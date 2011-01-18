@@ -1,0 +1,41 @@
+DROP TRIGGER BaixaEstoqueAvarias
+GO
+
+CREATE TRIGGER BaixaEstoqueAvarias
+ON T_ItensAvarias
+after INSERT
+AS
+
+DECLARE @parCod_Produto VARCHAR(5)
+DECLARE @parQtde_Venda Integer
+
+DECLARE ItensAvarias CURSOR FOR ( SELECT COD_Produto, QTDE_Avaria FROM INSERTED )
+BEGIN
+
+   OPEN ItensAvarias
+   FETCH NEXT FROM ItensAvarias INTO @parCod_Produto,@parQtde_Venda
+   WHILE @@FETCH_STATUS = 0
+   BEGIN
+      UPDATE T_Produtos set Saldo = Saldo-@parQtde_Venda where Codigo=@parCod_Produto
+      FETCH NEXT FROM ItensVendas INTO @parCod_Produto,@parQtde_Venda
+   END 
+   CLOSE ItensAvarias
+   DEALLOCATE ItensAvarias
+
+   SET NOCOUNT ON
+
+   INSERT INTO T_MOVESTOQUE
+               ( COD_EMP,COD_PRODUTO,DATA_CAD,DATA_MOV, E_S, OPERADOR, DOCUMENTO,
+                 QTDE_BAIXA, ROTINA,SALDO_ANTERIOR, SALDO_POSTERIOR               ) 
+
+   SELECT        '001',INSERTED.COD_PRODUTO,INSERTED.DATA_CAD,INSERTED.DATA_CAD,'S',
+                 INSERTED.OPERADOR,INSERTED.SEQAVARIA,INSERTED.QTDE_AVARIA,'SAIDA DE MATERIAL AVARIADO ',
+                 (T_PRODUTOS.SALDO+INSERTED.QTDE_AVARIA), 
+                 T_PRODUTOS.SALDO
+   FROM INSERTED INNER JOIN T_PRODUTOS
+   ON INSERTED.COD_PRODUTO = T_PRODUTOS.CODIGO
+
+   SET NOCOUNT OFF
+END
+
+

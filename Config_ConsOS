@@ -1,0 +1,1950 @@
+[Colum_Cod_Clientes: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Codigo"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Cod_Clientes"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Colum_Cod_Clientes/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="cod_Cliente"
+
+[Colum_Cod_Clientes/HeaderGlyph: TBitmap]
+=
+
+[Colum_Cod_Clientes/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Cod_Clientes/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Cod_Clientes/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Codigo: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Codigo"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Codigo"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=60
+
+[Colum_Codigo/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Cod_Produto"
+
+[Colum_Codigo/HeaderGlyph: TBitmap]
+=
+
+[Colum_Codigo/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Codigo/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Codigo/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Complemento: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Complemento"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Complemento"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="False"
+VisibleForCustomization="True"
+Width=150
+
+[Colum_Complemento/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Complemento"
+
+[Colum_Complemento/HeaderGlyph: TBitmap]
+=
+
+[Colum_Complemento/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Complemento/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Complemento/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[colum_Data_Agendada: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Data Agendada"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="colum_Data_Agendada"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=145
+
+[colum_Data_Agendada/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Data_Agendada"
+
+[colum_Data_Agendada/HeaderGlyph: TBitmap]
+=
+
+[colum_Data_Agendada/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[colum_Data_Agendada/Styles: TcxGridColumnStyles]
+=
+
+[colum_Data_Agendada/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Data_os: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Data O.S."
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Data_os"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=120
+
+[Colum_Data_os/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Data_Mov"
+
+[Colum_Data_os/HeaderGlyph: TBitmap]
+=
+
+[Colum_Data_os/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Data_os/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Data_os/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Desconto: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Desconto"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Desconto"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Colum_Desconto/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Vlr_Desconto"
+
+[Colum_Desconto/HeaderGlyph: TBitmap]
+=
+
+[Colum_Desconto/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Desconto/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Desconto/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Descricao: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Nome Cliente"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Descricao"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=200
+
+[Colum_Descricao/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Descricao"
+
+[Colum_Descricao/HeaderGlyph: TBitmap]
+=
+
+[Colum_Descricao/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Descricao/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Descricao/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Descrisao: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Descricao"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Descrisao"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=200
+
+[Colum_Descrisao/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Descricao"
+
+[Colum_Descrisao/HeaderGlyph: TBitmap]
+=
+
+[Colum_Descrisao/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Descrisao/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Descrisao/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Natureza: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Natureza do Serviço"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Natureza"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=125
+
+[Colum_Natureza/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Nome_Tipo_Servico"
+
+[Colum_Natureza/HeaderGlyph: TBitmap]
+=
+
+[Colum_Natureza/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Natureza/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Natureza/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_NomeStatus: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Status"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_NomeStatus"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=89
+
+[Colum_NomeStatus/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Nome_Status"
+
+[Colum_NomeStatus/HeaderGlyph: TBitmap]
+=
+
+[Colum_NomeStatus/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_NomeStatus/Styles: TcxGridColumnStyles]
+=
+
+[Colum_NomeStatus/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Operador: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Operador"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Operador"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=120
+
+[Colum_Operador/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Operador"
+
+[Colum_Operador/HeaderGlyph: TBitmap]
+=
+
+[Colum_Operador/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Operador/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Operador/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[colum_OS_informada: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="O.S. Informada"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="colum_OS_informada"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=100
+
+[colum_OS_informada/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="os_Informada"
+
+[colum_OS_informada/HeaderGlyph: TBitmap]
+=
+
+[colum_OS_informada/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[colum_OS_informada/Styles: TcxGridColumnStyles]
+=
+
+[colum_OS_informada/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_PcoVenda: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Preco"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_PcoVenda"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Colum_PcoVenda/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Pco_Venda"
+
+[Colum_PcoVenda/HeaderGlyph: TBitmap]
+=
+
+[Colum_PcoVenda/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_PcoVenda/Styles: TcxGridColumnStyles]
+=
+
+[Colum_PcoVenda/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Quantidade: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Quantidade"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Quantidade"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Colum_Quantidade/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Qtde_Venda"
+
+[Colum_Quantidade/HeaderGlyph: TBitmap]
+=
+
+[Colum_Quantidade/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Quantidade/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Quantidade/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_SeqOS: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Ordem de Serviço nº"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_SeqOS"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=110
+
+[Colum_SeqOS/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="SeqOS"
+
+[Colum_SeqOS/HeaderGlyph: TBitmap]
+=
+
+[Colum_SeqOS/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_SeqOS/Styles: TcxGridColumnStyles]
+=
+
+[Colum_SeqOS/Summary: TcxGridColumnSummary]
+=
+FooterKind="skCount"
+FooterFormat="0"
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skCount"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_Tecnico: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Tecnico Responsavel"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_Tecnico"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=150
+
+[Colum_Tecnico/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="nome_Tecnico"
+
+[Colum_Tecnico/HeaderGlyph: TBitmap]
+=
+
+[Colum_Tecnico/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_Tecnico/Styles: TcxGridColumnStyles]
+=
+
+[Colum_Tecnico/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Colum_VlrTotal: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Total"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Colum_VlrTotal"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Colum_VlrTotal/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Vlr_Total"
+
+[Colum_VlrTotal/HeaderGlyph: TBitmap]
+=
+
+[Colum_VlrTotal/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Colum_VlrTotal/Styles: TcxGridColumnStyles]
+=
+
+[Colum_VlrTotal/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Column_Prioridade: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Prioridade"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Column_Prioridade"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=64
+
+[Column_Prioridade/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Prioridade"
+
+[Column_Prioridade/HeaderGlyph: TBitmap]
+=
+
+[Column_Prioridade/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Column_Prioridade/Styles: TcxGridColumnStyles]
+=
+
+[Column_Prioridade/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[column_Tipo_OS: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Tipo OS"
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="column_Tipo_OS"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=64
+
+[column_Tipo_OS/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Nome_Tipo_Os"
+
+[column_Tipo_OS/HeaderGlyph: TBitmap]
+=
+
+[column_Tipo_OS/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[column_Tipo_OS/Styles: TcxGridColumnStyles]
+=
+
+[column_Tipo_OS/Summary: TcxGridColumnSummary]
+=
+FooterKind="skNone"
+FooterFormat=""
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skNone"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[Column_Vlr_os: TcxPropertiesStoreComponent]
+=
+AlternateCaption=""
+BestFitMaxWidth=0
+Caption="Vlr. O.S."
+DateTimeGrouping="dtgDefault"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+FooterAlignmentHorz="taLeftJustify"
+GroupIndex=-1
+GroupSummaryAlignment="taLeftJustify"
+HeaderAlignmentHorz="taLeftJustify"
+HeaderAlignmentVert="vaTop"
+HeaderGlyphAlignmentHorz="taLeftJustify"
+HeaderGlyphAlignmentVert="vaCenter"
+MinWidth=20
+Name="Column_Vlr_os"
+Properties=""
+PropertiesClassName=""
+RepositoryItem=""
+SortIndex=-1
+SortOrder="soNone"
+Tag=0
+Visible="True"
+VisibleForCustomization="True"
+Width=70
+
+[Column_Vlr_os/DataBinding: TcxGridItemDBDataBinding]
+=
+ValueType=""
+FieldName="Vlr_os"
+
+[Column_Vlr_os/HeaderGlyph: TBitmap]
+=
+
+[Column_Vlr_os/Options: TcxGridColumnOptions]
+=
+Editing="True"
+Filtering="True"
+FilteringFilteredItemsList="True"
+FilteringMRUItemsList="True"
+FilteringPopup="True"
+FilteringPopupMultiSelect="True"
+Focusing="True"
+IgnoreTimeForFiltering="True"
+IncSearch="True"
+ShowEditButtons="isebDefault"
+CellMerging="False"
+GroupFooters="True"
+Grouping="True"
+HorzSizing="True"
+Moving="True"
+ShowCaption="True"
+SortByDisplayText="isbtDefault"
+Sorting="True"
+
+[Column_Vlr_os/Styles: TcxGridColumnStyles]
+=
+
+[Column_Vlr_os/Summary: TcxGridColumnSummary]
+=
+FooterKind="skSum"
+FooterFormat=",0.00"
+GroupFooterKind="skNone"
+GroupFooterFormat=""
+GroupKind="skSum"
+GroupFormat=""
+SortByGroupFooterSummary="False"
+SortByGroupSummary="False"
+
+[GrdVendas: TcxPropertiesStoreComponent]
+=
+DragMode="dmManual"
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+Name="GrdVendas"
+PopupMenu=""
+Synchronization="True"
+Tag=0
+
+[GrdVendas/BackgroundBitmaps: TcxGridTableBackgroundBitmaps]
+=
+
+[GrdVendas/BackgroundBitmaps/Background: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Content: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/FilterBox: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Footer: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Header: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Group: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/GroupByBox: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Indicator: TBitmap]
+=
+
+[GrdVendas/BackgroundBitmaps/Preview: TBitmap]
+=
+
+[GrdVendas/DataController: TcxGridDBDataController]
+=
+DataSource="srcOrdemServico"
+DetailKeyFieldNames=""
+KeyFieldNames=""
+MasterKeyFieldNames=""
+Options="[dcoAssignGroupingValues,dcoAssignMasterDetailKeys,dcoSaveExpanding]"
+
+[GrdVendas/DataController/DataModeController: TcxDBDataModeController]
+=
+DetailInSQLMode="False"
+GridMode="False"
+GridModeBufferCount=0
+SmartRefresh="False"
+SyncMode="True"
+
+[GrdVendas/DataController/Filter: TcxDBDataFilterCriteria]
+=
+MaxValueListCount=0
+Options="[]"
+PercentWildcard=37
+UnderscoreWildcard=95
+Active="False"
+AutoDataSetFilter="False"
+DateTimeFormat=""
+IgnoreOrigin="True"
+TranslateBetween="False"
+TranslateIn="False"
+TranslateLike="False"
+SupportedLike="True"
+
+[GrdVendas/DataController/Summary: TcxDataSummary]
+=
+Options="[]"
+
+[GrdVendas/DataController/Summary/DefaultGroupSummaryItems: TcxDataGroupSummaryItems]
+=
+BeginText="("
+EndText=")"
+Separator=","
+
+[GrdVendas/DataController/Summary/DefaultGroupSummaryItems/0: TcxGridDBTableSummaryItem]
+=
+Column="Column_Vlr_os"
+Format=""
+Kind="skSum"
+Position="spGroup"
+FieldName=""
+DisplayText=""
+Sorted="False"
+VisibleForCustomization="True"
+
+[GrdVendas/DataController/Summary/DefaultGroupSummaryItems/1: TcxGridDBTableSummaryItem]
+=
+Column="Colum_SeqOS"
+Format=""
+Kind="skCount"
+Position="spGroup"
+FieldName=""
+DisplayText=""
+Sorted="False"
+VisibleForCustomization="True"
+
+[GrdVendas/DataController/Summary/FooterSummaryItems: TcxDataFooterSummaryItems]
+=
+
+[GrdVendas/DataController/Summary/FooterSummaryItems/0: TcxGridDBTableSummaryItem]
+=
+Column="Column_Vlr_os"
+Format=",0.00"
+Kind="skSum"
+Position="spFooter"
+FieldName=""
+DisplayText=""
+Sorted="False"
+VisibleForCustomization="True"
+
+[GrdVendas/DataController/Summary/FooterSummaryItems/1: TcxGridDBTableSummaryItem]
+=
+Column="Colum_SeqOS"
+Format="0"
+Kind="skCount"
+Position="spFooter"
+FieldName=""
+DisplayText=""
+Sorted="False"
+VisibleForCustomization="True"
+
+[GrdVendas/DataController/Summary/SummaryGroups: TcxDataSummaryGroups]
+=
+
+[GrdVendas/DateTimeHandling: TcxGridTableDateTimeHandling]
+=
+Filters="[]"
+IgnoreTimeForFiltering="False"
+MonthFormat=""
+YearFormat=""
+DateFormat=""
+Grouping="dtgByDateAndTime"
+HourFormat=""
+UseLongDateFormat="True"
+UseShortTimeFormat="True"
+
+[GrdVendas/FilterBox: TcxGridFilterBox]
+=
+CustomizeDialog="True"
+MRUItemsListDropDownCount=0
+Position="fpBottom"
+Visible="fvNonEmpty"
+
+[GrdVendas/Filtering: TcxGridTableFiltering]
+=
+MRUItemsList="True"
+MRUItemsListCount=10
+ColumnFilteredItemsList="False"
+ColumnMRUItemsList="True"
+ColumnMRUItemsListCount=5
+
+[GrdVendas/Filtering/ColumnPopup: TcxGridItemFilterPopupOptions]
+=
+ApplyMultiSelectChanges="fpacImmediately"
+DropDownWidth=0
+MaxDropDownItemCount=15
+MultiSelect="True"
+
+[GrdVendas/FilterRow: TcxGridFilterRowOptions]
+=
+InfoText="Click here to define a filter"
+SeparatorColor=536870912
+SeparatorWidth=6
+Visible="False"
+ApplyChanges="fracOnCellExit"
+
+[GrdVendas/NavigatorButtons: TcxNavigatorControlButtons]
+=
+ConfirmDelete="False"
+
+[GrdVendas/NavigatorButtons/First: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/PriorPage: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Prior: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Next: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/NextPage: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Last: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Insert: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Append: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="False"
+
+[GrdVendas/NavigatorButtons/Delete: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Edit: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Post: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Cancel: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Refresh: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/SaveBookmark: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/GotoBookmark: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NavigatorButtons/Filter: TcxNavigatorButton]
+=
+Enabled="True"
+Hint=""
+ImageIndex=-1
+Visible="True"
+
+[GrdVendas/NewItemRow: TcxGridNewItemRowOptions]
+=
+InfoText="Click here to add a new row"
+SeparatorColor=536870912
+SeparatorWidth=6
+Visible="False"
+
+[GrdVendas/OptionsBehavior: TcxGridTableOptionsBehavior]
+=
+PostponedSynchronization="True"
+AlwaysShowEditor="False"
+CellHints="False"
+CopyCaptionsToClipboard="True"
+DragDropText="False"
+DragFocusing="dfNone"
+DragHighlighting="True"
+DragOpening="True"
+DragScrolling="True"
+FocusCellOnTab="False"
+FocusFirstCellOnNewRecord="False"
+GoToNextCellOnEnter="False"
+ImmediateEditor="True"
+IncSearch="False"
+NavigatorHints="False"
+BestFitMaxRecordCount=0
+ColumnHeaderHints="True"
+CopyPreviewToClipboard="True"
+ExpandMasterRowOnDblClick="True"
+FocusCellOnCycle="False"
+PullFocusing="False"
+
+[GrdVendas/OptionsCustomize: TcxGridTableOptionsCustomize]
+=
+ColumnFiltering="True"
+ColumnGrouping="True"
+ColumnHiding="False"
+ColumnHidingOnGrouping="True"
+ColumnHorzSizing="True"
+ColumnMoving="True"
+ColumnSorting="True"
+ColumnsQuickCustomization="False"
+ColumnsQuickCustomizationMaxDropDownCount=0
+ColumnsQuickCustomizationReordering="qcrDefault"
+DataRowSizing="False"
+GroupBySorting="False"
+GroupRowSizing="False"
+
+[GrdVendas/OptionsData: TcxGridTableOptionsData]
+=
+Appending="False"
+CancelOnExit="False"
+Deleting="False"
+DeletingConfirmation="False"
+Editing="False"
+Inserting="False"
+
+[GrdVendas/OptionsSelection: TcxGridTableOptionsSelection]
+=
+CellSelect="True"
+HideFocusRect="True"
+HideFocusRectOnExit="True"
+HideSelection="False"
+InvertSelect="True"
+MultiSelect="False"
+UnselectFocusedRecordOnExit="True"
+CellMultiSelect="False"
+
+[GrdVendas/OptionsView: TcxGridTableOptionsView]
+=
+CellEndEllipsis="False"
+FocusRect="True"
+Navigator="False"
+NavigatorOffset=50
+NoDataToDisplayInfoText="<No data to display>"
+ScrollBars="ssBoth"
+ShowEditButtons="gsebNever"
+CellAutoHeight="False"
+CellTextMaxLineCount=0
+ColumnAutoWidth="False"
+DataRowHeight=0
+ExpandButtonsForEmptyDetails="True"
+Footer="True"
+FooterAutoHeight="False"
+FooterMultiSummaries="False"
+GridLineColor=536870912
+GridLines="glBoth"
+GroupByBox="True"
+GroupFooterMultiSummaries="False"
+GroupFooters="gfAlwaysVisible"
+GroupRowHeight=0
+GroupRowStyle="grsOffice11"
+GroupSummaryLayout="gslAlignWithColumns"
+Header="True"
+HeaderAutoHeight="False"
+HeaderEndEllipsis="False"
+HeaderHeight=0
+Indicator="False"
+IndicatorWidth=12
+RowSeparatorColor=536870912
+RowSeparatorWidth=0
+ShowColumnFilterButtons="sfbWhenSelected"
+
+[GrdVendas/Preview: TcxGridPreview]
+=
+AutoHeight="True"
+LeftIndent=20
+MaxLineCount=3
+Place="ppBottom"
+RightIndent=5
+Visible="False"
+
+[GrdVendas/Styles: TcxGridTableViewStyles]
+=
+Background="cxStyle1"
+Content="cxStyle2"
+ContentEven="cxStyle3"
+ContentOdd="cxStyle4"
+FilterBox="cxStyle5"
+Inactive="cxStyle10"
+IncSearch="cxStyle11"
+Selection="cxStyle14"
+Footer="cxStyle6"
+Group="cxStyle7"
+GroupByBox="cxStyle4"
+Header="cxStyle9"
+Indicator="cxStyle12"
+Preview="cxStyle13"
+StyleSheet="GridTableViewStyleSheetDevExpress"
+
+[gridOS: TcxPropertiesStoreComponent]
+=
+Align="alClient"
+AlignWithMargins="False"
+Anchors="[akLeft,akTop,akRight,akBottom]"
+BevelEdges="[beLeft,beTop,beRight,beBottom]"
+BevelInner="bvRaised"
+BevelKind="bkNone"
+BevelOuter="bvLowered"
+BevelWidth=1
+BorderStyle="cxcbsDefault"
+BorderWidth=0
+Cursor=0
+DragCursor=-12
+DragKind="dkDrag"
+DragMode="dmManual"
+DragOpening="True"
+DragOpeningWaitTime=800
+Enabled="True"
+Height=375
+HelpContext=0
+HelpKeyword=""
+HelpType="htContext"
+Hint=""
+Left=0
+Name="gridOS"
+ParentFont="True"
+PopupMenu=""
+TabOrder=1
+TabStop="True"
+Tag=0
+Top=116
+Visible="True"
+Width=1020
+
+[gridOS/Constraints: TSizeConstraints]
+=
+MaxHeight=0
+MaxWidth=0
+MinHeight=0
+MinWidth=0
+
+[gridOS/Font: TFont]
+=
+Charset=1
+Color=-16777208
+Height=-11
+Name="Tahoma"
+Orientation=0
+Pitch="fpDefault"
+Size=8
+Style="[]"
+
+[gridOS/LevelTabs: TcxGridLevelTabs]
+=
+CaptionAlignment="taCenter"
+ImageBorder=0
+Style=0
+
+[gridOS/LevelTabs/Slants: TcxTabSlants]
+=
+Kind="skSlant"
+Positions="[spLeft]"
+
+[gridOS/LookAndFeel: TcxLookAndFeel]
+=
+AssignedValues="[lfvKind,lfvNativeStyle,lfvSkinName]"
+Kind="lfUltraFlat"
+NativeStyle="False"
+SkinName=""
+
+[gridOS/Margins: TMargins]
+=
+Left=3
+Top=3
+Right=3
+Bottom=3
+
+[gridOS/RootLevelOptions: TcxGridRootLevelOptions]
+=
+DetailFrameColor=536870912
+DetailFrameWidth=0
+DetailTabsPosition="dtpNone"
+TabsForEmptyDetails="True"
+
+[gridOS/RootLevelStyles: TcxGridLevelStyles]
+=
+
+[gridOSLevel1: TcxPropertiesStoreComponent]
+=
+Caption=""
+FakeComponentLink1=""
+FakeComponentLink2=""
+FakeComponentLink3=""
+GridView="GrdVendas"
+ImageIndex=-1
+MaxDetailHeight=0
+Name="gridOSLevel1"
+Tag=0
+Visible="True"
+
+[gridOSLevel1/Options: TcxGridLevelOptions]
+=
+DetailFrameColor=536870912
+DetailFrameWidth=1
+DetailTabsPosition="dtpNone"
+TabsForEmptyDetails="True"
+
+[gridOSLevel1/Styles: TcxGridLevelStyles]
+=
+

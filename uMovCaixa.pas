@@ -1,0 +1,888 @@
+unit uMovCaixa;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, bsSkinCtrls, bsdbctrls, bsSkinBoxCtrls, StdCtrls, Mask,
+  EditNew, cxGridLevel, cxGridCustomTableView, cxGridTableView,SqlTimst,UformBase,
+  cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, ComCtrls,
+  bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SqlExpr, BusinessSkinForm, DBClient,
+  Provider, RDprint, SimpleDS;
+
+type
+  TfrmMovCaixa = class(TFormBase)
+    bsSkinCoolBar1: TbsSkinCoolBar;
+    bsSkinToolBar1: TbsSkinToolBar;
+    btnFechar: TbsSkinSpeedButton;
+    btnPrePagamento: TbsSkinSpeedButton;
+    btnincluir: TbsSkinSpeedButton;
+    BtnCancela: TbsSkinSpeedButton;
+    bsSkinBevel1: TbsSkinBevel;
+    btnok: TbsSkinSpeedButton;
+    bsSkinBevel2: TbsSkinBevel;
+    PagCadastro: TbsSkinPageControl;
+    bsSkinTabSheet1: TbsSkinTabSheet;
+    GridMovCaixa: TcxGrid;
+    GrdDespesas: TcxGridDBTableView;
+    Colum_Data: TcxGridDBColumn;
+    Colum_Historico: TcxGridDBColumn;
+    Colum_Vlr_Credito: TcxGridDBColumn;
+    GridMovCaixaLevel1: TcxGridLevel;
+    bsSkinTabSheet2: TbsSkinTabSheet;
+    PanelConsulta: TbsSkinPanel;
+    AtualizaRec: TbsSkinSpeedButton;
+    lblTurma: TbsSkinStdLabel;
+    dtpData_Fim: TbsSkinDateEdit;
+    dtpData_Ini: TbsSkinDateEdit;
+    qryPesquisa: TSQLQuery;
+    dspPesquisa: TDataSetProvider;
+    cdsPesquisa: TClientDataSet;
+    srcPesquisa: TDataSource;
+    colum_NomeD_C: TcxGridDBColumn;
+    Colum_Descricao: TcxGridDBColumn;
+    colum_Seqvenda: TcxGridDBColumn;
+    bsSkinBevel3: TbsSkinBevel;
+    btnEstornar: TbsSkinSpeedButton;
+    btnFecharcaixa: TbsSkinSpeedButton;
+    qryMovCaixa: TSQLQuery;
+    dspMovCaixa: TDataSetProvider;
+    cdsMovCaixa: TClientDataSet;
+    srcMovCaixa: TDataSource;
+    srcCadOperacoes: TDataSource;
+    cdsCadOperacoes: TClientDataSet;
+    qryVariavel: TSQLQuery;
+    dspVariavel: TDataSetProvider;
+    impMatricial: TRDprint;
+    cdsRelatorio: TClientDataSet;
+    bsSkinSpeedButton2: TbsSkinSpeedButton;
+    btnImprimir: TbsSkinSpeedButton;
+    bsSkinBevel4: TbsSkinBevel;
+    cdsCadFormasPagamento: TClientDataSet;
+    srcCadFormasPagamento: TDataSource;
+    qryModific: TSQLQuery;
+    Column_Esrtornado: TcxGridDBColumn;
+    cmbPeriodo: TbsSkinComboBox;
+    Column_Vlr_Debito: TcxGridDBColumn;
+    bsSkinExPanel1: TbsSkinExPanel;
+    bsSkinStdLabel6: TbsSkinStdLabel;
+    bsSkinStdLabel8: TbsSkinStdLabel;
+    bsSkinStdLabel9: TbsSkinStdLabel;
+    bsSkinStdLabel11: TbsSkinStdLabel;
+    bsSkinStdLabel13: TbsSkinStdLabel;
+    edtDataMov: TbsSkinDateEdit;
+    cmbD_C: TbsSkinComboBox;
+    EdtValor: TbsSkinEdit;
+    Edthistorico: TbsSkinEdit;
+    cmbNome_TipoDespesa: TbsSkinDBLookupComboBox;
+    cmbCod_TipoDespesa: TbsSkinDBLookupComboBox;
+    cmbNome_formaPagamento: TbsSkinDBLookupComboBox;
+    lblCliente: TbsSkinStdLabel;
+    cmbNome_Cliente: TbsSkinDBLookupComboBox;
+    edtcod_Cliente: TbsSkinEdit;
+    cdsCadClientes: TClientDataSet;
+    srcCadClientes: TDataSource;
+    procedure AtualizaRecClick(Sender: TObject);
+    procedure cmbPeriodoChange(Sender: TObject);
+    procedure cdsPesquisaBeforeOpen(DataSet: TDataSet);
+    procedure cdsPesquisaCalcFields(DataSet: TDataSet);
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnincluirClick(Sender: TObject);
+    procedure btnokClick(Sender: TObject);
+    procedure cmbD_CChange(Sender: TObject);
+    procedure cmbCod_TipoDespesaChange(Sender: TObject);
+    procedure cmbNome_TipoDespesaChange(Sender: TObject);
+    procedure BtnCancelaClick(Sender: TObject);
+    procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
+    procedure btnImprimirClick(Sender: TObject);
+    Procedure Limpacampos();
+    procedure btnFecharcaixaClick(Sender: TObject);
+    procedure btnPrePagamentoClick(Sender: TObject);
+    procedure btnEstornarClick(Sender: TObject);
+    procedure edtcod_ClienteExit(Sender: TObject);
+    procedure cmbNome_formaPagamentoChange(Sender: TObject);
+    procedure cmbNome_ClienteChange(Sender: TObject);
+  private
+    pviLinha : Integer;
+    { Private declarations }
+  public
+     pvsQualBotao : String;
+    { Public declarations }
+  end;
+
+var
+  frmMovCaixa: TfrmMovCaixa;
+
+implementation
+
+{$R *.dfm}
+
+uses uprincipal,ufuncoes, uFechaCaixa, uPrePagamento, uClassContaCorrente,uClassDaoContaCorrente;
+
+procedure TfrmMovCaixa.Limpacampos();
+begin
+    edtDataMov.Text                 := '';
+    cmbD_C.ItemIndex                := 1;
+    cmbCod_TipoDespesa.KeyValue     := null;
+    cmbNome_TipoDespesa.KeyValue    := null;
+    Edthistorico.Text               := '';
+    EdtValor.Text                   := '0,00';
+    cmbNome_formaPagamento.KeyValue := null;
+end;
+
+procedure TfrmMovCaixa.AtualizaRecClick(Sender: TObject);
+begin
+   qryPesquisa.Close;
+   qryPesquisa.Params.Clear;
+   qryPesquisa.Sql.Text:= 'Select Desp.Sequencia,Desp.Data_Lancamento,Desp.Cod_TipoDespesa,Desp.SeqVenda,desp.Estornado, '+
+                          'Desp.D_C, Desp.Valor, Desp.Historico,Pag.Descricao,desp.Cod_FormaPagamento '+
+                          'From t_movcaixa Desp, t_FormasPagamento pag  '+
+                          'Where Desp.Data_lancamento>=:parData_ini and Desp.Data_lancamento<=:parData_Fim and '+
+                          'PAg.Codigo = Desp.Cod_FormaPagamento';
+   qryPesquisa.Sql.Add('Order by Data_Lancamento ');
+
+   qryPesquisa.Parambyname('parData_Ini').AsSqltimestamp := StrToSQLTimeStamp(dtpData_Ini.Text+' 00:00:00');
+   qryPesquisa.Parambyname('parData_Fim').AsSqlTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
+
+   cdsPesquisa.Close;
+   cdsPesquisa.ProviderName := dspPesquisa.Name;
+   cdsPesquisa.Open;
+
+end;
+
+procedure TfrmMovCaixa.BtnCancelaClick(Sender: TObject);
+begin
+   PagCadastro.ActivePageIndex  := 0;
+
+   BtnIncluir.Enabled           := True;
+   BtnEstornar.Enabled          := True;
+   PanelConsulta.Enabled        := True;
+   BtnOk.Enabled                := False;
+   BtnCancela.Enabled           := False;
+   GridMovCaixa.Enabled         := True;
+   btnPrePagamento.Enabled      := True;
+   btnImprimir.Enabled          := True;
+   btnFecharcaixa.Enabled       := True;
+
+   Limpacampos();
+
+
+end;
+
+procedure TfrmMovCaixa.btnEstornarClick(Sender: TObject);
+var trdNrTransacao: TTransactionDesc;
+begin
+   if cdspesquisa.IsEmpty then
+   Begin
+      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+   if CaixaMensagem( 'Deseja Estornar lançamento', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+
+      if not frmPrincipal.dbxPrincipal.InTransaction then
+      begin
+         trdNrTransacao.IsolationLevel := xilREADCOMMITTED;
+         frmPrincipal.dbxPrincipal.StartTransaction( trdNrTransacao );
+      end;
+
+      Try
+         qryModific.Close;
+         qryModific.SQL.Text := 'UPDATE T_MovCaixa SET Estornado=:parEstornado '+
+                                'WHERE Sequencia=:parSequencia ';
+         qryModific.ParamByName('parEstornado').AsString  := 'S';
+         qryModific.ParamByName('parSequencia').AsInteger :=cdsPesquisa.FieldByName('Sequencia').AsInteger;
+         qryModific.ExecSQL;
+
+         QryMovCaixa.Close;
+         QryMovCaixa.Params.Clear;
+         QryMovCaixa.Sql.Text := 'Select * from t_MovCaixa where 1=2 ';
+
+         cdsMovCaixa.Close;
+         cdsMovCaixa.ProviderName := dspMovCaixa.name;
+         cdsMovCaixa.Open;
+
+         cdsMovCaixa.Append;
+         cdsMovCaixa.FieldByName('Sequencia').asInteger         := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
+         cdsMovCaixa.FieldByName('Cod_TipoDespesa').asString    := cdsPesquisa.FieldByName('Cod_TipoDespesa').AsString;
+         cdsMovCaixa.FieldByName('Operador').asString           := gsOperador;
+         cdsMovCaixa.FieldByName('Valor').asFloat               := cdsPesquisa.FieldByName('Valor').AsFloat;
+         cdsMovCaixa.FieldByName('Cod_Caixa').asString          := '001';
+         cdsMovCaixa.FieldByName('Cod_FormaPagamento').asString := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
+         cdsMovCaixa.FieldByName('D_C').asString                := 'C';
+         if cdsPesquisa.FieldByName('D_C').asString = 'C' then
+            cdsMovCaixa.FieldByName('D_C').asString            := 'D';
+         cdsMovCaixa.FieldByName('Historico').asString         := 'Estorno do Lancamento Sequencia'+cdsPesquisa.FieldByName('Sequencia').AsString;
+         cdsMovCaixa.FieldByName('Data_lancamento').asDatetime := GsData_Mov;
+         cdsMovCaixa.FieldByName('SeqVenda').asString          := cdsPesquisa.FieldByName('SeqVenda').AsString;
+
+         cdsMovCaixa.Post;
+         cdsMovCaixa.ApplyUpdates(-1);
+      Except
+         frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
+      End;
+      frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
+   End;
+end;
+
+procedure TfrmMovCaixa.btnFecharcaixaClick(Sender: TObject);
+begin
+   frmFechaCaixa := TfrmFechaCaixa.create(self);
+   frmFechaCaixa.showModal;
+   if frmfechacaixa.Tag=1 then
+   Begin
+      btnImprimirClick(btnImprimir);
+      qryModific.Close;
+      qryModific.SQL.Text := 'UPDATE T_Sequencias SET Sequencia=:parSequencia, '+
+                             'Data_Atu=:parData_Atu, Cod_emp=:parCod_emp where Tipo_sequencia=:parTipo_sequencia And Cod_Emp=:parCod_Emp ';
+      qryModific.ParamByName( 'parData_Atu' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',now));
+      qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
+      if FormatDateTime('DDD',gsData_Mov+1)='dom' then
+         qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+2);
+      qryModific.ParamByName( 'parCod_Emp' ).AsString           := gsCod_Emp;
+      qryModific.ParamByName( 'parTipo_Sequencia' ).AsString    := 'Data_Mov';
+      qryModific.ExecSQL;
+   End;
+end;
+
+procedure TfrmMovCaixa.btnFecharClick(Sender: TObject);
+begin
+   close;
+end;
+
+procedure TfrmMovCaixa.btnImprimirClick(Sender: TObject);
+var lrTotal_Venda    : Real;
+    lrtotal_Servico  : Real;
+    lrTotal_recebido : Real;
+    lrTotal_Baixa    : Real;
+    lrTotal_Saidas   : Real;
+    lrDiferenca      : Real;
+    lrVlr_Saida      : Real;
+    lrVlr_Entrada    : Real;
+    vlr_Prepagamento : Real;
+    lsCod_FormaPagamento : String;
+    lbImprimiuCredito : Boolean;
+    lbImprimiuDebito  : Boolean;
+    sdtsTempPagInformado : TSimpleDataSet;
+  lrTotal_Extras: double;
+begin
+   gsTituloRel := 'Relatorio de movimentação do dia '+FormatDateTime('dd/mm/yyyy',gsdata_Mov);
+
+   lrTotal_Venda    := 0;
+   lrtotal_Servico  := 0;
+   lrTotal_recebido := 0;
+   lrTotal_Extras   := 0;
+   lrTotal_Saidas   := 0;
+   lrDiferenca      := 0;
+   lrTotal_Baixa    := 0;
+   lrVlr_Saida      := 0;
+   lrVlr_Entrada    := 0;
+
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 1;
+   ImpMatricial.TamanhoQteColunas         := 48;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+
+   // Imprimindo resumo das vendas
+   qryVariavel.Sql.Text := 'Select Grupo.Codigo,Grupo.Descricao,avg(Itens.pco_Venda)as Pco_UnitMedio, '+
+                           '       Sum(Itens.Vlr_total) as Vlr_Total,Sum(Itens.Qtde_Venda) as Qtde_Total '+
+                           'from T_vendas ven, T_itensvendas itens, T_Produtos Prod, T_Grupos grupo '+
+                           'Where Ven.Data_Venda>=:parData_VendaIni and Ven.Data_Venda<=:parData_VendaFim And '+
+                           '      Ven.Tipo_Venda =:parTipo_Venda and '+
+                           '      Itens.seqvenda=Ven.Seqvenda and Prod.codigo=Itens.Cod_Produto and '+
+                           '      Grupo.Codigo=Prod.Cod_Grupo '+
+                           'Group by Grupo.Codigo,Grupo.Descricao';
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parTipo_venda').AsString          := 'P';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+
+   if not cdsRelatorio.IsEmpty then
+   begin
+      impmatricial.Imp(pvilinha,001,'Vendas Efetuadas ');
+      pvilinha := pviLinha + 1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Codigo Grupo            Quant. Vlr.Medio Total');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      while not cdsrelatorio.Eof do
+      Begin
+         impmatricial.Imp(pvilinha,001,Copy(cdsrelatorio.FieldByName('Codigo').AsString+' '+cdsrelatorio.FieldByName('Descricao').AsString,1,20) );
+         impmatricial.ImpD(pvilinha,030,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
+         impmatricial.ImpD(pvilinha,038,FormatFloat(',0.00',cdsrelatorio.fieldByname('Pco_UnitMedio').asfloat),[]);
+         impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+         lrTotal_Venda   := lrTotal_Venda+cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+         cdsrelatorio.Next;
+         pvilinha := pviLinha + 1;
+      End;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Total Das Vendas...');
+      impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',lrTotal_Venda),[]);
+      pviLinha:=Pvilinha+2;
+   end;
+   // <-- imprimindo resumo das vendas
+
+   // --> impressao dos serviços efetuados no dia
+
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'Select Grupo.Codigo,Grupo.Descricao,avg(Itens.pco_Venda)as Pco_UnitMedio, '+
+                           '       Sum(Itens.Vlr_total) as Vlr_Total,Sum(Itens.Qtde_Venda) as Qtde_Total '+
+                           'from T_vendas ven, T_itensvendas itens, T_Produtos Prod, T_Grupos grupo '+
+                           'Where Ven.Data_Venda>=:parData_VendaIni and Ven.Data_Venda<=:parData_VendaFim And '+
+                           '      Ven.Tipo_Venda =:parTipo_Venda and '+
+                           '      Itens.seqvenda=Ven.Seqvenda and Prod.codigo=Itens.Cod_Produto and '+
+                           '      Grupo.Codigo=Prod.Cod_Grupo '+
+                           'Group by Grupo.Codigo,Grupo.Descricao';
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parTipo_venda').AsString          := 'S';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+   if not cdsRelatorio.IsEmpty then
+   begin
+      impmatricial.Imp(pvilinha,001,'Serviços Contratados' );
+      pvilinha := pviLinha + 1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Codigo Grupo           Quant. Vlr.Medio  Total');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      while not cdsrelatorio.Eof do
+      Begin
+         impmatricial.Imp(pvilinha,001,Copy(cdsrelatorio.FieldByName('Codigo').AsString+' '+cdsrelatorio.FieldByName('Descricao').AsString,1,20) );
+         impmatricial.ImpD(pvilinha,030,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
+         impmatricial.ImpD(pvilinha,038,FormatFloat(',0.00',cdsrelatorio.fieldByname('Pco_UnitMedio').asfloat),[]);
+         impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+         lrtotal_Servico := lrtotal_Servico + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+
+         cdsrelatorio.Next;
+         pvilinha := pviLinha + 1;
+      End;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Total Dos Serviços...');
+      impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',lrtotal_Servico),[]);
+      pviLinha:=Pvilinha+2;
+   end;
+   // <-- impressao dos serviços efetuados no dia
+
+   // --> impressao dos serviços efetuados no dia
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'Select Ctas.SeqVenda, Ven.Controle, Ctas.Cod_Cliente, Cli.Descricao, '+
+                           '       Ctas.Data_Emissao, Ctas.Data_Vencimento, Ctas.Vlr_Recebido '+
+                           'From t_Ctasreceber Ctas, T_Clientes Cli, T_Vendas Ven '+
+                           'where Ctas.Status=:parStatus and Ctas.data_Pagamento=:parDataIni and '+
+                           '      Ctas.data_emissao<>:parDataIni and Cli.Codigo=Ctas.Cod_Cliente and'+
+                           '      Ven.Seqvenda=Ctas.Seqvenda ';
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
+   qryVariavel.ParamByName('parStatus').AsString        := '1';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+
+   if not cdsRelatorio.IsEmpty then
+   begin
+      impmatricial.Imp(pvilinha,001,'Resumo das baixas do Contas a Receber' );
+      pvilinha := pviLinha + 1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Codigo Controle Nome do Cliente ');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Emissao    Vencimento              vlr. Pago');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+
+      while not cdsrelatorio.Eof do
+      Begin
+         impmatricial.Imp(pvilinha,001,Inczero(cdsrelatorio.FieldByName('Seqvenda').AsString,8)+' '+Trim(cdsrelatorio.FieldByName('Controle').AsString) );
+         impmatricial.Imp(pvilinha,017,Copy(Inczero(cdsrelatorio.FieldByName('Cod_Cliente').AsString,5)+' '+Trim(cdsrelatorio.FieldByName('Descricao').AsString),1,30) );
+         pvilinha := pviLinha + 1;
+         impmatricial.Imp(pvilinha,001,FormatDateTime('dd/mm/yyyy',cdsrelatorio.fieldByname('Data_Emissao').asDateTime)+' '+FormatDateTime('dd/mm/yyyy',cdsrelatorio.fieldByname('Data_Vencimento').asDateTime));
+         impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Recebido').asfloat),[]);
+         lrTotal_Baixa := lrTotal_Baixa + cdsrelatorio.fieldByname('Vlr_Recebido').asfloat;
+         cdsrelatorio.Next;
+         pvilinha := pviLinha + 1;
+      End;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Total Das Baixas...');
+      impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',lrTotal_Baixa),[]);
+      pviLinha:=Pvilinha+2;
+   End;
+   ImpMatricial.imp(pvilinha,001,'Total Geral...');
+   impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',(lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa)),[]);
+   pviLinha:=Pvilinha+2;
+
+   // <-- Recebimentos do dia
+
+   // --> recebimentos do caixa
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'Select Mov.D_C, Pag.Codigo, Pag.Descricao, sum(Valor) as Vlr_Total '+
+                           'From t_movcaixa Mov, T_FormasPagamento Pag '+
+                           'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
+                           '      Pag.Codigo=Mov.cod_FormaPagamento  '+
+                           'Group by pag.codigo,pag.descricao,mov.D_C '+
+                           'Order by Pag.Codigo,Mov.D_C ';
+
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+
+   sdtsTempPagInformado := TsimpleDataSet.Create(self);
+   sdtsTempPagInformado.Connection := frmprincipal.dbxPrincipal;
+   sdtsTempPagInformado.dataSet.CommandText := 'Select * from t_PagamentosInformados '+
+                                               'where data_mov=:parData_Mov' ;
+   sdtsTempPagInformado.dataSet.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
+   sdtsTempPagInformado.open;
+
+   if not cdsRelatorio.IsEmpty then
+   begin
+      impmatricial.Imp(pvilinha,001,'Resumo de recebimentos do Caixa' );
+      pvilinha := pviLinha + 1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Codigo Descrica ');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Entradas   Saidas  Saldo  Informado   Diferença');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      lsCod_FormaPagamento := '';
+      lbImprimiuCredito := false;
+      lbImprimiuDebito  := false;
+      while not cdsrelatorio.Eof do
+      Begin
+         If (lsCod_FormaPagamento <> cdsrelatorio.FieldByName('Codigo').AsString) or cdsRelatorio.eof Then
+         Begin
+            impmatricial.Imp(pvilinha,001,Inczero(cdsrelatorio.FieldByName('Codigo').AsString,3)+'   '+cdsrelatorio.FieldByName('Descricao').AsString );
+            pviLinha:=Pvilinha+1;
+            lsCod_FormaPagamento := cdsrelatorio.FieldByName('Codigo').AsString;
+         End;
+         if cdsrelatorio.FieldByName('D_C').AsString = 'C' Then
+         Begin
+            impmatricial.ImpD(pvilinha,08,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+            lbImprimiuCredito := True;
+            lrVlr_Entrada    := cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+            lrTotal_recebido := lrTotal_recebido + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+         End
+         Else
+         Begin
+            impmatricial.ImpD(pvilinha,018,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+            if not lbImprimiuCredito then
+               impmatricial.ImpD(pvilinha,18,FormatFloat(',0.00',0),[]);
+            lbImprimiuDebito := True;
+            lrVlr_Saida      := cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+            lrTotal_Saidas   := lrTotal_Saidas + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+         End;
+         cdsrelatorio.Next;
+         If (lsCod_FormaPagamento <> cdsrelatorio.FieldByName('Codigo').AsString) or cdsRelatorio.eof Then
+         Begin
+            impmatricial.ImpD(pvilinha,024,FormatFloat(',0.00',(lrVlr_Entrada-lrVlr_saida)),[]);
+            if sdtsTempPagInformado.Locate('cod_FormaPagamento',lsCod_FormaPagamento,[]) then
+            Begin
+               impmatricial.ImpD(pvilinha,035,FormatFloat(',0.00',(sdtsTempPagInformado.FieldByName('vlr_Informado').AsFloat)),[]);
+               impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',((lrVlr_Entrada-lrVlr_saida)-sdtsTempPagInformado.FieldByName('vlr_Informado').AsFloat)),[]);
+            End
+            Else
+            Begin
+               impmatricial.ImpD(pvilinha,035,FormatFloat(',0.00',(0)),[]);
+               impmatricial.ImpD(pvilinha,048,FormatFloat(',0.00',(0)),[]);
+            End;
+
+            if not lbImprimiudebito then
+               impmatricial.ImpD(pvilinha,015,FormatFloat(',0.00',0),[]);
+
+            pvilinha := pviLinha + 1;
+
+            lbImprimiuCredito    := False;
+            lbImprimiuDebito     := False;
+            lrVlr_Saida          := 0;
+            lrVlr_Entrada        := 0;
+         End;
+      End;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Total Dos Recebimentos...');
+      pviLinha:=Pvilinha+1;
+      impmatricial.ImpD(pvilinha,008,FormatFloat(',0.00',lrTotal_recebido),[]);
+      impmatricial.ImpD(pvilinha,018,FormatFloat(',0.00',lrTotal_Saidas ),[]);
+      impmatricial.ImpD(pvilinha,025,FormatFloat(',0.00',(lrTotal_recebido-lrTotal_Saidas) ),[]);
+      pviLinha:=Pvilinha+2;
+   End;
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'Select sum(Valor) as Vlr_Total '+
+                           'From t_movcaixa Mov '+
+                           '     inner join t_vendas ven on ven.seqvenda=mov.seqvenda '+
+                           'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
+                           '      PrePagamento=:parPrePagamento and ven.status=:parstatus ';
+
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parPrePagamento').AsString  := 'S';
+   qryVariavel.ParamByName('parStatus').AsString        :=  '1';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+   vlr_Prepagamento := cdsRelatorio.FieldByname('Vlr_Total').AsFloat;
+
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'Select sum(Valor) as Vlr_Total '+
+                           'From t_movcaixa Mov ' +
+                           'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
+                           '      SeqVenda is null and D_C=:parD_C ';
+
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parD_C').AsString           := 'C';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+
+   lrTotal_Extras := cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+
+
+                                  //23456789.123456789.123456789.123456789.12345678
+   ImpMatricial.imp (pvilinha,001,'------------------------------------------------');
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp (pvilinha,001,'         Resumo da movimentação do dia');
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp (pvilinha,001,'------------------------------------------------');
+   pviLinha:=Pvilinha+1;
+   lrDiferenca := (lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa+lrTotal_Extras+vlr_Prepagamento);
+   ImpMatricial.imp (pvilinha,001,'Total Movimentado do dia.......:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',(lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa+lrTotal_Extras+vlr_Prepagamento)),[]);
+   pviLinha:=Pvilinha+2;
+   ImpMatricial.imp (pvilinha,001,'Total Extras...................:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',lrTotal_Extras),[]);
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp (pvilinha,001,'Total Recebido.................:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',lrTotal_recebido-lrTotal_Extras),[]);
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp (pvilinha,001,'Total de Pre-Pag.(Ñ Filanizado):');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',vlr_Prepagamento),[]);
+   pviLinha:=Pvilinha+1;
+   lrDiferenca:=lrDiferenca-lrTotal_recebido;
+
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'select sum(vlr_Total) As Total from t_vendas '+
+                           'where Data_Venda>=:parData_VendaIni and Data_Venda<=:parData_VendaFim And '+
+                           '      Status=:parStatus and tipo_Venda=:parTipo_Venda ';
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parStatus').AsString        := '1';
+   qryVariavel.ParamByName('parTipo_Venda').AsString    := 'S';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+   ImpMatricial.imp (pvilinha,001,'Total de O.S. Nao Finalizadas.:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',cdsRelatorio.FieldByName('Total').AsFloat),[]);
+   pviLinha:=Pvilinha+1;
+   lrDiferenca:=lrDiferenca-cdsRelatorio.FieldByName('Total').AsFloat;
+
+   qryVariavel.close;
+   qryVariavel.Params.Clear;
+   qryVariavel.Sql.Text := 'select sum(vlr_Areceber) As Total from t_Ctasreceber where data_Emissao=:parData_Mov and Status=:parStatus ';
+   qryVariavel.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
+   qryVariavel.ParamByName('parStatus').AsString         := '0';
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspVariavel.name;
+   cdsRelatorio.Open;
+
+   ImpMatricial.imp (pvilinha,001,'Total de Contas a Rerceber....:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',cdsRelatorio.FieldByName('Total').AsFloat),[]);
+   lrDiferenca:=lrDiferenca-cdsRelatorio.FieldByName('Total').AsFloat;
+   pviLinha:=Pvilinha+1;           //23456789.123456789.123456789.123456789.12345678
+   ImpMatricial.imp (pvilinha,001,'-------------------------------------------------');
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp (pvilinha,001,'Diferença.....................:');
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',lrDiferenca),[]);
+   pviLinha:=Pvilinha+1;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',48,0));
+   pviLinha:=Pvilinha+3;
+   ImpMatricial.imp (pvilinha,001,'.');
+   ImpMatricial.TamanhoQteLinhas := pviLinha;
+   ImpMatricial.fechar
+end;
+
+procedure TfrmMovCaixa.btnincluirClick(Sender: TObject);
+begin
+
+   pvsQualBotao:='INCLUIR';
+
+   PagCadastro.ActivePageIndex  := 1;
+
+   BtnIncluir.Enabled           := False;
+   BtnEstornar.Enabled          := False;
+   BtnOk.Enabled                := True;
+   BtnCancela.Enabled           := True;
+   PanelConsulta.Enabled        := False;
+   edtDataMov.date              := gsData_Mov;
+   GridMovCaixa.Enabled         := False;
+   btnPrePagamento.Enabled      := False;
+   btnImprimir.Enabled          := False;
+   btnFecharcaixa.Enabled       := False;
+
+end;
+
+procedure TfrmMovCaixa.btnokClick(Sender: TObject);
+var DadosContaCorrente : TContaCorrente;
+    GravaContaCorrente : TDaoContaCorrente;
+begin
+   QryMovCaixa.Close;
+   QryMovCaixa.Params.Clear;
+   QryMovCaixa.Sql.Text := 'Select * from t_MovCaixa where 1=2 ';
+
+   cdsMovCaixa.Close;
+   cdsMovCaixa.ProviderName := dspMovCaixa.name;
+   cdsMovCaixa.Open;
+
+   cdsMovCaixa.Append;
+   cdsMovCaixa.FieldByName('Sequencia').asInteger         := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
+   cdsMovCaixa.FieldByName('Cod_TipoDespesa').asString    := cmbCod_TipoDespesa.Text;
+   cdsMovCaixa.FieldByName('Operador').asString           := gsOperador;
+   cdsMovCaixa.FieldByName('Valor').asFloat               := strToFloat(EdtValor.Text);
+   cdsMovCaixa.FieldByName('Cod_Caixa').asString          := '001';
+   cdsMovCaixa.FieldByName('Cod_FormaPagamento').asString := cmbNome_formaPagamento.KeyValue;
+   cdsMovCaixa.FieldByName('D_C').asString              := 'C';
+   if cmbD_C.ItemIndex = 1 then
+      cdsMovCaixa.FieldByName('D_C').asString            := 'D';
+   cdsMovCaixa.FieldByName('Historico').asString         := edthistorico.text;
+   cdsMovCaixa.FieldByName('Data_lancamento').asDatetime := edtdatamov.Date;
+   cdsMovCaixa.FieldByName('Data_Cad').asDatetime        := Now;
+   cdsMovCaixa.Post;
+   cdsMovCaixa.ApplyUpdates(-1);
+   if cdsCadFormasPagamento.FieldByName('TipoLancamento').Asinteger=2 then
+   Begin
+      DadosContaCorrente := TContaCorrente.Create;
+      GravaContaCorrente := TDaoContaCorrente.Create;
+      DadosContaCorrente.D_C         := 'C';
+      if cmbD_C.ItemIndex = 1 then
+         DadosContaCorrente.D_C         := 'D';
+      DadosContaCorrente.Valor       := strToFloat(EdtValor.Text);
+      DadosContaCorrente.Cod_Cliente := StrtoInt(edtcod_Cliente.Text);
+      DadosContaCorrente.Historico   := edthistorico.text;
+      DadosContaCorrente.Documento   := cdsMovCaixa.FieldByName('Sequencia').asInteger;
+      IF  not GravaContaCorrente.Atualizar(DadosContaCorrente) Then
+      Begin
+         CaixaMensagem( 'Não foi possivel lancar no conta corrente', ctAviso, [ cbOk ], 0 );
+         Exit;
+      End;
+   End;
+   BtnCancelaClick(BtnCancela);
+end;
+
+procedure TfrmMovCaixa.btnPrePagamentoClick(Sender: TObject);
+begin
+   frmprepagamento := tfrmPrePagamento.create(Self);
+   frmprepagamento.showmodal;
+end;
+
+procedure TfrmMovCaixa.cdsPesquisaBeforeOpen(DataSet: TDataSet);
+var licont : Integer;
+begin
+ CriarCalculado (DataSet,'NomeD_C',ftString,15);
+ CriarCalculado (DataSet,'Vlr_Debito',ftFloat,0);
+ CriarCalculado (DataSet,'Vlr_Credito',ftFloat,0);
+ for liCont := 1 To DataSet.FieldCount Do
+   begin
+      if DataSet.Fields[ liCont - 1 ].DataType = ftFloat Then
+         TFloatField( DataSet.Fields[ liCont - 1 ] ).DisplayFormat := '0.00';
+   end;
+end;
+
+procedure TfrmMovCaixa.cdsPesquisaCalcFields(DataSet: TDataSet);
+begin
+   If cdsPesquisa.FieldByName('D_C').asString = 'C' Then
+   Begin
+      cdsPesquisa.FieldByName('NomeD_C').asString    := 'Entrada';
+      cdsPesquisa.FieldByName('Vlr_Credito').asFloat := cdsPesquisa.FieldByName('Valor').asFloat;
+      cdsPesquisa.FieldByName('Vlr_Debito').asFloat  := 0;
+   End;
+   If cdsPesquisa.FieldByName('D_C').asString = 'D' Then
+   Begin
+      cdsPesquisa.FieldByName('NomeD_C').asString    := 'Saida';
+      cdsPesquisa.FieldByName('Vlr_Debito').asFloat  := cdsPesquisa.FieldByName('Valor').asFloat;
+      cdsPesquisa.FieldByName('Vlr_Credito').asFloat := 0;
+   End;
+
+
+end;
+
+procedure TfrmMovCaixa.cmbCod_TipoDespesaChange(Sender: TObject);
+begin
+   cmbNome_TipoDespesa.KeyValue := cmbCod_TipoDespesa.KeyValue;
+end;
+
+procedure TfrmMovCaixa.cmbD_CChange(Sender: TObject);
+begin
+   If cmbD_C.ItemIndex = 0 Then
+   Begin
+      // despesas
+      qryVariavel.Close;
+      qryVariavel.Params.clear;
+      qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
+                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 or Tipo_Conta=:parTipo_Conta2 ) '+
+                                        'Order by Descricao ';
+      qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
+      qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 2; // 1 Debito 2 Credito
+      qryVariavel.ParamByName('parTipo_Conta2').AsInteger := 3; // 1 Debito 2 Credito
+    End
+    Else
+    Begin
+      // receitas
+      qryVariavel.Close;
+      qryVariavel.Params.clear;
+      qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
+                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1  ) '+
+                                        'Order by Descricao ';
+      qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 1; // 1 Debito 2 Credito
+      qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 4; // 1 Debito 2 Credito
+    End;
+
+    cdsCadOperacoes.Close;
+    cdsCadOperacoes.ProviderName := dspVariavel.name;
+    cdsCadOperacoes.Open;
+
+end;
+
+procedure TfrmMovCaixa.cmbNome_ClienteChange(Sender: TObject);
+begin
+   if cmbNome_Cliente.KeyValue <> Null then
+      edtCod_Cliente.text :=cmbNome_Cliente.KeyValue;
+end;
+
+procedure TfrmMovCaixa.cmbNome_formaPagamentoChange(Sender: TObject);
+begin
+   lblCliente.Visible      := False;
+   edtcod_Cliente.Visible  := False;
+   cmbNome_Cliente.Visible := False;
+   if cdsCadFormasPagamento.FieldByName('TipoLancamento').Asinteger=2 then
+   Begin
+      lblCliente.Visible      := True;
+      edtcod_Cliente.Visible  := True;
+      cmbNome_Cliente.Visible := True;
+   End;
+end;
+
+procedure TfrmMovCaixa.cmbNome_TipoDespesaChange(Sender: TObject);
+begin
+   cmbCod_TipoDespesa.KeyValue := cmbNome_TipoDespesa.KeyValue;
+end;
+
+procedure TfrmMovCaixa.cmbPeriodoChange(Sender: TObject);
+begin
+   ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+end;
+
+procedure TfrmMovCaixa.edtcod_ClienteExit(Sender: TObject);
+begin
+  inherited;
+   if Trim(edtCod_Cliente.text)<> '' Then
+   Begin
+      IF length(Trim(edtCod_Cliente.Text))<=5 Then
+      Begin
+         cmbNome_Cliente.KeyValue := edtCod_Cliente.text;
+         if Trim(cmbNome_Cliente.Text) = '' Then
+         Begin
+            cmbNome_Cliente.KeyValue := Null;
+            edtCod_Cliente.Text      := '';
+            CaixaMensagem( 'Cliente Não Encontrado ', ctAviso, [ cbOk ], 0 );
+         End;
+      End;
+   End
+   else
+      cmbNome_Cliente.KeyValue := Null;
+end;
+
+procedure TfrmMovCaixa.FormShow(Sender: TObject);
+begin
+
+   lblCliente.Visible      := False;
+   edtcod_Cliente.Visible  := False;
+   cmbNome_Cliente.Visible := False;
+
+
+   cmbPeriodoChange(cmbPeriodo);
+
+   qryVariavel.Close;
+   qryVariavel.Params.clear;
+   qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
+                                  '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 or Tipo_Conta=:parTipo_Conta2 ) '+
+                                     'Order by Descricao ';
+   qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
+   qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 2; // 1 Debito 2 Credito
+   qryVariavel.ParamByName('parTipo_Conta2').AsInteger := 3; // 1 Debito 2 Credito
+
+   cdsCadOperacoes.Close;
+   cdsCadOperacoes.ProviderName := dspVariavel.name;
+   cdsCadOperacoes.Open;
+
+   qryVariavel.Close;
+   qryVariavel.Params.Clear;
+   qryVariavel.SQL.text :='Select Codigo,Descricao,TipoLancamento from T_formasPagamento  '+
+                          'where TipoPagamento=:parTipoPagamento '+
+                          'order by Descricao' ;
+   qryVariavel.ParamByName('parTipoPagamento').AsString := '0'; // A vista
+
+   cdsCadFormasPagamento.Close;
+   cdsCadFormasPagamento.ProviderName := dspVariavel.Name;
+   cdsCadFormasPagamento.Open;
+
+   qryVariavel.Close;
+   qryVariavel.Params.Clear;
+   qryVariavel.SQL.text :='Select status, Codigo,Descricao,cnpjcpf,'+
+                           'Qtde_PedAberto,Limite_Credito,Cod_Rota from T_Clientes '+
+                           'where ativo=:parAtivo order by Descricao ';
+   qryVariavel.ParamByName('parativo').AsString := 'S';
+
+   cdsCadClientes.Close;
+   cdsCadClientes.ProviderName := dspVariavel.Name;
+   cdsCadClientes.Open;
+
+
+   PagCadastro.ActivePageIndex := 0;
+end;
+
+procedure TfrmMovCaixa.impMatricialNewPage(Sender: TObject; Pagina: Integer);
+begin
+   ConfiguraRel( Name, True, TRdPrint( Sender ), 1 );
+   pviLinha := 06;
+  // pviLinha:=Pvilinha+1;
+   //TRdPrint( Sender ).imp(pvilinha,001,'Data    Descricao                                    Debito   Credito      Saldo');
+   //pviLinha:=Pvilinha+1;
+   //TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
+   //pviLinha:=Pvilinha+1;
+end;
+
+end.
