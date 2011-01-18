@@ -33,7 +33,7 @@ object frmInventario: TfrmInventario
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 11
       Top = 0
-      Width = 783
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -298,13 +298,18 @@ object frmInventario: TfrmInventario
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta Inventario'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 43
         Width = 796
-        Height = 335
+        Height = 334
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 335
         object GridDBInventario: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -543,6 +548,10 @@ object frmInventario: TfrmInventario
     end
     object TabInventario: TbsSkinTabSheet
       Caption = 'Inventario dos produtos'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 57
@@ -769,9 +778,10 @@ object frmInventario: TfrmInventario
         Left = 0
         Top = 104
         Width = 796
-        Height = 274
+        Height = 273
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 274
         object cxGridDBTableView1: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcTempItensInventario
@@ -929,7 +939,6 @@ object frmInventario: TfrmInventario
     end
   end
   object cdsTempItensInventario: TClientDataSet
-    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -966,13 +975,6 @@ object frmInventario: TfrmInventario
     StoreDefs = True
     Left = 208
     Top = 225
-    Data = {
-      9E0000009619E0BD0100000018000000070000000000030000009E0006436F64
-      69676F04000100000000000944657363726963616F0100490000000100055749
-      4454480200020014000A5175616E74696461646504000100000000000950636F
-      5F76656E64610800040000000000094469666572656E63610400010000000000
-      0553616C646F040001000000000009766C725F546F74616C0800040000000000
-      0000}
     object cdsTempItensInventarioCodigo: TIntegerField
       FieldName = 'Codigo'
     end
@@ -1108,7 +1110,7 @@ object frmInventario: TfrmInventario
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

@@ -865,9 +865,9 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 538
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -900,6 +900,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 608
+        ExplicitTop = 12
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -1075,7 +1076,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

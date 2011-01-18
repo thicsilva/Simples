@@ -650,9 +650,9 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 482
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -685,6 +685,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 526
+        ExplicitTop = 12
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -742,17 +743,10 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     end
   end
   object cdsTmpItensEtiquetas: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 345
     Top = 315
-    Data = {
-      840000009619E0BD010000001800000005000000000003000000840006436F64
-      69676F040001000000000009436F645F42617272610100490000000100055749
-      445448020002000D000944657363726963616F01004900000001000557494454
-      480200020032000950636F5F56656E6461080004000000000004517464650400
-      0100000000000000}
     object cdsTmpItensEtiquetasCodigo: TIntegerField
       FieldName = 'Codigo'
     end

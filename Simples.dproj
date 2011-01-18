@@ -1,289 +1,280 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-		<PropertyGroup>
-			<ProjectGuid>{e6bbb627-fadb-4631-9d88-c7fafc798463}</ProjectGuid>
-			<MainSource>Simples.dpr</MainSource>
-			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-			<DCC_DependencyCheckOutputName>Simples.exe</DCC_DependencyCheckOutputName>
-			<ProjectVersion>12.0</ProjectVersion>
-			<Config Condition="'$(Config)'==''">Debug</Config>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
-			<Cfg_1>true</Cfg_1>
-			<CfgParent>Base</CfgParent>
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
-			<Cfg_2>true</Cfg_2>
-			<CfgParent>Base</CfgParent>
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Base)'!=''">
-			<DCC_DependencyCheckOutputName>Simples.exe</DCC_DependencyCheckOutputName>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<Version>7.0</Version>
-			<DCC_DebugInformation>False</DCC_DebugInformation>
-			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
-			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-			<DCC_UnitSearchPath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-			<DCC_ResourcePath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_ResourcePath)</DCC_ResourcePath>
-			<DCC_ObjPath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_ObjPath)</DCC_ObjPath>
-			<DCC_IncludePath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_IncludePath)</DCC_IncludePath>
-			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_2)'!=''">
-			<Version>7.0</Version>
-			<DCC_UnitSearchPath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-			<DCC_ResourcePath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_ResourcePath)</DCC_ResourcePath>
-			<DCC_ObjPath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_ObjPath)</DCC_ObjPath>
-			<DCC_IncludePath>D:\Arquivos de programas\Borland\Delphi7\vclD7\TeeChart.Pro.v7.06\Sources\Compiled\Delphi7\Lib;$(DCC_IncludePath)</DCC_IncludePath>
-			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-			<DCC_MapFile>3</DCC_MapFile>
-		</PropertyGroup>
-		<ProjectExtensions>
-			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
-			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
-			<BorlandProject>
-				<Delphi.Personality>
-					<Parameters>
-						<Parameters Name="UseLauncher">False</Parameters>
-						<Parameters Name="LoadAllSymbols">True</Parameters>
-						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
-					</Parameters>
-					<VersionInfo>
-						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
-						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
-						<VersionInfo Name="MajorVer">1</VersionInfo>
-						<VersionInfo Name="MinorVer">0</VersionInfo>
-						<VersionInfo Name="Release">2</VersionInfo>
-						<VersionInfo Name="Build">130</VersionInfo>
-						<VersionInfo Name="Debug">True</VersionInfo>
-						<VersionInfo Name="PreRelease">True</VersionInfo>
-						<VersionInfo Name="Special">False</VersionInfo>
-						<VersionInfo Name="Private">False</VersionInfo>
-						<VersionInfo Name="DLL">False</VersionInfo>
-						<VersionInfo Name="Locale">1046</VersionInfo>
-						<VersionInfo Name="CodePage">1252</VersionInfo>
-					</VersionInfo>
-					<VersionInfoKeys>
-						<VersionInfoKeys Name="CompanyName">Prisma Desenvolvimento de Soft Ware</VersionInfoKeys>
-						<VersionInfoKeys Name="FileDescription">Sistema Simples de Controle Integrado</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.0.2.130</VersionInfoKeys>
-						<VersionInfoKeys Name="InternalName">Simples</VersionInfoKeys>
-						<VersionInfoKeys Name="LegalCopyright">Copyright 2008 Todos os Direitos Reservados</VersionInfoKeys>
-						<VersionInfoKeys Name="LegalTrademarks"/>
-						<VersionInfoKeys Name="OriginalFilename"/>
-						<VersionInfoKeys Name="ProductName">Simples</VersionInfoKeys>
-						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
-						<VersionInfoKeys Name="Comments"/>
-					</VersionInfoKeys>
-					<Source>
-						<Source Name="MainSource">Simples.dpr</Source>
-					</Source>
-					<Excluded_Packages>
-						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-						<Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-					</Excluded_Packages>
-				</Delphi.Personality>
-				<ModelSupport>False</ModelSupport>
-			</BorlandProject>
-			<ProjectFileVersion>12</ProjectFileVersion>
-		</ProjectExtensions>
-		<ItemGroup>
-			<DelphiCompile Include="Simples.dpr">
-				<MainSource>MainSource</MainSource>
-			</DelphiCompile>
-			<DCCReference Include="uPrincipal.pas">
-				<Form>frmPrincipal</Form>
-			</DCCReference>
-			<DCCReference Include="uMensagens.pas">
-				<Form>FrmMensagens</Form>
-			</DCCReference>
-			<DCCReference Include="usequencias.pas">
-				<Form>frmSequencias</Form>
-			</DCCReference>
-			<DCCReference Include="uCadAtividades.pas">
-				<Form>frmCadAtividades</Form>
-			</DCCReference>
-			<DCCReference Include="uParametros.pas">
-				<Form>frmParametros</Form>
-			</DCCReference>
-			<DCCReference Include="uCadProdutos.pas">
-				<Form>frmCadProdutos</Form>
-			</DCCReference>
-			<DCCReference Include="uCadOperacoes.pas">
-				<Form>frmCadOperacoes</Form>
-			</DCCReference>
-			<DCCReference Include="uCadFormaPagamento.pas">
-				<Form>frmCadFormaPagamento</Form>
-			</DCCReference>
-			<DCCReference Include="uCtasReceber.pas">
-				<Form>frmCtasReceber</Form>
-			</DCCReference>
-			<DCCReference Include="uConsVendas.pas">
-				<Form>frmConsVendas</Form>
-			</DCCReference>
-			<DCCReference Include="uBaixaNormal.pas">
-				<Form>frmBaixaNormal</Form>
-			</DCCReference>
-			<DCCReference Include="uVendeBrinde.pas">
-				<Form>frmVendeBrinde</Form>
-			</DCCReference>
-			<DCCReference Include="uMovCaixa.pas">
-				<Form>frmMovCaixa</Form>
-			</DCCReference>
-			<DCCReference Include="uFechaCaixa.pas">
-				<Form>frmFechaCaixa</Form>
-			</DCCReference>
-			<DCCReference Include="uPrePagamento.pas">
-				<Form>frmPrePagamento</Form>
-			</DCCReference>
-			<DCCReference Include="UnitDeclaracoes.pas"/>
-			<DCCReference Include="ConfigUtils.pas"/>
-			<DCCReference Include="uCadFornecedores.pas">
-				<Form>frmCadFornecedores</Form>
-			</DCCReference>
-			<DCCReference Include="uCadClientes.pas">
-				<Form>frmCadClientes</Form>
-			</DCCReference>
-			<DCCReference Include="uEntradas.pas">
-				<Form>frmEntradas</Form>
-			</DCCReference>
-			<DCCReference Include="uselrelvendasVendedor.pas">
-				<Form>frmselrelVendasVendedor</Form>
-			</DCCReference>
-			<DCCReference Include="uUserLogin.pas">
-				<Form>frmLogin</Form>
-			</DCCReference>
-			<DCCReference Include="uselrelContaCorrenteEstoque.pas">
-				<Form>frmSelRelContaCorrenteEstoque</Form>
-			</DCCReference>
-			<DCCReference Include="udevolucaoVenda.pas">
-				<Form>frmDevolucaoVenda</Form>
-			</DCCReference>
-			<DCCReference Include="uBaixaTipo_01_Brinde.pas">
-				<Form>frmBaixaBrinde</Form>
-			</DCCReference>
-			<DCCReference Include="uFechaDia.pas">
-				<Form>frmFechaDia</Form>
-			</DCCReference>
-			<DCCReference Include="uCtaspagar.pas">
-				<Form>frmCtasPagar</Form>
-			</DCCReference>
-			<DCCReference Include="uControleRepasse.pas">
-				<Form>frmControleRepasse</Form>
-			</DCCReference>
-			<DCCReference Include="uSelRelDevolucoes.pas">
-				<Form>frmSelRelDevolucoes</Form>
-			</DCCReference>
-			<DCCReference Include="uAbreOS.pas">
-				<Form>frmabreos</Form>
-			</DCCReference>
-			<DCCReference Include="uConsultaOrdemServico.pas">
-				<Form>frmConsultaOrdemServico</Form>
-			</DCCReference>
-			<DCCReference Include="ufechaOS.pas">
-				<Form>frmFechaOs</Form>
-			</DCCReference>
-			<DCCReference Include="uManutencaoOs.pas">
-				<Form>frmManutencaoOs</Form>
-			</DCCReference>
-			<DCCReference Include="uCadRotas.pas">
-				<Form>frmCadRotas</Form>
-			</DCCReference>
-			<DCCReference Include="uSelMotivoStatus.pas">
-				<Form>frmMotivoStatus</Form>
-			</DCCReference>
-			<DCCReference Include="uselRelContasReceber.pas">
-				<Form>frmSelRelContasReceber</Form>
-			</DCCReference>
-			<DCCReference Include="uSelRelEntradas.pas">
-				<Form>frmselrelEntradas</Form>
-			</DCCReference>
-			<DCCReference Include="Cl_TBuscaDados.pas"/>
-			<DCCReference Include="uVendas.pas">
-				<Form>frmVendas</Form>
-			</DCCReference>
-			<DCCReference Include="uProposta.pas">
-				<Form>frmProposta</Form>
-			</DCCReference>
-			<DCCReference Include="uProdDescricaoComplementar.pas">
-				<Form>frmProdDescricaoComplementar</Form>
-			</DCCReference>
-			<DCCReference Include="uEstoqueManutencao.pas">
-				<Form>frmEstoqueManutencao</Form>
-			</DCCReference>
-			<DCCReference Include="cl_TAvarias.pas"/>
-			<DCCReference Include="uInventario.pas">
-				<Form>frmInventario</Form>
-			</DCCReference>
-			<DCCReference Include="..\Compartilhados\ucadUsuarios.pas">
-				<Form>frmCadUsuarios</Form>
-			</DCCReference>
-			<DCCReference Include="..\Compartilhados\uCadPerfil.pas">
-				<Form>frmCadPerfil</Form>
-			</DCCReference>
-			<DCCReference Include="..\Compartilhados\uFormBase.pas">
-				<Form>FormBase</Form>
-			</DCCReference>
-			<DCCReference Include="..\Compartilhados\uFuncoes.pas"/>
-			<DCCReference Include="uclassContaCorrente.pas"/>
-			<DCCReference Include="uClassDaoContaCorrente.pas"/>
-			<DCCReference Include="ufechames.pas">
-				<Form>frmfechames</Form>
-			</DCCReference>
-			<DCCReference Include="uCalMQuadrado.pas">
-				<Form>frmCalMQuadrado</Form>
-			</DCCReference>
-			<DCCReference Include="uselrelvendas.pas">
-				<Form>frmSelRelVendas</Form>
-			</DCCReference>
-			<DCCReference Include="uClassEstoque.pas"/>
-			<DCCReference Include="uselRelEtiquetas.pas">
-				<Form>frmSelRelEtiquetas</Form>
-			</DCCReference>
-			<DCCReference Include="uCadFabricantes.pas">
-				<Form>frmCadFabricantes</Form>
-			</DCCReference>
-			<DCCReference Include="uCadGrupos.pas">
-				<Form>frmCadGrupos</Form>
-			</DCCReference>
-			<DCCReference Include="uselrelClientes.pas">
-				<Form>frmSelRelClientes</Form>
-			</DCCReference>
-			<DCCReference Include="uselrelRepasse.pas">
-				<Form>frmselrelRepasse</Form>
-			</DCCReference>
-			<DCCReference Include="..\Compartilhados\uClassPerfil.pas"/>
-			<DCCReference Include="..\Compartilhados\uClassConexao.pas"/>
-			<DCCReference Include="uCadFuncionarios.pas">
-				<Form>frmCadFuncionarios</Form>
-			</DCCReference>
-			<DCCReference Include="uConsItensDevolvidos.pas">
-				<Form>frmConsItensDevolvidos</Form>
-			</DCCReference>
-			<DCCReference Include="ucadTipoVenda.pas">
-				<Form>frmCadtipoVenda</Form>
-			</DCCReference>
-			<DCCReference Include="uModelo.pas">
-				<Form>FrmModelo</Form>
-			</DCCReference>
-			<BuildConfiguration Include="Base">
-				<Key>Base</Key>
-			</BuildConfiguration>
-			<BuildConfiguration Include="Debug">
-				<Key>Cfg_2</Key>
-				<CfgParent>Base</CfgParent>
-			</BuildConfiguration>
-			<BuildConfiguration Include="Release">
-				<Key>Cfg_1</Key>
-				<CfgParent>Base</CfgParent>
-			</BuildConfiguration>
-		</ItemGroup>
-		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
-	</Project>
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{e2017030-34fb-4162-b401-1f83ee08570a}</ProjectGuid>
+    <MainSource>Simples.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>Simples.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+      <VersionInfo Name="MajorVer">1</VersionInfo>
+      <VersionInfo Name="MinorVer">0</VersionInfo>
+      <VersionInfo Name="Release">0</VersionInfo>
+      <VersionInfo Name="Build">0</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1046</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="CompanyName"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileDescription"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="InternalName"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+      <VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductName"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="Comments"></VersionInfoKeys>
+    </VersionInfoKeys>
+    <Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages>
+    <Source>
+      <Source Name="MainSource">Simples.dpr</Source>
+    </Source>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup />
+  <ItemGroup>
+    <DelphiCompile Include="Simples.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\Compartilhados\uCadPerfil.pas">
+      <Form>frmCadPerfil</Form>
+    </DCCReference>
+    <DCCReference Include="..\Compartilhados\ucadUsuarios.pas">
+      <Form>frmCadUsuarios</Form>
+    </DCCReference>
+    <DCCReference Include="..\Compartilhados\uClassConexao.pas" />
+    <DCCReference Include="..\Compartilhados\uClassPerfil.pas" />
+    <DCCReference Include="..\Compartilhados\uFormBase.pas">
+      <Form>FormBase</Form>
+    </DCCReference>
+    <DCCReference Include="..\Compartilhados\uFuncoes.pas" />
+    <DCCReference Include="cl_TAvarias.pas" />
+    <DCCReference Include="Cl_TBuscaDados.pas" />
+    <DCCReference Include="ConfigUtils.pas" />
+    <DCCReference Include="uAbreOS.pas">
+      <Form>frmabreos</Form>
+    </DCCReference>
+    <DCCReference Include="uBaixaNormal.pas">
+      <Form>frmBaixaNormal</Form>
+    </DCCReference>
+    <DCCReference Include="uBaixaTipo_01_Brinde.pas">
+      <Form>frmBaixaBrinde</Form>
+    </DCCReference>
+    <DCCReference Include="uCadAtividades.pas">
+      <Form>frmCadAtividades</Form>
+    </DCCReference>
+    <DCCReference Include="uCadClientes.pas">
+      <Form>frmCadClientes</Form>
+    </DCCReference>
+    <DCCReference Include="uCadFabricantes.pas">
+      <Form>frmCadFabricantes</Form>
+    </DCCReference>
+    <DCCReference Include="uCadFormaPagamento.pas">
+      <Form>frmCadFormaPagamento</Form>
+    </DCCReference>
+    <DCCReference Include="uCadFornecedores.pas">
+      <Form>frmCadFornecedores</Form>
+    </DCCReference>
+    <DCCReference Include="uCadFuncionarios.pas">
+      <Form>frmCadFuncionarios</Form>
+    </DCCReference>
+    <DCCReference Include="uCadGrupos.pas">
+      <Form>frmCadGrupos</Form>
+    </DCCReference>
+    <DCCReference Include="uCadOperacoes.pas">
+      <Form>frmCadOperacoes</Form>
+    </DCCReference>
+    <DCCReference Include="uCadProdutos.pas">
+      <Form>frmCadProdutos</Form>
+    </DCCReference>
+    <DCCReference Include="uCadRotas.pas">
+      <Form>frmCadRotas</Form>
+    </DCCReference>
+    <DCCReference Include="ucadTipoVenda.pas">
+      <Form>frmCadtipoVenda</Form>
+    </DCCReference>
+    <DCCReference Include="uCalMQuadrado.pas">
+      <Form>frmCalMQuadrado</Form>
+    </DCCReference>
+    <DCCReference Include="uclassContaCorrente.pas" />
+    <DCCReference Include="uClassDaoContaCorrente.pas" />
+    <DCCReference Include="uClassEstoque.pas" />
+    <DCCReference Include="uConsItensDevolvidos.pas">
+      <Form>frmConsItensDevolvidos</Form>
+    </DCCReference>
+    <DCCReference Include="uConsultaOrdemServico.pas">
+      <Form>frmConsultaOrdemServico</Form>
+    </DCCReference>
+    <DCCReference Include="uConsVendas.pas">
+      <Form>frmConsVendas</Form>
+    </DCCReference>
+    <DCCReference Include="uControleRepasse.pas">
+      <Form>frmControleRepasse</Form>
+    </DCCReference>
+    <DCCReference Include="uCtaspagar.pas">
+      <Form>frmCtasPagar</Form>
+    </DCCReference>
+    <DCCReference Include="uCtasReceber.pas">
+      <Form>frmCtasReceber</Form>
+    </DCCReference>
+    <DCCReference Include="udevolucaoVenda.pas">
+      <Form>frmDevolucaoVenda</Form>
+    </DCCReference>
+    <DCCReference Include="uEntradas.pas">
+      <Form>frmEntradas</Form>
+    </DCCReference>
+    <DCCReference Include="uEstoqueManutencao.pas">
+      <Form>frmEstoqueManutencao</Form>
+    </DCCReference>
+    <DCCReference Include="uFechaCaixa.pas">
+      <Form>frmFechaCaixa</Form>
+    </DCCReference>
+    <DCCReference Include="uFechaDia.pas">
+      <Form>frmFechaDia</Form>
+    </DCCReference>
+    <DCCReference Include="ufechames.pas">
+      <Form>frmfechames</Form>
+    </DCCReference>
+    <DCCReference Include="ufechaOS.pas">
+      <Form>frmFechaOs</Form>
+    </DCCReference>
+    <DCCReference Include="uInventario.pas">
+      <Form>frmInventario</Form>
+    </DCCReference>
+    <DCCReference Include="uManutencaoOs.pas">
+      <Form>frmManutencaoOs</Form>
+    </DCCReference>
+    <DCCReference Include="uMensagens.pas">
+      <Form>FrmMensagens</Form>
+    </DCCReference>
+    <DCCReference Include="uModelo.pas">
+      <Form>FrmModelo</Form>
+    </DCCReference>
+    <DCCReference Include="uMovCaixa.pas">
+      <Form>frmMovCaixa</Form>
+    </DCCReference>
+    <DCCReference Include="UnitDeclaracoes.pas" />
+    <DCCReference Include="uParametros.pas">
+      <Form>frmParametros</Form>
+    </DCCReference>
+    <DCCReference Include="uPrePagamento.pas">
+      <Form>frmPrePagamento</Form>
+    </DCCReference>
+    <DCCReference Include="uPrincipal.pas">
+      <Form>frmPrincipal</Form>
+    </DCCReference>
+    <DCCReference Include="uProdDescricaoComplementar.pas">
+      <Form>frmProdDescricaoComplementar</Form>
+    </DCCReference>
+    <DCCReference Include="uProposta.pas">
+      <Form>frmProposta</Form>
+    </DCCReference>
+    <DCCReference Include="uSelMotivoStatus.pas">
+      <Form>frmMotivoStatus</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelClientes.pas">
+      <Form>frmSelRelClientes</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelContaCorrenteEstoque.pas">
+      <Form>frmSelRelContaCorrenteEstoque</Form>
+    </DCCReference>
+    <DCCReference Include="uselRelContasReceber.pas">
+      <Form>frmSelRelContasReceber</Form>
+    </DCCReference>
+    <DCCReference Include="uSelRelDevolucoes.pas">
+      <Form>frmSelRelDevolucoes</Form>
+    </DCCReference>
+    <DCCReference Include="uSelRelEntradas.pas">
+      <Form>frmselrelEntradas</Form>
+    </DCCReference>
+    <DCCReference Include="uselRelEtiquetas.pas">
+      <Form>frmSelRelEtiquetas</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelRepasse.pas">
+      <Form>frmselrelRepasse</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelvendas.pas">
+      <Form>frmSelRelVendas</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelvendasVendedor.pas">
+      <Form>frmselrelVendasVendedor</Form>
+    </DCCReference>
+    <DCCReference Include="usequencias.pas">
+      <Form>frmSequencias</Form>
+    </DCCReference>
+    <DCCReference Include="uUserLogin.pas">
+      <Form>frmLogin</Form>
+    </DCCReference>
+    <DCCReference Include="uVendas.pas">
+      <Form>frmVendas</Form>
+    </DCCReference>
+    <DCCReference Include="uVendeBrinde.pas">
+      <Form>frmVendeBrinde</Form>
+    </DCCReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>

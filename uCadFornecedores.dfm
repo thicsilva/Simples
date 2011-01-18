@@ -49,10 +49,11 @@ object frmCadFornecedores: TfrmCadFornecedores
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 361
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 337
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -250,7 +251,7 @@ object frmCadFornecedores: TfrmCadFornecedores
         Left = 0
         Top = 33
         Width = 642
-        Height = 295
+        Height = 297
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 304
@@ -353,6 +354,9 @@ object frmCadFornecedores: TfrmCadFornecedores
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 337
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 65
@@ -1025,9 +1029,9 @@ object frmCadFornecedores: TfrmCadFornecedores
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 537
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1060,6 +1064,7 @@ object frmCadFornecedores: TfrmCadFornecedores
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 582
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -1098,6 +1103,7 @@ object frmCadFornecedores: TfrmCadFornecedores
         Layout = blGlyphTop
         OnClick = btnexcluirClick
         ExplicitLeft = 120
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70
@@ -1216,6 +1222,7 @@ object frmCadFornecedores: TfrmCadFornecedores
         Enabled = False
         OnClick = BtnCancelaClick
         ExplicitLeft = 326
+        ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 210

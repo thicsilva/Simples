@@ -49,10 +49,11 @@ object frmCadOperacoes: TfrmCadOperacoes
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 261
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 237
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -258,7 +259,7 @@ object frmCadOperacoes: TfrmCadOperacoes
         Left = 0
         Top = 33
         Width = 614
-        Height = 195
+        Height = 197
         Align = alClient
         TabOrder = 2
         ExplicitHeight = 204
@@ -316,6 +317,9 @@ object frmCadOperacoes: TfrmCadOperacoes
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 237
       object Previsto: TLabel
         Left = 72
@@ -625,9 +629,9 @@ object frmCadOperacoes: TfrmCadOperacoes
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -660,6 +664,7 @@ object frmCadOperacoes: TfrmCadOperacoes
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 550
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -698,6 +703,7 @@ object frmCadOperacoes: TfrmCadOperacoes
         Layout = blGlyphTop
         OnClick = BtnExcluirClick
         ExplicitLeft = 126
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70
@@ -815,6 +821,7 @@ object frmCadOperacoes: TfrmCadOperacoes
         Enabled = False
         OnClick = BtnCancelaClick
         ExplicitLeft = 273
+        ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 210

@@ -11,15 +11,7 @@ uses
   StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
-  SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, dxSkinBlack,
-  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
-  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
-  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
-  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
-  dxSkinsDefaultPainters, dxSkinValentine, dxSkinXmas2008Blue,
-  dxSkinsdxRibbonPainter, dxSkinsdxBarPainter, DBXMsSQL ;
+  SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL ;
 
 type
   TfrmPrincipal = class(TForm)

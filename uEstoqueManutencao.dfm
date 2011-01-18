@@ -1070,6 +1070,10 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     end
     object tabajustaSaldo: TbsSkinTabSheet
       Caption = 'Ajuste de Saldo de Estoque'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 0
@@ -1344,9 +1348,10 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Left = 0
         Top = 63
         Width = 665
-        Height = 313
+        Height = 312
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 313
         object cxGridAjustaEstoque: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcAjustaEstoque
@@ -1427,7 +1432,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 11
       Top = 0
-      Width = 652
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1638,17 +1643,10 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     Top = 253
   end
   object cdsProdutosAvarias: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 320
     Top = 225
-    Data = {
-      840000009619E0BD01000000180000000500000000000300000084000B436F64
-      5F50726F6475746F04000100000000000944657363726963616F010049000000
-      01000557494454480200020032000B717464655F417661726961040001000000
-      00000950636F5F56656E6461080004000000000009566C725F546F74616C0800
-      0400000000000000}
     object cdsProdutosAvariasCod_Produto: TIntegerField
       FieldName = 'Cod_Produto'
     end
@@ -1720,17 +1718,10 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     Top = 253
   end
   object cdsAjustaEstoque: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     Left = 376
     Top = 225
-    Data = {
-      8E0000009619E0BD0100000018000000050000000000030000008E0008446174
-      615F4361640800080000000000084F70657261646F7201004900000001000557
-      49445448020002001E00066D6F7469766F010049000000010005574944544802
-      0002003200045469706F0100490000000100055749445448020002000A000956
-      6C725F546F74616C08000400000000000000}
     object cdsAjustaEstoqueData_Cad: TDateTimeField
       FieldName = 'Data_Cad'
     end

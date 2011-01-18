@@ -49,10 +49,11 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 250
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 226
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -257,7 +258,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Left = 0
         Top = 33
         Width = 592
-        Height = 184
+        Height = 186
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 193
@@ -317,6 +318,8 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       Caption = 'Cadastro'
       ExplicitLeft = -174
       ExplicitTop = 2
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 13
         Top = 12
@@ -768,6 +771,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object tabMensagem: TbsSkinTabSheet
       Caption = 'Mensagem Complementar'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 226
       object MemoMensagem: TMemo
         Left = 0
@@ -847,9 +853,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 488
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -882,6 +888,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 518
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -920,6 +927,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Layout = blGlyphTop
         OnClick = btnexcluirClick
         ExplicitLeft = 97
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70

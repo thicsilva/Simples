@@ -542,9 +542,9 @@ object frmControleRepasse: TfrmControleRepasse
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 847
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -577,6 +577,7 @@ object frmControleRepasse: TfrmControleRepasse
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 811
+        ExplicitTop = 12
       end
       object btnImprimir: TbsSkinSpeedButton
         Left = 0
@@ -723,7 +724,6 @@ object frmControleRepasse: TfrmControleRepasse
     Top = 187
   end
   object cdsRepasse: TClientDataSet
-    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -788,17 +788,6 @@ object frmControleRepasse: TfrmControleRepasse
     StoreDefs = True
     Left = 354
     Top = 215
-    Data = {
-      2A0100009619E0BD01000000180000000E0000000000030000002A0104526F74
-      610100490000000100055749445448020002001E000B766C725F526570617373
-      65080004000000000009766C725F546F74616C08000400000000000C766C725F
-      526563656269646F08000400000000000D766C725F4465766F6C7669646F0800
-      0400000000000B766C725F5065726469646F08000400000000000C766C725F43
-      6F6D697373616F080004000000000010766C725F53616C646F52657061737365
-      08000400000000000B515444455F466963686173040001000000000007706572
-      6330303108000400000000000770657263303032080004000000000007706572
-      6330303308000400000000000770657263303034080004000000000007706572
-      6330303508000400000000000000}
     object cdsRepasseRota: TStringField
       FieldName = 'Rota'
       Size = 30
@@ -896,7 +885,7 @@ object frmControleRepasse: TfrmControleRepasse
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -980,7 +969,6 @@ object frmControleRepasse: TfrmControleRepasse
     Top = 149
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

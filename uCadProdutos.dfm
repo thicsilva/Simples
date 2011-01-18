@@ -51,10 +51,11 @@ object frmCadProdutos: TfrmCadProdutos
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 343
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 319
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -250,7 +251,7 @@ object frmCadProdutos: TfrmCadProdutos
         Left = 0
         Top = 41
         Width = 707
-        Height = 269
+        Height = 271
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 278
@@ -332,6 +333,9 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 319
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 81
@@ -1064,6 +1068,9 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object pagFichaTecnica: TbsSkinTabSheet
       Caption = 'Ficha Tecnica'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 319
       object Label2: TLabel
         Left = 328
@@ -1257,7 +1264,7 @@ object frmCadProdutos: TfrmCadProdutos
         Left = 0
         Top = 56
         Width = 707
-        Height = 254
+        Height = 256
         Align = alClient
         TabOrder = 0
         ExplicitHeight = 263
@@ -1400,12 +1407,15 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object bsSkinTabSheet4: TbsSkinTabSheet
       Caption = 'Movimento'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 319
       object bsSkinLinkImage1: TbsSkinLinkImage
         Left = 0
         Top = 61
         Width = 707
-        Height = 249
+        Height = 251
         Cursor = crHandPoint
         Align = alClient
         AutoSize = True
@@ -3851,7 +3861,7 @@ object frmCadProdutos: TfrmCadProdutos
         Left = 0
         Top = 61
         Width = 707
-        Height = 249
+        Height = 251
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 258
@@ -3975,6 +3985,9 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object tabfoto: TbsSkinTabSheet
       Caption = 'Foto do Produto'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 319
       object btnLocalizaImagem: TbsSkinButton
         Left = 581
@@ -4571,7 +4584,7 @@ object frmCadProdutos: TfrmCadProdutos
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

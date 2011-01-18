@@ -937,9 +937,9 @@ object frmConsVendas: TfrmConsVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 809
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -972,6 +972,7 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 856
+        ExplicitTop = 12
       end
       object separador: TbsSkinBevel
         Left = 100
@@ -1089,6 +1090,7 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnEmproducaoClick
         ExplicitLeft = 140
+        ExplicitTop = 12
       end
       object btnEntregue: TbsSkinSpeedButton
         Left = 211
@@ -1127,6 +1129,7 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnEntregueClick
         ExplicitLeft = 189
+        ExplicitTop = 12
       end
       object btnCupomFiscal: TbsSkinSpeedButton
         Left = 524
@@ -1165,6 +1168,7 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnCupomFiscalClick
         ExplicitLeft = 592
+        ExplicitTop = 12
       end
       object bsSkinBevel5: TbsSkinBevel
         Left = 594
@@ -1175,6 +1179,7 @@ object frmConsVendas: TfrmConsVendas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object btnImpComprovante: TbsSkinSpeedButton
         Left = 403
@@ -1275,7 +1280,6 @@ object frmConsVendas: TfrmConsVendas
     end
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1395,7 +1399,7 @@ object frmConsVendas: TfrmConsVendas
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -1505,7 +1509,7 @@ object frmConsVendas: TfrmConsVendas
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

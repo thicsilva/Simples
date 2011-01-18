@@ -108,7 +108,6 @@ object frmSelRelVendas: TfrmSelRelVendas
       Color = clWhite
       TabOrder = 2
       Text = '22/10/2007'
-      TextHint = True
       Visible = False
       OnExit = edtData_IniExit
       ColorOnFocus = clWhite
@@ -128,6 +127,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtData_fim: TEditN
       Left = 151
@@ -137,7 +137,6 @@ object frmSelRelVendas: TfrmSelRelVendas
       Color = clWhite
       TabOrder = 4
       Text = '22/10/2007'
-      TextHint = True
       Visible = False
       OnExit = edtData_fimExit
       ColorOnFocus = clWhite
@@ -157,6 +156,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object btnPesquisar: TbsSkinButton
       Left = 443
@@ -297,6 +297,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       Height = 21
       Style = csDropDownList
       DropDownCount = 30
+      ItemHeight = 13
       ItemIndex = 0
       TabOrder = 5
       TabStop = False
@@ -638,10 +639,11 @@ object frmSelRelVendas: TfrmSelRelVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 479
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -672,6 +674,7 @@ object frmSelRelVendas: TfrmSelRelVendas
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 536
+        ExplicitTop = 12
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -679,6 +682,7 @@ object frmSelRelVendas: TfrmSelRelVendas
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -718,6 +722,7 @@ object frmSelRelVendas: TfrmSelRelVendas
         Width = 185
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 94
@@ -730,6 +735,7 @@ object frmSelRelVendas: TfrmSelRelVendas
         Width = 224
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 273
@@ -801,7 +807,7 @@ object frmSelRelVendas: TfrmSelRelVendas
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -861,7 +867,6 @@ object frmSelRelVendas: TfrmSelRelVendas
     Top = 131
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

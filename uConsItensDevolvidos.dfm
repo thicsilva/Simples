@@ -154,9 +154,9 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 665
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -189,6 +189,7 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 704
+        ExplicitTop = 12
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 0
@@ -199,6 +200,7 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end

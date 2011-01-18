@@ -46,11 +46,10 @@ object frmCadtipoVenda: TfrmCadtipoVenda
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitWidth = 632
-    ExplicitHeight = 251
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 630
       ExplicitHeight = 227
       object bsSkinPanel1: TbsSkinPanel
@@ -248,7 +247,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         Left = 0
         Top = 33
         Width = 672
-        Height = 185
+        Height = 187
         Align = alClient
         TabOrder = 1
         ExplicitWidth = 630
@@ -307,6 +306,8 @@ object frmCadtipoVenda: TfrmCadtipoVenda
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 630
       ExplicitHeight = 227
       object bsSkinExPanel1: TbsSkinExPanel
@@ -555,9 +556,9 @@ object frmCadtipoVenda: TfrmCadtipoVenda
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 561
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -590,6 +591,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 614
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -628,6 +630,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         Layout = blGlyphTop
         OnClick = btnexcluirClick
         ExplicitLeft = 126
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70
@@ -811,6 +814,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 210

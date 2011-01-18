@@ -757,6 +757,10 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       SkinDataName = 'tab'
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Escolha o Filtro'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object bsSkinStdLabel1: TbsSkinStdLabel
           Left = 50
           Top = 10
@@ -1090,10 +1094,11 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 641
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1124,6 +1129,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 630
+        ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 70
@@ -1131,6 +1137,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         Width = 18
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = -6
@@ -1143,6 +1150,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         Width = 553
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1150,10 +1158,11 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 0
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1185,7 +1194,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         OnClick = bsSkinSpeedButton1Click
         ExplicitLeft = -6
         ExplicitTop = 8
-        ExplicitHeight = 40
       end
     end
   end
@@ -1250,7 +1258,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -1310,7 +1318,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Top = 280
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

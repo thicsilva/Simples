@@ -36,7 +36,7 @@ object frmCtasPagar: TfrmCtasPagar
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 11
       Top = 0
-      Width = 713
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -448,14 +448,19 @@ object frmCtasPagar: TfrmCtasPagar
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 707
-        Height = 247
+        Height = 249
         Align = alClient
         PopupMenu = bsSkinPopupMenu1
         TabOrder = 2
+        ExplicitHeight = 247
         object gridCtasPagar: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -867,6 +872,7 @@ object frmCtasPagar: TfrmCtasPagar
           Height = 22
           Style = csDropDownList
           DropDownCount = 30
+          ItemHeight = 14
           ItemIndex = 14
           TabOrder = 5
           TabStop = False
@@ -922,7 +928,6 @@ object frmCtasPagar: TfrmCtasPagar
           Color = clMedGray
           TabOrder = 6
           Text = '22/10/2007'
-          TextHint = True
           Visible = False
           OnExit = edtData_fimExit
           ColorOnFocus = clWhite
@@ -942,6 +947,7 @@ object frmCtasPagar: TfrmCtasPagar
           FirstCharUpper = False
           FirstCharUpList = ' ('
           WidthOnFocus = 0
+          TextHint = True
         end
         object edtData_Ini: TEditN
           Left = 639
@@ -951,7 +957,6 @@ object frmCtasPagar: TfrmCtasPagar
           Color = clMedGray
           TabOrder = 7
           Text = '22/10/2007'
-          TextHint = True
           Visible = False
           OnExit = edtData_IniExit
           ColorOnFocus = clWhite
@@ -971,12 +976,14 @@ object frmCtasPagar: TfrmCtasPagar
           FirstCharUpper = False
           FirstCharUpList = ' ('
           WidthOnFocus = 0
+          TextHint = True
         end
         object cmbTipoFiltro: TComboBox
           Left = 520
           Top = 40
           Width = 105
           Height = 22
+          ItemHeight = 14
           ItemIndex = 0
           TabOrder = 8
           Text = 'Em Aberto'
@@ -990,7 +997,7 @@ object frmCtasPagar: TfrmCtasPagar
         Left = 707
         Top = 72
         Width = 19
-        Height = 247
+        Height = 249
         HintImageIndex = 0
         TabOrder = 1
         Visible = False
@@ -1015,6 +1022,7 @@ object frmCtasPagar: TfrmCtasPagar
         Position = 0
         SmallChange = 127
         LargeChange = 127
+        ExplicitHeight = 247
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
@@ -1512,7 +1520,6 @@ object frmCtasPagar: TfrmCtasPagar
         ParentFont = False
         TabOrder = 9
         Text = '0,00'
-        TextHint = True
         ColorOnFocus = clWhite
         ColorOnNotFocus = clWhite
         FontColorOnFocus = clRed
@@ -1530,6 +1537,7 @@ object frmCtasPagar: TfrmCtasPagar
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+        TextHint = True
       end
       object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
         Left = 210
@@ -1662,7 +1670,6 @@ object frmCtasPagar: TfrmCtasPagar
     Top = 230
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1770,7 +1777,7 @@ object frmCtasPagar: TfrmCtasPagar
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

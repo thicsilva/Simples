@@ -48,10 +48,11 @@ object frmCadGrupos: TfrmCadGrupos
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 248
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 224
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -247,7 +248,7 @@ object frmCadGrupos: TfrmCadGrupos
         Left = 0
         Top = 33
         Width = 629
-        Height = 182
+        Height = 184
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 191
@@ -305,6 +306,9 @@ object frmCadGrupos: TfrmCadGrupos
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 224
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
@@ -522,9 +526,9 @@ object frmCadGrupos: TfrmCadGrupos
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -557,6 +561,7 @@ object frmCadGrupos: TfrmCadGrupos
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 543
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -595,6 +600,7 @@ object frmCadGrupos: TfrmCadGrupos
         Layout = blGlyphTop
         OnClick = btnexcluirClick
         ExplicitLeft = 337
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70
@@ -633,6 +639,7 @@ object frmCadGrupos: TfrmCadGrupos
         Layout = blGlyphTop
         OnClick = btnalterarClick
         ExplicitLeft = 204
+        ExplicitTop = 12
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0
@@ -671,6 +678,7 @@ object frmCadGrupos: TfrmCadGrupos
         Layout = blGlyphTop
         OnClick = btnincluirClick
         ExplicitLeft = 64
+        ExplicitTop = 12
       end
       object BtnCancela: TbsSkinSpeedButton
         Left = 343
@@ -710,6 +718,7 @@ object frmCadGrupos: TfrmCadGrupos
         Enabled = False
         OnClick = BtnCancelaClick
         ExplicitLeft = 478
+        ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 413
@@ -721,6 +730,7 @@ object frmCadGrupos: TfrmCadGrupos
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 477
+        ExplicitTop = -1
       end
       object btnok: TbsSkinSpeedButton
         Left = 273
@@ -760,6 +770,7 @@ object frmCadGrupos: TfrmCadGrupos
         Enabled = False
         OnClick = btnokClick
         ExplicitLeft = 407
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 414
@@ -771,6 +782,7 @@ object frmCadGrupos: TfrmCadGrupos
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 548
+        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 210
@@ -782,6 +794,7 @@ object frmCadGrupos: TfrmCadGrupos
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 274
+        ExplicitTop = -1
       end
     end
   end

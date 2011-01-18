@@ -48,10 +48,11 @@ object frmCadAtividades: TfrmCadAtividades
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 248
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 224
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -247,7 +248,7 @@ object frmCadAtividades: TfrmCadAtividades
         Left = 0
         Top = 33
         Width = 619
-        Height = 182
+        Height = 184
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 191
@@ -305,6 +306,9 @@ object frmCadAtividades: TfrmCadAtividades
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 224
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 65
@@ -555,9 +559,9 @@ object frmCadAtividades: TfrmCadAtividades
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -590,6 +594,7 @@ object frmCadAtividades: TfrmCadAtividades
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 542
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -627,6 +632,7 @@ object frmCadAtividades: TfrmCadAtividades
         Spacing = 1
         Layout = blGlyphTop
         ExplicitLeft = 115
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70

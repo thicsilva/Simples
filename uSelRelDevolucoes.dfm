@@ -486,9 +486,12 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     UseSkinFont = True
     DefaultItemHeight = 20
     SkinDataName = 'tab'
-    ExplicitTop = 104
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Escolha o Filtro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 81
         Top = 12
@@ -1024,10 +1027,11 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 579
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1059,7 +1063,6 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         OnClick = btnFecharClick
         ExplicitLeft = 487
         ExplicitTop = 8
-        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 0
@@ -1067,6 +1070,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         Width = 18
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1078,6 +1082,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1117,8 +1122,10 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         Width = 491
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end
@@ -1182,7 +1189,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

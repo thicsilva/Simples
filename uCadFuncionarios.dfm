@@ -48,10 +48,11 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     UseSkinFont = True
     DefaultItemHeight = 20
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 333
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 309
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
@@ -242,7 +243,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Left = 0
         Top = 33
         Width = 603
-        Height = 267
+        Height = 269
         Align = alClient
         TabOrder = 1
         ExplicitHeight = 276
@@ -340,6 +341,9 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
       ExplicitHeight = 309
       object bsSkinExPanel2: TbsSkinExPanel
         Left = 24
@@ -1087,10 +1091,11 @@ object frmCadFuncionarios: TfrmCadFuncionarios
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 497
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1121,6 +1126,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 518
+        ExplicitTop = 12
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -1128,6 +1134,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1158,6 +1165,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Layout = blGlyphTop
         OnClick = btnexcluirClick
         ExplicitLeft = 118
+        ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
         Left = 70
@@ -1165,6 +1173,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1203,6 +1212,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1242,6 +1252,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1273,6 +1284,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Enabled = False
         OnClick = BtnCancelaClick
         ExplicitLeft = 318
+        ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 210
@@ -1280,6 +1292,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 71
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1291,6 +1304,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1330,6 +1344,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Width = 76
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1355,7 +1370,6 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     Top = 195
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

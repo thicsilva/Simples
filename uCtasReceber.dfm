@@ -52,14 +52,19 @@ object frmCtasReceber: TfrmCtasReceber
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 759
-        Height = 313
+        Height = 315
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
+        ExplicitHeight = 313
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -794,6 +799,10 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object tabCadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 94
         Top = 98
@@ -1301,7 +1310,6 @@ object frmCtasReceber: TfrmCtasReceber
         ParentFont = False
         TabOrder = 9
         Text = '0,00'
-        TextHint = True
         ColorOnFocus = clWhite
         ColorOnNotFocus = clWhite
         FontColorOnFocus = clRed
@@ -1319,6 +1327,7 @@ object frmCtasReceber: TfrmCtasReceber
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+        TextHint = True
       end
       object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
         Left = 210
@@ -1471,9 +1480,9 @@ object frmCtasReceber: TfrmCtasReceber
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 567
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1507,7 +1516,6 @@ object frmCtasReceber: TfrmCtasReceber
         OnClick = btnFecharClick
         ExplicitLeft = 673
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 0
@@ -1865,7 +1873,7 @@ object frmCtasReceber: TfrmCtasReceber
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
