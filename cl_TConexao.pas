@@ -38,12 +38,13 @@ begin
    Fconection.DriverName                   := 'MSSQL';
    Fconection.LibraryName                  := 'dbxmss30.dll';
    Fconection.LoginPrompt                  :=  False;
+   Fconection.GetDriverFunc                := 'getSQLDriverMSSQL';
+   Fconection.VendorLib                    := 'oledb';
    Fconection.Params.Values[ 'HostName' ]  := gsParametros.ReadString('ACESSODADOS','HostName','(Local)');
    Fconection.Params.Values[ 'DataBase' ]  := gsParametros.ReadString('ACESSODADOS','DataBaseName','Controler');
    Fconection.Params.Values[ 'User_Name' ] := gsParametros.ReadString('ACESSODADOS','Usuario','Controler');
    Fconection.Params.Values[ 'Password' ]  := gsParametros.ReadString('ACESSODADOS','Senha','remoto');
    Fconection.Params.Values[ 'DriverName' ]:= 'MSSQL';
-   Fconection.LoginPrompt := False;
    Fconection.Open;
 
 end;

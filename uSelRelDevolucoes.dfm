@@ -49,7 +49,6 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     object lblTurma: TbsSkinStdLabel
       Left = 125
       Top = 14
@@ -488,10 +487,6 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Escolha o Filtro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 81
         Top = 12
@@ -754,8 +749,6 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     Height = 310
     Align = alClient
     TabOrder = 2
-    ExplicitTop = 213
-    ExplicitHeight = 319
     object ViewClientes: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio
@@ -971,19 +964,16 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 671
+        Width = 673
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 3
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 662
+      Width = 664
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1027,9 +1017,9 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 579
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1063,6 +1053,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         OnClick = btnFecharClick
         ExplicitLeft = 487
         ExplicitTop = 8
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 0
@@ -1246,7 +1237,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
     Left = 96
-    Top = 280
+    Top = 296
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>

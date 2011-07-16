@@ -21,8 +21,6 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Height = 161
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 270
-    ExplicitHeight = 170
     object GridAtividades: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcTmpItensEtiquetas
@@ -98,7 +96,6 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Sizeable = False
     Align = alTop
     Caption = 'Dados para Pesquisa'
-    ExplicitTop = 205
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 8
       Top = 23
@@ -404,7 +401,6 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alTop
-    ExplicitTop = 44
     object bsSkinStdLabel3: TbsSkinStdLabel
       Left = 12
       Top = 13
@@ -594,19 +590,16 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 588
+        Width = 590
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 6
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 579
+      Width = 581
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -650,9 +643,9 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 482
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -686,6 +679,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
         OnClick = btnFecharClick
         ExplicitLeft = 526
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -791,7 +785,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
   end
   object srcTmpItensEtiquetas: TDataSource
     DataSet = cdsTmpItensEtiquetas
-    Left = 345
+    Left = 337
     Top = 343
   end
   object cdsProdutos: TClientDataSet

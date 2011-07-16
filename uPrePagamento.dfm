@@ -27,15 +27,15 @@ object frmPrePagamento: TfrmPrePagamento
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 497
+        Width = 499
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 483
+      Width = 490
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -49,6 +49,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -93,6 +94,7 @@ object frmPrePagamento: TfrmPrePagamento
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -142,6 +144,7 @@ object frmPrePagamento: TfrmPrePagamento
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -174,6 +177,7 @@ object frmPrePagamento: TfrmPrePagamento
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 79
+        ExplicitTop = -5
       end
     end
   end
@@ -194,6 +198,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -275,6 +280,12 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtNumeroOsExit
     end
     object edtTotalTitulo: TEditN
@@ -324,16 +335,16 @@ object frmPrePagamento: TfrmPrePagamento
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 497
+        Width = 499
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 483
+      Width = 490
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -347,6 +358,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -391,6 +403,7 @@ object frmPrePagamento: TfrmPrePagamento
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -429,6 +442,7 @@ object frmPrePagamento: TfrmPrePagamento
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -482,6 +496,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -557,6 +572,12 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtcod_PagamentoExit
     end
     object cmbNome_formaPagamento: TbsSkinDBLookupComboBox
@@ -640,6 +661,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -698,6 +720,12 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetNoneEllips
       UseSkinSize = False
       UseSkinFontColor = True
@@ -736,6 +764,12 @@ object frmPrePagamento: TfrmPrePagamento
       ParentBiDiMode = False
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtVlr_Recebido: TbsSkinEdit
       Left = 130
@@ -763,6 +797,12 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       ExplicitTop = -1
     end
   end
@@ -933,6 +973,11 @@ object frmPrePagamento: TfrmPrePagamento
     Top = 184
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -951,7 +996,6 @@ object frmPrePagamento: TfrmPrePagamento
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -980,7 +1024,7 @@ object frmPrePagamento: TfrmPrePagamento
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 412
+    Left = 396
     Top = 112
   end
   object qryPagamento: TSQLQuery

@@ -587,7 +587,6 @@ object frmVendas: TfrmVendas
         ReadOnly = True
         TabOrder = 0
         Text = '0,00'
-        TextHint = True
         ColorOnFocus = clInfoBk
         ColorOnNotFocus = clInfoBk
         FontColorOnFocus = clRed
@@ -605,6 +604,7 @@ object frmVendas: TfrmVendas
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+        TextHint = True
       end
       object edtTotDesconto: TEditN
         Left = 143
@@ -622,7 +622,6 @@ object frmVendas: TfrmVendas
         ReadOnly = True
         TabOrder = 1
         Text = '0,00'
-        TextHint = True
         ColorOnFocus = clInfoBk
         ColorOnNotFocus = clInfoBk
         FontColorOnFocus = clRed
@@ -640,6 +639,7 @@ object frmVendas: TfrmVendas
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+        TextHint = True
       end
       object edtTotalLiquido: TEditN
         Left = 143
@@ -657,7 +657,6 @@ object frmVendas: TfrmVendas
         ReadOnly = True
         TabOrder = 2
         Text = '0,00'
-        TextHint = True
         ColorOnFocus = clInfoBk
         ColorOnNotFocus = clInfoBk
         FontColorOnFocus = clRed
@@ -675,6 +674,7 @@ object frmVendas: TfrmVendas
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+        TextHint = True
       end
     end
     object cmbNome_Cliente: TbsSkinDBLookupComboBox
@@ -1165,16 +1165,16 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 754
+        Width = 756
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 745
+      Width = 747
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -2042,7 +2042,6 @@ object frmVendas: TfrmVendas
     ReadOnly = True
     TabOrder = 8
     Text = '0,00'
-    TextHint = True
     Visible = False
     ColorOnFocus = clInactiveBorder
     ColorOnNotFocus = clInactiveBorder
@@ -2061,6 +2060,7 @@ object frmVendas: TfrmVendas
     FirstCharUpper = False
     FirstCharUpList = ' ('
     WidthOnFocus = 0
+    TextHint = True
   end
   object edtPco_Tabela: TbsSkinEdit
     Left = 642
@@ -2132,16 +2132,16 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar3
         ImageIndex = -1
         MinHeight = 49
-        Width = 754
+        Width = 756
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 11
     object bsSkinToolBar3: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 745
+      Width = 747
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -2408,7 +2408,6 @@ object frmVendas: TfrmVendas
     Top = 333
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -2764,7 +2763,7 @@ object frmVendas: TfrmVendas
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

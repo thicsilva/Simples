@@ -9,7 +9,7 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, Mask, bsSkinBoxCtrls, FMTBcd, DBClient, SqlExpr, Provider, RDprint,
-  dxSkinsCore;
+  dxSkinsCore,SqlTimSt;
 
 type
   TfrmSelRelClientes = class(TFormBase)
@@ -51,6 +51,11 @@ type
     btnLimpa: TbsSkinButton;
     cdsRelatorio: TClientDataSet;
     ProgressBar1: TProgressBar;
+    bsSkinExPanel1: TbsSkinExPanel;
+    dtpData_Ini: TbsSkinDateEdit;
+    lblTurma: TbsSkinStdLabel;
+    dtpData_Fim: TbsSkinDateEdit;
+    cmbPeriodo: TbsSkinComboBox;
     procedure btnokClick(Sender: TObject);
     procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure FormShow(Sender: TObject);
@@ -63,6 +68,7 @@ type
     procedure cmbCod_FuncionarioFimChange(Sender: TObject);
     procedure cmbNome_FuncionarioIniChange(Sender: TObject);
     procedure cmbNome_FuncionarioFimChange(Sender: TObject);
+    procedure cmbPeriodoChange(Sender: TObject);
   private
      pitipoRel : Integer;
      pviLinha  : integer;
@@ -116,7 +122,7 @@ begin
    End;
 
    lsPercentual := edtPercentual.text;
-   pitipoRel    := 2; //StrtoInt(Copy(TmenuItem(Sender).Caption,1,1));
+   pitipoRel    := 2;
    GstituloRel  :='Relatorio de clientes liberados sem compras ';
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
@@ -164,7 +170,8 @@ begin
                             '          TipoPg.Codigo=Ven.Cod_FormaPagamento '+
                             '     Left join T_Funcionarios Fun On '+
                             '          Fun.Codigo=Ven.Cod_Funcionario '+
-                            'WHERE Rec.status=:parStatus And Tipopg.SomaVenda=:parSomaVenda '+lsWhere+' '+
+                            'WHERE Rec.status=:parStatus And Tipopg.SomaVenda=:parSomaVenda and '+
+                            '      ( Rec.Data_Cad>=:parDataIni and Rec.Data_Cad<=:parDataFim ) '+lsWhere+' '+
                             'GROUP BY Rec.Seqvenda,Rec.Cod_Cliente,'+lsGroupBy+',Cli.Bairro,Cli.Endereco '+
                             'ORDER BY '+lsGroupBy+',Cli.Bairro,Cli.Endereco';
    qryRelatorio.ParamByName('parStatus').AsString := '1';
@@ -180,6 +187,9 @@ begin
       qryRelatorio.ParamByName('parCod_FuncionarioIni').AsString := (cmbCod_FuncionarioIni.Text);
       qryRelatorio.ParamByName('parCod_FuncionarioFim').AsString := (cmbCod_FuncionarioFim.Text);
    End;
+
+   qryRelatorio.ParamByName('parDataIni').AsSQLTimeStamp := DateTimeToSqlTimeStamp( dtpData_Ini.Date);
+   qryRelatorio.ParamByName('parDataFim').AsSQLTimeStamp := DateTimeToSqlTimeStamp( dtpData_Fim.Date);
 
    cdsRelatorio.Close;
    cdsRelatorio.ProviderName    := dspRelatorio.Name;
@@ -308,6 +318,12 @@ begin
    cmbCod_Rotaini.KeyValue := cmbNome_Rotaini.KeyValue;
 end;
 
+procedure TfrmSelRelClientes.cmbPeriodoChange(Sender: TObject);
+begin
+   ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+   cdsRelatorio.close;
+end;
+
 procedure TfrmSelRelClientes.FormShow(Sender: TObject);
 begin
    QryVariavel.Close;
@@ -319,12 +335,15 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select Codigo,Descricao from T_Funcionarios order by Codigo ';
+   qryVariavel.SQL.text :='Select Codigo,Descricao from T_Funcionarios where Ativo=:parAtivo order by Codigo ';
+   qryVariavel.ParamByName('parAtivo').AsString := 'S';
 
    cdsCadFuncionarios.Close;
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
    cdsCadFuncionarios.Open;
 
+   dtpData_Ini.date := (Now-365);
+   dtpData_Fim.date := Now;
 
 end;
 

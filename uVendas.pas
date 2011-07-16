@@ -327,7 +327,8 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select Codigo,Descricao from T_Funcionarios order by Descricao ';
+   qryVariavel.SQL.text :='Select Codigo,Descricao from T_Funcionarios where ativo=:parAtivo order by Descricao ';
+   qryVariavel.ParamByName('parAtivo').AsString := 'S';
 
    cdsCadFuncionarios.Close;
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
@@ -766,11 +767,14 @@ begin
         cdsItensVendas.FieldByName('Cod_emp').asString       := gsCod_Emp;
         cdsItensVendas.FieldByName('SeqVenda').asInteger     := liSeqvenda;
         cdsItensVendas.FieldByName('Perc_Comis').asFloat     := cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat;
-
         cdsItensVendas.Post;
       except
-         frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
-         Exit;
+         on E: Exception do
+         Begin
+            frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+            CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
+            Exit;
+         End;
       End;
 
 {$REGION 'Controle de Saldo de estoque (Valor)'}
@@ -779,33 +783,40 @@ begin
       Begin
          vlr_anterior := ( cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat * cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat ) ;
          vlr_Atual   := ( (cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat-cdsItensVendasTmp.FieldByName('Vlr_Desconto').asFloat ) * cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat ) ;
+         try
+            qrySaldos.Close;
+            qrySaldos.Params.Clear;
+            qrySaldos.Sql.Text :='Select * from T_saldos where 1=2';
 
-         qrySaldos.Close;
-         qrySaldos.Params.Clear;
-         qrySaldos.Sql.Text :='Select * from T_saldos where 1=2';
+            cdsSaldos.Close;
+            cdsSaldos.ProviderName := dspSaldos.Name;
+            cdsSaldos.Open;
 
-         cdsSaldos.Close;
-         cdsSaldos.ProviderName := dspSaldos.Name;
-         cdsSaldos.Open;
-
-         cdsSaldos.Append;
-         cdsSaldos.FieldByName('Codigo').AsInteger      := StrToInt( Sequencia('Codigo',False,'T_Saldos',FrmPrincipal.dbxPrincipal,'',False,8 ) );
-         cdsSaldos.FieldByName('Cod_emp').AsString      := GsCod_Emp;
-         cdsSaldos.FieldByName('E_S').AsString          := 'S';
-         cdsSaldos.FieldByName('Operador').AsString     := GsOperador;
-         cdsSaldos.FieldByName('Cod_Produto').AsInteger := cdsItensVendasTmp.FieldByName('Codigo').asInteger;
-         cdsSaldos.FieldByName('Pco_Venda').AsFloat     := (vlr_Anterior-vlr_Atual);
-         cdsSaldos.FieldByName('Pco_Custo').AsFloat     := 0;
-         cdsSaldos.FieldByName('Data_cad').AsDateTime   := Now;
-         cdsSaldos.FieldByName('Data_Mov').AsDateTime   := GsData_Mov;
-         cdsSaldos.FieldByName('Qtde').AsInteger        := 1;
-         cdsSaldos.FieldByName('Historico').AsString    := 'Baixa de Preço de venda de '+FormatFloat('0.00',cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat)+ ' Para '+FormatFloat(',0.00',cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat-cdsItensVendasTmp.FieldByName('Vlr_Desconto').asFloat);
-         cdsSaldos.FieldByName('Tipo_Movimento').AsString := 'DESCONTOS CONCEDIDOS';
-         cdsSaldos.Post;
-         cdsSaldos.ApplyUpdates(-1);
+            cdsSaldos.Append;
+            cdsSaldos.FieldByName('Codigo').AsInteger      := StrToInt( Sequencia('Codigo',False,'T_Saldos',FrmPrincipal.dbxPrincipal,'',False,8 ) );
+            cdsSaldos.FieldByName('Cod_emp').AsString      := GsCod_Emp;
+            cdsSaldos.FieldByName('E_S').AsString          := 'S';
+            cdsSaldos.FieldByName('Operador').AsString     := GsOperador;
+            cdsSaldos.FieldByName('Cod_Produto').AsInteger := cdsItensVendasTmp.FieldByName('Codigo').asInteger;
+            cdsSaldos.FieldByName('Pco_Venda').AsFloat     := (vlr_Anterior-vlr_Atual);
+            cdsSaldos.FieldByName('Pco_Custo').AsFloat     := 0;
+            cdsSaldos.FieldByName('Data_cad').AsDateTime   := Now;
+            cdsSaldos.FieldByName('Data_Mov').AsDateTime   := GsData_Mov;
+            cdsSaldos.FieldByName('Qtde').AsInteger        := 1;
+            cdsSaldos.FieldByName('Historico').AsString    := 'Baixa de Preço de venda de '+FormatFloat('0.00',cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat)+ ' Para '+FormatFloat(',0.00',cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat-cdsItensVendasTmp.FieldByName('Vlr_Desconto').asFloat);
+            cdsSaldos.FieldByName('Tipo_Movimento').AsString := 'DESCONTOS CONCEDIDOS';
+            cdsSaldos.Post;
+            cdsSaldos.ApplyUpdates(-1);
+         except
+            on E: Exception do
+            Begin
+               frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+               CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
+               Exit;
+            End;
+         End;
       End;
 {$ENDREGION}
-
 
       lrVlr_DescProd  := lrVlr_DescProd  + cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat;
 
@@ -1074,13 +1085,17 @@ begin
          End;
       End;
    except
-      frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
-      Exit;
+      on E: Exception do
+      Begin
+         frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+         CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
+         Exit;
+      End;
    End;
 {$ENDREGION}
 
 {$REGION 'Efetuando Registro de Materia Prima'}
-   
+
    if (frmVendas.tag = 4) or (frmVendas.tag = 5) or (frmVendas.tag = 0)then
    Begin
       qryItensMateriaPrima.Close;
@@ -1122,8 +1137,12 @@ begin
                End;
             End;
          except
-            frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
-            Exit;
+            on E: Exception do
+            Begin
+               frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+               CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
+               Exit;
+            End;
          End;
          cdsItensVendasTMP.Next;
       End;

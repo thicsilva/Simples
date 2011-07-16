@@ -51,6 +51,7 @@ type
     btnFechar: TbsSkinSpeedButton;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
+    cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -115,6 +116,12 @@ begin
       gParametros.Gravar( '', '[CADASTRO]', 'LigarECF', 'SIM' ,gsOperador )
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'LigarECF', 'NAO' ,gsOperador );
+
+   if cnkCadastraClienteSemCPF.Checked Then
+      gParametros.Gravar( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'SIM' ,gsOperador )
+   Else
+      gParametros.Gravar( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' ,gsOperador );
+
 
    if chkEmiteEtiqueta.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'EmiteEtiqueta', 'SIM' ,gsOperador )
@@ -193,6 +200,11 @@ begin
       chkLigaECF.Checked := False
    Else
       chkLigaECF.Checked := True;
+
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' )) = 'SIM' Then
+      cnkCadastraClienteSemCPF.Checked := True
+   Else
+      cnkCadastraClienteSemCPF.Checked := False;
 
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'EmiteEtiqueta', 'NAO' )) = 'NAO' Then
       chkEmiteEtiqueta.Checked := False

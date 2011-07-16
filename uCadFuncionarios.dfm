@@ -50,10 +50,6 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 309
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -243,10 +239,9 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Left = 0
         Top = 33
         Width = 603
-        Height = 269
+        Height = 267
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 276
         object GridClintes: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -341,10 +336,6 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 309
       object bsSkinExPanel2: TbsSkinExPanel
         Left = 24
         Top = 30
@@ -1035,19 +1026,16 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 599
+        Width = 601
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 590
+      Width = 592
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1091,9 +1079,9 @@ object frmCadFuncionarios: TfrmCadFuncionarios
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 497
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1127,6 +1115,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         OnClick = btnFecharClick
         ExplicitLeft = 518
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

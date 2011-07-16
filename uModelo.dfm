@@ -24,15 +24,15 @@ object FrmModelo: TFrmModelo
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 49
-        Width = 466
+        Width = 468
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
-      Top = 0
-      Width = 457
+      Left = 8
+      Top = 24
+      Width = 459
       Height = 49
       HintImageIndex = 0
       TabOrder = 0

@@ -28,20 +28,18 @@ object frmProposta: TfrmProposta
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 751
+        Width = 753
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.Skindata
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 737
+      Width = 744
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -51,6 +49,7 @@ object frmProposta: TfrmProposta
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -85,7 +84,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -95,6 +93,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -122,7 +121,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -132,6 +130,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -160,7 +159,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -170,6 +168,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -199,7 +198,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -210,7 +208,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -220,6 +217,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -249,7 +247,6 @@ object frmProposta: TfrmProposta
         Width = 47
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -260,7 +257,6 @@ object frmProposta: TfrmProposta
         Width = 0
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 230
@@ -272,7 +268,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -282,6 +277,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -311,7 +307,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -321,6 +316,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -350,7 +346,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -360,6 +355,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -389,7 +385,6 @@ object frmProposta: TfrmProposta
         Width = 72
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -403,7 +398,6 @@ object frmProposta: TfrmProposta
     Height = 21
     HintImageIndex = 0
     TabOrder = 1
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'statusbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -413,6 +407,7 @@ object frmProposta: TfrmProposta
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -439,7 +434,6 @@ object frmProposta: TfrmProposta
     Height = 105
     HintImageIndex = 0
     TabOrder = 2
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -449,6 +443,7 @@ object frmProposta: TfrmProposta
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -472,7 +467,6 @@ object frmProposta: TfrmProposta
       Width = 23
       Height = 23
       HintImageIndex = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'toolbutton'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -482,6 +476,7 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      CheckedMode = False
       ImageList = frmPrincipal.cxSmallImages
       UseSkinSize = True
       UseSkinFontColor = True
@@ -551,7 +546,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Cliente'
     end
@@ -568,7 +562,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'C.N.P.J'
     end
@@ -585,7 +578,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Vendedor'
     end
@@ -602,7 +594,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Data da Venda'
     end
@@ -619,7 +610,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Bairro'
     end
@@ -630,7 +620,6 @@ object frmProposta: TfrmProposta
       Height = 20
       HintImageIndex = 0
       TabOrder = 4
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -664,7 +653,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
@@ -674,6 +662,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtCod_FuncionarioExit
     end
     object edtcod_Cliente: TbsSkinEdit
@@ -691,7 +685,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.skinOffice
       SkinDataName = 'edit'
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
@@ -701,6 +694,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtcod_ClienteExit
     end
     object bsSkinPanel3: TbsSkinPanel
@@ -710,7 +709,6 @@ object frmProposta: TfrmProposta
       Height = 103
       HintImageIndex = 0
       TabOrder = 7
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'panel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -720,6 +718,7 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -750,7 +749,6 @@ object frmProposta: TfrmProposta
         DefaultFont.Height = -16
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = [fsBold]
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'stdlabel'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
@@ -773,7 +771,6 @@ object frmProposta: TfrmProposta
         DefaultFont.Height = -16
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = [fsBold]
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'stdlabel'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
@@ -817,7 +814,6 @@ object frmProposta: TfrmProposta
         DefaultFont.Height = -16
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = [fsBold]
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'stdlabel'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
@@ -940,7 +936,6 @@ object frmProposta: TfrmProposta
       Height = 20
       HintImageIndex = 0
       TabOrder = 6
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -975,7 +970,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       ReadOnly = True
       Alignment = taRightJustify
@@ -986,6 +980,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 8
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object cmbCod_Funcionario: TbsSkinDBLookupComboBox
       Left = 241
@@ -995,7 +995,6 @@ object frmProposta: TfrmProposta
       HintImageIndex = 0
       TabOrder = 9
       Visible = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1044,6 +1043,8 @@ object frmProposta: TfrmProposta
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -1052,7 +1053,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = True
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'buttonedit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1062,6 +1062,12 @@ object frmProposta: TfrmProposta
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtNome_Cliente: TbsSkinEdit
       Left = 241
@@ -1078,7 +1084,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1089,6 +1094,12 @@ object frmProposta: TfrmProposta
       Enabled = False
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtCod_ProdutoExit
     end
     object cmbCod_Cliente: TbsSkinDBLookupComboBox
@@ -1099,7 +1110,6 @@ object frmProposta: TfrmProposta
       HintImageIndex = 0
       TabOrder = 5
       Visible = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1133,7 +1143,6 @@ object frmProposta: TfrmProposta
       HintImageIndex = 0
       TabOrder = 10
       Visible = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1169,7 +1178,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       ReadOnly = True
       Alignment = taRightJustify
@@ -1180,6 +1188,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 11
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
@@ -1193,20 +1207,18 @@ object frmProposta: TfrmProposta
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 751
+        Width = 753
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.Skindata
     SkinBevel = True
     TabOrder = 3
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 737
+      Width = 744
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1216,6 +1228,7 @@ object frmProposta: TfrmProposta
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -1250,7 +1263,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1260,6 +1272,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1288,7 +1301,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1298,6 +1310,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1326,7 +1339,6 @@ object frmProposta: TfrmProposta
         Width = 131
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1337,7 +1349,6 @@ object frmProposta: TfrmProposta
         Width = 12
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 561
@@ -1349,7 +1360,6 @@ object frmProposta: TfrmProposta
         Width = 95
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1360,7 +1370,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1370,6 +1379,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         ImageList = frmPrincipal.Imagebutoes
         UseSkinSize = True
         UseSkinFontColor = True
@@ -1399,7 +1409,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1409,6 +1418,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1437,7 +1447,6 @@ object frmProposta: TfrmProposta
         Width = 58
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -1448,7 +1457,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1458,6 +1466,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1487,7 +1496,6 @@ object frmProposta: TfrmProposta
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1497,6 +1505,7 @@ object frmProposta: TfrmProposta
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1529,7 +1538,6 @@ object frmProposta: TfrmProposta
     Height = 55
     HintImageIndex = 0
     TabOrder = 4
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -1539,6 +1547,7 @@ object frmProposta: TfrmProposta
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -1569,7 +1578,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Produto'
     end
@@ -1586,7 +1594,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Quantidade'
     end
@@ -1603,7 +1610,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Vlr. Unit'#225'rio'
     end
@@ -1620,7 +1626,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Vlr. Total'
     end
@@ -1637,7 +1642,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Descricao'
     end
@@ -1654,7 +1658,6 @@ object frmProposta: TfrmProposta
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Desconto'
     end
@@ -1664,7 +1667,6 @@ object frmProposta: TfrmProposta
       Width = 25
       Height = 20
       HintImageIndex = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'toolbutton'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1674,6 +1676,7 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      CheckedMode = False
       UseSkinSize = False
       UseSkinFontColor = False
       WidthWithCaption = 0
@@ -1707,7 +1710,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -1716,6 +1718,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtCod_ProdutoExit
     end
     object cmbNome_Produto: TbsSkinDBLookupComboBox
@@ -1725,7 +1733,6 @@ object frmProposta: TfrmProposta
       Height = 20
       HintImageIndex = 0
       TabOrder = 1
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1760,7 +1767,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
@@ -1770,6 +1776,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtQtde_VendaExit
     end
     object EdtPco_Venda: TbsSkinEdit
@@ -1788,7 +1800,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
@@ -1798,6 +1809,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = EdtPco_VendaExit
     end
     object edtTotal: TbsSkinEdit
@@ -1816,7 +1833,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       ReadOnly = True
       Alignment = taRightJustify
@@ -1827,6 +1843,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtTotalExit
     end
     object edtDesconto: TbsSkinEdit
@@ -1845,7 +1867,6 @@ object frmProposta: TfrmProposta
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
@@ -1855,6 +1876,12 @@ object frmProposta: TfrmProposta
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtDescontoExit
     end
     object cmbTipoDesconto: TbsSkinComboBox
@@ -1864,7 +1891,6 @@ object frmProposta: TfrmProposta
       Height = 20
       HintImageIndex = 0
       TabOrder = 6
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -1924,7 +1950,6 @@ object frmProposta: TfrmProposta
     HintImageIndex = 0
     TabOrder = 5
     Visible = False
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'hscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -1973,6 +1998,12 @@ object frmProposta: TfrmProposta
     ParentFont = False
     TabOrder = 6
     Visible = False
+    LeftImageIndex = -1
+    LeftImageHotIndex = -1
+    LeftImageDownIndex = -1
+    RightImageIndex = -1
+    RightImageHotIndex = -1
+    RightImageDownIndex = -1
   end
   object bsSkinScrollBar2: TbsSkinScrollBar
     Left = 738
@@ -1981,7 +2012,6 @@ object frmProposta: TfrmProposta
     Height = 169
     HintImageIndex = 0
     TabOrder = 7
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'vscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -2011,7 +2041,6 @@ object frmProposta: TfrmProposta
     Height = 169
     HintImageIndex = 0
     TabOrder = 8
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'grid'
     Transparent = False
     WallpaperStretch = False
@@ -2088,7 +2117,6 @@ object frmProposta: TfrmProposta
     Height = 60
     HintImageIndex = 0
     TabOrder = 10
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'expanel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -2144,6 +2172,11 @@ object frmProposta: TfrmProposta
     Top = 333
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -2162,7 +2195,6 @@ object frmProposta: TfrmProposta
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -2183,7 +2215,6 @@ object frmProposta: TfrmProposta
     DefMenuItemFont.Name = 'Arial'
     DefMenuItemFont.Style = []
     UseDefaultSysMenu = True
-    SkinData = frmPrincipal.Skindata
     MinHeight = 0
     MinWidth = 0
     MaxHeight = 0
@@ -2572,7 +2603,7 @@ object frmProposta: TfrmProposta
   object cdstempProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 128
+    Left = 136
     Top = 386
     object cdstempProdutosCod_Produto: TIntegerField
       FieldName = 'Cod_Produto'

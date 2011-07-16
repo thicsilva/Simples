@@ -3,8 +3,8 @@ object frmParametros: TfrmParametros
   Top = 220
   BorderIcons = []
   Caption = 'Configura'#231'ao de parametros do Sistema'
-  ClientHeight = 335
-  ClientWidth = 515
+  ClientHeight = 396
+  ClientWidth = 552
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object frmParametros: TfrmParametros
   TextHeight = 13
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
-    Top = 314
-    Width = 515
+    Top = 375
+    Width = 552
     Height = 21
     HintImageIndex = 0
     TabOrder = 0
@@ -55,8 +55,8 @@ object frmParametros: TfrmParametros
   object bsSkinPageControl1: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 515
-    Height = 261
+    Width = 552
+    Height = 322
     ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -84,11 +84,8 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 44
-    ExplicitHeight = 270
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
-      ExplicitHeight = 249
       object bsSkinCheckRadioBox1: TbsSkinCheckRadioBox
         Left = 10
         Top = 8
@@ -414,7 +411,7 @@ object frmParametros: TfrmParametros
       object chkLigaECF: TbsSkinCheckRadioBox
         Left = 10
         Top = 189
-        Width = 281
+        Width = 79
         Height = 25
         HintImageIndex = 0
         TabOrder = 11
@@ -561,10 +558,39 @@ object frmParametros: TfrmParametros
         GroupIndex = 0
         Caption = 'Data do sistema Automatica'
       end
+      object cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox
+        Left = 9
+        Top = 230
+        Width = 160
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 16
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Cadastra Cliente sem CPF'
+      end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Configura'#231#227'o de Sistema'
-      ExplicitHeight = 249
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 30
         Top = 29
@@ -876,7 +902,7 @@ object frmParametros: TfrmParametros
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 515
+    Width = 552
     Height = 53
     AutoSize = True
     Bands = <
@@ -884,19 +910,16 @@ object frmParametros: TfrmParametros
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 509
+        Width = 548
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 500
+      Width = 539
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1032,7 +1055,6 @@ object frmParametros: TfrmParametros
     end
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1084,8 +1106,8 @@ object frmParametros: TfrmParametros
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 321
-    Top = 16
+    Left = 377
+    Top = 104
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1

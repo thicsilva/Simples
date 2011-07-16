@@ -28,16 +28,16 @@ object frmManutencaoOs: TfrmManutencaoOs
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 569
+        Width = 571
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 555
+      Width = 562
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -51,6 +51,7 @@ object frmManutencaoOs: TfrmManutencaoOs
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -95,6 +96,7 @@ object frmManutencaoOs: TfrmManutencaoOs
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -139,6 +141,7 @@ object frmManutencaoOs: TfrmManutencaoOs
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 80
+        ExplicitTop = -5
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -156,6 +159,7 @@ object frmManutencaoOs: TfrmManutencaoOs
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -282,6 +286,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtCod_Cliente: TbsSkinEdit
       Left = 43
@@ -309,6 +319,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtCNPJCPF: TbsSkinEdit
       Left = 429
@@ -337,6 +353,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object bsSkinLabel2: TbsSkinLabel
       Left = 5
@@ -355,6 +377,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetEllips
       UseSkinSize = False
       UseSkinFontColor = False
@@ -388,6 +416,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtNome_Cliente: TbsSkinEdit
       Left = 104
@@ -417,6 +451,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Enabled = False
       ParentFont = False
       TabOrder = 5
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object bsSkinLabel1: TbsSkinLabel
       Left = 305
@@ -436,6 +476,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetEllips
       UseSkinSize = False
       UseSkinFontColor = False
@@ -612,6 +658,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = []
       ParentFont = False
       TabOrder = 6
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtCod_AuxiliarExit
     end
     object cmbCod_Auxiliar: TbsSkinDBLookupComboBox
@@ -699,6 +751,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtcod_TecnicoExit
     end
     object cmbCod_Tecnico: TbsSkinDBLookupComboBox
@@ -762,6 +820,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       ParentFont = False
       TabOrder = 0
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtData_Atendimento: TbsSkinDateEdit
       Left = 312
@@ -786,6 +850,8 @@ object frmManutencaoOs: TfrmManutencaoOs
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -804,6 +870,12 @@ object frmManutencaoOs: TfrmManutencaoOs
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtHoraAtendimento: TbsSkinTimeEdit
       Left = 439
@@ -832,8 +904,15 @@ object frmManutencaoOs: TfrmManutencaoOs
       MaxLength = 8
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       AutoSize = False
       BorderStyle = bsNone
+      ShowUpDown = False
     end
     object cmbNivel_Atendimento: TbsSkinComboBox
       Left = 120
@@ -911,6 +990,7 @@ object frmManutencaoOs: TfrmManutencaoOs
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -931,6 +1011,11 @@ object frmManutencaoOs: TfrmManutencaoOs
     SizeGrip = False
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -949,7 +1034,6 @@ object frmManutencaoOs: TfrmManutencaoOs
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -977,7 +1061,7 @@ object frmManutencaoOs: TfrmManutencaoOs
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 292
+    Left = 284
     Top = 64
   end
   object cdsCadFuncionarios: TClientDataSet

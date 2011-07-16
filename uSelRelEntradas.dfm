@@ -50,8 +50,6 @@ object frmselrelEntradas: TfrmselrelEntradas
     Spacing = 2
     Caption = 'Selecione o intervalo de Datas'
     Align = alClient
-    ExplicitTop = 44
-    ExplicitHeight = 136
     object lblTurma: TbsSkinStdLabel
       Left = 127
       Top = 38
@@ -429,19 +427,16 @@ object frmselrelEntradas: TfrmselrelEntradas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 472
+        Width = 474
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 6
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 463
+      Width = 465
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -489,6 +484,7 @@ object frmselrelEntradas: TfrmselrelEntradas
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -527,6 +523,7 @@ object frmselrelEntradas: TfrmselrelEntradas
         Width = 70
         Height = 49
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -565,6 +562,7 @@ object frmselrelEntradas: TfrmselrelEntradas
         Width = 281
         Height = 49
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 64
@@ -609,7 +607,7 @@ object frmselrelEntradas: TfrmselrelEntradas
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -669,7 +667,6 @@ object frmselrelEntradas: TfrmselrelEntradas
     Top = 20
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -720,7 +717,7 @@ object frmselrelEntradas: TfrmselrelEntradas
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 324
+    Left = 308
     Top = 96
   end
   object cdsRelatorio: TClientDataSet

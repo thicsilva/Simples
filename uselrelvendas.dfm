@@ -50,7 +50,6 @@ object frmSelRelVendas: TfrmSelRelVendas
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     object lblTurma: TbsSkinStdLabel
       Left = 125
       Top = 18
@@ -472,8 +471,6 @@ object frmSelRelVendas: TfrmSelRelVendas
     Height = 281
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 113
-    ExplicitHeight = 290
     object GridRelatorio: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio
@@ -583,19 +580,16 @@ object frmSelRelVendas: TfrmSelRelVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 627
+        Width = 629
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 3
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 618
+      Width = 620
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -639,9 +633,9 @@ object frmSelRelVendas: TfrmSelRelVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 479
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -675,6 +669,7 @@ object frmSelRelVendas: TfrmSelRelVendas
         OnClick = btnFecharClick
         ExplicitLeft = 536
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -768,7 +763,7 @@ object frmSelRelVendas: TfrmSelRelVendas
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 250
+    Left = 242
     Top = 215
   end
   object impMatricial: TRDprint

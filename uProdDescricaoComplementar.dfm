@@ -26,20 +26,18 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 491
+        Width = 493
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.Skindata
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 70
+      Width = 484
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -49,6 +47,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -83,7 +82,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -93,6 +91,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -120,7 +119,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         Width = 18
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -131,7 +129,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -141,6 +138,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -168,7 +166,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
         Width = 313
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -218,7 +215,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Produto'
     end
@@ -237,7 +233,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -246,6 +241,12 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtProd_Descricao: TbsSkinEdit
       Left = 121
@@ -262,7 +263,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'edit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -271,6 +271,12 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsSkinExPanel2: TbsSkinExPanel
@@ -312,8 +318,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
       Lines.Strings = (
         'Memo1')
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitTop = 16
     end
   end
   object bsSkinStatusBar1: TbsSkinStatusBar
@@ -332,6 +336,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -404,6 +409,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -451,9 +457,6 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
     Position = 0
     SmallChange = 1
     LargeChange = 1
-    ExplicitLeft = 344
-    ExplicitTop = 304
-    ExplicitWidth = 200
   end
   object cdsDescricaoComplementar: TClientDataSet
     Aggregates = <>
@@ -463,7 +466,7 @@ object frmProdDescricaoComplementar: TfrmProdDescricaoComplementar
   end
   object DataSource1: TDataSource
     DataSet = cdsDescricaoComplementar
-    Left = 200
+    Left = 192
     Top = 260
   end
   object QryVariavel: TSQLQuery

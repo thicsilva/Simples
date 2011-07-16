@@ -204,7 +204,7 @@ begin
    cdsCadFuncionarios.FieldByName('CNPJCPF').AsString        := EdtCnpjCpf.text;
    cdsCadFuncionarios.FieldByName('Ativo').AsString          := 'S';
    if not chkAtivo.Checked then
-      cdsCadFuncionarios.FieldByName('SAtivo').AsString      := 'N';
+      cdsCadFuncionarios.FieldByName('Ativo').AsString      := 'N';
    cdsCadFuncionarios.FieldByName('Operador').AsString      := GsOperador;
    cdsCadFuncionarios.FieldByName('Cod_Emp').AsString       := gsCod_Emp;
 

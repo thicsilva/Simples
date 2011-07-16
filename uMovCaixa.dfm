@@ -27,7 +27,7 @@ object frmMovCaixa: TfrmMovCaixa
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 784
+        Width = 786
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -48,6 +48,7 @@ object frmMovCaixa: TfrmMovCaixa
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      CheckedMode = False
       UseSkinSize = True
       UseSkinFontColor = True
       WidthWithCaption = 0
@@ -70,9 +71,9 @@ object frmMovCaixa: TfrmMovCaixa
       ExplicitTop = 8
     end
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 770
+      Width = 777
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -86,6 +87,7 @@ object frmMovCaixa: TfrmMovCaixa
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -130,6 +132,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -168,6 +171,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -206,6 +210,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -244,6 +249,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -295,6 +301,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -358,6 +365,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -396,6 +404,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -434,6 +443,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -483,6 +493,12 @@ object frmMovCaixa: TfrmMovCaixa
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    MouseWheelSupport = False
+    TabExtededDraw = False
+    TabsOffset = 0
+    TabSpacing = 1
+    TextInHorizontal = False
+    TabsInCenter = False
     FreeOnClose = False
     ShowCloseButtons = False
     TabsBGTransparent = False
@@ -594,6 +610,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -627,6 +644,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          CheckedMode = False
           UseSkinSize = False
           UseSkinFontColor = True
           WidthWithCaption = 0
@@ -752,6 +770,8 @@ object frmMovCaixa: TfrmMovCaixa
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -770,6 +790,12 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object dtpData_Ini: TbsSkinDateEdit
           Left = 24
@@ -794,6 +820,8 @@ object frmMovCaixa: TfrmMovCaixa
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -812,6 +840,12 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object cmbPeriodo: TbsSkinComboBox
           Left = 246
@@ -1110,6 +1144,8 @@ object frmMovCaixa: TfrmMovCaixa
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -1128,6 +1164,12 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object cmbD_C: TbsSkinComboBox
           Left = 122
@@ -1217,6 +1259,12 @@ object frmMovCaixa: TfrmMovCaixa
           ParentCtl3D = False
           ParentFont = False
           TabOrder = 6
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object Edthistorico: TbsSkinEdit
           Left = 122
@@ -1244,6 +1292,12 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 100
           ParentFont = False
           TabOrder = 5
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object cmbNome_TipoDespesa: TbsSkinDBLookupComboBox
           Left = 208
@@ -1374,6 +1428,12 @@ object frmMovCaixa: TfrmMovCaixa
           Font.Style = []
           ParentFont = False
           TabOrder = 7
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtcod_ClienteExit
         end
       end
@@ -1547,7 +1607,7 @@ object frmMovCaixa: TfrmMovCaixa
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 384
+    Left = 400
     Top = 112
   end
   object cdsRelatorio: TClientDataSet

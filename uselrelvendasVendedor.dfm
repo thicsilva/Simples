@@ -51,7 +51,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     DesignSize = (
       756
       62)
@@ -478,8 +477,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Height = 258
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 218
-    ExplicitHeight = 267
     object ViewClientes: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio
@@ -722,7 +719,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alTop
-    ExplicitTop = 106
     object bsSkinPageControl1: TbsSkinPageControl
       Left = 1
       Top = 1
@@ -757,10 +753,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       SkinDataName = 'tab'
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Escolha o Filtro'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object bsSkinStdLabel1: TbsSkinStdLabel
           Left = 50
           Top = 10
@@ -1038,19 +1030,16 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 750
+        Width = 752
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 3
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 741
+      Width = 743
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1094,9 +1083,9 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 641
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1130,6 +1119,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         OnClick = btnFecharClick
         ExplicitLeft = 630
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 70
@@ -1158,9 +1148,9 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 0
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1194,6 +1184,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         OnClick = bsSkinSpeedButton1Click
         ExplicitLeft = -6
         ExplicitTop = 8
+        ExplicitHeight = 40
       end
     end
   end
@@ -1403,6 +1394,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     DataSet.Params = <>
     Params = <>
     Left = 328
-    Top = 304
+    Top = 312
   end
 end

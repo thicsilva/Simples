@@ -48,6 +48,7 @@ object frmMotivoStatus: TfrmMotivoStatus
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -92,6 +93,7 @@ object frmMotivoStatus: TfrmMotivoStatus
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -153,6 +155,7 @@ object frmMotivoStatus: TfrmMotivoStatus
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -247,6 +250,11 @@ object frmMotivoStatus: TfrmMotivoStatus
     end
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -265,7 +273,6 @@ object frmMotivoStatus: TfrmMotivoStatus
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -294,7 +301,7 @@ object frmMotivoStatus: TfrmMotivoStatus
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 182
-    Top = 112
+    Left = 158
+    Top = 104
   end
 end

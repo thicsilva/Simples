@@ -51,7 +51,6 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     object lblTurma: TbsSkinStdLabel
       Left = 125
       Top = 14
@@ -687,8 +686,6 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Height = 327
     Align = alClient
     TabOrder = 1
-    ExplicitTop = 110
-    ExplicitHeight = 336
     object GridRelatorio: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio
@@ -809,19 +806,16 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 767
+        Width = 769
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 758
+      Width = 760
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -865,9 +859,9 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 538
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -901,6 +895,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
         OnClick = btnFecharClick
         ExplicitLeft = 608
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -1136,7 +1131,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Top = 131
   end
   object PopRepasse: TbsSkinPopupMenu
-    Left = 336
+    Left = 328
     Top = 216
     object ColocaremRepasse1: TMenuItem
       Caption = 'Colocar em Repasse'

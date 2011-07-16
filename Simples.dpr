@@ -66,7 +66,10 @@ uses
   uCadFuncionarios in 'uCadFuncionarios.pas' {frmCadFuncionarios},
   uConsItensDevolvidos in 'uConsItensDevolvidos.pas' {frmConsItensDevolvidos},
   ucadTipoVenda in 'ucadTipoVenda.pas' {frmCadtipoVenda},
-  uModelo in 'uModelo.pas' {FrmModelo};
+  uModelo in 'uModelo.pas' {FrmModelo},
+  uTipos in '..\compartilhados\uTipos.pas',
+  uDaoPerfil in 'Dao\uDaoPerfil.pas',
+  uDaoEstrutura in 'Dao\uDaoEstrutura.pas';
 
 {$R *.res}
 

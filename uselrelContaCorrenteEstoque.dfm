@@ -50,7 +50,6 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     object lblTurma: TbsSkinStdLabel
       Left = 123
       Top = 14
@@ -375,7 +374,6 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
     Sizeable = False
     Align = alTop
     Caption = 'Selecione o intervalo de Vendedores'
-    ExplicitTop = 82
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 37
       Top = 39
@@ -536,8 +534,6 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
       'Extrato do Item'
       'Sintetico'
       'Tipo de Movimento')
-    ExplicitTop = 208
-    ExplicitHeight = 54
   end
   object PanelTipoMovimento: TbsSkinExPanel
     Left = 0
@@ -570,7 +566,6 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
     Sizeable = False
     Align = alTop
     Caption = 'Selecione o Tipo de Movimento'
-    ExplicitTop = 145
     object bsSkinStdLabel2: TbsSkinStdLabel
       Left = 13
       Top = 36
@@ -689,19 +684,16 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 476
+        Width = 478
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 5
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 467
+      Width = 469
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -780,6 +772,8 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 428
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -830,6 +824,7 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end
@@ -849,7 +844,7 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
   end
   object dspvariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 141
+    Left = 125
     Top = 70
   end
   object impMatricial: TRDprint
@@ -888,7 +883,7 @@ object frmSelRelContaCorrenteEstoque: TfrmSelRelContaCorrenteEstoque
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'

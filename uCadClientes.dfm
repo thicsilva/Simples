@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 53
     Width = 837
     Height = 458
-    ActivePage = bsSkinTabSheet6
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -51,10 +51,6 @@ object frmCadClientes: TfrmCadClientes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -249,10 +245,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 835
-        Height = 403
+        Height = 401
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 401
         object GridClintes: TcxGridDBTableView
           OnDblClick = GridClintesDblClick
           NavigatorButtons.ConfirmDelete = False
@@ -372,13 +367,9 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 0
-        Top = 289
+        Top = 287
         Width = 835
         Height = 147
         HintImageIndex = 0
@@ -410,7 +401,6 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'Informa'#231#245'es Adicionais'
         Align = alBottom
-        ExplicitTop = 287
         object bsSkinStdLabel9: TbsSkinStdLabel
           Left = 20
           Top = 36
@@ -1541,18 +1531,13 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = 'Ocorr'#234'ncias'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid2: TcxGrid
         Left = 0
         Top = 64
         Width = 835
-        Height = 372
+        Height = 370
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 370
         object GridOcorrencias: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcOcorrencias
@@ -1738,10 +1723,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet4: TbsSkinTabSheet
       Caption = 'Produtos Descontos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 23
@@ -2050,10 +2031,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 67
         Width = 835
-        Height = 369
+        Height = 367
         Align = alClient
         TabOrder = 2
-        ExplicitHeight = 367
         object GridProdutosDescontos: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcCalientesDescontos
@@ -2099,10 +2079,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet5: TbsSkinTabSheet
       Caption = 'Vendas e Servi'#231'os'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid3: TcxGrid
         Left = 0
         Top = 0
@@ -2272,22 +2248,16 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet6: TbsSkinTabSheet
       Caption = 'Recebido e a receber'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         835
-        436)
+        434)
       object cxGrid4: TcxGrid
         Left = 0
         Top = 0
         Width = 835
-        Height = 436
+        Height = 434
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = -1
-        ExplicitHeight = 434
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -2459,7 +2429,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 596
-        Top = 3
+        Top = 1
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -2477,17 +2447,9 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet7: TbsSkinTabSheet
       Caption = 'Brindes'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object bsSkinTabSheet8: TbsSkinTabSheet
       Caption = 'Valida CPF / CNPJ'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -2714,10 +2676,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 835
-        Height = 403
+        Height = 401
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 401
         object GridValidaCNPJCPF: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcValidaCPFCNPJ
@@ -2780,10 +2741,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet9: TbsSkinTabSheet
       Caption = 'Conta Corrente'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PanelConsulta: TbsSkinPanel
         Left = 0
         Top = 0
@@ -3175,10 +3132,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 41
         Width = 835
-        Height = 360
+        Height = 358
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 358
         object GrdDespesas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcContaCorrente
@@ -3247,7 +3203,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object bsSkinPanel4: TbsSkinPanel
         Left = 0
-        Top = 401
+        Top = 399
         Width = 835
         Height = 35
         HintImageIndex = 0
@@ -3279,7 +3235,6 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'bsSkinPanel4'
         Align = alBottom
-        ExplicitTop = 399
         object bsSkinStdLabel22: TbsSkinStdLabel
           Left = 14
           Top = 5
@@ -3373,16 +3328,16 @@ object frmCadClientes: TfrmCadClientes
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 49
-        Width = 831
+        Width = 833
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 822
+      Width = 824
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -3608,9 +3563,9 @@ object frmCadClientes: TfrmCadClientes
       end
       object btnFechar: TbsSkinSpeedButton
         Left = 729
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -3644,6 +3599,7 @@ object frmCadClientes: TfrmCadClientes
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 8
+        ExplicitHeight = 40
       end
       object BtnCancela: TbsSkinSpeedButton
         Left = 543

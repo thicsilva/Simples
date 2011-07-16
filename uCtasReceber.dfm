@@ -52,19 +52,14 @@ object frmCtasReceber: TfrmCtasReceber
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 759
-        Height = 315
+        Height = 313
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
-        ExplicitHeight = 313
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -799,10 +794,6 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object tabCadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 94
         Top = 98
@@ -1427,16 +1418,16 @@ object frmCtasReceber: TfrmCtasReceber
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 755
+        Width = 757
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 746
+      Width = 748
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1480,9 +1471,9 @@ object frmCtasReceber: TfrmCtasReceber
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 567
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1516,6 +1507,7 @@ object frmCtasReceber: TfrmCtasReceber
         OnClick = btnFecharClick
         ExplicitLeft = 673
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 0

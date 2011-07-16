@@ -47,7 +47,6 @@ object frmselrelRepasse: TfrmselrelRepasse
     UseSkinFont = True
     DefaultItemHeight = 20
     SkinDataName = 'tab'
-    ExplicitTop = 44
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Escolha o Filtro'
       object btnLimpa: TbsSkinButton
@@ -592,19 +591,16 @@ object frmselrelRepasse: TfrmselrelRepasse
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 554
+        Width = 556
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 545
+      Width = 547
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -683,6 +679,8 @@ object frmselrelRepasse: TfrmselrelRepasse
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 480
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
         Left = 0
@@ -773,7 +771,7 @@ object frmselrelRepasse: TfrmselrelRepasse
   end
   object srcCadRotas: TDataSource
     DataSet = cdsCadRotas
-    Left = 298
+    Left = 290
     Top = 95
   end
   object qryRelatorio: TSQLQuery
@@ -836,7 +834,7 @@ object frmselrelRepasse: TfrmselrelRepasse
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
-    About = 'RDprint 4.2 - Registrado'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -896,7 +894,6 @@ object frmselrelRepasse: TfrmselrelRepasse
     Top = 11
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

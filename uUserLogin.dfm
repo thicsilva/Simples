@@ -1745,6 +1745,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -1821,6 +1822,12 @@ object frmLogin: TfrmLogin
       MaxLength = 50
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtSenha: TbsSkinPasswordEdit
       Left = 111
@@ -1862,8 +1869,10 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    CheckedMode = False
     ImageList = frmPrincipal.Imagebutoes
     ImageIndex = 14
+    AlwaysShowLayeredFrame = False
     UseSkinSize = False
     UseSkinFontColor = True
     RepeatMode = False
@@ -1895,8 +1904,10 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    CheckedMode = False
     ImageList = frmPrincipal.Imagebutoes
     ImageIndex = 4
+    AlwaysShowLayeredFrame = False
     UseSkinSize = False
     UseSkinFontColor = True
     RepeatMode = False
@@ -1928,6 +1939,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -1948,6 +1960,11 @@ object frmLogin: TfrmLogin
     SizeGrip = False
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -1966,7 +1983,6 @@ object frmLogin: TfrmLogin
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -3386,7 +3402,12 @@ object frmLogin: TfrmLogin
   end
   object skinOffice: TbsSkinData
     SkinnableForm = True
+    AnimationForAllWindows = False
     EnableSkinEffects = True
+    ShowButtonGlowFrames = True
+    ShowCaptionButtonGlowFrames = True
+    ShowLayeredBorders = True
+    AeroBlurEnabled = True
     CompressedStoredSkin = skinStorage2
     SkinIndex = 0
     Left = 169
@@ -3394,7 +3415,12 @@ object frmLogin: TfrmLogin
   end
   object Skindata: TbsSkinData
     SkinnableForm = True
+    AnimationForAllWindows = False
     EnableSkinEffects = True
+    ShowButtonGlowFrames = True
+    ShowCaptionButtonGlowFrames = True
+    ShowLayeredBorders = True
+    AeroBlurEnabled = True
     CompressedStoredSkin = SkinEstorage1
     SkinIndex = 0
     Left = 169

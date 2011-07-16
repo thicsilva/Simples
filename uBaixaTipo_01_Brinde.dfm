@@ -290,7 +290,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ReadOnly = True
       TabOrder = 3
       Text = '0,00'
-      TextHint = True
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
       FontColorOnFocus = clRed
@@ -308,6 +307,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtVenciemento: TbsSkinEdit
       Left = 240
@@ -789,7 +789,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 0
       Text = '0,00'
-      TextHint = True
       OnExit = edtVlr_DescontoClick
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -808,6 +807,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtVlr_Devolvido: TEditN
       Left = 172
@@ -823,7 +823,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 2
       Text = '0,00'
-      TextHint = True
       OnExit = edtVlr_DescontoClick
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -842,6 +841,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtVlr_Comissao: TEditN
       Left = 468
@@ -857,7 +857,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 1
       Text = '0,00'
-      TextHint = True
       OnExit = edtVlr_DescontoClick
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -876,6 +875,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtVlr_Desconto: TEditN
       Left = 468
@@ -891,7 +891,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 3
       Text = '0,00'
-      TextHint = True
       OnExit = edtVlr_DescontoClick
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -910,6 +909,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtTotalReceber: TEditN
       Left = 468
@@ -927,7 +927,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ReadOnly = True
       TabOrder = 6
       Text = '0,00'
-      TextHint = True
       Visible = False
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -946,6 +945,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtData_Vencimento: TbsSkinDateEdit
       Left = 468
@@ -1012,7 +1012,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 4
       Text = '0,00'
-      TextHint = True
       OnExit = edtVlr_DescontoClick
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
@@ -1031,6 +1030,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
     object edtTotalInformado: TEditN
       Left = 172
@@ -1046,7 +1046,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 5
       Text = '0,00'
-      TextHint = True
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
       FontColorOnFocus = clBlue
@@ -1064,6 +1063,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FirstCharUpper = False
       FirstCharUpList = ' ('
       WidthOnFocus = 0
+      TextHint = True
     end
   end
   object bsSkinStatusBar1: TbsSkinStatusBar
@@ -1113,7 +1113,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 53
-        Width = 588
+        Width = 590
       end>
     Images = frmPrincipal.Imagebutoes
     SkinDataName = 'controlbar'
@@ -1121,9 +1121,9 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     SkinBevel = True
     TabOrder = 3
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 579
+      Width = 581
       Height = 53
       HintImageIndex = 0
       TabOrder = 0
@@ -1362,7 +1362,6 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     end
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1459,7 +1458,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 277
+    Left = 285
     Top = 162
   end
   object dspVariavel: TDataSetProvider

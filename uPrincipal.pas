@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, cxClasses, cxStyles, cxGridTableView, BusinessSkinForm,
-  ufuncoes,cl_TPerfil,
+  ufuncoes,cl_TPerfil,uClassConexao,uTipos,
   bsSkinShellCtrls, bsSkinCtrls, bsSkinData, ActnList, XPStyleActnCtrls,
   ActnMan, ImgList, bsCategoryButtons,IniFiles, DBXpress, DB, SqlExpr,
   StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
@@ -171,7 +171,7 @@ type
     dxBarLargeButton15: TdxBarLargeButton;
     dxBarLargeButton16: TdxBarLargeButton;
     actManutencaoOS: TAction;
-    bsSkinLinkImage1: TbsSkinLinkImage;
+    Gaga: TbsSkinLinkImage;
     cdsProcedimento: TClientDataSet;
     dspvariavel: TDataSetProvider;
     qryVariavel: TSQLQuery;
@@ -276,6 +276,8 @@ var
   gsUFEmp        : String;
   gbSenhaMaster  : boolean;
   gsPerfilAcesso : Tperfil;
+  gConexao       : TConexao;
+  gbControleDeSenhaAtivo : Boolean;
 
   gxLinha         : array[ 1..5 ]  of string;
 
@@ -288,7 +290,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadUsuarios, uselrelContaCorrenteEstoque, uFechaDia, uCtaspagar,
   uControleRepasse, uSelRelDevolucoes, uAbreOS, uConsultaOrdemServico,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
-  ucadTipoVenda;
+  ucadTipoVenda, uDaoEstrutura;
 
 {$R *.dfm}
 
@@ -350,6 +352,7 @@ begin
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
+var Estrutura : TDaoEstrutura;
 begin
    gParametros              := TParametros.Create;
 
@@ -368,7 +371,7 @@ begin
    MenuPrincipal.ActiveTab := dxRibCadastro ;
    lblVersao.Filename:= gspath+'simples.exe';
    lblVersao.Enabled := True;
-   frmPrincipal.Caption := frmPrincipal.Caption + ' '+lblVersao.InfoString;
+   frmPrincipal.Caption := frmPrincipal.Caption + 'VN '+lblVersao.InfoString;
    // <- Buscando versao de sistema
 
    // -> Buscando Operador e empresa
@@ -442,47 +445,12 @@ begin
    End;
    {$ENDREGION}
 
-   
-   {$REGION 'Ajustes no Banco de Dados'}
-
-   if not ExisteCampo( 'T_Vendas', 'Cod_TipoVenda', FrmPrincipal.dbxPrincipal ) then
-   begin
-      qryModific.Close;
-      qryModific.SQL.Text := 'ALTER TABLE T_Vendas ADD Cod_TipoVenda Integer ';
-      qryModific.ExecSQL;
+   Estrutura := TDaoEstrutura.Create(gConexao);
+   try
+      Estrutura.EfetuarCriacaoDosCamposAntigos;
+   finally
+      FreeAndNil(Estrutura);
    end;
-
-   if not ExisteCampo( 'T_ItensVendas', 'Perc_Comis', FrmPrincipal.dbxPrincipal ) then
-   begin
-      qryModific.Close;
-      qryModific.SQL.Text := 'ALTER TABLE T_ItensVendas ADD Perc_Comis Float ';
-      qryModific.ExecSQL;
-   end;
-
-   if not ExisteCampo( 'T_Ctasreceber', 'Fechado', FrmPrincipal.dbxPrincipal ) then
-   begin
-      qryModific.Close;
-      qryModific.SQL.Text := 'ALTER TABLE T_Ctasreceber ADD Fechado integer ';
-      qryModific.ExecSQL;
-   end;
-
-   if not ExisteCampo( 'T_Ctasreceber', 'Lote', FrmPrincipal.dbxPrincipal ) then
-   begin
-      qryModific.Close;
-      qryModific.SQL.Text := 'ALTER TABLE T_Ctasreceber ADD Lote integer ';
-      qryModific.ExecSQL;
-   end;
-
-   if not ExisteCampo( 'T_Clientes', 'Contrato', FrmPrincipal.dbxPrincipal ) then
-   begin
-      qryModific.Close;
-      qryModific.SQL.Text := 'ALTER TABLE T_Clientes ADD Contrato Varchar(10) ';
-      qryModific.ExecSQL;
-   end;
-
-
-   {$ENDREGION}
-
 
 end;
 
@@ -841,6 +809,8 @@ begin
    dbxPrincipal.Params.Values[ 'Password' ]  := gsParametros.ReadString('ACESSODADOS','Senha','remoto');
    dbxPrincipal.LoginPrompt := False;
    dbxPrincipal.Open;
+
+   gConexao := TConexao.Create(tcDBX);
 
 end;
 

@@ -456,11 +456,12 @@ end;
 
 procedure TfrmCadClientes.btnokClick(Sender: TObject);
 begin
-   if Trim(edtcnpjcpf.text)='' then
+   if ( Trim(edtcnpjcpf.text)='' ) and ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' )) = 'NAO' ) Then
    begin
       CaixaMensagem( 'O CPF/CNPJ Não pode ser vazio ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
+
    if Trim(cmbCod_Atividade.text)='' then
    begin
       CaixaMensagem( 'A Atividade não pode ser vazia ', ctAviso, [ cbOk ], 0 );
@@ -1438,33 +1439,29 @@ begin
       End;
    End;
 
-   if Length( edtCNPJCPF.Text ) <= 11 then
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' )) = 'NAO' Then
    begin
-      lblCNPJCPF.Caption   := 'C.P.F.';
-      edtCNPJCPF.EditMask := '###.###.###-##;0;_';
+      if Length( edtCNPJCPF.Text ) <= 11 then
+      begin
+         lblCNPJCPF.Caption   := 'C.P.F.';
+         edtCNPJCPF.EditMask := '###.###.###-##;0;_';
 
-      if not CPF_Check( edtCNPJCPF.Text ) then
+         if not CPF_Check( edtCNPJCPF.Text ) then
+         begin
+            CaixaMensagem( 'CPF ' + Trim( edtCNPJCPF.Text ) + ' inválido', ctAviso, [ cbOk ], 0 );
+            exit;
+         end;
+      end
+      else
       begin
-         CaixaMensagem( 'CPF ' + Trim( edtCNPJCPF.Text ) + ' inválido', ctAviso, [ cbOk ], 0 );
-         exit;
-      end;
-     {
-      if Trim( edtInscEst.Text ) <> 'ISENTO' then
-      begin
-         if CaixaMensagem( 'Deseja preencher a Inscrição Estadual com "ISENTO" ?', ctConfirma, [ cbSimNao ], 0 ) then
-            edtInscEst.Text := 'ISENTO';
-      end;
-      }
-   end
-   else
-   begin
-      lblCNPJCPF.Caption   := 'C.N.P.J.';
-      edtCNPJCPF.EditMask := '##.###.###/####-##;0;_';
+         lblCNPJCPF.Caption   := 'C.N.P.J.';
+         edtCNPJCPF.EditMask := '##.###.###/####-##;0;_';
 
-      if not CNPJ_Check( edtCNPJCPF.Text ) then
-      begin
-         CaixaMensagem( 'CNPJ ' + Trim( edtCNPJCPF.Text ) + ' inválido', ctAviso, [ cbOk ], 0 );
-         exit;
+         if not CNPJ_Check( edtCNPJCPF.Text ) then
+         begin
+            CaixaMensagem( 'CNPJ ' + Trim( edtCNPJCPF.Text ) + ' inválido', ctAviso, [ cbOk ], 0 );
+            exit;
+         end;
       end;
    end;
 end;
