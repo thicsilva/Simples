@@ -1061,7 +1061,7 @@ object frmCadClientes: TfrmCadClientes
           SkinDataName = 'stdlabel'
           Caption = 'Pto Referencia'
         end
-        object bsSkinStdLabel19: TbsSkinStdLabel
+        object lblrazao: TbsSkinStdLabel
           Left = 88
           Top = 89
           Width = 63
@@ -2429,7 +2429,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 596
-        Top = 1
+        Top = -1
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]

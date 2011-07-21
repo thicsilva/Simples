@@ -279,16 +279,16 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 49
-        Width = 704
+        Width = 706
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 695
+      Width = 697
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -527,7 +527,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 304
+    Left = 312
     Top = 212
   end
   object qryVariavel: TSQLQuery
@@ -629,7 +629,6 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     Top = 240
   end
   object SkinForm: TbsBusinessSkinForm
-    UseRibbon = False
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True

@@ -231,7 +231,7 @@ type
     GridValidaCNPJCPFOcorrencia: TcxGridDBColumn;
     GridValidaCNPJCPFDescricao: TcxGridDBColumn;
     GridValidaCNPJCPFSolicitante: TcxGridDBColumn;
-    bsSkinStdLabel19: TbsSkinStdLabel;
+    lblrazao: TbsSkinStdLabel;
     edtRazao_Social: TbsSkinEdit;
     bsSkinStdLabel20: TbsSkinStdLabel;
     edtResponsavel: TbsSkinEdit;
@@ -780,7 +780,8 @@ begin
    cdsCadFuncionarios.Open;
 
    PagCadastro.ActivePageIndex:=0;
-
+   if StrToInt(gsParametros.ReadString('ACESSODADOS','TipoSistema','0'))= 0 then
+      lblrazao.Caption :='Nome da Mãe';
    piCod_Produto  := 0;
 
    FGridBrushMasterCell := TBrush.Create;

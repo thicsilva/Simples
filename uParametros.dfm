@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 552
     Height = 322
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
