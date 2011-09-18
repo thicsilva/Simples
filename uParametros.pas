@@ -52,6 +52,7 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox;
+    chkVendaSemControle: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -111,6 +112,12 @@ begin
       gParametros.Gravar( '', '[CADASTRO]', 'BloqueioEstoque', 'SIM' ,gsOperador )
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' ,gsOperador );
+
+   if chkVendaSemControle.Checked Then
+      gParametros.Gravar( '', '[CADASTRO]', 'VendaSemControle', 'SIM' ,gsOperador )
+   Else
+      gParametros.Gravar( '', '[CADASTRO]', 'VendaSemControle', 'NAO' ,gsOperador );
+
 
    if chkLigaECF.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'LigarECF', 'SIM' ,gsOperador )
@@ -200,6 +207,11 @@ begin
       chkLigaECF.Checked := False
    Else
       chkLigaECF.Checked := True;
+
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
+      chkVendaSemControle.Checked := True
+   Else
+      chkVendaSemControle.Checked := False;
 
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' )) = 'SIM' Then
       cnkCadastraClienteSemCPF.Checked := True

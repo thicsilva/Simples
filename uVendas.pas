@@ -653,13 +653,16 @@ begin
    lsContrato := '';
    If (frmVendas.tag = 3) OR ( gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' ) Then
    Begin
-      If trim(edtControle.Text) = '' Then
-      Begin
-         CaixaMensagem( 'Digite o numero de controle ', ctAviso, [ cbOk ], 0 );
-         edtControle.SetFocus;
-         Exit;
-      End;
-     {
+      IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'NAO' Then
+      begin
+        If trim(edtControle.Text) = '' Then
+        Begin
+           CaixaMensagem( 'Digite o numero de controle ', ctAviso, [ cbOk ], 0 );
+           edtControle.SetFocus;
+           Exit;
+        End;
+      end;
+      {
       if Trim(cdsCadClientes.FieldByName('Contrato').AsString) = '' then
       Begin
          if not inputQuery('Digite o Contrato','Digite o Contrato',lsContrato) Then
@@ -667,7 +670,6 @@ begin
       End;
       }
    End;
-
    If cdsItensVendasTMP.IsEmpty Then
    Begin
       CaixaMensagem( 'Venda Sem item digitado ', ctAviso, [ cbOk ], 0 );

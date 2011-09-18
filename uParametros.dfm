@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 552
     Height = 322
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -587,6 +587,36 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Cadastra Cliente sem CPF'
+      end
+      object chkVendaSemControle: TbsSkinCheckRadioBox
+        Left = 201
+        Top = 228
+        Width = 297
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 17
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Permitir Vendas  sem informar o numero de controle'
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
