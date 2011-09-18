@@ -162,7 +162,7 @@ begin
          cdsMovCaixa.Open;
 
          sdtsPesqOS.Close;
-         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total From T_vendas Where Controle=:parControle';
+         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total From T_vendas Where SeqVenda=:parControle';
          sdtsPesqOS.DataSet.ParamByName('parControle').AsString := cdsTempPagamentos.FieldByName('SeqOS').AsString;
          sdtsPesqOS.Open;
 
@@ -334,7 +334,7 @@ begin
    if frmPRePagamento.Tag=0 then
    Begin
       sdtsPesqOS.Close;
-      sdtsPesqOS.DataSet.CommandText :='Select Status,SeqVenda, Vlr_Total From T_vendas Where Controle=:parControle';
+      sdtsPesqOS.DataSet.CommandText :='Select Status,SeqVenda, Vlr_Total From T_vendas Where SeqVenda=:parControle';
       sdtsPesqOS.DataSet.ParamByName('parControle').AsString := edtNumeroOs.Text;
       sdtsPesqOS.Open;
    End

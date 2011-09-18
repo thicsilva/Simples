@@ -27,6 +27,7 @@ procedure TDaoEstrutura.EfetuarCriacaoDosCamposAntigos;
 var qryAjustaTabelas : TSqlQuery;
 begin
    qryAjustaTabelas := TSqlQuery.Create(Nil);
+   qryAjustaTabelas.SQLConnection := FConexao.Conection;
    Try
       if not ExisteCampo( 'T_Vendas', 'Cod_TipoVenda', FConexao.Conection ) then
       begin
