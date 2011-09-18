@@ -119,7 +119,8 @@ implementation
 
 {$R *.dfm}
 
-uses uprincipal,ufuncoes, uFechaCaixa, uPrePagamento, uClassContaCorrente,uClassDaoContaCorrente;
+uses uprincipal,ufuncoes, uFechaCaixa, uPrePagamento, uClassContaCorrente,uClassDaoContaCorrente,
+  uselDatas;
 
 procedure TfrmMovCaixa.Limpacampos();
 begin
@@ -266,7 +267,9 @@ var lrTotal_Venda    : Real;
     lbImprimiuCredito : Boolean;
     lbImprimiuDebito  : Boolean;
     sdtsTempPagInformado : TSimpleDataSet;
-  lrTotal_Extras: double;
+    lrTotal_Extras: double;
+    dataInicial : TDateTime;
+    dataFinal : TDateTime;
 begin
    gsTituloRel := 'Relatorio de movimentação do dia '+FormatDateTime('dd/mm/yyyy',gsdata_Mov);
 
@@ -279,6 +282,18 @@ begin
    lrTotal_Baixa    := 0;
    lrVlr_Saida      := 0;
    lrVlr_Entrada    := 0;
+
+   frmSelDatas := TFrmSelDatas.Create(Self);
+   frmSelDatas.ShowModal;
+   if frmSelDatas.Tag = 1 then
+   begin
+      dataInicial := frmSelDatas.dtpData_Ini.Date;
+      dataFinal   := frmSelDatas.dtpData_Fim.Date;
+   end
+   else
+     exit;
+
+
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
@@ -298,8 +313,8 @@ begin
                            '      Itens.seqvenda=Ven.Seqvenda and Prod.codigo=Itens.Cod_Produto and '+
                            '      Grupo.Codigo=Prod.Cod_Grupo '+
                            'Group by Grupo.Codigo,Grupo.Descricao';
-   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.ParamByName('parTipo_venda').AsString          := 'P';
 
    cdsRelatorio.close;
@@ -346,8 +361,8 @@ begin
                            '      Itens.seqvenda=Ven.Seqvenda and Prod.codigo=Itens.Cod_Produto and '+
                            '      Grupo.Codigo=Prod.Cod_Grupo '+
                            'Group by Grupo.Codigo,Grupo.Descricao';
-   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp :=StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.ParamByName('parTipo_venda').AsString          := 'S';
 
    cdsRelatorio.close;
@@ -444,8 +459,8 @@ begin
                            'Group by pag.codigo,pag.descricao,mov.D_C '+
                            'Order by Pag.Codigo,Mov.D_C ';
 
-   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
 
    cdsRelatorio.close;
    cdsRelatorio.ProviderName := dspVariavel.name;
@@ -541,8 +556,8 @@ begin
                            'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
                            '      PrePagamento=:parPrePagamento and ven.status=:parstatus ';
 
-   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.ParamByName('parPrePagamento').AsString  := 'S';
    qryVariavel.ParamByName('parStatus').AsString        :=  '1';
 
@@ -558,8 +573,8 @@ begin
                            'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
                            '      SeqVenda is null and D_C=:parD_C ';
 
-   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.ParamByName('parD_C').AsString           := 'C';
 
    cdsRelatorio.close;
@@ -596,8 +611,8 @@ begin
    qryVariavel.Sql.Text := 'select sum(vlr_Total) As Total from t_vendas '+
                            'where Data_Venda>=:parData_VendaIni and Data_Venda<=:parData_VendaFim And '+
                            '      Status=:parStatus and tipo_Venda=:parTipo_Venda ';
-   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'00:00:00');
-   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov)+'23:59:59');
+   qryVariavel.ParamByName('parData_VendaIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryVariavel.ParamByName('parData_VendaFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.ParamByName('parStatus').AsString        := '1';
    qryVariavel.ParamByName('parTipo_Venda').AsString    := 'S';
 
