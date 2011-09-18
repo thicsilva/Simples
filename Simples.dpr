@@ -23,7 +23,7 @@ uses
   uCadClientes in 'uCadClientes.pas' {frmCadClientes},
   uEntradas in 'uEntradas.pas' {frmEntradas},
   uselrelvendasVendedor in 'uselrelvendasVendedor.pas' {frmselrelVendasVendedor},
-  uUserLogin in 'uUserLogin.pas' {frmLogin},
+  uLogin in 'uLogin.pas' {frmLogin},
   uselrelContaCorrenteEstoque in 'uselrelContaCorrenteEstoque.pas' {frmSelRelContaCorrenteEstoque},
   udevolucaoVenda in 'udevolucaoVenda.pas' {frmDevolucaoVenda},
   uBaixaTipo_01_Brinde in 'uBaixaTipo_01_Brinde.pas' {frmBaixaBrinde},
@@ -69,7 +69,11 @@ uses
   uModelo in 'uModelo.pas' {FrmModelo},
   uTipos in '..\compartilhados\uTipos.pas',
   uDaoPerfil in 'Dao\uDaoPerfil.pas',
-  uDaoEstrutura in 'Dao\uDaoEstrutura.pas';
+  uDaoEstrutura in 'Dao\uDaoEstrutura.pas',
+  uAmbienteSistema in '..\Compartilhados\uAmbienteSistema.pas',
+  uselRelCurvaAbcProdutos in 'uselRelCurvaAbcProdutos.pas' {frmselRelCurvaAbcProdutos},
+  uselrelCurvaAbcClientes in 'uselrelCurvaAbcClientes.pas' {frmselrelcurvaabcclientes},
+  uselDatas in 'uselDatas.pas' {frmSelDatas};
 
 {$R *.res}
 
@@ -79,5 +83,8 @@ begin
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TFrmModelo, FrmModelo);
+  Application.CreateForm(TfrmselRelCurvaAbcProdutos, frmselRelCurvaAbcProdutos);
+  Application.CreateForm(Tfrmselrelcurvaabcclientes, frmselrelcurvaabcclientes);
+  Application.CreateForm(TfrmSelDatas, frmSelDatas);
   Application.Run;
 end.

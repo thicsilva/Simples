@@ -36,6 +36,7 @@
     <DelphiCompile Include="Simples.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="..\Compartilhados\uAmbienteSistema.pas" />
     <DCCReference Include="..\Compartilhados\uCadPerfil.pas">
       <Form>frmCadPerfil</Form>
     </DCCReference>
@@ -144,6 +145,9 @@
     <DCCReference Include="uInventario.pas">
       <Form>frmInventario</Form>
     </DCCReference>
+    <DCCReference Include="uLogin.pas">
+      <Form>frmLogin</Form>
+    </DCCReference>
     <DCCReference Include="uManutencaoOs.pas">
       <Form>frmManutencaoOs</Form>
     </DCCReference>
@@ -172,6 +176,9 @@
     <DCCReference Include="uProposta.pas">
       <Form>frmProposta</Form>
     </DCCReference>
+    <DCCReference Include="uselDatas.pas">
+      <Form>frmSelDatas</Form>
+    </DCCReference>
     <DCCReference Include="uSelMotivoStatus.pas">
       <Form>frmMotivoStatus</Form>
     </DCCReference>
@@ -183,6 +190,12 @@
     </DCCReference>
     <DCCReference Include="uselRelContasReceber.pas">
       <Form>frmSelRelContasReceber</Form>
+    </DCCReference>
+    <DCCReference Include="uselrelCurvaAbcClientes.pas">
+      <Form>frmselrelcurvaabcclientes</Form>
+    </DCCReference>
+    <DCCReference Include="uselRelCurvaAbcProdutos.pas">
+      <Form>frmselRelCurvaAbcProdutos</Form>
     </DCCReference>
     <DCCReference Include="uSelRelDevolucoes.pas">
       <Form>frmSelRelDevolucoes</Form>
@@ -204,9 +217,6 @@
     </DCCReference>
     <DCCReference Include="usequencias.pas">
       <Form>frmSequencias</Form>
-    </DCCReference>
-    <DCCReference Include="uUserLogin.pas">
-      <Form>frmLogin</Form>
     </DCCReference>
     <DCCReference Include="uVendas.pas">
       <Form>frmVendas</Form>

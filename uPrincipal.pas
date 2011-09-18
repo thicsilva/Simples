@@ -200,6 +200,11 @@ type
     actPlanilhaRecebimento: TAction;
     dxBarLargeButton21: TdxBarLargeButton;
     dbxPrincipal: TSQLConnection;
+    MenuManegerBar3: TdxBar;
+    dxBarButton22: TdxBarButton;
+    actCurva_abc_Produto: TAction;
+    actCurva_abc_Cliente: TAction;
+    dxBarButton23: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -246,6 +251,8 @@ type
     procedure actCadFabricantesExecute(Sender: TObject);
     procedure actCadTipoVendaExecute(Sender: TObject);
     procedure actPlanilhaRecebimentoExecute(Sender: TObject);
+    procedure actCurva_abc_ProdutoExecute(Sender: TObject);
+    procedure actCurva_abc_ClienteExecute(Sender: TObject);
   private
     pviLinha : integer;
     { Private declarations }
@@ -290,7 +297,8 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadUsuarios, uselrelContaCorrenteEstoque, uFechaDia, uCtaspagar,
   uControleRepasse, uSelRelDevolucoes, uAbreOS, uConsultaOrdemServico,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
-  ucadTipoVenda, uDaoEstrutura;
+  ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
+  uselrelCurvaAbcClientes;
 
 {$R *.dfm}
 
@@ -382,16 +390,13 @@ begin
    StatusBar.Update;
 
    GsNomeEmp  := gsParametros.ReadString('CONFIG_SISTEMA','NomeEmpresa','Informe a empresa nos parametros');
-
-
+   RibonAtendimentoCliente.Visible := false;
    StatusBar.Panels[2].Text := 'Turno.: ';
 
    actServicos.Visible      := False;
    actconsServicos.Visible  := False;
    actCaixaDespesas.Visible := False;
-   //MenuPrincipal.Tabs[0].Visible :=False
-   RibonFiscal.Visible              := False;
-   RibonAtendimentoCliente.Visible  := False;
+   RibonFiscal.Visible      := False;
 
    if not DirectoryExists( gsPath + 'Config' ) then
       CreateDir( gsPath + 'Config' );
@@ -402,7 +407,7 @@ begin
        actconsServicos.Visible  := True;
        actCaixaDespesas.Visible := True;
        RibonFiscal.Visible      := True;
-       RibonAtendimentoCliente.Visible  := True
+       RibonAtendimentoCliente.Visible  := False;
    End;
 
    MenuPrincipal.BarManager.loadFromIniFile(gspath+'ConfigMenu.ini');
@@ -846,6 +851,28 @@ begin
    End;
    frmCtasReceber := TfrmCtasReceber.create(Self);
    frmCtasReceber.show;
+end;
+
+procedure TfrmPrincipal.actCurva_abc_ClienteExecute(Sender: TObject);
+begin
+ if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmselRelCurvaAbcClientes := TfrmselRelCurvaAbcClientes.create(Self);
+   frmselRelCurvaAbcClientes.showModal;
+end;
+
+procedure TfrmPrincipal.actCurva_abc_ProdutoExecute(Sender: TObject);
+begin
+ if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmselRelCurvaAbcProdutos := TfrmselRelCurvaAbcProdutos.create(Self);
+   frmselRelCurvaAbcProdutos.showModal;
 end;
 
 procedure TfrmPrincipal.actEntradasExecute(Sender: TObject);
