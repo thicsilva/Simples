@@ -676,6 +676,23 @@ object frmVendas: TfrmVendas
         WidthOnFocus = 0
         TextHint = True
       end
+      object pnlRemessaAberta: TPanel
+        Left = 2
+        Top = 124
+        Width = 230
+        Height = 24
+        Caption = 'Verndedor Com Remessa Aberta'
+        Color = clSkyBlue
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+        Visible = False
+      end
     end
     object cmbNome_Cliente: TbsSkinDBLookupComboBox
       Left = 241

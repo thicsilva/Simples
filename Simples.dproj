@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-    <DCC_DependencyCheckOutputName>Simples.exe</DCC_DependencyCheckOutputName>
+    <DCC_DependencyCheckOutputName>Programa\Simples.exe</DCC_DependencyCheckOutputName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Version>7.0</Version>
@@ -21,12 +21,32 @@
     <DCC_ResourcePath>D:\Producao\Compartilhados</DCC_ResourcePath>
     <DCC_ObjPath>D:\Producao\Compartilhados</DCC_ObjPath>
     <DCC_IncludePath>D:\Producao\Compartilhados</DCC_IncludePath>
+    <DCC_ExeOutput>E:\Desenvolvimento\Simples\Programa</DCC_ExeOutput>
+    <DCC_DcuOutput>E:\Desenvolvimento\Simples\Dcu´s</DCC_DcuOutput>
+    <DCC_ObjOutput>E:\Desenvolvimento\Simples\Dcu´s</DCC_ObjOutput>
+    <DCC_HppOutput>E:\Desenvolvimento\Simples\Dcu´s</DCC_HppOutput>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>Delphi.Personality</Borland.Personality>
     <Borland.ProjectType>VCLApplication</Borland.ProjectType>
     <BorlandProject>
 <BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">1</VersionInfo><VersionInfo Name="Build">41</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1046</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.1.41</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
     </Excluded_Packages><Source><Source Name="MainSource">Simples.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
@@ -53,8 +73,13 @@
     <DCCReference Include="cl_TAvarias.pas" />
     <DCCReference Include="Cl_TBuscaDados.pas" />
     <DCCReference Include="ConfigUtils.pas" />
+    <DCCReference Include="Dao\Dao.pas" />
+    <DCCReference Include="Dao\DaoRemessa.pas" />
+    <DCCReference Include="Dao\DaoSupervisor.pas" />
     <DCCReference Include="Dao\uDaoEstrutura.pas" />
     <DCCReference Include="Dao\uDaoPerfil.pas" />
+    <DCCReference Include="Modelos\ItemRemessa.pas" />
+    <DCCReference Include="Modelos\Remessa.pas" />
     <DCCReference Include="uAbreOS.pas">
       <Form>frmabreos</Form>
     </DCCReference>
@@ -100,6 +125,7 @@
     <DCCReference Include="uCalMQuadrado.pas">
       <Form>frmCalMQuadrado</Form>
     </DCCReference>
+    <DCCReference Include="uCarregarCarros.pas" />
     <DCCReference Include="uclassContaCorrente.pas" />
     <DCCReference Include="uClassDaoContaCorrente.pas" />
     <DCCReference Include="uClassEstoque.pas" />
@@ -175,6 +201,9 @@
     </DCCReference>
     <DCCReference Include="uProposta.pas">
       <Form>frmProposta</Form>
+    </DCCReference>
+    <DCCReference Include="uRemessaParaVenda.pas">
+      <Form>frmRemessaParaVenda</Form>
     </DCCReference>
     <DCCReference Include="uselDatas.pas">
       <Form>frmSelDatas</Form>

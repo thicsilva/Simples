@@ -73,7 +73,14 @@ uses
   uAmbienteSistema in '..\Compartilhados\uAmbienteSistema.pas',
   uselRelCurvaAbcProdutos in 'uselRelCurvaAbcProdutos.pas' {frmselRelCurvaAbcProdutos},
   uselrelCurvaAbcClientes in 'uselrelCurvaAbcClientes.pas' {frmselrelcurvaabcclientes},
-  uselDatas in 'uselDatas.pas' {frmSelDatas};
+  uselDatas in 'uselDatas.pas' {frmSelDatas},
+  uCarregarCarros in 'uCarregarCarros.pas',
+  uRemessaParaVenda in 'uRemessaParaVenda.pas' {frmRemessaParaVenda},
+  Remessa in 'Modelos\Remessa.pas',
+  ItemRemessa in 'Modelos\ItemRemessa.pas',
+  DaoRemessa in 'Dao\DaoRemessa.pas',
+  Dao in 'Dao\Dao.pas',
+  DaoSupervisor in 'Dao\DaoSupervisor.pas';
 
 {$R *.res}
 
@@ -82,9 +89,5 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TFrmModelo, FrmModelo);
-  Application.CreateForm(TfrmselRelCurvaAbcProdutos, frmselRelCurvaAbcProdutos);
-  Application.CreateForm(Tfrmselrelcurvaabcclientes, frmselrelcurvaabcclientes);
-  Application.CreateForm(TfrmSelDatas, frmSelDatas);
   Application.Run;
 end.

@@ -50,16 +50,19 @@ object frmCtasReceber: TfrmCtasReceber
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitTop = 109
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object cxGrid1: TcxGrid
         Left = 0
-        Top = 72
+        Top = 97
         Width = 759
-        Height = 313
+        Height = 288
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
+        ExplicitTop = 72
+        ExplicitHeight = 313
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -232,7 +235,7 @@ object frmCtasReceber: TfrmCtasReceber
         Left = 0
         Top = 0
         Width = 759
-        Height = 72
+        Height = 97
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -263,9 +266,10 @@ object frmCtasReceber: TfrmCtasReceber
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
+        ExplicitTop = -6
         DesignSize = (
           759
-          72)
+          97)
         object lblTurma: TbsSkinStdLabel
           Left = 239
           Top = 46
@@ -299,6 +303,23 @@ object frmCtasReceber: TfrmCtasReceber
           SkinData = frmPrincipal.SkinPrincipal
           SkinDataName = 'stdlabel'
           Caption = 'Intervalo de Datas'
+        end
+        object bsSkinStdLabel3: TbsSkinStdLabel
+          Left = 47
+          Top = 72
+          Width = 50
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Supervisor'
         end
         object cmbTipoPesquisa: TbsSkinComboBox
           Left = 65
@@ -560,8 +581,8 @@ object frmCtasReceber: TfrmCtasReceber
           OnClick = btnSelecionarClick
         end
         object cmbPeriodo: TbsSkinComboBox
-          Left = 379
-          Top = 41
+          Left = 376
+          Top = 39
           Width = 201
           Height = 20
           HintImageIndex = 0
@@ -699,8 +720,8 @@ object frmCtasReceber: TfrmCtasReceber
           OnChange = cmbPeriodoChange
         end
         object cmbTipoFiltro: TbsSkinComboBox
-          Left = 600
-          Top = 41
+          Left = 598
+          Top = 39
           Width = 120
           Height = 20
           HintImageIndex = 0
@@ -759,7 +780,7 @@ object frmCtasReceber: TfrmCtasReceber
         end
         object lblLote: TbsSkinLabel
           Left = 3
-          Top = 6
+          Top = 10
           Width = 56
           Height = 21
           Hint = 'Click bot'#227'o direito nova Sequencia'
@@ -789,6 +810,82 @@ object frmCtasReceber: TfrmCtasReceber
           PopupMenu = bsSkinPopupMenu1
           ShowHint = True
           AutoSize = False
+        end
+        object edtCod_Funcionario: TbsSkinEdit
+          Left = 108
+          Top = 69
+          Width = 65
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Alignment = taRightJustify
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 9
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_FuncionarioExit
+        end
+        object cmbNome_Funcionario: TbsSkinDBLookupComboBox
+          Left = 185
+          Top = 67
+          Width = 298
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 10
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcSupervisor
+          OnChange = cmbNome_FuncionarioChange
+        end
+        object pnlRemessaAberta: TPanel
+          Left = 518
+          Top = 66
+          Width = 230
+          Height = 24
+          Caption = 'Supervisor Com Remessa Aberta'
+          Color = clSkyBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 11
+          Visible = False
         end
       end
     end
@@ -1797,16 +1894,16 @@ object frmCtasReceber: TfrmCtasReceber
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
     Left = 508
-    Top = 191
+    Top = 247
   end
   object srcPesquisa: TDataSource
     DataSet = cdsPesquisa
     Left = 533
-    Top = 191
+    Top = 247
   end
   object srcCadCtoCusto: TDataSource
     Left = 481
-    Top = 191
+    Top = 247
   end
   object MenuRelatorios: TbsSkinPopupMenu
     Left = 288
@@ -1929,31 +2026,31 @@ object frmCtasReceber: TfrmCtasReceber
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 589
-    Top = 136
+    Top = 192
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
     Left = 589
-    Top = 164
+    Top = 220
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 508
-    Top = 219
+    Top = 275
   end
   object cdsCadCtoCusto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 481
-    Top = 219
+    Top = 275
   end
   object dspPesquisa: TDataSetProvider
     DataSet = QryPesquisa
     Left = 533
-    Top = 163
+    Top = 219
   end
   object QryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -1962,7 +2059,7 @@ object frmCtasReceber: TfrmCtasReceber
       'Select * from T_Ctasreceber where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 533
-    Top = 135
+    Top = 191
   end
   object cdsPesquisa: TClientDataSet
     Aggregates = <>
@@ -1971,14 +2068,14 @@ object frmCtasReceber: TfrmCtasReceber
     AfterOpen = cdsPesquisaAfterOpen
     OnCalcFields = cdsPesquisaCalcFields
     Left = 534
-    Top = 219
+    Top = 275
   end
   object QryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 561
-    Top = 136
+    Top = 192
   end
   object CxPropriedades: TcxPropertiesStore
     Components = <
@@ -2824,11 +2921,15 @@ object frmCtasReceber: TfrmCtasReceber
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 453
-    Top = 219
+    Top = 275
   end
   object DataSource1: TDataSource
     DataSet = cdsRelatorio
     Left = 453
-    Top = 191
+    Top = 247
+  end
+  object srcSupervisor: TDataSource
+    Left = 117
+    Top = 327
   end
 end
