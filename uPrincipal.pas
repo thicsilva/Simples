@@ -7,7 +7,7 @@ uses
   Dialogs, cxClasses, cxStyles, cxGridTableView, BusinessSkinForm,
   ufuncoes,cl_TPerfil,uClassConexao,uTipos,
   bsSkinShellCtrls, bsSkinCtrls, bsSkinData, ActnList, XPStyleActnCtrls,
-  ActnMan, ImgList, bsCategoryButtons,IniFiles, DBXpress, DB, SqlExpr,
+  ActnMan, ImgList, bsCategoryButtons,IniFiles, DB, SqlExpr,
   StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
@@ -205,6 +205,8 @@ type
     actCurva_abc_Produto: TAction;
     actCurva_abc_Cliente: TAction;
     dxBarButton23: TdxBarButton;
+    actRemessa: TAction;
+    dxBarButton24: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -253,6 +255,7 @@ type
     procedure actPlanilhaRecebimentoExecute(Sender: TObject);
     procedure actCurva_abc_ProdutoExecute(Sender: TObject);
     procedure actCurva_abc_ClienteExecute(Sender: TObject);
+    procedure actRemessaExecute(Sender: TObject);
   private
     pviLinha : integer;
     { Private declarations }
@@ -298,7 +301,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uControleRepasse, uSelRelDevolucoes, uAbreOS, uConsultaOrdemServico,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
-  uselrelCurvaAbcClientes;
+  uselrelCurvaAbcClientes, uRemessaParaVenda;
 
 {$R *.dfm}
 
@@ -652,6 +655,17 @@ begin
    frmControleRepasse := TfrmControleRepasse.create(Self);
    frmControleRepasse.Tag := 1;
    frmControleRepasse.showmodal;
+end;
+
+procedure TfrmPrincipal.actRemessaExecute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmRemessaParaVenda := TfrmRemessaParaVenda.Create(Self);
+   frmRemessaParaVenda.showmodal
 end;
 
 procedure TfrmPrincipal.actSelRelEntradasExecute(Sender: TObject);

@@ -166,6 +166,7 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel5: TbsSkinBevel;
+    pnlRemessaAberta: TPanel;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -224,7 +225,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
-  uCalMQuadrado;
+  uCalMQuadrado, DaoRemessa;
 
 {$R *.dfm}
 procedure tfrmVendas.AtualizaTabelas();
@@ -327,7 +328,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select Codigo,Descricao from T_Funcionarios where ativo=:parAtivo order by Descricao ';
+   qryVariavel.SQL.text :='Select Codigo,Descricao,Cod_Supervisor from T_Funcionarios where ativo=:parAtivo order by Descricao ';
    qryVariavel.ParamByName('parAtivo').AsString := 'S';
 
    cdsCadFuncionarios.Close;
@@ -647,6 +648,7 @@ Var liSeqvenda     : integer;
     DadosContaCorrente : TContaCorrente;
     GravaContaCorrente : TDaoContaCorrente;
     lsContrato : String;
+    DaoRemessa : TDaoRemessa;
 begin
 
 {$REGION 'Criticas e Validação das Informações'}
@@ -752,7 +754,8 @@ begin
    cdsItensVendas.Open;
 
    cdsItensVendasTMP.First;
-
+   if pnlRemessaAberta.Visible then
+      DaoRemessa := TDaoRemessa.Create(gCoNexao);
    while not cdsItensVendasTMP.Eof Do
    Begin
       Try
@@ -770,6 +773,12 @@ begin
         cdsItensVendas.FieldByName('SeqVenda').asInteger     := liSeqvenda;
         cdsItensVendas.FieldByName('Perc_Comis').asFloat     := cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat;
         cdsItensVendas.Post;
+        if pnlRemessaAberta.Visible then
+        begin
+           DaoRemessa.SomarItemNaRemessa(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger,
+                                         cdsItensVendasTmp.FieldByName('Codigo').asInteger,
+                                         cdsItensVendasTmp.FieldByName('Qtde_Venda').AsInteger, gsOperador  );
+        end;
       except
          on E: Exception do
          Begin
@@ -1708,10 +1717,16 @@ begin
 end;
 
 procedure TfrmVendas.cmbCod_FuncionarioChange(Sender: TObject);
+var Daoremessa : TDaoRemessa;
 begin
    cmbNome_Funcionario.KeyValue  :=  cmbCod_Funcionario.KeyValue;
    if Trim(cmbCod_Funcionario.Text)<>'' Then
-      edtCod_Funcionario.Text := cmbCod_Funcionario.Text
+   begin
+      Daoremessa := TDaoRemessa.Create(gConexao);
+      edtCod_Funcionario.Text := cmbCod_Funcionario.Text;
+      pnlRemessaAberta.Visible := DaoRemessa.TemRemessaAberta(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger);
+      FreeAndNil(Daoremessa);
+   end;
 end;
 
 procedure TfrmVendas.cmbCod_tipoVendaChange(Sender: TObject);

@@ -86,6 +86,8 @@ object frmParametros: TfrmParametros
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
+      ExplicitLeft = -2
+      ExplicitTop = 15
       object bsSkinCheckRadioBox1: TbsSkinCheckRadioBox
         Left = 10
         Top = 8
@@ -261,7 +263,7 @@ object frmParametros: TfrmParametros
         OnChange = cmbCod_ClienteChange
       end
       object chkBloqueioEstoque: TbsSkinCheckRadioBox
-        Left = 10
+        Left = 8
         Top = 168
         Width = 286
         Height = 25
@@ -409,7 +411,7 @@ object frmParametros: TfrmParametros
         RightImageDownIndex = -1
       end
       object chkLigaECF: TbsSkinCheckRadioBox
-        Left = 10
+        Left = 8
         Top = 189
         Width = 79
         Height = 25
@@ -439,7 +441,7 @@ object frmParametros: TfrmParametros
         Caption = 'Ligar ECF'
       end
       object chkCondicaoNaVenda: TbsSkinCheckRadioBox
-        Left = 10
+        Left = 8
         Top = 145
         Width = 357
         Height = 25
@@ -469,7 +471,7 @@ object frmParametros: TfrmParametros
         Caption = 'Mostrar unicamente considi'#231#245'es de pagamento na venda'
       end
       object chkVendeServico: TbsSkinCheckRadioBox
-        Left = 9
+        Left = 8
         Top = 209
         Width = 160
         Height = 25
@@ -559,7 +561,7 @@ object frmParametros: TfrmParametros
         Caption = 'Data do sistema Automatica'
       end
       object cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox
-        Left = 9
+        Left = 8
         Top = 230
         Width = 160
         Height = 25
@@ -617,6 +619,36 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Permitir Vendas  sem informar o numero de controle'
+      end
+      object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
+        Left = 8
+        Top = 253
+        Width = 187
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 18
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Trabalha Com Envio de Remessa'
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
@@ -1078,9 +1110,7 @@ object frmParametros: TfrmParametros
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 76
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitLeft = 64
       end
     end
   end

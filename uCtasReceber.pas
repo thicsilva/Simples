@@ -124,9 +124,13 @@ type
     btnSeparador: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
     bsSkinMenuSpeedButton1: TbsSkinMenuSpeedButton;
+    bsSkinStdLabel3: TbsSkinStdLabel;
+    edtCod_Funcionario: TbsSkinEdit;
+    cmbNome_Funcionario: TbsSkinDBLookupComboBox;
+    pnlRemessaAberta: TPanel;
+    srcSupervisor: TDataSource;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
-    procedure btnalterarClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -153,6 +157,8 @@ type
     procedure EdtPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure MenuItem1Click(Sender: TObject);
     procedure RecebimentosporLote1Click(Sender: TObject);
+    procedure edtCod_FuncionarioExit(Sender: TObject);
+    procedure cmbNome_FuncionarioChange(Sender: TObject);
   private
    pvQualBotao : String;
    pvilinha    : Integer;
@@ -168,7 +174,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uBaixaTipo_01_Brinde, uBaixaNormal,
-  uselRelContasReceber;
+  uselRelContasReceber, DaoSupervisor,DaoRemessa;
 
 procedure TfrmCtasReceber.LimpaCampos();
 Begin
@@ -345,54 +351,6 @@ begin
    frmselRelContasReceber.ShowModal;
 end;
 
-procedure TfrmCtasReceber.btnalterarClick(Sender: TObject);
-Var liSequencia : Integer;
-begin
-  {
-   IF qryctaspagar.IsEmpty Then
-   Begin
-      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;
-
-   pvQualBotao := 'ALTERAR';
-
-   liSequencia := qryCtasPagar.fieldByName('Sequencia').AsInteger;
-
-   qryCtasPagar.Close;
-   qryCtasPagar.SQL.text :=' Select * from T_CtasPagar WHERE Sequencia=:parSequencia ';
-   qryCtasPagar.Parameters.ParamValues['parSequencia']   := liSequencia;
-   qryCtasPagar.Open;
-
-   edtCod_Fornecedor.Text := QryCtasPagar.FieldByName('Cod_Fornecedor').AsString;
-   edtCod_FornecedorExit(edtCod_Fornecedor);
-   edtCod_CentroCusto.Text := QryCtasPagar.FieldByName('Cod_TipoDespesa').AsString;
-   edtCod_CentroCustoExit(edtCod_CentroCusto);
-   edtHistorico.Text       := QryCtasPagar.FieldByName('Historico').AsString;
-   edtParcelas.Text        := '1';
-   edtData_Emissao.Text    := FormatDateTime('dd/mm/yyyy',QryCtasPagar.FieldByName('Data_Emissao').AsDateTime);
-   edtData_Vencimento.Text := FormatDateTime('dd/mm/yyyy',QryCtasPagar.FieldByName('Data_Vencimento').AsDateTime);
-   EdtVlr_total.Text       := FormatFloat('0.00',QryCtasPagar.FieldByName('Valor').Asfloat);
-
-   edtDias.Enabled := False;
-   edtParcelas.Enabled := False;
-   rdgTipoVencimento.Enabled := False;
-
-   EdtData_cad.text := FormatDateTime('dd/mm/yyyy',QryCtasPagar.FieldByName('Data_Emissao').AsDateTime);
-
-   pvQualBotao := 'ALTERAR';
-
-   BtnIncluir.Enabled :=False;
-   BtnAlterar.Enabled :=False;
-   BtnExcluir.Enabled :=False;
-   BtnOk.Enabled      :=True;
-   BtnCancela.Enabled :=True;
-   PagCadastro.ActivePageIndex:=1;
-
-   edtHistorico.SetFocus;
-   }
-end;
-
 procedure TfrmCtasReceber.BtnCancelaClick(Sender: TObject);
 begin
    BtnIncluir.Enabled := True;
@@ -411,8 +369,9 @@ begin
 end;
 
 procedure TfrmCtasReceber.FormShow(Sender: TObject);
-Var lstmArquivo : TFileStream;
+Var 
     lcdsNovoCodigo : TClientDataSet;
+    DaoSupervisor: TDaoSupervisor;
 begin
    Inherited;
    piTipoRel := 0;
@@ -460,6 +419,10 @@ begin
    Else
       lblLote.Caption := inczero(IntToStr(lcdsNovoCodigo.FieldByName('Lote').AsInteger),4);
     freeandNil(lcdsNovoCodigo);
+
+    DaoSupervisor := TDaoSupervisor.Create(gConexao);
+    srcSupervisor.DataSet := DaoSupervisor.BuscarTodos;
+    FreeandNil(DaoSupervisor);
 end;
 
 procedure TfrmCtasReceber.rdgTipoVencimentoClick(Sender: TObject);
@@ -593,6 +556,19 @@ begin
   cmbCod_Fornecedor.KeyValue := cmbNome_Fornecedor.KeyValue;
 end;
 
+procedure TfrmCtasReceber.cmbNome_FuncionarioChange(Sender: TObject);
+var DaoRemessa : TDaoRemessa;
+begin
+  inherited;
+   if cmbNome_Funcionario.KeyValue <> null then
+   begin
+      Daoremessa := TDaoRemessa.Create(gConexao);
+      edtCod_Funcionario.Text := cmbNome_Funcionario.KeyValue;
+      pnlRemessaAberta.Visible := DaoRemessa.TemRemessaAberta(cmbNome_Funcionario.KeyValue);
+   end;
+
+end;
+
 procedure TfrmCtasReceber.cmbPeriodoChange(Sender: TObject);
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
@@ -609,6 +585,21 @@ begin
    End
    else
       cmbNome_Fornecedor.KeyValue := Null;
+end;
+
+procedure TfrmCtasReceber.edtCod_FuncionarioExit(Sender: TObject);
+begin
+  if trim(edtCod_Funcionario.text)<>'' then
+   Begin
+      cmbNome_Funcionario.KeyValue := StrToInt(edtCod_Funcionario.text);
+      cmbNome_FuncionarioChange(cmbNome_Funcionario);
+      if Trim(cmbNome_Funcionario.Text) = '' Then
+      Begin
+         cmbNome_Funcionario.KeyValue := Null;
+         edtCod_Funcionario.Text      := '';
+         CaixaMensagem( 'Vendedor nao localizado', ctAviso, [ cbOk ], 0 );
+      End;
+   End;
 end;
 
 procedure TfrmCtasReceber.btnSelecionarClick(Sender: TObject);

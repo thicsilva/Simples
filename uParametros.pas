@@ -53,6 +53,7 @@ type
     bsSkinBevel2: TbsSkinBevel;
     cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox;
     chkVendaSemControle: TbsSkinCheckRadioBox;
+    chkTrabalhaComRemessa: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -89,14 +90,17 @@ begin
 
    gsParametros.WriteString('CONFIG_SISTEMA','NomeEmpresa',edtNomeEmpresa.Text);
 
-
-
    //[parametros de cadastro]
    gParametros.Gravar( '', '[CADASTRO]', 'qtdeNumeroDias', EdtqtdeNumeroDias.Text ,gsOperador );
    gParametros.Gravar( '', '[CADASTRO]', 'NumeroCompras', EdtNumeroCompras.Text ,gsOperador );
    gParametros.Gravar( '', '[CADASTRO]', 'ClientePadrao', cmbCod_Cliente.Text ,gsOperador );
    gParametros.Gravar( '', '[CADASTRO]', 'ValorOSPadrao', edtVlr_Servico.Text ,gsOperador );
 
+
+   if chkTrabalhaComRemessa.Checked Then
+      gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'SIM' ,gsOperador )
+   Else
+      gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' ,gsOperador );
 
    if chkVendeServico.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'VendeServico', 'SIM' ,gsOperador )
@@ -207,6 +211,11 @@ begin
       chkLigaECF.Checked := False
    Else
       chkLigaECF.Checked := True;
+
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
+      chkTrabalhaComRemessa.Checked := True
+   Else
+      chkVendaSemControle.Checked := False;
 
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
       chkVendaSemControle.Checked := True

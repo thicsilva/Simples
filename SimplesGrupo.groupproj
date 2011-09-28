@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{ebdc9dec-ed1c-47ed-bee2-fe9e541eeef5}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="Simples.dproj" />
+    <Projects Include="SimplesTDD\SimplesTDD.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="Simples">
+    <MSBuild Projects="Simples.dproj" Targets="" />
+  </Target>
+  <Target Name="Simples:Clean">
+    <MSBuild Projects="Simples.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Simples:Make">
+    <MSBuild Projects="Simples.dproj" Targets="Make" />
+  </Target>
+  <Target Name="SimplesTDD">
+    <MSBuild Projects="SimplesTDD\SimplesTDD.dproj" Targets="" />
+  </Target>
+  <Target Name="SimplesTDD:Clean">
+    <MSBuild Projects="SimplesTDD\SimplesTDD.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimplesTDD:Make">
+    <MSBuild Projects="SimplesTDD\SimplesTDD.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="Simples;SimplesTDD" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="Simples:Clean;SimplesTDD:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="Simples:Make;SimplesTDD:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>
