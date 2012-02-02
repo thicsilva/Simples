@@ -24,7 +24,7 @@ type
   TfrmCtasReceber = class(TFormBase)
     pagCadastro: TbsSkinPageControl;
     bsSkinTabSheet1: TbsSkinTabSheet;
-    bsSkinPanel1: TbsSkinPanel;
+    PanelSelecao: TbsSkinPanel;
     cmbTipoPesquisa: TbsSkinComboBox;
     EdtPesquisa: TbsSkinEdit;
     chkPesqTodoTexto: TbsSkinCheckRadioBox;
@@ -95,7 +95,6 @@ type
     Columm_Data_Pagamento: TcxGridDBColumn;
     GridCtasReceberColumn2: TcxGridDBColumn;
     btnSelecionar: TbsSkinButton;
-    cmbPeriodo: TbsSkinComboBox;
     Columm_Nome_Rota: TcxGridDBColumn;
     CxPropriedades: TcxPropertiesStore;
     cxGridPopupMenu1: TcxGridPopupMenu;
@@ -105,7 +104,6 @@ type
     MenuGrid: TbsSkinPopupMenu;
     Marcarcomoentregue1: TMenuItem;
     cmbTipoFiltro: TbsSkinComboBox;
-    lblLote: TbsSkinLabel;
     bsSkinPopupMenu1: TbsSkinPopupMenu;
     MenuItem1: TMenuItem;
     RecebimentosporLote1: TMenuItem;
@@ -124,11 +122,18 @@ type
     btnSeparador: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
     bsSkinMenuSpeedButton1: TbsSkinMenuSpeedButton;
-    bsSkinStdLabel3: TbsSkinStdLabel;
+    srcSupervisor: TDataSource;
+    cmbPeriodo: TbsSkinComboBox;
+    pnlLoteRecebimento: TbsSkinExPanel;
     edtCod_Funcionario: TbsSkinEdit;
     cmbNome_Funcionario: TbsSkinDBLookupComboBox;
     pnlRemessaAberta: TPanel;
-    srcSupervisor: TDataSource;
+    bsSkinLabel2: TbsSkinLabel;
+    bsSkinExPanel1: TbsSkinExPanel;
+    bsSkinLabel1: TbsSkinLabel;
+    cmbLote: TbsSkinComboBox;
+    lblVendedor: TbsSkinLabel;
+    lblLote: TbsSkinLabel;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -146,7 +151,6 @@ type
     procedure edtCod_CentroCustoExit(Sender: TObject);
     procedure ImpMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure btnexcluirClick(Sender: TObject);
-    procedure pagCadastroChange(Sender: TObject);
     procedure EdtPesquisaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure cmbPeriodoChange(Sender: TObject);
@@ -159,10 +163,14 @@ type
     procedure RecebimentosporLote1Click(Sender: TObject);
     procedure edtCod_FuncionarioExit(Sender: TObject);
     procedure cmbNome_FuncionarioChange(Sender: TObject);
+    procedure PanelSelecaoClick(Sender: TObject);
+    procedure cmbLoteChange(Sender: TObject);
+
   private
    pvQualBotao : String;
    pvilinha    : Integer;
    piTipoRel   : Integer;
+   Function RetornarLotes : TStringList;
     { Private declarations }
   public
     { Public declarations }
@@ -222,17 +230,22 @@ begin
    lcdsNovoCodigo.ProviderName := dspVariavel.Name;
    lcdsNovoCodigo.Open;
    If lcdsNovoCodigo.FieldByName('Lote').isNull Then
-      lblLote.Caption := '0001'
+   Begin
+      lblLote.Caption := '0001';
+      cmbLote.Items.add('0001');
+   End
    Else
    Begin
       lblLote.Caption := inczero(IntToStr(lcdsNovoCodigo.FieldByName('Lote').AsInteger+1),4);
       lblLote.FontColor := clBlue;
+      cmbLote.Items.add(lblLote.Caption);
    end;
-
+   cmbLote.ItemIndex := (cmbLote.Items.Count-1);
 end;
 
-procedure TfrmCtasReceber.pagCadastroChange(Sender: TObject);
+procedure TfrmCtasReceber.PanelSelecaoClick(Sender: TObject);
 begin
+  inherited;
 
 end;
 
@@ -369,9 +382,11 @@ begin
 end;
 
 procedure TfrmCtasReceber.FormShow(Sender: TObject);
-Var 
+Var
     lcdsNovoCodigo : TClientDataSet;
     DaoSupervisor: TDaoSupervisor;
+    lista : TStringList;
+  I: Integer;
 begin
    Inherited;
    piTipoRel := 0;
@@ -423,6 +438,22 @@ begin
     DaoSupervisor := TDaoSupervisor.Create(gConexao);
     srcSupervisor.DataSet := DaoSupervisor.BuscarTodos;
     FreeandNil(DaoSupervisor);
+    pnlLoteRecebimento.Visible := False;
+    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
+       pnlLoteRecebimento.Visible := True;
+
+    cmbLote.Items.Clear;
+    lista := RetornarLotes;
+    for I := 0 to lista.Count - 1 do
+    begin
+       if lista[I]<>'0000' then
+          cmbLote.Items.add(lista[I]);
+    end;
+    cmbLote.ItemIndex := (i-2);
+   try
+     EdtPesquisa.SetFocus;
+   except
+   end;
 end;
 
 procedure TfrmCtasReceber.rdgTipoVencimentoClick(Sender: TObject);
@@ -452,8 +483,9 @@ begin
                            '       Sum(Vlr_Recebido)  as Tot_Recebido, '+
                            '       Sum(Vlr_Desconto)  as Tot_Desconto, '+
                            '       Sum(Vlr_Devolvido) as Tot_Devolvido,'+
+                           '       Sum(Vlr_Perdido)   as Tot_Perdido,'+
                            '       Sum(Vlr_Comissao)  as Tot_Comissao from T_ctasreceber where lote=:parLote ';
-   QryVariavel.ParamByName('parLote').AsInteger := StrToInt(lblLote.Caption);
+   QryVariavel.ParamByName('parLote').AsInteger := StrToInt(cmbLote.Text);
 
    cdsRelatorio.Close;
    cdsRelatorio.ProviderName := dspVariavel.Name;
@@ -489,6 +521,9 @@ begin
    impmatricial.Imp(pvilinha,001,'Total De Desconto ');
    impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsRelatorio.FieldByName('Tot_Desconto').AsFloat),[]);
    pvilinha := pvilinha + 1;
+   impmatricial.Imp(pvilinha,001,'Total Perdido ');
+   impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsRelatorio.FieldByName('Tot_Perdido').AsFloat),[]);
+   pvilinha := pvilinha + 1;
    impmatricial.Imp(pvilinha,001,'Total De Comissões ');
    impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsRelatorio.FieldByName('Tot_Comissao').AsFloat),[]);
    pvilinha := pvilinha + 1;
@@ -497,6 +532,7 @@ begin
    impmatricial.Imp(pvilinha,001,'Saldo A receber ');
    impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsRelatorio.FieldByName('Tot_Areceber').AsFloat - (
                                                       cdsRelatorio.FieldByName('Tot_Recebido').AsFloat +
+                                                      cdsRelatorio.FieldByName('Tot_Perdido').AsFloat +
                                                       cdsRelatorio.FieldByName('Tot_Devolvido').AsFloat +
                                                       cdsRelatorio.FieldByName('Tot_Desconto').AsFloat +
                                                       cdsRelatorio.FieldByName('Tot_Comissao').AsFloat ) ),[]);
@@ -545,10 +581,29 @@ begin
    ImpMatricial.Fechar;
 end;
 
+function TfrmCtasReceber.RetornarLotes: TStringList;
+var Dados : TclientDataSet;
+     lista : TStringList;
+begin
+   Dados := gconexao.BuscarDadosSQL('Select Lote from T_Ctasreceber group by Lote order by 1',Nil);
+   lista := TStringList.Create;
+   while not dados.Eof do
+   begin
+      lista.Add(incZero(dados.FieldByName('lote').AsString,4));
+      dados.next;
+   end;
+   Result := lista;
+end;
+
 procedure TfrmCtasReceber.cmbCod_FornecedorChange(Sender: TObject);
 begin
   cmbNome_Fornecedor.KeyValue :=  cmbCod_Fornecedor.KeyValue;
   edtCod_fornecedor.Text := cmbcod_Fornecedor.Text;
+end;
+
+procedure TfrmCtasReceber.cmbLoteChange(Sender: TObject);
+begin
+   lblLote.Caption := cmbLote.Text;
 end;
 
 procedure TfrmCtasReceber.cmbNome_FornecedorChange(Sender: TObject);
@@ -589,7 +644,7 @@ end;
 
 procedure TfrmCtasReceber.edtCod_FuncionarioExit(Sender: TObject);
 begin
-  if trim(edtCod_Funcionario.text)<>'' then
+  if (trim(edtCod_Funcionario.text)<>'') and (trim(edtCod_Funcionario.text)<>'0') then
    Begin
       cmbNome_Funcionario.KeyValue := StrToInt(edtCod_Funcionario.text);
       cmbNome_FuncionarioChange(cmbNome_Funcionario);
@@ -643,6 +698,12 @@ begin
    cdsPesquisa.Close;
    cdsPesquisa.ProviderName := dspPesquisa.Name;
    cdsPesquisa.Open;
+   try
+     EdtPesquisa.SetFocus;
+   except
+   end;
+
+   
 end;
 
 procedure TfrmCtasReceber.EdtPesquisaKeyDown(Sender: TObject; var Key: Word;
@@ -739,6 +800,14 @@ End;
 
 procedure TfrmCtasReceber.btnexcluirClick(Sender: TObject);
 begin
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
+   begin
+      if (Trim(edtCod_Funcionario.text)='') and (edtCod_Funcionario.Visible) then
+      begin
+         CaixaMensagem( 'informe o supervisor ou informe ZERO', ctAviso, [ cbOk ], 0 );
+         Exit
+      end;
+   end;
 
    If cdsPesquisa.FieldByName('Status').AsInteger = 1 Then
    Begin
@@ -765,7 +834,8 @@ begin
       frmbaixaBrinde.edtData_Emissao.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Emissao').AsDatetime);
       frmbaixaBrinde.edtData_Repasse.Text := FormatDateTime('dd/mm/yyyy',gsData_Mov);
       frmbaixaBrinde.cmbRota.KeyValue     := cdsPesquisa.FieldByName('Cod_Rota').AsString;
-      frmbaixaBrinde.pilote               := StrToInt(lblLote.Caption);
+      frmbaixaBrinde.edtSupervisor.text   := edtCod_Funcionario.Text; 
+      frmbaixaBrinde.pilote               := StrToInt(cmbLote.Text);
       frmbaixaBrinde.pbNovoRepasse        := False;
       if not cdsPesquisa.FieldByName('Data_Repasse').IsNull then
          frmbaixaBrinde.edtData_Repasse.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Repasse').AsDatetime)

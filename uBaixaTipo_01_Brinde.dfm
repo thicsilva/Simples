@@ -342,8 +342,8 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       RightImageDownIndex = -1
     end
     object edtNrVenda: TbsSkinEdit
-      Left = 410
-      Top = 89
+      Left = 384
+      Top = 82
       Width = 43
       Height = 18
       Text = 'Venda'
@@ -580,6 +580,39 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       KeyField = 'codigo'
       ListField = 'Descricao;Codigo'
       ListSource = srcRotas
+    end
+    object edtSupervisor: TbsSkinEdit
+      Left = 392
+      Top = 90
+      Width = 43
+      Height = 18
+      Text = 'Supervisor'
+      DefaultColor = clInactiveBorder
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinDataName = 'edit'
+      ReadOnly = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 12
+      Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox

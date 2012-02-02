@@ -139,7 +139,8 @@ var
 
 implementation
 
-uses uPrincipal,Ufuncoes,UnitDeclaracoes,uClassDaoContaCorrente,uClassContaCorrente;
+uses uPrincipal,Ufuncoes,UnitDeclaracoes,uClassDaoContaCorrente,uClassContaCorrente,
+  uDaoVenda;
 
 {$R *.dfm}
 
@@ -217,6 +218,7 @@ var lsupDate        : String;
     DadosContaCorrente : TContaCorrente;
     GravaContaCorrente : TDaoContaCorrente;
     lrValorRecebido    : Double;
+  DaoVenda: TdaoVenda;
 begin
    lrValorRecebido := 0;
    if frmBaixaNormal.Tag <> 2 then
@@ -362,7 +364,15 @@ begin
             If lblTroco.Caption = 'Troco' Then
                qryModific.ParamByName('parVlr_Recebido').AsFloat       := StrToFloat(edtTotalTitulo.text);
             qryModific.ParamByname('parVlr_Devolvido').AsFloat         := 0;
+
+            DaoVenda := TdaoVenda.Create(gconexao);
+            if qryModific.ParamByName('parTipo_Baixa').AsString = 'PT' then
+               DaoVenda.MarcarComoServicoPago(StrToint(edtNrVenda.Text));
+            FreeAndNil(DaoVenda);
+
+
             qryModific.ExecSQL;
+
          Except
             frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
             Exit;

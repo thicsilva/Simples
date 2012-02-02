@@ -23,7 +23,7 @@ type
     bsSkinStdLabel15: TbsSkinStdLabel;
     cmbNome_Funcionario: TbsSkinDBLookupComboBox;
     edtCod_Funcionario: TbsSkinEdit;
-    bsSkinDBGrid1: TbsSkinDBGrid;
+    btn: TbsSkinDBGrid;
     pnlProdutos: TbsSkinPanel;
     bsSkinStdLabel1: TbsSkinStdLabel;
     bsSkinStdLabel2: TbsSkinStdLabel;
@@ -57,6 +57,10 @@ type
     srcRemessas: TDataSource;
     cdsRemessas: TClientDataSet;
     srcItensRemessa: TDataSource;
+    btndicionar: TbsSkinSpeedButton;
+    bsSkinScrollBar1: TbsSkinScrollBar;
+    bsSkinScrollBar2: TbsSkinScrollBar;
+    bsSkinScrollBar3: TbsSkinScrollBar;
     procedure FormShow(Sender: TObject);
     procedure edtCod_FuncionarioExit(Sender: TObject);
     procedure cmbNome_FuncionarioChange(Sender: TObject);
@@ -70,6 +74,8 @@ type
     procedure BtnCancelaClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure cdsRemessasAfterScroll(DataSet: TDataSet);
+    procedure btnFecharRemessaClick(Sender: TObject);
+    procedure btndicionarClick(Sender: TObject);
   private
     procedure LimpaCampos;
     procedure LimparProduto;
@@ -77,6 +83,7 @@ type
     function RetornarProdutosDaRemessa ( RemessaId : Integer ) : TclientDataSet;
     { Private declarations }
   public
+    pRemessaId : Integer;
     { Public declarations }
   end;
 
@@ -92,6 +99,22 @@ uses uFuncoes, Remessa, DaoRemessa, uPrincipal;
 procedure TfrmRemessaParaVenda.bsSkinSpeedButton1Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmRemessaParaVenda.btndicionarClick(Sender: TObject);
+begin
+   PaginaDeconsulta.ActivePageIndex := 1;
+   btnOk.Enabled := true;
+   btnCancela.Enabled := true;
+   brnNovaRemessa.Enabled := False;
+   btnFecharRemessa.Enabled := False;
+   btndicionar.Enabled := False;
+   tabNovaRemessa.Enabled := True;
+   edtCod_Funcionario.Enabled := False;
+   cmbNome_Funcionario.Enabled := False;
+   edtCod_Funcionario.Text := cdsRemessas.FieldByname('FuncionarioId').AsString;
+   edtCod_funcionarioExit(edtCod_funcionario);
+   pRemessaId := cdsRemessas.FieldByname('ID').AsInteger;
 end;
 
 procedure TfrmRemessaParaVenda.btnAcessarClick(Sender: TObject);
@@ -129,6 +152,7 @@ begin
   btnCancela.Enabled := False;
   brnNovaRemessa.Enabled := true;
   btnFecharRemessa.Enabled := True;
+  btndicionar.Enabled := true;
 end;
 procedure TfrmRemessaParaVenda.brnNovaRemessaClick(Sender: TObject);
 begin
@@ -141,51 +165,95 @@ begin
    edtCod_Funcionario.SetFocus;
 end;
 
+procedure TfrmRemessaParaVenda.btnFecharRemessaClick(Sender: TObject);
+var
+  remessa : TRemessa;
+  daoRemessa : TDaoRemessa;
+  cdsItensRemessa : TClientDataSet;
+begin
+  daoRemessa := TDaoRemessa.Create(gConexao);
+  try
+    if daoRemessa.FecharRemessas(cdsRemessas.FieldByName('id').AsInteger,gsOperador) then
+       CaixaMensagem('Remessa fehcada com sucesso',ctAviso,[ cbOk ],0)
+    else
+       CaixaMensagem('Um Erro Aconteceu e a remnessa não foi Fehcada',ctAviso,[ cbOk ],0);
+  finally
+    daoRemessa.Free;
+  end;
+  if CaixaMensagem('Deseja abri uma remessa com o saldo deste fechamento',ctConfirma,[ cbSimNao ],0) then
+  begin
+     daoRemessa := TDaoRemessa.Create(gConexao);
+     try
+       remessa := DaoRemessa.Buscar(cdsRemessas.FieldByName('id').AsInteger);
+       remessa.Status :='A';
+       cdsItensRemessa := DaoRemessa.BuscarItens(cdsRemessas.FieldByName('id').AsInteger);
+       daoremessa.Incluir(remessa,cdsItensRemessa);
+     finally
+       daoRemessa.Free;
+     end;
+
+  end;
+
+
+end;
+
 procedure TfrmRemessaParaVenda.btnokClick(Sender: TObject);
 var
   remessa : TRemessa;
   daoRemessa : TDaoRemessa;
 begin
-   if not CaixaMensagem( 'Deseja Concluir a Remessa', ctConfirma, [ cbSimNao ], 0 )  Then
-     exit;
-
-
-   if Trim(edtCod_Funcionario.Text)='' then
-   begin
-     CaixaMensagem('Informe o vendedor',ctAviso,[ cbOk ],0);
-     Exit;
-   end;
-
-   if cdsTempProdutos.IsEmpty then
-   begin
-     CaixaMensagem('Nenhum Produto Foi Adicionado ',ctAviso,[ cbOk ],0);
-     Exit;
-   end;
-
-
-
   remessa := TRemessa.Create;;
   daoRemessa := TDaoRemessa.Create(gConexao);
+  if pRemessaId<>0 then
+  begin
+     daoRemessa.AtualizarItens(cdsTempProdutos,pRemessaId,gsOperador);
+     pRemessaId:=0;
+  end
+  else
+  Begin
+     if daoRemessa.TemRemessaAberta(StrToint(edtCod_Funcionario.Text)) then
+     begin
+       CaixaMensagem('Este Supervidsor ja Tem Remessa em Aberto',ctAviso,[ cbOk ],0);
+       Exit;
+     end;
 
-  remessa.Operador := gsOperador;
-  remessa.DataCadastro := gsData_Mov;
-  remessa.FuncionarioID := Strtoint(edtCod_Funcionario.Text);
-  remessa.Status := 'A';
+     if not CaixaMensagem( 'Deseja Concluir a Remessa', ctConfirma, [ cbSimNao ], 0 )  Then
+       exit;
 
-  daoRemessa.Incluir(remessa,cdsTempProdutos);
 
+     if Trim(edtCod_Funcionario.Text)='' then
+     begin
+       CaixaMensagem('Informe o vendedor',ctAviso,[ cbOk ],0);
+       Exit;
+     end;
+
+     if cdsTempProdutos.IsEmpty then
+     begin
+       CaixaMensagem('Nenhum Produto Foi Adicionado ',ctAviso,[ cbOk ],0);
+       Exit;
+     end;
+
+    remessa.Operador := gsOperador;
+    remessa.DataCadastro := gsData_Mov;
+    remessa.FuncionarioID := Strtoint(edtCod_Funcionario.Text);
+    remessa.Status := 'A';
+
+    daoRemessa.Incluir(remessa,cdsTempProdutos);
+  End;
   FreeAndNil(daoRemessa);
   FreeAndNil( remessa );
   cdsTempProdutos.EmptyDataSet;
   Cancelar;
-
 end;
 
 procedure TfrmRemessaParaVenda.btnPesquisarClick(Sender: TObject);
 var daoRemessa : TDaoRemessa;
 begin
   daoRemessa := TDaoRemessa.Create(gConexao);
-  cdsRemessas.data := daoRemessa.RetornarRemessasAbertas.Data;
+  if cmbtipoconsulta.ItemIndex = 0 then
+     cdsRemessas.Data := daoRemessa.RetornarRemessas('A').Data
+   else
+     cdsRemessas.Data := daoRemessa.RetornarRemessas('F').Data;
 end;
 
 procedure TfrmRemessaParaVenda.btnRemoverClick(Sender: TObject);
@@ -261,6 +329,7 @@ begin
    PaginaDeconsulta.ActivePageIndex := 0;
    tabNovaRemessa.Enabled := False;
    btnPesquisarClick(btnPesquisar);
+   pRemessaId := 0 ;
 end;
 
 procedure TfrmRemessaParaVenda.LimpaCampos;
@@ -283,10 +352,11 @@ var lstParametros : TStringList;
 begin
   lstParametros := TStringList.Create;
   lstParametros.Add(IntToStr(RemessaId));
-  srcItensRemessa.DataSet := gConexao.BuscarDadosSQL('Select Prod.Descricao as Produto, Itens.* '+
+  srcItensRemessa.DataSet := gConexao.BuscarDadosSQL('Select Prod.Descricao as Produto, Itens.*, '+
+                                                     '(QuantidadeEnviada + QuantidadeDevolvida)- QuantidadeVendida  as Saldo '+
                                                      'from ItensRemessa Itens '+
                                                      'Left Join T_Produtos Prod on Prod.Codigo=Itens.ProdutoId ' +
-                                                     'where RemessaId=:parRemessaId',lstParametros);
+                                                     'where RemessaId=:parRemessaId order by Prod.Descricao',lstParametros);
   FreeAndNil(lstParametros);
 end;
 

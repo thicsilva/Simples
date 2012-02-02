@@ -4,7 +4,7 @@ object frmCtasReceber: TfrmCtasReceber
   BorderIcons = []
   Caption = 'Cadastro e Manuten'#231#227'o de contas a receber'
   ClientHeight = 462
-  ClientWidth = 761
+  ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmCtasReceber: TfrmCtasReceber
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 761
+    Width = 737
     Height = 409
     ActivePage = bsSkinTabSheet1
     Align = alClient
@@ -31,7 +31,6 @@ object frmCtasReceber: TfrmCtasReceber
     ParentFont = False
     Style = tsButtons
     TabOrder = 0
-    OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
     TabsOffset = 0
@@ -50,19 +49,16 @@ object frmCtasReceber: TfrmCtasReceber
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 109
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object cxGrid1: TcxGrid
         Left = 0
-        Top = 97
-        Width = 759
-        Height = 288
+        Top = 176
+        Width = 735
+        Height = 209
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
-        ExplicitTop = 72
-        ExplicitHeight = 313
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -231,11 +227,11 @@ object frmCtasReceber: TfrmCtasReceber
           GridView = GridCtasReceber
         end
       end
-      object bsSkinPanel1: TbsSkinPanel
+      object PanelSelecao: TbsSkinPanel
         Left = 0
-        Top = 0
-        Width = 759
-        Height = 97
+        Top = 104
+        Width = 735
+        Height = 72
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -264,15 +260,12 @@ object frmCtasReceber: TfrmCtasReceber
         RollUpState = False
         NumGlyphs = 1
         Spacing = 2
-        Caption = 'bsSkinPanel1'
+        Caption = 'PanelSelecao'
         Align = alTop
-        ExplicitTop = -6
-        DesignSize = (
-          759
-          97)
+        OnClick = PanelSelecaoClick
         object lblTurma: TbsSkinStdLabel
-          Left = 239
-          Top = 46
+          Left = 207
+          Top = 42
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -288,8 +281,8 @@ object frmCtasReceber: TfrmCtasReceber
           Caption = 'Ate.'
         end
         object srcRelatorio: TbsSkinStdLabel
-          Left = 47
-          Top = 46
+          Left = 16
+          Top = 42
           Width = 87
           Height = 13
           EllipsType = bsetNone
@@ -304,27 +297,10 @@ object frmCtasReceber: TfrmCtasReceber
           SkinDataName = 'stdlabel'
           Caption = 'Intervalo de Datas'
         end
-        object bsSkinStdLabel3: TbsSkinStdLabel
-          Left = 47
-          Top = 72
-          Width = 50
-          Height = 13
-          EllipsType = bsetNone
-          UseSkinFont = True
-          UseSkinColor = True
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = -11
-          DefaultFont.Name = 'MS Sans Serif'
-          DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinPrincipal
-          SkinDataName = 'stdlabel'
-          Caption = 'Supervisor'
-        end
         object cmbTipoPesquisa: TbsSkinComboBox
-          Left = 65
-          Top = 10
-          Width = 144
+          Left = 17
+          Top = 6
+          Width = 161
           Height = 20
           HintImageIndex = 0
           TabOrder = 0
@@ -383,8 +359,8 @@ object frmCtasReceber: TfrmCtasReceber
           Style = bscbFixedStyle
         end
         object EdtPesquisa: TbsSkinEdit
-          Left = 215
-          Top = 10
+          Left = 187
+          Top = 6
           Width = 203
           Height = 18
           DefaultColor = clWindow
@@ -416,8 +392,8 @@ object frmCtasReceber: TfrmCtasReceber
           OnKeyPress = EdtPesquisaKeyPress
         end
         object chkPesqTodoTexto: TbsSkinCheckRadioBox
-          Left = 439
-          Top = 9
+          Left = 407
+          Top = 5
           Width = 138
           Height = 25
           HintImageIndex = 0
@@ -446,8 +422,8 @@ object frmCtasReceber: TfrmCtasReceber
           Caption = 'Pesquisa em todo texo'
         end
         object dtpData_Ini: TbsSkinDateEdit
-          Left = 142
-          Top = 41
+          Left = 110
+          Top = 37
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -496,8 +472,8 @@ object frmCtasReceber: TfrmCtasReceber
           RightImageDownIndex = -1
         end
         object dtpData_Fim: TbsSkinDateEdit
-          Left = 267
-          Top = 41
+          Left = 235
+          Top = 37
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -546,8 +522,8 @@ object frmCtasReceber: TfrmCtasReceber
           RightImageDownIndex = -1
         end
         object btnSelecionar: TbsSkinButton
-          Left = 608
-          Top = 10
+          Left = 544
+          Top = 6
           Width = 110
           Height = 25
           HintImageIndex = 0
@@ -580,14 +556,72 @@ object frmCtasReceber: TfrmCtasReceber
           Spacing = 1
           OnClick = btnSelecionarClick
         end
-        object cmbPeriodo: TbsSkinComboBox
-          Left = 376
-          Top = 39
-          Width = 201
+        object cmbTipoFiltro: TbsSkinComboBox
+          Left = 546
+          Top = 35
+          Width = 107
           Height = 20
           HintImageIndex = 0
-          Anchors = [akLeft]
           TabOrder = 6
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          UseSkinSize = True
+          ToolButtonStyle = False
+          AlphaBlend = False
+          AlphaBlendValue = 0
+          AlphaBlendAnimation = False
+          ListBoxCaptionMode = False
+          ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+          ListBoxDefaultFont.Color = clWindowText
+          ListBoxDefaultFont.Height = 14
+          ListBoxDefaultFont.Name = 'Arial'
+          ListBoxDefaultFont.Style = []
+          ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+          ListBoxDefaultCaptionFont.Color = clWindowText
+          ListBoxDefaultCaptionFont.Height = 14
+          ListBoxDefaultCaptionFont.Name = 'Arial'
+          ListBoxDefaultCaptionFont.Style = []
+          ListBoxDefaultItemHeight = 20
+          ListBoxCaptionAlignment = taLeftJustify
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          ListBoxWidth = 0
+          HideSelection = True
+          AutoComplete = True
+          ImageIndex = -1
+          CharCase = ecNormal
+          DefaultColor = clWindow
+          Text = 'A Receber'
+          Items.Strings = (
+            'A Receber'
+            'Recebido'
+            'Todos')
+          ItemIndex = 0
+          DropDownCount = 8
+          HorizontalExtent = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          Sorted = False
+          Style = bscbFixedStyle
+        end
+        object cmbPeriodo: TbsSkinComboBox
+          Left = 331
+          Top = 37
+          Width = 174
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 7
           SkinData = frmPrincipal.SkinPrincipal
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -719,13 +753,211 @@ object frmCtasReceber: TfrmCtasReceber
           Style = bscbFixedStyle
           OnChange = cmbPeriodoChange
         end
-        object cmbTipoFiltro: TbsSkinComboBox
-          Left = 598
-          Top = 39
-          Width = 120
+      end
+      object pnlLoteRecebimento: TbsSkinExPanel
+        Left = 0
+        Top = 55
+        Width = 735
+        Height = 49
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'expanel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CaptionImageIndex = -1
+        NumGlyphs = 1
+        Spacing = 2
+        RealWidth = 0
+        RealHeight = 0
+        ShowRollButton = True
+        ShowCloseButton = True
+        DefaultCaptionHeight = 21
+        RollState = False
+        RollKind = rkRollVertical
+        Moveable = False
+        Sizeable = False
+        Align = alTop
+        Caption = 'Controle de Remessa para venda'
+        object edtCod_Funcionario: TbsSkinEdit
+          Left = 127
+          Top = 23
+          Width = 93
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Alignment = taRightJustify
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_FuncionarioExit
+        end
+        object cmbNome_Funcionario: TbsSkinDBLookupComboBox
+          Left = 224
+          Top = 23
+          Width = 270
           Height = 20
           HintImageIndex = 0
-          TabOrder = 7
+          TabOrder = 1
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcSupervisor
+          OnChange = cmbNome_FuncionarioChange
+        end
+        object pnlRemessaAberta: TPanel
+          Left = 500
+          Top = 23
+          Width = 230
+          Height = 20
+          Caption = 'Supervisor Com Remessa Aberta'
+          Color = clSkyBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 2
+          Visible = False
+        end
+        object bsSkinLabel2: TbsSkinLabel
+          Left = 3
+          Top = 23
+          Width = 118
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 3
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clRed
+          DefaultFont.Height = -15
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Caption = 'Supervisor'
+          PopupMenu = bsSkinPopupMenu1
+          AutoSize = False
+        end
+      end
+      object bsSkinExPanel1: TbsSkinExPanel
+        Left = 0
+        Top = 0
+        Width = 735
+        Height = 55
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinDataName = 'expanel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        CaptionImageIndex = -1
+        NumGlyphs = 1
+        Spacing = 2
+        RealWidth = 0
+        RealHeight = 0
+        ShowRollButton = True
+        ShowCloseButton = True
+        DefaultCaptionHeight = 21
+        RollState = False
+        RollKind = rkRollVertical
+        Moveable = False
+        Sizeable = False
+        Align = alTop
+        Caption = 'Controle de Recebimento por Lote'
+        object bsSkinLabel1: TbsSkinLabel
+          Left = 3
+          Top = 27
+          Width = 118
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 0
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clRed
+          DefaultFont.Height = -15
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Caption = 'Selecione o Lote'
+          PopupMenu = bsSkinPopupMenu1
+          AutoSize = False
+        end
+        object cmbLote: TbsSkinComboBox
+          Left = 125
+          Top = 27
+          Width = 98
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 1
           SkinData = frmPrincipal.SkinPrincipal
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -762,30 +994,56 @@ object frmCtasReceber: TfrmCtasReceber
           ImageIndex = -1
           CharCase = ecNormal
           DefaultColor = clWindow
-          Text = 'A Receber'
-          Items.Strings = (
-            'A Receber'
-            'Recebido'
-            'Todos')
-          ItemIndex = 0
+          Text = 'Nome Cliente'
+          ItemIndex = -1
           DropDownCount = 8
           HorizontalExtent = False
-          Font.Charset = DEFAULT_CHARSET
+          Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
+          Font.Height = -16
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold, fsItalic]
           Sorted = False
           Style = bscbFixedStyle
+          OnChange = cmbLoteChange
+        end
+        object lblVendedor: TbsSkinLabel
+          Left = 227
+          Top = 27
+          Width = 499
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 2
+          SkinDataName = 'label'
+          DefaultFont.Charset = ANSI_CHARSET
+          DefaultFont.Color = clNavy
+          DefaultFont.Height = -15
+          DefaultFont.Name = 'Arial Narrow'
+          DefaultFont.Style = [fsBold]
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = False
+          BorderStyle = bvFrame
+          Caption = 'Vendedor'
+          AutoSize = False
         end
         object lblLote: TbsSkinLabel
-          Left = 3
-          Top = 10
+          Left = 670
+          Top = 27
           Width = 56
           Height = 21
           Hint = 'Click bot'#227'o direito nova Sequencia'
           HintImageIndex = 0
-          TabOrder = 8
+          TabOrder = 3
           SkinDataName = 'label'
           DefaultFont.Charset = ANSI_CHARSET
           DefaultFont.Color = clRed
@@ -810,82 +1068,6 @@ object frmCtasReceber: TfrmCtasReceber
           PopupMenu = bsSkinPopupMenu1
           ShowHint = True
           AutoSize = False
-        end
-        object edtCod_Funcionario: TbsSkinEdit
-          Left = 108
-          Top = 69
-          Width = 65
-          Height = 18
-          DefaultColor = clWindow
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
-          DefaultWidth = 0
-          DefaultHeight = 0
-          ButtonMode = False
-          SkinData = frmPrincipal.SkinPrincipal
-          SkinDataName = 'edit'
-          Alignment = taRightJustify
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 9
-          LeftImageIndex = -1
-          LeftImageHotIndex = -1
-          LeftImageDownIndex = -1
-          RightImageIndex = -1
-          RightImageHotIndex = -1
-          RightImageDownIndex = -1
-          OnExit = edtCod_FuncionarioExit
-        end
-        object cmbNome_Funcionario: TbsSkinDBLookupComboBox
-          Left = 185
-          Top = 67
-          Width = 298
-          Height = 20
-          HintImageIndex = 0
-          TabOrder = 10
-          SkinData = frmPrincipal.SkinPrincipal
-          SkinDataName = 'combobox'
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          DefaultWidth = 0
-          DefaultHeight = 20
-          UseSkinFont = True
-          DefaultColor = clWindow
-          ListBoxDefaultItemHeight = 20
-          ListBoxUseSkinFont = True
-          ListBoxUseSkinItemHeight = True
-          KeyField = 'codigo'
-          ListField = 'Descricao;Codigo'
-          ListSource = srcSupervisor
-          OnChange = cmbNome_FuncionarioChange
-        end
-        object pnlRemessaAberta: TPanel
-          Left = 518
-          Top = 66
-          Width = 230
-          Height = 24
-          Caption = 'Supervisor Com Remessa Aberta'
-          Color = clSkyBlue
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentBackground = False
-          ParentFont = False
-          TabOrder = 11
-          Visible = False
         end
       end
     end
@@ -1507,7 +1689,7 @@ object frmCtasReceber: TfrmCtasReceber
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 761
+    Width = 737
     Height = 53
     AutoSize = True
     Bands = <
@@ -1515,7 +1697,7 @@ object frmCtasReceber: TfrmCtasReceber
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 757
+        Width = 733
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -1524,7 +1706,7 @@ object frmCtasReceber: TfrmCtasReceber
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 748
+      Width = 724
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -2080,7 +2262,7 @@ object frmCtasReceber: TfrmCtasReceber
   object CxPropriedades: TcxPropertiesStore
     Components = <
       item
-        Component = cmbPeriodo
+        Component = cmbTipoFiltro
         Properties.Strings = (
           'Align'
           'AlignWithMargins'

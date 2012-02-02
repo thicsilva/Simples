@@ -3,7 +3,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   Top = 0
   Caption = 'Relatorio de Clientes '
   ClientHeight = 321
-  ClientWidth = 504
+  ClientWidth = 507
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   object bsSkinPanel1: TbsSkinPanel
     Left = 0
     Top = 281
-    Width = 504
+    Width = 507
     Height = 40
     HintImageIndex = 0
     TabOrder = 0
@@ -49,6 +49,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alBottom
+    ExplicitWidth = 504
     object bsSkinStdLabel3: TbsSkinStdLabel
       Left = 7
       Top = 11
@@ -109,7 +110,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 504
+    Width = 507
     Height = 53
     AutoSize = True
     Bands = <
@@ -117,16 +118,17 @@ object frmSelRelClientes: TfrmSelRelClientes
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 500
+        Width = 503
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
+    ExplicitWidth = 504
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 491
+      Width = 494
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -276,7 +278,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   object grpSelVendedor: TbsSkinGroupBox
     Left = 0
     Top = 183
-    Width = 504
+    Width = 507
     Height = 98
     HintImageIndex = 0
     TabOrder = 2
@@ -308,6 +310,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe o vendedor para o relarorio'
     Align = alClient
+    ExplicitWidth = 504
     object bsSkinStdLabel4: TbsSkinStdLabel
       Left = 5
       Top = 37
@@ -496,7 +499,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   object grpRota: TbsSkinGroupBox
     Left = 0
     Top = 107
-    Width = 504
+    Width = 507
     Height = 76
     HintImageIndex = 0
     TabOrder = 3
@@ -528,6 +531,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe a Rota para o Relatorio'
     Align = alTop
+    ExplicitWidth = 504
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 28
       Top = 31
@@ -711,7 +715,7 @@ object frmSelRelClientes: TfrmSelRelClientes
   object bsSkinExPanel1: TbsSkinExPanel
     Left = 0
     Top = 53
-    Width = 504
+    Width = 507
     Height = 54
     HintImageIndex = 0
     TabOrder = 4
@@ -738,6 +742,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Sizeable = False
     Align = alTop
     Caption = 'Intervalo de Datas'
+    ExplicitWidth = 504
     object lblTurma: TbsSkinStdLabel
       Left = 126
       Top = 30

@@ -86,8 +86,13 @@ object frmParametros: TfrmParametros
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
-      ExplicitLeft = -2
-      ExplicitTop = 15
+      object Label1: TLabel
+        Left = 12
+        Top = 279
+        Width = 113
+        Height = 14
+        Caption = 'Caminho da impressora'
+      end
       object bsSkinCheckRadioBox1: TbsSkinCheckRadioBox
         Left = 10
         Top = 8
@@ -417,6 +422,7 @@ object frmParametros: TfrmParametros
         Height = 25
         HintImageIndex = 0
         TabOrder = 11
+        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'checkbox'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -620,10 +626,10 @@ object frmParametros: TfrmParametros
         GroupIndex = 0
         Caption = 'Permitir Vendas  sem informar o numero de controle'
       end
-      object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
-        Left = 8
-        Top = 253
-        Width = 187
+      object chkImprimeComprovante: TbsSkinCheckRadioBox
+        Left = 201
+        Top = 248
+        Width = 272
         Height = 25
         HintImageIndex = 0
         TabOrder = 18
@@ -648,7 +654,15 @@ object frmParametros: TfrmParametros
         Radio = False
         Checked = False
         GroupIndex = 0
-        Caption = 'Trabalha Com Envio de Remessa'
+        Caption = 'Imprimir Comprovante na Venda ou Servi'#231'o'
+      end
+      object edtCaminhoImpressao: TEdit
+        Left = 131
+        Top = 274
+        Width = 121
+        Height = 22
+        TabOrder = 19
+        Text = 'edtCaminhoImpressao'
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
@@ -960,6 +974,71 @@ object frmParametros: TfrmParametros
         BorderStyle = bsNone
       end
     end
+    object tabContasAReceber: TbsSkinTabSheet
+      Caption = 'Contas a Receber'
+      ExplicitLeft = 2
+      ExplicitTop = 15
+      object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
+        Left = 11
+        Top = 6
+        Width = 278
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Trabalha Com Envio de Remessa para venda'
+      end
+      object chkRecebimentoLote: TbsSkinCheckRadioBox
+        Left = 11
+        Top = 26
+        Width = 278
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Trabalha com recebimento por lote'
+      end
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
@@ -1111,6 +1190,7 @@ object frmParametros: TfrmParametros
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 64
+        ExplicitTop = -1
       end
     end
   end

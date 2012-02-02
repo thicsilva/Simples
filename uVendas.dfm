@@ -1102,6 +1102,7 @@ object frmVendas: TfrmVendas
       ListField = 'Descricao;Codigo'
       ListSource = srcTipoVenda
       OnChange = cmbNome_TipoVendaChange
+      OnExit = cmbNome_TipoVendaExit
     end
     object cmbCod_tipoVenda: TbsSkinDBLookupComboBox
       Left = 207
@@ -2544,6 +2545,11 @@ object frmVendas: TfrmVendas
       item
         Name = 'perc_Comis'
         DataType = ftFloat
+      end
+      item
+        Name = 'Unidade'
+        DataType = ftString
+        Size = 3
       end>
     IndexDefs = <>
     Params = <>
@@ -2552,13 +2558,14 @@ object frmVendas: TfrmVendas
     Left = 107
     Top = 300
     Data = {
-      D90000009619E0BD010000001800000009000000000003000000D90006436F64
+      F50000009619E0BD01000000180000000A000000000003000000F50006436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
       0B436F6D706C656D656E746F0100490000000100055749445448020002003200
       0C766C725F446573636F6E746F08000400000000000A50636F5F546162656C61
-      08000400000000000A706572635F436F6D697308000400000000000000}
+      08000400000000000A706572635F436F6D6973080004000000000007556E6964
+      61646501004900000001000557494454480200020003000000}
     object cdsItensVendasTMPCodigo: TIntegerField
       DisplayWidth = 8
       FieldName = 'Codigo'
@@ -2600,6 +2607,10 @@ object frmVendas: TfrmVendas
     object cdsItensVendasTMPperc_Comis: TFloatField
       FieldName = 'perc_Comis'
       Visible = False
+    end
+    object cdsItensVendasTMPUnidade: TStringField
+      FieldName = 'Unidade'
+      Size = 3
     end
   end
   object srcItensVendasTMP: TDataSource

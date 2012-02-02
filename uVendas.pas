@@ -167,6 +167,7 @@ type
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel5: TbsSkinBevel;
     pnlRemessaAberta: TPanel;
+    cdsItensVendasTMPUnidade: TStringField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -207,6 +208,7 @@ type
     procedure edtCod_TipoVendaExit(Sender: TObject);
     procedure cmbCod_tipoVendaChange(Sender: TObject);
     procedure cmbNome_TipoVendaChange(Sender: TObject);
+    procedure cmbNome_TipoVendaExit(Sender: TObject);
 
   private
      pvQualBotao     : String;
@@ -293,6 +295,7 @@ Begin
    cmbCod_Cliente.KeyValue         := Null;
    edtLimite_Credito.Text          := '0,00';
    cmbNome_Cliente.KeyValue        := Null;
+   edtNome_Cliente.text            := '';
 End;
 procedure TfrmVendas.btnFecharClick(Sender: TObject);
 begin
@@ -413,10 +416,20 @@ begin
       lblControle.Visible        := True;
       edtControle.Visible        := True;
    End;
+   // ajuste para joao maria
+   lblVencimento.Visible      := False;
+   edtdata_Vencimento.Visible := False;
 
    EdtPco_Venda.Enabled := gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Altera Preco de Venda',gbMaster);
 
    pnlDadosClientes.Enabled := False;
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
+   begin
+      edtControle.Visible := False;
+      cmbRota.Visible := False;
+      lblControle.Visible := False;
+   end;
+
 
 end;
 
@@ -506,6 +519,15 @@ begin
    cmbCod_TipoVenda.KeyValue  :=  cmbNome_TipoVenda.KeyValue;
 end;
 
+procedure TfrmVendas.cmbNome_TipoVendaExit(Sender: TObject);
+begin
+  try
+    edtCod_Produto.SetFocus;
+  Except
+
+  end;
+end;
+
 procedure TfrmVendas.EdtPco_VendaExit(Sender: TObject);
 begin
    EdtPco_Venda.text := SubstString(EdtPco_Venda.text,'.', ',', True );
@@ -577,6 +599,7 @@ begin
    cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat    := cdsCadProdutos.fieldbyname('Perc_Comissao').asFloat;
    cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := StrToFloat ( edtVlr_Desconto.Text);
    cdsItensVendasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
+   cdsItensVendasTmp.FieldByName('Unidade').asString     := cdsCadProdutos.FieldByName('Unid').AsString;
    cdsItensVendasTmp.Post;
 
    edtTotDesconto.Text  := FormatFloat('0.00', StrToFloat(edtTotDesconto.Text)+( StrToFloat(edtVlr_Desconto.Text)*StrTofloat(edtQtde_Venda.Text)) );
@@ -632,6 +655,9 @@ end;
 
 
 procedure TfrmVendas.btnokClick(Sender: TObject);
+const
+  c17cpi      = #15;
+  EscDraft    = #27+'x'+'0';
 Var liSeqvenda     : integer;
     I              : Integer;
     liseqParcela   : Integer;
@@ -649,6 +675,8 @@ Var liSeqvenda     : integer;
     GravaContaCorrente : TDaoContaCorrente;
     lsContrato : String;
     DaoRemessa : TDaoRemessa;
+    Texto: string;
+    F: TextFile;
 begin
 
 {$REGION 'Criticas e Validação das Informações'}
@@ -775,9 +803,9 @@ begin
         cdsItensVendas.Post;
         if pnlRemessaAberta.Visible then
         begin
-           DaoRemessa.SomarItemNaRemessa(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger,
-                                         cdsItensVendasTmp.FieldByName('Codigo').asInteger,
-                                         cdsItensVendasTmp.FieldByName('Qtde_Venda').AsInteger, gsOperador  );
+           DaoRemessa.SomarItemNaRemessaVenda(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger,
+                                              cdsItensVendasTmp.FieldByName('Codigo').asInteger,
+                                              cdsItensVendasTmp.FieldByName('Qtde_Venda').AsInteger, gsOperador  );
         end;
       except
          on E: Exception do
@@ -1199,158 +1227,63 @@ begin
 
 {$REGION 'Impressao do comprovante de Venda'}
 
-   If NOT (edtdata_Vencimento.Visible) AND ( frmVendas.tag <> 4 ) and ( frmVendas.tag <> 5 )  Then
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' )) = 'SIM' Then
    Begin
-      impMatricial.PortaComunicacao          := 'LPT1';
-      impMatricial.OpcoesPreview.Preview     := True;
-      impMatricial.OpcoesPreview.PreviewZoom := 100;
-      impMatricial.TamanhoQteLinhas          := 1;
-      impMatricial.TamanhoQteColunas         := 39;
-      impMatricial.FonteTamanhoPadrao        := s17cpp;
-      impMatricial.UsaGerenciadorImpr        := True;
-      //impMatricial.Impressora             :=
-      impMatricial.Abrir;
+       AssignFile(F, gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1') );
+      Rewrite(F);
+      WriteLn(F, '',c17cpi+EscDraft+IncDigito('_','_',39,0));
+      WriteLn(F, '',c17cpi+EscDraft+'             '+ copy(gsVersis,5,6)+' Data:' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
+      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
+      WriteLn(F, '',c17cpi+EscDraft+Copy(gsNomeEmp,1,39));
+      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
+      WriteLn(F, '',c17cpi+EscDraft+Copy('Nota de Pagamento',1,39));
+      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
+      WriteLn(F, '',c17cpi+EscDraft+Copy(inczero(cdsVenda.FieldByName('Cod_Cliente').asString,5)+' - '+ cdsVenda.FieldByName('Nome_Cliente').asString,1, 39 ) );
+      WriteLn(F, '',c17cpi+EscDraft+'Emissao...: '+formatdateTime('dd/mm/YYYY',cdsVenda.FieldByName('Data_Venda').asDatetime)+' Orc.: '+incZero(cdsVenda.FieldByName('SeqVenda').asString,8) );
+      WriteLn(F, '',c17cpi+EscDraft+'Forma Pag.: '+Copy(inczero(cdsVenda.FieldByName('Cod_FormaPagamento').asString,3)+'-'+'Nome forma de pagamento',1,25));
+      WriteLn(F, '','Vendedor..: '+Copy(inczero(cdsVenda.FieldByName('Cod_Funcionario').asString,3)+'-'+'Nome Funcionario',1,25));
+      WriteLn(F, '','O.S Numero: '+inczero(cdsVenda.FieldByName('Controle').asString,6) );
+      WriteLn(F, '',IncDigito( '=','=',39,0));
+      WriteLn(F, '', 'Codigo |P R O D U T O S           |Und|' );
+      WriteLn(F, '', 'Quatidade|Pc. Unit| Desc.|   Vlr Total|' );
+      WriteLn(F, '', IncDigito( '=', '=', 39, 0 ) );
 
-      pviLinha := 01;
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,IncDigito( '_','_',39,0));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha, 001, 'Versao '+ copy(gsVersis,5,6)+' Data:' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,IncDigito( '-','-',39,0));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,Copy(gsNomeEmp,1,39));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,IncDigito( '-','-',39,0));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,010,Copy('Nota de Pagamento',1,39));
-      pviLinha := pviLinha + 1;
-
-      impMatricial.Imp(pviLinha,001,IncDigito( '-','-',39,0));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,Copy(inczero(edtcod_Cliente.text,5)+' - '+ EdtNome_Cliente.text,1, 39 ) );
-      pviLinha := pviLinha + 1;
-
-      impMatricial.Imp(pviLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',edtDataVenda.date)+' Orc.: '+incZero(IntToStr(liSeqVenda),8) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,'Forma Pag.: '+Copy(inczero(edtCod_FormaPagamento.Text,3)+'-'+cmbNome_formaPagamento.text,1,25));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,'Vendedor..: '+Copy(inczero(edtCod_Funcionario.Text,3)+'-'+cmbNome_Funcionario.text,1,25));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,'O.S Numero: '+inczero(edtControle.text,6) );
-      pviLinha := pviLinha + 1;
-      //impMatricial.Imp(pviLinha,001,'Celular...: '+lsdtsTempRep.FieldByname('Celular').AsString);
-      //pviLinha := pviLinha + 1;
-      impMatricial.Imp(pviLinha,001,IncDigito( '=','=',39,0));
-      pviLinha := pviLinha + 1;
-      //                                          1         2         3         4          5
-      //                                123456789.123456789.123456789.123456789.123456789.1234
-      //                                123456  123456789.123456789.123456789.123456789.123456789.
-      //                                         1         2         3         4          5
-      //                                123456789.123456789.123456789.123456789.123456789.1234
-      impMatricial.Imp( pviLinha, 001, 'Codigo |P R O D U T O S           |Und|' );
-      pviLinha := pviLinha + 1;
-      //impMatricial.Imp( pviLinha, 001, '      Embalagem      Compleme.    |Und|' );
-      //pviLinha := pviLinha + 1;
-      impMatricial.Imp( pviLinha, 001, 'Quatidade|Pc. Unit| Desc.|   Vlr Total|' );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp( pviLinha, 001, IncDigito( '=', '=', 39, 0 ) );
-      pviLinha := pviLinha + 1;
-
-      cdsItensVendasTMP.First;
       lrTot_Produtos := 0;
       lrTot_Desconto := 0;
+      liCont         := 0;
 
-      licont := 0;
-      While Not cdsItensVendasTMP.Eof Do
+      cdsItensVendasTMP.First;
+      while  Not cdsItensVendasTMP.Eof  do
       Begin
-         impMatricial.Imp ( pviLinha, 001, inczero(cdsItensVendasTMP.FieldByName( 'Codigo' ).AsString,5) + ' ' +
+         WriteLn(F, '', 001, inczero(cdsItensVendasTMP.FieldByName('Codigo' ).AsString,5) + ' ' +
                                            Copy( cdsItensVendasTMP.FieldByName( 'Descricao' ).AsString, 1, 30 ) );
 
-         impMatricial.Imp ( pviLinha, 037, 'UND'); // cdsItensVendasTMP.FieldByName( 'Unid' ).AsString );
-         pviLinha := pviLinha + 1;
-         impMatricial.ImpD( pviLinha, 008, FormatFloat( '#,##0.00',    cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat), [ Comp17 ] );
-         impMatricial.ImpD( pviLinha, 019, FormatFloat( '#,##0.00', Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) ), [ Comp17 ] );
-         impMatricial.ImpD( pviLinha, 027, FormatFloat( '#,##0.00', cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat ), [ Comp17 ] );
-         impMatricial.ImpD( pviLinha, 039, FormatFloat( '#,##0.00',  Arredondar ( cdsItensVendasTMP.FieldByName( 'Qtde_Venda' ).AsFloat *
-                                                                                ( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat -
-                                                                                   cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat ), 2 ) ) , [ Comp17 ] );
+         WriteLn(F, '', cdsItensVendasTmp.FieldByName('Unidade').asString +
+                        IncDigito( FormatFloat( '#,##0',cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat),' ',5,0) +
+                        IncDigito( FormatFloat( '#,##0.00', Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) ),' ',8,0)+
+                        IncDigito( FormatFloat( '#,##0.00', cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat ),' ',8,0)+
+                        IncDigito( FormatFloat( '#,##0.00', ( cdsItensVendasTMP.FieldByName( 'Qtde_Venda' ).AsFloat *
+                                                              Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat -
+                                                                          cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat , 2 ) ) ),' ',14,0) );
+
          lrTot_Produtos := lrTot_Produtos + ( cdsItensVendasTMP.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
-         lrTot_Desconto := lrTot_Desconto + ( cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat );
+         lrTot_Desconto := lrTot_Desconto + ( cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat ) ;
 
          liCont := liCont + 1;
          pviLinha := pviLinha + 1;
          cdsItensVendasTMP.Next;
       end;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '-', '-', 39, 0 ) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, 'Total de Produtos Listado.: ' );
-      impMatricial.ImpD( pviLinha, 039, IntToStr( liCont ), [ Comp17 ] );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, 'Total dos Produtos........:' );
-      impMatricial.ImpD( pviLinha, 039, FormatFloat( '#,##0.00', lrTot_Produtos ), [ Comp17 ] );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, 'Desconto Total ...........:' );
-      impMatricial.ImpD( pviLinha, 039, FormatFloat( '#,##0.00', lrTot_Desconto ), [ Comp17 ] );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, 'Valor Total...............:');
-      impMatricial.ImpD( pviLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ Comp17 ] );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '=', '=', 39, 0 ) );
-      pviLinha := pviLinha + 1;
-      memoMensagem.Clear;
-      if  cdsCadFormasPagamento.FieldByName('ImprimeMensagem').AsBoolean Then
-      Begin
-         MemoMensagem.Lines.LoadFromFile(gspath+incZero( edtCod_FormaPagamento.Text,3)+'.Men');
-         impMatricial.Imp ( pviLinha, 001, MemoMensagem.Text);
-         pviLinha := pviLinha + 1;
-         impMatricial.Imp ( pviLinha, 001, '___________________________');
-         pviLinha := pviLinha + 1;
-         impMatricial.Imp ( pviLinha, 001, EdtNome_Cliente.text);
-         pviLinha := pviLinha + 1;
-         impMatricial.Imp ( pviLinha, 001, 'CNPJ/CPF '+edtCnpjCpf.Text);
-         pviLinha := pviLinha + 2;
-      End;
-      {
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, gIniParam.ReadString( 'Orcamento', 'msg1', 'Obrigado!' ) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, gIniParam.ReadString( 'Orcamento', 'msg2', 'Volte sempre!' ) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '-','-',39,0));
-      pviLinha := pviLinha + 1;
-       }
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '=', '=', 39, 0 ) );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, '    DOCUMENTO SEM VALOR FISCAL        ' );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '=', '=', 39, 0 ) );
-      pviLinha := pviLinha + 5;
-      impMatricial.Imp ( pviLinha, 001, '.' );
-      impMatricial.TamanhoQteLinhas          := pviLinha;
-      impMatricial.Fechar;
+      WriteLn(F, '', IncDigito( '-', '-', 39, 0 ) );
+      WriteLn(F, '', 'Total de Produtos Listado.:'+IncDigito(  IntToStr( liCont ),' ',10,0) );
+      WriteLn(F, '', 'Total dos Produtos........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Produtos ) ,' ',10,0) ) ;
+      WriteLn(F, '', 'Desconto Total ...........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Desconto ) ,' ',10,0) );
+      WriteLn(F, '', 'Valor Total...............:'+IncDigito( FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ) ,' ',10,0) );
+      WriteLn(F, '',IncDigito( '=', '=', 39, 0 ) );
+      WriteLn(F, '', '    DOCUMENTO SEM VALOR FISCAL        ' );
+      CloseFile(F);
 
-      {
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '-','-',39,0));
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, '       O R C A M E N T O              ' );
-      impMatricial.Imp ( pviLinha, 001, '       O R C A M E N T O              ' );
-      impMatricial.Imp ( pviLinha, 001, '       O R C A M E N T O              ' );
-      pviLinha := pviLinha + 1;
-      impMatricial.Imp ( pviLinha, 001, IncDigito( '-', '-', 39, 0 ) );
-      If gIniParam.ReadInteger( 'Orcamento', 'spnOrc_ValidadeOrcamento', 5 ) > 0 Then
-      Begin
-         pviLinha := pviLinha + 1;
-         impMatricial.Imp ( pviLinha, 001, ' ESTE ORCAMENTO TEM VALIDADE DE ' + IntToStr( gIniParam.ReadInteger( 'Orcamento', 'spnOrc_ValidadeOrcamento', 5 ) ) + ' DIAS' );
-         pviLinha := pviLinha + 1;
-         impMatricial.Imp ( pviLinha, 001, IncDigito( '-','-',39,0));
-      End;
-      pviLinha := pviLinha + gIniParam.ReadInteger( 'Faturamento', 'FAT_LinhasAposImpressao', 10 );
-      impMatricial.Imp ( pviLinha, 001, ' ' );
-      impMatricial.TamanhoQteLinhas := pviLinha;
-       }
    End;
+
 {$ENDREGION}
 
 {$REGION 'Mensagem Final ao Usuario'}
@@ -1412,6 +1345,7 @@ begin
    btnAdicionar.Enabled  := False;
    btnExcluir.Enabled    := False;
    pnlProdutos.Enabled   := False;
+   pnlDadosClientes.Enabled := False;
    cdsItensVendasTMP.EmptyDataSet;
 
    btnok.Enabled         := False;
@@ -1764,7 +1698,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,Pco_Venda,Saldo,Perc_Comissao from T_Produtos order by Descricao ';
+   qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,Pco_Venda,Saldo,Perc_Comissao,M2 from T_Produtos order by Descricao ';
 
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;

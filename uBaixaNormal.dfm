@@ -29,16 +29,16 @@ object frmBaixaNormal: TfrmBaixaNormal
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 671
+        Width = 673
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 657
+      Width = 664
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -52,6 +52,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -96,6 +97,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -145,6 +147,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -209,6 +212,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -375,6 +379,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 10
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtNomeCliente: TbsSkinEdit
       Left = 65
@@ -401,6 +411,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtCnpjcpf: TbsSkinEdit
       Left = 459
@@ -427,6 +443,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtDocumento: TbsSkinEdit
       Left = 64
@@ -453,6 +475,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtTotalTitulo: TEditN
       Left = 457
@@ -481,7 +509,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       EditPrecision = 0
       ValueInteger = 0
       ValueDate = 39369.000000000000000000
-      ValueTime = 0.502512476851851900
+      ValueTime = 0.502512476851851800
       TimeSeconds = False
       FirstCharUpper = False
       FirstCharUpList = ' ('
@@ -512,6 +540,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtNrVenda: TbsSkinEdit
       Left = 223
@@ -539,6 +573,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 5
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtData_Pagamento: TbsSkinDateEdit
       Left = 117
@@ -563,6 +603,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -581,6 +623,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       MaxLength = 10
       ParentFont = False
       TabOrder = 6
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object Cod_Cliente: TbsSkinEdit
       Left = 271
@@ -608,6 +656,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 7
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtCod_FormaPagamento: TbsSkinEdit
       Left = 315
@@ -635,6 +689,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 8
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtData_Emissao: TbsSkinEdit
       Left = 359
@@ -662,6 +722,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 9
       Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtVlr_Desconto: TbsSkinNumericEdit
       Left = 457
@@ -691,6 +757,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 11
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtVlr_DescontoExit
     end
     object cmbTipoDesconto: TbsSkinComboBox
@@ -769,6 +841,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -797,15 +870,15 @@ object frmBaixaNormal: TfrmBaixaNormal
           Control = bsSkinToolBar2
           ImageIndex = -1
           MinHeight = 40
-          Width = 669
+          Width = 671
         end>
       SkinDataName = 'controlbar'
       SkinBevel = True
       TabOrder = 0
       object bsSkinToolBar2: TbsSkinToolBar
-        Left = 12
+        Left = 9
         Top = 0
-        Width = 655
+        Width = 662
         Height = 40
         HintImageIndex = 0
         TabOrder = 0
@@ -819,6 +892,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -863,6 +937,7 @@ object frmBaixaNormal: TfrmBaixaNormal
           DefaultWidth = 70
           DefaultHeight = 40
           UseSkinFont = True
+          CheckedMode = False
           UseSkinSize = True
           UseSkinFontColor = True
           WidthWithCaption = 0
@@ -912,6 +987,7 @@ object frmBaixaNormal: TfrmBaixaNormal
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          CheckedMode = False
           UseSkinSize = True
           UseSkinFontColor = True
           WidthWithCaption = 0
@@ -1015,6 +1091,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -1122,6 +1199,12 @@ object frmBaixaNormal: TfrmBaixaNormal
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
         OnExit = edtcod_PagamentoExit
       end
       object cmbNome_formaPagamento: TbsSkinDBLookupComboBox
@@ -1181,7 +1264,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39619.000000000000000000
-        ValueTime = 0.976081990740740800
+        ValueTime = 0.976081990740740700
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -1207,6 +1290,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -1242,6 +1326,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetNoneEllips
       UseSkinSize = False
       UseSkinFontColor = True
@@ -1279,6 +1369,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       ExplicitLeft = 136
     end
     object lblTroco: TbsSkinStatusPanel
@@ -1298,6 +1394,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetNoneEllips
       UseSkinSize = True
       UseSkinFontColor = False
@@ -1335,6 +1437,12 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       ExplicitLeft = 472
       ExplicitTop = 1
     end
@@ -1559,6 +1667,11 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -1577,7 +1690,6 @@ object frmBaixaNormal: TfrmBaixaNormal
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200

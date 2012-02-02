@@ -4,7 +4,7 @@ object frmConsVendas: TfrmConsVendas
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o das Vendas Efetuadas'
   ClientHeight = 539
-  ClientWidth = 944
+  ClientWidth = 946
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
     Top = 518
-    Width = 944
+    Width = 946
     Height = 21
     HintImageIndex = 0
     TabOrder = 0
@@ -57,7 +57,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
     Top = 146
-    Width = 944
+    Width = 946
     Height = 372
     HintImageIndex = 0
     TabOrder = 1
@@ -88,16 +88,13 @@ object frmConsVendas: TfrmConsVendas
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alClient
-    ExplicitTop = 137
-    ExplicitHeight = 381
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 942
+      Width = 944
       Height = 370
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 379
       object GrdVendas: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
         DataController.DataSource = srcVendas
@@ -204,6 +201,9 @@ object frmConsVendas: TfrmConsVendas
           DataBinding.FieldName = 'Vendedor'
           Width = 150
         end
+        object Column_Status_Pagamento: TcxGridDBColumn
+          DataBinding.FieldName = 'Status_Pagamento'
+        end
       end
       object GrdItensVendas: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
@@ -297,7 +297,7 @@ object frmConsVendas: TfrmConsVendas
   object panelconsulta: TbsSkinPanel
     Left = 0
     Top = 77
-    Width = 944
+    Width = 946
     Height = 69
     HintImageIndex = 0
     TabOrder = 2
@@ -329,7 +329,6 @@ object frmConsVendas: TfrmConsVendas
     Spacing = 2
     Caption = 'panelconsulta'
     Align = alTop
-    ExplicitTop = 68
     object lblsituacao: TbsSkinStdLabel
       Left = 117
       Top = 43
@@ -851,11 +850,20 @@ object frmConsVendas: TfrmConsVendas
       Spacing = 1
       OnClick = btnSelecionarClick
     end
+    object Button1: TButton
+      Left = 858
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 8
+      OnClick = Button1Click
+    end
   end
   object pnlmensagem: TPanel
     Left = 0
     Top = 53
-    Width = 944
+    Width = 946
     Height = 24
     Align = alTop
     Caption = 'Consulta de Vendas'
@@ -868,12 +876,11 @@ object frmConsVendas: TfrmConsVendas
     ParentBackground = False
     ParentFont = False
     TabOrder = 3
-    ExplicitTop = 44
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 944
+    Width = 946
     Height = 53
     AutoSize = True
     Bands = <
@@ -881,19 +888,16 @@ object frmConsVendas: TfrmConsVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 938
+        Width = 942
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 4
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 929
+      Width = 933
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -937,9 +941,9 @@ object frmConsVendas: TfrmConsVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 809
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -973,6 +977,7 @@ object frmConsVendas: TfrmConsVendas
         OnClick = btnFecharClick
         ExplicitLeft = 856
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object separador: TbsSkinBevel
         Left = 100
@@ -1406,7 +1411,7 @@ object frmConsVendas: TfrmConsVendas
     UsaGerenciadorImpr = True
     CorForm = clBtnFace
     CorFonte = clBlack
-    Impressora = Epson
+    Impressora = Personalizado
     Mapeamento.Strings = (
       '//--- Grafico Compativel com Windows/USB ---//'
       '//'
@@ -1451,7 +1456,7 @@ object frmConsVendas: TfrmConsVendas
     TamanhoQteColunas = 80
     TamanhoQteLPP = Seis
     NumerodeCopias = 1
-    FonteTamanhoPadrao = S10cpp
+    FonteTamanhoPadrao = S17cpp
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     Left = 464
@@ -2482,5 +2487,9 @@ object frmConsVendas: TfrmConsVendas
     Params = <>
     Left = 464
     Top = 272
+  end
+  object Print: TPrintDialog
+    Left = 632
+    Top = 248
   end
 end

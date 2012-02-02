@@ -81,6 +81,7 @@ type
     cdsSaldos: TClientDataSet;
     dspSaldos: TDataSetProvider;
     qrySaldos: TSQLQuery;
+    edtSupervisor: TbsSkinEdit;
     procedure FormShow(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -103,7 +104,7 @@ var
 
 implementation
 
-uses uPrincipal,Ufuncoes, uVendeBrinde, udevolucaoVenda, DBXCommon;
+uses uPrincipal,Ufuncoes, uVendeBrinde, udevolucaoVenda, DBXCommon, DaoRemessa;
 
 {$R *.dfm}
 
@@ -140,6 +141,8 @@ begin
    edtData_Vencimento.Text  := edtVenciemento.Text;
    edtVlr_Comissao.Enabled  := True;
    edtVlr_Devolvido.Enabled := True;
+   if Trim(edtSupervisor.Text)='0' then
+      edtSupervisor.Text := '';
 end;
 
 procedure TfrmBaixaBrinde.btnokClick(Sender: TObject);
@@ -151,43 +154,15 @@ var lsupDate          : String;
     lrvlr_TotalItem   : Real;
     vlr_anterior      : Real;
     vlr_Atual         : Real;
+  DaoRemessa: TDaoRemessa;
 begin
-
+   try
+     bsSkinToolBar2.SetFocus
+   except
+   end;
+   
    if CaixaMensagem( 'Deseja Efetuar o pagamento do titulo '+edtDocumento.text, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
-      //  lancamento do caixa conforme venda
-      {
-      QryItemVendas.Close;
-      QryItemVendas.SQL.Text := 'Select Prod.Cod_TipoDespesa, Itens.* from T_ItensVendas itens, T_Produtos Prod Where Seqvenda=:parSeqvenda '+
-                                'And Prod.Codigo=Itens.Cod_Produto ';
-      QryItemVendas.ParamByName('parSeqVenda']  := StrtoInt(edtNrVenda.Text);
-      QryItemVendas.Open;
-
-      lrVlr_Desc :=(1-( StrToFloat( edtVlr_Desconto.Text )/StrToFloat(edtVlr_Venda.Text) )) ;
-
-      while not QryItemVendas.Eof Do
-      Begin
-
-         qryModific.Close;
-         qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa ) Values '+
-                                '                       ( :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
-                                '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa ) ';
-
-         qryModific.ParamByName('parCod_Caixa').AsString             := '001';
-         qryModific.ParamByName('parValor').asFloat                  := arredondar( (StrtoFloat(edtVlr_Venda.Text)*lrVlr_Desc),2);
-         qryModific.ParamByName('parHistorico').asString             := 'Recebimento de Venda nº '+edtNrVenda.Text;
-         qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToTimeStamp(now);
-         qryModific.ParamByName('parD_C').AsString                   := 'C';
-         qryModific.ParamByName('parSeqVenda')as.Integer             := StrtoInt(edtNrVenda.Text);
-         qryModific.ParamByName('parCod_tipoDespesa').AsString       := QryItemVendas.fieldByName('Cod_TipoDespesa').AsString;
-         qryModific.ExecSQL;
-
-         QryItemVendas.Next;
-      End;
-      //  lancamento do caixa conforme venda
-      }
-
-      // atualização do contas a receber
 
       if arredondar(StrtoFloat(edtTotalInformado.Text),2)<>arredondar(StrtoFloat(edtTotalReceber.Text),2) then
       Begin
@@ -253,7 +228,7 @@ begin
          cdsPagamento.ApplyUpdates(-1);
       End;
 
-      {$REGION 'Devolução dos Itens '}
+    {$REGION 'Devolução dos Itens '}
 
      if not frmPrincipal.dbxPrincipal.InTransaction then
         trdNrTransacao := frmPrincipal.dbxPrincipal.BeginTransaction;
@@ -292,6 +267,15 @@ begin
               frmPrincipal.dbxPrincipal.RollbackFreeAndNil(trdNrTransacao);
               Exit;
            End;
+
+           if StrToIntDef(edtSupervisor.Text,0) <> 0 then
+           begin
+              DaoRemessa := TDaoRemessa.Create(gCoNexao);
+              DaoRemessa.SomarItemNaRemessaDevolucao(StrToIntDef(edtSupervisor.Text,0),
+                                                     cdsTmpItensDevolucoes.FieldByName('Codigo').asInteger,
+                                                     cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger, gsOperador  );
+              FreeAndNil(DaoRemessa);
+           end;
 
            qryItensDevolucoes.Close;
            qryItensDevolucoes.SQL.Text :='Select * from T_ItensDevolucoes where 1=2';

@@ -21,7 +21,7 @@ object frmCadOperacoes: TfrmCadOperacoes
     Top = 53
     Width = 616
     Height = 252
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -51,10 +51,6 @@ object frmCadOperacoes: TfrmCadOperacoes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 237
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -259,10 +255,9 @@ object frmCadOperacoes: TfrmCadOperacoes
         Left = 0
         Top = 33
         Width = 614
-        Height = 197
+        Height = 195
         Align = alClient
         TabOrder = 2
-        ExplicitHeight = 204
         object GridOperacoes: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -317,10 +312,6 @@ object frmCadOperacoes: TfrmCadOperacoes
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 237
       object Previsto: TLabel
         Left = 72
         Top = 96
@@ -508,11 +499,10 @@ object frmCadOperacoes: TfrmCadOperacoes
         Text = 'Despesas Operacionais'
         Items.Strings = (
           'Despesas Operacionais'
-          'Receitas'
-          'Despesas  Pessoais'
+          'Receitas de Vendas'
           'Outras Despesas'
           'Outras Receitas')
-        ItemIndex = 0
+        ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
         Font.Charset = DEFAULT_CHARSET
@@ -573,19 +563,16 @@ object frmCadOperacoes: TfrmCadOperacoes
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 610
+        Width = 612
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 601
+      Width = 603
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -629,9 +616,9 @@ object frmCadOperacoes: TfrmCadOperacoes
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -665,6 +652,7 @@ object frmCadOperacoes: TfrmCadOperacoes
         OnClick = btnFecharClick
         ExplicitLeft = 550
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

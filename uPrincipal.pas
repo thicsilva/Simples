@@ -258,6 +258,11 @@ type
     procedure actRemessaExecute(Sender: TObject);
   private
     pviLinha : integer;
+    procedure ConfiguraAmbiente;
+    procedure DefinirDataSistema;
+    procedure DefinirVariaveisDeAmbiente;
+    procedure ControleDeRepasse;
+    procedure VerificarEstrutura;
     { Private declarations }
   public
     { Public declarations }
@@ -270,6 +275,7 @@ var
   gsCod_Operador : String;
   Gsversis       : String;
   GsNomeEmp      : String;
+  gsCNPJEmp      : String;
   GstituloRel    : String;
   gsPeriodoRel   : String;
   gsCod_Emp      : String;
@@ -363,103 +369,113 @@ begin
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
-var Estrutura : TDaoEstrutura;
 begin
    gParametros              := TParametros.Create;
 
-   // -> Buscando a data do movimento
-   sdtsSequencia.Close;
-   sdtsSequencia.DataSet.CommandText := 'SELECT * FROM T_Sequencias where Tipo_sequencia=:parTipo_Sequencia';
-   sdtsSequencia.DataSet.ParamByName('parTipo_Sequencia').AsString := 'Data_Mov';
-   sdtsSequencia.Open;
-   gsData_Mov := StrToDate(sdtsSequencia.FieldByName('sequencia').AsString);
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'Data_Automatica', 'NAO' )) = 'NAO' Then
-      gsData_Mov := StrToDate(FormatDatetime('dd/mm/yyyy',now));
-   StatusBar.Panels[0].Text := 'Data do Movimento .: '+FormatDatetime('dd/mm/yyyy',gsData_Mov);
-   // <- Buscando a data do movimento
+   DefinirDataSistema;
 
-   // -> Buscando versao de sistema
-   MenuPrincipal.ActiveTab := dxRibCadastro ;
-   lblVersao.Filename:= gspath+'simples.exe';
-   lblVersao.Enabled := True;
-   frmPrincipal.Caption := frmPrincipal.Caption + 'VN '+lblVersao.InfoString;
-   // <- Buscando versao de sistema
+   DefinirVariaveisDeAmbiente;
 
-   // -> Buscando Operador e empresa
-  // gsOperador := '--- A Definir ---';
-   gsCod_Emp  := '001';
-   StatusBar.Panels[1].Text := 'Operador .: '+gsOperador;
-   // -> Buscando Operador e empresa
-   StatusBar.Update;
+   ConfiguraAmbiente;
 
-   GsNomeEmp  := gsParametros.ReadString('CONFIG_SISTEMA','NomeEmpresa','Informe a empresa nos parametros');
+   ControleDeRepasse;
+
+   VerificarEstrutura;
+end;
+
+procedure TfrmPrincipal.ConfiguraAmbiente;
+begin
+   RibonFiscal.Visible :=false;
+
+   MenuPrincipal.ActiveTab := dxRibCadastro;
    RibonAtendimentoCliente.Visible := false;
-   StatusBar.Panels[2].Text := 'Turno.: ';
 
    actServicos.Visible      := False;
    actconsServicos.Visible  := False;
-   actCaixaDespesas.Visible := False;
    RibonFiscal.Visible      := False;
-
-   if not DirectoryExists( gsPath + 'Config' ) then
-      CreateDir( gsPath + 'Config' );
 
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1' Then
    Begin
        actServicos.Visible      := True;
        actconsServicos.Visible  := True;
-       actCaixaDespesas.Visible := True;
        RibonFiscal.Visible      := True;
        RibonAtendimentoCliente.Visible  := False;
    End;
 
-   MenuPrincipal.BarManager.loadFromIniFile(gspath+'ConfigMenu.ini');
+end;
 
-   {$REGION 'Incluir titulos no repasse '}
+procedure TfrmPrincipal.DefinirDataSistema;
+begin
+  sdtsSequencia.Close;
+  sdtsSequencia.DataSet.CommandText := 'SELECT * FROM T_Sequencias where Tipo_sequencia=:parTipo_Sequencia';
+  sdtsSequencia.DataSet.ParamByName('parTipo_Sequencia').AsString := 'Data_Mov';
+  sdtsSequencia.Open;
+  
+  if sdtsSequencia.IsEmpty then
+    gsData_Mov := Now
+  else
+    gsData_Mov := StrToDate(sdtsSequencia.FieldByName('sequencia').AsString);
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'Data_Automatica', 'SIM')) = 'SIM' then
+    gsData_Mov := StrToDate(FormatDatetime('dd/mm/yyyy', now));
+   StatusBar.Panels[0].Text := 'Data do Movimento .: '+FormatDatetime('dd/mm/yyyy',gsData_Mov);
+end;
 
-   if formatDateTime('dd/mm/yyyy', now) <> gsParametros.ReadString('AMBIENTE','data_repasse', '01/01/2008' ) Then
-   Begin
-      If Uppercase(Formatdatetime('ddd',Now))='QUA' Then
-      Begin
-         QryVariavel.Close;
-         QryVariavel.Params.Clear;
-         QryVariavel.SQL.Text := 'SELECT Documento, Sequencia FROM T_Ctasreceber '+
-                                 'WHERE Status=:parStatus and '+
-                                 '      ( Data_Vencimento>=:parData_VencimentoIni and Data_Vencimento<=:parData_VencimentoFim )';
+procedure TfrmPrincipal.DefinirVariaveisDeAmbiente;
+begin
+  GsNomeEmp := gsParametros.ReadString('CONFIG_SISTEMA', 'NomeEmpresa', 'Informe a empresa nos parametros');
+  gsCod_Emp := '001';
+  lblVersao.Filename := gspath + 'simples.exe';
+  lblVersao.Enabled := True;
+  StatusBar.Panels[1].Text := 'Operador .: ' + gsOperador;
+  StatusBar.Update;
+  frmPrincipal.Caption := frmPrincipal.Caption + 'Versão ' + lblVersao.InfoString;
+  if not DirectoryExists( gsPath + 'Config' ) then
+     CreateDir( gsPath + 'Config' );
+  MenuPrincipal.BarManager.loadFromIniFile(gspath+'ConfigMenu.ini');
+end;
 
-         QryVariavel.ParamByName('parData_VencimentoIni').AsSQLTimeStamp  := DateTimeToSQLTimeStamp(gsdata_mov-7);
-         QryVariavel.ParamByName('parData_VencimentoFim').AsSQLTimeStamp  := DateTimeToSQLTimeStamp(gsdata_mov-2);
-         QryVariavel.ParamByName('parStatus').AsString                    := '0';
+procedure TfrmPrincipal.ControleDeRepasse;
+begin
+  if formatDateTime('dd/mm/yyyy', now) <> gsParametros.ReadString('AMBIENTE', 'data_repasse', '01/01/2008') then
+  begin
+    if Uppercase(Formatdatetime('ddd', Now)) = 'QUA' then
+    begin
+      QryVariavel.Close;
+      QryVariavel.Params.Clear;
+      QryVariavel.SQL.Text := 'SELECT Documento, Sequencia FROM T_Ctasreceber ' + 'WHERE Status=:parStatus and ' + '      ( Data_Vencimento>=:parData_VencimentoIni and Data_Vencimento<=:parData_VencimentoFim )';
+      QryVariavel.ParamByName('parData_VencimentoIni').AsSQLTimeStamp := DateTimeToSQLTimeStamp(gsdata_mov - 7);
+      QryVariavel.ParamByName('parData_VencimentoFim').AsSQLTimeStamp := DateTimeToSQLTimeStamp(gsdata_mov - 2);
+      QryVariavel.ParamByName('parStatus').AsString := '0';
+      cdsProcedimento.Close;
+      cdsProcedimento.ProviderName := dspVariavel.name;
+      cdsProcedimento.Open;
+      while not cdsProcedimento.Eof do
+      begin
+        qryModific.Close;
+        qryModific.Params.Clear;
+        qryModific.SQL.Text := 'Update T_Ctasreceber set Repasse=:parRepasse, data_Repasse=:parData_Repasse ' + 'Where Documento=:parDocumento and Sequencia=:parSequencia';
+        qryModific.ParamByName('parDocumento').asString := cdsProcedimento.FieldByName('Documento').AsString;
+        qryModific.ParamByName('parRepasse').asString := 'S';
+        qryModific.ParamByName('parData_Repasse').AsSQLTimeStamp := DateTimeToSQLTimeStamp(now);
+        qryModific.ParamByName('parSequencia').asInteger := cdsProcedimento.FieldByName('Sequencia').AsInteger;
+        qryModific.ExecSQL;
+        cdsProcedimento.Next;
+      end;
+      gsParametros.WriteString('AMBIENTE', 'data_repasse', formatDateTime('dd/mm/yyyy', now));
+    end;
+  end;
 
-         cdsProcedimento.Close;
-         cdsProcedimento.ProviderName := dspVariavel.name;
-         cdsProcedimento.Open;
+end;
 
-         while not  cdsProcedimento.Eof do
-         Begin
-            qryModific.Close;
-            qryModific.Params.Clear;
-            qryModific.SQL.Text := 'Update T_Ctasreceber set Repasse=:parRepasse, data_Repasse=:parData_Repasse '+
-                                    'Where Documento=:parDocumento and Sequencia=:parSequencia';
-            qryModific.ParamByName('parDocumento').asString           := cdsProcedimento.FieldByName('Documento').AsString;
-            qryModific.ParamByName('parRepasse').asString             := 'S';
-            qryModific.ParamByName('parData_Repasse').AsSQLTimeStamp  := DateTimeToSQLTimeStamp(now);
-            qryModific.ParamByName('parSequencia').asInteger          := cdsProcedimento.FieldByName('Sequencia').AsInteger;
-            qryModific.ExecSQL;
-            cdsProcedimento.Next;
-         End;
-         gsParametros.WriteString('AMBIENTE','data_repasse',formatDateTime('dd/mm/yyyy', now));
-      End;
-   End;
-   {$ENDREGION}
-
+procedure TfrmPrincipal.VerificarEstrutura;
+var Estrutura: TDaoEstrutura;
+begin
    Estrutura := TDaoEstrutura.Create(gConexao);
    try
-      Estrutura.EfetuarCriacaoDosCamposAntigos;
+     Estrutura.ExecultarCorrecoes;
    finally
-      FreeAndNil(Estrutura);
+     FreeAndNil(Estrutura);
    end;
-
 end;
 
 procedure TfrmPrincipal.impMatricialNewPage(Sender: TObject; Pagina: Integer);
@@ -659,11 +675,11 @@ end;
 
 procedure TfrmPrincipal.actRemessaExecute(Sender: TObject);
 begin
-   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+  {if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
-   End;
+   End;}
    frmRemessaParaVenda := TfrmRemessaParaVenda.Create(Self);
    frmRemessaParaVenda.showmodal
 end;

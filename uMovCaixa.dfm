@@ -931,7 +931,7 @@ object frmMovCaixa: TfrmMovCaixa
             'Pr'#243'ximo Ano')
           CharCase = ecNormal
           DefaultColor = clWindow
-          Text = 'Nenhum'
+          Text = 'Hoje'
           Items.Strings = (
             'Nenhum'
             'Ontem'
@@ -973,7 +973,7 @@ object frmMovCaixa: TfrmMovCaixa
             'Ano Passado'
             'Neste Ano'
             'Pr'#243'ximo Ano')
-          ItemIndex = 0
+          ItemIndex = 2
           DropDownCount = 8
           HorizontalExtent = False
           Font.Charset = DEFAULT_CHARSET

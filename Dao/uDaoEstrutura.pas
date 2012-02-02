@@ -9,18 +9,53 @@ type TDaoEstrutura = class
     FConexao : TConexao;
     FQryAjustes : TSqlQuery;
     function ExisteCampo(prsNomeTabela, prsNomeCampo: string; prSQLConnection: TSQLConnection): Boolean;
+    procedure EfetuarCriacaoDosCamposAntigos;
+    procedure Adicionar_PagouSinal_na_Tabela_vendas;
+    procedure Adicionar_ServicoPago_na_Tabela_vendas;
   public
     Constructor Create(Conexao : TConexao);
-    procedure EfetuarCriacaoDosCamposAntigos;
+    procedure ExecultarCorrecoes;
 end;
 
 implementation
 
 { TDaoEstrutura }
 
+procedure TDaoEstrutura.Adicionar_PagouSinal_na_Tabela_vendas;
+begin
+    if not ExisteCampo( 'T_Vendas', 'ServicoPago', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD ServicoPago bit ';
+       FQryAjustes.ExecSQL;
+
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_vendas ADD CONSTRAINT DF_ServicoPago DEFAULT 0 FOR ServicoPago';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_ServicoPago_na_Tabela_vendas;
+begin
+    if not ExisteCampo( 'T_Vendas', 'PagouSinal', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD PagouSinal bit ';
+       FQryAjustes.ExecSQL;
+
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_vendas ADD CONSTRAINT DF_PagouSinal DEFAULT 0 FOR PagouSinal';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+
 constructor TDaoEstrutura.Create(Conexao: TConexao);
 begin
-   FConexao := Conexao;
+   FConexao    := Conexao;
+   FQryAjustes := TSqlQuery.Create(Nil);
+   FQryAjustes.SQLConnection := Fconexao.Conection;
+
 end;
 
 procedure TDaoEstrutura.EfetuarCriacaoDosCamposAntigos;
@@ -66,6 +101,13 @@ begin
    Finally
       FreeAndNil(qryAjustaTabelas);
    End;
+end;
+
+procedure TDaoEstrutura.ExecultarCorrecoes;
+begin
+  EfetuarCriacaoDosCamposAntigos;
+  Adicionar_PagouSinal_na_Tabela_vendas;
+  Adicionar_ServicoPago_na_Tabela_vendas
 end;
 
 Function TDaoEstrutura.ExisteCampo( prsNomeTabela, prsNomeCampo: string; prSQLConnection: TSQLConnection ): Boolean;

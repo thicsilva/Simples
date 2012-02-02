@@ -17,7 +17,6 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinGroupBox1: TbsSkinGroupBox;
-    lbldocumento: TbsSkinStdLabel;
     edtNumeroOs: TbsSkinEdit;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
@@ -61,6 +60,11 @@ type
     cdsTempPagamentosseqos: TIntegerField;
     lblNome: TbsSkinStdLabel;
     edtVlr_Recebido: TbsSkinEdit;
+    btnPesquisa: TbsSkinSpeedButton;
+    bsSkinBevel3: TbsSkinBevel;
+    bsSkinStdLabel1: TbsSkinStdLabel;
+    lblNome_cliente: TbsSkinLabel;
+    cmbTipoPesquisa: TbsSkinComboBox;
     procedure edtcod_PagamentoExit(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
@@ -69,6 +73,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure edtNumeroOsExit(Sender: TObject);
     procedure cmbNome_formaPagamentoChange(Sender: TObject);
+    procedure btnPesquisaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -80,7 +85,7 @@ var
 
 implementation
 
-uses uPrincipal,ufuncoes;
+uses uPrincipal,ufuncoes, uConsultasSemSinalPago, uDaoVenda;
 {$R *.dfm}
 
 procedure TfrmPrePagamento.btnAdicionarClick(Sender: TObject);
@@ -112,13 +117,15 @@ var liseqParcela    : Integer;
     liqtde_Parcelas : Integer;
     I               : Integer;
     lsPrazo         : String;
+    DaoVenda : TDaoVenda;
 begin
+
    case frmPrePagamento.tag of
       0: // prepagamento
       Begin
          if StrTofloat(edtVlr_Recebido.Text)>StrTofloat(edtTotGeral_os.Text) then
          Begin
-            CaixaMensagem( 'O valor recebido não pode ser maior que o do titulo ', ctAviso, [ cbOk ], 0 );
+            CaixaMensagem( 'O valor recebido não pode ser maior que o serviço ', ctAviso, [ cbOk ], 0 );
             Exit;
          End;
       End;
@@ -126,7 +133,7 @@ begin
       Begin
          if StrTofloat(edtVlr_Recebido.Text)>StrTofloat(edtTotalTitulo.Text) then
          Begin
-            CaixaMensagem( 'O valor recebido não pode ser maior que o do titulo ', ctAviso, [ cbOk ], 0 );
+            CaixaMensagem( 'O valor recebido não pode ser maior que o do serviço ', ctAviso, [ cbOk ], 0 );
             Exit;
          End;
          if StrToFloat(edtVlr_Recebido.Text)<>StrTofloat(edtTotalTitulo.Text) then
@@ -188,31 +195,12 @@ begin
          cdsMovCaixa.FieldByName('Estornado').AsString             := 'N';
          cdsMovCaixa.Post;
          cdsMovCaixa.ApplyUpdates(0);
-         {
-         qryModific.Close;
-         qryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento,PrePagamento ) Values '+
-                                '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
-                                '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento,:parPrePagamento ) ';
+         DaoVenda := TdaoVenda.Create(gconexao);
 
-         qryModific.ParamByName('parCod_Caixa').AsString             := '001';
-         qryModific.ParamByName('parValor').asFloat                  := cdsTempPagamentos.FieldByName('Valor').AsFloat;
-         qryModific.ParamByName('parHistorico').asString             := 'Pre-Pagamento O.S. nº '+edtNumeroOs.text;
-         qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToSqlTimeStamp(gsData_Mov);
-         qryModific.ParamByName('parD_C').AsString                   := 'C';
-         IF frmprepagamento.Tag = 2 Then
-            qryModific.ParamByName('parSeqVenda').AsInteger          := (StrtoInt(edtNumeroOs.Text))
-         Else
-            qryModific.ParamByName('parSeqVenda').asInteger          := sdtsPesqOS.FieldByName('SeqVenda').AsInteger;
-         qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
-         qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
-         qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := strToInt(cdsTempPagamentos.FieldByName('Codigo').AsString);
-         qryModific.ParamByName('parOperador').AsString              := gsOperador;
-         IF frmprepagamento.Tag = 2 Then
-            qryModific.ParamByName('parPrePagamento').AsString          := 'N'
-         Else
-            qryModific.ParamByName('parPrePagamento').AsString          := 'S';
-         qryModific.ExecSQL;
-         }
+         DaoVenda.MarcarComoPagouSinal(sdtsPesqOS.FieldByName('SeqVenda').AsInteger);
+         if StrTofloat(edtVlr_Recebido.Text)=StrTofloat(edtTotalTitulo.Text) then
+            DaoVenda.MarcarComoServicoPago(sdtsPesqOS.FieldByName('SeqVenda').AsInteger);
+         FreeAndNil(DaoVenda);
       End
       Else
       Begin
@@ -288,6 +276,19 @@ begin
    Close;
 End;
 
+procedure TfrmPrePagamento.btnPesquisaClick(Sender: TObject);
+begin
+   frmConsultaSemSinalPago := TfrmConsultaSemSinalPago.Create(Self);
+   frmConsultaSemSinalPago.ShowModal;
+   if frmConsultaSemSinalPago.pNumeroVenda>0 then
+   begin
+      edtNumeroOs.Text := IntToStr(frmConsultaSemSinalPago.pNumeroVenda);
+      cmbTipoPesquisa.ItemIndex := 1;
+      edtNumeroOsExit(edtNumeroOs);
+      edtcod_Pagamento.SetFocus;
+   end;
+end;
+
 procedure TfrmPrePagamento.btnRemoverClick(Sender: TObject);
 begin
    if cdsTempPagamentos.IsEmpty then
@@ -323,18 +324,23 @@ end;
 
 procedure TfrmPrePagamento.edtNumeroOsExit(Sender: TObject);
 var liSeqvenda : Integer;
+    lsWhere : string;
 begin
-
    If Trim(edtNumeroOs.Text)='' Then
    Begin
       CaixaMensagem( 'Informe o Numero da Ordem de Serviço ', ctAviso, [ cbOk ], 0 );
       edtNumeroOs.SetFocus;
       exit;
    End;
+
+   lsWhere := ' Where SeqVenda=:parControle ';
+   if cmbTipoPesquisa.ItemIndex=0 then
+      lsWhere := ' Where Controle=:parControle ';
+
    if frmPRePagamento.Tag=0 then
    Begin
       sdtsPesqOS.Close;
-      sdtsPesqOS.DataSet.CommandText :='Select Status,SeqVenda, Vlr_Total From T_vendas Where SeqVenda=:parControle';
+      sdtsPesqOS.DataSet.CommandText :='Select Status,SeqVenda,Nome_cliente, Vlr_Total From T_vendas '+lsWhere;
       sdtsPesqOS.DataSet.ParamByName('parControle').AsString := edtNumeroOs.Text;
       sdtsPesqOS.Open;
    End
@@ -360,7 +366,8 @@ begin
    End;
 
 
-   edtTotalTitulo.Text := Formatfloat('0.00',sdtsPesqOS.FieldByName('vlr_Total').asFloat);
+   edtTotalTitulo.Text     := Formatfloat('0.00',sdtsPesqOS.FieldByName('vlr_Total').asFloat);
+   lblNome_cliente.Caption := sdtsPesqOS.FieldByName('Nome_Cliente').AsString;
 
    if frmPRePagamento.Tag=0 then
    Begin

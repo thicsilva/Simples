@@ -593,7 +593,7 @@ begin
    pviLinha:=Pvilinha+1;
    lrDiferenca := (lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa+lrTotal_Extras+vlr_Prepagamento);
    ImpMatricial.imp (pvilinha,001,'Total Movimentado do dia.......:');
-   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',(lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa+lrTotal_Extras+vlr_Prepagamento)),[]);
+   impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',(lrTotal_Venda+lrtotal_Servico+lrTotal_Baixa+lrTotal_Extras)),[]);
    pviLinha:=Pvilinha+2;
    ImpMatricial.imp (pvilinha,001,'Total Extras...................:');
    impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',lrTotal_Extras),[]);
@@ -601,7 +601,7 @@ begin
    ImpMatricial.imp (pvilinha,001,'Total Recebido.................:');
    impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',lrTotal_recebido-lrTotal_Extras),[]);
    pviLinha:=Pvilinha+1;
-   ImpMatricial.imp (pvilinha,001,'Total de Pre-Pag.(Ñ Filanizado):');
+   ImpMatricial.imp (pvilinha,001,'Total de Pre-Pag.(Ñ Finalizado):');
    impmatricial.ImpD(pvilinha,042,FormatFloat(',0.00',vlr_Prepagamento),[]);
    pviLinha:=Pvilinha+1;
    lrDiferenca:=lrDiferenca-lrTotal_recebido;

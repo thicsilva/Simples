@@ -53,7 +53,12 @@ type
     bsSkinBevel2: TbsSkinBevel;
     cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox;
     chkVendaSemControle: TbsSkinCheckRadioBox;
+    chkImprimeComprovante: TbsSkinCheckRadioBox;
+    edtCaminhoImpressao: TEdit;
+    Label1: TLabel;
+    tabContasAReceber: TbsSkinTabSheet;
     chkTrabalhaComRemessa: TbsSkinCheckRadioBox;
+    chkRecebimentoLote: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -90,6 +95,9 @@ begin
 
    gsParametros.WriteString('CONFIG_SISTEMA','NomeEmpresa',edtNomeEmpresa.Text);
 
+   {Parametros de impressao}
+   gsParametros.WriteString('IMPRESSAO','CaminhoImpressao',edtCaminhoImpressao.text);
+
    //[parametros de cadastro]
    gParametros.Gravar( '', '[CADASTRO]', 'qtdeNumeroDias', EdtqtdeNumeroDias.Text ,gsOperador );
    gParametros.Gravar( '', '[CADASTRO]', 'NumeroCompras', EdtNumeroCompras.Text ,gsOperador );
@@ -101,6 +109,12 @@ begin
       gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'SIM' ,gsOperador )
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' ,gsOperador );
+
+   if chkRecebimentoLote.Checked Then
+      gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', 'SIM' ,gsOperador )
+   Else
+      gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' ,gsOperador );
+
 
    if chkVendeServico.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'VendeServico', 'SIM' ,gsOperador )
@@ -122,6 +136,10 @@ begin
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'VendaSemControle', 'NAO' ,gsOperador );
 
+   if chkImprimeComprovante.Checked Then
+      gParametros.Gravar( '', '[CADASTRO]', 'ImprimeComprovante', 'SIM' ,gsOperador )
+   Else
+      gParametros.Gravar( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' ,gsOperador );
 
    if chkLigaECF.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'LigarECF', 'SIM' ,gsOperador )
@@ -133,7 +151,6 @@ begin
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' ,gsOperador );
 
-
    if chkEmiteEtiqueta.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'EmiteEtiqueta', 'SIM' ,gsOperador )
    Else
@@ -143,7 +160,6 @@ begin
       gParametros.Gravar( '', '[CADASTRO]', 'Data_Automatica', 'SIM' ,gsOperador )
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'Data_Automatica', 'NAO' ,gsOperador );
-
    Close;
 end;
 
@@ -178,6 +194,8 @@ begin
    edtUsuario.text          := gsParametros.ReadString('ACESSODADOS','Usuario','Controler');
    edtSenha.text            := gsParametros.ReadString('ACESSODADOS','Senha','remoto');
    rdgTipoSistema.ItemIndex := StrToInt(gsParametros.ReadString('ACESSODADOS','TipoSistema','0'));
+
+   edtCaminhoImpressao.text := gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1');
 
    edtNomeEmpresa.Text      := gsParametros.ReadString('CONFIG_SISTEMA','NomeEmpresa','Informe a empresa nos parametros');
 
@@ -215,7 +233,17 @@ begin
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
       chkTrabalhaComRemessa.Checked := True
    Else
-      chkVendaSemControle.Checked := False;
+      chkTrabalhaComRemessa.Checked := False;
+
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' )) = 'SIM' Then
+      chkRecebimentoLote.Checked := True
+   Else
+      chkRecebimentoLote.Checked := False;
+
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' )) = 'SIM' Then
+      chkImprimeComprovante.Checked := True
+   Else
+      chkImprimeComprovante.Checked := False;
 
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
       chkVendaSemControle.Checked := True

@@ -112,7 +112,6 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         Align = alLeft
         Spacing = 2
         OnClick = brnNovaRemessaClick
-        ExplicitLeft = -6
         ExplicitTop = 12
         ExplicitHeight = 40
       end
@@ -150,11 +149,12 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
+        OnClick = btnFecharRemessaClick
         ExplicitLeft = 64
         ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 415
+        Left = 464
         Top = 0
         Width = 1
         Height = 49
@@ -166,19 +166,19 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         ExplicitTop = -1
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 161
+        Left = 244
         Top = 0
-        Width = 114
+        Width = 80
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 231
+        ExplicitLeft = 161
         ExplicitTop = -1
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
-        Left = 531
+        Left = 580
         Top = 0
         Width = 70
         Height = 49
@@ -218,7 +218,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 416
+        Left = 465
         Top = 0
         Width = 115
         Height = 49
@@ -230,7 +230,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         ExplicitTop = -1
       end
       object BtnCancela: TbsSkinSpeedButton
-        Left = 275
+        Left = 324
         Top = 0
         Width = 70
         Height = 49
@@ -271,7 +271,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
-        Left = 345
+        Left = 394
         Top = 0
         Width = 70
         Height = 49
@@ -311,6 +311,43 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         ExplicitTop = 8
         ExplicitHeight = 40
       end
+      object btndicionar: TbsSkinSpeedButton
+        Left = 161
+        Top = 0
+        Width = 83
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 10
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Adicinar Estoque'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        OnClick = btndicionarClick
+        ExplicitLeft = 222
+      end
     end
   end
   object PaginaDeconsulta: TbsSkinPageControl
@@ -318,7 +355,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
     Top = 53
     Width = 750
     Height = 354
-    ActivePage = tabNovaRemessa
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -349,7 +386,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
       object bsSkinDBGrid2: TbsSkinDBGrid
         Left = 0
         Top = 33
-        Width = 748
+        Width = 729
         Height = 134
         HintImageIndex = 0
         TabOrder = 0
@@ -359,6 +396,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         WallpaperStretch = False
         UseSkinFont = True
         UseSkinCellHeight = True
+        VScrollBar = bsSkinScrollBar3
         GridLineColor = clWindowText
         DefaultCellHeight = 20
         DrawGraphicFields = False
@@ -451,7 +489,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         object bsSkinDBGrid3: TbsSkinDBGrid
           Left = 1
           Top = 21
-          Width = 746
+          Width = 727
           Height = 144
           HintImageIndex = 0
           TabOrder = 0
@@ -461,6 +499,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           WallpaperStretch = False
           UseSkinFont = True
           UseSkinCellHeight = True
+          VScrollBar = bsSkinScrollBar2
           GridLineColor = clWindowText
           DefaultCellHeight = 20
           DrawGraphicFields = False
@@ -516,6 +555,40 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
               FieldName = 'Saldo'
               Visible = True
             end>
+        end
+        object bsSkinScrollBar2: TbsSkinScrollBar
+          Left = 728
+          Top = 21
+          Width = 19
+          Height = 144
+          HintImageIndex = 0
+          TabOrder = 1
+          Visible = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'vscrollbar'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 19
+          DefaultHeight = 0
+          UseSkinFont = True
+          Both = False
+          BothMarkerWidth = 19
+          BothSkinDataName = 'bothhscrollbar'
+          CanFocused = False
+          Align = alRight
+          Kind = sbVertical
+          PageSize = 0
+          Min = 0
+          Max = 100
+          Position = 0
+          SmallChange = 1
+          LargeChange = 1
+          ExplicitLeft = 569
+          ExplicitTop = 103
+          ExplicitHeight = 200
         end
       end
       object bsSkinPanel1: TbsSkinPanel
@@ -643,6 +716,40 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           Spacing = 1
           OnClick = btnPesquisarClick
         end
+      end
+      object bsSkinScrollBar3: TbsSkinScrollBar
+        Left = 729
+        Top = 33
+        Width = 19
+        Height = 134
+        HintImageIndex = 0
+        TabOrder = 3
+        Visible = False
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'vscrollbar'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 19
+        DefaultHeight = 0
+        UseSkinFont = True
+        Both = False
+        BothMarkerWidth = 19
+        BothSkinDataName = 'bothhscrollbar'
+        CanFocused = False
+        Align = alRight
+        Kind = sbVertical
+        PageSize = 0
+        Min = 0
+        Max = 100
+        Position = 0
+        SmallChange = 1
+        LargeChange = 1
+        ExplicitLeft = 569
+        ExplicitTop = 103
+        ExplicitHeight = 200
       end
     end
     object tabNovaRemessa: TbsSkinTabSheet
@@ -999,10 +1106,10 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           end
         end
       end
-      object bsSkinDBGrid1: TbsSkinDBGrid
+      object btn: TbsSkinDBGrid
         Left = 0
         Top = 97
-        Width = 748
+        Width = 729
         Height = 236
         HintImageIndex = 0
         TabOrder = 1
@@ -1011,6 +1118,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         WallpaperStretch = False
         UseSkinFont = True
         UseSkinCellHeight = True
+        VScrollBar = bsSkinScrollBar1
         GridLineColor = clWindowText
         DefaultCellHeight = 20
         DrawGraphicFields = False
@@ -1046,6 +1154,40 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             Width = 80
             Visible = True
           end>
+      end
+      object bsSkinScrollBar1: TbsSkinScrollBar
+        Left = 729
+        Top = 97
+        Width = 19
+        Height = 236
+        HintImageIndex = 0
+        TabOrder = 2
+        Visible = False
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'vscrollbar'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 19
+        DefaultHeight = 0
+        UseSkinFont = True
+        Both = False
+        BothMarkerWidth = 19
+        BothSkinDataName = 'bothhscrollbar'
+        CanFocused = False
+        Align = alRight
+        Kind = sbVertical
+        PageSize = 0
+        Min = 0
+        Max = 100
+        Position = 0
+        SmallChange = 1
+        LargeChange = 1
+        ExplicitLeft = 569
+        ExplicitTop = 103
+        ExplicitHeight = 200
       end
     end
   end
