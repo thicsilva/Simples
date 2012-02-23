@@ -27,12 +27,10 @@ uses
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
-  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore;
+  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase;
 
 type
-  TfrmConsVendas = class(TForm)
-    bsSkinStatusBar1: TbsSkinStatusBar;
-    bsBusinessSkinForm1: TbsBusinessSkinForm;
+  TfrmConsVendas = class(TFormBase)
     bsSkinPanel3: TbsSkinPanel;
     srcItensVendas: TDataSource;
     srcVendas: TDataSource;
@@ -120,7 +118,6 @@ type
     bsSkinBevel2: TbsSkinBevel;
     btnCancelar: TbsSkinMenuSpeedButton;
     Column_Status_Pagamento: TcxGridDBColumn;
-    Button1: TButton;
     Print: TPrintDialog;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -128,7 +125,6 @@ type
     procedure cdsItensVendasAfterOpen(DataSet: TDataSet);
     procedure QryVendaAfterOpen(DataSet: TDataSet);
     procedure QryVendaAfterScroll(DataSet: TDataSet);
-    procedure FormShow(Sender: TObject);
     procedure cdsVendasCalcFields(DataSet: TDataSet);
     procedure cdsVendasBeforeOpen(DataSet: TDataSet);
     procedure cdsItensVendasBeforeOpen(DataSet: TDataSet);
@@ -143,8 +139,11 @@ type
     procedure Etiquetas1Click(Sender: TObject);
     procedure VisualizarDevolvidos1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     pvilinha  : integer;
+    procedure CarregaPropriedade;
     { Private declarations }
   public
     { Public declarations }
@@ -156,7 +155,7 @@ var
 implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus,
-  udevolucaoVenda, uConsItensDevolvidos;
+  udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda;
 
 {$R *.dfm}
 
@@ -655,8 +654,16 @@ begin
    frmConsItensDevolvidos.ShowModal;
 end;
 
+procedure TfrmConsVendas.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited
+  //
+end;
+
 procedure TfrmConsVendas.FormShow(Sender: TObject);
 begin
+ inherited;
+
    cmbPeriodoChange(cmbPeriodo);
 
    btnCupomFiscal.Visible := True;
@@ -677,7 +684,7 @@ begin
    pnlmensagem.color      := $00D5FBD6;
    cmbStatus.Visible      := False;
    lblsituacao.Visible    := False;
-   cmbStatus.ItemIndex    := 0;
+   //cmbStatus.ItemIndex    := 0;
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
    grdvendas.Columns[0].Visible := False;
@@ -687,7 +694,7 @@ begin
       frmConsVendas.Caption := 'Consulta e manutenção de Serviços  ';
       pnlmensagem.Caption   := 'Consulta de Serviços ';
       pnlmensagem.color     := clInfoBk;
-      cmbStatus.ItemIndex   := 1;
+      //cmbStatus.ItemIndex   := 1;
       cmbStatus.Visible     := True;
       cmbStatus.Visible     := True;
       lblsituacao.Visible   := True;
@@ -697,7 +704,7 @@ begin
       grdvendas.Columns[0].Visible := True;
    End;
    btnSelecionarClick(btnSelecionar);
-End;
+end;
 
 procedure TfrmConsVendas.BorderodeEntrega1Click(Sender: TObject);
 var liSeqVenda     : Integer;
@@ -1033,7 +1040,16 @@ begin
 end;
 
 procedure TfrmConsVendas.btnEntregueClick(Sender: TObject);
+var Parametros : TStringList;
+    DaoVenda   : TDaoVenda;
+    Venda      : Tvenda;
+
 begin
+   if not cdsVendas.FieldByName('ServicoPago').AsBoolean then
+   begin
+      CaixaMensagem( 'O serviço não foi pago Totalmente', ctAviso, [ cbOk ], 0 );
+      Exit;
+   end;
    if cdsVendas.FieldByName('Status').AsString='4' then
    Begin
       CaixaMensagem( 'O serviço ja foi entregue', ctAviso, [ cbOk ], 0 );
@@ -1052,6 +1068,14 @@ begin
       qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
       qryModific.ParamByName('parStatus').AsString    := '4';
       qryModific.ExecSQL;
+
+      Parametros := TStringList.Create;
+      Parametros.Add(cdsVendas.FieldByName('SeqVenda').AsString);
+      cdsVendas := gConexao.BuscarDadosSQL('Select * From T_vendas Where SeqVenda=:parSeqVenda', Parametros );
+      DaoVenda := TDaoVenda.Create(gConexao);
+      Venda := DaoVenda.CarregarVenda(cdsVendas);
+      venda.Numerovias := StrtoInt(gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador ));
+
    End;
    btnselecionarclick(btnselecionar);
 end;
@@ -1083,6 +1107,12 @@ begin
    cdsVendas.Open;
 
    cdsVendas.Locate('SeqVenda',liNumeroVenda, [] );
+
+end;
+
+procedure TfrmConsVendas.CarregaPropriedade;
+begin
+
 
 end;
 

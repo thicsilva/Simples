@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 552
     Height = 322
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -84,15 +84,9 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitTop = 125
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
-      object Label1: TLabel
-        Left = 12
-        Top = 279
-        Width = 113
-        Height = 14
-        Caption = 'Caminho da impressora'
-      end
       object bsSkinCheckRadioBox1: TbsSkinCheckRadioBox
         Left = 10
         Top = 8
@@ -416,8 +410,8 @@ object frmParametros: TfrmParametros
         RightImageDownIndex = -1
       end
       object chkLigaECF: TbsSkinCheckRadioBox
-        Left = 8
-        Top = 189
+        Left = 471
+        Top = 3
         Width = 79
         Height = 25
         HintImageIndex = 0
@@ -506,9 +500,9 @@ object frmParametros: TfrmParametros
         GroupIndex = 0
         Caption = 'Permitir venda de Servi'#231'os'
       end
-      object chkEmiteEtiqueta: TbsSkinCheckRadioBox
+      object chkData_Automatica: TbsSkinCheckRadioBox
         Left = 201
-        Top = 209
+        Top = 189
         Width = 224
         Height = 25
         HintImageIndex = 0
@@ -534,45 +528,15 @@ object frmParametros: TfrmParametros
         Radio = False
         Checked = False
         GroupIndex = 0
-        Caption = 'Emitir a etiqueta no fechamento da OS'
-      end
-      object chkData_Automatica: TbsSkinCheckRadioBox
-        Left = 201
-        Top = 189
-        Width = 224
-        Height = 25
-        HintImageIndex = 0
-        TabOrder = 15
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'checkbox'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        WordWrap = False
-        AllowGrayed = False
-        State = cbUnchecked
-        ImageIndex = 0
-        Flat = True
-        UseSkinFontColor = True
-        TabStop = True
-        CanFocused = True
-        Radio = False
-        Checked = False
-        GroupIndex = 0
         Caption = 'Data do sistema Automatica'
       end
       object cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox
-        Left = 8
-        Top = 230
+        Left = 7
+        Top = 189
         Width = 160
         Height = 25
         HintImageIndex = 0
-        TabOrder = 16
+        TabOrder = 15
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'checkbox'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -598,11 +562,11 @@ object frmParametros: TfrmParametros
       end
       object chkVendaSemControle: TbsSkinCheckRadioBox
         Left = 201
-        Top = 228
+        Top = 209
         Width = 297
         Height = 25
         HintImageIndex = 0
-        TabOrder = 17
+        TabOrder = 16
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'checkbox'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -625,44 +589,6 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Permitir Vendas  sem informar o numero de controle'
-      end
-      object chkImprimeComprovante: TbsSkinCheckRadioBox
-        Left = 201
-        Top = 248
-        Width = 272
-        Height = 25
-        HintImageIndex = 0
-        TabOrder = 18
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'checkbox'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        WordWrap = False
-        AllowGrayed = False
-        State = cbUnchecked
-        ImageIndex = 0
-        Flat = True
-        UseSkinFontColor = True
-        TabStop = True
-        CanFocused = True
-        Radio = False
-        Checked = False
-        GroupIndex = 0
-        Caption = 'Imprimir Comprovante na Venda ou Servi'#231'o'
-      end
-      object edtCaminhoImpressao: TEdit
-        Left = 131
-        Top = 274
-        Width = 121
-        Height = 22
-        TabOrder = 19
-        Text = 'edtCaminhoImpressao'
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
@@ -976,8 +902,6 @@ object frmParametros: TfrmParametros
     end
     object tabContasAReceber: TbsSkinTabSheet
       Caption = 'Contas a Receber'
-      ExplicitLeft = 2
-      ExplicitTop = 15
       object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
         Left = 11
         Top = 6
@@ -1037,6 +961,203 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Trabalha com recebimento por lote'
+      end
+      object bsSkinLabel6: TbsSkinLabel
+        Left = 11
+        Top = 49
+        Width = 79
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvNone
+        Caption = 'TIpo de Baixa'
+        AutoSize = False
+      end
+      object cmbTipoBaixa: TbsSkinComboBox
+        Left = 96
+        Top = 49
+        Width = 177
+        Height = 20
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinDataName = 'combobox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        UseSkinSize = True
+        ToolButtonStyle = False
+        AlphaBlend = False
+        AlphaBlendValue = 0
+        AlphaBlendAnimation = False
+        ListBoxCaptionMode = False
+        ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+        ListBoxDefaultFont.Color = clWindowText
+        ListBoxDefaultFont.Height = 14
+        ListBoxDefaultFont.Name = 'Arial'
+        ListBoxDefaultFont.Style = []
+        ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+        ListBoxDefaultCaptionFont.Color = clWindowText
+        ListBoxDefaultCaptionFont.Height = 14
+        ListBoxDefaultCaptionFont.Name = 'Arial'
+        ListBoxDefaultCaptionFont.Style = []
+        ListBoxDefaultItemHeight = 20
+        ListBoxCaptionAlignment = taLeftJustify
+        ListBoxUseSkinFont = True
+        ListBoxUseSkinItemHeight = True
+        ListBoxWidth = 0
+        HideSelection = True
+        AutoComplete = True
+        ImageIndex = -1
+        CharCase = ecNormal
+        DefaultColor = clWindow
+        Text = 'Baixa Normal'
+        Items.Strings = (
+          'Baixa Normal'
+          'Baixa com Contrle de Brinde')
+        ItemIndex = 0
+        DropDownCount = 8
+        HorizontalExtent = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        Sorted = False
+        Style = bscbFixedStyle
+      end
+    end
+    object bsSkinTabSheet3: TbsSkinTabSheet
+      Caption = 'Impress'#227'o'
+      ExplicitLeft = 0
+      ExplicitTop = 15
+      object Label1: TLabel
+        Left = 8
+        Top = 9
+        Width = 113
+        Height = 14
+        Caption = 'Caminho da impressora'
+      end
+      object Label2: TLabel
+        Left = 11
+        Top = 102
+        Width = 159
+        Height = 14
+        Caption = 'Numero de Vias do Comprovante'
+      end
+      object edtCaminhoImpressao: TEdit
+        Left = 127
+        Top = 7
+        Width = 410
+        Height = 22
+        TabOrder = 0
+        Text = 'edtCaminhoImpressao'
+      end
+      object chkImprimeComprovante: TbsSkinCheckRadioBox
+        Left = 3
+        Top = 41
+        Width = 272
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Imprimir Comprovante na Venda ou Servi'#231'o'
+      end
+      object chkEmiteEtiqueta: TbsSkinCheckRadioBox
+        Left = 3
+        Top = 72
+        Width = 224
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Emitir a etiqueta no fechamento da OS'
+      end
+      object editNumeroVias: TbsSkinSpinEdit
+        Left = 176
+        Top = 96
+        Width = 54
+        Height = 20
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinDataName = 'spinedit'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        DefaultColor = clWindow
+        UseSkinSize = True
+        ValueType = vtInteger
+        Value = 1.000000000000000000
+        Increment = 1.000000000000000000
+        EditorEnabled = True
+        MaxLength = 0
       end
     end
   end
@@ -1247,30 +1368,30 @@ object frmParametros: TfrmParametros
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
     Left = 377
-    Top = 104
+    Top = 176
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 325
-    Top = 58
+    Top = 130
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
     Left = 325
-    Top = 85
+    Top = 157
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
     Left = 325
-    Top = 142
+    Top = 214
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 325
-    Top = 114
+    Top = 186
   end
 end

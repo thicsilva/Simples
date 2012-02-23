@@ -2,7 +2,8 @@ unit uDaoVenda;
 
 interface
 
-uses DBClient,Classes,uClassConexao,
+uses DBClient,Classes,uClassConexao,uClassVenda,uDaoCliente,
+     uDaoFuncionario,uDaoFormaPagamento,
      Dao, SqlExpr;
 
 type TDaoVenda = class
@@ -14,13 +15,30 @@ type TDaoVenda = class
      Function RetonarVendasSemSinalPago : TclientDataSet;
      Procedure MarcarComoPagouSinal(IDVenda : Integer);
      Procedure MarcarComoServicoPago(IDVenda : Integer);
-
+     Function  CarregarVenda(DadosVendas : TClientDataSet) : TVenda;
 end;
 
 
 implementation
 
 { TDaoVenda }
+
+function TDaoVenda.CarregarVenda(DadosVendas: TClientDataSet): TVenda;
+var DaoFuncionario : TDaoFuncionario;
+    DaoFormaPagamento : TDaoFormaPagamento;
+    DaoCliente : TDaoCliente;
+    Venda : TVenda;
+begin
+    DaoFuncionario    := TDaoFuncionario.Create(FConexao);
+    DaoFormaPagamento := TDaoFormaPagamento.Create(FConexao);
+    DaoCliente        := TDaoCliente.Create(FConexao);
+
+    Venda := TVenda.Create;
+    Venda.FormaPagamento := DaoFormaPagamento.Buscar(DadosVendas.fieldByname('Cod_FormaPagamento').AsInteger);
+    Venda.Funcionario := DaoFuncionario.Buscar(DadosVendas.fieldByname('Cod_Funcionario').AsInteger);
+    Venda.Cliente := DaoCliente.Buscar(DadosVendas.fieldByname('Cod_Cliente').AsInteger);
+    Result := Venda;
+end;
 
 constructor TDaoVenda.Create(conexao: TConexao);
 begin

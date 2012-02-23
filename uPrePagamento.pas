@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinGrids, bsDBGrids, bsSkinCtrls, DB, DBClient, StdCtrls, EditNew,
   bsdbctrls, Mask, bsSkinBoxCtrls, ExtCtrls, ToolWin, ComCtrls, FMTBcd, SqlExpr,sqltimst,
-  SimpleDS, Provider, BusinessSkinForm;
+  SimpleDS, Provider, BusinessSkinForm,uclassVenda, RDprint;
 
 type
   TfrmPrePagamento = class(TForm)
@@ -65,6 +65,7 @@ type
     bsSkinStdLabel1: TbsSkinStdLabel;
     lblNome_cliente: TbsSkinLabel;
     cmbTipoPesquisa: TbsSkinComboBox;
+    RDprint1: TRDprint;
     procedure edtcod_PagamentoExit(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
@@ -117,9 +118,14 @@ var liseqParcela    : Integer;
     liqtde_Parcelas : Integer;
     I               : Integer;
     lsPrazo         : String;
-    DaoVenda : TDaoVenda;
+    DaoVenda        : TDaoVenda;
+    Venda           : TVenda;
+    TotalPago       : Real;
+    cdsItensVenda   : TClientDataSet;
+    cdsVendas       : TClientDataSet;
+    Parametros      : TStringList;
 begin
-
+     TotalPago := 0;
    case frmPrePagamento.tag of
       0: // prepagamento
       Begin
@@ -169,7 +175,7 @@ begin
          cdsMovCaixa.Open;
 
          sdtsPesqOS.Close;
-         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total From T_vendas Where SeqVenda=:parControle';
+         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total, * From T_vendas Where SeqVenda=:parControle';
          sdtsPesqOS.DataSet.ParamByName('parControle').AsString := cdsTempPagamentos.FieldByName('SeqOS').AsString;
          sdtsPesqOS.Open;
 
@@ -270,7 +276,28 @@ begin
             cdsPagamento.ApplyUpdates(-1);
          End;
       End;
+      TotalPago := TotalPago + cdsTempPagamentos.FieldByName('Valor').AsFloat;
       cdsTempPagamentos.Next;
+   End;
+   if TotalPago>0 then
+   Begin
+      Parametros := TStringList.Create;
+      Parametros.Add(edtNumeroOs.Text);
+      cdsVendas := gConexao.BuscarDadosSQL('Select * From T_vendas Where SeqVenda=:parSeqVenda', Parametros );
+      DaoVenda := TDaoVenda.Create(gConexao);
+      Venda := DaoVenda.CarregarVenda(cdsVendas);
+      venda.Numerovias := StrtoInt(gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador ));
+     {
+      venda.Imprimir(cdsVendas,gConexao.BuscarDadosSQL('select Prod.Codigo,Prod.Descricao, Itens.* '+
+                                                       'from T_ItensVendas itens '+
+                                                       '    left join T_produtos Prod on Prod.Codigo = Itens.Cod_Produto '+
+                                                       'Where SeqVenda=:parSeqVenda',Parametros ), TotalPago, RDprint1 );
+      }
+      venda.ImprimirBematec(cdsVendas,gConexao.BuscarDadosSQL('select Prod.Codigo,Prod.Descricao,Prod.unid as Unidade, Itens.* '+
+                                                       'from T_ItensVendas itens '+
+                                                       '    left join T_produtos Prod on Prod.Codigo = Itens.Cod_Produto '+
+                                                       'Where SeqVenda=:parSeqVenda',Parametros ),gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),TotalPago);
+
    End;
    frmprepagamento.Tag := 1;
    Close;
@@ -358,7 +385,7 @@ begin
       edtNumeroOs.SetFocus;
       exit;
    End;
-   if sdtsPesqOS.FieldByName('Status').Asinteger=3 then
+   if sdtsPesqOS.FieldByName('Status').AsString='3' then
    Begin
       CaixaMensagem( 'Impossivel Pre-Pagamento de O.S Finalizada ', ctAviso, [ cbOk ], 0 );
       edtNumeroOs.SetFocus;

@@ -385,7 +385,6 @@ end;
 
 procedure TfrmPrincipal.ConfiguraAmbiente;
 begin
-   RibonFiscal.Visible :=false;
 
    MenuPrincipal.ActiveTab := dxRibCadastro;
    RibonAtendimentoCliente.Visible := false;
@@ -398,7 +397,6 @@ begin
    Begin
        actServicos.Visible      := True;
        actconsServicos.Visible  := True;
-       RibonFiscal.Visible      := True;
        RibonAtendimentoCliente.Visible  := False;
    End;
 

@@ -44,7 +44,6 @@ type
     chkLigaECF: TbsSkinCheckRadioBox;
     chkCondicaoNaVenda: TbsSkinCheckRadioBox;
     chkVendeServico: TbsSkinCheckRadioBox;
-    chkEmiteEtiqueta: TbsSkinCheckRadioBox;
     chkData_Automatica: TbsSkinCheckRadioBox;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
@@ -53,18 +52,31 @@ type
     bsSkinBevel2: TbsSkinBevel;
     cnkCadastraClienteSemCPF: TbsSkinCheckRadioBox;
     chkVendaSemControle: TbsSkinCheckRadioBox;
-    chkImprimeComprovante: TbsSkinCheckRadioBox;
-    edtCaminhoImpressao: TEdit;
-    Label1: TLabel;
     tabContasAReceber: TbsSkinTabSheet;
     chkTrabalhaComRemessa: TbsSkinCheckRadioBox;
     chkRecebimentoLote: TbsSkinCheckRadioBox;
+    bsSkinLabel6: TbsSkinLabel;
+    cmbTipoBaixa: TbsSkinComboBox;
+    bsSkinTabSheet3: TbsSkinTabSheet;
+    Label1: TLabel;
+    edtCaminhoImpressao: TEdit;
+    chkImprimeComprovante: TbsSkinCheckRadioBox;
+    chkEmiteEtiqueta: TbsSkinCheckRadioBox;
+    editNumeroVias: TbsSkinSpinEdit;
+    Label2: TLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cmbNome_ClienteChange(Sender: TObject);
     procedure cmbCod_ClienteChange(Sender: TObject);
   private
+    procedure GravarParametrosContaAReceber;
+    procedure GravarParametrosImpressao;
+    procedure RecuperarParametrosContasAReceber;
+    procedure RecuperarParametrosImpressao;
+
+    function RetornaSimouNao(condicao : Boolean): String;
+    function RetornarVerdadeirOuFalso(condicao : string) : Boolean;
     { Private declarations }
   public
     { Public declarations }
@@ -85,8 +97,11 @@ end;
 
 procedure TfrmParametros.btnokClick(Sender: TObject);
 begin
-   //[parametros de sistema]
 
+   GravarParametrosContaAReceber;
+   GravarParametrosImpressao;
+
+   //[parametros de sistema]
    gsParametros.WriteString('ACESSODADOS','HostName',edtHostName.text);
    gsParametros.WriteString('ACESSODADOS','DataBaseName',edtDatabaseName.text);
    gsParametros.WriteString('ACESSODADOS','Usuario',edtUsuario.text);
@@ -105,15 +120,6 @@ begin
    gParametros.Gravar( '', '[CADASTRO]', 'ValorOSPadrao', edtVlr_Servico.Text ,gsOperador );
 
 
-   if chkTrabalhaComRemessa.Checked Then
-      gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'SIM' ,gsOperador )
-   Else
-      gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' ,gsOperador );
-
-   if chkRecebimentoLote.Checked Then
-      gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', 'SIM' ,gsOperador )
-   Else
-      gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' ,gsOperador );
 
 
    if chkVendeServico.Checked Then
@@ -187,6 +193,10 @@ begin
    cdsCadClientes.ProviderName := dspVariavel.Name;
    cdsCadClientes.Open;
 
+   RecuperarParametrosContasAReceber;
+   RecuperarParametrosImpressao;
+
+
    //[parametros de sistema]
 
    edtHostName.text         := gsParametros.ReadString('ACESSODADOS','HostName','(Local)');
@@ -230,16 +240,6 @@ begin
    Else
       chkLigaECF.Checked := True;
 
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
-      chkTrabalhaComRemessa.Checked := True
-   Else
-      chkTrabalhaComRemessa.Checked := False;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' )) = 'SIM' Then
-      chkRecebimentoLote.Checked := True
-   Else
-      chkRecebimentoLote.Checked := False;
-
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' )) = 'SIM' Then
       chkImprimeComprovante.Checked := True
    Else
@@ -265,8 +265,46 @@ begin
    Else
       chkData_Automatica.Checked := True;
 
+end;
 
+procedure TfrmParametros.GravarParametrosContaAReceber;
+begin
+   gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa',RetornaSimouNao(chkTrabalhaComRemessa.Checked),gsOperador );
+   gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', RetornaSimouNao(chkRecebimentoLote.Checked) ,gsOperador );
+   gParametros.Gravar( '', '[CADASTRO]', 'TipoBaixa', IntToStr(cmbTipoBaixa.ItemIndex) ,gsOperador );
+end;
 
+procedure TfrmParametros.GravarParametrosImpressao;
+begin
+   gParametros.Gravar( '', '[IMPRESSAO]', 'NumeroVias',editNumeroVias.Text,gsOperador );
+end;
+
+procedure TfrmParametros.RecuperarParametrosContasAReceber;
+begin
+   cmbTipoBaixa.ItemIndex        := StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador ));
+   chkTrabalhaComRemessa.Checked := RetornarVerdadeirOuFalso(Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )));
+   chkRecebimentoLote.Checked    := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' )));
+end;
+
+procedure TfrmParametros.RecuperarParametrosImpressao;
+begin
+    editNumeroVias.Text     := gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador );
+end;
+
+function TfrmParametros.RetornarVerdadeirOuFalso(condicao: string): Boolean;
+begin
+   if condicao='SIM' then
+      Result := True
+   Else
+     Result := False;   
+end;
+
+function TfrmParametros.RetornaSimouNao(Condicao: Boolean): String;
+begin
+ if Condicao then
+    Result := 'SIM'
+ else
+    Result := 'NAO';
 end;
 
 end.

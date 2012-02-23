@@ -821,7 +821,7 @@ begin
       Exit
    End;
 
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
+   If  StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
    Begin
       frmbaixaBrinde := TfrmbaixaBrinde.Create(Self);
       frmbaixaBrinde.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;

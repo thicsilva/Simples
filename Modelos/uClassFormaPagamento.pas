@@ -7,12 +7,13 @@ type TFormaPagamento = class
     FIdFormaPagamento: Integer;
     FImprimeMensagem: Boolean;
     FMensagem: String;
+    FId: Integer;
     procedure SetDescricao(const Value: String);
-    procedure SetIdFormaPagamento(const Value: Integer);
     procedure SetImprimeMensagem(const Value: Boolean);
     procedure SetMensagem(const Value: String);
+    procedure SetId(const Value: Integer);
   public
-    property IdFormaPagamento : Integer read FIdFormaPagamento write SetIdFormaPagamento;
+    property Id : Integer read FId write SetId;
     property Descricao : String read FDescricao write SetDescricao;
     property ImprimeMensagem : Boolean read FImprimeMensagem write SetImprimeMensagem;
     property Mensagem : String read FMensagem write SetMensagem;
@@ -27,9 +28,9 @@ begin
   FDescricao := Value;
 end;
 
-procedure TFormaPagamento.SetIdFormaPagamento(const Value: Integer);
+procedure TFormaPagamento.SetId(const Value: Integer);
 begin
-  FIdFormaPagamento := Value;
+  FId := Value;
 end;
 
 procedure TFormaPagamento.SetImprimeMensagem(const Value: Boolean);

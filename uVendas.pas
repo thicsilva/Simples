@@ -25,7 +25,7 @@ uses
   Dialogs, DB, DBClient, Provider, ADODB, StdCtrls, bsSkinCtrls, Mask,
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
-  SimpleDS, sqltimst, RDprint;
+  SimpleDS, sqltimst, RDprint, uClassVenda;
 
 type
   TfrmVendas = class(TForm)
@@ -227,7 +227,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
-  uCalMQuadrado, DaoRemessa;
+  uCalMQuadrado, DaoRemessa, uDaoVenda;
 
 {$R *.dfm}
 procedure tfrmVendas.AtualizaTabelas();
@@ -677,6 +677,8 @@ Var liSeqvenda     : integer;
     DaoRemessa : TDaoRemessa;
     Texto: string;
     F: TextFile;
+    loVenda : TVenda;
+  DaoVenda: TDaoVenda;
 begin
 
 {$REGION 'Criticas e Validação das Informações'}
@@ -1226,64 +1228,14 @@ begin
    frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
 
 {$REGION 'Impressao do comprovante de Venda'}
-
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' )) = 'SIM' Then
    Begin
-       AssignFile(F, gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1') );
-      Rewrite(F);
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito('_','_',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+'             '+ copy(gsVersis,5,6)+' Data:' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy(gsNomeEmp,1,39));
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy('Nota de Pagamento',1,39));
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy(inczero(cdsVenda.FieldByName('Cod_Cliente').asString,5)+' - '+ cdsVenda.FieldByName('Nome_Cliente').asString,1, 39 ) );
-      WriteLn(F, '',c17cpi+EscDraft+'Emissao...: '+formatdateTime('dd/mm/YYYY',cdsVenda.FieldByName('Data_Venda').asDatetime)+' Orc.: '+incZero(cdsVenda.FieldByName('SeqVenda').asString,8) );
-      WriteLn(F, '',c17cpi+EscDraft+'Forma Pag.: '+Copy(inczero(cdsVenda.FieldByName('Cod_FormaPagamento').asString,3)+'-'+'Nome forma de pagamento',1,25));
-      WriteLn(F, '','Vendedor..: '+Copy(inczero(cdsVenda.FieldByName('Cod_Funcionario').asString,3)+'-'+'Nome Funcionario',1,25));
-      WriteLn(F, '','O.S Numero: '+inczero(cdsVenda.FieldByName('Controle').asString,6) );
-      WriteLn(F, '',IncDigito( '=','=',39,0));
-      WriteLn(F, '', 'Codigo |P R O D U T O S           |Und|' );
-      WriteLn(F, '', 'Quatidade|Pc. Unit| Desc.|   Vlr Total|' );
-      WriteLn(F, '', IncDigito( '=', '=', 39, 0 ) );
-
-      lrTot_Produtos := 0;
-      lrTot_Desconto := 0;
-      liCont         := 0;
-
-      cdsItensVendasTMP.First;
-      while  Not cdsItensVendasTMP.Eof  do
-      Begin
-         WriteLn(F, '', 001, inczero(cdsItensVendasTMP.FieldByName('Codigo' ).AsString,5) + ' ' +
-                                           Copy( cdsItensVendasTMP.FieldByName( 'Descricao' ).AsString, 1, 30 ) );
-
-         WriteLn(F, '', cdsItensVendasTmp.FieldByName('Unidade').asString +
-                        IncDigito( FormatFloat( '#,##0',cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat),' ',5,0) +
-                        IncDigito( FormatFloat( '#,##0.00', Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) ),' ',8,0)+
-                        IncDigito( FormatFloat( '#,##0.00', cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat ),' ',8,0)+
-                        IncDigito( FormatFloat( '#,##0.00', ( cdsItensVendasTMP.FieldByName( 'Qtde_Venda' ).AsFloat *
-                                                              Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat -
-                                                                          cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat , 2 ) ) ),' ',14,0) );
-
-         lrTot_Produtos := lrTot_Produtos + ( cdsItensVendasTMP.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( cdsItensVendasTMP.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
-         lrTot_Desconto := lrTot_Desconto + ( cdsItensVendasTMP.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendasTMP.FieldByName( 'Qtde_venda').AsFloat ) ;
-
-         liCont := liCont + 1;
-         pviLinha := pviLinha + 1;
-         cdsItensVendasTMP.Next;
-      end;
-      WriteLn(F, '', IncDigito( '-', '-', 39, 0 ) );
-      WriteLn(F, '', 'Total de Produtos Listado.:'+IncDigito(  IntToStr( liCont ),' ',10,0) );
-      WriteLn(F, '', 'Total dos Produtos........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Produtos ) ,' ',10,0) ) ;
-      WriteLn(F, '', 'Desconto Total ...........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Desconto ) ,' ',10,0) );
-      WriteLn(F, '', 'Valor Total...............:'+IncDigito( FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ) ,' ',10,0) );
-      WriteLn(F, '',IncDigito( '=', '=', 39, 0 ) );
-      WriteLn(F, '', '    DOCUMENTO SEM VALOR FISCAL        ' );
-      CloseFile(F);
-
+      DaoVenda := TDaoVenda.Create(gConexao);
+      loVenda  := DaoVenda.CarregarVenda(cdsVenda);
+      lovenda.Empresa.Descricao := GsNomeEmp;
+      //loVenda.Imprimir(cdsVenda,cdsItensVendasTMP); com rd print
+      loVenda.ImprimirMatricial(cdsVenda,cdsItensVendasTMP, gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'));
    End;
-
 {$ENDREGION}
 
 {$REGION 'Mensagem Final ao Usuario'}

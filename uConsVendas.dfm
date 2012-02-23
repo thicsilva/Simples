@@ -14,53 +14,17 @@ object frmConsVendas: TfrmConsVendas
   OldCreateOrder = False
   Position = poDesigned
   WindowState = wsMaximized
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object bsSkinStatusBar1: TbsSkinStatusBar
-    Left = 0
-    Top = 518
-    Width = 946
-    Height = 21
-    HintImageIndex = 0
-    TabOrder = 0
-    SkinData = frmPrincipal.SkinPrincipal
-    SkinDataName = 'statusbar'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = 14
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    DefaultWidth = 0
-    DefaultHeight = 0
-    UseSkinFont = True
-    RibbonStyle = False
-    ImagePosition = bsipDefault
-    TransparentMode = False
-    CaptionImageIndex = -1
-    RealHeight = -1
-    AutoEnabledControls = True
-    CheckedMode = False
-    Checked = False
-    DefaultAlignment = taLeftJustify
-    DefaultCaptionHeight = 22
-    BorderStyle = bvNone
-    CaptionMode = False
-    RollUpMode = False
-    RollUpState = False
-    NumGlyphs = 1
-    Spacing = 2
-    Caption = 'bsSkinStatusBar1'
-    Align = alBottom
-    SizeGrip = False
-  end
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
     Top = 146
     Width = 946
-    Height = 372
+    Height = 393
     HintImageIndex = 0
-    TabOrder = 1
+    TabOrder = 0
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -88,13 +52,15 @@ object frmConsVendas: TfrmConsVendas
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alClient
+    ExplicitHeight = 372
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
       Width = 944
-      Height = 370
+      Height = 391
       Align = alClient
       TabOrder = 0
+      ExplicitHeight = 370
       object GrdVendas: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
         DataController.DataSource = srcVendas
@@ -300,7 +266,7 @@ object frmConsVendas: TfrmConsVendas
     Width = 946
     Height = 69
     HintImageIndex = 0
-    TabOrder = 2
+    TabOrder = 1
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -850,15 +816,6 @@ object frmConsVendas: TfrmConsVendas
       Spacing = 1
       OnClick = btnSelecionarClick
     end
-    object Button1: TButton
-      Left = 858
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 8
-      OnClick = Button1Click
-    end
   end
   object pnlmensagem: TPanel
     Left = 0
@@ -875,7 +832,7 @@ object frmConsVendas: TfrmConsVendas
     Font.Style = [fsBold]
     ParentBackground = False
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
@@ -893,7 +850,7 @@ object frmConsVendas: TfrmConsVendas
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
-    TabOrder = 4
+    TabOrder = 3
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -1284,61 +1241,6 @@ object frmConsVendas: TfrmConsVendas
       end
     end
   end
-  object bsBusinessSkinForm1: TbsBusinessSkinForm
-    QuickButtons = <>
-    QuickButtonsShowHint = False
-    QuickButtonsShowDivider = True
-    ClientInActiveEffect = False
-    ClientInActiveEffectType = bsieSemiTransparent
-    DisableSystemMenu = False
-    AlwaysResize = False
-    PositionInMonitor = bspDefault
-    UseFormCursorInNCArea = False
-    MaxMenuItemsInWindow = 0
-    ClientWidth = 0
-    ClientHeight = 0
-    HideCaptionButtons = False
-    AlwaysShowInTray = False
-    LogoBitMapTransparent = False
-    AlwaysMinimizeToTray = False
-    UseSkinFontInMenu = True
-    ShowIcon = False
-    MaximizeOnFullScreen = False
-    AlphaBlend = True
-    AlphaBlendAnimation = True
-    AlphaBlendValue = 200
-    ShowObjectHint = False
-    MenusAlphaBlend = True
-    MenusAlphaBlendAnimation = True
-    MenusAlphaBlendValue = 200
-    DefCaptionFont.Charset = DEFAULT_CHARSET
-    DefCaptionFont.Color = clBtnText
-    DefCaptionFont.Height = 14
-    DefCaptionFont.Name = 'Arial'
-    DefCaptionFont.Style = [fsBold]
-    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
-    DefInActiveCaptionFont.Color = clBtnShadow
-    DefInActiveCaptionFont.Height = 14
-    DefInActiveCaptionFont.Name = 'Arial'
-    DefInActiveCaptionFont.Style = [fsBold]
-    DefMenuItemHeight = 20
-    DefMenuItemFont.Charset = DEFAULT_CHARSET
-    DefMenuItemFont.Color = clWindowText
-    DefMenuItemFont.Height = 14
-    DefMenuItemFont.Name = 'Arial'
-    DefMenuItemFont.Style = []
-    UseDefaultSysMenu = True
-    SkinData = frmPrincipal.SkinPrincipal
-    MinHeight = 0
-    MinWidth = 0
-    MaxHeight = 0
-    MaxWidth = 0
-    Magnetic = False
-    MagneticSize = 5
-    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 592
-    Top = 304
-  end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
     Left = 290
@@ -1405,7 +1307,7 @@ object frmConsVendas: TfrmConsVendas
     RegistroUsuario.SerieProduto = 'SITE-0306/00320'
     RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
     About = 'RDprint 4.0c - Registrado'
-    Acentuacao = Transliterate
+    Acentuacao = SemAcento
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
     UsaGerenciadorImpr = True
@@ -1629,6 +1531,69 @@ object frmConsVendas: TfrmConsVendas
   end
   object cxPropertiesStore1: TcxPropertiesStore
     Components = <
+      item
+        Component = cmbPeriodo
+        Properties.Strings = (
+          'Align'
+          'AlignWithMargins'
+          'AlphaBlend'
+          'AlphaBlendAnimation'
+          'AlphaBlendValue'
+          'Anchors'
+          'AutoComplete'
+          'CharCase'
+          'Cursor'
+          'DefaultColor'
+          'DefaultFont'
+          'DefaultHeight'
+          'DefaultWidth'
+          'DropDownCount'
+          'Enabled'
+          'Font'
+          'Height'
+          'HelpContext'
+          'HelpKeyword'
+          'HelpType'
+          'HideSelection'
+          'Hint'
+          'HintImageIndex'
+          'HintImageList'
+          'HintTitle'
+          'HorizontalExtent'
+          'ImageIndex'
+          'Images'
+          'ItemIndex'
+          'Items'
+          'Left'
+          'ListBoxCaption'
+          'ListBoxCaptionAlignment'
+          'ListBoxCaptionMode'
+          'ListBoxDefaultCaptionFont'
+          'ListBoxDefaultFont'
+          'ListBoxDefaultItemHeight'
+          'ListBoxUseSkinFont'
+          'ListBoxUseSkinItemHeight'
+          'ListBoxWidth'
+          'Margins'
+          'Name'
+          'PopupMenu'
+          'ShowHint'
+          'SkinData'
+          'SkinDataName'
+          'Sorted'
+          'Style'
+          'TabOrder'
+          'TabStop'
+          'TabWidths'
+          'Tag'
+          'Text'
+          'ToolButtonStyle'
+          'Top'
+          'UseSkinFont'
+          'UseSkinSize'
+          'Visible'
+          'Width')
+      end
       item
         Component = cmbStatus
         Properties.Strings = (

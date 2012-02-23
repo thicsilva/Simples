@@ -3,16 +3,17 @@ unit uClassCliente;
 interface
 type TCliente = class
   private
-    FDescrcao: string;
-    FIdCliente: integer;
+    FDescricao: string;
     FCPF: String;
-    procedure SetDescrcao(const Value: string);
-    procedure SetIdCliente(const Value: integer);
+    FId: integer;
+    procedure SetDescricao(const Value: string);
     procedure SetCPF(const Value: String);
+    procedure SetId(const Value: integer);
   published
    public
-     property IdCliente : integer read FIdCliente write SetIdCliente;
-     property Descrcao : string read FDescrcao write SetDescrcao;
+     property Id : integer read FId write SetId;
+     property Descricao : string read FDescricao write SetDescricao;
+
      property CPF : String read FCPF write SetCPF;
 
 end;
@@ -25,14 +26,15 @@ begin
   FCPF := Value;
 end;
 
-procedure TCliente.SetDescrcao(const Value: string);
+procedure TCliente.SetDescricao(const Value: string);
 begin
-  FDescrcao := Value;
+  FDescricao := Value;
 end;
 
-procedure TCliente.SetIdCliente(const Value: integer);
+procedure TCliente.SetId(const Value: integer);
 begin
-  FIdCliente := Value;
+  FId := Value;
 end;
+
 
 end.

@@ -90,7 +90,9 @@ uses
   uClassFuncionario in 'Modelos\uClassFuncionario.pas',
   uDaoFuncionario in 'Dao\uDaoFuncionario.pas',
   uClassEmpresa in 'Modelos\uClassEmpresa.pas',
-  uClassFormaPagamento in 'Modelos\uClassFormaPagamento.pas';
+  uClassFormaPagamento in 'Modelos\uClassFormaPagamento.pas',
+  uDaoCliente in 'Dao\uDaoCliente.pas',
+  uDaoFormaPagamento in 'Dao\uDaoFormaPagamento.pas';
 
 {$R *.res}
 
