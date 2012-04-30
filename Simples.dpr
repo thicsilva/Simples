@@ -1,11 +1,6 @@
 program Simples;
 
 uses
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uMensagens in 'uMensagens.pas' {FrmMensagens},
@@ -78,7 +73,7 @@ uses
   DaoRemessa in 'Dao\DaoRemessa.pas',
   Dao in 'Dao\Dao.pas',
   DaoSupervisor in 'Dao\DaoSupervisor.pas',
-  uLancarComanda in 'uLancarComanda.pas' {Form1},
+  uLancarComanda in 'uLancarComanda.pas' {frmLancaComanda},
   uConsultasSemSinalPago in 'uConsultasSemSinalPago.pas' {frmConsultaSemSinalPago},
   uclassContaCorrente in 'Modelos\uclassContaCorrente.pas',
   uClassDaoContaCorrente in 'Modelos\uClassDaoContaCorrente.pas',
@@ -92,16 +87,30 @@ uses
   uClassEmpresa in 'Modelos\uClassEmpresa.pas',
   uClassFormaPagamento in 'Modelos\uClassFormaPagamento.pas',
   uDaoCliente in 'Dao\uDaoCliente.pas',
-  uDaoFormaPagamento in 'Dao\uDaoFormaPagamento.pas';
+  uDaoFormaPagamento in 'Dao\uDaoFormaPagamento.pas',
+  uCadCaixas in 'uCadCaixas.pas' {frmCadCaixas},
+  uCadSetores in 'uCadSetores.pas' {frmCadsetores},
+  uDaoSaldo in 'Dao\uDaoSaldo.pas',
+  uClassSaldo in 'Modelos\uClassSaldo.pas',
+  uFuncoesMP4000 in 'uFuncoesMP4000.pas',
+  uClassEndereco in 'Modelos\uClassEndereco.pas',
+  uDaoItemVenda in 'Dao\uDaoItemVenda.pas',
+  uClassItemVenda in 'Modelos\uClassItemVenda.pas',
+  uDaoCaixaMovimento in 'Dao\uDaoCaixaMovimento.pas',
+  uRelAnaliseFinanceira in 'uRelAnaliseFinanceira.pas' {frmRelAnaliseFinanceira},
+  uClassCorrecao in 'Modelos\uClassCorrecao.pas',
+  uDaoCorrecao in 'Dao\uDaoCorrecao.pas',
+  uTransferenciaEntreSetores in 'uTransferenciaEntreSetores.pas' {frmTransferenciaDeSetores},
+  uDescontoVenda in 'uDescontoVenda.pas' {FrmDescontoVenda};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.Title := 'Simples - Sistema Simples de Administração';
-  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TfrmConsultaSemSinalPago, frmConsultaSemSinalPago);
+  Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TFrmDescontoVenda, FrmDescontoVenda);
+  Frmlogin.ShowModal;
   Application.Run;
 end.

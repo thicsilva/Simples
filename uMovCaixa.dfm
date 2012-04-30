@@ -4,7 +4,7 @@ object frmMovCaixa: TfrmMovCaixa
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o de lan'#231'amentos do caixa'
   ClientHeight = 399
-  ClientWidth = 790
+  ClientWidth = 813
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmMovCaixa: TfrmMovCaixa
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 790
+    Width = 813
     Height = 44
     AutoSize = True
     Bands = <
@@ -27,10 +27,10 @@ object frmMovCaixa: TfrmMovCaixa
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 786
+        Width = 809
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.SkinPrincipal
+    SkinData = FrmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
     object bsSkinSpeedButton2: TbsSkinSpeedButton
@@ -73,11 +73,11 @@ object frmMovCaixa: TfrmMovCaixa
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 777
+      Width = 800
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.SkinPrincipal
+      SkinData = FrmPrincipal.SkinPrincipal
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -115,14 +115,14 @@ object frmMovCaixa: TfrmMovCaixa
       AutoShowHideCaptions = False
       ShowCaptions = True
       Flat = True
-      Images = frmPrincipal.Imagebutoes
+      Images = FrmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 678
+        Left = 775
         Top = 0
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -156,12 +156,12 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object btnPrePagamento: TbsSkinSpeedButton
-        Left = 195
+        Left = 292
         Top = 0
         Width = 97
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -200,7 +200,7 @@ object frmMovCaixa: TfrmMovCaixa
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -234,12 +234,12 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object BtnCancela: TbsSkinSpeedButton
-        Left = 494
+        Left = 591
         Top = 0
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -274,24 +274,24 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 634
+        Left = 731
         Top = 0
         Width = 44
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 603
         ExplicitTop = -5
       end
       object btnok: TbsSkinSpeedButton
-        Left = 564
+        Left = 661
         Top = 0
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -331,19 +331,19 @@ object frmMovCaixa: TfrmMovCaixa
         Width = 55
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 64
         ExplicitTop = -5
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 292
+        Left = 389
         Top = 0
         Width = 37
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 286
@@ -355,7 +355,7 @@ object frmMovCaixa: TfrmMovCaixa
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -389,12 +389,12 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object btnFecharcaixa: TbsSkinSpeedButton
-        Left = 399
+        Left = 496
         Top = 0
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -424,16 +424,16 @@ object frmMovCaixa: TfrmMovCaixa
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnFecharcaixaClick
-        ExplicitLeft = 415
+        ExplicitLeft = 490
         ExplicitTop = 8
       end
       object btnImprimir: TbsSkinSpeedButton
-        Left = 329
+        Left = 426
         Top = 0
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -467,22 +467,62 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 469
+        Left = 566
         Top = 0
         Width = 25
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 469
         ExplicitTop = -5
+      end
+      object btnRecebimentos: TbsSkinSpeedButton
+        Left = 195
+        Top = 0
+        Width = 97
+        Height = 40
+        HintImageIndex = 0
+        SkinData = FrmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 11
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Recebimentos'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        Layout = blGlyphTop
+        OnClick = btnRecebimentosClick
+        ExplicitLeft = 201
+        ExplicitTop = 8
       end
     end
   end
   object PagCadastro: TbsSkinPageControl
     Left = 0
     Top = 44
-    Width = 790
+    Width = 813
     Height = 355
     ActivePage = bsSkinTabSheet1
     Align = alClient
@@ -509,15 +549,15 @@ object frmMovCaixa: TfrmMovCaixa
     DefaultFont.Style = []
     UseSkinFont = True
     DefaultItemHeight = 20
-    SkinData = frmPrincipal.SkinPrincipal
+    SkinData = FrmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object GridMovCaixa: TcxGrid
         Left = 0
-        Top = 41
-        Width = 788
-        Height = 293
+        Top = 49
+        Width = 811
+        Height = 285
         Align = alClient
         TabOrder = 0
         object GrdDespesas: TcxGridDBTableView
@@ -549,9 +589,9 @@ object frmMovCaixa: TfrmMovCaixa
           OptionsView.GroupFooters = gfAlwaysVisible
           OptionsView.GroupRowStyle = grsOffice11
           OptionsView.GroupSummaryLayout = gslAlignWithColumns
-          Styles.Group = frmPrincipal.cxStyle5
-          Styles.GroupByBox = frmPrincipal.cxStyle4
-          Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+          Styles.Group = FrmPrincipal.cxStyle5
+          Styles.GroupByBox = FrmPrincipal.cxStyle4
+          Styles.StyleSheet = FrmPrincipal.GridTableViewStyleSheetDevExpress
           object colum_NomeD_C: TcxGridDBColumn
             Caption = 'Tipo Lan.'
             DataBinding.FieldName = 'NomeD_C'
@@ -588,6 +628,9 @@ object frmMovCaixa: TfrmMovCaixa
             DataBinding.FieldName = 'Estornado'
             Width = 80
           end
+          object GrdDespesasColumn1: TcxGridDBColumn
+            DataBinding.FieldName = 'Nome_Cliente'
+          end
         end
         object GridMovCaixaLevel1: TcxGridLevel
           GridView = GrdDespesas
@@ -596,11 +639,11 @@ object frmMovCaixa: TfrmMovCaixa
       object PanelConsulta: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 788
-        Height = 41
+        Width = 811
+        Height = 49
         HintImageIndex = 0
         TabOrder = 1
-        SkinData = frmPrincipal.SkinPrincipal
+        SkinData = FrmPrincipal.SkinPrincipal
         SkinDataName = 'panel'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -629,12 +672,12 @@ object frmMovCaixa: TfrmMovCaixa
         Caption = 'PanelConsulta'
         Align = alTop
         object AtualizaRec: TbsSkinSpeedButton
-          Left = 546
-          Top = 8
-          Width = 151
+          Left = 642
+          Top = 23
+          Width = 137
           Height = 24
           HintImageIndex = 0
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'bigtoolbutton'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -732,7 +775,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object lblTurma: TbsSkinStdLabel
           Left = 123
-          Top = 14
+          Top = 29
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -743,13 +786,13 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'stdlabel'
           Caption = 'Ate.'
         end
         object dtpData_Fim: TbsSkinDateEdit
           Left = 151
-          Top = 11
+          Top = 26
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -780,7 +823,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = True
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'buttonedit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -799,7 +842,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object dtpData_Ini: TbsSkinDateEdit
           Left = 24
-          Top = 11
+          Top = 26
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -830,7 +873,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = True
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'buttonedit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -849,12 +892,12 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object cmbPeriodo: TbsSkinComboBox
           Left = 246
-          Top = 11
+          Top = 26
           Width = 180
           Height = 20
           HintImageIndex = 0
           TabOrder = 2
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -985,18 +1028,52 @@ object frmMovCaixa: TfrmMovCaixa
           Style = bscbFixedStyle
           OnChange = cmbPeriodoChange
         end
+        object cmbCaixa: TbsSkinDBLookupComboBox
+          Left = 434
+          Top = 26
+          Width = 190
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 3
+          SkinData = FrmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcCaixa
+          OnChange = cmbNome_formaPagamentoChange
+        end
+        object chkMostraCaixaFechado: TCheckBox
+          Left = 24
+          Top = 3
+          Width = 233
+          Height = 17
+          Caption = 'Visualizar Caixa Fechado'
+          TabOrder = 4
+        end
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manutencao'
       object bsSkinExPanel1: TbsSkinExPanel
-        Left = 136
+        Left = 160
         Top = 47
         Width = 449
         Height = 218
         HintImageIndex = 0
         TabOrder = 0
-        SkinData = frmPrincipal.SkinEntradaDados
+        SkinData = FrmPrincipal.SkinEntradaDados
         SkinDataName = 'expanel'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1021,7 +1098,7 @@ object frmMovCaixa: TfrmMovCaixa
         Caption = 'Dados para lancamento no Caixa'
         object bsSkinStdLabel6: TbsSkinStdLabel
           Left = 25
-          Top = 150
+          Top = 174
           Width = 84
           Height = 13
           EllipsType = bsetNone
@@ -1032,7 +1109,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Valor da Despesa'
         end
@@ -1049,7 +1126,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Data de Lan'#231'amento'
         end
@@ -1066,13 +1143,13 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Tipo Lan'#231'amento'
         end
         object bsSkinStdLabel11: TbsSkinStdLabel
           Left = 70
-          Top = 120
+          Top = 144
           Width = 41
           Height = 13
           EllipsType = bsetNone
@@ -1083,7 +1160,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Historico'
         end
@@ -1100,13 +1177,13 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Tipo de Despesas'
         end
         object lblCliente: TbsSkinStdLabel
           Left = 18
-          Top = 175
+          Top = 199
           Width = 93
           Height = 13
           EllipsType = bsetNone
@@ -1117,9 +1194,26 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Cliente Para Credito'
+        end
+        object bsSkinStdLabel1: TbsSkinStdLabel
+          Left = 85
+          Top = 120
+          Width = 26
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = FrmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Caixa'
         end
         object edtDataMov: TbsSkinDateEdit
           Left = 122
@@ -1154,7 +1248,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = True
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'buttonedit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1178,7 +1272,7 @@ object frmMovCaixa: TfrmMovCaixa
           Height = 20
           HintImageIndex = 0
           TabOrder = 1
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1232,7 +1326,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object EdtValor: TbsSkinEdit
           Left = 122
-          Top = 141
+          Top = 165
           Width = 103
           Height = 22
           Text = '0,00'
@@ -1246,7 +1340,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Alignment = taRightJustify
           Font.Charset = DEFAULT_CHARSET
@@ -1258,7 +1352,7 @@ object frmMovCaixa: TfrmMovCaixa
           ParentBiDiMode = False
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 8
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1268,7 +1362,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object Edthistorico: TbsSkinEdit
           Left = 122
-          Top = 115
+          Top = 139
           Width = 301
           Height = 18
           DefaultColor = clWindow
@@ -1281,7 +1375,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1291,7 +1385,7 @@ object frmMovCaixa: TfrmMovCaixa
           CharCase = ecUpperCase
           MaxLength = 100
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 7
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1306,7 +1400,7 @@ object frmMovCaixa: TfrmMovCaixa
           Height = 20
           HintImageIndex = 0
           TabOrder = 4
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1332,7 +1426,7 @@ object frmMovCaixa: TfrmMovCaixa
           Height = 20
           HintImageIndex = 0
           TabOrder = 3
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1358,7 +1452,7 @@ object frmMovCaixa: TfrmMovCaixa
           Height = 20
           HintImageIndex = 0
           TabOrder = 2
-          SkinData = frmPrincipal.SkinEntradaDados
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1379,12 +1473,12 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object cmbNome_Cliente: TbsSkinDBLookupComboBox
           Left = 207
-          Top = 169
+          Top = 193
           Width = 214
           Height = 20
           HintImageIndex = 0
-          TabOrder = 8
-          SkinData = frmPrincipal.SkinEntradaDados
+          TabOrder = 10
+          SkinData = FrmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1405,7 +1499,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object edtcod_Cliente: TbsSkinEdit
           Left = 122
-          Top = 169
+          Top = 193
           Width = 79
           Height = 18
           DefaultColor = clWindow
@@ -1418,7 +1512,7 @@ object frmMovCaixa: TfrmMovCaixa
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
-          SkinData = frmPrincipal.SkinPrincipal
+          SkinData = FrmPrincipal.SkinPrincipal
           SkinDataName = 'edit'
           Alignment = taRightJustify
           Font.Charset = DEFAULT_CHARSET
@@ -1427,7 +1521,7 @@ object frmMovCaixa: TfrmMovCaixa
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 9
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1436,20 +1530,72 @@ object frmMovCaixa: TfrmMovCaixa
           RightImageDownIndex = -1
           OnExit = edtcod_ClienteExit
         end
+        object cmbCod_Caixa: TbsSkinDBLookupComboBox
+          Left = 122
+          Top = 114
+          Width = 85
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 5
+          SkinData = FrmPrincipal.SkinEntradaDados
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'codigo;descricao'
+          ListSource = srcCaixa
+          OnChange = cmbCod_CaixaChange
+        end
+        object cmbNome_Caixa: TbsSkinDBLookupComboBox
+          Left = 208
+          Top = 113
+          Width = 215
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 6
+          SkinData = FrmPrincipal.SkinEntradaDados
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'descricao;codigo'
+          ListSource = srcCaixa
+          OnChange = cmbNome_CaixaChange
+        end
       end
     end
   end
   object qryPesquisa: TSQLQuery
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 602
-    Top = 88
+    SQLConnection = FrmPrincipal.dbxPrincipal
+    Left = 586
+    Top = 120
   end
   object dspPesquisa: TDataSetProvider
     DataSet = qryPesquisa
-    Left = 602
-    Top = 116
+    Left = 586
+    Top = 148
   end
   object cdsPesquisa: TClientDataSet
     Aggregates = <>
@@ -1457,63 +1603,63 @@ object frmMovCaixa: TfrmMovCaixa
     ProviderName = 'dspPesquisa'
     BeforeOpen = cdsPesquisaBeforeOpen
     OnCalcFields = cdsPesquisaCalcFields
-    Left = 603
-    Top = 144
+    Left = 587
+    Top = 176
   end
   object srcPesquisa: TDataSource
     DataSet = cdsPesquisa
-    Left = 603
-    Top = 172
+    Left = 587
+    Top = 204
   end
   object qryMovCaixa: TSQLQuery
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 630
-    Top = 88
+    SQLConnection = FrmPrincipal.dbxPrincipal
+    Left = 614
+    Top = 120
   end
   object dspMovCaixa: TDataSetProvider
     DataSet = qryMovCaixa
-    Left = 630
-    Top = 116
+    Left = 614
+    Top = 148
   end
   object cdsMovCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMovCaixa'
     BeforeOpen = cdsPesquisaBeforeOpen
-    Left = 631
-    Top = 144
+    Left = 615
+    Top = 176
   end
   object srcMovCaixa: TDataSource
     DataSet = cdsMovCaixa
-    Left = 631
-    Top = 172
+    Left = 615
+    Top = 204
   end
   object srcCadOperacoes: TDataSource
     DataSet = cdsCadOperacoes
-    Left = 659
-    Top = 172
+    Left = 643
+    Top = 204
   end
   object cdsCadOperacoes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     BeforeOpen = cdsPesquisaBeforeOpen
-    Left = 659
-    Top = 144
+    Left = 643
+    Top = 176
   end
   object qryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 575
-    Top = 88
+    SQLConnection = FrmPrincipal.dbxPrincipal
+    Left = 559
+    Top = 120
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 576
-    Top = 116
+    Left = 560
+    Top = 148
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -1614,38 +1760,50 @@ object frmMovCaixa: TfrmMovCaixa
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 687
-    Top = 144
+    Left = 671
+    Top = 176
   end
   object cdsCadFormasPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 715
-    Top = 144
+    Left = 699
+    Top = 176
   end
   object srcCadFormasPagamento: TDataSource
     DataSet = cdsCadFormasPagamento
-    Left = 715
-    Top = 172
+    Left = 699
+    Top = 204
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
-    SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 547
-    Top = 88
+    SQLConnection = FrmPrincipal.dbxPrincipal
+    Left = 531
+    Top = 120
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 744
-    Top = 144
+    Left = 728
+    Top = 176
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 744
-    Top = 172
+    Left = 728
+    Top = 204
+  end
+  object srcCaixa: TDataSource
+    DataSet = cdsCaixas
+    Left = 756
+    Top = 204
+  end
+  object cdsCaixas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 756
+    Top = 176
   end
 end

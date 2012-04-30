@@ -30,9 +30,9 @@ type
     dspAcesso: TDataSetProvider;
     procedure btnAcessarClick(Sender: TObject);
     procedure bsSkinButton1Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edtSenhaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -49,6 +49,7 @@ uses uprincipal,Ufuncoes,cl_Tperfil;
 
 procedure TfrmLogin.bsSkinButton1Click(Sender: TObject);
 begin
+   frmlogin.tag:=1;
    Application.Terminate;
 end;
 
@@ -86,8 +87,8 @@ begin
      edtusuario.SetFocus;
      Exit;
    End;
-   frmlogin.Hide;
-   frmPrincipal.showmodal;
+   frmlogin.tag:=1;
+   Close;
 end;
 
 procedure TfrmLogin.edtSenhaKeyDown(Sender: TObject; var Key: Word;
@@ -99,7 +100,8 @@ end;
 
 procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-   Application.Terminate;
+   if tag=0 then
+      Application.Terminate;
 end;
 
 end.

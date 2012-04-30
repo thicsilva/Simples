@@ -171,7 +171,7 @@ type
     dxBarLargeButton15: TdxBarLargeButton;
     dxBarLargeButton16: TdxBarLargeButton;
     actManutencaoOS: TAction;
-    Gaga: TbsSkinLinkImage;
+    Ga: TbsSkinLinkImage;
     cdsProcedimento: TClientDataSet;
     dspvariavel: TDataSetProvider;
     qryVariavel: TSQLQuery;
@@ -191,7 +191,7 @@ type
     dxBarButton18: TdxBarButton;
     dxBarButton19: TdxBarButton;
     actCadFabricantes: TAction;
-    dxBarButton20: TdxBarButton;
+    btnCadFabricante: TdxBarButton;
     Action2: TAction;
     ImpMatricial: TRDprint;
     lblVersao: TVersionLabel;
@@ -207,6 +207,17 @@ type
     dxBarButton23: TdxBarButton;
     actRemessa: TAction;
     dxBarButton24: TdxBarButton;
+    acrCaixas: TAction;
+    dxBarButton25: TdxBarButton;
+    actVendasExternas: TAction;
+    dxBarButton20: TdxBarButton;
+    actCadastroDeSetores: TAction;
+    dxBarButton26: TdxBarButton;
+    actTrocaDeUsuario: TAction;
+    dxBarButton27: TdxBarButton;
+    MenuManegerBar12: TdxBar;
+    dxBarButton28: TdxBarButton;
+    actAnaliseFinanceira: TAction;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -256,6 +267,11 @@ type
     procedure actCurva_abc_ProdutoExecute(Sender: TObject);
     procedure actCurva_abc_ClienteExecute(Sender: TObject);
     procedure actRemessaExecute(Sender: TObject);
+    procedure acrCaixasExecute(Sender: TObject);
+    procedure actVendasExternasExecute(Sender: TObject);
+    procedure actCadastroDeSetoresExecute(Sender: TObject);
+    procedure actTrocaDeUsuarioExecute(Sender: TObject);
+    procedure actAnaliseFinanceiraExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -307,7 +323,8 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uControleRepasse, uSelRelDevolucoes, uAbreOS, uConsultaOrdemServico,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
-  uselrelCurvaAbcClientes, uRemessaParaVenda;
+  uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
+  uRelAnaliseFinanceira;
 
 {$R *.dfm}
 
@@ -330,6 +347,13 @@ begin
    end;
 end;
 
+procedure TfrmPrincipal.actTrocaDeUsuarioExecute(Sender: TObject);
+begin
+   frmLogin := TfrmLogin.Create(application);
+   frmLogin.Tag := 2;
+   frmLogin.ShowModal;
+end;
+
 procedure TfrmPrincipal.actSairExecute(Sender: TObject);
 begin
    Application.Terminate;
@@ -346,6 +370,17 @@ begin
    frmCadClientes.show;
 end;
 
+procedure TfrmPrincipal.acrCaixasExecute(Sender: TObject);
+begin
+if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmCadCaixas := TfrmCadCaixas.create(Self);
+   frmCadCaixas.showModal;
+end;
+
 procedure TfrmPrincipal.actAbreOsExecute(Sender: TObject);
 begin
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -355,6 +390,23 @@ begin
    End;
    frmabreos := tfrmabreos.create(Self);
    frmabreos.showmodal;
+end;
+
+procedure TfrmPrincipal.actAnaliseFinanceiraExecute(Sender: TObject);
+begin
+   frmRelAnaliseFinanceira := TfrmRelAnaliseFinanceira.Create(Application);
+   frmRelAnaliseFinanceira.showModal;
+end;
+
+procedure TfrmPrincipal.actCadastroDeSetoresExecute(Sender: TObject);
+begin
+  if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmCadsetores:= TfrmCadsetores.create(Self);
+   frmCadsetores.showModal;
 end;
 
 procedure TfrmPrincipal.actCadAtividadesExecute(Sender: TObject);
@@ -818,6 +870,19 @@ begin
       Exit;
    End;
    FrmVendas := TfrmVendas.create(Self);
+   frmVendas.Showmodal;
+end;
+
+procedure TfrmPrincipal.actVendasExternasExecute(Sender: TObject);
+const Venda_Externa = 2;
+begin
+if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := Venda_Externa;
    frmVendas.Showmodal;
 end;
 

@@ -80,6 +80,7 @@ procedure TfrmCadGrupos.LimpaCampos();
 Begin
    EdtDescricao.Text := '';
 End;
+
 procedure TfrmCadGrupos.btnincluirClick(Sender: TObject);
 begin
    pvQualBotao := 'INCLUIR';
@@ -147,7 +148,6 @@ begin
       EdtPesquisaChange(EdtPesquisa);
 
    PagCadastro.ActivePageIndex:=0;
-
 end;
 
 procedure TfrmCadGrupos.BtnCancelaClick(Sender: TObject);
@@ -203,7 +203,6 @@ begin
    PagCadastro.ActivePageIndex:=1;
 
    edtDescricao.SetFocus;
-
 end;
 
 procedure TfrmCadGrupos.btnFecharClick(Sender: TObject);

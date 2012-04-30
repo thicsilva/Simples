@@ -2,7 +2,7 @@ object frmCadGrupos: TfrmCadGrupos
   Left = 245
   Top = 302
   BorderIcons = []
-  Caption = 'Cadastro e manuten'#231#227'o de Grupos'
+  Caption = 'Cadastro e Manuten'#231#227'o de Grupos'
   ClientHeight = 292
   ClientWidth = 631
   Color = clBtnFace
@@ -50,10 +50,6 @@ object frmCadGrupos: TfrmCadGrupos
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 224
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -248,10 +244,9 @@ object frmCadGrupos: TfrmCadGrupos
         Left = 0
         Top = 33
         Width = 629
-        Height = 184
+        Height = 182
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 191
         object GridAtividades: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -306,10 +301,6 @@ object frmCadGrupos: TfrmCadGrupos
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 224
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -470,19 +461,16 @@ object frmCadGrupos: TfrmCadGrupos
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 625
+        Width = 627
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 616
+      Width = 618
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -526,9 +514,9 @@ object frmCadGrupos: TfrmCadGrupos
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -562,6 +550,7 @@ object frmCadGrupos: TfrmCadGrupos
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

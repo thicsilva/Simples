@@ -111,6 +111,8 @@ type
     cdsItensVendas: TClientDataSet;
     cdsVendas: TClientDataSet;
     cdsTempPagamentosTipoLancamento: TIntegerField;
+    cdsTempPagamentosCod_Caixa: TIntegerField;
+    edtCod_Caixa: TbsSkinEdit;
     procedure FormShow(Sender: TObject);
     procedure btnReceberClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -140,7 +142,7 @@ var
 implementation
 
 uses uPrincipal,Ufuncoes,UnitDeclaracoes,uClassDaoContaCorrente,uClassContaCorrente,
-  uDaoVenda;
+  uDaoVenda,uClassVenda,uDaoFuncionario;
 
 {$R *.dfm}
 
@@ -219,6 +221,10 @@ var lsupDate        : String;
     GravaContaCorrente : TDaoContaCorrente;
     lrValorRecebido    : Double;
   DaoVenda: TdaoVenda;
+  TotalPago: Real;
+  Parametros: TStringList;
+  Venda : TVenda;
+  DaoFuncionario : TDaoFuncionario;
 begin
    lrValorRecebido := 0;
    if frmBaixaNormal.Tag <> 2 then
@@ -269,7 +275,7 @@ begin
                                             '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
                                             '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
 
-                     qryModific.ParamByName('parCod_Caixa').AsString             := '001';
+                     qryModific.ParamByName('parCod_Caixa').AsInteger            := cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger;
                      qryModific.ParamByName('parValor').asFloat                  := cdsTempPagamentos.FieldByName('Valor').AsFloat;
                      If lblTroco.Caption = 'Troco' Then
                         qryModific.ParamByName('parValor').asFloat               := StrToFloat(edtTotalTitulo.text);
@@ -280,8 +286,9 @@ begin
                      qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
                      qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
                      qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := strToInt(cdsTempPagamentos.FieldByName('Codigo').AsString);
-                     qryModific.ParamByName('parOperador').AsString                 := gsOperador;
+                     qryModific.ParamByName('parOperador').AsString              := gsOperador;
                      qryModific.ExecSQL;
+
                      lrValorRecebido := lrValorRecebido + cdsTempPagamentos.FieldByName('Valor').AsFloat;
                   Except
                      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
@@ -313,6 +320,7 @@ begin
                      cdsPagamento.FieldByname('Documento').AsString           := Copy(edtDocumento.text,1,8)+IncZero(IntToStr(StrToInt(Copy(edtDocumento.text,9,3))+1),3);
                      cdsPagamento.FieldByName('Status').AsInteger             := 0;
                      cdsPagamento.FieldByname('Tipo_Baixa').AsString          := 'AB';
+                     cdsPagamento.FieldByname('Cod_Caixa').AsInteger          := cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger;
                      cdsPagamento.Post;
                      cdsPagamento.ApplyUpdates(-1);
                   Except
@@ -338,6 +346,7 @@ begin
                   End;
                End;
             End;
+            TotalPago := TotalPago + cdsTempPagamentos.FieldByName('Valor').AsFloat;
             cdsTempPagamentos.Next;
          End;
          //  lancamento do caixa conforme venda
@@ -403,6 +412,7 @@ begin
                cdsPagamento.FieldByname('Operador').AsString            := gsOperador;
                cdsPagamento.FieldByname('Documento').AsString           := Copy(edtDocumento.text,1,8)+IncZero(IntToStr(StrToInt(Copy(edtDocumento.text,9,3))+1),3);
                cdsPagamento.FieldByName('Status').AsInteger             := 0;
+               cdsPagamento.FieldByname('Cod_Caixa').AsInteger          := StrToint(edtCod_Caixa.Text);
                cdsPagamento.Post;
                cdsPagamento.ApplyUpdates(-1);
             Except
@@ -411,7 +421,7 @@ begin
             End;
          End;
          frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
-         if pbeServico then
+         if (pbeServico) and RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' ))) then
          Begin
             if CaixaMensagem( 'O Serviço '+edtcontrole.Text+' Foi Entregue ???', ctConfirma, [ cbSimNao ], 0 )  Then
             Begin
@@ -423,6 +433,7 @@ begin
                qryModific.ExecSQL;
             End;
          End;
+
          cdsPesquisa.Close;
          cdsPesquisa.ProviderName := dspPesquisa.Name;
          cdsPesquisa.Open;
@@ -430,26 +441,49 @@ begin
             Close
          Else
          Begin
-            if CaixaMensagem( 'Deseja receber outro pagamento deste cliente ? ', ctConfirma, [ cbSimNao ], 0 )  Then
-            Begin
-               btnReceber.Enabled := False;
-               cdsTempPagamentos.EmptyDataSet;
-               edtDocumento.Text    := '';
-               edtVenciemento.Text  := '';
-               edtNomeCliente.Text  := '';
-               edtCnpjcpf.Text      := '';
-               edtTotalTitulo.Text  := '0,00';
-               edtVlr_Desconto.Text := '0,00';
-               edtVlr_Recebido.Text := '0,00';
-               edtTotalReceber.Text := '0,00';
-               panelRecebimento.Visible   := True;
-               panelRecebimento.RollState := False;
-            End
-            Else
-              Close;
+            if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'BaixaMultiplosClientes', 'NAO' ))) then
+            begin
+               if CaixaMensagem( 'Deseja receber outro pagamento deste cliente ? ', ctConfirma, [ cbSimNao ], 0 )  Then
+               Begin
+                  btnReceber.Enabled := False;
+                  cdsTempPagamentos.EmptyDataSet;
+                  edtDocumento.Text    := '';
+                  edtVenciemento.Text  := '';
+                  edtNomeCliente.Text  := '';
+                  edtCnpjcpf.Text      := '';
+                  edtTotalTitulo.Text  := '0,00';
+                  edtVlr_Desconto.Text := '0,00';
+                  edtVlr_Recebido.Text := '0,00';
+                  edtTotalReceber.Text := '0,00';
+                  panelRecebimento.Visible   := True;
+                  panelRecebimento.RollState := False;
+               End
+               Else
+            end;
+            Close;
          End;
-
       End;
+   End;
+
+
+   if TotalPago>0 then
+   Begin
+      Parametros := TStringList.Create;
+      Parametros.Add(edtNrVenda.Text);
+      cdsVendas := gConexao.BuscarDadosSQL('Select * From T_vendas Where SeqVenda=:parSeqVenda', Parametros );
+      DaoVenda := TDaoVenda.Create(gConexao);
+      Venda := DaoVenda.CarregarVenda(cdsVendas);
+      Venda.ValorPendendente := StrToFloat(edtTotalTitulo.text);
+      DaoFuncionario    := TDaoFuncionario.Create(gConexao);
+      venda.Funcionario := Daofuncionario.Buscar(cdsVendas.FieldByName('Cod_Funcionario').AsInteger);
+      venda.Numerovias  := StrtoInt(gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador ));
+
+      venda.Imprimir(cdsVendas,gConexao.BuscarDadosSQL('select Prod.Codigo,Prod.Descricao,Prod.unid as Unidade, Prod.QtdeEmbalagem, Itens.* '+
+                                                              'from T_ItensVendas itens '+
+                                                              '     left join T_produtos Prod on Prod.Codigo = Itens.Cod_Produto '+
+                                                              'Where SeqVenda=:parSeqVenda',Parametros ),gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),TotalPago,
+                                                              StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador )));
+
    End;
 
    {$REGION 'impressao de cupom fiscal'}
@@ -625,6 +659,7 @@ begin
    cdsTempPagamentos.FieldByName('Descricao').AsString       := cmbNome_FormaPagamento.text;
    cdsTempPagamentos.FieldByName('valor').AsFloat            := strtofloat(edtPco_Venda.Text);
    cdsTempPagamentos.FieldByName('TipoLancamento').AsInteger := cdsCadFormasPagamento.FieldByName('TipoLancamento').AsInteger;
+   cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger      := StrToint(edtCod_Caixa.Text);
    cdsTempPagamentos.Post;
    edtVlr_Recebido.text   := FormatFloat('0.00',Strtofloat(edtVlr_Recebido.text)+strtofloat(edtPco_Venda.Text));
    edtTotalReceber.text   := FormatFloat('0.00',strTofloat(edtTotalTitulo.Text)-( StrTofloat(edtVlr_Recebido.text)+strToFloat(edtVlr_Desconto.Text) ) );

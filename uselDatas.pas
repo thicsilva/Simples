@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, bsSkinCtrls, ToolWin, ComCtrls, bsSkinBoxCtrls, StdCtrls,
-  Mask;
+  Mask,uDaoCaixaMovimento,DbClient;
 
 type
   TfrmSelDatas = class(TForm)
@@ -20,6 +20,8 @@ type
     btnincluir: TbsSkinSpeedButton;
     bsSkinBevel1: TbsSkinBevel;
     bsSkinBevel2: TbsSkinBevel;
+    cmbturno: TbsSkinComboBox;
+    cmbTipoResumoVenda: TbsSkinComboBox;
     procedure cmbPeriodoChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -27,6 +29,8 @@ type
   private
     { Private declarations }
   public
+     idCaixa : integer;
+     procedure CarregarDoTurno;
     { Public declarations }
   end;
 
@@ -49,9 +53,31 @@ begin
    close;
 end;
 
+procedure TfrmSelDatas.CarregarDoTurno;
+var DaoCaixaMovimento : TDaoCaixaMovimento;
+    Dados : TclientDataSet;
+begin
+   DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
+   Dados := DaoCaixaMovimento.RetornarTurnosFechados(dtpData_Ini.Date, idCaixa);
+   cmbturno.Items.Clear;
+   while not Dados.Eof do
+   begin
+     if Dados.FieldByName('Turno').AsInteger=0 then
+        cmbturno.Items.Add('Caixa Aberto')
+     else
+        cmbturno.Items.Add('Turno '+Dados.FieldByName('Turno').AsString);
+     Dados.Next;
+   end;
+   try
+   cmbturno.ItemIndex := 0;
+   except
+   end;
+end;
+
 procedure TfrmSelDatas.cmbPeriodoChange(Sender: TObject);
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+   CarregarDoTurno;
 end;
 
 procedure TfrmSelDatas.FormShow(Sender: TObject);

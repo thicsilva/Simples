@@ -509,7 +509,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       EditPrecision = 0
       ValueInteger = 0
       ValueDate = 39369.000000000000000000
-      ValueTime = 0.502512476851851800
+      ValueTime = 0.502512476851851900
       TimeSeconds = False
       FirstCharUpper = False
       FirstCharUpList = ' ('
@@ -822,6 +822,39 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       Sorted = False
       Style = bscbFixedStyle
+    end
+    object edtCod_Caixa: TbsSkinEdit
+      Left = 225
+      Top = 63
+      Width = 40
+      Height = 18
+      Text = '0'
+      DefaultColor = clInactiveBorder
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinDataName = 'edit'
+      ReadOnly = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 13
+      Visible = False
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox
@@ -1264,7 +1297,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39619.000000000000000000
-        ValueTime = 0.976081990740740700
+        ValueTime = 0.976081990740740600
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -1797,6 +1830,10 @@ object frmBaixaNormal: TfrmBaixaNormal
       item
         Name = 'TipoLancamento'
         DataType = ftInteger
+      end
+      item
+        Name = 'Cod_Caixa'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -1805,10 +1842,11 @@ object frmBaixaNormal: TfrmBaixaNormal
     Left = 259
     Top = 437
     Data = {
-      780000009619E0BD010000001800000004000000000003000000780006436F64
+      8A0000009619E0BD0100000018000000050000000000030000008A0006436F64
       69676F0100490000000100055749445448020002000300094465736372696361
       6F01004900000001000557494454480200020032000556616C6F720800040000
-      0000000E5469706F4C616E63616D656E746F04000100000000000000}
+      0000000E5469706F4C616E63616D656E746F040001000000000009436F645F43
+      6169786104000100000000000000}
     object cdsTempPagamentosCodigo: TStringField
       DisplayWidth = 6
       FieldName = 'Codigo'
@@ -1825,6 +1863,10 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
     object cdsTempPagamentosTipoLancamento: TIntegerField
       FieldName = 'TipoLancamento'
+      Visible = False
+    end
+    object cdsTempPagamentosCod_Caixa: TIntegerField
+      FieldName = 'Cod_Caixa'
       Visible = False
     end
   end

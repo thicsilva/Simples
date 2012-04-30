@@ -7,7 +7,10 @@ uses
   Dialogs,uFormBase, StdCtrls, bsSkinCtrls, Mask, bsSkinBoxCtrls, ExtCtrls,
   ToolWin, ComCtrls;
 
+const METRO_QUADRADO = 1;
+      METRO_LINEAR = 2;
 type
+
   TfrmCalMQuadrado = class(TFormbase)
     bsSkinCoolBar1: TbsSkinCoolBar;
     bsSkinToolBar1: TbsSkinToolBar;
@@ -26,10 +29,15 @@ type
     edtTotal: TbsSkinNumericEdit;
     bsSkinStdLabel5: TbsSkinStdLabel;
     AtualizaRec: TbsSkinSpeedButton;
+    edtComplemento: TbsSkinNumericEdit;
+    lbl01: TbsSkinStdLabel;
     procedure AtualizaRecClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
+    Function MetroQuadrado(Altura,Comprimento : Real) : Real;
+    function MetroLinear (Altura,Comprimento,Complemento : Real) : Real;
     { Private declarations }
   public
     { Public declarations }
@@ -44,7 +52,11 @@ uses Uprincipal;
 
 procedure TfrmCalMQuadrado.AtualizaRecClick(Sender: TObject);
 begin
-  edtMEtroQ.text := Formatfloat('0.00', StrtoFloat(edtaltura.text) * Strtofloat(edtcomprimento.text));
+  if frmCalMQuadrado.tag = METRO_QUADRADO then
+     edtMEtroQ.text := FormatFloat ('0.00' , MetroQuadrado( StrtoFloat(edtaltura.text), Strtofloat(edtcomprimento.text)))
+  else
+     edtMEtroQ.text := FormatFloat ('0.00' , MetroLinear( StrtoFloat(edtaltura.text), Strtofloat(edtcomprimento.text),Strtofloat(edtComplemento.text) ) );
+
   edtTotal.text := Formatfloat('0.00', StrtoFloat( edtMEtroQ.text ) * StrtoFloat( edtVlrMetro.Text ) );
 end;
 
@@ -57,6 +69,27 @@ procedure TfrmCalMQuadrado.btnokClick(Sender: TObject);
 begin
    frmCalMQuadrado.Tag := 1;
    Close;
+end;
+
+procedure TfrmCalMQuadrado.FormShow(Sender: TObject);
+begin
+  inherited;
+  if frmCalMQuadrado.tag = METRO_QUADRADO then
+  begin
+     edtComplemento.Visible := False;
+     lbl01.Visible := False;
+  end;
+end;
+
+function TfrmCalMQuadrado.MetroLinear(Altura, Comprimento,
+  Complemento: Real): Real;
+begin
+   Result := (Altura *2)+ (Comprimento*2)+Complemento;
+end;
+
+function TfrmCalMQuadrado.MetroQuadrado(Altura, Comprimento: Real): Real;
+begin
+   Result := (Altura * Comprimento)
 end;
 
 end.

@@ -47,18 +47,13 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     SkinDataName = 'tab'
     object TabLancamento: TbsSkinTabSheet
       Caption = 'Lancamento de Avarias'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 182
         Width = 665
-        Height = 193
+        Height = 194
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 194
         object GridAvarias: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = SrcProdutosAvarias
@@ -583,10 +578,6 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     end
     object tabConsulta: TbsSkinTabSheet
       Caption = 'Consulta de Avarias'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object panelconsulta: TbsSkinPanel
         Left = 0
         Top = 0
@@ -927,10 +918,9 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Left = 0
         Top = 42
         Width = 665
-        Height = 333
+        Height = 334
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 334
         object GrdAvarias: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcAvarias
@@ -1070,10 +1060,6 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     end
     object tabajustaSaldo: TbsSkinTabSheet
       Caption = 'Ajuste de Saldo de Estoque'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 0
@@ -1348,10 +1334,9 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Left = 0
         Top = 63
         Width = 665
-        Height = 312
+        Height = 313
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 313
         object cxGridAjustaEstoque: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcAjustaEstoque
@@ -1424,15 +1409,15 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 661
+        Width = 663
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 1
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 70
+      Width = 654
       Height = 40
       HintImageIndex = 0
       TabOrder = 0

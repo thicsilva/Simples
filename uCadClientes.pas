@@ -281,6 +281,12 @@ type
     BtnCancela: TbsSkinSpeedButton;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
+    bsSkinStdLabel19: TbsSkinStdLabel;
+    edtInscricaoEstadual: TbsSkinEdit;
+    N4ClientescomDebitoemContaCorrente1: TMenuItem;
+    qryRelcliente: TSQLQuery;
+    dspRelCliente: TDataSetProvider;
+    cdsRelCliente: TClientDataSet;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -336,6 +342,7 @@ type
     procedure cdsContaCorrenteBeforeOpen(DataSet: TDataSet);
     procedure cdsContaCorrenteCalcFields(DataSet: TDataSet);
     procedure EdtPesquisaKeyPress(Sender: TObject; var Key: Char);
+    procedure N4ClientescomDebitoemContaCorrente1Click(Sender: TObject);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -394,6 +401,70 @@ Begin
       End;
    end;
 End;
+
+procedure TfrmCadClientes.N4ClientescomDebitoemContaCorrente1Click(  Sender: TObject);
+var TotalAReceber : Real;
+    liCliente : Integer;
+    lrCredito : Real;
+    lrDebito : Real;
+    lsNomeCliente : String;
+    SaldoDevedor : Real;
+begin
+   gsTituloRel  := 'Relatorio Clientes com Debito em Conta Corrente ';
+
+   qryRelcliente.Close;
+   qryRelcliente.SQL.text:='select Conta.Cod_cliente,Cli.Descricao,conta.D_C,sum(conta.Valor) as Valor '+
+                          'from T_ContaCorrente Conta '+
+                          '     inner join T_clientes cli on Cli.Codigo=Conta.Cod_Cliente '+
+                          'group by Cod_cliente,D_C,Cli.Descricao order by 1,3 ';
+   cdsRelcliente.Close;
+   cdsRelcliente.Open;
+
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 66;
+   ImpMatricial.TamanhoQteColunas         := 80;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := False;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+   TotalAReceber := 0;
+   cdsRelcliente.First;
+   liCliente      := cdsRelcliente.fieldByname('Cod_Cliente').AsInteger;
+   lsNomeCliente  := cdsRelcliente.fieldByname('Descricao').AsString;
+   lrDebito       := 0;
+   lrCredito      := 0;
+   pvilinha := pvilinha+1;
+   while not cdsRelcliente.Eof Do
+   Begin
+      if liCliente <> cdsRelcliente.fieldByname('Cod_Cliente').AsInteger then
+      begin
+         SaldoDevedor := ( lrDebito - lrCredito );
+         if SaldoDevedor>0 then
+         begin
+            impmatricial.Imp(pvilinha,001,IncZero(IntToStr(liCliente),5)+'-'+lsNomeCliente );
+            impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',SaldoDevedor) ,[]);
+            pvilinha := pvilinha+1;
+            TotalAReceber := TotalAReceber + SaldoDevedor;
+         end;
+         liCliente      := cdsRelcliente.fieldByname('Cod_Cliente').AsInteger;
+         lsNomeCliente  := cdsRelcliente.fieldByname('Descricao').AsString;
+         lrDebito       := 0;
+         lrCredito      := 0;
+      end;
+      if cdsRelcliente.fieldByname('D_C').AsString='D' then
+         lrDebito := cdsRelcliente.fieldByname('Valor').AsFloat
+      else
+         lrCredito := cdsRelcliente.fieldByname('Valor').AsFloat;
+      cdsRelcliente.Next;
+   End;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+   pvilinha := pvilinha+1;
+   impmatricial.Imp(pvilinha,001,'Total a Receber...');
+   impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',TotalAReceber),[]);
+   impmatricial.Fechar;
+end;
 
 procedure TFrmCadClientes.LimpaCampos();
 Begin
@@ -526,6 +597,7 @@ begin
    cdsCadClientes.FieldByName('Qtde_PedAberto').AsInteger := StrToInt(edtNumeroPedAberto.Text);
    cdsCadClientes.FieldByName('Pto_referencia').AsString  := edtPto_Referencia.Text;
    cdsCadClientes.FieldByName('Contrato').AsString        := edtContrato.Text;
+   cdsCadClientes.FieldByName('InscricaoEstadual').AsString        := edtInscricaoEstadual.Text;
    cdsCadClientes.Post;
 
    If cdsCadClientes.ChangeCount > 0  Then // se houve mudancas
@@ -698,6 +770,7 @@ begin
    EdtNumeroPedAberto.Value   := cdspesquisa.FieldByName('Qtde_PedAberto').AsInteger;
    edtPto_Referencia.Text     := cdspesquisa.FieldByName('Pto_referencia').AsString;
    edtContrato.Text           := cdspesquisa.FieldByName('Contrato').AsString;
+   edtInscricaoEstadual.Text  := cdspesquisa.FieldByName('InscricaoEstadual').AsString;
 
    BtnIncluir.Enabled :=False;
    BtnAlterar.Enabled :=False;
@@ -1008,7 +1081,6 @@ begin
    if not inputQuery('Insira o Percentual','Insira o Percentual',lsPercentual) Then
       Exit;
 
-
    GstituloRel  :='Relatorio de clientes liberados sem compras ';
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
@@ -1034,10 +1106,11 @@ begin
                             '          Cli.Codigo=Rec.Cod_Cliente '+
                             '     Left Join T_Rotas Rota On '+
                             '          Rota.Codigo=Cli.Cod_rota '+
-                            'WHERE Rec.status =:parStatus '+
+                            'WHERE Rec.status=:parStatus and cli.status=:parStatusCli '+
                             'GROUP BY Rec.Cod_Cliente,Cli.Cod_Rota,Cli.Bairro,Cli.Endereco '+
                             'ORDER BY Cli.Cod_rota,Cli.Bairro,Cli.Endereco';
-   qryRelatorio.ParamByName('parStatus').AsString  := '1';
+   qryRelatorio.ParamByName('parStatus').AsString     := '1';
+   qryRelatorio.ParamByName('parStatuscli').AsString  := '0';
 
    cdsRelatorio.Close;
    cdsRelatorio.ProviderName := dspRelatorio.Name;
@@ -1073,6 +1146,9 @@ begin
             impmatricial.Imp(pvilinha,001,IncZero(cdsRelatorio.FieldByName('Codigo').AsString,5)+' '+cdsRelatorio.FieldByName('Descricao').AsString );
             impmatricial.Imp(pvilinha,040,Copy(cdsRelatorio.FieldByName('Endereco').AsString,1,40) );
             impmatricial.Imp(pvilinha,082,cdsRelatorio.FieldByName('Bairro').AsString );
+            if UPPERCASE(Trim(cdsRelatorio.FieldByName('Bairro').AsString))='CENTRO' then
+               impmatricial.Imp(pvilinha,082,cdsRelatorio.FieldByName('Bairro').AsString +'de '+cdsRelatorio.FieldByName('Cidade').AsString );
+
 
             impmatricial.Impd(pvilinha,111,FormatFloat(',0.00',cdsRelatorio.FieldByName('Total_Areceber').AsFloat),[] );
             impmatricial.Impd(pvilinha,121,FormatFloat(',0.00',cdsRelatorio.FieldByName('Total_Recebido').AsFloat),[] );

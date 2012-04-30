@@ -115,7 +115,6 @@ var lsNome_Rota : String;
     ldVlr_aReceber  : Double;
     ldTot_aReceber  : Double;
 begin
-
    if cdsRelatorio.IsEmpty Then
    Begin
       CaixaMensagem( 'Selecione os dados para impressao ', ctAviso, [ cbOk ], 0 );
@@ -123,7 +122,6 @@ begin
    End;
 
    GstituloRel  :='Relatorio de '+cmbTipoRelatorio.text+' '+cmbTipoResultado.text;
-
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
    ImpMatricial.TamanhoQteLinhas          := 66;

@@ -50,10 +50,6 @@ object frmCadRotas: TfrmCadRotas
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 224
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -248,10 +244,9 @@ object frmCadRotas: TfrmCadRotas
         Left = 0
         Top = 33
         Width = 641
-        Height = 184
+        Height = 182
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 191
         object GridAtividades: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -306,10 +301,6 @@ object frmCadRotas: TfrmCadRotas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 224
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -466,19 +457,16 @@ object frmCadRotas: TfrmCadRotas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 637
+        Width = 639
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 628
+      Width = 630
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -522,9 +510,9 @@ object frmCadRotas: TfrmCadRotas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 529
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -558,6 +546,7 @@ object frmCadRotas: TfrmCadRotas
         OnClick = btnFecharClick
         ExplicitLeft = 555
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -594,6 +583,7 @@ object frmCadRotas: TfrmCadRotas
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
+        OnClick = btnexcluirClick
         ExplicitLeft = 126
         ExplicitTop = 12
       end

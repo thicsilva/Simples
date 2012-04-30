@@ -51,7 +51,6 @@ object frmControleRepasse: TfrmControleRepasse
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitTop = 44
     object lblTurma: TbsSkinStdLabel
       Left = 123
       Top = 18
@@ -380,8 +379,6 @@ object frmControleRepasse: TfrmControleRepasse
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = 87
-    ExplicitHeight = 394
     object GridRelatorio: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRepasse
@@ -486,19 +483,16 @@ object frmControleRepasse: TfrmControleRepasse
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 966
+        Width = 968
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 957
+      Width = 959
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -542,9 +536,9 @@ object frmControleRepasse: TfrmControleRepasse
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 847
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -578,6 +572,7 @@ object frmControleRepasse: TfrmControleRepasse
         OnClick = btnFecharClick
         ExplicitLeft = 811
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnImprimir: TbsSkinSpeedButton
         Left = 0
@@ -724,6 +719,7 @@ object frmControleRepasse: TfrmControleRepasse
     Top = 187
   end
   object cdsRepasse: TClientDataSet
+    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -788,6 +784,17 @@ object frmControleRepasse: TfrmControleRepasse
     StoreDefs = True
     Left = 354
     Top = 215
+    Data = {
+      2A0100009619E0BD01000000180000000E0000000000030000002A0104526F74
+      610100490000000100055749445448020002001E000B766C725F526570617373
+      65080004000000000009766C725F546F74616C08000400000000000C766C725F
+      526563656269646F08000400000000000D766C725F4465766F6C7669646F0800
+      0400000000000B766C725F5065726469646F08000400000000000C766C725F43
+      6F6D697373616F080004000000000010766C725F53616C646F52657061737365
+      08000400000000000B515444455F466963686173040001000000000007706572
+      6330303108000400000000000770657263303032080004000000000007706572
+      6330303308000400000000000770657263303034080004000000000007706572
+      6330303508000400000000000000}
     object cdsRepasseRota: TStringField
       FieldName = 'Rota'
       Size = 30

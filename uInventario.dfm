@@ -25,15 +25,15 @@ object frmInventario: TfrmInventario
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 792
+        Width = 794
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 70
+      Width = 785
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -270,7 +270,7 @@ object frmInventario: TfrmInventario
     Top = 44
     Width = 798
     Height = 399
-    ActivePage = bsSkinTabSheet1
+    ActivePage = TabInventario
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -298,18 +298,13 @@ object frmInventario: TfrmInventario
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta Inventario'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 43
         Width = 796
-        Height = 334
+        Height = 335
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 335
         object GridDBInventario: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -548,10 +543,6 @@ object frmInventario: TfrmInventario
     end
     object TabInventario: TbsSkinTabSheet
       Caption = 'Inventario dos produtos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 57
@@ -738,6 +729,7 @@ object frmInventario: TfrmInventario
           Caption = '    &Remover'
           NumGlyphs = 1
           Spacing = 1
+          OnClick = bsSkinButton1Click
         end
         object bsSkinButton3: TbsSkinButton
           Left = 432
@@ -778,10 +770,9 @@ object frmInventario: TfrmInventario
         Left = 0
         Top = 104
         Width = 796
-        Height = 273
+        Height = 274
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 274
         object cxGridDBTableView1: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcTempItensInventario
@@ -896,7 +887,7 @@ object frmInventario: TfrmInventario
         object edtMotivoInventario: TbsSkinEdit
           Left = 48
           Top = 29
-          Width = 603
+          Width = 473
           Height = 18
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -923,6 +914,31 @@ object frmInventario: TfrmInventario
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
+        object cmbSetores: TbsSkinDBLookupComboBox
+          Left = 533
+          Top = 29
+          Width = 249
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 1
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcSetores
+        end
       end
     end
   end
@@ -939,6 +955,7 @@ object frmInventario: TfrmInventario
     end
   end
   object cdsTempItensInventario: TClientDataSet
+    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -975,6 +992,13 @@ object frmInventario: TfrmInventario
     StoreDefs = True
     Left = 208
     Top = 225
+    Data = {
+      9E0000009619E0BD0100000018000000070000000000030000009E0006436F64
+      69676F04000100000000000944657363726963616F0100490000000100055749
+      4454480200020014000A5175616E74696461646504000100000000000950636F
+      5F76656E64610800040000000000094469666572656E63610400010000000000
+      0553616C646F040001000000000009766C725F546F74616C0800040000000000
+      0000}
     object cdsTempItensInventarioCodigo: TIntegerField
       FieldName = 'Codigo'
     end
@@ -1203,6 +1227,18 @@ object frmInventario: TfrmInventario
   object srcPesquisa: TDataSource
     DataSet = cdsPesquisa
     Left = 236
+    Top = 253
+  end
+  object cdsSetores: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 264
+    Top = 225
+  end
+  object srcSetores: TDataSource
+    DataSet = cdsSetores
+    Left = 264
     Top = 253
   end
 end

@@ -40,7 +40,6 @@ type
     bsSkinLabel4: TbsSkinLabel;
     EdtqtdeNumeroDias: TbsSkinSpinEdit;
     bsSkinLabel5: TbsSkinLabel;
-    edtVlr_Servico: TbsSkinEdit;
     chkLigaECF: TbsSkinCheckRadioBox;
     chkCondicaoNaVenda: TbsSkinCheckRadioBox;
     chkVendeServico: TbsSkinCheckRadioBox;
@@ -60,23 +59,51 @@ type
     bsSkinTabSheet3: TbsSkinTabSheet;
     Label1: TLabel;
     edtCaminhoImpressao: TEdit;
-    chkImprimeComprovante: TbsSkinCheckRadioBox;
+    chkImprimeComprovanteServico: TbsSkinCheckRadioBox;
     chkEmiteEtiqueta: TbsSkinCheckRadioBox;
     editNumeroVias: TbsSkinSpinEdit;
     Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    cmbCaixaBalcao: TbsSkinDBLookupComboBox;
+    cmbCaixaVendasExternas: TbsSkinDBLookupComboBox;
+    srcCadCaixa: TDataSource;
+    cdsCadCaixa: TClientDataSet;
+    edtVlr_Servico: TbsSkinEdit;
+    chkVendaExterna: TbsSkinCheckRadioBox;
+    bsSkinLabel7: TbsSkinLabel;
+    cmbTipoImpressora: TbsSkinComboBox;
+    chkImprimiCopiaComprovante: TbsSkinCheckRadioBox;
+    bsSkinTabSheet4: TbsSkinTabSheet;
+    chkMarcaOsNoCaixa: TbsSkinCheckRadioBox;
+    chkBaixaMultiplosClientes: TbsSkinCheckRadioBox;
+    Label5: TLabel;
+    cmbEstoqueVendaExterna: TbsSkinDBLookupComboBox;
+    srcSetoresEstoque: TDataSource;
+    cdsSetoresEstoque: TClientDataSet;
+    chkImprimeComprovanteVenda: TbsSkinCheckRadioBox;
+    bsSkinLabel8: TbsSkinLabel;
+    EdtNumeroDeTurnos: TbsSkinSpinEdit;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cmbNome_ClienteChange(Sender: TObject);
     procedure cmbCod_ClienteChange(Sender: TObject);
   private
+    {Gravação dos parametros}
     procedure GravarParametrosContaAReceber;
+    procedure GravarParametrosAdiministrativos;
     procedure GravarParametrosImpressao;
+    procedure GravarParametrosGerais;
+
+    {Recuperação dos parametros}
+    procedure RecuperarParametrosAdiministrativos;
     procedure RecuperarParametrosContasAReceber;
     procedure RecuperarParametrosImpressao;
+    procedure RecuperarParametrosGerais;
+    procedure CarregarTabelas;
+    procedure CarregarTodosOsParametros;
 
-    function RetornaSimouNao(condicao : Boolean): String;
-    function RetornarVerdadeirOuFalso(condicao : string) : Boolean;
     { Private declarations }
   public
     { Public declarations }
@@ -100,6 +127,7 @@ begin
 
    GravarParametrosContaAReceber;
    GravarParametrosImpressao;
+   GravarParametrosGerais;
 
    //[parametros de sistema]
    gsParametros.WriteString('ACESSODADOS','HostName',edtHostName.text);
@@ -142,11 +170,6 @@ begin
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'VendaSemControle', 'NAO' ,gsOperador );
 
-   if chkImprimeComprovante.Checked Then
-      gParametros.Gravar( '', '[CADASTRO]', 'ImprimeComprovante', 'SIM' ,gsOperador )
-   Else
-      gParametros.Gravar( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' ,gsOperador );
-
    if chkLigaECF.Checked Then
       gParametros.Gravar( '', '[CADASTRO]', 'LigarECF', 'SIM' ,gsOperador )
    Else
@@ -182,129 +205,147 @@ end;
 procedure TfrmParametros.FormShow(Sender: TObject);
 begin
 
-   qryVariavel.Close;
-   qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select status, Codigo,Descricao,cnpjcpf,'+
-                           'Qtde_PedAberto,Limite_Credito from T_Clientes '+
-                           'where ativo=:parAtivo order by Descricao ';
-   qryVariavel.ParamByName('parativo').AsString := 'S';
-
-   cdsCadClientes.Close;
-   cdsCadClientes.ProviderName := dspVariavel.Name;
-   cdsCadClientes.Open;
+   CarregarTabelas;
 
    RecuperarParametrosContasAReceber;
    RecuperarParametrosImpressao;
+   RecuperarParametrosGerais;
 
+   CarregarTodosOsParametros;
+end;
 
-   //[parametros de sistema]
-
-   edtHostName.text         := gsParametros.ReadString('ACESSODADOS','HostName','(Local)');
-   edtDatabaseName.text     := gsParametros.ReadString('ACESSODADOS','DataBaseName','Controler');
-   edtUsuario.text          := gsParametros.ReadString('ACESSODADOS','Usuario','Controler');
-   edtSenha.text            := gsParametros.ReadString('ACESSODADOS','Senha','remoto');
-   rdgTipoSistema.ItemIndex := StrToInt(gsParametros.ReadString('ACESSODADOS','TipoSistema','0'));
-
-   edtCaminhoImpressao.text := gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1');
-
-   edtNomeEmpresa.Text      := gsParametros.ReadString('CONFIG_SISTEMA','NomeEmpresa','Informe a empresa nos parametros');
-
-   cmbCod_Cliente.KeyValue  := StrToInt(gParametros.Ler( '', '[CADASTRO]', 'ClientePadrao', '0' ));
-   if StrToInt(gParametros.Ler( '', '[CADASTRO]', 'ClientePadrao', '0' ))<>0 then
-   Begin
-      cmbCod_Cliente.KeyValue  := StrToInt(gParametros.Ler( '', '[CADASTRO]', 'ClientePadrao', '0' ));
-      cmbCod_ClienteChange(cmbCod_Cliente);
-   End;
-   EdtNumeroCompras.Value   := StrToInt(gParametros.Ler( '', '[CADASTRO]', 'NumeroCompras', '999' ));
-   EdtqtdeNumeroDias.Value  := StrToInt(gParametros.Ler( '', '[CADASTRO]', 'qtdeNumeroDias', '999' ));
-   edtVlr_Servico.Text      := gParametros.Ler( '', '[CADASTRO]', 'ValorOSPadrao', '0' );
-
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendeServico', 'NAO' )) = 'NAO' Then
-      chkVendeServico.Checked := False
-   Else
-     chkVendeServico.Checked := True;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CondicaoNaVenda', 'NAO' )) = 'NAO' Then
-      chkCondicaoNaVenda.Checked := False
-   Else
-      chkCondicaoNaVenda.Checked := True;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'NAO' Then
-      chkBloqueioEstoque.Checked := False
-   Else
-      chkBloqueioEstoque.Checked := True;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'LigarECF', 'NAO' )) = 'NAO' Then
-      chkLigaECF.Checked := False
-   Else
-      chkLigaECF.Checked := True;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'ImprimeComprovante', 'NAO' )) = 'SIM' Then
-      chkImprimeComprovante.Checked := True
-   Else
-      chkImprimeComprovante.Checked := False;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
-      chkVendaSemControle.Checked := True
-   Else
-      chkVendaSemControle.Checked := False;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO' )) = 'SIM' Then
-      cnkCadastraClienteSemCPF.Checked := True
-   Else
-      cnkCadastraClienteSemCPF.Checked := False;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'EmiteEtiqueta', 'NAO' )) = 'NAO' Then
-      chkEmiteEtiqueta.Checked := False
-   Else
-      chkEmiteEtiqueta.Checked := True;
-
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'Data_Automatica', 'NAO' )) = 'NAO' Then
-      chkData_Automatica.Checked := False
-   Else
-      chkData_Automatica.Checked := True;
-
+procedure TfrmParametros.GravarParametrosAdiministrativos;
+begin
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', RetornaSimouNao(chkMarcaOsNoCaixa.Checked) ,gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosContaAReceber;
 begin
-   gParametros.Gravar( '', '[CADASTRO]', 'TrabalhaComRemessa',RetornaSimouNao(chkTrabalhaComRemessa.Checked),gsOperador );
-   gParametros.Gravar( '', '[CADASTRO]', 'RecebimentoLote', RetornaSimouNao(chkRecebimentoLote.Checked) ,gsOperador );
-   gParametros.Gravar( '', '[CADASTRO]', 'TipoBaixa', IntToStr(cmbTipoBaixa.ItemIndex) ,gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'TrabalhaComRemessa',RetornaSimouNao(chkTrabalhaComRemessa.Checked),gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'RecebimentoLote', RetornaSimouNao(chkRecebimentoLote.Checked) ,gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'TipoBaixa', IntToStr(cmbTipoBaixa.ItemIndex) ,gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'BaixaMultiplosClientes', RetornaSimouNao(chkBaixaMultiplosClientes.Checked) ,gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'NumeroDeTurnos', EdtNumeroDeTurnos.Text ,gsOperador );
+
+end;
+
+procedure TfrmParametros.GravarParametrosGerais;
+begin
+   gParametros.Gravar( '', '[GERAL]', 'CaixaBalcao', cmbCaixaBalcao.KeyValue,gsOperador );
+   gParametros.Gravar( '', '[GERAL]', 'CaixaVendasExternas', cmbCaixaVendasExternas.KeyValue,gsOperador );
+   gParametros.Gravar( '', '[GERAL]', 'VendaExterna',RetornaSimouNao(chkVendaExterna.Checked),gsOperador );
+   gParametros.Gravar( '', '[GERAL]', 'EstoqueVendaExterna', cmbEstoqueVendaExterna.KeyValue,gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosImpressao;
 begin
    gParametros.Gravar( '', '[IMPRESSAO]', 'NumeroVias',editNumeroVias.Text,gsOperador );
+   gParametros.Gravar( '', '[IMPRESSAO]', 'TipoImpressora',intToStr(cmbTipoImpressora.ItemIndex),gsOperador );
+   gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante',RetornaSimouNao(chkImprimiCopiaComprovante.Checked),gsOperador );
+   gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda',RetornaSimouNao(chkImprimeComprovanteVenda.Checked),gsOperador );
+   gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteServico',RetornaSimouNao(chkImprimeComprovanteServico.Checked),gsOperador );
+end;
+
+procedure TfrmParametros.RecuperarParametrosAdiministrativos;
+begin
+   chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;
 begin
-   cmbTipoBaixa.ItemIndex        := StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador ));
-   chkTrabalhaComRemessa.Checked := RetornarVerdadeirOuFalso(Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )));
-   chkRecebimentoLote.Checked    := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'RecebimentoLote', 'NAO' )));
+   cmbTipoBaixa.ItemIndex            := StrToint(gParametros.Ler( '', '[CONTASRECEBER]', 'TipoBaixa', '0' ,gsOperador ));
+   EdtNumeroDeTurnos.Text            := gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador );
+   chkTrabalhaComRemessa.Checked     := RetornarVerdadeirOuFalso(Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'TrabalhaComRemessa', 'NAO' )));
+   chkRecebimentoLote.Checked        := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'RecebimentoLote', 'NAO' )));
+   chkBaixaMultiplosClientes.Checked := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'BaixaMultiplosClientes', 'NAO' )));
+end;
+
+procedure TfrmParametros.RecuperarParametrosGerais;
+begin
+   cmbCaixaBalcao.KeyValue          := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '1' );
+   cmbCaixaVendasExternas.KeyValue  := gParametros.Ler( '', '[GERAL]', 'CaixaVendasExternas', '1' );
+   cmbEstoqueVendaExterna.KeyValue  := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
+   chkVendaExterna.Checked          := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
+end;
+
+procedure TfrmParametros.CarregarTabelas;
+var Parametros : TStringList;
+begin
+  Parametros := TStringList.Create;
+  try
+    Parametros.add('S');
+    cdsCadClientes.Data := gConexao.BuscarDadosSQL('Select status, Codigo, Descricao, cnpjcpf,' +
+                                              '       Qtde_PedAberto,Limite_Credito '+
+                                              'From T_Clientes '+
+                                              'Where ativo=:parAtivo order by Descricao ',Parametros).data;
+    cdsCadCaixa.Data := gConexao.BuscarDadosSQL('Select * from Caixas Order by Descricao ',Nil).data;
+    cdsSetoresEstoque.data := gConexao.BuscarDadosSQL('Select * from Setores Order by Descricao ',Nil).data;
+  finally
+     FreeAndNil(Parametros);
+  end;
+end;
+
+procedure TfrmParametros.CarregarTodosOsParametros;
+begin
+  edtHostName.text := gsParametros.ReadString('ACESSODADOS', 'HostName', '(Local)');
+  edtDatabaseName.text := gsParametros.ReadString('ACESSODADOS', 'DataBaseName', 'Controler');
+  edtUsuario.text := gsParametros.ReadString('ACESSODADOS', 'Usuario', 'Controler');
+  edtSenha.text := gsParametros.ReadString('ACESSODADOS', 'Senha', 'remoto');
+  rdgTipoSistema.ItemIndex := StrToInt(gsParametros.ReadString('ACESSODADOS', 'TipoSistema', '0'));
+  edtCaminhoImpressao.text := gsParametros.ReadString('IMPRESSAO', 'CaminhoImpressao', 'LPT1');
+  edtNomeEmpresa.Text := gsParametros.ReadString('CONFIG_SISTEMA', 'NomeEmpresa', 'Informe a empresa nos parametros');
+  cmbCod_Cliente.KeyValue := StrToInt(gParametros.Ler('', '[CADASTRO]', 'ClientePadrao', '0'));
+  if StrToInt(gParametros.Ler('', '[CADASTRO]', 'ClientePadrao', '0')) <> 0 then
+  begin
+    cmbCod_Cliente.KeyValue := StrToInt(gParametros.Ler('', '[CADASTRO]', 'ClientePadrao', '0'));
+    cmbCod_ClienteChange(cmbCod_Cliente);
+  end;
+  EdtNumeroCompras.Value := StrToInt(gParametros.Ler('', '[CADASTRO]', 'NumeroCompras', '999'));
+  EdtqtdeNumeroDias.Value := StrToInt(gParametros.Ler('', '[CADASTRO]', 'qtdeNumeroDias', '999'));
+  edtVlr_Servico.Text := gParametros.Ler('', '[CADASTRO]', 'ValorOSPadrao', '0');
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'VendeServico', 'NAO')) = 'NAO' then
+    chkVendeServico.Checked := False
+  else
+    chkVendeServico.Checked := True;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'CondicaoNaVenda', 'NAO')) = 'NAO' then
+    chkCondicaoNaVenda.Checked := False
+  else
+    chkCondicaoNaVenda.Checked := True;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'BloqueioEstoque', 'NAO')) = 'NAO' then
+    chkBloqueioEstoque.Checked := False
+  else
+    chkBloqueioEstoque.Checked := True;
+
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'LigarECF', 'NAO')) = 'NAO' then
+    chkLigaECF.Checked := False
+  else
+    chkLigaECF.Checked := True;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'VendaSemControle', 'NAO')) = 'SIM' then
+    chkVendaSemControle.Checked := True
+  else
+    chkVendaSemControle.Checked := False;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'CadastraClienteSemCPF', 'NAO')) = 'SIM' then
+    cnkCadastraClienteSemCPF.Checked := True
+  else
+    cnkCadastraClienteSemCPF.Checked := False;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'EmiteEtiqueta', 'NAO')) = 'NAO' then
+    chkEmiteEtiqueta.Checked := False
+  else
+    chkEmiteEtiqueta.Checked := True;
+  if Uppercase(gParametros.Ler('', '[CADASTRO]', 'Data_Automatica', 'NAO')) = 'NAO' then
+    chkData_Automatica.Checked := False
+  else
+    chkData_Automatica.Checked := True;
 end;
 
 procedure TfrmParametros.RecuperarParametrosImpressao;
 begin
-    editNumeroVias.Text     := gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador );
+   editNumeroVias.Text         := gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador );
+   cmbTipoImpressora.Itemindex := StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador ));
+   chkImprimiCopiaComprovante.Checked := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
+   chkImprimeComprovanteVenda.Checked := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda','0',gsOperador ));
+   chkImprimeComprovanteServico.Checked := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteServico','0',gsOperador ));
 end;
 
-function TfrmParametros.RetornarVerdadeirOuFalso(condicao: string): Boolean;
-begin
-   if condicao='SIM' then
-      Result := True
-   Else
-     Result := False;   
-end;
-
-function TfrmParametros.RetornaSimouNao(Condicao: Boolean): String;
-begin
- if Condicao then
-    Result := 'SIM'
- else
-    Result := 'NAO';
-end;
 
 end.

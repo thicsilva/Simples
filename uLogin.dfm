@@ -4,7 +4,7 @@ object frmLogin: TfrmLogin
   BorderIcons = []
   BorderStyle = bsSingle
   BorderWidth = 2
-  Caption = 'Simples - Acesso ao Sistema'
+  Caption = 'entre com usuario e senha'
   ClientHeight = 291
   ClientWidth = 353
   Color = clBtnFace
@@ -1763,6 +1763,7 @@ object frmLogin: TfrmLogin
     Spacing = 2
     Caption = 'Informe Usuario e Senha'
     Align = alTop
+    ExplicitTop = 127
     object bsSkinStdLabel10: TbsSkinStdLabel
       Left = 69
       Top = 36

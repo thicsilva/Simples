@@ -179,8 +179,6 @@ begin
    impmatricial.Imp(pvilinha,001,'Quantidade Total da Rota..: '+intToStr(liQtde_Rota));
    impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Rota),[]);
    pviLinha:=Pvilinha+1;
-  // impmatricial.Imp(pvilinha,001,'Total da Rota..: '+intToStr(liQtde_Rota));
-   //impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Total),[]);
    pviLinha:=Pvilinha+2;
    lrVlr_Rota   := 0;
    liQtde_Rota  := 0;

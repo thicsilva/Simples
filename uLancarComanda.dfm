@@ -1,7 +1,7 @@
-object Form1: TForm1
+object frmLancaComanda: TfrmLancaComanda
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Lancamento de Comanda '
   ClientHeight = 162
   ClientWidth = 447
   Color = clBtnFace

@@ -4,7 +4,7 @@ object frmConsVendas: TfrmConsVendas
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o das Vendas Efetuadas'
   ClientHeight = 539
-  ClientWidth = 946
+  ClientWidth = 894
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,9 @@ object frmConsVendas: TfrmConsVendas
   TextHeight = 13
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
-    Top = 146
-    Width = 946
-    Height = 393
+    Top = 153
+    Width = 894
+    Height = 386
     HintImageIndex = 0
     TabOrder = 0
     SkinDataName = 'panel'
@@ -52,15 +52,13 @@ object frmConsVendas: TfrmConsVendas
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alClient
-    ExplicitHeight = 372
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 944
-      Height = 391
+      Width = 892
+      Height = 384
       Align = alClient
       TabOrder = 0
-      ExplicitHeight = 370
       object GrdVendas: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
         DataController.DataSource = srcVendas
@@ -263,8 +261,8 @@ object frmConsVendas: TfrmConsVendas
   object panelconsulta: TbsSkinPanel
     Left = 0
     Top = 77
-    Width = 946
-    Height = 69
+    Width = 894
+    Height = 76
     HintImageIndex = 0
     TabOrder = 1
     SkinData = frmPrincipal.SkinPrincipal
@@ -296,8 +294,8 @@ object frmConsVendas: TfrmConsVendas
     Caption = 'panelconsulta'
     Align = alTop
     object lblsituacao: TbsSkinStdLabel
-      Left = 117
-      Top = 43
+      Left = 17
+      Top = 47
       Width = 42
       Height = 13
       EllipsType = bsetNone
@@ -313,8 +311,8 @@ object frmConsVendas: TfrmConsVendas
       Caption = 'Situa'#231#227'o'
     end
     object lblTurma: TbsSkinStdLabel
-      Left = 392
-      Top = 16
+      Left = 292
+      Top = 17
       Width = 19
       Height = 13
       EllipsType = bsetNone
@@ -330,8 +328,8 @@ object frmConsVendas: TfrmConsVendas
       Caption = 'Ate.'
     end
     object cmbStatus: TbsSkinComboBox
-      Left = 165
-      Top = 38
+      Left = 65
+      Top = 42
       Width = 105
       Height = 20
       HintImageIndex = 0
@@ -392,8 +390,8 @@ object frmConsVendas: TfrmConsVendas
       Style = bscbFixedStyle
     end
     object cmbTipoFiltro: TbsSkinComboBox
-      Left = 287
-      Top = 38
+      Left = 185
+      Top = 42
       Width = 120
       Height = 20
       HintImageIndex = 0
@@ -453,8 +451,8 @@ object frmConsVendas: TfrmConsVendas
       Style = bscbFixedStyle
     end
     object dtpData_Ini: TbsSkinDateEdit
-      Left = 287
-      Top = 12
+      Left = 187
+      Top = 13
       Width = 88
       Height = 18
       EditMask = '!99/99/0000;1; '
@@ -503,8 +501,8 @@ object frmConsVendas: TfrmConsVendas
       RightImageDownIndex = -1
     end
     object dtpData_Fim: TbsSkinDateEdit
-      Left = 425
-      Top = 12
+      Left = 325
+      Top = 13
       Width = 89
       Height = 18
       EditMask = '!99/99/0000;1; '
@@ -553,8 +551,8 @@ object frmConsVendas: TfrmConsVendas
       RightImageDownIndex = -1
     end
     object cmbTipoData: TbsSkinComboBox
-      Left = 165
-      Top = 12
+      Left = 65
+      Top = 11
       Width = 105
       Height = 20
       HintImageIndex = 0
@@ -612,8 +610,8 @@ object frmConsVendas: TfrmConsVendas
       Style = bscbFixedStyle
     end
     object edtPesquisa: TbsSkinEdit
-      Left = 413
-      Top = 40
+      Left = 313
+      Top = 42
       Width = 291
       Height = 18
       DefaultColor = clWindow
@@ -644,8 +642,8 @@ object frmConsVendas: TfrmConsVendas
       OnKeyDown = edtPesquisaKeyDown
     end
     object cmbPeriodo: TbsSkinComboBox
-      Left = 524
-      Top = 12
+      Left = 424
+      Top = 13
       Width = 180
       Height = 20
       HintImageIndex = 0
@@ -782,8 +780,8 @@ object frmConsVendas: TfrmConsVendas
       OnChange = cmbPeriodoChange
     end
     object btnSelecionar: TbsSkinButton
-      Left = 727
-      Top = 20
+      Left = 621
+      Top = 7
       Width = 125
       Height = 28
       HintImageIndex = 0
@@ -816,11 +814,41 @@ object frmConsVendas: TfrmConsVendas
       Spacing = 1
       OnClick = btnSelecionarClick
     end
+    object checkUsarleitor: TbsSkinCheckRadioBox
+      Left = 621
+      Top = 41
+      Width = 191
+      Height = 25
+      HintImageIndex = 0
+      TabOrder = 8
+      SkinDataName = 'checkbox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      WordWrap = False
+      AllowGrayed = False
+      State = cbUnchecked
+      ImageIndex = 0
+      Flat = True
+      UseSkinFontColor = True
+      TabStop = True
+      CanFocused = True
+      Radio = False
+      Checked = False
+      GroupIndex = 0
+      Caption = 'Usar leitor de Codigo de Barras'
+      OnClick = checkUsarleitorClick
+    end
   end
   object pnlmensagem: TPanel
     Left = 0
     Top = 53
-    Width = 946
+    Width = 894
     Height = 24
     Align = alTop
     Caption = 'Consulta de Vendas'
@@ -837,7 +865,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 946
+    Width = 894
     Height = 53
     AutoSize = True
     Bands = <
@@ -845,7 +873,7 @@ object frmConsVendas: TfrmConsVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 942
+        Width = 890
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -854,7 +882,7 @@ object frmConsVendas: TfrmConsVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 933
+      Width = 881
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -897,7 +925,7 @@ object frmConsVendas: TfrmConsVendas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 809
+        Left = 753
         Top = 0
         Width = 70
         Height = 49
@@ -932,7 +960,6 @@ object frmConsVendas: TfrmConsVendas
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
-        ExplicitLeft = 856
         ExplicitTop = 12
         ExplicitHeight = 40
       end
@@ -1135,7 +1162,7 @@ object frmConsVendas: TfrmConsVendas
       object bsSkinBevel5: TbsSkinBevel
         Left = 594
         Top = 0
-        Width = 215
+        Width = 159
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
@@ -1252,8 +1279,8 @@ object frmConsVendas: TfrmConsVendas
     Top = 391
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
-    Left = 144
-    Top = 248
+    Left = 64
+    Top = 32
     object BorderodeEntrega1: TMenuItem
       Caption = 'Devolu'#231#227'o Total'
       OnClick = BorderodeEntrega1Click
@@ -2456,5 +2483,60 @@ object frmConsVendas: TfrmConsVendas
   object Print: TPrintDialog
     Left = 632
     Top = 248
+  end
+  object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
+    DisableSystemMenu = False
+    AlwaysResize = False
+    PositionInMonitor = bspDefault
+    UseFormCursorInNCArea = False
+    MaxMenuItemsInWindow = 0
+    ClientWidth = 0
+    ClientHeight = 0
+    HideCaptionButtons = False
+    AlwaysShowInTray = False
+    LogoBitMapTransparent = False
+    AlwaysMinimizeToTray = False
+    UseSkinFontInMenu = True
+    ShowIcon = False
+    MaximizeOnFullScreen = False
+    AlphaBlend = False
+    AlphaBlendAnimation = True
+    AlphaBlendValue = 200
+    ShowObjectHint = False
+    MenusAlphaBlend = False
+    MenusAlphaBlendAnimation = False
+    MenusAlphaBlendValue = 200
+    DefCaptionFont.Charset = DEFAULT_CHARSET
+    DefCaptionFont.Color = clBtnText
+    DefCaptionFont.Height = 14
+    DefCaptionFont.Name = 'Arial'
+    DefCaptionFont.Style = [fsBold]
+    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
+    DefInActiveCaptionFont.Color = clBtnShadow
+    DefInActiveCaptionFont.Height = 14
+    DefInActiveCaptionFont.Name = 'Arial'
+    DefInActiveCaptionFont.Style = [fsBold]
+    DefMenuItemHeight = 20
+    DefMenuItemFont.Charset = DEFAULT_CHARSET
+    DefMenuItemFont.Color = clWindowText
+    DefMenuItemFont.Height = 14
+    DefMenuItemFont.Name = 'Arial'
+    DefMenuItemFont.Style = []
+    UseDefaultSysMenu = True
+    SkinData = frmPrincipal.SkinPrincipal
+    MinHeight = 0
+    MinWidth = 0
+    MaxHeight = 0
+    MaxWidth = 0
+    Magnetic = False
+    MagneticSize = 5
+    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
+    Left = 348
+    Top = 216
   end
 end

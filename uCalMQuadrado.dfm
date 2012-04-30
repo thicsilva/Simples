@@ -2,7 +2,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
   Left = 0
   Top = 0
   Caption = 'Calculo de metro Quadrado'
-  ClientHeight = 224
+  ClientHeight = 244
   ClientWidth = 349
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object bsSkinCoolBar1: TbsSkinCoolBar
@@ -24,16 +25,16 @@ object frmCalMQuadrado: TfrmCalMQuadrado
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 343
+        Width = 345
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 329
+      Width = 336
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -47,6 +48,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -91,6 +93,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -129,6 +132,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -149,6 +153,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = -6
+        ExplicitTop = 8
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
@@ -168,7 +173,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
     Left = 0
     Top = 44
     Width = 349
-    Height = 180
+    Height = 200
     HintImageIndex = 0
     TabOrder = 1
     SkinData = frmPrincipal.SkinPrincipal
@@ -195,6 +200,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
     Sizeable = False
     Align = alClient
     Caption = 'Informe as Medidas para o Metro Quadrado'
+    ExplicitHeight = 180
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 51
       Top = 37
@@ -230,7 +236,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Caption = 'Comprimento'
     end
     object bsSkinStdLabel3: TbsSkinStdLabel
-      Left = 24
+      Left = 172
       Top = 77
       Width = 57
       Height = 13
@@ -244,12 +250,12 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       DefaultFont.Style = []
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'stdlabel'
-      Caption = 'Total Em M'#178
+      Caption = 'Total Em M.'
     end
     object bsSkinStdLabel4: TbsSkinStdLabel
-      Left = 175
-      Top = 77
-      Width = 54
+      Left = 27
+      Top = 117
+      Width = 51
       Height = 13
       EllipsType = bsetNone
       UseSkinFont = True
@@ -261,10 +267,10 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       DefaultFont.Style = []
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'stdlabel'
-      Caption = 'Valor do M'#178
+      Caption = 'Valor do M'
     end
     object bsSkinStdLabel5: TbsSkinStdLabel
-      Left = 18
+      Left = 166
       Top = 117
       Width = 63
       Height = 13
@@ -281,9 +287,9 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Caption = 'Total a pagar'
     end
     object AtualizaRec: TbsSkinSpeedButton
-      Left = 203
-      Top = 114
-      Width = 97
+      Left = 18
+      Top = 148
+      Width = 311
       Height = 24
       HintImageIndex = 0
       SkinData = frmPrincipal.SkinPrincipal
@@ -296,6 +302,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      CheckedMode = False
       UseSkinSize = False
       UseSkinFontColor = True
       WidthWithCaption = 0
@@ -381,6 +388,23 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Spacing = 1
       OnClick = AtualizaRecClick
     end
+    object lbl01: TbsSkinStdLabel
+      Left = 24
+      Top = 77
+      Width = 58
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Complemnto'
+    end
     object edtaltura: TbsSkinNumericEdit
       Left = 87
       Top = 34
@@ -409,6 +433,12 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = AtualizaRecClick
     end
     object edtcomprimento: TbsSkinNumericEdit
@@ -439,9 +469,127 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = AtualizaRecClick
     end
     object edtMEtroQ: TbsSkinNumericEdit
+      Left = 235
+      Top = 74
+      Width = 65
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = AtualizaRecClick
+    end
+    object edtVlrMetro: TbsSkinNumericEdit
+      Left = 87
+      Top = 114
+      Width = 65
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      Decimal = 3
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      ReadOnly = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = AtualizaRecClick
+    end
+    object edtTotal: TbsSkinNumericEdit
+      Left = 235
+      Top = 114
+      Width = 65
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      Decimal = 3
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      ReadOnly = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = AtualizaRecClick
+    end
+    object edtComplemento: TbsSkinNumericEdit
       Left = 87
       Top = 74
       Width = 65
@@ -469,69 +617,12 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      OnExit = AtualizaRecClick
-    end
-    object edtVlrMetro: TbsSkinNumericEdit
-      Left = 235
-      Top = 74
-      Width = 65
-      Height = 18
-      Text = '0,00'
-      Increment = 1.000000000000000000
-      SupportUpDownKeys = False
-      Alignment = taRightJustify
-      UseSkinFont = True
-      Decimal = 3
-      ValueType = vtFloat
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clBlack
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      ButtonMode = False
-      SkinData = frmPrincipal.SkinEntradaDados
-      SkinDataName = 'edit'
-      ReadOnly = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 3
-      OnExit = AtualizaRecClick
-    end
-    object edtTotal: TbsSkinNumericEdit
-      Left = 87
-      Top = 114
-      Width = 65
-      Height = 18
-      Text = '0,00'
-      Increment = 1.000000000000000000
-      SupportUpDownKeys = False
-      Alignment = taRightJustify
-      UseSkinFont = True
-      Decimal = 3
-      ValueType = vtFloat
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clBlack
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      ButtonMode = False
-      SkinData = frmPrincipal.SkinEntradaDados
-      SkinDataName = 'edit'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = AtualizaRecClick
     end
   end

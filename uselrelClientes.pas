@@ -170,11 +170,12 @@ begin
                             '          TipoPg.Codigo=Ven.Cod_FormaPagamento '+
                             '     Left join T_Funcionarios Fun On '+
                             '          Fun.Codigo=Ven.Cod_Funcionario '+
-                            'WHERE Rec.status=:parStatus And Tipopg.SomaVenda=:parSomaVenda and '+
+                            'WHERE Rec.status=:parStatus And Tipopg.SomaVenda=:parSomaVenda and Cli.Status=:parStatusCli and '+
                             '      ( Rec.Data_Cad>=:parDataIni and Rec.Data_Cad<=:parDataFim ) '+lsWhere+' '+
                             'GROUP BY Rec.Seqvenda,Rec.Cod_Cliente,'+lsGroupBy+',Cli.Bairro,Cli.Endereco '+
                             'ORDER BY '+lsGroupBy+',Cli.Bairro,Cli.Endereco';
    qryRelatorio.ParamByName('parStatus').AsString := '1';
+   qryRelatorio.ParamByName('parStatusCli').AsString := '0';
    qryRelatorio.ParamByName('parSomaVenda').AsBoolean := True;
 
    if cmbNome_RotaIni.KeyValue <> Null  Then
@@ -242,6 +243,9 @@ begin
          lsNome_Cliente := cdsRelatorio.FieldByName('Descricao').AsString;
          lsEndereco     := Copy( cdsRelatorio.FieldByName('Endereco').AsString,1,40 );
          lsBairro       := cdsRelatorio.FieldByName('Bairro').AsString;
+         if UPPERCASE(Trim(cdsRelatorio.FieldByName('Bairro').AsString))='CENTRO' then
+            lsBairro := (cdsRelatorio.FieldByName('Bairro').AsString +' de '+cdsRelatorio.FieldByName('Cidade').AsString );
+         lsBairro := Copy(lsBairro,1,30);
          lrVlr_Total    := 0;
          lrVlr_Recebido := 0;
          while (lsCod_cliente = cdsRelatorio.FieldByName('Codigo').AsString) AND (not cdsRelatorio.Eof)  do

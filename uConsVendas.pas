@@ -27,10 +27,11 @@ uses
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
-  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase;
+  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
+  uClassDaoContaCorrente;
 
 type
-  TfrmConsVendas = class(TFormBase)
+  TfrmConsVendas = class(TForm)
     bsSkinPanel3: TbsSkinPanel;
     srcItensVendas: TDataSource;
     srcVendas: TDataSource;
@@ -119,6 +120,8 @@ type
     btnCancelar: TbsSkinMenuSpeedButton;
     Column_Status_Pagamento: TcxGridDBColumn;
     Print: TPrintDialog;
+    checkUsarleitor: TbsSkinCheckRadioBox;
+    SkinForm: TbsBusinessSkinForm;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -138,9 +141,9 @@ type
     procedure cmbPeriodoChange(Sender: TObject);
     procedure Etiquetas1Click(Sender: TObject);
     procedure VisualizarDevolvidos1Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
+    procedure checkUsarleitorClick(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -154,8 +157,9 @@ var
 
 implementation
 
-uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus,
-  udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda;
+uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
+  udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
+  uclassContaCorrente;
 
 {$R *.dfm}
 
@@ -209,10 +213,10 @@ begin
    //-------------------------------------itens vendas ----------------------------------------------
 
    qryItensVendas.Close;
-   qryItensVendas.SQL.Text := 'Select Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
+   qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
                               'Prod.Pco_Custo, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
-                              'where Prod.Codigo=Itens.Cod_Produto AND Ven.Tipo_Venda=:parTipo_Venda ';
+                              'where Prod.Codigo=Itens.Cod_Produto AND Ven.Tipo_Venda=:parTipo_Venda  ';
 
    if cmbStatus.ItemIndex <> 0 Then
       qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.Status=:parStatus ';
@@ -261,48 +265,6 @@ begin
 
 end;
 
-
-procedure TfrmConsVendas.Button1Click(Sender: TObject);
-const
-  cJustif     = #27#97#51;
-  cEject      = #12;
-  { Tamanho da fonte }
-  c10cpi      = #18;
-  c12cpi      = #27#77;
-  c17cpi      = #15;
-  cIExpandido = #14;
-  cFExpandido = #20;
-  { Formatação da fonte }
-  cINegrito   = #27#71;
-  cFNegrito   = #27#72;
-  cIItalico   = #27#52;
-  cFItalico   = #27#53;
-var
-  Texto: string;
-  F: TextFile;
-begin
-
-  Texto := c10cpi +
-    'Este e um teste para impressora Epson LX 300. ' +
-    'O objetivo e imprimir texto justificado sem deixar ' +
-    'de usar formatacao, tais como: ' +
-    cINegrito + 'Negrito, ' + cFNegrito +
-    cIItalico + 'Italico, ' + cFItalico +
-    c17cpi + 'Condensado (17cpi), ' + c10cpi +
-    c12cpi + '12 cpi, ' + c10cpi +
-    cIExpandido + 'Expandido.' + cFExpandido +
-    ' Este e apenas um exemplo, mas voce podera adapta-lo ' +
-    'a sua realidade conforme a necessidade.';
-
-  AssignFile(F, '\\NOTE_BRUNO\EPSON' );
-  Rewrite(F);
-  try
-    WriteLn(F, cJustif, Texto);
-    WriteLn(F, cEject);
-  finally
-    CloseFile(F);
-  end;
-end;
 
 procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
 var liRetorno : Integer;
@@ -419,8 +381,18 @@ begin
          cdsItensvendas.Next;
       End;
    End;
-   frmVendas.Showmodal;
+   if checkUsarleitor.Checked then
+   begin
+      frmVendas.AtualizaTabelas;
+      frmVendas.PrepararFinalizacaoOS;
+      frmVendas.edtCod_TipoVenda.Visible := False;
+      frmVendas.btnokclick(frmVendas.btnOk);
+      frmVendas.Close;
+   end
+   else
+      frmVendas.Showmodal;
    btnSelecionarClick(btnSelecionar);
+
    {$REGION 'Imprime Etiquetas das O.S'}
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'EmiteEtiqueta', 'NAO' )) = 'SIM' Then
    Begin
@@ -467,83 +439,22 @@ begin
 end;
 
 procedure TfrmConsVendas.btnImpComprovanteClick(Sender: TObject);
-const
-  cJustif     = #27#97#51;
-  cEject      = #12;
-  { Tamanho da fonte }
-  c10cpi      = #18;
-  c12cpi      = #27#77;
-  c17cpi      = #15;
-  cIExpandido = #14;
-  cFExpandido = #20;
-  { Formatação da fonte }
-  cINegrito   = #27#71;
-  cFNegrito   = #27#72;
-  cIItalico   = #27#52;
-  cFItalico   = #27#53;
-  EscDraft    = #27+'x'+'0';
-var lrTot_Produtos : Double;
-    licont         : Integer;
-    lrTot_Desconto : double;
-    liNumeroVenda  : Integer;
-    Texto: string;
-    F: TextFile;
+var
+    loVenda : TVenda;
+    DaoVenda: TDaoVenda;
+    DaoItemVenda : TDaoItemVenda;
 begin
-   If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
-   Begin
-      AssignFile(F,  gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1') );
-      Rewrite(F);
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito('_','_',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+'             '+ copy(gsVersis,5,6)+' Data:' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy(gsNomeEmp,1,39));
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy('Nota de Pagamento',1,39));
-      WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-      WriteLn(F, '',c17cpi+EscDraft+Copy(inczero(cdsVendas.FieldByName('Cod_Cliente').asString,5)+' - '+ cdsVendas.FieldByName('Nome_Cliente').asString,1, 39 ) );
-      WriteLn(F, '',c17cpi+EscDraft+'Emissao...: '+formatdateTime('dd/mm/YYYY',cdsVendas.FieldByName('Data_Venda').asDatetime)+' Orc.: '+incZero(cdsVendas.FieldByName('SeqVenda').asString,8) );
-      WriteLn(F, '',c17cpi+EscDraft+'Forma Pag.: '+Copy(inczero(cdsVendas.FieldByName('Cod_FormaPagamento').asString,3)+'-'+'Nome forma de pagamento',1,25));
-      WriteLn(F, '','Vendedor..: '+Copy(inczero(cdsVendas.FieldByName('Cod_Funcionario').asString,3)+'-'+'Nome Funcionario',1,25));
-      WriteLn(F, '','O.S Numero: '+inczero(cdsVendas.FieldByName('Controle').asString,6) );
-      WriteLn(F, '',IncDigito( '=','=',39,0));
-      WriteLn(F, '', 'Codigo |P R O D U T O S           |Und|' );
-      WriteLn(F, '', 'Quatidade|Pc. Unit| Desc.|   Vlr Total|' );
-      WriteLn(F, '', IncDigito( '=', '=', 39, 0 ) );
-
-      lrTot_Produtos := 0;
-      lrTot_Desconto := 0;
-      liCont         := 0;
-
-      liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
-      while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liNumeroVenda )  and ( Not cdsItensVendas.Eof )  do
-      Begin
-         WriteLn(F, '', 001, inczero(cdsItensVendas.FieldByName( 'Cod_Produto' ).AsString,5) + ' ' +
-                                           Copy( cdsItensVendas.FieldByName( 'Descricao' ).AsString, 1, 30 ) );
-
-         WriteLn(F, '', 'UND' +
-                        IncDigito( FormatFloat( '#,##0',cdsItensVendas.FieldByName( 'Qtde_venda').AsFloat),' ',5,0) +
-                        IncDigito( FormatFloat( '#,##0.00', Arredondar( cdsItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) ),' ',8,0)+
-                        IncDigito( FormatFloat( '#,##0.00', cdsItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendas.FieldByName( 'Qtde_venda').AsFloat ),' ',8,0)+
-                        IncDigito( FormatFloat( '#,##0.00', ( cdsItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat *
-                                                              Arredondar( cdsItensVendas.FieldByName( 'Pco_Venda' ).AsFloat -
-                                                                          cdsItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat , 2 ) ) ),' ',14,0) );
-
-         lrTot_Produtos := lrTot_Produtos + ( cdsItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( cdsItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
-         lrTot_Desconto := lrTot_Desconto + ( cdsItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat * cdsItensVendas.FieldByName( 'Qtde_venda').AsFloat ) ;
-
-         liCont := liCont + 1;
-         pviLinha := pviLinha + 1;
-         cdsItensVendas.Next;
-      end;
-      WriteLn(F, '', IncDigito( '-', '-', 39, 0 ) );
-      WriteLn(F, '', 'Total de Produtos Listado.:'+IncDigito(  IntToStr( liCont ),' ',10,0) );
-      WriteLn(F, '', 'Total dos Produtos........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Produtos ) ,' ',10,0) ) ;
-      WriteLn(F, '', 'Desconto Total ...........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Desconto ) ,' ',10,0) );
-      WriteLn(F, '', 'Valor Total...............:'+IncDigito( FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ) ,' ',10,0) );
-      WriteLn(F, '',IncDigito( '=', '=', 39, 0 ) );
-      WriteLn(F, '', '    DOCUMENTO SEM VALOR FISCAL        ' );
-      CloseFile(F);
-   End;
+   DaoVenda := TDaoVenda.Create(gConexao);
+   loVenda  := DaoVenda.CarregarVenda(cdsVendas);
+   loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
+   lovenda.Empresa.Descricao := GsNomeEmp;
+   DaoItemVenda := TDaoItemVenda.Create(gConexao);
+   loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
+                    gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
+                    StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
+   FreeAndNil(DaoVenda);
+   FreeAndNil(lovenda);
+   FreeAndNil(DaoItemVenda);
 end;
 
 procedure TfrmConsVendas.cdsItensVendasAfterOpen(DataSet: TDataSet);
@@ -602,6 +513,26 @@ begin
 
 
 
+end;
+
+procedure TfrmConsVendas.checkUsarleitorClick(Sender: TObject);
+begin
+  inherited;
+  if checkUsarleitor.Checked then
+  begin
+     cmbTipoFiltro.ItemIndex := 3;
+     cmbStatus.ItemIndex := 1;
+     cmbTipoFiltro.Enabled :=False;
+     cmbStatus.Enabled :=False;
+     btnSelecionarClick(btnSelecionar);
+  end
+  else
+  begin
+     cmbTipoFiltro.ItemIndex := 0;
+     cmbStatus.ItemIndex     := 0;
+     cmbTipoFiltro.Enabled   := True;
+     cmbStatus.Enabled       := True;
+  end;
 end;
 
 procedure TfrmConsVendas.cmbPeriodoChange(Sender: TObject);
@@ -669,6 +600,8 @@ begin
    btnCupomFiscal.Visible := True;
    btnEmproducao.Visible  := True;
    btnEntregue.Visible    := True;
+   cmbTipoFiltro.Enabled  := True;
+   cmbStatus.Enabled      := True;
 
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
    Begin
@@ -684,7 +617,7 @@ begin
    pnlmensagem.color      := $00D5FBD6;
    cmbStatus.Visible      := False;
    lblsituacao.Visible    := False;
-   //cmbStatus.ItemIndex    := 0;
+   cmbStatus.ItemIndex    := 0;
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
    grdvendas.Columns[0].Visible := False;
@@ -703,6 +636,7 @@ begin
       grdvendas.Columns[9].Visible := False;
       grdvendas.Columns[0].Visible := True;
    End;
+   btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    btnSelecionarClick(btnSelecionar);
 end;
 
@@ -711,7 +645,10 @@ var liSeqVenda     : Integer;
     trdNrTransacao : TTransactionDesc;
     vlr_anterior   : Double;
     vlr_Atual      : Double;
-   liNumeroVenda   : Integer;
+    liNumeroVenda   : Integer;
+    loDaoCaixaMovimento : TDaoCaixaMovimento;
+    DadosContaCorrente  : TContaCorrente;
+    GravaContaCorrente  : TDaoContaCorrente;
 begin
 
 {$REGION 'Inicializando Variaveis'}
@@ -763,25 +700,6 @@ begin
 
       while not CdsVerifica.Eof do
       Begin
-          if CdsVerifica.FieldByname('Status').AsString='1' then
-          Begin
-             qryModific.Close;
-             qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
-                                    '                       ( :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
-                                    '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
-
-             qryModific.ParamByName('parCod_Caixa').AsString             := '001';
-             qryModific.ParamByName('parValor').asFloat                  := CdsVerifica.FieldByname('Vlr_Recebido').AsFloat;
-             qryModific.ParamByName('parHistorico').asString             := 'Cancelamento da Venda nº '+ IncZero(CdsVerifica.FieldByname('SeqVenda').AsString,8);
-             qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := datetimeToSqlTimeStamp(gsData_Mov);
-             qryModific.ParamByName('parD_C').AsString                   := 'D';
-             qryModific.ParamByName('parSeqVenda').asInteger             := liNumeroVenda;
-             qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
-             qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
-             qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := 1; // Sempre Dinheiro
-             qryModific.ExecSQL;
-          End;
-
           Try
             qryModific.Close;
             qryModific.SQL.Text := 'update T_Ctasreceber set Status=:parStatus,Operador=:parOperador, Tipo_Baixa=:parTipo_Baixa, '+
@@ -799,6 +717,64 @@ begin
          End;
          CdsVerifica.Next;
       End;
+
+      QryVariavel.Close;
+      QryVariavel.Params.Clear;
+      QryVariavel.Sql.text := 'Select * from T_MovCaixa Where SeqVenda=:parseqvenda ';
+      QryVariavel.paramByname('parSeqvenda').AsInteger  := cdsVendas.FieldByName('Seqvenda').AsInteger;
+
+      CdsVerifica.Close;
+      CdsVerifica.ProviderName := dspvariavel.Name;
+      CdsVerifica.Open;
+
+      while not CdsVerifica.Eof do
+      Begin
+         loDaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
+
+         qryModific.Close;
+         qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
+                                '                       ( :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
+                                '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
+
+         qryModific.ParamByName('parCod_Caixa').AsInteger            := loDaoCaixaMovimento.RetornarCaixaDoLancamento(CdsVerifica.FieldByname('SeqVenda').AsInteger);
+         qryModific.ParamByName('parValor').asFloat                  := CdsVerifica.FieldByname('Valor').AsFloat;
+         qryModific.ParamByName('parHistorico').asString             := 'Cancelamento da Venda nº '+ IncZero(CdsVerifica.FieldByname('SeqVenda').AsString,8);
+         qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := datetimeToSqlTimeStamp(gsData_Mov);
+         qryModific.ParamByName('parD_C').AsString                   := 'D';
+         qryModific.ParamByName('parSeqVenda').asInteger             := liNumeroVenda;
+         qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
+         qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
+         qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := 1; // Sempre Dinheiro
+         qryModific.ExecSQL;
+         CdsVerifica.Next;
+      End;
+
+      QryVariavel.Close;
+      QryVariavel.Params.Clear;
+      QryVariavel.Sql.text := 'Select * from T_ContaCorrente Where Documento=:parseqvenda ';
+      QryVariavel.paramByname('parSeqvenda').AsInteger  := cdsVendas.FieldByName('Seqvenda').AsInteger;
+
+      CdsVerifica.Close;
+      CdsVerifica.ProviderName := dspvariavel.Name;
+      CdsVerifica.Open;
+
+      while not CdsVerifica.Eof do
+      Begin
+         DadosContaCorrente := TContaCorrente.Create;
+         GravaContaCorrente := TDaoContaCorrente.Create;
+         DadosContaCorrente.D_C         := 'C';
+         DadosContaCorrente.Valor       := CdsVerifica.FieldByname('Valor').AsFloat;
+         DadosContaCorrente.Cod_Cliente :=  CdsVerifica.FieldByname('Cod_cliente').AsInteger;
+         DadosContaCorrente.Historico   := 'Estorno do cancelamento da Venda nº '+IntToStr(liSeqvenda);
+         DadosContaCorrente.Documento   :=  99+cdsVendas.FieldByName('Seqvenda').AsInteger;
+         IF  not GravaContaCorrente.Atualizar(DadosContaCorrente) Then
+         Begin
+            CaixaMensagem( 'Não foi possivel lancar no conta corrente', ctAviso, [ cbOk ], 0 );
+            Exit;
+         End;
+         CdsVerifica.Next;
+      End;
+
  {$ENDREGION}
 
 {$REGION 'Devolucao de estoque (Cancelando os Itens)'}
@@ -842,6 +818,7 @@ begin
                cdsItensDevolucoes.FieldByName('Pco_Venda').asFloat          := cdsItensVendas.FieldByName('Pco_Venda').asFloat;
                cdsItensDevolucoes.FieldByName('Pco_Custo').asFloat          := cdsItensVendas.FieldByName('Pco_Custo').Asfloat;
                cdsItensDevolucoes.FieldByName('Data_Cad').asDateTime        := now;
+               cdsItensDevolucoes.FieldByName('SetorId').asFloat            := cdsItensVendas.FieldByName('SetorId').Asfloat;
                cdsItensDevolucoes.FieldByName('Data_Devolucao').asDateTime  := gsData_mov;
                cdsItensDevolucoes.FieldByname('Operador').AsString          := gsOperador;
                cdsItensDevolucoes.FieldByname('Cod_Emp').AsString           := gsCod_Emp;
@@ -935,10 +912,12 @@ begin
          Try
 
             qryModific.Close;
-            qryModific.SQL.Text := 'update T_Vendas set Status=:parStatus, Controle=:parControle, Operador=:parOperador, Data_Atu=:parData_Atu '+
+            qryModific.SQL.Text := 'update T_Vendas set Status=:parStatus, Controle=:parControle, '+
+                                   'Operador=:parOperador, Data_Atu=:parData_Atu, PagouSinal=:parPagouSinal '+
                                    'where Seqvenda=:parseqvenda ';
             qryModific.ParamByName('parSeqVenda').AsInteger      := liNumeroVenda;
             qryModific.ParamByName('parStatus').AsString         := '5';
+            qryModific.ParamByName('parPagouSinal').AsInteger        := 1;
             qryModific.ParamByName('parControle').AsString       := '';
             qryModific.ParamByName('parOperador').AsString       := gsOperador;
             qryModific.ParamByName('parData_Atu').AsSQLTimeStamp := StrToSqlTimeStamp(formatdateTime('dd/mm/yyyy', GsData_mov)+' 00:00:00');
@@ -1068,14 +1047,14 @@ begin
       qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
       qryModific.ParamByName('parStatus').AsString    := '4';
       qryModific.ExecSQL;
-
+      {
       Parametros := TStringList.Create;
       Parametros.Add(cdsVendas.FieldByName('SeqVenda').AsString);
       cdsVendas := gConexao.BuscarDadosSQL('Select * From T_vendas Where SeqVenda=:parSeqVenda', Parametros );
       DaoVenda := TDaoVenda.Create(gConexao);
       Venda := DaoVenda.CarregarVenda(cdsVendas);
       venda.Numerovias := StrtoInt(gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador ));
-
+       }
    End;
    btnselecionarclick(btnselecionar);
 end;
@@ -1086,7 +1065,17 @@ procedure TfrmConsVendas.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key=13 then
-     btnSelecionarClick(btnSelecionar);
+  begin
+     if checkUsarleitor.Checked then
+     begin
+        btnSelecionarClick(btnSelecionar);
+        if cdsVendas.RecordCount = 1 then
+           btnFinalizarClick(btnFinalizar);
+        edtPesquisa.Text := '';
+     end
+     else
+
+  end;
 end;
 
 procedure TfrmConsVendas.Etiquetas1Click(Sender: TObject);

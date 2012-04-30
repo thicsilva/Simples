@@ -153,6 +153,13 @@ type
     lblMostraFornecedor: TbsSkinStdLabel;
     cmbPeriodo: TbsSkinComboBox;
     lblsituacao: TbsSkinStdLabel;
+    bsSkinStdLabel22: TbsSkinStdLabel;
+    cmbSetores: TbsSkinDBLookupComboBox;
+    cdsSetores: TClientDataSet;
+    srcSetores: TDataSource;
+    cdsItensEntradasTMPComplemento: TStringField;
+    cdsItensEntradasTMPvlr_Desconto: TFloatField;
+    cdsItensEntradasTMPSetorId: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
     procedure cmbNome_ProdutoChange(Sender: TObject);
@@ -176,6 +183,7 @@ type
     procedure edtCod_CentroCustoExit(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
   private
+    procedure CarregarTabelas;
     { Private declarations }
   public
     { Public declarations }
@@ -186,46 +194,13 @@ var
 
 implementation
 
-uses uprincipal,ufuncoes;
+uses uprincipal,ufuncoes, uDaoSaldo, uClassSaldo;
 
 {$R *.dfm}
 
 procedure TfrmEntradas.FormShow(Sender: TObject);
 begin
-   qryVariavel.Close;
-   qryVariavel.Params.clear;
-   qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
-                                  '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 or Tipo_Conta=:parTipo_Conta2 ) '+
-                                     'Order by Descricao ';
-   qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
-   qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 2; // 1 Debito 2 Credito
-   qryVariavel.ParamByName('parTipo_Conta2').AsInteger := 3; // 1 Debito 2 Credito
-
-   cdsCadOperacoes.Close;
-   cdsCadOperacoes.ProviderName := dspVariavel.name;
-   cdsCadOperacoes.Open;
-
-   qryVariavel.Close;
-   qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,Pco_Compra '+
-                          'From T_Produtos where tipo_Produto<>:parTipo_Produto '+
-                          'Order by Descricao ';
-   qryVariavel.ParamByName('parTipo_Produto').AsString := '1';
-
-   cdsCadProdutos.Close;
-   cdsCadProdutos.ProviderName := dspVariavel.Name;
-   cdsCadProdutos.Open;
-
-   QryVariavel.Close;
-   QryVariavel.SQL.Text := 'Select * from T_Fornecedores order by Descricao';
-
-   cdsCadFornecedores.Close;
-   cdsCadFornecedores.ProviderName := dspVariavel.Name;
-   cdsCadFornecedores.Open;
-
-   tabctaspagar.TabVisible := True;
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
-      tabctaspagar.TabVisible := False;
+   CarregarTabelas;
 
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
 
@@ -291,6 +266,41 @@ begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
 end;
 
+procedure TfrmEntradas.CarregarTabelas;
+begin
+  qryVariavel.Close;
+  qryVariavel.Params.clear;
+  qryVariavel.SQL.Text := 'Select * from T_Operacoes where ' + '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 or Tipo_Conta=:parTipo_Conta2 ) ' + 'Order by Descricao ';
+  qryVariavel.ParamByName('parTipo_Conta').AsInteger := 0;
+  // 1 Debito 2 Credito
+  qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 2;
+  // 1 Debito 2 Credito
+  qryVariavel.ParamByName('parTipo_Conta2').AsInteger := 3;
+  // 1 Debito 2 Credito
+  cdsCadOperacoes.Close;
+  cdsCadOperacoes.ProviderName := dspVariavel.name;
+  cdsCadOperacoes.Open;
+  qryVariavel.Close;
+  qryVariavel.Params.Clear;
+  qryVariavel.SQL.text := 'Select COd_Barras,Unid,Codigo,Descricao,Pco_Compra ' + 'From T_Produtos where tipo_Produto<>:parTipo_Produto ' + 'Order by Descricao ';
+  qryVariavel.ParamByName('parTipo_Produto').AsString := '1';
+  cdsCadProdutos.Close;
+  cdsCadProdutos.ProviderName := dspVariavel.Name;
+  cdsCadProdutos.Open;
+  QryVariavel.Close;
+  QryVariavel.SQL.Text := 'Select * from T_Fornecedores order by Descricao';
+  cdsCadFornecedores.Close;
+  cdsCadFornecedores.ProviderName := dspVariavel.Name;
+  cdsCadFornecedores.Open;
+
+  qryVariavel.Close;
+  qryVariavel.Params.Clear;
+  qryVariavel.SQL.text := 'Select * From Setores ';
+  cdsSetores.Close;
+  cdsSetores.ProviderName := dspVariavel.Name;
+  cdsSetores.Open;
+end;
+
 procedure TfrmEntradas.cmbNome_FornecedorChange(Sender: TObject);
 begin
   cmbCod_Fornecedor.KeyValue := cmbNome_Fornecedor.KeyValue;
@@ -340,6 +350,7 @@ begin
    cdsItensEntradasTmp.FieldByName('Pco_Venda').asFloat     := StrToFloat (edtPco_Venda.Text);
    cdsItensEntradasTmp.FieldByName('vlr_Total').asFloat     := StrToFloat ( edtTotal.Text);
    cdsItensEntradasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
+   cdsItensEntradasTmp.FieldByName('SetorId').asInteger     := cmbSetores.KeyValue;
    cdsItensEntradasTmp.Post;
 
    edtTotalEntrada.Text  := FormatFloat('0.00', StrToFloat(edtTotalEntrada.Text) +  StrToFloat(edtTotal.Text)  );
@@ -381,6 +392,8 @@ Var liSeqEntrada   : integer;
     lsDiasant      : String;
     lsAno          : String;
     trdNrTransacao : TTransactionDesc;
+    loDaoSaldo     : TDaoSaldo;
+    loSaldo        : TSaldo;
 begin
 
    liSeqEntrada := StrToInt(Sequencia('SeqEntrada',True,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8));
@@ -402,20 +415,18 @@ begin
       CaixaMensagem( 'O Centro de Custo não pode ficar em branco ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   {
-   if Trim( edtHistorico.Text ) = '' Then
-   Begin
-      CaixaMensagem( 'O Historico não pode ficar em branco ', ctAviso, [ cbOk ], 0 );
+   if cmbSetores.KeyValue = Null then
+   begin
+      CaixaMensagem( 'Informe o setor para credito do estoque', ctAviso, [ cbOk ], 0 );
       Exit
-   End;
-    }
-
+   end;
+   {
    if not frmPrincipal.dbxPrincipal.InTransaction then
    begin
       trdNrTransacao.IsolationLevel := xilREADCOMMITTED;
       frmPrincipal.dbxPrincipal.StartTransaction( trdNrTransacao );
    end;
-
+    }
    Try
       cdsEntradas.Append;
       cdsEntradas.FieldByname('SeqEntrada').Asinteger     := liSeqEntrada;
@@ -443,8 +454,20 @@ begin
       cdsItensEntradasTMP.First;
       while not cdsItensEntradasTMP.Eof Do
       Begin
+         if cdsItensEntradasTmp.FieldByName('SetorId').asInteger>1 then
+         begin
+            loDaoSaldo := TDaoSaldo.Create(gConexao);
+            loSaldo    := TSaldo.Create;
+            loSaldo.SetorId := cdsItensEntradasTmp.FieldByName('SetorId').asInteger;
+            loSaldo.ProdutoId := cdsItensEntradasTmp.FieldByName('Codigo').asInteger;
+            if not loDaoSaldo.ExisteSaldo(loSaldo) then
+               loDaoSaldo.CriarNoSetor(loSaldo);
+            FreeAndNil(loDaoSaldo);
+            FreeAndNil(loSaldo);
+         end;
          cdsItensEntradas.Append;
          cdsItensEntradas.FieldByName('Cod_Produto').asInteger    := cdsItensEntradasTmp.FieldByName('Codigo').asInteger;
+         cdsItensEntradas.FieldByName('SetorId').asInteger        := cdsItensEntradasTmp.FieldByName('SetorId').asInteger;
          cdsItensEntradas.FieldByName('SeqEntrada').asInteger     := liSeqEntrada;
          cdsItensEntradas.FieldByName('Qtde_Entrada').asFloat     := cdsItensEntradasTmp.FieldByName('Qtde_Venda').asFloat;
          cdsItensEntradas.FieldByName('Pco_Entrada').asFloat      := cdsItensEntradasTmp.FieldByName('Pco_Venda').asFloat;
@@ -459,7 +482,7 @@ begin
          cdsItensEntradasTMP.Next;
       End;
    Except
-      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
+//      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
    End;
 
    lsdias    := FormatDateTime('DD',edtdata_Vencimento.Date);
@@ -518,10 +541,10 @@ begin
          cdsCtasPagar.ApplyUpdates(-1);
       End;
    Except
-      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
+//      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
    End;
 
-   frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
+  // frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
 
    CaixaMensagem( 'Entradas Numero  '+IntToStr(liSeqEntrada), ctAviso, [ cbOk ], 0 );
 

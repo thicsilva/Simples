@@ -49,7 +49,6 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alBottom
-    ExplicitWidth = 504
     object bsSkinStdLabel3: TbsSkinStdLabel
       Left = 7
       Top = 11
@@ -124,7 +123,6 @@ object frmSelRelClientes: TfrmSelRelClientes
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitWidth = 504
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -310,7 +308,6 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe o vendedor para o relarorio'
     Align = alClient
-    ExplicitWidth = 504
     object bsSkinStdLabel4: TbsSkinStdLabel
       Left = 5
       Top = 37
@@ -531,7 +528,6 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe a Rota para o Relatorio'
     Align = alTop
-    ExplicitWidth = 504
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 28
       Top = 31
@@ -742,7 +738,6 @@ object frmSelRelClientes: TfrmSelRelClientes
     Sizeable = False
     Align = alTop
     Caption = 'Intervalo de Datas'
-    ExplicitWidth = 504
     object lblTurma: TbsSkinStdLabel
       Left = 126
       Top = 30

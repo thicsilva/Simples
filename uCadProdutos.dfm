@@ -2,9 +2,9 @@ object frmCadProdutos: TfrmCadProdutos
   Left = 173
   Top = 172
   BorderIcons = []
-  Caption = 'Cadastro e manuten'#231#227'o de produtos'
-  ClientHeight = 387
-  ClientWidth = 709
+  Caption = 'Cadastro e manuten'#231#227'o de Produtos'
+  ClientHeight = 497
+  ClientWidth = 752
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,9 @@ object frmCadProdutos: TfrmCadProdutos
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 709
-    Height = 334
-    ActivePage = bsSkinTabSheet2
+    Width = 752
+    Height = 444
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -56,7 +56,7 @@ object frmCadProdutos: TfrmCadProdutos
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 707
+        Width = 750
         Height = 41
         HintImageIndex = 0
         TabOrder = 0
@@ -133,7 +133,9 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultColor = clWindow
           Text = 'Descricao'
           Items.Strings = (
-            'Descricao')
+            'Descricao'
+            'Codigo'
+            'Codigo Fornecedor')
           ItemIndex = 0
           DropDownCount = 8
           HorizontalExtent = False
@@ -246,8 +248,8 @@ object frmCadProdutos: TfrmCadProdutos
       object cxGrid1: TcxGrid
         Left = 0
         Top = 41
-        Width = 707
-        Height = 269
+        Width = 750
+        Height = 379
         Align = alClient
         TabOrder = 1
         object GridProdutos: TcxGridDBTableView
@@ -280,9 +282,18 @@ object frmCadProdutos: TfrmCadProdutos
             DataBinding.FieldName = 'Codigo'
             Width = 50
           end
+          object Column_CodigoFornecedor: TcxGridDBColumn
+            Caption = 'Cod. Fornecedor'
+            DataBinding.FieldName = 'CodigoFornecedor'
+            Width = 95
+          end
           object GridProdutosDescricao: TcxGridDBColumn
             DataBinding.FieldName = 'Descricao'
             Width = 200
+          end
+          object GridProdutosColumn2: TcxGridDBColumn
+            DataBinding.FieldName = 'Unid'
+            Width = 50
           end
           object GridProdutosColumn4: TcxGridDBColumn
             DataBinding.FieldName = 'Saldo'
@@ -293,14 +304,10 @@ object frmCadProdutos: TfrmCadProdutos
             DataBinding.FieldName = 'Pco_Venda'
             Width = 70
           end
-          object GridProdutosColumn2: TcxGridDBColumn
-            DataBinding.FieldName = 'Unid'
-            Width = 50
-          end
-          object GridProdutosData_cad: TcxGridDBColumn
-            Caption = 'Cadastrado Em'
-            DataBinding.FieldName = 'Data_cad'
-            Width = 100
+          object PrecoVendaExterna: TcxGridDBColumn
+            Caption = 'Venda Externa'
+            DataBinding.FieldName = 'PrecoVendaExterna'
+            Width = 90
           end
           object GridProdutosData_Atu: TcxGridDBColumn
             Caption = 'Alterado em'
@@ -320,6 +327,11 @@ object frmCadProdutos: TfrmCadProdutos
             DataBinding.FieldName = 'm2'
             Width = 20
           end
+          object GridProdutosData_cad: TcxGridDBColumn
+            Caption = 'Cadastrado Em'
+            DataBinding.FieldName = 'Data_cad'
+            Width = 100
+          end
         end
         object cxGrid1Level1: TcxGridLevel
           GridView = GridProdutos
@@ -329,10 +341,10 @@ object frmCadProdutos: TfrmCadProdutos
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
-        Left = 81
-        Top = 18
+        Left = 76
+        Top = 19
         Width = 530
-        Height = 241
+        Height = 294
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinEntradaDados
@@ -381,7 +393,7 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object bsSkinStdLabel5: TbsSkinStdLabel
           Left = 63
-          Top = 89
+          Top = 113
           Width = 48
           Height = 13
           EllipsType = bsetNone
@@ -414,8 +426,8 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Data Cadastro'
         end
         object bsSkinStdLabel2: TbsSkinStdLabel
-          Left = 32
-          Top = 119
+          Left = 35
+          Top = 143
           Width = 76
           Height = 13
           EllipsType = bsetNone
@@ -432,7 +444,7 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object bsSkinStdLabel3: TbsSkinStdLabel
           Left = 33
-          Top = 144
+          Top = 192
           Width = 78
           Height = 13
           EllipsType = bsetNone
@@ -450,7 +462,7 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object bsSkinStdLabel11: TbsSkinStdLabel
           Left = 36
-          Top = 189
+          Top = 237
           Width = 76
           Height = 13
           EllipsType = bsetNone
@@ -483,8 +495,8 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Codigo de Barras'
         end
         object bsSkinStdLabel6: TbsSkinStdLabel
-          Left = 192
-          Top = 119
+          Left = 71
+          Top = 166
           Width = 40
           Height = 13
           EllipsType = bsetNone
@@ -501,7 +513,7 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object bsSkinStdLabel7: TbsSkinStdLabel
           Left = 82
-          Top = 170
+          Top = 215
           Width = 29
           Height = 13
           EllipsType = bsetNone
@@ -517,8 +529,8 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Grupo'
         end
         object bsSkinStdLabel9: TbsSkinStdLabel
-          Left = 36
-          Top = 213
+          Left = 181
+          Top = 260
           Width = 76
           Height = 13
           EllipsType = bsetNone
@@ -532,10 +544,11 @@ object frmCadProdutos: TfrmCadProdutos
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Aliquota do ECF'
+          Visible = False
         end
         object lblComissao: TbsSkinStdLabel
-          Left = 160
-          Top = 213
+          Left = 66
+          Top = 259
           Width = 45
           Height = 13
           EllipsType = bsetNone
@@ -550,9 +563,9 @@ object frmCadProdutos: TfrmCadProdutos
           SkinDataName = 'stdlabel'
           Caption = 'Comiss'#227'o'
         end
-        object bsSkinStdLabel12: TbsSkinStdLabel
-          Left = 282
-          Top = 213
+        object lblCadFabricante: TbsSkinStdLabel
+          Left = 298
+          Top = 261
           Width = 50
           Height = 13
           EllipsType = bsetNone
@@ -567,9 +580,60 @@ object frmCadProdutos: TfrmCadProdutos
           SkinDataName = 'stdlabel'
           Caption = 'Fabricante'
         end
+        object bsSkinStdLabel13: TbsSkinStdLabel
+          Left = 158
+          Top = 166
+          Width = 128
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Quantidade da Embalagem'
+        end
+        object lblPrecoVendaExterna: TbsSkinStdLabel
+          Left = 193
+          Top = 142
+          Width = 115
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Preco de venda Externa'
+        end
+        object bsSkinStdLabel12: TbsSkinStdLabel
+          Left = 6
+          Top = 90
+          Width = 105
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Codigo do Fornecedor'
+        end
         object edtDescricao: TbsSkinEdit
           Left = 120
-          Top = 85
+          Top = 109
           Width = 337
           Height = 18
           DefaultColor = clWindow
@@ -667,11 +731,11 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
           Left = 186
-          Top = 137
+          Top = 185
           Width = 271
           Height = 20
           HintImageIndex = 0
-          TabOrder = 8
+          TabOrder = 15
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -694,11 +758,11 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object cmbCod_CentroCusto: TbsSkinDBLookupComboBox
           Left = 120
-          Top = 137
+          Top = 185
           Width = 63
           Height = 20
           HintImageIndex = 0
-          TabOrder = 7
+          TabOrder = 14
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -721,11 +785,11 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object cmbTipoProduto: TbsSkinComboBox
           Left = 120
-          Top = 182
+          Top = 230
           Width = 337
           Height = 20
           HintImageIndex = 0
-          TabOrder = 11
+          TabOrder = 10
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -780,12 +844,12 @@ object frmCadProdutos: TfrmCadProdutos
           Style = bscbFixedStyle
         end
         object chkMetroQuadrado: TbsSkinCheckRadioBox
-          Left = 279
-          Top = 110
+          Left = 14
+          Top = 28
           Width = 179
           Height = 21
           HintImageIndex = 0
-          TabOrder = 6
+          TabOrder = 13
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -808,6 +872,7 @@ object frmCadProdutos: TfrmCadProdutos
           Checked = False
           GroupIndex = 0
           Caption = 'Pre'#231'o por M'#178' (Metro Quadrado)'
+          OnClick = chkMetroQuadradoClick
         end
         object edtCod_barras: TbsSkinEdit
           Left = 288
@@ -842,8 +907,8 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object edtUnid: TbsSkinEdit
-          Left = 240
-          Top = 111
+          Left = 120
+          Top = 161
           Width = 33
           Height = 18
           DefaultColor = clWindow
@@ -866,7 +931,7 @@ object frmCadProdutos: TfrmCadProdutos
           CharCase = ecUpperCase
           MaxLength = 3
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 6
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -876,11 +941,11 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object cmbCod_Grupo: TbsSkinDBLookupComboBox
           Left = 120
-          Top = 160
+          Top = 208
           Width = 63
           Height = 20
           HintImageIndex = 0
-          TabOrder = 9
+          TabOrder = 8
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -902,11 +967,11 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object cmbNome_Grupo: TbsSkinDBLookupComboBox
           Left = 186
-          Top = 160
+          Top = 208
           Width = 271
           Height = 20
           HintImageIndex = 0
-          TabOrder = 10
+          TabOrder = 9
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -927,8 +992,8 @@ object frmCadProdutos: TfrmCadProdutos
           OnChange = cmbNome_GrupoChange
         end
         object edtAliquota_ECF: TbsSkinEdit
-          Left = 120
-          Top = 208
+          Left = 261
+          Top = 256
           Width = 33
           Height = 18
           DefaultColor = clWindow
@@ -951,7 +1016,8 @@ object frmCadProdutos: TfrmCadProdutos
           CharCase = ecUpperCase
           MaxLength = 3
           ParentFont = False
-          TabOrder = 12
+          TabOrder = 16
+          Visible = False
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -960,8 +1026,8 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object edtPco_Venda: TbsSkinNumericEdit
-          Left = 121
-          Top = 113
+          Left = 120
+          Top = 137
           Width = 65
           Height = 18
           Text = '0,00'
@@ -995,8 +1061,97 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object edtComissao: TbsSkinNumericEdit
-          Left = 211
-          Top = 208
+          Left = 120
+          Top = 256
+          Width = 58
+          Height = 18
+          Text = '0,00'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 11
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object cmbNome_Fabricante: TbsSkinDBLookupComboBox
+          Left = 352
+          Top = 256
+          Width = 105
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 12
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'descricao;codigo'
+          ListSource = srcCadFabricantes
+          OnChange = cmbNome_CentroCustoChange
+        end
+        object QtdeEmbalagem: TbsSkinSpinEdit
+          Left = 292
+          Top = 161
+          Width = 66
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 7
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'spinedit'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          DefaultColor = clWindow
+          UseSkinSize = True
+          ValueType = vtInteger
+          Decimal = 0
+          MinValue = 1.000000000000000000
+          MaxValue = 20000.000000000000000000
+          Value = 1.000000000000000000
+          Increment = 1.000000000000000000
+          EditorEnabled = True
+          MaxLength = 0
+        end
+        object edtPcoVendaExterna: TbsSkinNumericEdit
+          Left = 321
+          Top = 137
           Width = 65
           Height = 18
           Text = '0,00'
@@ -1021,7 +1176,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 13
+          TabOrder = 5
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1029,31 +1184,68 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
-        object cmbNome_Fabricante: TbsSkinDBLookupComboBox
-          Left = 338
-          Top = 208
-          Width = 119
-          Height = 20
+        object chkMetroLinear: TbsSkinCheckRadioBox
+          Left = 197
+          Top = 28
+          Width = 139
+          Height = 21
           HintImageIndex = 0
-          TabOrder = 14
+          TabOrder = 17
           SkinData = frmPrincipal.SkinEntradaDados
-          SkinDataName = 'combobox'
+          SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
           DefaultFont.Height = 14
           DefaultFont.Name = 'Arial'
           DefaultFont.Style = []
           DefaultWidth = 0
-          DefaultHeight = 20
+          DefaultHeight = 0
           UseSkinFont = True
+          WordWrap = False
+          AllowGrayed = False
+          State = cbUnchecked
+          ImageIndex = 0
+          Flat = True
+          UseSkinFontColor = True
+          TabStop = True
+          CanFocused = True
+          Radio = False
+          Checked = False
+          GroupIndex = 0
+          Caption = 'Pre'#231'o por Metro Linear'
+          OnClick = chkMetroLinearClick
+        end
+        object EdtCodigoFornecedor: TbsSkinEdit
+          Left = 120
+          Top = 85
+          Width = 169
+          Height = 18
           DefaultColor = clWindow
-          ListBoxDefaultItemHeight = 20
-          ListBoxUseSkinFont = True
-          ListBoxUseSkinItemHeight = True
-          KeyField = 'codigo'
-          ListField = 'descricao;codigo'
-          ListSource = srcCadFabricantes
-          OnChange = cmbNome_CentroCustoChange
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 10
+          ParentFont = False
+          TabOrder = 18
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
       end
     end
@@ -1069,7 +1261,7 @@ object frmCadProdutos: TfrmCadProdutos
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 23
-        Width = 707
+        Width = 750
         Height = 33
         HintImageIndex = 0
         TabOrder = 1
@@ -1250,8 +1442,8 @@ object frmCadProdutos: TfrmCadProdutos
       object cxGrid3: TcxGrid
         Left = 0
         Top = 56
-        Width = 707
-        Height = 254
+        Width = 750
+        Height = 364
         Align = alClient
         TabOrder = 0
         object GridFichaTecinica: TcxGridDBTableView
@@ -1301,7 +1493,7 @@ object frmCadProdutos: TfrmCadProdutos
       object pnlFichaTecnica: TbsSkinPaintPanel
         Left = 0
         Top = 0
-        Width = 707
+        Width = 750
         Height = 23
         HintImageIndex = 0
         TabOrder = 2
@@ -1396,8 +1588,8 @@ object frmCadProdutos: TfrmCadProdutos
       object bsSkinLinkImage1: TbsSkinLinkImage
         Left = 0
         Top = 61
-        Width = 707
-        Height = 249
+        Width = 750
+        Height = 359
         Cursor = crHandPoint
         Align = alClient
         AutoSize = True
@@ -3481,7 +3673,7 @@ object frmCadProdutos: TfrmCadProdutos
       object bsSkinPaintPanel1: TbsSkinPaintPanel
         Left = 0
         Top = 23
-        Width = 707
+        Width = 750
         Height = 38
         HintImageIndex = 0
         TabOrder = 0
@@ -3514,8 +3706,8 @@ object frmCadProdutos: TfrmCadProdutos
         Caption = 'bsSkinPaintPanel1'
         Align = alTop
         object lblTurma: TbsSkinStdLabel
-          Left = 125
-          Top = 11
+          Left = 104
+          Top = 14
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -3531,8 +3723,8 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Ate.'
         end
         object btnPesquisar: TbsSkinButton
-          Left = 447
-          Top = 7
+          Left = 521
+          Top = 6
           Width = 110
           Height = 25
           HintImageIndex = 0
@@ -3566,7 +3758,7 @@ object frmCadProdutos: TfrmCadProdutos
           OnClick = btnPesquisarClick
         end
         object dtpData_Ini: TbsSkinDateEdit
-          Left = 18
+          Left = 3
           Top = 9
           Width = 95
           Height = 18
@@ -3616,7 +3808,7 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object dtpData_Fim: TbsSkinDateEdit
-          Left = 158
+          Left = 129
           Top = 9
           Width = 89
           Height = 18
@@ -3666,8 +3858,8 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object btnImprimirSaldos: TbsSkinButton
-          Left = 578
-          Top = 7
+          Left = 634
+          Top = 6
           Width = 110
           Height = 25
           HintImageIndex = 0
@@ -3701,9 +3893,9 @@ object frmCadProdutos: TfrmCadProdutos
           OnClick = btnImprimirSaldosClick
         end
         object cmbPeriodo: TbsSkinComboBox
-          Left = 253
+          Left = 224
           Top = 9
-          Width = 180
+          Width = 136
           Height = 20
           HintImageIndex = 0
           TabOrder = 4
@@ -3838,12 +4030,37 @@ object frmCadProdutos: TfrmCadProdutos
           Style = bscbFixedStyle
           OnChange = cmbPeriodoChange
         end
+        object cmbSetores: TbsSkinDBLookupComboBox
+          Left = 413
+          Top = 9
+          Width = 94
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 5
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcSetores
+        end
       end
       object cxGrid2: TcxGrid
         Left = 0
         Top = 61
-        Width = 707
-        Height = 249
+        Width = 750
+        Height = 359
         Align = alClient
         TabOrder = 1
         object gridMovimento: TcxGridDBTableView
@@ -3881,6 +4098,11 @@ object frmCadProdutos: TfrmCadProdutos
             DataBinding.FieldName = 'Data_Cad'
             Width = 120
           end
+          object Column_SetorID: TcxGridDBColumn
+            Caption = 'Setor'
+            DataBinding.FieldName = 'SetorID'
+            Width = 50
+          end
           object gridMovimentoColumn4: TcxGridDBColumn
             Caption = 'Saldo Anterior'
             DataBinding.FieldName = 'Saldo_Anterior'
@@ -3908,7 +4130,7 @@ object frmCadProdutos: TfrmCadProdutos
       object pnlDescProduto: TbsSkinPaintPanel
         Left = 0
         Top = 0
-        Width = 707
+        Width = 750
         Height = 23
         HintImageIndex = 0
         TabOrder = 2
@@ -4089,7 +4311,7 @@ object frmCadProdutos: TfrmCadProdutos
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 709
+    Width = 752
     Height = 53
     AutoSize = True
     Bands = <
@@ -4097,7 +4319,7 @@ object frmCadProdutos: TfrmCadProdutos
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 705
+        Width = 748
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -4106,7 +4328,7 @@ object frmCadProdutos: TfrmCadProdutos
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 696
+      Width = 739
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -4450,8 +4672,8 @@ object frmCadProdutos: TfrmCadProdutos
   end
   object dspCadProdutos: TDataSetProvider
     DataSet = qryCadProdutos
-    Left = 417
-    Top = 166
+    Left = 369
+    Top = 270
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
@@ -4459,68 +4681,68 @@ object frmCadProdutos: TfrmCadProdutos
     ProviderName = 'dspCadProdutos'
     BeforeOpen = cdsCadProdutosBeforeOpen
     OnCalcFields = cdsCadProdutosCalcFields
-    Left = 417
-    Top = 195
+    Left = 369
+    Top = 299
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 417
-    Top = 223
+    Left = 369
+    Top = 327
   end
   object srcCadCtoCusto: TDataSource
     DataSet = cdsCadCtosCusto
-    Left = 446
-    Top = 223
+    Left = 398
+    Top = 327
   end
   object qryCadProdutos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 417
+    Left = 545
     Top = 137
   end
   object srcCadGrupos: TDataSource
     DataSet = cdsCadGrupos
-    Left = 473
-    Top = 223
+    Left = 425
+    Top = 327
   end
   object cdsCadGrupos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspvariavel'
-    Left = 473
-    Top = 195
+    Left = 425
+    Top = 299
   end
   object cdsCadCtosCusto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspvariavel'
-    Left = 445
-    Top = 195
+    Left = 397
+    Top = 299
   end
   object qryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 389
+    Left = 517
     Top = 137
   end
   object dspvariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 389
-    Top = 166
+    Left = 597
+    Top = 142
   end
   object cdsMovEstoque: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspvariavel'
-    Left = 501
-    Top = 195
+    Left = 453
+    Top = 299
   end
   object srcMovEstoque: TDataSource
     DataSet = cdsMovEstoque
-    Left = 501
-    Top = 223
+    Left = 453
+    Top = 327
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -4614,86 +4836,86 @@ object frmCadProdutos: TfrmCadProdutos
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 445
-    Top = 137
+    Left = 637
+    Top = 97
   end
   object cdsMateriaPrima: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMateriaPrima'
-    Left = 529
-    Top = 195
+    Left = 481
+    Top = 299
   end
   object srcMateriaPrima: TDataSource
     DataSet = cdsMateriaPrima
-    Left = 529
-    Top = 223
+    Left = 481
+    Top = 327
   end
   object cdsFichaTecnica: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFichaTecnica'
-    Left = 557
-    Top = 195
+    Left = 509
+    Top = 299
   end
   object srcFichaTecnica: TDataSource
     DataSet = cdsFichaTecnica
-    Left = 557
-    Top = 223
+    Left = 509
+    Top = 327
   end
   object dspFichaTecnica: TDataSetProvider
     DataSet = sqlFichaTecnica
-    Left = 557
-    Top = 167
+    Left = 509
+    Top = 271
   end
   object sqlFichaTecnica: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 557
-    Top = 139
+    Left = 509
+    Top = 243
   end
   object dspMateriaPrima: TDataSetProvider
     DataSet = qryMateriaPrima
-    Left = 530
-    Top = 167
+    Left = 482
+    Top = 271
   end
   object qryMateriaPrima: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 530
-    Top = 139
+    Left = 482
+    Top = 243
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 360
+    Left = 488
     Top = 137
   end
   object qrySaldos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 585
-    Top = 139
+    Left = 537
+    Top = 243
   end
   object dspSaldos: TDataSetProvider
     DataSet = qrySaldos
-    Left = 585
-    Top = 167
+    Left = 537
+    Top = 271
   end
   object cdsSaldos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSaldos'
-    Left = 585
-    Top = 195
+    Left = 537
+    Top = 299
   end
   object popEstoque: TbsSkinPopupMenu
-    Left = 296
-    Top = 184
+    Left = 472
+    Top = 144
     object LanarAvarias1: TMenuItem
       Caption = 'Lan'#231'ar Avarias'
       OnClick = LanarAvarias1Click
@@ -4710,30 +4932,34 @@ object frmCadProdutos: TfrmCadProdutos
       Caption = 'Inventario dos produtos'
       OnClick = Inventariodosprodutos1Click
     end
+    object ransferenciaEntreSetores1: TMenuItem
+      Caption = 'Transferencia Entre Setores'
+      OnClick = ransferenciaEntreSetores1Click
+    end
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 613
-    Top = 223
+    Left = 565
+    Top = 327
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRelatorio'
-    Left = 613
-    Top = 195
+    Left = 565
+    Top = 299
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
-    Left = 613
-    Top = 167
+    Left = 565
+    Top = 271
   end
   object qryRelatorio: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 613
-    Top = 139
+    Left = 565
+    Top = 243
   end
   object cxPropertiesStore1: TcxPropertiesStore
     Components = <
@@ -5579,8 +5805,8 @@ object frmCadProdutos: TfrmCadProdutos
       end>
     StorageName = 'cxPropertiesStore1'
     StorageType = stStream
-    Left = 160
-    Top = 208
+    Left = 304
+    Top = 296
   end
   object cxGridPopupMenu1: TcxGridPopupMenu
     Grid = cxGrid1
@@ -5589,16 +5815,16 @@ object frmCadProdutos: TfrmCadProdutos
         HitTypes = []
         Index = 0
       end>
-    Left = 256
-    Top = 184
+    Left = 392
+    Top = 248
   end
   object OpenFigura: TOpenPictureDialog
-    Left = 196
-    Top = 209
+    Left = 332
+    Top = 241
   end
   object PopRelatorios: TbsSkinPopupMenu
-    Left = 328
-    Top = 184
+    Left = 392
+    Top = 152
     object Etiquetas15X501: TMenuItem
       Caption = 'Etiquetas 15X50  - 2 Colunas'
       OnClick = Etiquetas15X501Click
@@ -5608,12 +5834,24 @@ object frmCadProdutos: TfrmCadProdutos
     Aggregates = <>
     Params = <>
     OnCalcFields = cdsCadProdutosCalcFields
-    Left = 641
-    Top = 195
+    Left = 593
+    Top = 299
   end
   object srcCadFabricantes: TDataSource
     DataSet = cdsCadFabricantes
-    Left = 641
-    Top = 223
+    Left = 593
+    Top = 327
+  end
+  object cdsSetores: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 340
+    Top = 299
+  end
+  object srcSetores: TDataSource
+    DataSet = cdsSetores
+    Left = 340
+    Top = 327
   end
 end

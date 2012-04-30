@@ -3,8 +3,8 @@ object frmPrePagamento: TfrmPrePagamento
   Top = 0
   BorderIcons = []
   Caption = 'Recebimento de Pre-Pagamento'
-  ClientHeight = 388
-  ClientWidth = 521
+  ClientHeight = 390
+  ClientWidth = 544
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmPrePagamento: TfrmPrePagamento
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 521
+    Width = 544
     Height = 44
     AutoSize = True
     Bands = <
@@ -27,15 +27,16 @@ object frmPrePagamento: TfrmPrePagamento
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 517
+        Width = 540
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
+    ExplicitWidth = 521
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 508
+      Width = 531
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -234,7 +235,7 @@ object frmPrePagamento: TfrmPrePagamento
   object bsSkinGroupBox1: TbsSkinGroupBox
     Left = 0
     Top = 44
-    Width = 521
+    Width = 544
     Height = 77
     HintImageIndex = 0
     TabOrder = 1
@@ -266,6 +267,7 @@ object frmPrePagamento: TfrmPrePagamento
     Spacing = 2
     Caption = 'Informa'#231#245'es do Pre-Pagamento'
     Align = alTop
+    ExplicitWidth = 521
     object bsSkinStdLabel6: TbsSkinStdLabel
       Left = 299
       Top = 53
@@ -339,7 +341,7 @@ object frmPrePagamento: TfrmPrePagamento
       OnExit = edtNumeroOsExit
     end
     object edtTotalTitulo: TEditN
-      Left = 403
+      Left = 400
       Top = 49
       Width = 101
       Height = 24
@@ -444,11 +446,11 @@ object frmPrePagamento: TfrmPrePagamento
       ImageIndex = -1
       CharCase = ecNormal
       DefaultColor = clWindow
-      Text = 'Ordem de Servi'#231'o'
+      Text = 'Controle'
       Items.Strings = (
         'Controle'
         'Ordem de Servi'#231'o')
-      ItemIndex = 1
+      ItemIndex = 0
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -463,7 +465,7 @@ object frmPrePagamento: TfrmPrePagamento
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 121
-    Width = 521
+    Width = 544
     Height = 44
     AutoSize = True
     Bands = <
@@ -471,16 +473,17 @@ object frmPrePagamento: TfrmPrePagamento
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 517
+        Width = 540
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
+    ExplicitWidth = 521
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 508
+      Width = 531
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -618,7 +621,7 @@ object frmPrePagamento: TfrmPrePagamento
   object bsSkinPanel1: TbsSkinPanel
     Left = 0
     Top = 165
-    Width = 521
+    Width = 544
     Height = 30
     HintImageIndex = 0
     TabOrder = 3
@@ -649,6 +652,7 @@ object frmPrePagamento: TfrmPrePagamento
     NumGlyphs = 1
     Spacing = 2
     Align = alTop
+    ExplicitWidth = 521
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 3
       Top = 9
@@ -760,6 +764,7 @@ object frmPrePagamento: TfrmPrePagamento
       ParentFont = False
       TabOrder = 2
       Text = '0,00'
+      OnExit = edtPco_VendaExit
       ColorOnFocus = clInfoBk
       ColorOnNotFocus = clInfoBk
       FontColorOnFocus = clRed
@@ -782,8 +787,8 @@ object frmPrePagamento: TfrmPrePagamento
   end
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
-    Top = 366
-    Width = 521
+    Top = 368
+    Width = 544
     Height = 22
     HintImageIndex = 0
     TabOrder = 4
@@ -816,33 +821,13 @@ object frmPrePagamento: TfrmPrePagamento
     Caption = 'bsSkinStatusBar1'
     Align = alBottom
     SizeGrip = False
-    object lblNome: TbsSkinStdLabel
-      Left = 267
-      Top = 2
-      Width = 118
-      Height = 20
-      EllipsType = bsetNone
-      UseSkinFont = True
-      UseSkinColor = True
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clNavy
-      DefaultFont.Height = -16
-      DefaultFont.Name = 'MS Sans Serif'
-      DefaultFont.Style = [fsBold]
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'stdlabel'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clNavy
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      Caption = 'Total Das O.S.'
-      ParentFont = False
-    end
+    ExplicitLeft = -8
+    ExplicitTop = 366
+    ExplicitWidth = 521
     object bsSkinStatusPanel1: TbsSkinStatusPanel
-      Left = 0
+      Left = 424
       Top = 0
-      Width = 130
+      Width = 54
       Height = 22
       HintImageIndex = 0
       TabOrder = 0
@@ -866,16 +851,18 @@ object frmPrePagamento: TfrmPrePagamento
       UseSkinSize = False
       UseSkinFontColor = True
       BorderStyle = bvFrame
-      Align = alLeft
-      Caption = 'Total Recebido'
+      Align = alRight
+      Caption = 'Troco'
       AutoSize = False
       ImageIndex = -1
       NumGlyphs = 1
+      ExplicitLeft = 436
+      ExplicitTop = 6
     end
-    object edtTotGeral_os: TbsSkinEdit
-      Left = 403
+    object edtVlr_FaltaReceber: TbsSkinEdit
+      Left = 351
       Top = 0
-      Width = 118
+      Width = 73
       Height = 23
       Text = '0,00'
       DefaultColor = clWindow
@@ -906,12 +893,12 @@ object frmPrePagamento: TfrmPrePagamento
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
-      ExplicitLeft = 385
+      ExplicitLeft = 328
     end
     object edtVlr_Recebido: TbsSkinEdit
-      Left = 130
+      Left = 144
       Top = 0
-      Width = 130
+      Width = 87
       Height = 23
       Text = '0,00'
       DefaultColor = clWindow
@@ -925,7 +912,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultHeight = 0
       ButtonMode = False
       SkinDataName = 'statusedit'
-      Align = alLeft
+      Align = alRight
       Alignment = taRightJustify
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -940,14 +927,119 @@ object frmPrePagamento: TfrmPrePagamento
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
-      ExplicitTop = -1
+      ExplicitLeft = 194
+      ExplicitTop = 6
+    end
+    object lblNome: TbsSkinStatusPanel
+      Left = 20
+      Top = 0
+      Width = 124
+      Height = 22
+      HintImageIndex = 0
+      TabOrder = 3
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'statuspanel'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clNavy
+      DefaultFont.Height = -16
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = [fsBold]
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Align = alRight
+      Caption = 'Total Recebido'
+      AutoSize = False
+      ImageIndex = -1
+      NumGlyphs = 1
+      ExplicitLeft = 3
+    end
+    object EdtTroco: TbsSkinEdit
+      Left = 478
+      Top = 0
+      Width = 66
+      Height = 23
+      Text = '0,00'
+      DefaultColor = clWindow
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = -16
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = [fsBold]
+      UseSkinFont = False
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinDataName = 'statusedit'
+      Align = alRight
+      Alignment = taRightJustify
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      BiDiMode = bdLeftToRight
+      ParentBiDiMode = False
+      ParentFont = False
+      TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      ExplicitLeft = 337
+    end
+    object bsSkinStatusPanel3: TbsSkinStatusPanel
+      Left = 231
+      Top = 0
+      Width = 120
+      Height = 22
+      HintImageIndex = 0
+      TabOrder = 5
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'statuspanel'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clNavy
+      DefaultFont.Height = -16
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = [fsBold]
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
+      EllipsType = bsetNoneEllips
+      UseSkinSize = False
+      UseSkinFontColor = True
+      BorderStyle = bvFrame
+      Align = alRight
+      Caption = 'Falta Receber'
+      AutoSize = False
+      ImageIndex = -1
+      NumGlyphs = 1
+      ExplicitLeft = 81
     end
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
     Top = 195
-    Width = 521
-    Height = 171
+    Width = 544
+    Height = 173
     HintImageIndex = 0
     TabOrder = 5
     SkinData = frmPrincipal.SkinPrincipal
@@ -1108,61 +1200,6 @@ object frmPrePagamento: TfrmPrePagamento
     Params = <>
     Left = 387
     Top = 184
-  end
-  object SkinForm: TbsBusinessSkinForm
-    QuickButtons = <>
-    QuickButtonsShowHint = False
-    QuickButtonsShowDivider = True
-    ClientInActiveEffect = False
-    ClientInActiveEffectType = bsieSemiTransparent
-    DisableSystemMenu = False
-    AlwaysResize = False
-    PositionInMonitor = bspDefault
-    UseFormCursorInNCArea = False
-    MaxMenuItemsInWindow = 0
-    ClientWidth = 0
-    ClientHeight = 0
-    HideCaptionButtons = False
-    AlwaysShowInTray = False
-    LogoBitMapTransparent = False
-    AlwaysMinimizeToTray = False
-    UseSkinFontInMenu = True
-    ShowIcon = False
-    MaximizeOnFullScreen = False
-    AlphaBlend = False
-    AlphaBlendAnimation = True
-    AlphaBlendValue = 200
-    ShowObjectHint = False
-    MenusAlphaBlend = False
-    MenusAlphaBlendAnimation = False
-    MenusAlphaBlendValue = 200
-    DefCaptionFont.Charset = DEFAULT_CHARSET
-    DefCaptionFont.Color = clBtnText
-    DefCaptionFont.Height = 14
-    DefCaptionFont.Name = 'Arial'
-    DefCaptionFont.Style = [fsBold]
-    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
-    DefInActiveCaptionFont.Color = clBtnShadow
-    DefInActiveCaptionFont.Height = 14
-    DefInActiveCaptionFont.Name = 'Arial'
-    DefInActiveCaptionFont.Style = [fsBold]
-    DefMenuItemHeight = 20
-    DefMenuItemFont.Charset = DEFAULT_CHARSET
-    DefMenuItemFont.Color = clWindowText
-    DefMenuItemFont.Height = 14
-    DefMenuItemFont.Name = 'Arial'
-    DefMenuItemFont.Style = []
-    UseDefaultSysMenu = True
-    SkinData = frmPrincipal.SkinPrincipal
-    MinHeight = 0
-    MinWidth = 0
-    MaxHeight = 0
-    MaxWidth = 0
-    Magnetic = False
-    MagneticSize = 5
-    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 396
-    Top = 112
   end
   object qryPagamento: TSQLQuery
     MaxBlobSize = -1

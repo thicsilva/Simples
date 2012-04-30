@@ -53,7 +53,6 @@ type
     dtpData_Ini: TbsSkinDateEdit;
     lblTurma: TbsSkinStdLabel;
     dtpData_Fim: TbsSkinDateEdit;
-    srcRelatorio: TbsSkinStdLabel;
     bsSkinStdLabel7: TbsSkinStdLabel;
     cmbNome_CentroCusto: TbsSkinDBLookupComboBox;
     cmbCod_CentroCusto: TbsSkinDBLookupComboBox;
@@ -129,11 +128,12 @@ type
     cmbNome_Funcionario: TbsSkinDBLookupComboBox;
     pnlRemessaAberta: TPanel;
     bsSkinLabel2: TbsSkinLabel;
-    bsSkinExPanel1: TbsSkinExPanel;
+    pnlRecebimentoPorLote: TbsSkinExPanel;
     bsSkinLabel1: TbsSkinLabel;
     cmbLote: TbsSkinComboBox;
     lblVendedor: TbsSkinLabel;
     lblLote: TbsSkinLabel;
+    cmbTipoData: TbsSkinComboBox;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -423,33 +423,35 @@ begin
    tabCadastro.TabVisible := False;
    btnSeparador.Width := 390;
 
-   QryVariavel.Close;
-   QryVariavel.SQL.text := 'Select Max(Lote) as Lote From T_ctasreceber ';
+   if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'RecebimentoLote', 'NAO' ))) then
+   begin
+      QryVariavel.Close;
+      QryVariavel.SQL.text := 'Select Max(Lote) as Lote From T_ctasreceber ';
+      lcdsNovoCodigo := TClientDataSet.Create(Self);
+      lcdsNovoCodigo.ProviderName := dspVariavel.Name;
+      lcdsNovoCodigo.Open;
+      If lcdsNovoCodigo.FieldByName('Lote').isNull Then
+        lblLote.Caption := '0001'
+      Else
+         lblLote.Caption := inczero(IntToStr(lcdsNovoCodigo.FieldByName('Lote').AsInteger),4);
+      freeandNil(lcdsNovoCodigo);
+      pnlRecebimentoPorLote.Visible := True;
+   end;
 
-   lcdsNovoCodigo := TClientDataSet.Create(Self);
-   lcdsNovoCodigo.ProviderName := dspVariavel.Name;
-   lcdsNovoCodigo.Open;
-   If lcdsNovoCodigo.FieldByName('Lote').isNull Then
-      lblLote.Caption := '0001'
-   Else
-      lblLote.Caption := inczero(IntToStr(lcdsNovoCodigo.FieldByName('Lote').AsInteger),4);
-    freeandNil(lcdsNovoCodigo);
-
-    DaoSupervisor := TDaoSupervisor.Create(gConexao);
-    srcSupervisor.DataSet := DaoSupervisor.BuscarTodos;
-    FreeandNil(DaoSupervisor);
-    pnlLoteRecebimento.Visible := False;
-    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
-       pnlLoteRecebimento.Visible := True;
-
-    cmbLote.Items.Clear;
-    lista := RetornarLotes;
-    for I := 0 to lista.Count - 1 do
-    begin
-       if lista[I]<>'0000' then
-          cmbLote.Items.add(lista[I]);
-    end;
-    cmbLote.ItemIndex := (i-2);
+   DaoSupervisor := TDaoSupervisor.Create(gConexao);
+   srcSupervisor.DataSet := DaoSupervisor.BuscarTodos;
+   FreeandNil(DaoSupervisor);
+   pnlLoteRecebimento.Visible := False;
+   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
+      pnlLoteRecebimento.Visible := True;
+   cmbLote.Items.Clear;
+   lista := RetornarLotes;
+   for I := 0 to lista.Count - 1 do
+   begin
+      if lista[I]<>'0000' then
+         cmbLote.Items.add(lista[I]);
+   end;
+   cmbLote.ItemIndex := (i-2);
    try
      EdtPesquisa.SetFocus;
    except
@@ -659,16 +661,22 @@ end;
 
 procedure TfrmCtasReceber.btnSelecionarClick(Sender: TObject);
 var lsCoringa : String;
+    lsWhere : String;
 begin
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
 
+   lsWhere := '(Rec.Data_Vencimento>=:parDataIni and Rec.Data_Vencimento<=:parDataFim ) And ';
+   if cmbTipoData.ItemIndex = 1 then
+      lsWhere := '(Rec.Data_Emissao>=:parDataIni and Rec.Data_Emissao<=:parDataFim ) And ';
+
+
    qryPesquisa.Close;
-   qryPesquisa.SQL.Text :=  'Select cli.Cod_rota,Rota.Descricao as Nome_Rota, Cli.Descricao, Cli.CnpjCpf, '+
+   qryPesquisa.SQL.Text :=  'Select cli.Cod_rota,Rota.Descricao as Nome_Rota, Ven.Nome_cliente as Descricao, Cli.CnpjCpf, '+
                             '       Ven.Controle, Ven.Tipo_Venda, Ven.Status as Entregue, Rec.* '+
                             'from T_CtasReceber Rec, T_Clientes Cli, T_Vendas ven, T_Rotas Rota '+
-                            'where (Rec.Data_Vencimento>=:parDataIni and Rec.Data_Vencimento<=:parDataFim ) And '+
+                            'where '+lsWhere+' '+
                             '       Rec.Vlr_Areceber>:parVlr_Areceber AND '+
                             '      Cli.Codigo=Rec.Cod_Cliente and ven.Seqvenda=Rec.Seqvenda And Rota.Codigo=Cli.Cod_Rota ';
 
@@ -844,7 +852,7 @@ begin
       frmbaixaBrinde.edtCod_FormaPagamento.Text := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
       frmbaixaBrinde.Showmodal
    End
-   Else if gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1' Then
+   Else if StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 0 Then
    Begin
       frmBaixaNormal := TfrmBaixaNormal.Create(Self);
       frmBaixaNormal.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;
@@ -857,6 +865,7 @@ begin
       frmBaixaNormal.Cod_Cliente.Text     := cdsPesquisa.FieldByName('Cod_Cliente').AsString;
       frmBaixaNormal.edtData_Emissao.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Emissao').AsDatetime);
       frmBaixaNormal.edtCod_FormaPagamento.Text := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
+      frmBaixaNormal.edtCod_Caixa.Text    := cdsPesquisa.FieldByName('Cod_Caixa').AsString;
       frmBaixaNormal.pbeServico := False;
       if cdspesquisa.FieldByName('Tipo_Venda').AsString='S' then
          frmBaixaNormal.pbeServico := True;

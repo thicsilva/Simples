@@ -2,7 +2,7 @@ object frmVendas: TfrmVendas
   Left = 132
   Top = 129
   BorderIcons = []
-  Caption = 'Cadastro e manuten'#227'o de Vendas'
+  Caption = 'Pedido de Venda'
   ClientHeight = 535
   ClientWidth = 760
   Color = clBtnFace
@@ -987,7 +987,6 @@ object frmVendas: TfrmVendas
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
-      OnExit = edtCod_ProdutoExit
     end
     object cmbCod_Cliente: TbsSkinDBLookupComboBox
       Left = 241
@@ -1024,8 +1023,8 @@ object frmVendas: TfrmVendas
       OnChange = cmbCod_ClienteChange
     end
     object cmbCNPJCPF: TbsSkinDBLookupComboBox
-      Left = 378
-      Top = 33
+      Left = 384
+      Top = 57
       Width = 56
       Height = 20
       HintImageIndex = 0
@@ -1271,7 +1270,7 @@ object frmVendas: TfrmVendas
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnExcluirClick
-        ExplicitLeft = 454
+        ExplicitLeft = 442
         ExplicitTop = 8
       end
       object btnAdicionar: TbsSkinSpeedButton
@@ -1474,7 +1473,7 @@ object frmVendas: TfrmVendas
         Layout = blGlyphTop
         Enabled = False
         OnClick = btnOkProdClick
-        ExplicitLeft = 648
+        ExplicitLeft = 651
         ExplicitTop = 8
       end
       object btnCancelar: TbsSkinSpeedButton
@@ -1854,7 +1853,7 @@ object frmVendas: TfrmVendas
     object cmbTipoDesconto: TbsSkinComboBox
       Left = 544
       Top = 21
-      Width = 36
+      Width = 42
       Height = 20
       HintImageIndex = 0
       TabOrder = 6
@@ -1894,11 +1893,11 @@ object frmVendas: TfrmVendas
       ImageIndex = -1
       CharCase = ecNormal
       DefaultColor = clWindow
-      Text = '$'
+      Text = '%'
       Items.Strings = (
         '$'
         '%')
-      ItemIndex = 0
+      ItemIndex = 1
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -2202,7 +2201,7 @@ object frmVendas: TfrmVendas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 653
+        Left = 646
         Top = 0
         Width = 70
         Height = 49
@@ -2282,7 +2281,7 @@ object frmVendas: TfrmVendas
         ExplicitHeight = 40
       end
       object BtnCancela: TbsSkinSpeedButton
-        Left = 409
+        Left = 431
         Top = 0
         Width = 70
         Height = 49
@@ -2335,7 +2334,7 @@ object frmVendas: TfrmVendas
         ExplicitHeight = 40
       end
       object btnok: TbsSkinSpeedButton
-        Left = 479
+        Left = 501
         Top = 0
         Width = 70
         Height = 49
@@ -2372,34 +2371,67 @@ object frmVendas: TfrmVendas
         Enabled = False
         OnClick = btnokClick
         ExplicitLeft = 485
-        ExplicitTop = 8
-        ExplicitHeight = 40
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 549
+        Left = 571
         Top = 0
-        Width = 104
+        Width = 75
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 529
-        ExplicitTop = -5
-        ExplicitHeight = 40
       end
       object bsSkinBevel5: TbsSkinBevel
-        Left = 230
+        Left = 300
         Top = 0
-        Width = 179
+        Width = 131
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 224
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitLeft = 230
+      end
+      object btnDesconto: TbsSkinSpeedButton
+        Left = 230
+        Top = 0
+        Width = 70
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 13
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = '&Desconto'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        Layout = blGlyphTop
+        Enabled = False
+        OnClick = BtnCancelaClick
+        ExplicitLeft = 122
       end
     end
   end
@@ -2550,6 +2582,18 @@ object frmVendas: TfrmVendas
         Name = 'Unidade'
         DataType = ftString
         Size = 3
+      end
+      item
+        Name = 'qtdeEmbalagem'
+        DataType = ftInteger
+      end
+      item
+        Name = 'seqVenda'
+        DataType = ftInteger
+      end
+      item
+        Name = 'SetorId'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -2558,14 +2602,16 @@ object frmVendas: TfrmVendas
     Left = 107
     Top = 300
     Data = {
-      F50000009619E0BD01000000180000000A000000000003000000F50006436F64
+      2C0100009619E0BD01000000180000000D0000000000030000002C0106436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
       0B436F6D706C656D656E746F0100490000000100055749445448020002003200
       0C766C725F446573636F6E746F08000400000000000A50636F5F546162656C61
       08000400000000000A706572635F436F6D6973080004000000000007556E6964
-      61646501004900000001000557494454480200020003000000}
+      61646501004900000001000557494454480200020003000D71746465456D6261
+      6C6167656D04000100000000000873657156656E646104000100000000000753
+      65746F72496404000100000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
       DisplayWidth = 8
       FieldName = 'Codigo'
@@ -2574,6 +2620,10 @@ object frmVendas: TfrmVendas
       DisplayWidth = 37
       FieldName = 'Descricao'
       Size = 50
+    end
+    object cdsItensVendasTMPUnidade: TStringField
+      FieldName = 'Unidade'
+      Size = 3
     end
     object cdsItensVendasTMPqtde_Venda: TFloatField
       DisplayLabel = 'Quantidade.'
@@ -2608,9 +2658,17 @@ object frmVendas: TfrmVendas
       FieldName = 'perc_Comis'
       Visible = False
     end
-    object cdsItensVendasTMPUnidade: TStringField
-      FieldName = 'Unidade'
-      Size = 3
+    object cdsItensVendasTMPqtdeEmbalagem: TIntegerField
+      FieldName = 'qtdeEmbalagem'
+      Visible = False
+    end
+    object cdsItensVendasTMPseqVenda: TIntegerField
+      FieldName = 'seqVenda'
+      Visible = False
+    end
+    object cdsItensVendasTMPSetorId: TIntegerField
+      FieldName = 'SetorId'
+      Visible = False
     end
   end
   object srcItensVendasTMP: TDataSource
@@ -2717,8 +2775,8 @@ object frmVendas: TfrmVendas
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 496
-    Top = 367
+    Left = 472
+    Top = 167
   end
   object cdsTempPagamentos: TClientDataSet
     Active = True

@@ -156,7 +156,7 @@ type
     edtCaminhoImagem: TEdit;
     PopRelatorios: TbsSkinPopupMenu;
     Etiquetas15X501: TMenuItem;
-    bsSkinStdLabel12: TbsSkinStdLabel;
+    lblCadFabricante: TbsSkinStdLabel;
     cmbNome_Fabricante: TbsSkinDBLookupComboBox;
     cdsCadFabricantes: TClientDataSet;
     srcCadFabricantes: TDataSource;
@@ -170,6 +170,20 @@ type
     btnok: TbsSkinSpeedButton;
     BtnImprimir: TbsSkinMenuSpeedButton;
     btnImprimir2: TbsSkinMenuSpeedButton;
+    bsSkinStdLabel13: TbsSkinStdLabel;
+    QtdeEmbalagem: TbsSkinSpinEdit;
+    lblPrecoVendaExterna: TbsSkinStdLabel;
+    edtPcoVendaExterna: TbsSkinNumericEdit;
+    PrecoVendaExterna: TcxGridDBColumn;
+    chkMetroLinear: TbsSkinCheckRadioBox;
+    cmbSetores: TbsSkinDBLookupComboBox;
+    cdsSetores: TClientDataSet;
+    srcSetores: TDataSource;
+    bsSkinStdLabel12: TbsSkinStdLabel;
+    EdtCodigoFornecedor: TbsSkinEdit;
+    Column_CodigoFornecedor: TcxGridDBColumn;
+    Column_SetorID: TcxGridDBColumn;
+    ransferenciaEntreSetores1: TMenuItem;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -203,11 +217,16 @@ type
     procedure cdsCadProdutosCalcFields(DataSet: TDataSet);
     procedure btnLocalizaImagemClick(Sender: TObject);
     procedure Etiquetas15X501Click(Sender: TObject);
+    procedure chkMetroQuadradoClick(Sender: TObject);
+    procedure chkMetroLinearClick(Sender: TObject);
+    procedure ransferenciaEntreSetores1Click(Sender: TObject);
   private
      pvQualBotao  : String;
      vlr_VendaAnt : Double;
      pvTipo_Rel   : Integer;
      pviCodSel    : integer;
+     procedure CarregarFrabricante;
+     procedure AjustarTela;
     { Private declarations }
   public
      piCod_Produto : Integer;
@@ -220,7 +239,8 @@ var
 
 implementation
 
-uses uPrincipal,ufuncoes, uEstoqueManutencao, uInventario, uselRelEtiquetas;
+uses uPrincipal,ufuncoes, uEstoqueManutencao, uInventario, uselRelEtiquetas,
+  uTransferenciaEntreSetores;
 
 {$R *.dfm}
 //
@@ -296,6 +316,12 @@ begin
    end;
 end;
 
+procedure TfrmCadProdutos.ransferenciaEntreSetores1Click(Sender: TObject);
+begin
+   frmTransferenciaDeSetores := TfrmTransferenciaDeSetores.create(Application);
+   frmTransferenciaDeSetores.ShowModal;
+end;
+
 procedure TfrmCadProdutos.EdtPesquisaChange(Sender: TObject);
 begin
    btnPesquisaClick(btnPesquisa);
@@ -329,7 +355,7 @@ procedure TfrmCadProdutos.btnokClick(Sender: TObject);
 VAR vlr_anterior : Double;
     vlr_Atual   : Double;
 begin
-   if cmbNome_Fabricante.KeyValue = null Then
+   if (cmbNome_Fabricante.KeyValue = null) and (cmbNome_Fabricante.Visible) Then
    Begin
       CaixaMensagem( 'Informe o Fabricante ', ctAviso, [ cbOk ], 0 );
       Exit
@@ -368,16 +394,24 @@ begin
    cdsCadProdutos.FieldByName('Cod_Emp').AsString          := gsCod_Emp;
    cdsCadProdutos.FieldByName('Cod_Barras').AsString       := edtCod_barras.Text;
    cdsCadProdutos.FieldByName('Cod_Grupo').AsString        := cmbNome_Grupo.KeyValue;
-   cdsCadProdutos.FieldByName('Cod_Fabricante').AsInteger  := cmbNome_Fabricante.KeyValue;
    cdsCadProdutos.FieldByName('Unid').AsString             := edtUnid.Text;
    cdsCadProdutos.FieldByName('Aliquota_ECF').AsString     := edtAliquota_ECF.Text;
    cdsCadProdutos.FieldByName('Caminho_Imagem').AsString   := edtCaminhoImagem.Text;
+   cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat := Strtofloat(edtPcoVendaExterna.Text);
+   cdsCadProdutos.FieldByName('QtdeEmbalagem').AsInteger   := StrToInt(QtdeEmbalagem.Text);
+   cdsCadProdutos.FieldByName('Codigo').AsString           := edtCodigo.Text;
+   cdsCadProdutos.FieldByName('CodigoFornecedor').AsString := edtCodigoFornecedor.Text;
+
+   cdsCadProdutos.FieldByName('Cod_Fabricante').AsInteger  := 1;
+   if cmbNome_Fabricante.Visible then
+      cdsCadProdutos.FieldByName('Cod_Fabricante').AsInteger  := cmbNome_Fabricante.KeyValue;
 
    cdsCadProdutos.FieldByName('M2').AsString               := 'N';
    if chkMetroQuadrado.Checked Then
       cdsCadProdutos.FieldByName('M2').AsString            := 'S';
    cdsCadProdutos.FieldByName('Tipo_Produto').AsString     := IntToStr(cmbTipoProduto.ItemIndex);
    cdsCadProdutos.FieldByName('Perc_Comissao').AsFloat     := StrToFloat( edtComissao.Text );
+   cdsCadProdutos.FieldByName('MetroLinear').AsBoolean     := chkMetroLinear.Checked;
    cdsCadProdutos.Post;
 
    If cdsCadProdutos.ChangeCount > 0  Then // se houve mudancas
@@ -459,6 +493,12 @@ end;
 
 procedure TfrmCadProdutos.btnPesquisarClick(Sender: TObject);
 begin
+   if cmbSetores.KeyValue = null then
+   begin
+      CaixaMensagem( 'Selecione o setor do estoque ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   end;
+   
    qryVariavel.Close;
    qryVariavel.Params.Clear;
    qryVariavel.SQL.Text := 'SELECT Mov.Cod_Produto,Prod.Descricao,Mov.E_S,Mov.Rotina,Mov.Data_Cad, '+
@@ -467,11 +507,12 @@ begin
                            'Left Join T_Produtos Prod ON '+
                            '     Prod.Codigo=Mov.Cod_Produto  '+
                            'where ( Mov.Data_Cad>=:parData_VendaIni And Mov.Data_Cad<=:parData_VendaFim ) AND '+
-                           '  Cod_Produto=:parCod_Produto '+
+                           '        Cod_Produto=:parCod_Produto and SetorId=:parSetorId '+
                            'Order by Mov.Data_Cad ';
    qryVariavel.ParamByName('parData_VendaIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
    qryVariavel.ParamByName('parData_VendaFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
    qryVariavel.ParamByName('parCod_Produto').AsString         := cdsCadProdutos.FieldByName('Codigo').AsString;
+   qryVariavel.ParamByName('parSetorId').AsInteger            := cmbSetores.KeyValue;
 
 
    cdsMovEstoque.Close;
@@ -500,6 +541,29 @@ begin
       qryModific.ExecSQL;
       MostraPesquisa;
    End;
+end;
+
+procedure TfrmCadProdutos.CarregarFrabricante;
+begin
+   if frmPrincipal.btnCadFabricante.VisibleForUser then
+   begin
+     qryVariavel.Close;
+     qryVariavel.Params.clear;
+     qryVariavel.SQL.Text := 'Select * from T_Fabricantes ';
+
+     cdsCadFabricantes.close;
+     cdsCadFabricantes.ProviderName := dspVariavel.Name;
+     cdsCadFabricantes.Open;
+
+   end;
+   cmbNome_Fabricante.Visible := frmPrincipal.btnCadFabricante.VisibleForUser;
+   lblCadFabricante.Visible   := frmPrincipal.btnCadFabricante.VisibleForUser;
+end;
+
+procedure TfrmCadProdutos.AjustarTela;
+begin
+   lblPrecoVendaExterna.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
+   edtPcoVendaExterna.Visible   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
 end;
 
 procedure TfrmCadProdutos.AjustarValordoEstoque1Click(Sender: TObject);
@@ -572,11 +636,13 @@ begin
 
    pvQualBotao := 'ALTERAR';
    pviCodSel   := cdsCadProdutos.FieldByName('Codigo').AsInteger;
-   
+
    edtcodigo.Text              := incZero( IntToStr(cdsCadProdutos.FieldByName('Codigo').AsInteger),6);
+   edtcodigoFornecedor.Text    := cdsCadProdutos.FieldByName('CodigoFornecedor').AsString;
    edtDescricao.Text           := cdsCadProdutos.FieldByName('Descricao').AsString;
    edtCaminhoImagem.text       := cdsCadProdutos.FieldByName('Caminho_Imagem').AsString;
    edtPco_Venda.Text           := FormatFloat('0.00',cdsCadProdutos.FieldByName('Pco_Venda').AsFloat);
+   edtPcoVendaExterna.Text     := FormatFloat('0.00',cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat);
    cmbCod_CentroCusto.KeyValue := cdsCadProdutos.FieldByName('Cod_Operacao').AsString;
    cmbCod_CentroCustoChange(cmbCod_CentroCusto);
    cmbCod_Grupo.KeyValue       := cdsCadProdutos.FieldByName('Cod_Grupo').AsString;
@@ -587,9 +653,8 @@ begin
    EdtData_cad.text   := FormatDateTime('dd/mm/yyyy',cdsCadProdutos.FieldByName('Data_Cad').AsDateTime);
    edtCod_barras.Text := cdsCadProdutos.FieldByName('Cod_Barras').AsString;
    edtUnid.Text       := cdsCadProdutos.FieldByName('Unid').AsString;
-   chkMetroQuadrado.Checked := True;
-   IF cdsCadProdutos.FieldByName('m2').AsString='N' Then
-      chkMetroQuadrado.Checked := False;
+   chkMetroQuadrado.Checked := RetornarVerdadeirOuFalso(cdsCadProdutos.FieldByName('m2').AsString);
+   chkMetroLinear.Checked := cdsCadProdutos.FieldByName('MetroLinear').AsBoolean;
    cmbTipoProduto.ItemIndex := cdsCadProdutos.FieldByName('Tipo_Produto').AsInteger;
    edtComissao.Text  := FormatFloat('0.00', cdsCadProdutos.FieldByName('Perc_Comissao').AsFloat);
    vlr_VendaAnt      := cdsCadProdutos.FieldByName('Pco_Venda').AsFloat;
@@ -616,8 +681,12 @@ begin
    End;
    if CaixaMensagem( 'Deseja Exclir o Produto '+cdsCadProdutos.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
-      cdsCadProdutos.Delete;
-      cdsCadProdutos.ApplyUpdates(-1);
+       try
+         cdsCadProdutos.Delete;
+         cdsCadProdutos.ApplyUpdates(-1);
+       except on E: Exception do
+          CaixaMensagem('Não foi possivel Excluir o Produto ('+E.Message+')', ctConfirma, [ cbSimNao ], 0 )
+       end;
    End;
 end;
 
@@ -701,6 +770,8 @@ begin
    inherited;
    PagCadastro.ActivePageIndex:=0;
 
+   AjustarTela;
+
    qryVariavel.Close;
    qryVariavel.Params.clear;
    qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
@@ -721,13 +792,7 @@ begin
    cdsCadGrupos.ProviderName := dspVariavel.Name;
    cdsCadGrupos.Open;
 
-   qryVariavel.Close;
-   qryVariavel.Params.clear;
-   qryVariavel.SQL.Text := 'Select * from T_Fabricantes ';
-
-   cdsCadFabricantes.close;
-   cdsCadFabricantes.ProviderName := dspVariavel.Name;
-   cdsCadFabricantes.Open;
+   CarregarFrabricante;
 
    qryMateriaPrima.Close;
    qryMateriaPrima.Params.clear;
@@ -746,10 +811,19 @@ begin
    cdsCadProdutos.Open;
 
    // --> Controle de tipo de sistema
-   lblComissao.Visible      := True;
-   edtComissao.Visible      := True;
-   chkMetroQuadrado.Visible := True;
-   tabfoto.Enabled          := False;
+   lblComissao.Visible        := True;
+   edtComissao.Visible        := True;
+   chkMetroQuadrado.Visible   := True;
+   tabfoto.Enabled            := False;
+   LanarAvarias1.Visible      := False;
+   ConsultadeAvarias1.Visible := False;
+
+  qryVariavel.Close;
+  qryVariavel.Params.Clear;
+  qryVariavel.SQL.text := 'Select * From Setores ';
+  cdsSetores.Close;
+  cdsSetores.ProviderName := dspVariavel.Name;
+  cdsSetores.Open;
 
 
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
@@ -769,10 +843,25 @@ end;
 
 procedure TfrmCadProdutos.btnPesquisaClick(Sender: TObject);
 var lsCoringa : String;
+    lsWhere : String;
+    lsSelect : String;
 Begin
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
+   if cmbPesquisa.ItemIndex = 0 then
+      lsWhere := 'Prod.Descricao like :parDescricao'
+   else if cmbPesquisa.ItemIndex = 1 then
+   begin
+      lsWhere := 'Prod.Codigo=:parDescricao';
+      lsCoringa := '';
+   end
+   else if cmbPesquisa.ItemIndex = 2 then
+   begin
+      lsWhere := 'Prod.CodigoFornecedor=:parDescricao';
+      lsCoringa := '';
+   end;
+
 
    qryCadProdutos.Close;
    qryCadProdutos.SQL.Text := 'Select Gru.Descricao as Nome_Grupo, Fab.Descricao as Nome_Fabricante, Prod.* from T_Produtos Prod '+
@@ -780,12 +869,13 @@ Begin
                               '            Gru.Codigo = Prod.Cod_Grupo '+
                               '       Left Join T_Fabricantes Fab on ' +
                               '            Fab.Codigo  =  Prod.Cod_Fabricante '+
-                              'Where Prod.Descricao like :parDescricao ';
-   qryCadProdutos.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+'%';
+                              'Where '+lsWhere;
+   qryCadProdutos.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+lsCoringa;
 
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspCadProdutos.Name;
    cdsCadProdutos.Open;
+
 end;
 
 procedure TfrmCadProdutos.cdsCadProdutosBeforeOpen(DataSet: TDataSet);
@@ -804,6 +894,18 @@ begin
        3 : cdsCadProdutos.FieldByName('Nome_TipoProduto').AsString := 'Brinde'
       End;
    End;
+end;
+
+procedure TfrmCadProdutos.chkMetroLinearClick(Sender: TObject);
+begin
+  if chkMetroQuadrado.Checked and chkMetroLinear.Checked then
+     chkMetroQuadrado.Checked := False;
+end;
+
+procedure TfrmCadProdutos.chkMetroQuadradoClick(Sender: TObject);
+begin
+  if chkMetroQuadrado.Checked and chkMetroLinear.Checked then
+     chkMetroLinear.Checked := False;
 end;
 
 procedure TfrmCadProdutos.cmbCod_CentroCustoChange(Sender: TObject);

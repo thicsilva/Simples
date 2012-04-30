@@ -12,7 +12,7 @@ uses
   RDprint, dxSkinsCore;
 
 type
-  TfrmInventario = class(TformBase)
+  TfrmInventario = class(TFormBase)
     bsSkinCoolBar1: TbsSkinCoolBar;
     bsSkinToolBar1: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
@@ -89,6 +89,9 @@ type
     srcRelatorio: TDataSource;
     cdsPesquisa: TClientDataSet;
     srcPesquisa: TDataSource;
+    cmbSetores: TbsSkinDBLookupComboBox;
+    cdsSetores: TClientDataSet;
+    srcSetores: TDataSource;
     procedure bsSkinButton3Click(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -100,8 +103,12 @@ type
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure ClientesSemCompras1Click(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
   private
     pviLinha : Integer;
+    procedure AtualizarSaldoNoProduto(cdsDadosItens: TClientDataSet; SeqInventario : Integer);
+    procedure AtualizarSaldoNoSetor(cdsDadosItens: TClientDataSet;
+      SeqInventario: Integer);
     { Private declarations }
   public
     { Public declarations }
@@ -112,9 +119,16 @@ var
 
 implementation
 
-uses uFuncoes,uPrincipal;
+uses uFuncoes,uPrincipal,uClassSaldo,uDaoSaldo;
 
 {$R *.dfm}
+
+procedure TfrmInventario.bsSkinButton1Click(Sender: TObject);
+begin
+  inherited;
+   if CaixaMensagem( 'Deseja Exclir o Produto '+cdsTempItensInventario.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
+      cdsTempItensInventario.Delete;
+end;
 
 procedure TfrmInventario.bsSkinButton2Click(Sender: TObject);
 begin
@@ -136,20 +150,34 @@ begin
 end;
 
 procedure TfrmInventario.bsSkinButton3Click(Sender: TObject);
+var loDaoSaldo : TDaoSaldo;
+    lrSaldo : Integer;
 begin
+   if cmbSetores.keyvalue=null then
+   Begin
+      CaixaMensagem( 'informe o setor primeiro ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    if strToInt(edtQtde_inv.Text)<0 then
    Begin
       CaixaMensagem( 'Valor do saldo não pode ser menior que zero ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
+
+   loDaoSaldo := TDaoSaldo.Create(gconexao);
+   if cmbSetores.keyvalue>1 then
+      lrSaldo := loDaoSaldo.RetornaSaldo(strToInt(edtProd_inv.Text),cmbSetores.keyvalue)
+   else
+      lrSaldo := cdsCadProdutos.FieldByName('Saldo').AsInteger;
    cdsTempItensInventario.Append;
    cdsTempItensInventario.FieldByName('Codigo').asInteger       := strToInt(edtProd_inv.Text);
    cdsTempItensInventario.FieldByName('Descricao').asString     := cmbNome_ProdutoInv.Text;
    cdsTempItensInventario.FieldByName('Pco_Venda').asfloat      := strTofloat(edtPco_venda.Text);
    cdsTempItensInventario.FieldByName('Quantidade').asInteger   := strToInt(edtQtde_inv.Text);
-   cdsTempItensInventario.FieldByName('Diferenca').asInteger    := (CdsCadProdutos.FieldByName('Saldo').AsInteger - strToInt(edtQtde_inv.Text))*-1;
-   cdsTempItensInventario.FieldByName('Saldo').asInteger        := cdsCadProdutos.FieldByName('Saldo').AsInteger;
-   cdsTempItensInventario.FieldByName('Vlr_Total').asfloat      := (cdsCadProdutos.FieldByName('Saldo').AsInteger - strToInt(edtQtde_inv.Text))*strTofloat(edtPco_venda.Text);
+   cdsTempItensInventario.FieldByName('Diferenca').asInteger    := (lrSaldo - strToInt(edtQtde_inv.Text))*-1;
+   cdsTempItensInventario.FieldByName('Saldo').asInteger        :=  lrSaldo;
+   cdsTempItensInventario.FieldByName('Vlr_Total').asfloat      := (lrSaldo - strToInt(edtQtde_inv.Text))*strTofloat(edtPco_venda.Text);
    cdsTempItensInventario.post;
    edtQtde_inv.Text       := '0';
    edtProd_inv.Text       := '';
@@ -170,6 +198,7 @@ begin
   TabInventario.Enabled    := True;
   BtnIncluir.Enabled       := False;
   cdsTempItensInventario.EmptyDataSet;
+  edtMotivoInventario.SetFocus;
 end;
 
 procedure TfrmInventario.btnokClick(Sender: TObject);
@@ -181,6 +210,12 @@ begin
       Exit;
    End;
 
+   if Trim(cmbSetores.Text)='' then
+   Begin
+      CaixaMensagem( 'O Setor não foi informado', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    liSeqInventario := StrToInt(Sequencia('SeqInventario',True,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8));
 
    QryInventario.Close;
@@ -189,6 +224,8 @@ begin
    cdsInventario.Close;
    cdsInventario.ProviderName := dspInventario.Name;
    cdsInventario.Open;
+   try
+
 
    cdsInventario.Append;
    cdsInventario.FieldByName('Cod_emp').AsString        := GsCod_Emp;
@@ -210,34 +247,58 @@ begin
    cdsTempItensInventario.First;
    while not cdsTempItensInventario.eof Do
    Begin
-      cdsItensInventario.Append;
-      cdsItensInventario.FieldByName('Cod_emp').AsString          := GsCod_Emp;
-      cdsItensInventario.FieldByName('Data_Cad').AsDateTime       := Now;
-      cdsItensInventario.FieldByName('Data_mov').AsDateTime       := GsData_mov;
-      cdsItensInventario.FieldByName('SeqInventario').AsInteger   := liSeqInventario;
-      cdsItensInventario.FieldByName('Operador').AsString         := gsOperador;
-      cdsItensInventario.FieldByName('Diferenca').AsInteger       := cdsTempItensInventario.FieldByName('Diferenca').AsInteger;
-      cdsItensInventario.FieldByName('Cod_Produto').AsInteger     := cdsTempItensInventario.FieldByName('Codigo').AsInteger;
-      cdsItensInventario.FieldByName('Qtde_Inventario').AsInteger := cdsTempItensInventario.FieldByName('Quantidade').AsInteger;
-      cdsItensInventario.FieldByName('Saldo').AsInteger           := cdsTempItensInventario.FieldByName('Saldo').AsInteger;
-      if cdsTempItensInventario.FieldByName('Diferenca').AsInteger > 0 then
-         cdsItensInventario.FieldByName('E_S').AsString           := 'E'
-      Else
-         cdsItensInventario.FieldByName('E_S').AsString           := 'S';
-      cdsItensInventario.FieldByName('Pco_Venda').AsInteger       := cdsTempItensInventario.FieldByName('Pco_Venda').AsInteger;
-      cdsItensInventario.Post;
-      cdsItensInventario.ApplyUpdates(0);
+      if cmbSetores.KeyValue=1 then
+         AtualizarSaldoNoProduto(cdsTempItensInventario,liSeqInventario)
+      else
+         AtualizarSaldoNoSetor(cdsTempItensInventario,liSeqInventario);
+
       cdsTempItensInventario.Next;
    End;
+
+   except on E: Exception do
+     CaixaMensagem( 'Um Erro Foi encontrado '+ E.Message, ctAviso, [ cbOk ], 0 );
+   end;
+
    btnOk.Enabled            := False;
    btnIncluir.Enabled       := True;
    TabInventario.Enabled    := False;
    edtMotivoInventario.Text := '';
-   PagGeral.ActivePageIndex := 0;
+   PagGeral.ActivePageIndex := 0;                         
    cdsTempItensInventario.EmptyDataSet;
-
 end;
 
+procedure TfrmInventario.AtualizarSaldoNoProduto(cdsDadosItens : TClientDataSet; SeqInventario : Integer);
+begin
+   cdsItensInventario.Append;
+   cdsItensInventario.FieldByName('Cod_emp').AsString          := GsCod_Emp;
+   cdsItensInventario.FieldByName('Data_Cad').AsDateTime       := Now;
+   cdsItensInventario.FieldByName('Data_mov').AsDateTime       := GsData_mov;
+   cdsItensInventario.FieldByName('SeqInventario').AsInteger   := SeqInventario;
+   cdsItensInventario.FieldByName('Operador').AsString         := gsOperador;
+   cdsItensInventario.FieldByName('Diferenca').AsInteger       := cdsDadosItens.FieldByName('Diferenca').AsInteger;
+   cdsItensInventario.FieldByName('Cod_Produto').AsInteger     := cdsDadosItens.FieldByName('Codigo').AsInteger;
+   cdsItensInventario.FieldByName('Qtde_Inventario').AsInteger := cdsDadosItens.FieldByName('Quantidade').AsInteger;
+   cdsItensInventario.FieldByName('Saldo').AsInteger           := cdsDadosItens.FieldByName('Saldo').AsInteger;
+   if cdsDadosItens.FieldByName('Diferenca').AsInteger > 0 then
+      cdsItensInventario.FieldByName('E_S').AsString           := 'E'
+   Else
+      cdsItensInventario.FieldByName('E_S').AsString           := 'S';
+   cdsItensInventario.FieldByName('Pco_Venda').AsInteger       := cdsDadosItens.FieldByName('Pco_Venda').AsInteger;
+   cdsItensInventario.Post;
+   cdsItensInventario.ApplyUpdates(0);
+end;
+procedure TfrmInventario.AtualizarSaldoNoSetor(cdsDadosItens : TClientDataSet; SeqInventario : Integer);
+var loSaldo : TSaldo;
+    loDaoSaldo : TDaoSaldo;
+begin
+   loDaoSaldo := TDaoSaldo.Create(gConexao);
+   loSaldo    := TSaldo.Create;
+   loSaldo.SetorId   := StrToInt(cmbSetores.KeyValue);
+   loSaldo.ProdutoId := cdsDadosItens.FieldByName('Codigo').AsInteger;
+   loSaldo.Valor     := cdsDadosItens.FieldByName('Vlr_Total').AsInteger;
+   loSaldo.Diferenca := cdsDadosItens.FieldByName('Diferenca').AsInteger;
+   loDaoSaldo.AtualizarSaldo(loSaldo);
+end;
 procedure TfrmInventario.Clientes1Click(Sender: TObject);
 var lsNome_Grupo : String;
     ldTotalGeral : Double;
@@ -374,6 +435,7 @@ procedure TfrmInventario.FormShow(Sender: TObject);
 begin
    PagGeral.ActivePageIndex := 0;
    TabInventario.Enabled    := False;
+
    qryVariavel.Close;
    qryVariavel.Params.Clear;
    qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,Pco_Venda,Saldo,Tipo_Produto '+
@@ -385,6 +447,14 @@ begin
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
+
+   qryVariavel.Close;
+   qryVariavel.Params.Clear;
+   qryVariavel.SQL.text :='Select * From Setores ';
+
+   cdsSetores.Close;
+   cdsSetores.ProviderName := dspVariavel.Name;
+   cdsSetores.Open;
 end;
 
 procedure TfrmInventario.impMatricialNewPage(Sender: TObject; Pagina: Integer);

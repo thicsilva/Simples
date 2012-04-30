@@ -27,19 +27,20 @@ object frmCtasPagar: TfrmCtasPagar
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 722
+        Width = 724
       end>
     Images = frmPrincipal.Imagebutoes
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 70
+      Width = 715
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
+      SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -84,6 +85,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -121,6 +123,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -158,6 +161,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -195,6 +199,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -224,7 +229,7 @@ object frmCtasPagar: TfrmCtasPagar
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnincluirClick
-        ExplicitTop = 8
+        ExplicitLeft = -6
       end
       object BtnCancela: TbsSkinSpeedButton
         Left = 553
@@ -232,6 +237,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -270,6 +276,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 39
         Height = 40
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -280,6 +287,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -319,6 +327,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 46
         Height = 40
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -329,6 +338,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 70
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -366,6 +376,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 42
         Height = 40
         Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -376,6 +387,7 @@ object frmCtasPagar: TfrmCtasPagar
         Width = 76
         Height = 40
         HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolmenubutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -445,22 +457,18 @@ object frmCtasPagar: TfrmCtasPagar
     DefaultFont.Style = []
     UseSkinFont = True
     DefaultItemHeight = 20
+    SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 707
-        Height = 249
+        Height = 247
         Align = alClient
         PopupMenu = bsSkinPopupMenu1
         TabOrder = 2
-        ExplicitHeight = 247
         object gridCtasPagar: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -997,7 +1005,7 @@ object frmCtasPagar: TfrmCtasPagar
         Left = 707
         Top = 72
         Width = 19
-        Height = 249
+        Height = 247
         HintImageIndex = 0
         TabOrder = 1
         Visible = False
@@ -1022,15 +1030,12 @@ object frmCtasPagar: TfrmCtasPagar
         Position = 0
         SmallChange = 127
         LargeChange = 127
-        ExplicitHeight = 247
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitLeft = 2
+      ExplicitTop = 18
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 94
         Top = 98
@@ -1044,6 +1049,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Historico'
       end
@@ -1060,6 +1066,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Fornecedor'
       end
@@ -1092,6 +1099,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Emiss'#227'o'
       end
@@ -1108,6 +1116,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = '1'#186' Vencimento'
       end
@@ -1124,6 +1133,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Dias'
       end
@@ -1140,6 +1150,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Numero de Parcelas'
       end
@@ -1169,6 +1180,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultFont.Height = -11
         DefaultFont.Name = 'MS Sans Serif'
         DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Centro de Custo'
       end
@@ -1179,6 +1191,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 1
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'combobox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1212,6 +1225,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'edit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1274,6 +1288,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'edit'
         Alignment = taRightJustify
         Font.Charset = DEFAULT_CHARSET
@@ -1298,6 +1313,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 2
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'combobox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1349,6 +1365,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = True
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'buttonedit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1398,6 +1415,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = True
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'buttonedit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -1467,6 +1485,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 7
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'spinedit'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1490,6 +1509,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 6
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'spinedit'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1546,6 +1566,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 11
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'combobox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1571,6 +1592,7 @@ object frmCtasPagar: TfrmCtasPagar
         Height = 20
         HintImageIndex = 0
         TabOrder = 12
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'combobox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -1604,6 +1626,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'edit'
         Alignment = taRightJustify
         Font.Charset = DEFAULT_CHARSET
@@ -1713,6 +1736,7 @@ object frmCtasPagar: TfrmCtasPagar
     DefMenuItemFont.Name = 'Arial'
     DefMenuItemFont.Style = []
     UseDefaultSysMenu = True
+    SkinData = frmPrincipal.SkinPrincipal
     MinHeight = 0
     MinWidth = 0
     MaxHeight = 0

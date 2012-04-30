@@ -2,8 +2,8 @@ object frmSelDatas: TfrmSelDatas
   Left = 0
   Top = 0
   Caption = 'Selecione o Intervalo de Datas'
-  ClientHeight = 101
-  ClientWidth = 444
+  ClientHeight = 95
+  ClientWidth = 725
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmSelDatas: TfrmSelDatas
   object PanelConsulta: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 444
+    Width = 725
     Height = 41
     HintImageIndex = 0
     TabOrder = 0
@@ -50,6 +50,7 @@ object frmSelDatas: TfrmSelDatas
     Spacing = 2
     Caption = 'PanelConsulta'
     Align = alTop
+    ExplicitWidth = 588
     object lblTurma: TbsSkinStdLabel
       Left = 123
       Top = 14
@@ -305,11 +306,124 @@ object frmSelDatas: TfrmSelDatas
       Style = bscbFixedStyle
       OnChange = cmbPeriodoChange
     end
+    object cmbturno: TbsSkinComboBox
+      Left = 440
+      Top = 11
+      Width = 112
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 3
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      UseSkinSize = True
+      ToolButtonStyle = False
+      AlphaBlend = False
+      AlphaBlendValue = 0
+      AlphaBlendAnimation = False
+      ListBoxCaptionMode = False
+      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultFont.Color = clWindowText
+      ListBoxDefaultFont.Height = 14
+      ListBoxDefaultFont.Name = 'Arial'
+      ListBoxDefaultFont.Style = []
+      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultCaptionFont.Color = clWindowText
+      ListBoxDefaultCaptionFont.Height = 14
+      ListBoxDefaultCaptionFont.Name = 'Arial'
+      ListBoxDefaultCaptionFont.Style = []
+      ListBoxDefaultItemHeight = 20
+      ListBoxCaptionAlignment = taLeftJustify
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      ListBoxWidth = 0
+      HideSelection = True
+      AutoComplete = True
+      ImageIndex = 0
+      CharCase = ecNormal
+      DefaultColor = clWindow
+      Text = 'Saida'
+      ItemIndex = -1
+      DropDownCount = 8
+      HorizontalExtent = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      Sorted = False
+      Style = bscbFixedStyle
+    end
+    object cmbTipoResumoVenda: TbsSkinComboBox
+      Left = 567
+      Top = 11
+      Width = 142
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 4
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      UseSkinSize = True
+      ToolButtonStyle = False
+      AlphaBlend = False
+      AlphaBlendValue = 0
+      AlphaBlendAnimation = False
+      ListBoxCaptionMode = False
+      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultFont.Color = clWindowText
+      ListBoxDefaultFont.Height = 14
+      ListBoxDefaultFont.Name = 'Arial'
+      ListBoxDefaultFont.Style = []
+      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultCaptionFont.Color = clWindowText
+      ListBoxDefaultCaptionFont.Height = 14
+      ListBoxDefaultCaptionFont.Name = 'Arial'
+      ListBoxDefaultCaptionFont.Style = []
+      ListBoxDefaultItemHeight = 20
+      ListBoxCaptionAlignment = taLeftJustify
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      ListBoxWidth = 0
+      HideSelection = True
+      AutoComplete = True
+      ImageIndex = 0
+      CharCase = ecNormal
+      DefaultColor = clWindow
+      Text = 'Venda Resumida'
+      Items.Strings = (
+        'Venda Resumida'
+        'Venda Detalhada')
+      ItemIndex = 0
+      DropDownCount = 8
+      HorizontalExtent = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      Sorted = False
+      Style = bscbFixedStyle
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 444
+    Width = 725
     Height = 53
     AutoSize = True
     Bands = <
@@ -317,16 +431,17 @@ object frmSelDatas: TfrmSelDatas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 440
+        Width = 721
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
+    ExplicitWidth = 588
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 431
+      Width = 712
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -369,7 +484,7 @@ object frmSelDatas: TfrmSelDatas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 348
+        Left = 634
         Top = 0
         Width = 70
         Height = 49
@@ -448,7 +563,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 347
+        Left = 633
         Top = 0
         Width = 1
         Height = 49
@@ -462,13 +577,12 @@ object frmSelDatas: TfrmSelDatas
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
         Top = 0
-        Width = 277
+        Width = 563
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -1
       end
     end
   end

@@ -4,7 +4,7 @@ object frmEntradas: TfrmEntradas
   BorderIcons = []
   Caption = 'Entrada de Produtos'
   ClientHeight = 536
-  ClientWidth = 666
+  ClientWidth = 705
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmEntradas: TfrmEntradas
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 666
+    Width = 705
     Height = 44
     AutoSize = True
     Bands = <
@@ -27,16 +27,16 @@ object frmEntradas: TfrmEntradas
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 660
+        Width = 701
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 646
+      Width = 692
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -50,6 +50,7 @@ object frmEntradas: TfrmEntradas
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -94,6 +95,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -132,6 +134,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -170,6 +173,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -221,6 +225,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -271,6 +276,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -309,16 +315,16 @@ object frmEntradas: TfrmEntradas
   object StatusBar1: TStatusBar
     Left = 0
     Top = 517
-    Width = 666
+    Width = 705
     Height = 19
     Panels = <>
   end
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 44
-    Width = 666
+    Width = 705
     Height = 473
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -329,6 +335,12 @@ object frmEntradas: TfrmEntradas
     Style = tsButtons
     TabOrder = 2
     OnChange = pagCadastroChange
+    MouseWheelSupport = False
+    TabExtededDraw = False
+    TabsOffset = 0
+    TabSpacing = 1
+    TextInHorizontal = False
+    TabsInCenter = False
     FreeOnClose = False
     ShowCloseButtons = False
     TabsBGTransparent = False
@@ -341,13 +353,12 @@ object frmEntradas: TfrmEntradas
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 46
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 664
+        Width = 703
         Height = 62
         HintImageIndex = 0
         TabOrder = 0
@@ -361,6 +372,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -378,7 +390,6 @@ object frmEntradas: TfrmEntradas
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
-        ExplicitTop = -6
         object lblTurma: TbsSkinStdLabel
           Left = 241
           Top = 33
@@ -494,6 +505,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object chkPesqTodoTexto: TbsSkinCheckRadioBox
           Left = 358
@@ -542,8 +559,10 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
+          AlwaysShowLayeredFrame = False
           UseSkinSize = True
           UseSkinFontColor = True
           RepeatMode = False
@@ -581,6 +600,8 @@ object frmEntradas: TfrmEntradas
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -599,6 +620,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object dtpData_Fim: TbsSkinDateEdit
           Left = 263
@@ -623,6 +650,8 @@ object frmEntradas: TfrmEntradas
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -641,6 +670,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 5
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object cmbPeriodo: TbsSkinComboBox
           Left = 358
@@ -784,11 +819,10 @@ object frmEntradas: TfrmEntradas
       object cxGrid1: TcxGrid
         Left = 0
         Top = 62
-        Width = 664
+        Width = 703
         Height = 387
         Align = alClient
         TabOrder = 1
-        ExplicitTop = 58
         object GrdCompras: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcConsEntradas
@@ -933,7 +967,7 @@ object frmEntradas: TfrmEntradas
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 664
+        Width = 703
         Height = 111
         HintImageIndex = 0
         TabOrder = 0
@@ -947,6 +981,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -999,8 +1034,8 @@ object frmEntradas: TfrmEntradas
           Caption = 'Fornecedor'
         end
         object bsSkinStdLabel8: TbsSkinStdLabel
-          Left = 297
-          Top = 11
+          Left = 330
+          Top = 9
           Width = 68
           Height = 13
           EllipsType = bsetNone
@@ -1032,8 +1067,8 @@ object frmEntradas: TfrmEntradas
           Caption = 'N'#186' da Nota Fiscal'
         end
         object bsSkinStdLabel16: TbsSkinStdLabel
-          Left = 302
-          Top = 64
+          Left = 321
+          Top = 58
           Width = 63
           Height = 13
           EllipsType = bsetNone
@@ -1067,7 +1102,7 @@ object frmEntradas: TfrmEntradas
           Enabled = False
         end
         object btnCadAlunos: TbsSkinSpeedButton
-          Left = 429
+          Left = 459
           Top = 28
           Width = 23
           Height = 23
@@ -1082,6 +1117,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          CheckedMode = False
           ImageList = frmPrincipal.cxSmallImages
           UseSkinSize = True
           UseSkinFontColor = True
@@ -1137,6 +1173,23 @@ object frmEntradas: TfrmEntradas
           NumGlyphs = 1
           Spacing = 1
         end
+        object bsSkinStdLabel22: TbsSkinStdLabel
+          Left = 302
+          Top = 93
+          Width = 82
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Setor De Entrada'
+        end
         object cmbCod_Fornecedor: TbsSkinDBLookupComboBox
           Left = 209
           Top = 4
@@ -1166,7 +1219,7 @@ object frmEntradas: TfrmEntradas
         object edtobs: TbsSkinEdit
           Left = 107
           Top = 88
-          Width = 350
+          Width = 182
           Height = 18
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1188,6 +1241,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 100
           ParentFont = False
           TabOrder = 5
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtobsExit
         end
         object edtCod_Fornecedor: TbsSkinEdit
@@ -1215,6 +1274,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtCod_FornecedorExit
         end
         object cmbNome_Fornecedor: TbsSkinDBLookupComboBox
@@ -1244,7 +1309,7 @@ object frmEntradas: TfrmEntradas
           OnChange = cmbNome_FornecedorChange
         end
         object edtData_cad: TbsSkinEdit
-          Left = 383
+          Left = 408
           Top = 4
           Width = 74
           Height = 18
@@ -1267,6 +1332,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 6
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object edtCodigo: TbsSkinEdit
           Left = 9
@@ -1295,6 +1366,12 @@ object frmEntradas: TfrmEntradas
           ParentFont = False
           TabOrder = 7
           Visible = False
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object edtSeqNotaFiscal: TbsSkinEdit
           Left = 107
@@ -1320,12 +1397,18 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtCod_ProdutoExit
         end
         object edtDataEntrada: TbsSkinDateEdit
-          Left = 377
-          Top = 59
-          Width = 80
+          Left = 390
+          Top = 57
+          Width = 93
           Height = 18
           EditMask = '!99/99/0000;1; '
           Text = '  /  /    '
@@ -1345,6 +1428,8 @@ object frmEntradas: TfrmEntradas
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -1363,6 +1448,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object edtNumeroPedido: TbsSkinEdit
           Left = 228
@@ -1389,10 +1480,16 @@ object frmEntradas: TfrmEntradas
           Enabled = False
           ParentFont = False
           TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtCod_ProdutoExit
         end
         object bsSkinGroupBox1: TbsSkinGroupBox
-          Left = 470
+          Left = 509
           Top = 1
           Width = 193
           Height = 109
@@ -1408,6 +1505,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
           CaptionImageList = frmPrincipal.cxSmallImages
@@ -1507,6 +1605,12 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 0
+            LeftImageIndex = -1
+            LeftImageHotIndex = -1
+            LeftImageDownIndex = -1
+            RightImageIndex = -1
+            RightImageHotIndex = -1
+            RightImageDownIndex = -1
           end
           object edtNumeroItens: TbsSkinEdit
             Left = 110
@@ -1538,6 +1642,12 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 1
+            LeftImageIndex = -1
+            LeftImageHotIndex = -1
+            LeftImageDownIndex = -1
+            RightImageIndex = -1
+            RightImageHotIndex = -1
+            RightImageDownIndex = -1
           end
           object edtQtde_Total: TbsSkinEdit
             Left = 110
@@ -1569,13 +1679,44 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 2
+            LeftImageIndex = -1
+            LeftImageHotIndex = -1
+            LeftImageDownIndex = -1
+            RightImageIndex = -1
+            RightImageHotIndex = -1
+            RightImageDownIndex = -1
           end
+        end
+        object cmbSetores: TbsSkinDBLookupComboBox
+          Left = 388
+          Top = 86
+          Width = 94
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 10
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcSetores
         end
       end
       object bsSkinDBGrid2: TbsSkinDBGrid
         Left = 0
         Top = 208
-        Width = 645
+        Width = 684
         Height = 241
         HintImageIndex = 0
         TabOrder = 1
@@ -1607,7 +1748,7 @@ object frmEntradas: TfrmEntradas
       object pnlProdutos: TbsSkinPanel
         Left = 0
         Top = 155
-        Width = 664
+        Width = 703
         Height = 53
         HintImageIndex = 0
         TabOrder = 2
@@ -1621,6 +1762,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -1747,6 +1889,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtCod_ProdutoExit
         end
         object cmbNome_Produto: TbsSkinDBLookupComboBox
@@ -1801,6 +1949,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object EdtPco_Venda: TbsSkinEdit
           Left = 446
@@ -1828,6 +1982,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = EdtPco_VendaExit
         end
         object edtTotal: TbsSkinEdit
@@ -1857,11 +2017,17 @@ object frmEntradas: TfrmEntradas
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = btnAdicionarClick
         end
       end
       object bsSkinScrollBar1: TbsSkinScrollBar
-        Left = 645
+        Left = 684
         Top = 208
         Width = 19
         Height = 241
@@ -1889,13 +2055,11 @@ object frmEntradas: TfrmEntradas
         Position = 1
         SmallChange = 1
         LargeChange = 1
-        ExplicitLeft = 651
-        ExplicitTop = 203
       end
       object bsSkinCoolBar2: TbsSkinCoolBar
         Left = 0
         Top = 111
-        Width = 664
+        Width = 703
         Height = 44
         AutoSize = True
         Bands = <
@@ -1903,16 +2067,16 @@ object frmEntradas: TfrmEntradas
             Control = bsSkinToolBar2
             ImageIndex = -1
             MinHeight = 40
-            Width = 660
+            Width = 699
           end>
         SkinDataName = 'controlbar'
         SkinData = frmPrincipal.SkinPrincipal
         SkinBevel = True
         TabOrder = 4
         object bsSkinToolBar2: TbsSkinToolBar
-          Left = 10
+          Left = 9
           Top = 0
-          Width = 646
+          Width = 690
           Height = 40
           HintImageIndex = 0
           TabOrder = 0
@@ -1926,6 +2090,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 70
           DefaultHeight = 40
           UseSkinFont = True
+          RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
           CaptionImageIndex = -1
@@ -1970,6 +2135,7 @@ object frmEntradas: TfrmEntradas
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = True
+            CheckedMode = False
             UseSkinSize = True
             UseSkinFontColor = True
             WidthWithCaption = 0
@@ -2008,6 +2174,7 @@ object frmEntradas: TfrmEntradas
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = True
+            CheckedMode = False
             UseSkinSize = True
             UseSkinFontColor = True
             WidthWithCaption = 0
@@ -2064,6 +2231,7 @@ object frmEntradas: TfrmEntradas
             SkinDataName = 'bevel'
             DividerMode = True
             ExplicitLeft = -6
+            ExplicitTop = -5
           end
         end
       end
@@ -2087,6 +2255,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageList = frmPrincipal.cxSmallImages
@@ -2303,6 +2472,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
           CaptionImageIndex = -1
@@ -2403,6 +2573,8 @@ object frmEntradas: TfrmEntradas
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -2421,6 +2593,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object edtHistorico: TbsSkinEdit
           Left = 104
@@ -2447,6 +2625,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 50
           ParentFont = False
           TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
           Left = 171
@@ -2524,6 +2708,8 @@ object frmEntradas: TfrmEntradas
           CalendarUseSkinFont = True
           CalendarSkinDataName = 'panel'
           FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -2542,6 +2728,12 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object edtCod_CentroCusto: TbsSkinEdit
           Left = 101
@@ -2568,6 +2760,12 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnExit = edtCod_CentroCustoExit
         end
         object bsSkinEdit1: TbsSkinEdit
@@ -2595,6 +2793,12 @@ object frmEntradas: TfrmEntradas
           ParentFont = False
           TabOrder = 10
           Visible = False
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
         object EdtVlr_total: TbsSkinEdit
           Left = 351
@@ -2626,6 +2830,12 @@ object frmEntradas: TfrmEntradas
           ParentBiDiMode = False
           ParentFont = False
           TabOrder = 8
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
       end
     end
@@ -2655,17 +2865,55 @@ object frmEntradas: TfrmEntradas
   object cdsItensEntradasTMP: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Codigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Descricao'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'qtde_Venda'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Pco_Venda'
+        DataType = ftFloat
+      end
+      item
+        Name = 'vlr_Total'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Complemento'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'vlr_Desconto'
+        DataType = ftFloat
+      end
+      item
+        Name = 'SetorId'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     BeforeOpen = cdsItensEntradasTMPBeforeOpen
     Left = 298
     Top = 437
     Data = {
-      B30000009619E0BD010000001800000007000000000003000000B30006436F64
+      C30000009619E0BD010000001800000008000000000003000000C30006436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
       0B436F6D706C656D656E746F0100490000000100055749445448020002003200
-      0C766C725F446573636F6E746F08000400000000000000}
+      0C766C725F446573636F6E746F0800040000000000075365746F724964040001
+      00000000000000}
     object cdsItensEntradasTMPCodigo: TIntegerField
       DisplayWidth = 13
       FieldName = 'Codigo'
@@ -2689,6 +2937,19 @@ object frmEntradas: TfrmEntradas
       DisplayLabel = 'Vlr. Total'
       DisplayWidth = 14
       FieldName = 'vlr_Total'
+    end
+    object cdsItensEntradasTMPComplemento: TStringField
+      FieldName = 'Complemento'
+      Visible = False
+      Size = 50
+    end
+    object cdsItensEntradasTMPvlr_Desconto: TFloatField
+      FieldName = 'vlr_Desconto'
+      Visible = False
+    end
+    object cdsItensEntradasTMPSetorId: TIntegerField
+      FieldName = 'SetorId'
+      Visible = False
     end
   end
   object srcItensVendasTMP: TDataSource
@@ -2736,6 +2997,11 @@ object frmEntradas: TfrmEntradas
     Top = 465
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -2754,7 +3020,6 @@ object frmEntradas: TfrmEntradas
     AlphaBlendAnimation = False
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -2893,5 +3158,17 @@ object frmEntradas: TfrmEntradas
     DataSet = cdsCtasPagar
     Left = 410
     Top = 465
+  end
+  object cdsSetores: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 156
+    Top = 438
+  end
+  object srcSetores: TDataSource
+    DataSet = cdsSetores
+    Left = 156
+    Top = 466
   end
 end

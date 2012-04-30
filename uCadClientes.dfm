@@ -48,7 +48,10 @@ object frmCadClientes: TfrmCadClientes
     DefaultFont.Style = []
     UseSkinFont = True
     DefaultItemHeight = 20
+    SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitLeft = 264
+    ExplicitTop = 77
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
@@ -58,6 +61,7 @@ object frmCadClientes: TfrmCadClientes
         Height = 33
         HintImageIndex = 0
         TabOrder = 0
+        SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'panel'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -369,11 +373,12 @@ object frmCadClientes: TfrmCadClientes
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 0
-        Top = 287
+        Top = 296
         Width = 835
-        Height = 147
+        Height = 138
         HintImageIndex = 0
         TabOrder = 0
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'groupbox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -414,6 +419,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Limite de Credito'
         end
@@ -430,6 +436,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Situa'#231#227'o'
         end
@@ -446,6 +453,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Atividade'
         end
@@ -462,11 +470,12 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Rota'
         end
         object bsSkinStdLabel10: TbsSkinStdLabel
-          Left = 406
+          Left = 382
           Top = 61
           Width = 84
           Height = 13
@@ -478,6 +487,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Pedido em Aberto'
         end
@@ -494,12 +504,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Vendedor'
         end
         object bsSkinStdLabel23: TbsSkinStdLabel
-          Left = 374
-          Top = 111
+          Left = 425
+          Top = 106
           Width = 40
           Height = 13
           EllipsType = bsetNone
@@ -510,8 +521,26 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Contrato'
+        end
+        object bsSkinStdLabel19: TbsSkinStdLabel
+          Left = 379
+          Top = 81
+          Width = 87
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Inscri'#231#227'o Estadual'
         end
         object cmbStatusCliente: TbsSkinComboBox
           Left = 249
@@ -520,6 +549,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 1
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -590,6 +620,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -612,6 +643,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 2
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -637,6 +669,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 3
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -656,12 +689,13 @@ object frmCadClientes: TfrmCadClientes
           OnChange = cmbNome_AtividadeChange
         end
         object chkClienteAtivo: TbsSkinCheckRadioBox
-          Left = 496
+          Left = 471
           Top = 24
           Width = 89
           Height = 25
           HintImageIndex = 0
           TabOrder = 4
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -691,6 +725,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 5
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -717,6 +752,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 6
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -736,12 +772,13 @@ object frmCadClientes: TfrmCadClientes
           OnChange = cmbNome_RotaChange
         end
         object edtNumeroPedAberto: TbsSkinSpinEdit
-          Left = 496
+          Left = 472
           Top = 55
-          Width = 82
+          Width = 67
           Height = 20
           HintImageIndex = 0
           TabOrder = 7
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'spinedit'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -765,6 +802,7 @@ object frmCadClientes: TfrmCadClientes
           Height = 20
           HintImageIndex = 0
           TabOrder = 8
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -784,12 +822,13 @@ object frmCadClientes: TfrmCadClientes
           OnChange = cmbCod_VendedorChange
         end
         object cmbNome_Vendedor: TbsSkinDBLookupComboBox
-          Left = 167
+          Left = 168
           Top = 106
           Width = 201
           Height = 20
           HintImageIndex = 0
           TabOrder = 9
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -809,8 +848,8 @@ object frmCadClientes: TfrmCadClientes
           OnChange = cmbNome_VendedorChange
         end
         object edtContrato: TbsSkinEdit
-          Left = 419
-          Top = 108
+          Left = 471
+          Top = 103
           Width = 122
           Height = 18
           DefaultColor = clWindow
@@ -823,6 +862,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -839,14 +879,47 @@ object frmCadClientes: TfrmCadClientes
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
+        object edtInscricaoEstadual: TbsSkinEdit
+          Left = 472
+          Top = 79
+          Width = 122
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 13
+          ParentFont = False
+          TabOrder = 11
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
       end
       object bsSkinExPanel1: TbsSkinExPanel
-        Left = 107
-        Top = 12
-        Width = 605
-        Height = 246
+        Left = 136
+        Top = 3
+        Width = 524
+        Height = 269
         HintImageIndex = 0
         TabOrder = 1
+        SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'expanel'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -870,8 +943,8 @@ object frmCadClientes: TfrmCadClientes
         Sizeable = False
         Caption = 'Dados Cadastrais'
         object bsSkinStdLabel1: TbsSkinStdLabel
-          Left = 118
-          Top = 43
+          Left = 78
+          Top = 63
           Width = 33
           Height = 13
           EllipsType = bsetNone
@@ -882,12 +955,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Codigo'
         end
         object bsSkinStdLabel5: TbsSkinStdLabel
-          Left = 80
-          Top = 67
+          Left = 40
+          Top = 87
           Width = 71
           Height = 13
           EllipsType = bsetNone
@@ -898,12 +972,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Nome Fantasia'
         end
         object bsSkinStdLabel8: TbsSkinStdLabel
-          Left = 440
-          Top = 31
+          Left = 359
+          Top = 29
           Width = 68
           Height = 13
           EllipsType = bsetNone
@@ -914,12 +989,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Data Cadastro'
         end
         object bsSkinStdLabel2: TbsSkinStdLabel
-          Left = 122
-          Top = 141
+          Left = 82
+          Top = 161
           Width = 27
           Height = 13
           EllipsType = bsetNone
@@ -930,12 +1006,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Bairro'
         end
         object bsSkinStdLabel3: TbsSkinStdLabel
-          Left = 103
-          Top = 114
+          Left = 63
+          Top = 134
           Width = 46
           Height = 13
           EllipsType = bsetNone
@@ -946,12 +1023,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Endereco'
         end
         object bsSkinStdLabel4: TbsSkinStdLabel
-          Left = 317
-          Top = 141
+          Left = 277
+          Top = 161
           Width = 33
           Height = 13
           EllipsType = bsetNone
@@ -962,12 +1040,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Cidade'
         end
         object bsSkinStdLabel6: TbsSkinStdLabel
-          Left = 130
-          Top = 168
+          Left = 90
+          Top = 188
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -978,12 +1057,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Cep'
         end
         object bsSkinStdLabel7: TbsSkinStdLabel
-          Left = 225
-          Top = 168
+          Left = 185
+          Top = 188
           Width = 14
           Height = 13
           EllipsType = bsetNone
@@ -994,12 +1074,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'UF'
         end
         object bsSkinStdLabel14: TbsSkinStdLabel
-          Left = 107
-          Top = 197
+          Left = 67
+          Top = 217
           Width = 42
           Height = 13
           EllipsType = bsetNone
@@ -1010,12 +1091,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Telefone'
         end
         object bsSkinStdLabel15: TbsSkinStdLabel
-          Left = 317
-          Top = 199
+          Left = 277
+          Top = 219
           Width = 32
           Height = 13
           EllipsType = bsetNone
@@ -1026,12 +1108,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Celular'
         end
         object lblCNPJCPF: TbsSkinStdLabel
-          Left = 229
-          Top = 44
+          Left = 291
+          Top = 64
           Width = 52
           Height = 13
           EllipsType = bsetNone
@@ -1042,12 +1125,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'CNPJ/CPF'
         end
         object bsSkinStdLabel16: TbsSkinStdLabel
-          Left = 78
-          Top = 221
+          Left = 40
+          Top = 241
           Width = 71
           Height = 13
           EllipsType = bsetNone
@@ -1058,12 +1142,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Pto Referencia'
         end
         object lblrazao: TbsSkinStdLabel
-          Left = 88
-          Top = 89
+          Left = 48
+          Top = 109
           Width = 63
           Height = 13
           EllipsType = bsetNone
@@ -1074,12 +1159,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Razao Social'
         end
         object bsSkinStdLabel20: TbsSkinStdLabel
-          Left = 288
-          Top = 168
+          Left = 248
+          Top = 188
           Width = 62
           Height = 13
           EllipsType = bsetNone
@@ -1090,12 +1176,13 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Height = -11
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Responsavel'
         end
         object edtNome_Fantasia: TbsSkinEdit
-          Left = 157
-          Top = 63
+          Left = 117
+          Top = 83
           Width = 337
           Height = 18
           DefaultColor = clWindow
@@ -1108,6 +1195,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1124,8 +1212,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtCodigo: TbsSkinEdit
-          Left = 159
-          Top = 39
+          Left = 119
+          Top = 59
           Width = 56
           Height = 18
           Text = '0001'
@@ -1139,6 +1227,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           ReadOnly = True
           Font.Charset = DEFAULT_CHARSET
@@ -1157,8 +1246,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtData_cad: TbsSkinEdit
-          Left = 514
-          Top = 26
+          Left = 433
+          Top = 25
           Width = 74
           Height = 18
           TabStop = False
@@ -1172,6 +1261,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           ReadOnly = True
           Font.Charset = DEFAULT_CHARSET
@@ -1180,7 +1270,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 11
+          TabOrder = 13
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1189,8 +1279,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtBairro: TbsSkinEdit
-          Left = 157
-          Top = 136
+          Left = 117
+          Top = 156
           Width = 137
           Height = 18
           DefaultColor = clWindow
@@ -1203,6 +1293,70 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtCep: TbsSkinEdit
+          Left = 117
+          Top = 185
+          Width = 65
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 9
+          ParentFont = False
+          TabOrder = 7
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtEndereco: TbsSkinEdit
+          Left = 117
+          Top = 130
+          Width = 337
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1218,70 +1372,9 @@ object frmCadClientes: TfrmCadClientes
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
-        object edtCep: TbsSkinEdit
-          Left = 157
-          Top = 165
-          Width = 65
-          Height = 18
-          DefaultColor = clWindow
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
-          DefaultWidth = 0
-          DefaultHeight = 0
-          ButtonMode = False
-          SkinDataName = 'edit'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
-          MaxLength = 9
-          ParentFont = False
-          TabOrder = 6
-          LeftImageIndex = -1
-          LeftImageHotIndex = -1
-          LeftImageDownIndex = -1
-          RightImageIndex = -1
-          RightImageHotIndex = -1
-          RightImageDownIndex = -1
-        end
-        object edtEndereco: TbsSkinEdit
-          Left = 157
-          Top = 110
-          Width = 337
-          Height = 18
-          DefaultColor = clWindow
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
-          DefaultWidth = 0
-          DefaultHeight = 0
-          ButtonMode = False
-          SkinDataName = 'edit'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 3
-          LeftImageIndex = -1
-          LeftImageHotIndex = -1
-          LeftImageDownIndex = -1
-          RightImageIndex = -1
-          RightImageHotIndex = -1
-          RightImageDownIndex = -1
-        end
         object edtCidade: TbsSkinEdit
-          Left = 357
-          Top = 136
+          Left = 317
+          Top = 156
           Width = 137
           Height = 18
           DefaultColor = clWindow
@@ -1294,6 +1387,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1301,7 +1395,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 6
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1311,8 +1405,8 @@ object frmCadClientes: TfrmCadClientes
           OnExit = edtCidadeExit
         end
         object edtUf: TbsSkinEdit
-          Left = 246
-          Top = 165
+          Left = 206
+          Top = 185
           Width = 25
           Height = 18
           DefaultColor = clWindow
@@ -1325,6 +1419,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1333,7 +1428,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           CharCase = ecUpperCase
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 8
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1342,8 +1437,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtTelefone: TbsSkinEdit
-          Left = 157
-          Top = 194
+          Left = 117
+          Top = 214
           Width = 93
           Height = 18
           DefaultColor = clWindow
@@ -1356,6 +1451,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1364,7 +1460,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           MaxLength = 13
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 10
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1373,8 +1469,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtCelular: TbsSkinEdit
-          Left = 357
-          Top = 194
+          Left = 317
+          Top = 214
           Width = 137
           Height = 18
           DefaultColor = clWindow
@@ -1387,6 +1483,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1395,7 +1492,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           MaxLength = 13
           ParentFont = False
-          TabOrder = 9
+          TabOrder = 11
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1404,8 +1501,8 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
         object edtCnpjCpf: TbsSkinEdit
-          Left = 293
-          Top = 39
+          Left = 349
+          Top = 61
           Width = 105
           Height = 18
           DefaultColor = clWindow
@@ -1418,6 +1515,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1437,39 +1535,8 @@ object frmCadClientes: TfrmCadClientes
           OnExit = edtCnpjCpfExit
         end
         object edtPto_Referencia: TbsSkinEdit
-          Left = 155
-          Top = 218
-          Width = 339
-          Height = 18
-          DefaultColor = clWindow
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
-          DefaultWidth = 0
-          DefaultHeight = 0
-          ButtonMode = False
-          SkinDataName = 'edit'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
-          MaxLength = 50
-          ParentFont = False
-          TabOrder = 10
-          LeftImageIndex = -1
-          LeftImageHotIndex = -1
-          LeftImageDownIndex = -1
-          RightImageIndex = -1
-          RightImageHotIndex = -1
-          RightImageDownIndex = -1
-        end
-        object edtRazao_Social: TbsSkinEdit
-          Left = 157
-          Top = 86
+          Left = 117
+          Top = 238
           Width = 337
           Height = 18
           DefaultColor = clWindow
@@ -1482,12 +1549,14 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = 14
           Font.Name = 'Arial'
           Font.Style = []
+          MaxLength = 50
           ParentFont = False
           TabOrder = 12
           LeftImageIndex = -1
@@ -1497,9 +1566,40 @@ object frmCadClientes: TfrmCadClientes
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
+        object edtRazao_Social: TbsSkinEdit
+          Left = 117
+          Top = 106
+          Width = 337
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
         object edtResponsavel: TbsSkinEdit
-          Left = 357
-          Top = 165
+          Left = 317
+          Top = 185
           Width = 137
           Height = 18
           DefaultColor = clWindow
@@ -1512,6 +1612,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1519,7 +1620,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 13
+          TabOrder = 9
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1774,9 +1875,9 @@ object frmCadClientes: TfrmCadClientes
         object Label3: TLabel
           Left = 406
           Top = 4
-          Width = 46
+          Width = 59
           Height = 14
-          Caption = 'Desconto'
+          Caption = 'Desconto %'
         end
         object cmbNome_Produto: TbsSkinDBLookupComboBox
           Left = 76
@@ -2429,7 +2530,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 596
-        Top = -1
+        Top = -15
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -3697,32 +3798,32 @@ object frmCadClientes: TfrmCadClientes
   end
   object dspCadClientes: TDataSetProvider
     DataSet = qryCadClientes
-    Left = 568
-    Top = 303
+    Left = 832
+    Top = 447
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadClientes'
-    Left = 568
-    Top = 359
+    Left = 832
+    Top = 503
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 568
-    Top = 331
+    Left = 832
+    Top = 475
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryvariavel
-    Left = 541
-    Top = 303
+    Left = 805
+    Top = 447
   end
   object qryvariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 540
-    Top = 275
+    Left = 804
+    Top = 419
   end
   object qryCadClientes: TSQLQuery
     MaxBlobSize = -1
@@ -3730,25 +3831,25 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 567
-    Top = 275
+    Left = 831
+    Top = 419
   end
   object cdsCadAtividades: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 596
-    Top = 359
+    Left = 860
+    Top = 503
   end
   object srcCadAtividades: TDataSource
     DataSet = cdsCadAtividades
-    Left = 596
-    Top = 331
+    Left = 860
+    Top = 475
   end
   object srcPesquisa: TDataSource
     DataSet = cdspesquisa
-    Left = 623
-    Top = 331
+    Left = 887
+    Top = 475
   end
   object sdtsOcorrencias: TSimpleDataSet
     Aggregates = <>
@@ -3768,13 +3869,13 @@ object frmCadClientes: TfrmCadClientes
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 421
-    Top = 379
+    Left = 685
+    Top = 411
   end
   object srcCadRotas: TDataSource
     DataSet = cdsCadRotas
-    Left = 422
-    Top = 407
+    Left = 686
+    Top = 439
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
@@ -3783,30 +3884,30 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsVendasBeforeOpen
     AfterOpen = cdsVendasAfterOpen
     OnCalcFields = cdsVendasCalcFields
-    Left = 366
-    Top = 379
+    Left = 630
+    Top = 411
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 338
-    Top = 379
+    Left = 602
+    Top = 411
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
-    Left = 338
-    Top = 407
+    Left = 602
+    Top = 439
   end
   object srcVendas: TDataSource
     DataSet = cdsVendas
-    Left = 366
-    Top = 407
+    Left = 630
+    Top = 439
   end
   object srcCtasReceber: TDataSource
     DataSet = cdsCtasReceber
-    Left = 394
-    Top = 407
+    Left = 658
+    Top = 439
   end
   object cdsCtasReceber: TClientDataSet
     Aggregates = <>
@@ -3815,8 +3916,8 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsCtasReceberBeforeOpen
     AfterOpen = cdsCtasReceberAfterOpen
     OnCalcFields = cdsCtasReceberCalcFields
-    Left = 394
-    Top = 379
+    Left = 658
+    Top = 411
   end
   object qryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -3824,13 +3925,13 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 623
-    Top = 359
+    Left = 887
+    Top = 503
   end
   object dspPesquisa: TDataSetProvider
     DataSet = qryPesquisa
-    Left = 621
-    Top = 303
+    Left = 885
+    Top = 447
   end
   object cdspesquisa: TClientDataSet
     Aggregates = <>
@@ -3838,8 +3939,8 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspPesquisa'
     BeforeOpen = cdspesquisaBeforeOpen
     OnCalcFields = cdspesquisaCalcFields
-    Left = 621
-    Top = 275
+    Left = 885
+    Top = 419
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -3933,69 +4034,69 @@ object frmCadClientes: TfrmCadClientes
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 309
-    Top = 344
+    Left = 573
+    Top = 488
   end
   object qryRelatorio: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 310
-    Top = 323
+    Left = 574
+    Top = 467
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
-    Left = 310
-    Top = 351
+    Left = 574
+    Top = 495
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 310
-    Top = 379
+    Left = 574
+    Top = 411
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 310
-    Top = 407
+    Left = 574
+    Top = 439
   end
   object srcCalientesDescontos: TDataSource
     DataSet = cdsClientesDescontos
-    Left = 282
-    Top = 407
+    Left = 546
+    Top = 439
   end
   object cdsClientesDescontos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientesDescontos'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 282
-    Top = 379
+    Left = 546
+    Top = 411
   end
   object dspClientesDescontos: TDataSetProvider
     DataSet = qryClientesDescontos
-    Left = 282
-    Top = 351
+    Left = 546
+    Top = 495
   end
   object qryClientesDescontos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 282
-    Top = 323
+    Left = 546
+    Top = 467
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadProdutos'
-    Left = 254
-    Top = 379
+    Left = 518
+    Top = 411
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 254
-    Top = 407
+    Left = 518
+    Top = 439
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
@@ -4025,6 +4126,10 @@ object frmCadClientes: TfrmCadClientes
     object N3ExtratodeContaCorrente1: TMenuItem
       Caption = '3 - Extrato de Conta Corrente'
     end
+    object N4ClientescomDebitoemContaCorrente1: TMenuItem
+      Caption = '4 - Clientes com debito em Conta-Corrente'
+      OnClick = N4ClientescomDebitoemContaCorrente1Click
+    end
   end
   object cdsClientesDebitos: TClientDataSet
     Aggregates = <>
@@ -4040,15 +4145,15 @@ object frmCadClientes: TfrmCadClientes
   end
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
-    Left = 226
-    Top = 407
+    Left = 490
+    Top = 439
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 226
-    Top = 379
+    Left = 490
+    Top = 411
   end
   object qryValidaCPFCNPJ: TSQLQuery
     MaxBlobSize = -1
@@ -4056,26 +4161,26 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'select * from T_validaCNPJCPF')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 198
-    Top = 323
+    Left = 462
+    Top = 467
   end
   object dspValidaCPFCNPJ: TDataSetProvider
     DataSet = qryValidaCPFCNPJ
-    Left = 198
-    Top = 351
+    Left = 462
+    Top = 495
   end
   object cdsValidaCPFCNPJ: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspValidaCPFCNPJ'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 198
-    Top = 379
+    Left = 462
+    Top = 411
   end
   object srcValidaCPFCNPJ: TDataSource
     DataSet = cdsValidaCPFCNPJ
-    Left = 198
-    Top = 407
+    Left = 462
+    Top = 439
   end
   object cdsContaCorrente: TClientDataSet
     Aggregates = <>
@@ -4083,20 +4188,39 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     BeforeOpen = cdsContaCorrenteBeforeOpen
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 449
-    Top = 379
+    Left = 713
+    Top = 411
   end
   object srcContaCorrente: TDataSource
     DataSet = cdsContaCorrente
-    Left = 450
-    Top = 407
+    Left = 714
+    Top = 439
   end
   object cdsTemp: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 169
-    Top = 379
+    Left = 433
+    Top = 411
+  end
+  object qryRelcliente: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 240
+    Top = 160
+  end
+  object dspRelCliente: TDataSetProvider
+    DataSet = qryRelcliente
+    Left = 240
+    Top = 189
+  end
+  object cdsRelCliente: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspRelCliente'
+    Left = 240
+    Top = 216
   end
 end

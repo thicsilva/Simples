@@ -264,8 +264,8 @@ object frmCtasReceber: TfrmCtasReceber
         Align = alTop
         OnClick = PanelSelecaoClick
         object lblTurma: TbsSkinStdLabel
-          Left = 207
-          Top = 42
+          Left = 220
+          Top = 43
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -279,23 +279,6 @@ object frmCtasReceber: TfrmCtasReceber
           SkinData = frmPrincipal.SkinPrincipal
           SkinDataName = 'stdlabel'
           Caption = 'Ate.'
-        end
-        object srcRelatorio: TbsSkinStdLabel
-          Left = 16
-          Top = 42
-          Width = 87
-          Height = 13
-          EllipsType = bsetNone
-          UseSkinFont = True
-          UseSkinColor = True
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = -11
-          DefaultFont.Name = 'MS Sans Serif'
-          DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinPrincipal
-          SkinDataName = 'stdlabel'
-          Caption = 'Intervalo de Datas'
         end
         object cmbTipoPesquisa: TbsSkinComboBox
           Left = 17
@@ -422,8 +405,8 @@ object frmCtasReceber: TfrmCtasReceber
           Caption = 'Pesquisa em todo texo'
         end
         object dtpData_Ini: TbsSkinDateEdit
-          Left = 110
-          Top = 37
+          Left = 127
+          Top = 40
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -472,8 +455,8 @@ object frmCtasReceber: TfrmCtasReceber
           RightImageDownIndex = -1
         end
         object dtpData_Fim: TbsSkinDateEdit
-          Left = 235
-          Top = 37
+          Left = 242
+          Top = 40
           Width = 89
           Height = 18
           EditMask = '!99/99/0000;1; '
@@ -557,8 +540,8 @@ object frmCtasReceber: TfrmCtasReceber
           OnClick = btnSelecionarClick
         end
         object cmbTipoFiltro: TbsSkinComboBox
-          Left = 546
-          Top = 35
+          Left = 547
+          Top = 40
           Width = 107
           Height = 20
           HintImageIndex = 0
@@ -616,8 +599,8 @@ object frmCtasReceber: TfrmCtasReceber
           Style = bscbFixedStyle
         end
         object cmbPeriodo: TbsSkinComboBox
-          Left = 331
-          Top = 37
+          Left = 340
+          Top = 40
           Width = 174
           Height = 20
           HintImageIndex = 0
@@ -699,7 +682,7 @@ object frmCtasReceber: TfrmCtasReceber
             'Pr'#243'ximo Ano')
           CharCase = ecNormal
           DefaultColor = clWindow
-          Text = 'Nenhum'
+          Text = 'Hoje'
           Items.Strings = (
             'Nenhum'
             'Ontem'
@@ -741,7 +724,7 @@ object frmCtasReceber: TfrmCtasReceber
             'Ano Passado'
             'Neste Ano'
             'Pr'#243'ximo Ano')
-          ItemIndex = 0
+          ItemIndex = 2
           DropDownCount = 8
           HorizontalExtent = False
           Font.Charset = DEFAULT_CHARSET
@@ -752,6 +735,64 @@ object frmCtasReceber: TfrmCtasReceber
           Sorted = False
           Style = bscbFixedStyle
           OnChange = cmbPeriodoChange
+        end
+        object cmbTipoData: TbsSkinComboBox
+          Left = 16
+          Top = 40
+          Width = 105
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 8
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          UseSkinSize = True
+          ToolButtonStyle = False
+          AlphaBlend = False
+          AlphaBlendValue = 0
+          AlphaBlendAnimation = False
+          ListBoxCaptionMode = False
+          ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+          ListBoxDefaultFont.Color = clWindowText
+          ListBoxDefaultFont.Height = 14
+          ListBoxDefaultFont.Name = 'Arial'
+          ListBoxDefaultFont.Style = []
+          ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+          ListBoxDefaultCaptionFont.Color = clWindowText
+          ListBoxDefaultCaptionFont.Height = 14
+          ListBoxDefaultCaptionFont.Name = 'Arial'
+          ListBoxDefaultCaptionFont.Style = []
+          ListBoxDefaultItemHeight = 20
+          ListBoxCaptionAlignment = taLeftJustify
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          ListBoxWidth = 0
+          HideSelection = True
+          AutoComplete = True
+          ImageIndex = -1
+          CharCase = ecNormal
+          DefaultColor = clWindow
+          Text = 'Data de Emiss'#227'o'
+          Items.Strings = (
+            'Data do Vencimento'
+            'Data de Emiss'#227'o')
+          ItemIndex = 1
+          DropDownCount = 8
+          HorizontalExtent = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          Sorted = False
+          Style = bscbFixedStyle
         end
       end
       object pnlLoteRecebimento: TbsSkinExPanel
@@ -891,13 +932,14 @@ object frmCtasReceber: TfrmCtasReceber
           AutoSize = False
         end
       end
-      object bsSkinExPanel1: TbsSkinExPanel
+      object pnlRecebimentoPorLote: TbsSkinExPanel
         Left = 0
         Top = 0
         Width = 735
         Height = 55
         HintImageIndex = 0
         TabOrder = 3
+        Visible = False
         SkinDataName = 'expanel'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText

@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, bsSkinCtrls, bsdbctrls, Mask, bsSkinBoxCtrls;
 
 type
-  TForm1 = class(TForm)
+  TfrmLancaComanda = class(TForm)
     edtcod_Cliente: TbsSkinEdit;
     cmbNome_Cliente: TbsSkinDBLookupComboBox;
     bsSkinStdLabel1: TbsSkinStdLabel;
@@ -23,7 +23,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmLancaComanda: TfrmLancaComanda;
 
 implementation
 
