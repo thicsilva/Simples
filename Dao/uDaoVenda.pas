@@ -33,7 +33,7 @@ begin
     DaoFormaPagamento := TDaoFormaPagamento.Create(FConexao);
     DaoCliente        := TDaoCliente.Create(FConexao);
 
-    Venda := TVenda.Create;
+    Venda := TVenda.Create(FConexao);
     Venda.FormaPagamento := DaoFormaPagamento.Buscar(DadosVendas.fieldByname('Cod_FormaPagamento').AsInteger);
     Venda.Funcionario := DaoFuncionario.Buscar(DadosVendas.fieldByname('Cod_Funcionario').AsInteger);
     Venda.Cliente := DaoCliente.Buscar(DadosVendas.fieldByname('Cod_Cliente').AsInteger);

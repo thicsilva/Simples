@@ -3,8 +3,8 @@ unit uDaoFuncionario;
 
 interface
 
-uses DBClient,
-     uClassConexao,uClassFuncionario;
+uses DBClient,SysUtils,
+     uClassConexao,uClassFuncionario,Classes;
 
 type TDaoFuncionario = class
    private
@@ -21,8 +21,11 @@ implementation
 function TDaoFuncionario.Buscar(idFuncionario: Integer): TFuncionario;
 var Dados : TclientDataSet;
     Funcionario : TFuncionario;
+    parametros : TStringList;
 begin
-    Dados := FConexao.BuscarDadosSQL('Select * from T_Funcionarios',Nil);
+    parametros := TStringList.Create;
+    Parametros.Add(IntToStr(idFuncionario));
+    Dados := FConexao.BuscarDadosSQL('Select * from T_Funcionarios where Codigo=:parcodigo',Parametros);
     Funcionario := TFuncionario.Create;
     Funcionario.IdFuncionario := Dados.FieldByName('Codigo').AsInteger;
     Funcionario.Descricao     := Dados.FieldByName('Descricao').AsString;

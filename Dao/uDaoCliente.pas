@@ -28,9 +28,14 @@ begin
   Parametros.ADD(IntToStr(idCliente));
   Try
      Dados := FConexao.BuscarDadosSQL('Select * from T_clientes where Codigo=:parcodigo',Parametros);
-     Cliente.Id := Dados.FieldByName('Codigo').AsInteger;
-     Cliente.CPF := Dados.FieldByName('CNPJCPF').AsString;
-     Cliente.Descricao := Dados.FieldByName('Descricao').AsString;
+     Cliente.Id         := Dados.FieldByName('Codigo').AsInteger;
+     Cliente.CPF        := Dados.FieldByName('CNPJCPF').AsString;
+     Cliente.Descricao  := Dados.FieldByName('Descricao').AsString;
+     Cliente.Endereco.bairro := Dados.FieldByName('Bairro').AsString;
+     Cliente.Endereco.cidade := Dados.FieldByName('cidade').AsString;
+     Cliente.Endereco.uf      := Dados.FieldByName('UF').AsString;
+     Cliente.Endereco.logradouro := Dados.FieldByName('endereco').AsString;
+     Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
      Result := Cliente;
   Finally
     FreeandNil(Dados);
