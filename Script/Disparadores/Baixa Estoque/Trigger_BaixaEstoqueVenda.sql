@@ -1,4 +1,4 @@
-DROP TRIGGER BaixaEstoqueVeNda
+DROP TRIGGER BaixaEstoqueVenda
 GO
 
 CREATE TRIGGER BaixaEstoqueVenda
@@ -8,16 +8,19 @@ AS
 
 DECLARE @parCod_Produto VARCHAR(5)
 DECLARE @parQtde_venda Integer
+DECLARE @parSetorId integer
 
-DECLARE ItensVendas CURSOR FOR ( SELECT COD_PRODUTO, QTDE_VENDA FROM INSERTED )
+DECLARE ItensVendas CURSOR FOR ( SELECT SETORID, COD_PRODUTO, QTDE_VENDA FROM INSERTED )
 BEGIN
 
    OPEN ItensVendas
-   FETCH NEXT FROM ItensVendas INTO @parCod_Produto,@parQtde_Venda
+   FETCH NEXT FROM ItensVendas INTO @parSetorId, @parCod_Produto,@parQtde_Venda
    WHILE @@FETCH_STATUS = 0
    BEGIN
-      UPDATE T_Produtos set Saldo = Saldo-@parQtde_Venda where Codigo=@parCod_Produto
-      FETCH NEXT FROM ItensVendas INTO @parCod_Produto,@parQtde_Venda
+      IF (@parSetorId = 1)
+         UPDATE T_Produtos set Saldo = Saldo-@parQtde_Venda where Codigo=@parCod_Produto
+
+      FETCH NEXT FROM ItensVendas INTO @parSetorId, @parCod_Produto,@parQtde_Venda
    END 
    CLOSE ItensVendas
    DEALLOCATE ItensVendas
