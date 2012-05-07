@@ -11,7 +11,8 @@ uses
   StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
-  SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL ;
+  SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL, bsSkinGrids,
+  bsDBGrids ;
 
 type
   TfrmPrincipal = class(TForm)
@@ -218,6 +219,9 @@ type
     MenuManegerBar12: TdxBar;
     dxBarButton28: TdxBarButton;
     actAnaliseFinanceira: TAction;
+    PanelEventos: TbsSkinExPanel;
+    bsSkinDBGrid1: TbsSkinDBGrid;
+    srcEventoAnimal: TDataSource;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -279,6 +283,7 @@ type
     procedure DefinirVariaveisDeAmbiente;
     procedure ControleDeRepasse;
     procedure VerificarEstrutura;
+    procedure VerificarAgendaAnimal;
     { Private declarations }
   public
     { Public declarations }
@@ -324,7 +329,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
-  uRelAnaliseFinanceira;
+  uRelAnaliseFinanceira, uDaoEventoAnimal;
 
 {$R *.dfm}
 
@@ -433,6 +438,17 @@ begin
    ControleDeRepasse;
 
    VerificarEstrutura;
+
+   VerificarAgendaAnimal;
+
+end;
+procedure TfrmPrincipal.VerificarAgendaAnimal;
+var DaoEventoAnimal : TdaoEventoAnimal;
+begin
+  DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+  srcEventoAnimal.DataSet := DaoEventoAnimal.AgendaPendente;
+  FreeAndNil(DaoEventoAnimal);
+  PanelEventos.Visible := ( not srcEventoAnimal.DataSet.IsEmpty);
 end;
 
 procedure TfrmPrincipal.ConfiguraAmbiente;

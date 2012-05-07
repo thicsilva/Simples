@@ -1,6 +1,11 @@
 program Simples;
 
 uses
+  madExcept,
+  madLinkDisAsm,
+  madListHardware,
+  madListProcesses,
+  madListModules,
   Forms,
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uMensagens in 'uMensagens.pas' {FrmMensagens},
@@ -101,7 +106,13 @@ uses
   uClassCorrecao in 'Modelos\uClassCorrecao.pas',
   uDaoCorrecao in 'Dao\uDaoCorrecao.pas',
   uTransferenciaEntreSetores in 'uTransferenciaEntreSetores.pas' {frmTransferenciaDeSetores},
-  uDescontoVenda in 'uDescontoVenda.pas' {FrmDescontoVenda};
+  uDescontoVenda in 'uDescontoVenda.pas' {FrmDescontoVenda},
+  uConfigTabSheet in 'uConfigTabSheet.pas' {frmConfigTabSheet},
+  uDaoClienteAnimal in 'Dao\uDaoClienteAnimal.pas',
+  uCapturaImagem in '..\AutoEscola\uCapturaImagem.pas' {frmCapturaImagem},
+  uClassAnimal in 'Modelos\uClassAnimal.pas',
+  uClassEventoAnimal in 'Modelos\uClassEventoAnimal.pas',
+  uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas';
 
 {$R *.res}
 
@@ -110,7 +121,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TFrmDescontoVenda, FrmDescontoVenda);
   Frmlogin.ShowModal;
   Application.Run;
 end.

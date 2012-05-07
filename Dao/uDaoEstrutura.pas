@@ -30,6 +30,8 @@ type TDaoEstrutura = class
     procedure Adicionar_CodigoFornecedor_na_Tabela_Produtos;
     procedure Adicionar_Defult_SotorId;
     procedure Adicionar_SetorId_na_Tabela_ItensDevolucao;
+    procedure CriarTabela_Animal;
+    procedure CrateTabela_AventoAnimais;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -189,11 +191,49 @@ begin
 end;
 
 
+procedure TDaoEstrutura.CrateTabela_AventoAnimais;
+begin
+   if not ExisteTabela( 'EventosAnimais', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'create Table EventosAnimais (EventoId int primary key identity (1,1),'+
+                              'AnimalId int, '+
+                              'Evento Varchar(100), '+
+                              'Data_Cadastro DateTime, '+
+                              'Data_Agendada DateTime, '+
+                              'Data_Realizada DateTime, '+
+                              'Operador varchar(50) ) ';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 constructor TDaoEstrutura.Create(Conexao: TConexao);
 begin
    FConexao    := Conexao;
    FQryAjustes := TSqlQuery.Create(Nil);
    FQryAjustes.SQLConnection := Fconexao.Conection;
+end;
+
+procedure TDaoEstrutura.CriarTabela_Animal;
+begin
+   if not ExisteTabela( 'ClienteAnimais', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Create Table ClienteAnimais '+
+                              ' ( Animalid int primary key identity(1,1), '+
+                              '   NomeAnimal varchar(50), '+
+                              '   Especie varchar(50), '+
+                              '   Raca varchar(50), '+
+                              '   Cor Varchar(50), '+
+                              '   Data_Nascimento DateTime,' +
+                              '   Data_Aquisicao DateTime,' +
+                              '   CaminhoImagem Varchar(100), '+
+                              '   Operador Varchar(50), '+
+                              '   Data_Cadastro DateTime, '+
+                              '   ClienteId int, '+
+                              '   Data_Atualizacao Datetime )';
+      FQryAjustes.ExecSQL;
+   end;
 end;
 
 procedure TDaoEstrutura.CriarTabela_Caixas;
@@ -202,7 +242,7 @@ begin
    begin
       FQryAjustes.Close;
       FQryAjustes.SQL.Text := 'CREATE TABLE Caixas([Codigo] [INT] , '+
-	                            '                    [Descricao] [varchar](50), '+
+	                           '                    [Descricao] [varchar](50), '+
                               '                    [Data_Cad] [datetime] NULL,'+
                               '                    [Data_Atu] [datetime] NULL,'+
     	                        '                    [Cod_Emp] [char](3), '+
@@ -320,9 +360,11 @@ begin
   Adicionar_MetroLinear_na_Tabela_Produtos;
   Adicionar_CodigoFornecedor_na_Tabela_Produtos;
   CriarTabela_Correcoes;
-  //icionar_Defult_SotorId;
   Adicionar_SetorId_na_Tabela_ItensDevolucao;
+  CriarTabela_Animal;
+  CrateTabela_AventoAnimais;
 end;
+
 
 Function TDaoEstrutura.ExisteCampo( prsNomeTabela, prsNomeCampo: string; prSQLConnection: TSQLConnection ): Boolean;
 var lsdtsTemp: TSimpleDataSet;

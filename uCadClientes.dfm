@@ -4,7 +4,7 @@ object frmCadClientes: TfrmCadClientes
   BorderIcons = []
   Caption = 'Cadastro e manute'#231#227'o de Clientes'
   ClientHeight = 511
-  ClientWidth = 837
+  ClientWidth = 845
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,10 +18,10 @@ object frmCadClientes: TfrmCadClientes
   TextHeight = 13
   object pagCadastro: TbsSkinPageControl
     Left = 0
-    Top = 53
-    Width = 837
-    Height = 458
-    ActivePage = bsSkinTabSheet2
+    Top = 76
+    Width = 845
+    Height = 435
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -50,14 +50,12 @@ object frmCadClientes: TfrmCadClientes
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = 264
-    ExplicitTop = 77
-    object bsSkinTabSheet1: TbsSkinTabSheet
+    object Tab_Consulta: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 835
+        Width = 843
         Height = 33
         HintImageIndex = 0
         TabOrder = 0
@@ -89,6 +87,7 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
+        PopupMenu = PopupMenu1
         object cmbtipoconsulta: TbsSkinComboBox
           Left = 8
           Top = 8
@@ -248,8 +247,8 @@ object frmCadClientes: TfrmCadClientes
       object cxGrid1: TcxGrid
         Left = 0
         Top = 33
-        Width = 835
-        Height = 401
+        Width = 843
+        Height = 378
         Align = alClient
         TabOrder = 1
         object GridClintes: TcxGridDBTableView
@@ -369,12 +368,12 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
-    object bsSkinTabSheet2: TbsSkinTabSheet
+    object Tab_Cadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 0
-        Top = 296
-        Width = 835
+        Top = 273
+        Width = 843
         Height = 138
         HintImageIndex = 0
         TabOrder = 0
@@ -1630,13 +1629,13 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
-    object bsSkinTabSheet3: TbsSkinTabSheet
+    object Tab_Ocorrencias: TbsSkinTabSheet
       Caption = 'Ocorr'#234'ncias'
       object cxGrid2: TcxGrid
         Left = 0
         Top = 64
-        Width = 835
-        Height = 370
+        Width = 843
+        Height = 347
         Align = alClient
         TabOrder = 0
         object GridOcorrencias: TcxGridDBTableView
@@ -1675,7 +1674,7 @@ object frmCadClientes: TfrmCadClientes
       object bsSkinGroupBox2: TbsSkinGroupBox
         Left = 0
         Top = 0
-        Width = 835
+        Width = 843
         Height = 64
         HintImageIndex = 0
         TabOrder = 1
@@ -1822,12 +1821,12 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
-    object bsSkinTabSheet4: TbsSkinTabSheet
+    object Tab_ProdutosDescontos: TbsSkinTabSheet
       Caption = 'Produtos Descontos'
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
-        Top = 23
-        Width = 835
+        Top = 0
+        Width = 843
         Height = 44
         HintImageIndex = 0
         TabOrder = 0
@@ -2072,69 +2071,13 @@ object frmCadClientes: TfrmCadClientes
           RightImageDownIndex = -1
         end
       end
-      object pnlClientesDescontos: TbsSkinPaintPanel
-        Left = 0
-        Top = 0
-        Width = 835
-        Height = 23
-        HintImageIndex = 0
-        TabOrder = 1
-        SkinDataName = 'panel'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clNavy
-        DefaultFont.Height = -16
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = [fsBold]
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = False
-        RibbonStyle = False
-        ImagePosition = bsipDefault
-        TransparentMode = False
-        CaptionImageIndex = -1
-        RealHeight = -1
-        AutoEnabledControls = True
-        CheckedMode = False
-        Checked = False
-        DefaultAlignment = taCenter
-        DefaultCaptionHeight = 22
-        BorderStyle = bvFrame
-        CaptionMode = True
-        RollUpMode = False
-        RollUpState = False
-        NumGlyphs = 1
-        Spacing = 2
-        Align = alTop
-        object lblNomeCliente: TbsSkinStdLabel
-          Left = 7
-          Top = 2
-          Width = 29
-          Height = 19
-          EllipsType = bsetNone
-          UseSkinFont = False
-          UseSkinColor = False
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clNavy
-          DefaultFont.Height = -16
-          DefaultFont.Name = 'MS Sans Serif'
-          DefaultFont.Style = [fsBold]
-          SkinDataName = 'stdlabel'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clNavy
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Caption = 'Ate.'
-          ParentFont = False
-        end
-      end
       object cxGrid5: TcxGrid
         Left = 0
-        Top = 67
-        Width = 835
+        Top = 44
+        Width = 843
         Height = 367
         Align = alClient
-        TabOrder = 2
+        TabOrder = 1
         object GridProdutosDescontos: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcCalientesDescontos
@@ -2178,13 +2121,13 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
-    object bsSkinTabSheet5: TbsSkinTabSheet
+    object Tab_VendasEServicos: TbsSkinTabSheet
       Caption = 'Vendas e Servi'#231'os'
       object cxGrid3: TcxGrid
         Left = 0
         Top = 0
-        Width = 835
-        Height = 434
+        Width = 843
+        Height = 411
         Align = alClient
         TabOrder = 0
         object GrdVendas: TcxGridDBTableView
@@ -2347,16 +2290,16 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
-    object bsSkinTabSheet6: TbsSkinTabSheet
+    object tab_Historico: TbsSkinTabSheet
       Caption = 'Recebido e a receber'
       DesignSize = (
-        835
-        434)
+        843
+        411)
       object cxGrid4: TcxGrid
         Left = 0
         Top = 0
-        Width = 835
-        Height = 434
+        Width = 843
+        Height = 411
         Align = alClient
         TabOrder = 0
         object GridCtasReceber: TcxGridDBTableView
@@ -2529,8 +2472,8 @@ object frmCadClientes: TfrmCadClientes
         end
       end
       object pnlBloqueado: TPanel
-        Left = 596
-        Top = -15
+        Left = 591
+        Top = -3
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -2554,7 +2497,7 @@ object frmCadClientes: TfrmCadClientes
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 835
+        Width = 843
         Height = 33
         HintImageIndex = 0
         TabOrder = 0
@@ -2776,8 +2719,8 @@ object frmCadClientes: TfrmCadClientes
       object cxGrid6: TcxGrid
         Left = 0
         Top = 33
-        Width = 835
-        Height = 401
+        Width = 843
+        Height = 378
         Align = alClient
         TabOrder = 1
         object GridValidaCNPJCPF: TcxGridDBTableView
@@ -2845,7 +2788,7 @@ object frmCadClientes: TfrmCadClientes
       object PanelConsulta: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 835
+        Width = 843
         Height = 41
         HintImageIndex = 0
         TabOrder = 0
@@ -3232,8 +3175,8 @@ object frmCadClientes: TfrmCadClientes
       object GridMovCaixa: TcxGrid
         Left = 0
         Top = 41
-        Width = 835
-        Height = 358
+        Width = 843
+        Height = 335
         Align = alClient
         TabOrder = 1
         object GrdDespesas: TcxGridDBTableView
@@ -3304,8 +3247,8 @@ object frmCadClientes: TfrmCadClientes
       end
       object bsSkinPanel4: TbsSkinPanel
         Left = 0
-        Top = 399
-        Width = 835
+        Top = 376
+        Width = 843
         Height = 35
         HintImageIndex = 0
         TabOrder = 2
@@ -3417,11 +3360,973 @@ object frmCadClientes: TfrmCadClientes
         end
       end
     end
+    object bsSkinTabSheet1: TbsSkinTabSheet
+      Caption = 'Animais de Estima'#231#227'o'
+      object bsSkinPanel5: TbsSkinPanel
+        Left = 0
+        Top = 0
+        Width = 843
+        Height = 105
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'panel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taLeftJustify
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = False
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = 'bsSkinPanel2'
+        Align = alTop
+        object Label4: TLabel
+          Left = 163
+          Top = 21
+          Width = 76
+          Height = 14
+          Caption = 'Nome do Animal'
+        end
+        object Label7: TLabel
+          Left = 203
+          Top = 47
+          Width = 38
+          Height = 14
+          Caption = 'Esp'#233'cie'
+        end
+        object Label8: TLabel
+          Left = 216
+          Top = 69
+          Width = 25
+          Height = 14
+          Caption = 'Ra'#231'a'
+        end
+        object Label9: TLabel
+          Left = 513
+          Top = 21
+          Width = 17
+          Height = 14
+          Caption = 'Cor'
+        end
+        object Label10: TLabel
+          Left = 462
+          Top = 47
+          Width = 68
+          Height = 14
+          Caption = 'Data de Nasc.'
+        end
+        object Label11: TLabel
+          Left = 443
+          Top = 67
+          Width = 87
+          Height = 14
+          Caption = 'Data de Aquisi'#231#227'o'
+        end
+        object edtNomeAnimal: TbsSkinEdit
+          Left = 247
+          Top = 17
+          Width = 187
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_ProdutoExit
+        end
+        object bsSkinButton1: TbsSkinButton
+          Left = 697
+          Top = 58
+          Width = 110
+          Height = 25
+          HintImageIndex = 0
+          TabOrder = 7
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 9
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '    &Remover'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = btnRemoverDescontoClick
+        end
+        object btnAdicionarAnimal: TbsSkinButton
+          Left = 697
+          Top = 17
+          Width = 110
+          Height = 25
+          HintImageIndex = 0
+          TabOrder = 6
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 10
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '    &Adicionar'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = btnAdicionarAnimalClick
+        end
+        object edtEspecie: TbsSkinEdit
+          Left = 247
+          Top = 41
+          Width = 187
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_ProdutoExit
+        end
+        object edtRaca: TbsSkinEdit
+          Left = 247
+          Top = 65
+          Width = 187
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_ProdutoExit
+        end
+        object edtCor: TbsSkinEdit
+          Left = 535
+          Top = 17
+          Width = 128
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtDataNascimento: TbsSkinDateEdit
+          Left = 535
+          Top = 40
+          Width = 128
+          Height = 18
+          EditMask = '!99/99/0000;1; '
+          Text = '  /  /    '
+          AlphaBlend = False
+          AlphaBlendAnimation = False
+          AlphaBlendValue = 0
+          UseSkinFont = True
+          TodayDefault = False
+          CalendarWidth = 200
+          CalendarHeight = 150
+          CalendarFont.Charset = DEFAULT_CHARSET
+          CalendarFont.Color = clWindowText
+          CalendarFont.Height = 14
+          CalendarFont.Name = 'Arial'
+          CalendarFont.Style = []
+          CalendarBoldDays = False
+          CalendarUseSkinFont = True
+          CalendarSkinDataName = 'panel'
+          FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = True
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'buttonedit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 10
+          ParentFont = False
+          TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtDataAquisicao: TbsSkinDateEdit
+          Left = 535
+          Top = 64
+          Width = 128
+          Height = 18
+          EditMask = '!99/99/0000;1; '
+          Text = '  /  /    '
+          AlphaBlend = False
+          AlphaBlendAnimation = False
+          AlphaBlendValue = 0
+          UseSkinFont = True
+          TodayDefault = False
+          CalendarWidth = 200
+          CalendarHeight = 150
+          CalendarFont.Charset = DEFAULT_CHARSET
+          CalendarFont.Color = clWindowText
+          CalendarFont.Height = 14
+          CalendarFont.Name = 'Arial'
+          CalendarFont.Style = []
+          CalendarBoldDays = False
+          CalendarUseSkinFont = True
+          CalendarSkinDataName = 'panel'
+          FirstDayOfWeek = Sun
+          WeekNumbers = False
+          ShowToday = False
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = True
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'buttonedit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 10
+          ParentFont = False
+          TabOrder = 5
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object bsSkinExPanel2: TbsSkinExPanel
+          Left = 1
+          Top = 1
+          Width = 147
+          Height = 103
+          HintImageIndex = 0
+          TabOrder = 8
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'expanel'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          CaptionImageIndex = -1
+          NumGlyphs = 1
+          Spacing = 2
+          RealWidth = 0
+          RealHeight = 0
+          ShowRollButton = False
+          ShowCloseButton = False
+          DefaultCaptionHeight = 21
+          RollState = False
+          RollKind = rkRollVertical
+          Moveable = False
+          Sizeable = False
+          Align = alLeft
+          Caption = '        Foto do Animal'
+          object imgAnimal: TImage
+            Left = 1
+            Top = 21
+            Width = 145
+            Height = 81
+            Align = alClient
+            Stretch = True
+            OnDblClick = imgAnimalDblClick
+            ExplicitLeft = -1
+            ExplicitTop = 3
+            ExplicitWidth = 111
+            ExplicitHeight = 78
+          end
+        end
+      end
+      object bsSkinPageControl1: TbsSkinPageControl
+        Left = 0
+        Top = 105
+        Width = 843
+        Height = 306
+        ActivePage = bsSkinTabSheet2
+        Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnText
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        MouseWheelSupport = False
+        TabExtededDraw = False
+        TabsOffset = 0
+        TabSpacing = 1
+        TextInHorizontal = False
+        TabsInCenter = False
+        FreeOnClose = False
+        ShowCloseButtons = False
+        TabsBGTransparent = False
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBtnText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        UseSkinFont = True
+        DefaultItemHeight = 20
+        SkinDataName = 'tab'
+        ExplicitLeft = -1
+        ExplicitTop = 109
+        object bsSkinTabSheet2: TbsSkinTabSheet
+          Caption = 'Consulta '
+          object cxGrid7: TcxGrid
+            Left = 0
+            Top = 0
+            Width = 374
+            Height = 285
+            Align = alClient
+            TabOrder = 0
+            object cxGridDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = srcClienteAnimais
+              DataController.Summary.DefaultGroupSummaryItems = <
+                item
+                  Format = '0'
+                  Kind = skCount
+                end>
+              DataController.Summary.FooterSummaryItems = <
+                item
+                  Format = '0'
+                  Kind = skCount
+                end>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Deleting = False
+              OptionsData.Editing = False
+              OptionsData.Inserting = False
+              OptionsView.GroupByBox = False
+              OptionsView.GroupSummaryLayout = gslAlignWithColumns
+              Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetWindowsClassic
+              object Column_Nome: TcxGridDBColumn
+                Caption = 'Nome do Animal'
+                DataBinding.FieldName = 'NomeAnimal'
+                Width = 233
+              end
+              object Column_Especie: TcxGridDBColumn
+                Caption = 'Esp'#233'cie'
+                DataBinding.FieldName = 'Especie'
+                Width = 85
+              end
+              object Column_Raca: TcxGridDBColumn
+                Caption = 'Ra'#231'a'
+                DataBinding.FieldName = 'Raca'
+                Width = 97
+              end
+              object Column_Cor: TcxGridDBColumn
+                DataBinding.FieldName = 'Cor'
+                Width = 132
+              end
+              object Column_Data_Nascimento: TcxGridDBColumn
+                Caption = 'Data Nascimento'
+                DataBinding.FieldName = 'Data_Nascimento'
+                Width = 141
+              end
+              object Column_Data_Aquisicao: TcxGridDBColumn
+                Caption = 'Data Aquisicao'
+                DataBinding.FieldName = 'Data_Aquisicao'
+                Width = 115
+              end
+            end
+            object cxGridLevel6: TcxGridLevel
+              GridView = cxGridDBTableView1
+            end
+          end
+          object bsSkinPanel6: TbsSkinPanel
+            Left = 374
+            Top = 0
+            Width = 467
+            Height = 285
+            HintImageIndex = 0
+            TabOrder = 1
+            SkinDataName = 'panel'
+            DefaultFont.Charset = DEFAULT_CHARSET
+            DefaultFont.Color = clWindowText
+            DefaultFont.Height = 14
+            DefaultFont.Name = 'Arial'
+            DefaultFont.Style = []
+            DefaultWidth = 0
+            DefaultHeight = 0
+            UseSkinFont = True
+            RibbonStyle = False
+            ImagePosition = bsipDefault
+            TransparentMode = False
+            CaptionImageIndex = -1
+            RealHeight = -1
+            AutoEnabledControls = True
+            CheckedMode = False
+            Checked = False
+            DefaultAlignment = taLeftJustify
+            DefaultCaptionHeight = 22
+            BorderStyle = bvFrame
+            CaptionMode = False
+            RollUpMode = False
+            RollUpState = False
+            NumGlyphs = 1
+            Spacing = 2
+            Caption = 'bsSkinPanel6'
+            Align = alRight
+            object bsSkinExPanel3: TbsSkinExPanel
+              Left = 1
+              Top = 1
+              Width = 465
+              Height = 64
+              HintImageIndex = 0
+              TabOrder = 0
+              SkinData = frmPrincipal.SkinPrincipal
+              SkinDataName = 'expanel'
+              DefaultFont.Charset = DEFAULT_CHARSET
+              DefaultFont.Color = clWindowText
+              DefaultFont.Height = 14
+              DefaultFont.Name = 'Arial'
+              DefaultFont.Style = []
+              DefaultWidth = 0
+              DefaultHeight = 0
+              UseSkinFont = True
+              CaptionImageIndex = -1
+              NumGlyphs = 1
+              Spacing = 2
+              RealWidth = 0
+              RealHeight = 0
+              ShowRollButton = True
+              ShowCloseButton = True
+              DefaultCaptionHeight = 21
+              RollState = False
+              RollKind = rkRollVertical
+              Moveable = False
+              Sizeable = False
+              Align = alTop
+              Caption = 'Dados para agendamento de Evento'
+              object Label5: TLabel
+                Left = 5
+                Top = 24
+                Width = 33
+                Height = 14
+                Caption = 'Evento'
+              end
+              object Label6: TLabel
+                Left = 275
+                Top = 24
+                Width = 73
+                Height = 14
+                Caption = 'Data do Evento'
+              end
+              object btnCadAlunos: TbsSkinSpeedButton
+                Left = 391
+                Top = 35
+                Width = 26
+                Height = 23
+                HintImageIndex = 0
+                SkinData = frmPrincipal.SkinPrincipal
+                SkinDataName = 'toolbutton'
+                DefaultFont.Charset = DEFAULT_CHARSET
+                DefaultFont.Color = clWindowText
+                DefaultFont.Height = 14
+                DefaultFont.Name = 'Arial'
+                DefaultFont.Style = []
+                DefaultWidth = 0
+                DefaultHeight = 0
+                UseSkinFont = True
+                CheckedMode = False
+                ImageList = frmPrincipal.cxSmallImages
+                UseSkinSize = True
+                UseSkinFontColor = True
+                WidthWithCaption = 0
+                WidthWithoutCaption = 0
+                ImageIndex = 8
+                RepeatMode = False
+                RepeatInterval = 100
+                Transparent = False
+                Flat = False
+                AllowAllUp = False
+                ShowHint = True
+                ParentShowHint = False
+                Down = False
+                GroupIndex = 0
+                Caption = 'Atividades'
+                ShowCaption = False
+                Glyph.Data = {
+                  36090000424D3609000000000000360000002800000018000000180000000100
+                  2000000000000009000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000000000000000000000000000404040D0C0C
+                  0C251313133A15151544151515451313133C0E0E0E2A07070714010101020000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000010909091A1C1C1C593131319E4343
+                  43CC525252E25A5A5AEB5C5C5CEB595959E54A4A4AD3373737B0242424751010
+                  1030030303080000000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000A0A0A1F2D2D2D9A5C5C5CF47F7F7FFF9898
+                  98FFACACACFFBCBCBCFFC2C2C2FFC2C2C2FFB1B1B1FF737373FF696969FF4A4A
+                  4AD01A1A1A5B0101010300000000000000000000000000000000000000000000
+                  00000000000000000000020202112C2C2CA9676767FF979797FFC1C1C1FFDDDC
+                  DCFFE9E6E8FFECE7EBFFE7E1E5FFDDD9DCFFD0CFD0FFB3B3B3FF9D9D9DFFA0A0
+                  A0FF858585E71414144C00000000000000000000000000000000000000000000
+                  00000000000001010121434343D0777777FFC1C1C1FFFAF9FAFFFFFFFFFFECEA
+                  EBFFC5D3C8FFA4C0ABFF9BB9A3FFA5B9AAFFBABEBAFFCDC7CAFFCDC7CCFFB9B8
+                  B8FFC0C0C0FFBABABAFB19191969000000000000000000000000000000000000
+                  000000000011484848CDA8A8A8FFEDEDEDFFFFFFFFFFCCDBCFFF6EB480FF2BA5
+                  4EFF17A944FF13AA44FF14A946FF1AA94BFF26A451FF459F62FF7A9E84FFAFAB
+                  ACFFC6C1C5FFCDCECDFFCBCBCBFF1313135B0000000000000000000000000000
+                  00002323239CAAAAAAFFFEFDFEFFF6F5F5FF79B889FF0EA43AFF04B43EFF1AA1
+                  49FF23A253FF1ABA5CFF22C869FF23C669FF22C669FF1CC363FF15B456FF369D
+                  5CFFA3B2A6FFDED8DCFFDADADAFFA9A9A9EF0202022400000000000000000202
+                  022F868686FBFCFBFCFFF5F4F4FF47AB64FF00B63AFF07C54EFF39915CFFACA7
+                  AAFFBEB9BCFF73A48BFF16BD6EFF1ED27EFF1FCE7DFF1FCE7CFF1FCF7BFF15CC
+                  6FFF17AC59FFA5BFAEFFF6EFF3FFE4E4E4FF3B3B3B9800000000000000001E1E
+                  1E8EE2E2E2FFFFFEFFFF56B070FF00BB3CFF03C850FF3A9761FFC2B9BFFFE2E0
+                  E1FFDFDDDEFFE1D7DCFF6CA68FFF0EC47DFF18D68CFF19D38AFF18D288FF18D2
+                  83FF0FD178FF15AD5CFFCBD9CFFFFFFFFFFFA2A2A2EC010101160000001D6D6D
+                  6DD7FFFFFFFFA3CBADFF00AF33FF00C749FF2E9759FFCAC1C7FFF3F2F2FFEBE9
+                  EAFFE6E2E3FFDDDDDDFFDBD0D4FF5FA28AFF07C781FF12D68EFF13D28BFF12D1
+                  86FF11D07FFF02CA6AFF43B274FFFFFBFEFFE8E8E8FF0D0D0D4D06060640BDBD
+                  BDF5FFFBFFFF32A752FF00C13AFF23974DFFBFB8BCFFEDEBEDFFEAE7E8FFE2E6
+                  E5FFD7E5E0FFF2ECEFFFE9E9E9FFDFD5D9FF52A084FF04C47DFF10D088FF0FCD
+                  82FF0ECB7AFF0CCB71FF00B051FFB9D5C2FFFFFFFFFF242424701010104FEBE8
+                  EAFCCDDDD0FF00A42FFF16A244FFB5B6B5FFF3EFF2FFE9E7E8FFEAE5E7FF47C5
+                  8BFF16C178FFBCD8CDFFF5ECF0FFEFEEEEFFE7DDE1FF4FA382FF00BE74FF0DC7
+                  7BFF0CC372FF0AC268FF00B751FF64B381FFFFFFFFFF3A3A3A8219191959FAF5
+                  F9FFB1D0B8FF0FAD3EFF45AA64FFFFF8FFFFFEFBFDFFFFF5FCFF6DC697FF00B4
+                  57FF01BB66FF18B872FFC4D8D0FFF1EAEDFFEDEDEDFFE1D9DCFF449C77FF00B5
+                  62FF09BB65FF08B75CFF00B44CFF3AA660FFFFFFFFFF5050508F1B1B1B5BFAF5
+                  F8FFAACDB3FF47B967FF20B04BFF70C78BFFECF7EFFF8BD0A5FF00A642FF05AD
+                  51FF08AE59FF00AF5AFF20AF6BFFCBD8D2FFEEE8EBFFECEAEBFFDBD4D7FF3795
+                  66FF00A84CFF06AD4EFF00A941FF299A4EFFFFFEFFFF5757579410101046E6E3
+                  E6F8B8D2BEFF5CB975FF60C07BFF24A94CFF079C36FF019930FF039E3CFF04A0
+                  43FF05A148FF05A34DFF00A149FF28A662FFD9DEDCFFEDE9EBFFECEAEBFFD0CD
+                  CFFF2D8A53FF009B37FF009D33FF359751FFFFFEFFFF403F408204040424B4B2
+                  B3E0D5E0D7FF71B982FF71C185FF70C085FF4EB26AFF13993BFF008F2AFF0092
+                  31FF039438FF04953CFF04963FFF009337FF37A161FFE9E9E9FFEFECEEFFEFEC
+                  EEFFCBC9CAFF218040FF00891FFF579B66FFFFF8FDFF17171752000000005555
+                  55A0F4F4F4FF92C19CFF80C390FF7EC18EFF7DC18DFF73BC86FF49AA64FF1893
+                  3CFF018728FF008627FF00882CFF018A30FF008525FF4BA367FFF8F5F8FFF5F3
+                  F4FFF8F3F7FFB7C4BBFF006F12FF9EBBA3FFCBC7CBEE02020216000000000B0B
+                  0B3FEAE7E9FFC6D7CAFF8FC49AFF8FC79BFF8BC498FF87C295FF87C295FF7EBD
+                  8DFF5EAE73FF379B52FF1A8D3AFF058228FF007E21FF007512FF53A066FFFBFB
+                  FBFFFFFFFFFF6DAE7BFF20762FFFE7E5E7FF5151519C00000000000000000000
+                  0000626262B3F3F2F2FFB1CDB6FF9DCBA6FF9CCAA5FF98C8A1FF93C59EFF8FC3
+                  9AFF8EC299FF8BC198FF82BC8FFF6FB27EFF5CA86EFF4CA05FFF2F9146FF8ABE
+                  96FF9DCAA7FF318843FFB7C9BAFFD3D0D3F40505052800000000000000000000
+                  00000202021FA1A0A1E6EBECEBFFB6D1BBFFA8CFAFFFA8CFAFFFA4CDACFF9FCA
+                  A8FF9BC8A4FF96C6A0FF92C49CFF8FC299FF8CC097FF89BE94FF85BC90FF71B2
+                  7EFF68A774FFBFD0C3FFEFEBEFFF242424690000000000000000000000000000
+                  0000000000000D0D0D36B9B8B9EEF1F2F1FFC9DCCDFFB2D2B8FFAFD3B6FFAED3
+                  B5FFAAD1B2FFA6CEAEFFA2CCAAFF9ECAA7FF9AC8A3FF93C49DFF8BBE95FF93BD
+                  9BFFD1DDD4FFEAE8EAFF5A5A5A82000000000000000000000000000000000000
+                  0000000000000000000011111127949494CDF6F5F6FFEAF1EBFFCDE0D0FFBCD7
+                  C1FFB5D4BAFFB1D3B7FFADD1B4FFA9CEB0FFA7CCAEFFB0CFB6FFCEDFD1FFEFF0
+                  EFFFD8D6D8F54040406300000000000000000000000000000000000000000000
+                  0000000000000000000000000000040404094A4A4A70C7C6C7E1FBF9FBFFF7FA
+                  F8FFECF2EDFFE5EEE6FFE2ECE4FFE5EEE7FFEFF3EFFFF7F6F7FFDBD9DBF67776
+                  779F1B1B1B260000000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000000000000000000060606093838384B7979
+                  7991A8A7A8BCC9C7C9D9CCCCCCDBB7B7B7C78A898AA1464647671010101A0000
+                  0000000000000000000000000000000000000000000000000000}
+                NumGlyphs = 1
+                Spacing = 1
+                OnClick = btnCadAlunosClick
+              end
+              object bsSkinSpeedButton1: TbsSkinSpeedButton
+                Left = 423
+                Top = 35
+                Width = 26
+                Height = 23
+                HintImageIndex = 0
+                SkinData = frmPrincipal.SkinPrincipal
+                SkinDataName = 'toolbutton'
+                DefaultFont.Charset = DEFAULT_CHARSET
+                DefaultFont.Color = clWindowText
+                DefaultFont.Height = 14
+                DefaultFont.Name = 'Arial'
+                DefaultFont.Style = []
+                DefaultWidth = 0
+                DefaultHeight = 0
+                UseSkinFont = True
+                CheckedMode = False
+                ImageList = frmPrincipal.cxSmallImages
+                UseSkinSize = True
+                UseSkinFontColor = True
+                WidthWithCaption = 0
+                WidthWithoutCaption = 0
+                ImageIndex = 8
+                RepeatMode = False
+                RepeatInterval = 100
+                Transparent = False
+                Flat = False
+                AllowAllUp = False
+                ShowHint = True
+                ParentShowHint = False
+                Down = False
+                GroupIndex = 0
+                Caption = 'Atividades'
+                ShowCaption = False
+                Glyph.Data = {
+                  36090000424D3609000000000000360000002800000018000000180000000100
+                  2000000000000009000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000000000000000000000000000404040D0C0C
+                  0C251313133A15151544151515451313133C0E0E0E2A07070714010101020000
+                  0000000000000000000000000000000000000000000000000000000000000000
+                  0000000000000000000000000000000000010909091A1C1C1C593131319E4343
+                  43CC525252E25A5A5AEB5C5C5CEB595959E54A4A4AD3373737B0242424751010
+                  1030030303080000000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000A0A0A1F2D2D2D9A5C5C5CF47F7F7FFF9898
+                  98FFACACACFFBCBCBCFFC2C2C2FFC2C2C2FFB1B1B1FF737373FF696969FF4A4A
+                  4AD01A1A1A5B0101010300000000000000000000000000000000000000000000
+                  00000000000000000000020202112C2C2CA9676767FF979797FFC1C1C1FFDDDD
+                  DBFFE9E8E5FFECEBE6FFE7E6E1FFDDDCD8FFD1D0CEFFB3B3B3FF9D9D9DFFA0A0
+                  A0FF858585E71414144C00000000000000000000000000000000000000000000
+                  00000000000001010121434343D0777777FFC1C1C1FFFAFAF9FFFFFFFFFFECEC
+                  ECFFC4C7D6FFA2A8C4FF9AA0BEFFA4A8BCFFBABBBFFFCDCCC5FFCECCC6FFB9B9
+                  B8FFBFC0C0FFBABABAFB19191969000000000000000000000000000000000000
+                  000000000011484848CDA8A8A8FFEDEDEDFFFFFFFFFFCBCDDFFF6A76BAFF253B
+                  ABFF0E2AB1FF0626B7FF0628BAFF0C2DBBFF1937B4FF3D53ABFF7780A3FFAFAE
+                  AAFFC6C5C1FFCDCDCEFFCBCBCBFF1313135B0000000000000000000000000000
+                  00002323239CAAAAAAFFFEFEFDFFF6F6F7FF7780BDFF081FA5FF001FB8FF0B2F
+                  CAFF1138D4FF143CDAFF143EDDFF143FDFFF123DE0FF0D38DCFF0730CBFF2F49
+                  ABFFA2A5B3FFDEDDD7FFDADADAFFA9A9A9EF0202022400000000000000000202
+                  022F868686FBFCFCFBFFF5F5F6FF4653AEFF0014ADFF0C2CC5FF1035D1FF123C
+                  DDFF1442E6FF1545ECFF1546EEFF1647EFFF1647EFFF1647EFFF1646EFFF0C3D
+                  E9FF1237C1FFA4AAC3FFF6F5EEFFE4E4E4FF3B3B3B9800000000000000001E1E
+                  1E8EE2E2E2FFFFFFFFFF5661B3FF0013ACFF0C2BC3FF0E32D0FF103BDFFF1342
+                  ECFF1448F6FF154AFAFF154BFBFF154BFCFF154BFCFF154BFCFF154AFBFF1449
+                  F8FF0D40F2FF1438C2FFCBCEDCFFFFFFFFFFA2A2A2EC010101160000001D6D6D
+                  6DD7FFFFFFFFA3A7D0FF000EA2FF0925BBFF0B2BC6FF0D34D6FF0F3CE5FF1144
+                  F2FF1248FBFF134AFFFF134BFFFF134BFFFF134BFFFF134BFFFF134BFFFF1349
+                  FDFF1246F7FF0435E7FF455DC1FFFFFFFBFFE8E8E8FF0D0D0D4D06060640BDBD
+                  BDF5FFFFFDFF323EA6FF0017AEFF0521BCFF0627C9FF0930D9FF0B38E8FF0C40
+                  F6FF0E44FFFF0E46FFFF0E46FFFF0E46FFFF0E46FFFF0E46FFFF0E46FFFF0E45
+                  FFFF0E42F9FF0F3EECFF0227C5FFB9BEDAFFFFFFFFFF242424701010104FEBEB
+                  E7FCCDCEE1FF02139DFF071DAAFF1B2D92FF1C3094FF1B349FFF1E3AAAFF1E3D
+                  B2FF1D3FB6FF2042BAFF2144BDFF1F43BEFF1E42BEFF1E42BEFF1E42BEFF1E41
+                  BAFF193EC2FF0D38E2FF0025CFFF6572BEFFFFFFFFFF3A3A3A8219191959FAFA
+                  F5FFB1B4D5FF1728AAFF11239FFFCECDC8FFE4E3DBFFD4D3CCFFCDCCC5FFCBCA
+                  C3FFCAC8C1FFC6C4BDFFC7C5BEFFCAC8C2FFCECCC6FFCECDC7FFCECCC6FFD4D1
+                  C7FFA9ADC1FF092FD1FF0024CCFF3B4DB4FFFFFFFFFF5050508F1B1B1B5BFAF9
+                  F4FFABAED2FF4753BAFF2F3DABFFD7D9E0FFFFFFFFFFFFFFFFFFFEFEFEFFF7F7
+                  F7FFEFEFEFFFEBEBEBFFE7E7E7FFE5E5E5FFE4E4E4FFE8E8E8FFEEEEEDFFF8F7
+                  F2FFBEC5E0FF0425C5FF001FC1FF2B3CACFFFFFFFEFF5757569410101046E6E6
+                  E2F8B9BBD7FF5B65BFFF5F69BEFFDADBE4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFEFEF9FFF7F6F1FFF1F0EBFFEDECE7FFE9E8E3FFE6E5E1FFF1F0
+                  E6FFB0B6D4FF001BB8FF0016B4FF3643A9FFFFFFFEFF40403F8204040424B4B4
+                  B1E0D5D6E3FF7279C3FF6D76C5FFC0C3E0FFE5E7F5FFD8DAF0FFC6CBEAFFC9CD
+                  ECFFCDD2EFFFCED3F1FFD1D6F2FFCDD2EEFFC4C9E6FFBFC3DFFFC0C5DEFFC6C9
+                  DDFF7D86C5FF0013ADFF000CA6FF575EACFFFFFEF7FF17171752000000005555
+                  55A0F4F4F4FF9398CBFF8188CDFF7C83CBFF777FCAFF6E77C8FF4754BDFF1628
+                  B0FF0012ABFF0010AEFF0015B2FF0119B5FF021BB6FF021AB4FF031AB2FF0319
+                  AEFF0215ABFF0315A8FF000696FF9FA1C4FFCBCBC6EE02020216000000000B0B
+                  0B3FEAEAE6FFC7C8DDFF9095D0FF9096D2FF8B91D1FF878DD0FF878DD0FF7D85
+                  CEFF5D68C5FF3645B9FF1A2BB0FF0518AAFF0011A8FF000EA6FF000DA4FF000C
+                  A2FF000C9FFF00059AFF2A2F96FFE7E7E5FF5151519C00000000000000000000
+                  0000626262B3F3F3F2FFB2B4D6FF9EA2D7FF9DA2D6FF999DD5FF9499D3FF9095
+                  D2FF8F95D2FF8C93D2FF838ACFFF6F78C8FF5C66C2FF4D57BBFF3F49B5FF3843
+                  B1FF3640B0FF3842A7FFB8B9D0FFD3D3CEF40505052800000000000000000000
+                  00000202021FA1A1A0E6EBEBEDFFB7B9DAFFA8ACDBFFA8ACDBFFA4A8D9FF9FA4
+                  D8FF9BA0D6FF969CD4FF9298D3FF9096D2FF8D93D1FF8990CFFF858BCEFF7D83
+                  CBFF767CC1FFC0C2D7FFEFEEE9FF242424690000000000000000000000000000
+                  0000000000000D0D0D36B9B9B8EEF1F1F3FFC9CBE2FFB2B5DDFFAFB3DEFFAEB2
+                  DEFFAAAEDCFFA6ABDAFFA2A7D9FF9EA3D7FF999FD6FF9398D3FF8B91CEFF9498
+                  CBFFD1D2E1FFEAEAE7FF5A5A5A82000000000000000000000000000000000000
+                  0000000000000000000011111127949493CDF6F6F4FFEAEBF3FFCDCFE5FFBCBF
+                  DFFFB5B8DEFFB1B4DDFFADB1DCFFA9ADDAFFA7ABD7FFB0B4D9FFCED0E5FFEFEF
+                  F1FFD8D8D5F54040406300000000000000000000000000000000000000000000
+                  0000000000000000000000000000040404094A4A4A70C7C7C6E1FBFBF9FFF7F7
+                  FAFFECECF4FFE5E5F1FFE2E3F0FFE5E6F1FFEFEFF5FFF7F6F6FFDBDBD8F67777
+                  769F1B1B1B260000000000000000000000000000000000000000000000000000
+                  00000000000000000000000000000000000000000000060606093838384B7979
+                  7991A8A8A7BCC9C9C7D9CCCCCBDBB7B7B6C78A8A89A1464646671010101A0000
+                  0000000000000000000000000000000000000000000000000000}
+                NumGlyphs = 1
+                Spacing = 1
+                OnClick = bsSkinSpeedButton1Click
+              end
+              object edtEvento: TbsSkinEdit
+                Left = 5
+                Top = 40
+                Width = 252
+                Height = 18
+                DefaultColor = clWindow
+                DefaultFont.Charset = DEFAULT_CHARSET
+                DefaultFont.Color = clBlack
+                DefaultFont.Height = 14
+                DefaultFont.Name = 'Arial'
+                DefaultFont.Style = []
+                UseSkinFont = True
+                DefaultWidth = 0
+                DefaultHeight = 0
+                ButtonMode = False
+                SkinData = frmPrincipal.SkinPrincipal
+                SkinDataName = 'edit'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = 14
+                Font.Name = 'Arial'
+                Font.Style = []
+                MaxLength = 100
+                ParentFont = False
+                TabOrder = 0
+                LeftImageIndex = -1
+                LeftImageHotIndex = -1
+                LeftImageDownIndex = -1
+                RightImageIndex = -1
+                RightImageHotIndex = -1
+                RightImageDownIndex = -1
+                OnExit = edtCod_ProdutoExit
+              end
+              object edtdataAgendada: TbsSkinDateEdit
+                Left = 275
+                Top = 40
+                Width = 110
+                Height = 18
+                EditMask = '!99/99/0000;1; '
+                Text = '  /  /    '
+                AlphaBlend = False
+                AlphaBlendAnimation = False
+                AlphaBlendValue = 0
+                UseSkinFont = True
+                TodayDefault = False
+                CalendarWidth = 200
+                CalendarHeight = 150
+                CalendarFont.Charset = DEFAULT_CHARSET
+                CalendarFont.Color = clWindowText
+                CalendarFont.Height = 14
+                CalendarFont.Name = 'Arial'
+                CalendarFont.Style = []
+                CalendarBoldDays = False
+                CalendarUseSkinFont = True
+                CalendarSkinDataName = 'panel'
+                FirstDayOfWeek = Sun
+                WeekNumbers = False
+                ShowToday = False
+                DefaultFont.Charset = DEFAULT_CHARSET
+                DefaultFont.Color = clBlack
+                DefaultFont.Height = 14
+                DefaultFont.Name = 'Arial'
+                DefaultFont.Style = []
+                DefaultWidth = 0
+                DefaultHeight = 0
+                ButtonMode = True
+                SkinData = frmPrincipal.SkinPrincipal
+                SkinDataName = 'buttonedit'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = 14
+                Font.Name = 'Arial'
+                Font.Style = []
+                MaxLength = 10
+                ParentFont = False
+                TabOrder = 1
+                LeftImageIndex = -1
+                LeftImageHotIndex = -1
+                LeftImageDownIndex = -1
+                RightImageIndex = -1
+                RightImageHotIndex = -1
+                RightImageDownIndex = -1
+              end
+            end
+            object bsSkinDBGrid1: TbsSkinDBGrid
+              Left = 1
+              Top = 65
+              Width = 465
+              Height = 219
+              HintImageIndex = 0
+              TabOrder = 1
+              SkinData = frmPrincipal.SkinPrincipal
+              SkinDataName = 'grid'
+              Transparent = False
+              WallpaperStretch = False
+              UseSkinFont = True
+              UseSkinCellHeight = True
+              GridLineColor = clWindowText
+              DefaultCellHeight = 20
+              DrawGraphicFields = False
+              UseColumnsFont = False
+              DefaultRowHeight = 18
+              MouseWheelSupport = False
+              SaveMultiSelection = False
+              PickListBoxSkinDataName = 'listbox'
+              PickListBoxCaptionMode = False
+              Align = alClient
+              DataSource = srcEventosAnimais
+              PopupMenu = PopapAnimais
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clBtnText
+              TitleFont.Height = 14
+              TitleFont.Name = 'Arial'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Evento'
+                  Width = 239
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Data_Agendada'
+                  Title.Caption = 'Data Agendada'
+                  Width = 85
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'Data_Realizada'
+                  Title.Caption = 'Realizado Dia'
+                  Width = 115
+                  Visible = True
+                end>
+            end
+          end
+        end
+      end
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 837
+    Width = 845
     Height = 53
     AutoSize = True
     Bands = <
@@ -3429,7 +4334,7 @@ object frmCadClientes: TfrmCadClientes
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 49
-        Width = 833
+        Width = 841
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -3438,7 +4343,7 @@ object frmCadClientes: TfrmCadClientes
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 824
+      Width = 832
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -3796,34 +4701,91 @@ object frmCadClientes: TfrmCadClientes
       end
     end
   end
+  object pnlClientesDescontos: TbsSkinPaintPanel
+    Left = 0
+    Top = 53
+    Width = 845
+    Height = 23
+    HintImageIndex = 0
+    TabOrder = 2
+    Visible = False
+    SkinDataName = 'panel'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clNavy
+    DefaultFont.Height = -16
+    DefaultFont.Name = 'Arial'
+    DefaultFont.Style = [fsBold]
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = False
+    RibbonStyle = False
+    ImagePosition = bsipDefault
+    TransparentMode = False
+    CaptionImageIndex = -1
+    RealHeight = -1
+    AutoEnabledControls = True
+    CheckedMode = False
+    Checked = False
+    DefaultAlignment = taCenter
+    DefaultCaptionHeight = 22
+    BorderStyle = bvFrame
+    CaptionMode = True
+    RollUpMode = False
+    RollUpState = False
+    NumGlyphs = 1
+    Spacing = 2
+    Align = alTop
+    object lblNomeCliente: TbsSkinStdLabel
+      Left = 7
+      Top = 2
+      Width = 29
+      Height = 19
+      EllipsType = bsetNone
+      UseSkinFont = False
+      UseSkinColor = False
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clNavy
+      DefaultFont.Height = -16
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = [fsBold]
+      SkinDataName = 'stdlabel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      Caption = 'Ate.'
+      ParentFont = False
+    end
+  end
   object dspCadClientes: TDataSetProvider
     DataSet = qryCadClientes
-    Left = 832
-    Top = 447
+    Left = 696
+    Top = 407
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadClientes'
-    Left = 832
-    Top = 503
+    Left = 696
+    Top = 463
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 832
-    Top = 475
+    Left = 696
+    Top = 435
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryvariavel
-    Left = 805
-    Top = 447
+    Left = 669
+    Top = 407
   end
   object qryvariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 804
-    Top = 419
+    Left = 668
+    Top = 379
   end
   object qryCadClientes: TSQLQuery
     MaxBlobSize = -1
@@ -3831,25 +4793,25 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 831
-    Top = 419
+    Left = 695
+    Top = 379
   end
   object cdsCadAtividades: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 860
-    Top = 503
+    Left = 724
+    Top = 463
   end
   object srcCadAtividades: TDataSource
     DataSet = cdsCadAtividades
-    Left = 860
-    Top = 475
+    Left = 724
+    Top = 435
   end
   object srcPesquisa: TDataSource
     DataSet = cdspesquisa
-    Left = 887
-    Top = 475
+    Left = 751
+    Top = 435
   end
   object sdtsOcorrencias: TSimpleDataSet
     Aggregates = <>
@@ -3857,25 +4819,25 @@ object frmCadClientes: TfrmCadClientes
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 648
-    Top = 359
+    Left = 285
+    Top = 387
   end
   object srcOcorrencias: TDataSource
     DataSet = sdtsOcorrencias
-    Left = 647
-    Top = 331
+    Left = 285
+    Top = 415
   end
   object cdsCadRotas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 685
-    Top = 411
+    Left = 565
+    Top = 387
   end
   object srcCadRotas: TDataSource
     DataSet = cdsCadRotas
-    Left = 686
-    Top = 439
+    Left = 566
+    Top = 415
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
@@ -3884,30 +4846,30 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsVendasBeforeOpen
     AfterOpen = cdsVendasAfterOpen
     OnCalcFields = cdsVendasCalcFields
-    Left = 630
-    Top = 411
+    Left = 510
+    Top = 387
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 602
-    Top = 411
+    Left = 482
+    Top = 387
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
-    Left = 602
-    Top = 439
+    Left = 482
+    Top = 415
   end
   object srcVendas: TDataSource
     DataSet = cdsVendas
-    Left = 630
-    Top = 439
+    Left = 510
+    Top = 415
   end
   object srcCtasReceber: TDataSource
     DataSet = cdsCtasReceber
-    Left = 658
-    Top = 439
+    Left = 538
+    Top = 415
   end
   object cdsCtasReceber: TClientDataSet
     Aggregates = <>
@@ -3916,8 +4878,8 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsCtasReceberBeforeOpen
     AfterOpen = cdsCtasReceberAfterOpen
     OnCalcFields = cdsCtasReceberCalcFields
-    Left = 658
-    Top = 411
+    Left = 538
+    Top = 387
   end
   object qryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -3925,13 +4887,13 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 887
-    Top = 503
+    Left = 751
+    Top = 463
   end
   object dspPesquisa: TDataSetProvider
     DataSet = qryPesquisa
-    Left = 885
-    Top = 447
+    Left = 749
+    Top = 407
   end
   object cdspesquisa: TClientDataSet
     Aggregates = <>
@@ -3939,8 +4901,8 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspPesquisa'
     BeforeOpen = cdspesquisaBeforeOpen
     OnCalcFields = cdspesquisaCalcFields
-    Left = 885
-    Top = 419
+    Left = 749
+    Top = 379
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -4034,69 +4996,69 @@ object frmCadClientes: TfrmCadClientes
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 573
-    Top = 488
+    Left = 453
+    Top = 464
   end
   object qryRelatorio: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 574
-    Top = 467
+    Left = 454
+    Top = 443
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
-    Left = 574
-    Top = 495
+    Left = 454
+    Top = 471
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 574
-    Top = 411
+    Left = 454
+    Top = 387
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 574
-    Top = 439
+    Left = 454
+    Top = 415
   end
   object srcCalientesDescontos: TDataSource
     DataSet = cdsClientesDescontos
-    Left = 546
-    Top = 439
+    Left = 426
+    Top = 415
   end
   object cdsClientesDescontos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientesDescontos'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 546
-    Top = 411
+    Left = 426
+    Top = 387
   end
   object dspClientesDescontos: TDataSetProvider
     DataSet = qryClientesDescontos
-    Left = 546
-    Top = 495
+    Left = 426
+    Top = 471
   end
   object qryClientesDescontos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 546
-    Top = 467
+    Left = 426
+    Top = 443
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadProdutos'
-    Left = 518
-    Top = 411
+    Left = 398
+    Top = 387
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 518
-    Top = 439
+    Left = 398
+    Top = 415
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
@@ -4109,7 +5071,7 @@ object frmCadClientes: TfrmCadClientes
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPesquisa'
-    Left = 733
+    Left = 645
     Top = 339
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
@@ -4135,25 +5097,25 @@ object frmCadClientes: TfrmCadClientes
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 62
-    Top = 188
+    Left = 38
+    Top = 300
   end
   object srcClientesDebitos: TDataSource
     DataSet = cdsClientesDebitos
-    Left = 63
-    Top = 216
+    Left = 39
+    Top = 328
   end
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
-    Left = 490
-    Top = 439
+    Left = 370
+    Top = 415
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 490
-    Top = 411
+    Left = 370
+    Top = 387
   end
   object qryValidaCPFCNPJ: TSQLQuery
     MaxBlobSize = -1
@@ -4161,26 +5123,26 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'select * from T_validaCNPJCPF')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 462
+    Left = 342
     Top = 467
   end
   object dspValidaCPFCNPJ: TDataSetProvider
     DataSet = qryValidaCPFCNPJ
-    Left = 462
-    Top = 495
+    Left = 342
+    Top = 439
   end
   object cdsValidaCPFCNPJ: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspValidaCPFCNPJ'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 462
-    Top = 411
+    Left = 342
+    Top = 387
   end
   object srcValidaCPFCNPJ: TDataSource
     DataSet = cdsValidaCPFCNPJ
-    Left = 462
-    Top = 439
+    Left = 342
+    Top = 415
   end
   object cdsContaCorrente: TClientDataSet
     Aggregates = <>
@@ -4188,39 +5150,82 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     BeforeOpen = cdsContaCorrenteBeforeOpen
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 713
-    Top = 411
+    Left = 593
+    Top = 387
   end
   object srcContaCorrente: TDataSource
     DataSet = cdsContaCorrente
-    Left = 714
-    Top = 439
+    Left = 594
+    Top = 415
   end
   object cdsTemp: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 433
-    Top = 411
+    Left = 313
+    Top = 387
   end
   object qryRelcliente: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 240
-    Top = 160
+    Left = 216
+    Top = 272
   end
   object dspRelCliente: TDataSetProvider
     DataSet = qryRelcliente
-    Left = 240
-    Top = 189
+    Left = 216
+    Top = 301
   end
   object cdsRelCliente: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRelCliente'
-    Left = 240
-    Top = 216
+    Left = 216
+    Top = 328
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 800
+    Top = 104
+    object Configurar1: TMenuItem
+      Caption = 'Configurar'
+      OnClick = Configurar1Click
+    end
+  end
+  object srcClienteAnimais: TDataSource
+    DataSet = cdsClienteAnimais
+    Left = 257
+    Top = 415
+  end
+  object cdsClienteAnimais: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    AfterScroll = cdsClienteAnimaisAfterScroll
+    OnCalcFields = cdsContaCorrenteCalcFields
+    Left = 257
+    Top = 387
+  end
+  object cdsEventosAnimais: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    OnCalcFields = cdsContaCorrenteCalcFields
+    Left = 229
+    Top = 387
+  end
+  object srcEventosAnimais: TDataSource
+    DataSet = cdsEventosAnimais
+    Left = 229
+    Top = 415
+  end
+  object PopapAnimais: TPopupMenu
+    Left = 520
+    Top = 224
+    object MenuItem1: TMenuItem
+      Caption = 'Realizar Evento'
+      OnClick = MenuItem1Click
+    end
   end
 end

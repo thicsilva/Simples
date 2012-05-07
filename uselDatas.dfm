@@ -50,7 +50,6 @@ object frmSelDatas: TfrmSelDatas
     Spacing = 2
     Caption = 'PanelConsulta'
     Align = alTop
-    ExplicitWidth = 588
     object lblTurma: TbsSkinStdLabel
       Left = 123
       Top = 14
@@ -437,7 +436,6 @@ object frmSelDatas: TfrmSelDatas
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitWidth = 588
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -583,6 +581,7 @@ object frmSelDatas: TfrmSelDatas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 65
       end
     end
   end

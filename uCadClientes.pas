@@ -16,12 +16,12 @@ uses
 type
   TfrmCadClientes = class(TFormBase)
     pagCadastro: TbsSkinPageControl;
-    bsSkinTabSheet1: TbsSkinTabSheet;
+    Tab_Consulta: TbsSkinTabSheet;
     bsSkinPanel1: TbsSkinPanel;
     cmbtipoconsulta: TbsSkinComboBox;
     EdtPesquisa: TbsSkinEdit;
     chkPesqTodoTexto: TbsSkinCheckRadioBox;
-    bsSkinTabSheet2: TbsSkinTabSheet;
+    Tab_Cadastro: TbsSkinTabSheet;
     dspCadClientes: TDataSetProvider;
     cdsCadClientes: TClientDataSet;
     srcCadClientes: TDataSource;
@@ -61,7 +61,7 @@ type
     GridClintesCep: TcxGridDBColumn;
     srcPesquisa: TDataSource;
     chkClienteAtivo: TbsSkinCheckRadioBox;
-    bsSkinTabSheet3: TbsSkinTabSheet;
+    Tab_Ocorrencias: TbsSkinTabSheet;
     cxGrid2: TcxGrid;
     GridOcorrencias: TcxGridDBTableView;
     cxGridLevel1: TcxGridLevel;
@@ -80,9 +80,9 @@ type
     srcCadRotas: TDataSource;
     bsSkinStdLabel10: TbsSkinStdLabel;
     edtNumeroPedAberto: TbsSkinSpinEdit;
-    bsSkinTabSheet4: TbsSkinTabSheet;
-    bsSkinTabSheet5: TbsSkinTabSheet;
-    bsSkinTabSheet6: TbsSkinTabSheet;
+    Tab_ProdutosDescontos: TbsSkinTabSheet;
+    Tab_VendasEServicos: TbsSkinTabSheet;
+    tab_Historico: TbsSkinTabSheet;
     cxGrid3: TcxGrid;
     GrdVendas: TcxGridDBTableView;
     colum_Controle: TcxGridDBColumn;
@@ -152,8 +152,6 @@ type
     edtCod_Produto: TbsSkinEdit;
     btnRemoverDesconto: TbsSkinButton;
     btnAdicionaDesconto: TbsSkinButton;
-    pnlClientesDescontos: TbsSkinPaintPanel;
-    lblNomeCliente: TbsSkinStdLabel;
     cxGrid5: TcxGrid;
     GridProdutosDescontos: TcxGridDBTableView;
     GridProdutosDescontosColumn1: TcxGridDBColumn;
@@ -287,6 +285,54 @@ type
     qryRelcliente: TSQLQuery;
     dspRelCliente: TDataSetProvider;
     cdsRelCliente: TClientDataSet;
+    PopupMenu1: TPopupMenu;
+    Configurar1: TMenuItem;
+    bsSkinTabSheet1: TbsSkinTabSheet;
+    bsSkinPanel5: TbsSkinPanel;
+    Label4: TLabel;
+    edtNomeAnimal: TbsSkinEdit;
+    bsSkinButton1: TbsSkinButton;
+    btnAdicionarAnimal: TbsSkinButton;
+    Label7: TLabel;
+    edtEspecie: TbsSkinEdit;
+    Label8: TLabel;
+    edtRaca: TbsSkinEdit;
+    Label9: TLabel;
+    edtCor: TbsSkinEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    edtDataNascimento: TbsSkinDateEdit;
+    edtDataAquisicao: TbsSkinDateEdit;
+    pnlClientesDescontos: TbsSkinPaintPanel;
+    lblNomeCliente: TbsSkinStdLabel;
+    bsSkinExPanel2: TbsSkinExPanel;
+    imgAnimal: TImage;
+    srcClienteAnimais: TDataSource;
+    bsSkinPageControl1: TbsSkinPageControl;
+    bsSkinTabSheet2: TbsSkinTabSheet;
+    cxGrid7: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    Column_Nome: TcxGridDBColumn;
+    Column_Especie: TcxGridDBColumn;
+    Column_Raca: TcxGridDBColumn;
+    Column_Cor: TcxGridDBColumn;
+    Column_Data_Nascimento: TcxGridDBColumn;
+    Column_Data_Aquisicao: TcxGridDBColumn;
+    cxGridLevel6: TcxGridLevel;
+    bsSkinPanel6: TbsSkinPanel;
+    bsSkinExPanel3: TbsSkinExPanel;
+    bsSkinDBGrid1: TbsSkinDBGrid;
+    Label5: TLabel;
+    edtEvento: TbsSkinEdit;
+    edtdataAgendada: TbsSkinDateEdit;
+    Label6: TLabel;
+    btnCadAlunos: TbsSkinSpeedButton;
+    cdsClienteAnimais: TClientDataSet;
+    bsSkinSpeedButton1: TbsSkinSpeedButton;
+    cdsEventosAnimais: TClientDataSet;
+    srcEventosAnimais: TDataSource;
+    PopapAnimais: TPopupMenu;
+    MenuItem1: TMenuItem;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -343,6 +389,13 @@ type
     procedure cdsContaCorrenteCalcFields(DataSet: TDataSet);
     procedure EdtPesquisaKeyPress(Sender: TObject; var Key: Char);
     procedure N4ClientescomDebitoemContaCorrente1Click(Sender: TObject);
+    procedure Configurar1Click(Sender: TObject);
+    procedure btnAdicionarAnimalClick(Sender: TObject);
+    procedure imgAnimalDblClick(Sender: TObject);
+    procedure btnCadAlunosClick(Sender: TObject);
+    procedure bsSkinSpeedButton1Click(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure cdsClienteAnimaisAfterScroll(DataSet: TDataSet);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -352,6 +405,8 @@ type
    pviLinha            : Integer;
    pitipoRel           : Integer;
    pdSaldoConta        : Double;
+    procedure DesabilitarTabSheets;
+    procedure MostrarAnimaisCliente;
    { Private declarations }
   public
     pvsCNPJCPF    : String;
@@ -364,7 +419,21 @@ var
 
 implementation
 
-uses uPrincipal,ufuncoes,cxGridCommon, uselrelClientes;
+uses uPrincipal,ufuncoes,cxGridCommon, uselrelClientes, uConfigTabSheet,
+  uDaoClienteAnimal, uCapturaImagem, uClassAnimal, uClassEventoAnimal,
+  uDaoEventoAnimal;
+
+procedure TfrmCadClientes.MenuItem1Click(Sender: TObject);
+var  DaoEventoAnimal : TdaoEventoAnimal;
+begin
+   if CaixaMensagem( 'Deseja marcar evento como concluido', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+      DaoEventoAnimal.RealizarEvento(cdsEventosAnimais.FieldByName('EventoId').AsInteger,gsOperador);
+      cdsEventosAnimais.Data := DaoEventoAnimal.BuscarEvento(cdsClienteAnimais.FieldByName('AnimalId').AsInteger).Data;
+      FreeAndNil(DaoEventoAnimal);
+   end;
+end;
 
 Procedure TfrmCadClientes.MostraPesquisa(pwTipo : Integer );
 Begin
@@ -784,6 +853,30 @@ begin
 
 end;
 
+procedure TfrmCadClientes.btnCadAlunosClick(Sender: TObject);
+var EventoAnimal : TEventoAnimal;
+    DaoEventoAnimal : TdaoEventoAnimal;
+begin
+   if Trim(edtEvento.Text)='' then
+   begin
+      CaixaMensagem( 'O Evento Não pode ser vazio ', ctAviso, [ cbOk ], 0 );
+      Exit
+   end;
+   
+
+   EventoAnimal := TEventoAnimal.Create;
+   DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+
+   EventoAnimal.AnimalId := cdsClienteAnimais.FieldByName('AnimalId').AsInteger;
+   EventoAnimal.Evento := edtEvento.Text;
+   EventoAnimal.Data_Agendada := edtdataAgendada.Date;
+   EventoAnimal.Data_Cadastro := Now;
+   DaoEventoAnimal.incluir(EventoAnimal);
+   cdsEventosAnimais.Data := DaoEventoAnimal.BuscarEvento(cdsClienteAnimais.FieldByName('AnimalId').AsInteger).Data;
+   FreeAndNil(DaoEventoAnimal);
+   FreeAndNil(EventoAnimal);
+end;
+
 procedure TfrmCadClientes.btnexcluirClick(Sender: TObject);
 begin
    IF cdsCadClientes.IsEmpty Then
@@ -866,8 +959,32 @@ begin
 
   InitFonts();
 
-  // edtNumeroPedAberto.Value :=
+  DesabilitarTabSheets;
 
+end;
+procedure TfrmCadClientes.DesabilitarTabSheets;
+var lstConfig : TStringList;
+    licont : integer;
+begin
+   if FileExists(gsPath+'\Config\TabShetFrmCadClientes.config') then
+   begin
+      lstConfig := TStringList.Create;
+      lstConfig.LoadFromFile(gsPath+'\Config\TabShetFrmCadClientes.config');
+      for liCont := 0 to Self.ComponentCount - 1 do
+      begin
+         if self.Components[liCont] is Tbsskintabsheet then
+           (self.Components[liCont] as Tbsskintabsheet).TabVisible := ( lstConfig.IndexOf((self.Components[liCont] as Tbsskintabsheet).Caption) >= 0 )
+      end;
+      FreeAndnil(lstConfig);
+   end;
+end;
+
+procedure TfrmCadClientes.cdsClienteAnimaisAfterScroll(DataSet: TDataSet);
+var  DaoEventoAnimal : TdaoEventoAnimal;
+begin
+  DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+  cdsEventosAnimais.Data := DaoEventoAnimal.BuscarEvento(cdsClienteAnimais.FieldByName('AnimalId').AsInteger).Data;
+  FreeAndNil(DaoEventoAnimal);
 end;
 
 procedure TfrmCadClientes.cdsClientesDescontosBeforeOpen(DataSet: TDataSet);
@@ -1273,9 +1390,20 @@ begin
    Begin
       cmbPeriodoChange(cmbPeriodo);
       pdSaldoConta := 0;
+   End
+   else if pagCadastro.ActivePageIndex = 9 then
+   begin
+      MostrarAnimaisCliente;
+      edtdataAgendada.Date := gsData_Mov;
    End;
-
+   pnlClientesDescontos.Visible := False;
+   if pagCadastro.ActivePageIndex>1 then
+   begin
+      pnlClientesDescontos.Visible := True;
+      lblNomeCliente.Caption := 'Cliente..: '+upperCase( inczero( cdspesquisa.FieldByName('Codigo').AsString,5)+' - '+cdspesquisa.FieldByName('Descricao').AsString);
+   end;
 End;
+
 
 procedure TfrmCadClientes.btnPesquisa_CNPJCPFClick(Sender: TObject);
 var lswhere      : String;
@@ -1420,6 +1548,15 @@ begin
    pdSaldoConta := 0;
 end;
 
+procedure TfrmCadClientes.bsSkinSpeedButton1Click(Sender: TObject);
+var  DaoEventoAnimal : TdaoEventoAnimal;
+begin
+  DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+  DaoEventoAnimal.Excluir(cdsEventosAnimais.FieldByName('EventoId').AsInteger);
+  cdsEventosAnimais.Data := DaoEventoAnimal.BuscarEvento(cdsClienteAnimais.FieldByName('AnimalId').AsInteger).Data;
+  FreeAndNil(DaoEventoAnimal);
+end;
+
 procedure TfrmCadClientes.btnAdicionaDescontoClick(Sender: TObject);
 begin
    if Trim(edtCod_Produto.text)='' then
@@ -1453,6 +1590,36 @@ begin
    cdsClientesDescontos.ApplyUpdates(-1);
 
    MostraPesquisa(1);
+end;
+
+procedure TfrmCadClientes.btnAdicionarAnimalClick(Sender: TObject);
+var Animal : TAnimal;
+    DaoClienteAnimal : TDaoClienteAnimal;
+begin
+   inherited;
+   Animal := TAnimal.Create;
+   DaoClienteAnimal := TDaoClienteAnimal.Create(gConexao);
+   Animal.Nome := edtNomeAnimal.Text;
+   Animal.Especie := EdtEspecie.Text;
+   Animal.Raca := edtRaca.Text;
+   Animal.Cor := edtCor.text;
+   Animal.Data_Nascmento := edtDataNascimento.Date;
+   Animal.Data_aquisicao := edtDataAquisicao.date;
+   Animal.Data_Cadastro  := gsData_mov;
+   Animal.Operador := gsOperador;
+   animal.ClienteId := cdspesquisa.FieldByName('Codigo').asInteger;
+   animal.CaminhoImagem := imgAnimal.Picture.GetNamePath;
+   DaoClienteAnimal.Inserir(animal);
+   FreeAndNil(Animal);
+   FreeAndNil(DaoClienteAnimal);
+   MostrarAnimaisCliente;
+end;
+
+procedure TfrmCadClientes.MostrarAnimaisCliente;
+var  DaoClienteAnimal : TDaoClienteAnimal;
+begin
+   DaoClienteAnimal := TDaoClienteAnimal.create(gConexao);
+   cdsClienteAnimais.Data := DaoClienteAnimal.BucarAnimalCliente(cdspesquisa.FieldByName('Codigo').AsInteger).Data;
 end;
 
 procedure TfrmCadClientes.btnAdicionarClick(Sender: TObject);
@@ -1498,6 +1665,21 @@ end;
 procedure TfrmCadClientes.cmbPeriodoChange(Sender: TObject);
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+end;
+
+procedure TfrmCadClientes.Configurar1Click(Sender: TObject);
+var licont : integer;
+begin
+   frmConfigTabSheet :=  TfrmConfigTabSheet.Create(Self);
+   frmConfigTabSheet.psFormulario := 'FrmCadclientes';
+   frmConfigTabSheet.chkConfiguracao.Columns := 3;
+   frmConfigTabSheet.chkConfiguracao.Refresh;
+   for liCont := 0 to Self.ComponentCount - 1 do
+   begin
+      if self.Components[liCont] is Tbsskintabsheet then
+         frmConfigTabSheet.chkConfiguracao.Items.add((self.Components[liCont] as Tbsskintabsheet).Caption );
+   end;
+   frmConfigTabSheet.showModal;
 end;
 
 procedure TfrmCadClientes.edtCnpjCpfExit(Sender: TObject);
@@ -1627,6 +1809,15 @@ begin
      acanvas.Font.color  := clblack;
   End;
 
+end;
+
+procedure TfrmCadClientes.imgAnimalDblClick(Sender: TObject);
+begin
+  frmcapturaImagem := TfrmcapturaImagem.create(Self);
+  frmcapturaImagem.pscpf := edtNomeAnimal.Text+'_'+IntToStr(cdspesquisa.FieldByName('Codigo').asInteger);
+  frmcapturaImagem.Showmodal;
+  imgAnimal.Picture.LoadFromFile(frmcapturaImagem.psCaminho);
+  imgAnimal.Refresh;
 end;
 
 procedure TfrmCadClientes.impMatricialNewPage(Sender: TObject; Pagina: Integer);
