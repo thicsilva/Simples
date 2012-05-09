@@ -30,6 +30,7 @@ type TDaoEstrutura = class
     procedure Adicionar_CodigoFornecedor_na_Tabela_Produtos;
     procedure Adicionar_Defult_SotorId;
     procedure Adicionar_SetorId_na_Tabela_ItensDevolucao;
+    procedure Adicionar_AnimalId_na_Tabela_Vendas;
     procedure CriarTabela_Animal;
     procedure CrateTabela_AventoAnimais;
 
@@ -43,6 +44,16 @@ implementation
 uses uDaoCorrecao, uClassCorrecao;
 
 { TDaoEstrutura }
+
+procedure TDaoEstrutura.Adicionar_AnimalId_na_Tabela_Vendas;
+begin
+   if not ExisteCampo( 'T_Vendas', 'AnimalId', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD AnimalId int';
+      FQryAjustes.ExecSQL;
+   end;
+end;
 
 procedure TDaoEstrutura.Adicionar_CodigoFornecedor_na_Tabela_Produtos;
 begin
@@ -363,6 +374,8 @@ begin
   Adicionar_SetorId_na_Tabela_ItensDevolucao;
   CriarTabela_Animal;
   CrateTabela_AventoAnimais;
+  Adicionar_AnimalId_na_Tabela_Vendas;
+  
 end;
 
 

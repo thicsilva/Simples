@@ -221,10 +221,12 @@ type
     procedure cmbNome_TipoVendaExit(Sender: TObject);
 
   private
-     pvQualBotao     : String;
-     pvrvlr_TotalAnt : Real;
-     pviLinha        : Integer;
+     pvQualBotao      : String;
+     pvrvlr_TotalAnt  : Real;
+     pviLinha         : Integer;
      pDescontoCliente : Boolean;
+     pAnimalId         : Integer;
+    procedure MostrarAnimaisCliente;
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
@@ -239,7 +241,8 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
-  uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario;
+  uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,
+  uselAnimal;
 
 {$R *.dfm}
 procedure tfrmVendas.AtualizaTabelas();
@@ -441,7 +444,7 @@ begin
       cmbRota.Visible := False;
       lblControle.Visible := False;
    end;
-
+   pAnimalId := 0;
 
 end;
 
@@ -941,6 +944,7 @@ begin
       cdsVenda.FieldByname('Tipo_Venda').AsString    := 'S';
       cdsVenda.FieldByname('Status').AsString        := '3';
    End;
+   cdsVenda.FieldByname('AnimalID').AsInteger        := pAnimalId;
    cdsVenda.Post;
 
    Try
@@ -1573,6 +1577,25 @@ begin
       cmbNome_Cliente.KeyValue := Null;
 end;
 
+procedure TfrmVendas.MostrarAnimaisCliente;
+var  DaoClienteAnimal : TDaoClienteAnimal;
+     cdsDados : TclientDataSet;
+begin
+   DaoClienteAnimal := TDaoClienteAnimal.create(gConexao);
+   cdsDados :=  DaoClienteAnimal.BucarAnimalCliente(cmbNome_Cliente.KeyValue);
+   if not cdsDados.IsEmpty then
+   begin
+      frmSelAnimal := TfrmSelAnimal.Create(application);
+      frmSelAnimal.srcAnimais.DataSet := cdsDados;
+      frmSelAnimal.showmodal;
+      if frmselAnimal.Tag=1 then
+         pAnimalId := frmselAnimal.pAnimalId
+      else
+         BtnCancelaClick(BtnCancela);
+      FreeandNil(frmSelAnimal);
+   end;
+end;
+
 procedure TfrmVendas.cmbNome_ClienteChange(Sender: TObject);
 begin
    CmbCod_Cliente.Keyvalue := cmbnome_Cliente.Keyvalue;
@@ -1580,6 +1603,7 @@ begin
    Begin
       edtCod_Cliente.text   :=  cmbCod_Cliente.Text;
       edtNome_Cliente.Text  :=  cmbNome_Cliente.Text;
+      MostrarAnimaisCliente
    End;
 end;
 

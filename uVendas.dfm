@@ -2382,6 +2382,7 @@ object frmVendas: TfrmVendas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object bsSkinBevel5: TbsSkinBevel
         Left = 300
@@ -2393,6 +2394,7 @@ object frmVendas: TfrmVendas
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 230
+        ExplicitTop = -1
       end
       object btnDesconto: TbsSkinSpeedButton
         Left = 230
@@ -2432,6 +2434,7 @@ object frmVendas: TfrmVendas
         Enabled = False
         OnClick = BtnCancelaClick
         ExplicitLeft = 122
+        ExplicitTop = 12
       end
     end
   end

@@ -112,7 +112,8 @@ uses
   uCapturaImagem in '..\AutoEscola\uCapturaImagem.pas' {frmCapturaImagem},
   uClassAnimal in 'Modelos\uClassAnimal.pas',
   uClassEventoAnimal in 'Modelos\uClassEventoAnimal.pas',
-  uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas';
+  uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas',
+  uselAnimal in 'uselAnimal.pas' {frmSelAnimal};
 
 {$R *.res}
 
@@ -121,6 +122,7 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmSelAnimal, frmSelAnimal);
   Frmlogin.ShowModal;
   Application.Run;
 end.
