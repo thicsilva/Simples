@@ -194,7 +194,8 @@ var
 
 implementation
 
-uses uprincipal,ufuncoes, uDaoSaldo, uClassSaldo;
+uses uprincipal,ufuncoes, uDaoSaldo, uClassSaldo, uClassItemEntrada,
+  uDaoItemEntrada;
 
 {$R *.dfm}
 
@@ -392,8 +393,8 @@ Var liSeqEntrada   : integer;
     lsDiasant      : String;
     lsAno          : String;
     trdNrTransacao : TTransactionDesc;
-    loDaoSaldo     : TDaoSaldo;
-    loSaldo        : TSaldo;
+    loItementrada  : TitemEntrada;
+    loDaoItemEntrada : TDaoItemEntrada;
 begin
 
    liSeqEntrada := StrToInt(Sequencia('SeqEntrada',True,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8));
@@ -404,6 +405,12 @@ begin
    cdsEntradas.Close;
    cdsEntradas.ProviderName := dspEntradas.Name;
    cdsEntradas.Open;
+
+   if StrToIntDef( edtSeqNotaFiscal.Text, 0 ) = 0 Then
+   Begin
+      CaixaMensagem( 'Informe o numero da nota Fiscal  ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
 
    if Trim( cmbCod_Fornecedor.Text ) = '' Then
    Begin
@@ -420,13 +427,12 @@ begin
       CaixaMensagem( 'Informe o setor para credito do estoque', ctAviso, [ cbOk ], 0 );
       Exit
    end;
-   {
-   if not frmPrincipal.dbxPrincipal.InTransaction then
+   {if not frmPrincipal.dbxPrincipal.InTransaction then
    begin
       trdNrTransacao.IsolationLevel := xilREADCOMMITTED;
       frmPrincipal.dbxPrincipal.StartTransaction( trdNrTransacao );
-   end;
-    }
+   end;}
+
    Try
       cdsEntradas.Append;
       cdsEntradas.FieldByname('SeqEntrada').Asinteger     := liSeqEntrada;
@@ -451,38 +457,16 @@ begin
       cdsItensEntradas.ProviderName := dspItensEntradas.Name;
       cdsItensEntradas.Open;
 
-      cdsItensEntradasTMP.First;
-      while not cdsItensEntradasTMP.Eof Do
-      Begin
-         if cdsItensEntradasTmp.FieldByName('SetorId').asInteger>1 then
-         begin
-            loDaoSaldo := TDaoSaldo.Create(gConexao);
-            loSaldo    := TSaldo.Create;
-            loSaldo.SetorId := cdsItensEntradasTmp.FieldByName('SetorId').asInteger;
-            loSaldo.ProdutoId := cdsItensEntradasTmp.FieldByName('Codigo').asInteger;
-            if not loDaoSaldo.ExisteSaldo(loSaldo) then
-               loDaoSaldo.CriarNoSetor(loSaldo);
-            FreeAndNil(loDaoSaldo);
-            FreeAndNil(loSaldo);
-         end;
-         cdsItensEntradas.Append;
-         cdsItensEntradas.FieldByName('Cod_Produto').asInteger    := cdsItensEntradasTmp.FieldByName('Codigo').asInteger;
-         cdsItensEntradas.FieldByName('SetorId').asInteger        := cdsItensEntradasTmp.FieldByName('SetorId').asInteger;
-         cdsItensEntradas.FieldByName('SeqEntrada').asInteger     := liSeqEntrada;
-         cdsItensEntradas.FieldByName('Qtde_Entrada').asFloat     := cdsItensEntradasTmp.FieldByName('Qtde_Venda').asFloat;
-         cdsItensEntradas.FieldByName('Pco_Entrada').asFloat      := cdsItensEntradasTmp.FieldByName('Pco_Venda').asFloat;
-         cdsItensEntradas.FieldByName('vlr_Total').asFloat        := cdsItensEntradasTmp.FieldByName('vlr_Total').asFloat;
-         cdsItensEntradas.FieldByName('Data_Cad').asDateTime      := now;
-         cdsItensEntradas.FieldByName('Data_Entrada').asDateTime  := edtDataEntrada.Date;
-         cdsItensEntradas.FieldByname('Operador').AsString        := gsOperador;
-         cdsItensEntradas.FieldByname('Cod_Emp').AsString         := gsCod_Emp;
-         cdsItensEntradas.FieldByName('Data_Mov').asDateTime      := gsdata_Mov;
-         cdsItensEntradas.Post;
-         cdsItensEntradas.ApplyUpdates(-1);
-         cdsItensEntradasTMP.Next;
-      End;
-   Except
-//      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
+      loItementrada  := TitemEntrada.Create;
+      loDaoItemEntrada := TDaoItemEntrada.Create(gConexao);
+      loItementrada.CodigoEmpresa := StrtoInt(gsCod_emp);
+      loItementrada.Operador  := gsOperador;
+      loItementrada.DataMovimento  := gsData_mov;
+      loItementrada.DataEntrada  := edtDataEntrada.Date;
+      loItementrada.CompraId  := liSeqEntrada;
+      loDaoItemEntrada.incluir(cdsItensEntradasTmp,loItemEntrada);
+   except on E: Exception do
+       CaixaMensagem('Não foi possivel efetuar a entrada ('+E.Message+')', ctConfirma, [ cbSimNao ], 0 )
    End;
 
    lsdias    := FormatDateTime('DD',edtdata_Vencimento.Date);

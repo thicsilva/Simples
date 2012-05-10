@@ -113,7 +113,9 @@ uses
   uClassAnimal in 'Modelos\uClassAnimal.pas',
   uClassEventoAnimal in 'Modelos\uClassEventoAnimal.pas',
   uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas',
-  uselAnimal in 'uselAnimal.pas' {frmSelAnimal};
+  uselAnimal in 'uselAnimal.pas' {frmSelAnimal},
+  uDaoItemEntrada in 'Dao\uDaoItemEntrada.pas',
+  uClassItemEntrada in 'Modelos\uClassItemEntrada.pas';
 
 {$R *.res}
 

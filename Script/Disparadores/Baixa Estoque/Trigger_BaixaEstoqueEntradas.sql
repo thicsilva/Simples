@@ -19,10 +19,11 @@ BEGIN
    FETCH NEXT FROM ItensProduto INTO @parSetorId, @parCod_Produto,@parQtde_Entrada,@parPco_Entrada
    WHILE @@FETCH_STATUS = 0
    BEGIN
+      FETCH NEXT FROM ItensProduto INTO @parSetorId,@parCod_Produto,@parQtde_Entrada,@parPco_Entrada
+
       IF (@parSetorId = 1)
       BEGIN
         UPDATE T_Produtos set Saldo = Saldo+@parQtde_Entrada, Pco_Compra=@ParPco_Entrada where Codigo=@parCod_Produto AND TIPO_PRODUTO<>'1'
-        FETCH NEXT FROM ItensProduto INTO @parSetorId,@parCod_Produto,@parQtde_Entrada,@parPco_Entrada
 
         SET NOCOUNT ON
 
