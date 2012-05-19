@@ -626,6 +626,7 @@ begin
    lrDiferenca:=0;
    ImpMatricial.imp (pvilinha,001,'---------------------------------------');
    pviLinha:=Pvilinha+1;
+   lrDiferenca := 0;
    ImpMatricial.imp (pvilinha,001,'Diferença..................:');
    impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrDiferenca),[]);
    pviLinha:=Pvilinha+1;
@@ -655,10 +656,9 @@ begin
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
-               'where Seqvenda In ( Select Seqvenda from T_movCaixa '+
-               '                    where ( data_Lancamento>=:parDataIni and '+
-               '                            data_Lancamento<=:parDataFim ) and '+
-               '                               Cod_Caixa=:parCod_Caixa '+lsFiltro+'  ) '+
+               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda and Mov.Data_cad=Itens.Data_cad '+
+               'where Mov.Cod_Caixa=:parCod_Caixa and '+
+               '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
                'Group by Grupo.Codigo,Grupo.Descricao';
    End
    Else
@@ -669,11 +669,11 @@ begin
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
-               'where Seqvenda In ( Select Seqvenda from T_movCaixa '+
-               '                    where ( data_Lancamento>=:parDataIni and '+
-               '                            data_Lancamento<=:parDataFim ) and '+
-               '                               Cod_Caixa=:parCod_Caixa '+lsFiltro+'  ) '+
-               'Group by Prod.Codigo,Prod.Descricao';
+               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda and Mov.Data_cad=Itens.Data_cad '+
+               'where mov.Cod_Caixa=:parCod_Caixa And '+
+               '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
+               'Group by Prod.Codigo,Grupo.Descricao';
+
    End;
 
 
@@ -1387,7 +1387,7 @@ end;
 
 procedure TfrmMovCaixa.btnImprimirClick(Sender: TObject);
 begin
-   RelatorioDeCaixaModelo02
+   RelatorioDeCaixaModelo02;
 end;
 
 procedure TfrmMovCaixa.btnincluirClick(Sender: TObject);
