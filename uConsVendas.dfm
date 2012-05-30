@@ -61,6 +61,7 @@ object frmConsVendas: TfrmConsVendas
       TabOrder = 0
       object GrdVendas: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
+        OnCustomDrawCell = GrdVendasCustomDrawCell
         DataController.DataSource = srcVendas
         DataController.DetailKeyFieldNames = 'Seqvenda'
         DataController.KeyFieldNames = 'SeqVenda'

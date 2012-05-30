@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 435
-    ActivePage = bsSkinTabSheet1
+    ActivePage = tab_Historico
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -2473,7 +2473,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 591
-        Top = -3
+        Top = -5
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -3812,8 +3812,6 @@ object frmCadClientes: TfrmCadClientes
         UseSkinFont = True
         DefaultItemHeight = 20
         SkinDataName = 'tab'
-        ExplicitLeft = -1
-        ExplicitTop = 109
         object bsSkinTabSheet2: TbsSkinTabSheet
           Caption = 'Consulta '
           object cxGrid7: TcxGrid

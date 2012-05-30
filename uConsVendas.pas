@@ -144,6 +144,9 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure checkUsarleitorClick(Sender: TObject);
+    procedure GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -640,6 +643,17 @@ begin
    btnSelecionarClick(btnSelecionar);
 end;
 
+procedure TfrmConsVendas.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
+  ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+  var ADone: Boolean);
+begin
+  IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Cancelada' Then
+     acanvas.Font.color := clred
+  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Finalizado' Then
+     acanvas.Font.color := clGreen;
+
+end;
+
 procedure TfrmConsVendas.BorderodeEntrega1Click(Sender: TObject);
 var liSeqVenda     : Integer;
     trdNrTransacao : TTransactionDesc;
@@ -995,6 +1009,19 @@ end;
 
 procedure TfrmConsVendas.btnEmproducaoClick(Sender: TObject);
 begin
+
+   if cdsVendas.FieldByName('Status').AsString='3' then
+   begin
+      CaixaMensagem( 'O Serviço já foi finalizado, Impossivel Colocar em Produção !', ctAviso, [ cbOK ], 0 );
+      exit;
+   end;
+
+   if cdsVendas.FieldByName('Status').AsString='5' then
+   begin
+      CaixaMensagem( 'O Serviço esta cancelado, Impossivel Colocar em Produção !', ctAviso, [ cbOK ], 0 );
+      exit;
+   end;
+
    if cdsVendas.FieldByName('Status').AsString='2' then
    Begin
       if CaixaMensagem( 'O Serviço ja esta em produção. Deseja Retirar ???', ctConfirma, [ cbSimNao ], 0 )  Then
