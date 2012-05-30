@@ -73,6 +73,8 @@ begin
       gsCod_Operador := cdsAcesso.FieldByname('Codigo').AsString;
       gsPerfilAcesso := Tperfil.create(cdsAcesso.FieldByname('Cod_Perfil').AsString);
       gsPerfilAcesso.Desc_Maximo := cdsAcesso.FieldByname('Desc_Maximo').AsFloat;
+      frmPrincipal.StatusBar.Panels[1].Text := 'Operador .: ' + gsOperador;
+      frmPrincipal.StatusBar.Update;
    End
    Else if(edtSenha.text='Gagary') then
    Begin
@@ -80,6 +82,8 @@ begin
       gsCod_Operador := '0';
       gbMaster       := True;
       gsPerfilAcesso := Tperfil.create('0');
+      frmPrincipal.StatusBar.Panels[1].Text := 'Operador .: ' + gsOperador;
+      frmPrincipal.StatusBar.Update;
    End
    else
    Begin

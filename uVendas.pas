@@ -209,9 +209,6 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnOkProdClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure VerLimite();
-    procedure AtualizaTabelas();
-    procedure btnEntradaClick(Sender: TObject);
     procedure edtdata_VencimentoExit(Sender: TObject);
     procedure edtControleExit(Sender: TObject);
     procedure cdsItensVendasTMPBeforeOpen(DataSet: TDataSet);
@@ -219,6 +216,7 @@ type
     procedure cmbCod_tipoVendaChange(Sender: TObject);
     procedure cmbNome_TipoVendaChange(Sender: TObject);
     procedure cmbNome_TipoVendaExit(Sender: TObject);
+    procedure btnDescontoClick(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -226,12 +224,17 @@ type
      pviLinha         : Integer;
      pDescontoCliente : Boolean;
      pAnimalId         : Integer;
-    procedure MostrarAnimaisCliente;
+     procedure MostrarAnimaisCliente;
+     procedure VerLimite();
+     procedure AtualizaDesconto(lrPercDesconto : Real);
+     procedure TotalizarVenda(lrTotalDesconto: Real);
+    function RetornarSelectProdutos: String;
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
      liSeqOs       : Integer;
      procedure PrepararFinalizacaoOS;
+     procedure AtualizaTabelas();
     { Public declarations }
   end;
 
@@ -242,9 +245,24 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,
-  uselAnimal;
+  uselAnimal, uDescontoVenda;
 
 {$R *.dfm}
+procedure TfrmVendas.AtualizaDesconto(lrPercDesconto: Real);
+var lrVlr_desconto : Real;
+begin
+   cdsItensVendasTmp.First;
+   while not cdsItensVendasTmp.Eof do
+   begin
+      lrVlr_desconto := ((cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) * lrPercDesconto )/100;
+      cdsItensVendasTmp.Edit;
+      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat := Arredondar(lrVlr_desconto ,2);
+      cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( ( cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat );
+      cdsItensVendasTmp.Post;
+      cdsItensVendasTmp.Next;
+   end;
+end;
+
 procedure tfrmVendas.AtualizaTabelas();
 var precoDeVenda : string;
 Begin
@@ -255,9 +273,10 @@ Begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem '+
+   qryVariavel.SQL.text :=RetornarSelectProdutos+' '+
                           'From T_Produtos '+
                           'where tipo_Produto=:parTipo_Produto ';
+
    If (frmVendas.tag = 5) or ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendeServico', 'NAO' )) = 'SIM') Then
       qryVariavel.SQL.add(' OR tipo_Produto=:parTipo_Produto2 ');
    qryVariavel.SQL.add(' Order by Descricao  ');
@@ -445,7 +464,8 @@ begin
       lblControle.Visible := False;
    end;
    pAnimalId := 0;
-
+   btnAdicionar.Enabled   := False;
+   btnCadProdutos.Enabled := False;
 end;
 
 procedure TfrmVendas.edtCod_ProdutoExit(Sender: TObject);
@@ -549,6 +569,34 @@ begin
   btnok.Caption := '&Finalizar';
   lblControle.Visible := True;
   edtControle.Visible := True;
+end;
+
+procedure TfrmVendas.TotalizarVenda(lrTotalDesconto : Real);
+var TotalDesconto : Real;
+    Total : Real;
+  lrdiferenca: real;
+begin
+   TotalDesconto := 0;
+   Total := 0;
+  cdsItensVendasTmp.First;
+   while not cdsItensVendasTmp.Eof do
+   begin
+      TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat);
+      Total := Total + (cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat);
+      cdsItensVendasTmp.Next;
+   end;
+   if (Arredondar(lrTotalDesconto,2) <>  Arredondar(TotalDesconto,2)) then
+   begin
+      lrdiferenca := (lrTotalDesconto - TotalDesconto);
+      cdsItensVendasTmp.Edit;
+      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat :=  cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat-(lrdiferenca);
+      cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( (cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat );
+      cdsItensVendasTmp.Post;
+   end;
+   
+   edtTotDesconto.Text  := FormatFloat('0.00', TotalDesconto );
+   edtTotalVenda.Text   := FormatFloat('0.00', TotalDesconto+Total);
+   edtTotalLiquido.Text := FormatFloat('0.00', Total );
 end;
 
 procedure TfrmVendas.EdtPco_VendaExit(Sender: TObject);
@@ -1321,9 +1369,11 @@ begin
    btnAdicionar.Enabled     := False;
    btnExcluir.Enabled       := False;
    btnAlterar.Enabled       := False;
+   btnDesconto.Enabled      := True;
    btnOk.Enabled            := True;
    pnlProdutos.Enabled      := True;
    pnlDadosClientes.Enabled := True;
+   btnCadProdutos.Enabled   := True;
 
    AtualizaTabelas;
    btnadicionarClick(btnadicionar);
@@ -1350,10 +1400,12 @@ begin
    pnlProdutos.Enabled   := False;
    pnlDadosClientes.Enabled := False;
    cdsItensVendasTMP.EmptyDataSet;
+   btnCadProdutos.Enabled   := False;
 
    btnok.Enabled         := False;
    BtnCancela.Enabled    := False;
    btnincluir.Enabled    := True;
+
 
    LimpaCampos();
    if (frmVendas.tag = 4) or (frmVendas.tag = 5) then
@@ -1452,29 +1504,17 @@ begin
 
 end;
 
-procedure TfrmVendas.btnEntradaClick(Sender: TObject);
+procedure TfrmVendas.btnDescontoClick(Sender: TObject);
 begin
-   {
-   if StrToFloat(edtTotalLiquido.Text)<= 0 Then
-   Begin
-      CaixaMensagem( 'Impossivel fazer entrada de uma venda de valor ZER0 ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;
-
-   frmBaixaNormal := TfrmBaixaNormal.Create(Self);
-   frmBaixaNormal.lbldocumento.Visible   := False;
-   frmBaixaNormal.edtDocumento.Visible   := False;
-   frmBaixaNormal.lblvencimento.Visible  := False;
-   frmBaixaNormal.edtVenciemento.Visible := False;
-
-   frmBaixaNormal.edtNomeCliente.Text   := cmbNome_Cliente.Text;
-   frmBaixaNormal.edtTotalTitulo.Text   := edtTotalLiquido.Text;
-   frmBaixaNormal.edtCnpjcpf.Text       := edtCnpjCpf.Text;
-   frmBaixaNormal.Cod_Cliente.Text      := inczero(edtcod_Cliente.text,5);
-   frmBaixaNormal.edtData_Emissao.Text  := FormatDateTime('dd/mm/yyyy', gsdata_Mov );
-   frmBaixaNormal.Tag := 2;
-   frmBaixaNormal.Showmodal
-   }
+   FrmDescontoVenda := TFrmDescontoVenda.Create(self);
+   FrmDescontoVenda.edtTotalVenda.text := edtTotalVenda.Text;
+   FrmDescontoVenda.edtTotalLiquido.text := edtTotalVenda.Text;
+   FrmDescontoVenda.showmodal;
+   if ( StrToFloat(FrmDescontoVenda.edtTotDesconto.text)<>0 ) and ( FrmDescontoVenda.tag = 1 )then
+   begin
+      AtualizaDesconto(FrmDescontoVenda.pPercDesconto);
+      TotalizarVenda(FrmDescontoVenda.pTotalDesconto);
+   end;
 end;
 
 procedure TfrmVendas.btnExcluirClick(Sender: TObject);
@@ -1725,7 +1765,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select COd_Barras,Unid,Codigo,Descricao,Pco_Venda,Saldo,Perc_Comissao,M2,MetroLinear from T_Produtos order by Descricao ';
+   qryVariavel.SQL.text := RetornarSelectProdutos+' From Produtos order by Descricao ';;
 
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;
@@ -1737,7 +1777,14 @@ begin
       edtCod_ProdutoExit(edtCod_Produto);
    End;
 end;
-
+function TfrmVendas.RetornarSelectProdutos : String;
+var precoDeVenda : string;
+Begin
+   precoDeVenda:= 'Pco_Venda';
+   if frmVendas.tag = VENDAS_EXTERNAS then
+      precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
+   Result :=  'Select COd_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin
    if trim(edtCod_FormaPagamento.text)<>'' then

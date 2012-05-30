@@ -1269,6 +1269,7 @@ object frmVendas: TfrmVendas
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
+        Enabled = False
         OnClick = btnExcluirClick
         ExplicitLeft = 442
         ExplicitTop = 8
@@ -1421,6 +1422,7 @@ object frmVendas: TfrmVendas
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
+        Enabled = False
         OnClick = btnAlterarClick
         ExplicitLeft = 580
         ExplicitTop = 8
@@ -1553,6 +1555,7 @@ object frmVendas: TfrmVendas
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alTop
+    Enabled = False
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 10
       Top = 7
@@ -2432,7 +2435,7 @@ object frmVendas: TfrmVendas
         Spacing = 1
         Layout = blGlyphTop
         Enabled = False
-        OnClick = BtnCancelaClick
+        OnClick = btnDescontoClick
         ExplicitLeft = 122
         ExplicitTop = 12
       end

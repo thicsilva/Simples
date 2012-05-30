@@ -522,7 +522,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
-        Left = 0
+        Left = 563
         Top = 0
         Width = 70
         Height = 49
@@ -573,7 +573,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitTop = -1
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 70
+        Left = 0
         Top = 0
         Width = 563
         Height = 49
@@ -581,7 +581,7 @@ object frmSelDatas: TfrmSelDatas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 65
+        ExplicitLeft = -9
       end
     end
   end

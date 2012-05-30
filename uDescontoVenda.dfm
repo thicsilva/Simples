@@ -48,11 +48,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alRight
-    ExplicitLeft = 71
-    ExplicitTop = 1
-    ExplicitHeight = 153
     object bsSkinStdLabel7: TbsSkinStdLabel
-      Left = 54
+      Left = 66
       Top = 12
       Width = 83
       Height = 20
@@ -74,9 +71,9 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object bsSkinStdLabel9: TbsSkinStdLabel
-      Left = 59
-      Top = 50
-      Width = 78
+      Left = 3
+      Top = 54
+      Width = 150
       Height = 20
       EllipsType = bsetNone
       UseSkinFont = False
@@ -92,7 +89,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      Caption = 'Desconto'
+      Caption = 'Valor do Desconto'
       ParentFont = False
     end
     object bsSkinStdLabel10: TbsSkinStdLabel
@@ -117,8 +114,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object bsSkinStdLabel11: TbsSkinStdLabel
-      Left = 14
-      Top = 94
+      Left = 26
+      Top = 95
       Width = 123
       Height = 20
       EllipsType = bsetNone
@@ -139,8 +136,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object edtTotalVenda: TEditN
-      Left = 143
-      Top = 8
+      Left = 162
+      Top = 12
       Width = 69
       Height = 24
       TabStop = False
@@ -175,8 +172,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       TextHint = True
     end
     object edtTotDesconto: TEditN
-      Left = 143
-      Top = 50
+      Left = 162
+      Top = 54
       Width = 69
       Height = 24
       TabStop = False
@@ -187,7 +184,6 @@ object FrmDescontoVenda: TFrmDescontoVenda
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      ReadOnly = True
       TabOrder = 1
       Text = '0,00'
       OnExit = edtTotDescontoExit
@@ -211,8 +207,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       TextHint = True
     end
     object edtTotalLiquido: TEditN
-      Left = 143
-      Top = 91
+      Left = 162
+      Top = 95
       Width = 69
       Height = 24
       TabStop = False
