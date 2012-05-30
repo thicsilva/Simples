@@ -58,6 +58,7 @@ begin
    ItensVendas.first;
    while not ItensVendas.Eof do
    Begin
+      {
       if ItensVendas.FieldByName('SetorId').asInteger>1 then
       begin
          loDaoSaldo := TDaoSaldo.Create(FConexao);
@@ -69,6 +70,7 @@ begin
          FreeAndNil(loDaoSaldo);
          FreeAndNil(loSaldo);
       end;
+       }
       FQueryModific.ParamByName('parCod_Produto').asInteger   := ItensVendas.FieldByName('Codigo').asInteger;
       FQueryModific.ParamByName('parQtde_Venda').asFloat      := ItensVendas.FieldByName('Qtde_Venda').asFloat;
       FQueryModific.ParamByName('parPco_Venda').asFloat       := ItensVendas.FieldByName('Pco_Venda').asFloat;

@@ -115,7 +115,8 @@ uses
   uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas',
   uselAnimal in 'uselAnimal.pas' {frmSelAnimal},
   uDaoItemEntrada in 'Dao\uDaoItemEntrada.pas',
-  uClassItemEntrada in 'Modelos\uClassItemEntrada.pas';
+  uClassItemEntrada in 'Modelos\uClassItemEntrada.pas',
+  uRelEstoque in 'uRelEstoque.pas' {FrmRelEstoque};
 
 {$R *.res}
 
@@ -125,6 +126,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmSelAnimal, frmSelAnimal);
+  Application.CreateForm(TFrmRelEstoque, FrmRelEstoque);
   Frmlogin.ShowModal;
   Application.Run;
 end.

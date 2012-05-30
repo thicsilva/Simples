@@ -251,7 +251,6 @@ type
     procedure actCadFornecedoresExecute(Sender: TObject);
     procedure actEntradasExecute(Sender: TObject);
     procedure actSelRelVendasExecute(Sender: TObject);
-    procedure actSelRelSaldosExecute(Sender: TObject);
     procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure actSelRelVendaRepresentanteExecute(Sender: TObject);
     procedure actCadUsuariosExecute(Sender: TObject);
@@ -276,6 +275,7 @@ type
     procedure actCadastroDeSetoresExecute(Sender: TObject);
     procedure actTrocaDeUsuarioExecute(Sender: TObject);
     procedure actAnaliseFinanceiraExecute(Sender: TObject);
+    procedure actSelRelSaldosExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -329,7 +329,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
-  uRelAnaliseFinanceira, uDaoEventoAnimal;
+  uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque;
 
 {$R *.dfm}
 
@@ -773,74 +773,9 @@ begin
 end;
 
 procedure TfrmPrincipal.actSelRelSaldosExecute(Sender: TObject);
-var lsNome_Grupo : String;
-    ldTotalGeral : Double;
 begin
-
-   GstituloRel  :='Relatorio Saldo de Prtodutos';
-
-   ImpMatricial.PortaComunicacao          := 'LPT1';
-   ImpMatricial.OpcoesPreview.Preview     := true;
-   ImpMatricial.TamanhoQteLinhas          := 66;
-   ImpMatricial.TamanhoQteColunas         := 80;
-   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
-   ImpMatricial.UsaGerenciadorImpr        := True;
-   ImpMatricial.Abrir;
-
-   qryRelatorio.Close;
-   qryRelatorio.SQL.Text := 'Select Prod.Cod_Grupo, Gru.Descricao as Grupo,Prod.Codigo, Prod.Descricao, Prod.Unid, '+
-                            '       Prod.Saldo,Prod.Pco_Venda '+
-                            'From T_Produtos Prod '+
-                            'Left Join T_Grupos Gru On ' +
-                            '     Gru.Codigo=Prod.Cod_Grupo '+
-                            'where Tipo_Produto=:parTipo_Produto ' +
-                            'Order by Prod.Cod_grupo,Prod.Descricao ';
-   qryRelatorio.ParamByName('parTipo_Produto').AsString := '0';
-
-   {
-   If cmbTipoRel.ItemIndex = 0 Then
-      qryRelatorio.ParamByName('parTipo_Venda').AsString          := 'P'
-   Else
-      qryRelatorio.ParamByName('parTipo_Venda').AsString          := 'S';
-   }
-   cdsRelatorio.Close;
-   cdsRelatorio.ProviderName := dspRelatorio.Name;
-   cdsRelatorio.Open;
-
-   cdsRelatorio.First;
-   ldTotalGeral := 0;
-   while not cdsRelatorio.Eof do
-   Begin
-      if lsNome_Grupo<>cdsRelatorio.FieldByName('Grupo').AsString then
-      Begin
-         pviLinha:=Pvilinha+1;
-         impmatricial.Imp(pvilinha,001,inczero(cdsRelatorio.FieldByName('Cod_Grupo').AsString,4)+'-'+cdsRelatorio.FieldByName('Grupo').AsString );
-         pviLinha:=Pvilinha+1;
-         impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-         pviLinha:=Pvilinha+1;
-         lsNome_Grupo:=cdsRelatorio.FieldByName('Grupo').AsString;
-      End;
-      impmatricial.Imp(pvilinha,001,IncZero(cdsRelatorio.FieldByName('Codigo').AsString,5)+' '+cdsRelatorio.FieldByName('Descricao').AsString );
-      impmatricial.Imp(pvilinha,050,cdsRelatorio.FieldByName('unid').AsString );
-      impmatricial.Impd(pvilinha,060,FormatFloat('0',cdsRelatorio.FieldByName('saldo').AsFloat),[] );
-      impmatricial.Impd(pvilinha,070,FormatFloat(',0.00',cdsRelatorio.FieldByName('Pco_Venda').AsFloat),[] );
-      if cdsRelatorio.FieldByName('saldo').AsFloat > 0 then
-         impmatricial.Impd(pvilinha,080,FormatFloat(',0.00',(cdsRelatorio.FieldByName('saldo').AsFloat*cdsRelatorio.FieldByName('Pco_Venda').AsFloat)),[] )
-      Else
-         impmatricial.Impd(pvilinha,080,FormatFloat(',0.00',0 ),[] );
-
-      pviLinha:=Pvilinha+1;
-      if pvilinha>60 then
-         impmatricial.Novapagina;
-      if cdsRelatorio.FieldByName('saldo').AsFloat > 0 then
-         ldTotalGeral := ldTotalGeral + (cdsRelatorio.FieldByName('saldo').AsFloat*cdsRelatorio.FieldByName('Pco_Venda').AsFloat);
-      cdsRelatorio.next;
-   End;
-   impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-   pviLinha:=Pvilinha+1;
-   impmatricial.imp(pviLinha,001,'Total do Estoque....');
-   impmatricial.Impd(pvilinha,080,FormatFloat(',0.00',ldTotalGeral),[] );
-   impmatricial.Fechar;
+   frmRelEstoque := TfrmRelEstoque.create(Self);
+   frmRelEstoque.showModaL;
 end;
 
 procedure TfrmPrincipal.actSelRelVendaRepresentanteExecute(Sender: TObject);
