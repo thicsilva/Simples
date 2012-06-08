@@ -222,6 +222,9 @@ type
     PanelEventos: TbsSkinExPanel;
     bsSkinDBGrid1: TbsSkinDBGrid;
     srcEventoAnimal: TDataSource;
+    MenuManegerBar13: TdxBar;
+    actRomaneioEntrega: TAction;
+    dxBarLargeButton22: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -276,6 +279,7 @@ type
     procedure actTrocaDeUsuarioExecute(Sender: TObject);
     procedure actAnaliseFinanceiraExecute(Sender: TObject);
     procedure actSelRelSaldosExecute(Sender: TObject);
+    procedure actRomaneioEntregaExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -329,7 +333,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
-  uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque;
+  uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga;
 
 {$R *.dfm}
 
@@ -748,6 +752,12 @@ begin
    End;}
    frmRemessaParaVenda := TfrmRemessaParaVenda.Create(Self);
    frmRemessaParaVenda.showmodal
+end;
+
+procedure TfrmPrincipal.actRomaneioEntregaExecute(Sender: TObject);
+begin
+   frmRomaneioDeEntrega := TfrmRomaneioDeEntrega.Create(Self);
+   frmRomaneioDeEntrega.ShowModal
 end;
 
 procedure TfrmPrincipal.actSelRelEntradasExecute(Sender: TObject);
