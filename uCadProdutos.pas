@@ -184,6 +184,10 @@ type
     Column_CodigoFornecedor: TcxGridDBColumn;
     Column_SetorID: TcxGridDBColumn;
     ransferenciaEntreSetores1: TMenuItem;
+    bsSkinStdLabel14: TbsSkinStdLabel;
+    bsSkinStdLabel15: TbsSkinStdLabel;
+    edtPesoBruto: TbsSkinNumericEdit;
+    edtPesoLiquido: TbsSkinNumericEdit;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -274,6 +278,8 @@ Begin
    edtUnid.Text       :='';
    chkMetroQuadrado.Checked := False;
    cmbTipoProduto.ItemIndex := 0 ;
+   edtPesoBruto.text := '0,000';
+   edtPesoLiquido.text := '0,000';
 End;
 
 
@@ -406,12 +412,14 @@ begin
    if cmbNome_Fabricante.Visible then
       cdsCadProdutos.FieldByName('Cod_Fabricante').AsInteger  := cmbNome_Fabricante.KeyValue;
 
-   cdsCadProdutos.FieldByName('M2').AsString               := 'N';
+   cdsCadProdutos.FieldByName('M2').AsString           := 'N';
    if chkMetroQuadrado.Checked Then
-      cdsCadProdutos.FieldByName('M2').AsString            := 'S';
-   cdsCadProdutos.FieldByName('Tipo_Produto').AsString     := IntToStr(cmbTipoProduto.ItemIndex);
-   cdsCadProdutos.FieldByName('Perc_Comissao').AsFloat     := StrToFloat( edtComissao.Text );
-   cdsCadProdutos.FieldByName('MetroLinear').AsBoolean     := chkMetroLinear.Checked;
+      cdsCadProdutos.FieldByName('M2').AsString        := 'S';
+   cdsCadProdutos.FieldByName('Tipo_Produto').AsString := IntToStr(cmbTipoProduto.ItemIndex);
+   cdsCadProdutos.FieldByName('Perc_Comissao').AsFloat := StrToFloat( edtComissao.Text );
+   cdsCadProdutos.FieldByName('MetroLinear').AsBoolean := chkMetroLinear.Checked;
+   cdsCadProdutos.FieldByName('PesoLiquido').AsFloat   := StrTofloat(edtPesoLiquido.Text);
+   cdsCadProdutos.FieldByName('PesoBruto').AsFloat     := StrTofloat(edtPesoBruto.Text);
    cdsCadProdutos.Post;
 
    If cdsCadProdutos.ChangeCount > 0  Then // se houve mudancas
@@ -658,6 +666,9 @@ begin
    cmbTipoProduto.ItemIndex := cdsCadProdutos.FieldByName('Tipo_Produto').AsInteger;
    edtComissao.Text  := FormatFloat('0.00', cdsCadProdutos.FieldByName('Perc_Comissao').AsFloat);
    vlr_VendaAnt      := cdsCadProdutos.FieldByName('Pco_Venda').AsFloat;
+   edtPesoBruto.Text   := FormatFloat('0.000',cdsCadProdutos.FieldByName('PesoBruto').AsFloat);
+   edtPesoLiquido.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('PesoLiquido').AsFloat);
+
 
    BtnIncluir.Enabled := False;
    BtnAlterar.Enabled := False;

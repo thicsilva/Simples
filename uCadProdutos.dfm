@@ -341,10 +341,10 @@ object frmCadProdutos: TfrmCadProdutos
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
-        Left = 76
+        Left = 73
         Top = 19
         Width = 530
-        Height = 294
+        Height = 310
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinEntradaDados
@@ -630,6 +630,40 @@ object frmCadProdutos: TfrmCadProdutos
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Codigo do Fornecedor'
+        end
+        object bsSkinStdLabel14: TbsSkinStdLabel
+          Left = 56
+          Top = 283
+          Width = 55
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Peso Bruno'
+        end
+        object bsSkinStdLabel15: TbsSkinStdLabel
+          Left = 306
+          Top = 283
+          Width = 61
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Peso Liquido'
         end
         object edtDescricao: TbsSkinEdit
           Left = 120
@@ -1240,6 +1274,78 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 10
           ParentFont = False
           TabOrder = 18
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtPesoBruto: TbsSkinNumericEdit
+          Left = 117
+          Top = 280
+          Width = 84
+          Height = 18
+          Text = '0,000'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          Decimal = 3
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 19
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtPesoLiquido: TbsSkinNumericEdit
+          Left = 373
+          Top = 280
+          Width = 84
+          Height = 18
+          Text = '0,000'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          Decimal = 3
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 20
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -5816,7 +5922,7 @@ object frmCadProdutos: TfrmCadProdutos
         Index = 0
       end>
     Left = 392
-    Top = 248
+    Top = 232
   end
   object OpenFigura: TOpenPictureDialog
     Left = 332
