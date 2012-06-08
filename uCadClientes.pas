@@ -333,6 +333,8 @@ type
     srcEventosAnimais: TDataSource;
     PopapAnimais: TPopupMenu;
     MenuItem1: TMenuItem;
+    bsSkinStdLabel24: TbsSkinStdLabel;
+    edtSequenciaEntrega: TbsSkinSpinEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -549,6 +551,7 @@ Begin
    edtTelefone.text  := '';
    pvsCNPJCPF        := '';
    edtCnpjCpf.Text   := '';
+   edtSequenciaEntrega.Text := '0'; 
    edtResponsavel.Text := '';
    edtLimiteCredito.Value  := 0.00;
    cmbStatusCliente.ItemIndex := 0;
@@ -666,7 +669,8 @@ begin
    cdsCadClientes.FieldByName('Qtde_PedAberto').AsInteger := StrToInt(edtNumeroPedAberto.Text);
    cdsCadClientes.FieldByName('Pto_referencia').AsString  := edtPto_Referencia.Text;
    cdsCadClientes.FieldByName('Contrato').AsString        := edtContrato.Text;
-   cdsCadClientes.FieldByName('InscricaoEstadual').AsString        := edtInscricaoEstadual.Text;
+   cdsCadClientes.FieldByName('InscricaoEstadual').AsString := edtInscricaoEstadual.Text;
+   cdsCadClientes.FieldByName('SequenciaEntrega').AsInteger := StrtoInt(edtSequenciaEntrega.Text);
    cdsCadClientes.Post;
 
    If cdsCadClientes.ChangeCount > 0  Then // se houve mudancas
@@ -821,6 +825,7 @@ begin
    EdtCelular.Text            := cdspesquisa.FieldByName('Celular').AsString;
    Edtresponsavel.Text        := cdspesquisa.FieldByName('Responsavel').AsString;
    edtLimiteCredito.Value     := cdspesquisa.FieldByName('Limite_Credito').AsFloat;
+   edtSequenciaEntrega.Value  := cdspesquisa.FieldByName('SequenciaEntrega').AsInteger;
 
    if not cdspesquisa.FieldByName('Cod_Funcionario').IsNull then
    Begin
