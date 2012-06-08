@@ -84,6 +84,8 @@ type
     chkImprimeComprovanteVenda: TbsSkinCheckRadioBox;
     bsSkinLabel8: TbsSkinLabel;
     EdtNumeroDeTurnos: TbsSkinSpinEdit;
+    Vendas: TbsSkinTabSheet;
+    chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -95,12 +97,15 @@ type
     procedure GravarParametrosAdiministrativos;
     procedure GravarParametrosImpressao;
     procedure GravarParametrosGerais;
+    procedure GravarParametrosVendas;
 
     {Recuperação dos parametros}
     procedure RecuperarParametrosAdiministrativos;
     procedure RecuperarParametrosContasAReceber;
     procedure RecuperarParametrosImpressao;
     procedure RecuperarParametrosGerais;
+    procedure RecuperarParametrosVendas;
+
     procedure CarregarTabelas;
     procedure CarregarTodosOsParametros;
 
@@ -128,6 +133,7 @@ begin
    GravarParametrosContaAReceber;
    GravarParametrosImpressao;
    GravarParametrosGerais;
+   GravarParametrosVendas;
 
    //[parametros de sistema]
    gsParametros.WriteString('ACESSODADOS','HostName',edtHostName.text);
@@ -210,6 +216,7 @@ begin
    RecuperarParametrosContasAReceber;
    RecuperarParametrosImpressao;
    RecuperarParametrosGerais;
+   RecuperarParametrosVendas;
 
    CarregarTodosOsParametros;
 end;
@@ -246,9 +253,19 @@ begin
    gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteServico',RetornaSimouNao(chkImprimeComprovanteServico.Checked),gsOperador );
 end;
 
+procedure TfrmParametros.GravarParametrosVendas;
+begin
+   gParametros.Gravar( '', '[VENDA]', 'NaoMostraTipoDePagamento',RetornaSimouNao(chkNaoMostraTipoDePagamento.Checked),gsOperador );
+end;
+
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
 begin
    chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
+end;
+
+procedure TfrmParametros.RecuperarParametrosVendas;
+begin
+   chkNaoMostraTipoDePagamento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' )));
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;

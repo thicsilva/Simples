@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 552
     Height = 340
-    ActivePage = bsSkinTabSheet1
+    ActivePage = Vendas
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1547,6 +1547,41 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Permitir que o caixa marque como entregue  uma ordem de servi'#231'o'
+      end
+    end
+    object Vendas: TbsSkinTabSheet
+      Caption = 'Vendas'
+      ExplicitLeft = 233
+      ExplicitTop = -100
+      object chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox
+        Left = 11
+        Top = 4
+        Width = 357
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'N'#227'o mostra tipo  de venda'
       end
     end
   end
