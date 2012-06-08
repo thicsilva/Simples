@@ -25,7 +25,7 @@ uses
   Dialogs, DB, DBClient, Provider, ADODB, StdCtrls, bsSkinCtrls, Mask,
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
-  SimpleDS, sqltimst, RDprint, uClassVenda,uClassItemvenda,uDaoItemVenda;
+  SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -34,13 +34,11 @@ const
     LANCAMENTO_MATERIAL = 5;
 
 type
-  TfrmVendas = class(TForm)
+  TfrmVendas = class(TFormBase)
     dspItensVendas: TDataSetProvider;
     cdsCadClientes: TClientDataSet;
     srcCadClientes: TDataSource;
     dspVariavel: TDataSetProvider;
-    SkinForm: TbsBusinessSkinForm;
-    bsSkinStatusBar1: TbsSkinStatusBar;
     pnlDadosClientes: TbsSkinPanel;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
@@ -435,18 +433,16 @@ begin
    lblVencimento.Visible      := False;
    edtdata_Vencimento.Visible := False;
    cmbRota.Visible            := False;
-   lblNomeTipoVenda.Visible   := False;
-   cmbNome_tipoVenda.Visible  := False;
-   edtCod_TipoVenda.Visible   := False;
+
+   lblNomeTipoVenda.Visible   := (Not RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' ))));
+   cmbNome_tipoVenda.Visible  := (Not RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' ))));
+   edtCod_TipoVenda.Visible   := (Not RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' ))));
 
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
    Begin
       lblVencimento.Visible      := True;
       edtdata_Vencimento.Visible := True;
       cmbRota.Visible            := True;
-      lblNomeTipoVenda.Visible   := True;
-      edtCod_TipoVenda.Visible   := True;
-      cmbNome_TipoVenda.Visible  := True;
       lblControle.Visible        := True;
       edtControle.Visible        := True;
    End;
@@ -493,6 +489,11 @@ begin
          edtCod_TipoVenda.Text      := '';
          CaixaMensagem( 'Vendedor nao localizado', ctAviso, [ cbOk ], 0 );
       End;
+      try
+        edtCod_Funcionario.SetFocus;
+      Except
+
+      end;
    End;
 
 end;
@@ -1594,12 +1595,16 @@ begin
       IF length(Trim(edtCod_Cliente.Text))<=5 Then
       Begin
          cmbCod_Cliente.KeyValue := edtCod_Cliente.text;
-        // cmbCod_ClienteChange(cmbCod_Cliente);
          if Trim(cmbNome_Cliente.Text) = '' Then
          Begin
             cmbNome_Cliente.KeyValue := Null;
             edtCod_Cliente.Text      := '';
             CaixaMensagem( 'Cliente Não Encontrado ', ctAviso, [ cbOk ], 0 );
+            try
+              edtCod_Cliente.SetFocus;
+            Except
+
+            End;
          End;
       End
       Else
@@ -1796,6 +1801,11 @@ begin
          cmbNome_FormaPagamento.KeyValue := Null;
          edtCod_FormaPagamento.Text      := '';
          CaixaMensagem( 'Forma de pagamento não encontrada ', ctAviso, [ cbOk ], 0 );
+         try
+           edtCod_FormaPagamento.SetFocus
+         Except
+
+         end;
       End;
    End;
 end;
@@ -1811,6 +1821,11 @@ begin
          cmbNome_Funcionario.KeyValue := Null;
          edtCod_Funcionario.Text      := '';
          CaixaMensagem( 'Vendedor nao localizado', ctAviso, [ cbOk ], 0 );
+         try
+           edtCod_Funcionario.SetFocus
+         Except
+
+         end;
       End;
    End;
 end;

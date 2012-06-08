@@ -17,50 +17,13 @@ object frmVendas: TfrmVendas
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object bsSkinStatusBar1: TbsSkinStatusBar
-    Left = 0
-    Top = 514
-    Width = 760
-    Height = 21
-    HintImageIndex = 0
-    TabOrder = 0
-    SkinData = frmPrincipal.SkinPrincipal
-    SkinDataName = 'statusbar'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = 14
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    DefaultWidth = 0
-    DefaultHeight = 0
-    UseSkinFont = True
-    RibbonStyle = False
-    ImagePosition = bsipDefault
-    TransparentMode = False
-    CaptionImageIndex = -1
-    RealHeight = -1
-    AutoEnabledControls = True
-    CheckedMode = False
-    Checked = False
-    DefaultAlignment = taLeftJustify
-    DefaultCaptionHeight = 22
-    BorderStyle = bvNone
-    CaptionMode = False
-    RollUpMode = False
-    RollUpState = False
-    NumGlyphs = 1
-    Spacing = 2
-    Caption = 'bsSkinStatusBar1'
-    Align = alBottom
-    SizeGrip = False
-  end
   object pnlDadosClientes: TbsSkinPanel
     Left = 0
     Top = 53
     Width = 760
     Height = 155
     HintImageIndex = 0
-    TabOrder = 1
+    TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1187,7 +1150,7 @@ object frmVendas: TfrmVendas
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
-    TabOrder = 2
+    TabOrder = 1
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -1526,7 +1489,7 @@ object frmVendas: TfrmVendas
     Width = 760
     Height = 55
     HintImageIndex = 0
-    TabOrder = 3
+    TabOrder = 2
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1914,11 +1877,11 @@ object frmVendas: TfrmVendas
   end
   object bsSkinScrollBar1: TbsSkinScrollBar
     Left = 0
-    Top = 495
+    Top = 516
     Width = 760
     Height = 19
     HintImageIndex = 0
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     SkinDataName = 'hscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1941,6 +1904,7 @@ object frmVendas: TfrmVendas
     Position = 0
     SmallChange = 127
     LargeChange = 127
+    ExplicitTop = 495
   end
   object edtVlr_Desconto: TbsSkinEdit
     Left = 445
@@ -1966,7 +1930,7 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
     Visible = False
     LeftImageIndex = -1
     LeftImageHotIndex = -1
@@ -1979,9 +1943,9 @@ object frmVendas: TfrmVendas
     Left = 741
     Top = 307
     Width = 19
-    Height = 188
+    Height = 209
     HintImageIndex = 0
-    TabOrder = 6
+    TabOrder = 5
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'vscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -2004,14 +1968,15 @@ object frmVendas: TfrmVendas
     Position = 1
     SmallChange = 1
     LargeChange = 1
+    ExplicitHeight = 188
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
     Top = 307
     Width = 741
-    Height = 188
+    Height = 209
     HintImageIndex = 0
-    TabOrder = 7
+    TabOrder = 6
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'grid'
     Transparent = False
@@ -2060,7 +2025,7 @@ object frmVendas: TfrmVendas
     Font.Style = [fsBold]
     ParentFont = False
     ReadOnly = True
-    TabOrder = 8
+    TabOrder = 7
     Text = '0,00'
     Visible = False
     ColorOnFocus = clInactiveBorder
@@ -2106,7 +2071,7 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
     Visible = False
     LeftImageIndex = -1
     LeftImageHotIndex = -1
@@ -2129,7 +2094,7 @@ object frmVendas: TfrmVendas
     Font.Style = []
     ParentFont = False
     ScrollBars = ssBoth
-    TabOrder = 10
+    TabOrder = 9
     Visible = False
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clBlack
@@ -2157,7 +2122,7 @@ object frmVendas: TfrmVendas
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
-    TabOrder = 11
+    TabOrder = 10
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -2462,61 +2427,6 @@ object frmVendas: TfrmVendas
     DataSet = QryVariavel
     Left = 277
     Top = 333
-  end
-  object SkinForm: TbsBusinessSkinForm
-    QuickButtons = <>
-    QuickButtonsShowHint = False
-    QuickButtonsShowDivider = True
-    ClientInActiveEffect = False
-    ClientInActiveEffectType = bsieSemiTransparent
-    DisableSystemMenu = False
-    AlwaysResize = False
-    PositionInMonitor = bspDefault
-    UseFormCursorInNCArea = False
-    MaxMenuItemsInWindow = 0
-    ClientWidth = 0
-    ClientHeight = 0
-    HideCaptionButtons = False
-    AlwaysShowInTray = False
-    LogoBitMapTransparent = False
-    AlwaysMinimizeToTray = False
-    UseSkinFontInMenu = True
-    ShowIcon = False
-    MaximizeOnFullScreen = False
-    AlphaBlend = False
-    AlphaBlendAnimation = True
-    AlphaBlendValue = 200
-    ShowObjectHint = False
-    MenusAlphaBlend = False
-    MenusAlphaBlendAnimation = False
-    MenusAlphaBlendValue = 200
-    DefCaptionFont.Charset = DEFAULT_CHARSET
-    DefCaptionFont.Color = clBtnText
-    DefCaptionFont.Height = 14
-    DefCaptionFont.Name = 'Arial'
-    DefCaptionFont.Style = [fsBold]
-    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
-    DefInActiveCaptionFont.Color = clBtnShadow
-    DefInActiveCaptionFont.Height = 14
-    DefInActiveCaptionFont.Name = 'Arial'
-    DefInActiveCaptionFont.Style = [fsBold]
-    DefMenuItemHeight = 20
-    DefMenuItemFont.Charset = DEFAULT_CHARSET
-    DefMenuItemFont.Color = clWindowText
-    DefMenuItemFont.Height = 14
-    DefMenuItemFont.Name = 'Arial'
-    DefMenuItemFont.Style = []
-    UseDefaultSysMenu = True
-    SkinData = frmPrincipal.SkinPrincipal
-    MinHeight = 0
-    MinWidth = 0
-    MaxHeight = 0
-    MaxWidth = 0
-    Magnetic = False
-    MagneticSize = 5
-    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 390
-    Top = 304
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
