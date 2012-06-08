@@ -116,7 +116,8 @@ uses
   uselAnimal in 'uselAnimal.pas' {frmSelAnimal},
   uDaoItemEntrada in 'Dao\uDaoItemEntrada.pas',
   uClassItemEntrada in 'Modelos\uClassItemEntrada.pas',
-  uRelEstoque in 'uRelEstoque.pas' {FrmRelEstoque};
+  uRelEstoque in 'uRelEstoque.pas' {FrmRelEstoque},
+  uRomaneioDeCarga in 'uRomaneioDeCarga.pas' {frmRomaneioDeEntrega};
 
 {$R *.res}
 
@@ -127,6 +128,7 @@ begin
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmSelAnimal, frmSelAnimal);
   Application.CreateForm(TFrmRelEstoque, FrmRelEstoque);
+  Application.CreateForm(TfrmRomaneioDeEntrega, frmRomaneioDeEntrega);
   Frmlogin.ShowModal;
   Application.Run;
 end.

@@ -8,6 +8,8 @@ delete from t_itensvendas
 go
 delete from t_ctasreceber
 go
+delete from T_movCaixa
+go
 delete from t_vendas
 go
 delete from t_produtos
@@ -23,4 +25,6 @@ go
 delete from t_Rotas
 go 
 delete from t_funcionarios
+
+
 

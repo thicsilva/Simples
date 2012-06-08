@@ -33,6 +33,9 @@ type TDaoEstrutura = class
     procedure Adicionar_AnimalId_na_Tabela_Vendas;
     procedure CriarTabela_Animal;
     procedure CrateTabela_AventoAnimais;
+    procedure Adicionar_PesoBrunto_na_Tabela_Produtos;
+    procedure Adicionar_PesoLiquido_na_Tabela_Produtos;
+    procedure Adicionar_Sequenciaentrega_na_Tabela_Clientes;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -54,6 +57,35 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_Sequenciaentrega_na_Tabela_Clientes;
+begin
+   if not ExisteCampo( 'T_Clientes', 'SequenciaEntrega', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Clientes ADD SequenciaEntrega int';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+procedure TDaoEstrutura.Adicionar_PesoBrunto_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'PesoBruto', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD PesoBruto Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+procedure TDaoEstrutura.Adicionar_PesoLiquido_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'PesoLiquido', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD PesoLiquido float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 procedure TDaoEstrutura.Adicionar_CodigoFornecedor_na_Tabela_Produtos;
 begin
@@ -375,7 +407,9 @@ begin
   CriarTabela_Animal;
   CrateTabela_AventoAnimais;
   Adicionar_AnimalId_na_Tabela_Vendas;
-  
+  Adicionar_PesoBrunto_na_Tabela_Produtos;
+  Adicionar_PesoLiquido_na_Tabela_Produtos;
+  Adicionar_Sequenciaentrega_na_Tabela_Clientes;
 end;
 
 
@@ -451,6 +485,17 @@ Begin
       Result := llstTemp;
    End;
 End;
+{
+create Table Romaneio ( ID int Identity(1,1),
+                        Total Float,
+                        PesoB_Total Float,
+                        PesoL_total Float,
+                        Data_Cadastro Datetime,
+                        Data_movimento DateTime,
+                        Data_Atualizacao DateTime,
+                        Operador Varchar(50),
+                        Cod_Emp int
+                       )
 
-
+ }
 end.
