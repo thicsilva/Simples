@@ -11,6 +11,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object bsSkinCoolBar3: TbsSkinCoolBar
@@ -30,8 +32,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitLeft = -52
-    ExplicitWidth = 760
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -78,7 +78,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 705
+        Left = 671
         Top = 0
         Width = 70
         Height = 49
@@ -112,12 +112,13 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Align = alLeft
         Spacing = 2
         Layout = blGlyphTop
-        ExplicitLeft = 677
+        OnClick = btnFecharClick
+        ExplicitLeft = 764
         ExplicitTop = 12
         ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 70
+        Left = 97
         Top = 0
         Width = 83
         Height = 49
@@ -125,11 +126,13 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 70
+        ExplicitTop = -1
       end
-      object btnok: TbsSkinSpeedButton
+      object btnGerar: TbsSkinSpeedButton
         Left = 0
         Top = 0
-        Width = 70
+        Width = 97
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -155,19 +158,66 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '&Ok'
+        Caption = '&Gerar Romaneio'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
-        Layout = blGlyphTop
-        Enabled = False
+        OnClick = btnGerarClick
         ExplicitLeft = -6
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 153
+        Left = 180
         Top = 0
-        Width = 552
+        Width = 213
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitTop = -1
+      end
+      object btnCancelar: TbsSkinSpeedButton
+        Left = 393
+        Top = 0
+        Width = 112
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 70
+        DefaultHeight = 40
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 4
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Cancelar Digitacao'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 2
+        OnClick = btnCancelarClick
+      end
+      object bsSkinBevel3: TbsSkinBevel
+        Left = 505
+        Top = 0
+        Width = 166
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
@@ -176,7 +226,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       end
     end
   end
-  object bsSkinPageControl1: TbsSkinPageControl
+  object pagGeral: TbsSkinPageControl
     Left = 0
     Top = 53
     Width = 811
@@ -190,6 +240,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    OnChange = pagGeralChange
     MouseWheelSupport = False
     TabExtededDraw = False
     TabsOffset = 0
@@ -207,25 +258,18 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     UseSkinFont = True
     DefaultItemHeight = 20
     SkinDataName = 'tab'
-    ExplicitWidth = 708
     object PagNovoRomaneio: TbsSkinTabSheet
       Caption = 'Inclus'#227'o de Romaneio'
-      ExplicitLeft = 2
-      ExplicitWidth = 706
       object cxGrid1: TcxGrid
         Left = 0
-        Top = 70
+        Top = 81
         Width = 809
-        Height = 296
+        Height = 285
         Align = alClient
         TabOrder = 0
-        ExplicitTop = 76
-        ExplicitWidth = 706
         object GrdVendas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
-          DataController.DataSource = srcRomaneio
-          DataController.DetailKeyFieldNames = 'Seqvenda'
-          DataController.KeyFieldNames = 'SeqVenda'
+          DataController.DataSource = srcVendasRomaneio
           DataController.Summary.DefaultGroupSummaryItems = <
             item
               Format = '0.00'
@@ -276,7 +320,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
             Width = 60
           end
           object GrdVendasClienteId: TcxGridDBColumn
-            DataBinding.FieldName = 'Codigo'
+            Caption = 'Codigo'
+            DataBinding.FieldName = 'ClienteId'
             Width = 60
           end
           object GrdVendasNome_cliente: TcxGridDBColumn
@@ -288,7 +333,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
             DataBinding.FieldName = 'Vendedor'
           end
           object GrdVendasDataVenda: TcxGridDBColumn
-            DataBinding.FieldName = 'Data da Venda'
+            Caption = 'Data da Venda'
+            DataBinding.FieldName = 'DataVenda'
             Width = 95
           end
           object GrdVendasTotal_Financeiro: TcxGridDBColumn
@@ -297,7 +343,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
             Width = 80
           end
           object GrdVendasTotal_Peso: TcxGridDBColumn
-            DataBinding.FieldName = 'Peso B Total'
+            Caption = 'PesoB Total'
+            DataBinding.FieldName = 'Total_Peso'
             Width = 90
           end
         end
@@ -387,7 +434,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Left = 0
         Top = 0
         Width = 809
-        Height = 70
+        Height = 81
         HintImageIndex = 0
         TabOrder = 1
         SkinData = frmPrincipal.SkinPrincipal
@@ -414,11 +461,11 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Sizeable = False
         Align = alTop
         Caption = 'Incluir Vendas no Romaneio'
+        ExplicitLeft = -1
         ExplicitTop = -6
-        ExplicitWidth = 706
         object bsSkinLabel1: TbsSkinLabel
           Left = 24
-          Top = 32
+          Top = 27
           Width = 97
           Height = 21
           HintImageIndex = 0
@@ -448,8 +495,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         end
         object edtNumeroVenda: TbsSkinEdit
           Left = 127
-          Top = 32
-          Width = 130
+          Top = 27
+          Width = 91
           Height = 18
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -478,8 +525,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           RightImageDownIndex = -1
         end
         object bsSkinButton3: TbsSkinButton
-          Left = 580
-          Top = 32
+          Left = 572
+          Top = 34
           Width = 107
           Height = 28
           HintImageIndex = 0
@@ -510,10 +557,11 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Caption = '    &Adicionar'
           NumGlyphs = 1
           Spacing = 1
+          OnClick = bsSkinButton3Click
         end
         object bsSkinButton1: TbsSkinButton
-          Left = 693
-          Top = 32
+          Left = 685
+          Top = 34
           Width = 107
           Height = 28
           HintImageIndex = 0
@@ -544,46 +592,452 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Caption = '    &Remover'
           NumGlyphs = 1
           Spacing = 1
+          OnClick = bsSkinButton1Click
+        end
+        object edtFuncionarioId: TbsSkinEdit
+          Left = 127
+          Top = 51
+          Width = 91
+          Height = 18
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Alignment = taRightJustify
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtFuncionarioIdExit
+        end
+        object cmbNome_Funcionario: TbsSkinDBLookupComboBox
+          Left = 224
+          Top = 51
+          Width = 299
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 5
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao'
+          ListSource = srcFuncionarios
+          OnChange = cmbNome_FuncionarioChange
+        end
+        object bsSkinLabel2: TbsSkinLabel
+          Left = 24
+          Top = 51
+          Width = 97
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 6
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Caption = 'Motorista'
+          AutoSize = False
         end
       end
     end
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta Romaneio'
-      ExplicitLeft = 2
-      ExplicitWidth = 706
+      object cxGrid2: TcxGrid
+        Left = 0
+        Top = 25
+        Width = 809
+        Height = 341
+        Align = alClient
+        TabOrder = 0
+        object GridRomaneio: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = srcRomaneios
+          DataController.Summary.DefaultGroupSummaryItems = <
+            item
+              Format = '0'
+              Kind = skCount
+            end>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Format = '0'
+              Kind = skCount
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          OptionsView.GroupSummaryLayout = gslAlignWithColumns
+          Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+          object GridRomaneioCodigo: TcxGridDBColumn
+            Caption = 'N'#186' Romaneio'
+            DataBinding.FieldName = 'Id'
+            Width = 50
+          end
+          object GridRomaneioData_cad: TcxGridDBColumn
+            Caption = 'Cadastrado Em'
+            DataBinding.FieldName = 'Data_cadastro'
+            Width = 100
+          end
+          object GridRomaneioCod_Emp: TcxGridDBColumn
+            Caption = 'Valor Total'
+            DataBinding.FieldName = 'Total'
+            Width = 76
+          end
+          object GridRomaneioPeso_total: TcxGridDBColumn
+            Caption = 'Peso Total'
+            DataBinding.FieldName = 'PesoB_total'
+            Width = 80
+          end
+          object GridRomaneioQtde_Venda: TcxGridDBColumn
+            Caption = 'Quant. Vendas'
+            DataBinding.FieldName = 'Qtde_Vendas'
+            Width = 91
+          end
+          object GridRomaneioMotorista: TcxGridDBColumn
+            Caption = 'Motorista Responsavel'
+            DataBinding.FieldName = 'Motorista'
+            Width = 270
+          end
+          object GridRomaneioOperador: TcxGridDBColumn
+            DataBinding.FieldName = 'Operador'
+            Width = 100
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = GridRomaneio
+        end
+      end
+      object bsSkinPanel1: TbsSkinPanel
+        Left = 0
+        Top = 0
+        Width = 809
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinDataName = 'panel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taLeftJustify
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = False
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = 'bsSkinPanel1'
+        Align = alTop
+        object bsSkinButton4: TbsSkinButton
+          Left = 304
+          Top = 0
+          Width = 201
+          Height = 26
+          HintImageIndex = 0
+          TabOrder = 0
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 6
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '    &Relatorio de Produtos'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = bsSkinButton4Click
+        end
+        object bsSkinButton5: TbsSkinButton
+          Left = 560
+          Top = 0
+          Width = 201
+          Height = 25
+          HintImageIndex = 0
+          TabOrder = 1
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 6
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '    &Relatorio financeiro'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = bsSkinButton5Click
+        end
+        object bsSkinButton2: TbsSkinButton
+          Left = 48
+          Top = -1
+          Width = 201
+          Height = 26
+          HintImageIndex = 0
+          TabOrder = 2
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 4
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = 'Cancelar Romaneio'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = bsSkinButton2Click
+        end
+      end
     end
   end
-  object cdsRomaneio: TClientDataSet
+  object cdsVendasRomaneio: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
+    AfterOpen = cdsVendasRomaneioAfterOpen
     Left = 400
     Top = 248
-    object cdsRomaneioNumeroVenda: TIntegerField
+    Data = {
+      BC0000009619E0BD010000001800000007000000000003000000BC000B4E756D
+      65726F56656E6461040001000000000009436C69656E74654964040001000000
+      00000C4E6F6D655F636C69656E74650100490000000100055749445448020002
+      003C000856656E6465646F720100490000000100055749445448020002001400
+      094461746156656E6461080008000000000010546F74616C5F46696E616E6365
+      69726F08000400000000000A546F74616C5F5065736F08000400000000000000}
+    object cdsVendasRomaneioNumeroVenda: TIntegerField
       FieldName = 'NumeroVenda'
     end
-    object cdsRomaneioClienteId: TIntegerField
+    object cdsVendasRomaneioClienteId: TIntegerField
       FieldName = 'ClienteId'
     end
-    object cdsRomaneioNome_cliente: TStringField
+    object cdsVendasRomaneioNome_cliente: TStringField
       FieldName = 'Nome_cliente'
       Size = 60
     end
-    object cdsRomaneioVendedor: TStringField
+    object cdsVendasRomaneioVendedor: TStringField
       FieldName = 'Vendedor'
     end
-    object cdsRomaneioDataVenda: TDateTimeField
+    object cdsVendasRomaneioDataVenda: TDateTimeField
       FieldName = 'DataVenda'
     end
-    object cdsRomaneioTotal_Financeiro: TFloatField
+    object cdsVendasRomaneioTotal_Financeiro: TFloatField
       FieldName = 'Total_Financeiro'
     end
-    object cdsRomaneioTotal_Peso: TFloatField
+    object cdsVendasRomaneioTotal_Peso: TFloatField
       FieldName = 'Total_Peso'
     end
   end
-  object srcRomaneio: TDataSource
-    DataSet = cdsRomaneio
+  object srcVendasRomaneio: TDataSource
+    DataSet = cdsVendasRomaneio
     Left = 400
+    Top = 275
+  end
+  object srcRomaneios: TDataSource
+    Left = 428
+    Top = 275
+  end
+  object impMatricial: TRDprint
+    ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
+    ImpressoraPersonalizada.AvancaOitavos = '27 48'
+    ImpressoraPersonalizada.AvancaSextos = '27 50'
+    ImpressoraPersonalizada.SaltoPagina = '12'
+    ImpressoraPersonalizada.TamanhoPagina = '27 67 66'
+    ImpressoraPersonalizada.Negrito = '27 69'
+    ImpressoraPersonalizada.Italico = '27 52'
+    ImpressoraPersonalizada.Sublinhado = '27 45 49'
+    ImpressoraPersonalizada.Expandido = '27 14'
+    ImpressoraPersonalizada.Normal10 = '18 27 80'
+    ImpressoraPersonalizada.Comprimir12 = '18 27 77'
+    ImpressoraPersonalizada.Comprimir17 = '27 80 27 15'
+    ImpressoraPersonalizada.Comprimir20 = '27 77 27 15'
+    ImpressoraPersonalizada.Reset = '27 80 18 20 27 53 27 70 27 45 48'
+    ImpressoraPersonalizada.Inicializar = '27 64'
+    OpcoesPreview.PaginaZebrada = False
+    OpcoesPreview.Remalina = False
+    OpcoesPreview.CaptionPreview = 'Rdprint Preview'
+    OpcoesPreview.PreviewZoom = 100
+    OpcoesPreview.CorPapelPreview = clWhite
+    OpcoesPreview.CorLetraPreview = clBlack
+    OpcoesPreview.Preview = False
+    OpcoesPreview.BotaoSetup = Ativo
+    OpcoesPreview.BotaoImprimir = Ativo
+    OpcoesPreview.BotaoGravar = Ativo
+    OpcoesPreview.BotaoLer = Ativo
+    OpcoesPreview.BotaoProcurar = Ativo
+    Margens.Left = 10
+    Margens.Right = 10
+    Margens.Top = 10
+    Margens.Bottom = 10
+    Autor = Deltress
+    RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
+    RegistroUsuario.SerieProduto = 'SITE-0306/00320'
+    RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
+    About = 'RDprint 4.0c - Registrado'
+    Acentuacao = Transliterate
+    CaptionSetup = 'Rdprint Setup'
+    TitulodoRelatorio = 'Gerado por RDprint'
+    UsaGerenciadorImpr = True
+    CorForm = clBtnFace
+    CorFonte = clBlack
+    Impressora = Epson
+    Mapeamento.Strings = (
+      '//--- Grafico Compativel com Windows/USB ---//'
+      '//'
+      'GRAFICO=GRAFICO'
+      'HP=GRAFICO'
+      'DESKJET=GRAFICO'
+      'LASERJET=GRAFICO'
+      'INKJET=GRAFICO'
+      'STYLUS=GRAFICO'
+      'EPL=GRAFICO'
+      'USB=GRAFICO'
+      '//'
+      '//--- Linha Epson Matricial 9 e 24 agulhas ---//'
+      '//'
+      'EPSON=EPSON'
+      'GENERICO=EPSON'
+      'LX-300=EPSON'
+      'LX-810=EPSON'
+      'FX-2170=EPSON'
+      'FX-1170=EPSON'
+      'LQ-1170=EPSON'
+      'LQ-2170=EPSON'
+      'OKIDATA=EPSON'
+      '//'
+      '//--- Rima e Emilia ---//'
+      '//'
+      'RIMA=RIMA'
+      'EMILIA=RIMA'
+      '//'
+      '//--- Linha HP/Xerox padr'#227'o PCL ---//'
+      '//'
+      'PCL=HP'
+      '//'
+      '//--- Impressoras 40 Colunas ---//'
+      '//'
+      'DARUMA=BOBINA'
+      'SIGTRON=BOBINA'
+      'SWEDA=BOBINA'
+      'BEMATECH=BOBINA')
+    MostrarProgresso = True
+    TamanhoQteLinhas = 66
+    TamanhoQteColunas = 80
+    TamanhoQteLPP = Seis
+    NumerodeCopias = 1
+    FonteTamanhoPadrao = S10cpp
+    FonteEstiloPadrao = []
+    Orientacao = poPortrait
+    OnNewPage = impMatricialNewPage
+    Left = 213
+    Top = 176
+  end
+  object srcFuncionarios: TDataSource
+    Left = 456
     Top = 275
   end
 end
