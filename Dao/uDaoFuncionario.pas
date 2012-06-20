@@ -12,6 +12,7 @@ type TDaoFuncionario = class
    public
      Constructor Create(Conexao : TConexao);
      function Buscar( idFuncionario : Integer ) : TFuncionario;
+     function BuscarTodos : TClientDataSet;
 
 end;
 implementation
@@ -30,6 +31,11 @@ begin
     Funcionario.IdFuncionario := Dados.FieldByName('Codigo').AsInteger;
     Funcionario.Descricao     := Dados.FieldByName('Descricao').AsString;
     Result := Funcionario;
+end;
+
+function TDaoFuncionario.BuscarTodos: TClientDataSet;
+begin
+  Result := FConexao.BuscarDadosSQL('Select * from T_Funcionarios order by Descricao',Nil);
 end;
 
 constructor TDaoFuncionario.Create(Conexao: TConexao);

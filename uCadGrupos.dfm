@@ -553,7 +553,7 @@ object frmCadGrupos: TfrmCadGrupos
         ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
-        Left = 140
+        Left = 203
         Top = 0
         Width = 70
         Height = 49
@@ -588,7 +588,7 @@ object frmCadGrupos: TfrmCadGrupos
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnexcluirClick
-        ExplicitLeft = 337
+        ExplicitLeft = 244
         ExplicitTop = 12
       end
       object btnalterar: TbsSkinSpeedButton
@@ -774,7 +774,7 @@ object frmCadGrupos: TfrmCadGrupos
         ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 210
+        Left = 140
         Top = 0
         Width = 63
         Height = 49

@@ -37,36 +37,6 @@
       
       
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
       <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
       <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
     </Excluded_Packages><Source><Source Name="MainSource">Simples.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
@@ -93,6 +63,7 @@
     </DCCReference>
     <DCCReference Include="..\Compartilhados\uFuncoes.pas" />
     <DCCReference Include="..\compartilhados\uTipos.pas" />
+    <DCCReference Include="Controller\uControllerRomaneio.pas" />
     <DCCReference Include="Dao\Dao.pas" />
     <DCCReference Include="Dao\DaoRemessa.pas" />
     <DCCReference Include="Dao\DaoSupervisor.pas" />
@@ -107,6 +78,7 @@
     <DCCReference Include="Dao\uDaoItemEntrada.pas" />
     <DCCReference Include="Dao\uDaoItemVenda.pas" />
     <DCCReference Include="Dao\uDaoPerfil.pas" />
+    <DCCReference Include="Dao\uDaoRomaneio.pas" />
     <DCCReference Include="Dao\uDaoSaldo.pas" />
     <DCCReference Include="Dao\uDaoVenda.pas" />
     <DCCReference Include="Funcoes\UnitDeclaracoes.pas" />
@@ -125,6 +97,7 @@
     <DCCReference Include="Modelos\uClassFuncionario.pas" />
     <DCCReference Include="Modelos\uClassItemEntrada.pas" />
     <DCCReference Include="Modelos\uClassItemVenda.pas" />
+    <DCCReference Include="Modelos\uClassRomaneio.pas" />
     <DCCReference Include="Modelos\uClassSaldo.pas" />
     <DCCReference Include="Modelos\uClassVenda.pas" />
     <DCCReference Include="uAbreOS.pas">
@@ -262,6 +235,9 @@
     </DCCReference>
     <DCCReference Include="uProposta.pas">
       <Form>frmProposta</Form>
+    </DCCReference>
+    <DCCReference Include="uRecebimentoRomaneio.pas">
+      <Form>frmRecebimentoRomaneio</Form>
     </DCCReference>
     <DCCReference Include="uRelAnaliseFinanceira.pas">
       <Form>frmRelAnaliseFinanceira</Form>

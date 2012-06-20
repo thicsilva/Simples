@@ -49,10 +49,10 @@ begin
    FQueryModific.SQLConnection := FConnection;
    FQueryModific.Sql.Text := 'Insert into T_ItensVendas ( Cod_Produto,Qtde_Venda,Pco_Venda,vlr_Desconto, '+
                              'vlr_Total,Operador,Data_Cad,Data_Mov,Complemento,'+
-                             'Cod_emp,SeqVenda,Perc_Comis, SetorId) Values     '+
+                             'Cod_emp,SeqVenda,Perc_Comis, SetorId,PesoBruto,PesoLiquido) Values     '+
                              '(:parCod_Produto,:parQtde_Venda,:parPco_Venda,:parvlr_Desconto, '+
                              ':parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,:parComplemento,'+
-                             ':parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId)';
+                             ':parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId, :parPesoBruto,:parPesoLiquido)';
 
    FQueryModific.Prepared := True;
    ItensVendas.first;
@@ -84,6 +84,8 @@ begin
       FQueryModific.ParamByName('parSeqVenda').asInteger      := ItemVenda.VendaID;
       FQueryModific.ParamByName('parPerc_Comis').asFloat      := ItensVendas.FieldByName('Perc_Comis').asFloat;
       FQueryModific.ParamByName('parSetorId').asInteger       := ItensVendas.FieldByName('SetorId').asInteger;
+      FQueryModific.ParamByName('parPesoLiquido').asFloat     := ItensVendas.FieldByName('PesoLiquido').AsFloat;
+      FQueryModific.ParamByName('parPesoBruto').asFloat       := ItensVendas.FieldByName('PesoBruto').AsFloat;
       FQueryModific.ExecSql;
       ItensVendas.next;
    End;

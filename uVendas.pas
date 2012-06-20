@@ -176,6 +176,8 @@ type
     cdsItensVendasTMPseqVenda: TIntegerField;
     cdsItensVendasTMPSetorId: TIntegerField;
     btnDesconto: TbsSkinSpeedButton;
+    cdsItensVendasTMPPesoBruto: TFloatField;
+    cdsItensVendasTMPPesoLiquido: TFloatField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -231,6 +233,7 @@ type
   public
      liSeqVendaAtu : Integer;
      liSeqOs       : Integer;
+     liCaixa       : Integer;
      procedure PrepararFinalizacaoOS;
      procedure AtualizaTabelas();
     { Public declarations }
@@ -400,7 +403,7 @@ begin
    cdsTipoVenda.Open;
 
    liseqos := 0;
-
+   licaixa := 0;
 end;
 
 procedure TfrmVendas.FormShow(Sender: TObject);
@@ -675,6 +678,8 @@ begin
    cdsItensVendasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
    cdsItensVendasTmp.FieldByName('Unidade').asString      := cdsCadProdutos.FieldByName('Unid').AsString;
    cdsItensVendasTmp.FieldByName('QtdeEmbalagem').asString := cdsCadProdutos.FieldByName('QtdeEmbalagem').AsString;
+   cdsItensVendasTmp.FieldByName('PesoBruto').asFloat      := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoBruto').AsFloat;
+   cdsItensVendasTmp.FieldByName('PesoLiquido').asFloat    := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoLiquido').AsFloat;
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    if frmVendas.Tag=VENDAS_EXTERNAS then
@@ -757,7 +762,8 @@ Var liSeqvenda     : integer;
     DaoVenda: TDaoVenda;
     loItemVenda : TItemVenda;
     DaoItemVenda : TDaoItemVenda;
-  DaoFuncionario: TdaoFuncionario;
+    DaoFuncionario: TdaoFuncionario;
+    liCaixaFinalizado : Integer;
 begin
 
    {$REGION 'Criticas e Validação das Informações'}
@@ -951,6 +957,9 @@ begin
    cdsVenda.ProviderName := dspVenda.Name;
    cdsVenda.Open;
 
+   If frmVendas.tag = OS_FINALIZADA then
+      liCaixaFinalizado := cdsVenda.FieldByname('Cod_Caixa').Asinteger;
+
    If frmVendas.tag = 4 then
       cdsVenda.Edit
    else
@@ -981,13 +990,15 @@ begin
    if edtCod_TipoVenda.Visible then
       cdsVenda.FieldByName('Cod_TipoVenda').AsInteger   := Strtoint(edtCod_TipoVenda.text);
 
-
    If frmVendas.tag = SERVICOS then
    Begin
       cdsVenda.FieldByname('Tipo_Venda').AsString    := 'S';
       cdsVenda.FieldByname('Status').AsString        := '1';
       cdsVenda.FieldByname('PagouSinal').AsBoolean   := False;
-   End;
+      cdsVenda.FieldByName('Cod_caixa').asInteger    := 1;
+      if licaixa<>0 then
+         cdsVenda.FieldByname('Cod_Caixa').AsInteger := licaixa;
+  End;
    If frmVendas.tag = OS_FINALIZADA then
    Begin
       cdsVenda.FieldByname('Tipo_Venda').AsString    := 'S';
@@ -1090,8 +1101,13 @@ begin
                         cdsPagamento.FieldByname('Cod_Caixa').AsInteger           := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '0001' );
                         if frmVendas.Tag = VENDAS_EXTERNAS then
                            cdsPagamento.FieldByname('Cod_Caixa').AsInteger        := gParametros.Ler( '', '[GERAL]', 'CaixaVendasExternas', '0001' );
-                        if (frmVendas.Tag = SERVICOS ) OR  (frmVendas.Tag = OS_FINALIZADA )  then
+                        if (frmVendas.Tag = SERVICOS )  then
                            cdsPagamento.FieldByname('Cod_Caixa').AsInteger        := 1;
+                        if licaixa<>0 then
+                           cdsPagamento.FieldByname('Cod_Caixa').AsInteger        := licaixa;
+                        if (frmVendas.Tag = OS_FINALIZADA ) then
+                           cdsPagamento.FieldByname('Cod_Caixa').AsInteger        := liCaixaFinalizado;
+
                         cdsPagamento.Post;
                         cdsPagamento.ApplyUpdates(-1);
                         lsPrazo :='';
@@ -1137,8 +1153,12 @@ begin
                      cdsPagamento.FieldByname('Cod_Caixa').AsInteger       := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '0001' );
                      if frmVendas.Tag = VENDAS_EXTERNAS then
                         cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := gParametros.Ler( '', '[GERAL]', 'CaixaVendasExternas', '0001' );
-                     if (frmVendas.Tag = SERVICOS ) OR  (frmVendas.Tag = OS_FINALIZADA )  then
-                        cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := 1;
+                     if (frmVendas.Tag = SERVICOS ) then
+                         cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := 1;
+                     if licaixa<>0 then
+                         cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := licaixa;
+                     if (frmVendas.Tag = OS_FINALIZADA ) then
+                         cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := liCaixaFinalizado;
                      cdsPagamento.Post;
                      cdsPagamento.ApplyUpdates(-1);
                   End;
@@ -1169,9 +1189,12 @@ begin
             cdsPagamento.FieldByname('Cod_Caixa').AsInteger       := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '0001' );
             if frmVendas.Tag = VENDAS_EXTERNAS then
                cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := gParametros.Ler( '', '[GERAL]', 'CaixaVendasExternas', '0001' );
-             if (frmVendas.Tag = SERVICOS ) OR  (frmVendas.Tag = OS_FINALIZADA )  then
+            if (frmVendas.Tag = SERVICOS )  then
                cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := 1;
-
+            if licaixa<>0 then
+                cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := licaixa;
+            if (frmVendas.Tag = OS_FINALIZADA ) then
+                cdsPagamento.FieldByname('Cod_Caixa').AsInteger    := liCaixaFinalizado;
             cdsPagamento.Post;
             cdsPagamento.ApplyUpdates(-1);
          End;
@@ -1788,7 +1811,7 @@ Begin
    precoDeVenda:= 'Pco_Venda';
    if frmVendas.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
-   Result :=  'Select COd_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+   Result :=  'Select PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
 end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin

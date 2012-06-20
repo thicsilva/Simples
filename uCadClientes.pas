@@ -423,7 +423,7 @@ implementation
 
 uses uPrincipal,ufuncoes,cxGridCommon, uselrelClientes, uConfigTabSheet,
   uDaoClienteAnimal, uCapturaImagem, uClassAnimal, uClassEventoAnimal,
-  uDaoEventoAnimal;
+  uDaoEventoAnimal, uDaoVenda;
 
 procedure TfrmCadClientes.MenuItem1Click(Sender: TObject);
 var  DaoEventoAnimal : TdaoEventoAnimal;
@@ -853,7 +853,7 @@ begin
    BtnCancela.Enabled :=True;
    try
 //      edtDescricao.SetFocus;
-   Except
+   except
    end;
 
 end;
@@ -883,16 +883,37 @@ begin
 end;
 
 procedure TfrmCadClientes.btnexcluirClick(Sender: TObject);
+var loDaoVenda : TDaoVenda;
 begin
-   IF cdsCadClientes.IsEmpty Then
+   IF cdspesquisa.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   if CaixaMensagem( 'Deseja Exclir o forma de pagamento '+cdspesquisa.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
+
+   loDaoVenda := TDaoVenda.Create(gConexao);
+   try
+      if  loDaoVenda.TemVenda(cdspesquisa.FieldByname('Codigo').AsInteger) then
+      begin
+         CaixaMensagem( 'Cliente com movimento não pode ser excluido ', ctAviso, [ cbOk ], 0 );
+         Exit
+      end;
+   finally
+      FreeAndNil(loDaoVenda);
+   end;
+
+   if CaixaMensagem( 'Deseja Excluir o Cliente '+cdspesquisa.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
-      cdspesquisa.Delete;
-      cdspesquisa.ApplyUpdates(-1);
+      try
+         cdspesquisa.Delete;
+         cdspesquisa.ApplyUpdates(-1);
+      except
+         On E: Exception Do
+         Begin
+            CaixaMensagem( 'Não foi possível Excluir o Cliente "' + E.Message + '"', ctAviso, [ cbOk ], 0 );
+            Exit;
+         End;
+      end;
    End;
 end;
 

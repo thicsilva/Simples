@@ -3,14 +3,16 @@ unit uDaoCliente;
 interface
 
 uses uClassconexao,uClassCliente,
-     Classes,DBClient,SysUtils;
+     Classes,DBClient,SysUtils, SqlExpr;
 
 type TDaoCliente = class
    private
      FConexao : TConexao;
+     FQryModific : TSqlQuery;
    public
      Constructor Create( conexao : TConexao);
      function Buscar(idCliente : Integer) : TCliente;
+     function Excluir(idCliente : Integer) : Boolean;
 end;
 
 
@@ -47,6 +49,16 @@ end;
 constructor TDaoCliente.Create(conexao: TConexao);
 begin
   Fconexao := conexao;
+  FQryModific := TSqlQuery.Create(nil);
+end;
+
+function TDaoCliente.Excluir(idCliente: Integer): Boolean;
+begin
+   FQryModific.Close;
+   FQryModific.SQLConnection := Fconexao.Conection;
+   FQryModific.SQL.Text := 'Delete from T_Clientes where Codigo=:parId ';
+   FQryModific.ParamByName('parId').AsInteger := idCliente;
+   FQryModific.ExecSQL;
 end;
 
 end.

@@ -36,6 +36,14 @@ type TDaoEstrutura = class
     procedure Adicionar_PesoBrunto_na_Tabela_Produtos;
     procedure Adicionar_PesoLiquido_na_Tabela_Produtos;
     procedure Adicionar_Sequenciaentrega_na_Tabela_Clientes;
+    procedure Adicionar_Cod_Caixa_na_Tabela_Vendas;
+    procedure CriarTabela_Romaneio;
+    procedure Adicionar_RomaeneioID_na_Tabela_Vendas;
+    procedure Adicionar_PesoBrunto_na_Tabela_ItensVendas;
+    procedure Adicionar_PesoLiquido_na_Tabela_ItensVendas;
+    procedure Adicionar_Status_na_Tabela_Romaneio;
+    procedure Adicionar_Entregue_na_Tabela_Vendas;
+    procedure Adicionar_Prorrogado_na_Tabela_Vendas;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -67,6 +75,17 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_PesoBrunto_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'PesoBruto', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD PesoBruto Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_PesoBrunto_na_Tabela_Produtos;
 begin
    if not ExisteCampo( 'T_Produtos', 'PesoBruto', FConexao.Conection ) then
@@ -76,6 +95,16 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+procedure TDaoEstrutura.Adicionar_PesoLiquido_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'PesoLiquido', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD PesoLiquido Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_PesoLiquido_na_Tabela_Produtos;
 begin
    if not ExisteCampo( 'T_Produtos', 'PesoLiquido', FConexao.Conection ) then
@@ -103,6 +132,16 @@ begin
    begin
       FQryAjustes.Close;
       FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD Cod_Caixa Integer';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_Cod_Caixa_na_Tabela_Vendas;
+begin
+   if not ExisteCampo( 'T_Vendas', 'Cod_caixa', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Cod_Caixa integer';
       FQryAjustes.ExecSQL;
    end;
 end;
@@ -187,6 +226,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_RomaeneioID_na_Tabela_Vendas;
+begin
+ if not ExisteCampo( 'T_Vendas', 'RomaneioId', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD RomaneioId Integer';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_ServicoPago_na_Tabela_vendas;
 begin
     if not ExisteCampo( 'T_Vendas', 'PagouSinal', FConexao.Conection ) then
@@ -210,7 +259,16 @@ begin
       FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensDevolucoes ADD SetorId Integer';
       FQryAjustes.ExecSQL;
    end;
+end;
 
+procedure TDaoEstrutura.Adicionar_Prorrogado_na_Tabela_Vendas;
+begin
+   if not ExisteCampo( 'T_Vendas', 'Prorrogado', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Prorrogado Integer';
+      FQryAjustes.ExecSQL;
+   end;
 end;
 
 procedure TDaoEstrutura.Adicionar_SetorId_na_Tabela_ItensVendas;
@@ -233,6 +291,32 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Entregue_na_Tabela_Vendas;
+begin
+   if not ExisteCampo( 'T_Vendas', 'Entregue', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Entregue bit';
+      FQryAjustes.ExecSQL;
+   end;
+   if not ExisteCampo( 'T_Vendas', 'Data_Entrega', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Data_Entrega DateTime';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
+procedure TDaoEstrutura.Adicionar_Status_na_Tabela_Romaneio;
+begin
+   if not ExisteCampo( 'Romaneios', 'Status', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE Romaneios ADD Status char(1) ';
+      FQryAjustes.ExecSQL;
+   end;
+end;
 
 procedure TDaoEstrutura.CrateTabela_AventoAnimais;
 begin
@@ -388,10 +472,10 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
-  EfetuarCriacaoDosCamposAntigos;
-  Adicionar_PagouSinal_na_Tabela_vendas;
-  Adicionar_ServicoPago_na_Tabela_vendas;
-  Adicionar_QtdeEmbalagem_na_Tabela_Produtos;
+  //EfetuarCriacaoDosCamposAntigos;
+  //Adicionar_PagouSinal_na_Tabela_vendas;
+  //Adicionar_ServicoPago_na_Tabela_vendas;
+  //Adicionar_QtdeEmbalagem_na_Tabela_Produtos;
   Adicionar_PrecoVendaExterna_na_Tabela_Produtos;
   Adicionar_Cod_Caixa_na_Tabela_CtasReceber;
   Adicionar_SetorId_na_Tabela_ItensVendas;
@@ -410,6 +494,14 @@ begin
   Adicionar_PesoBrunto_na_Tabela_Produtos;
   Adicionar_PesoLiquido_na_Tabela_Produtos;
   Adicionar_Sequenciaentrega_na_Tabela_Clientes;
+  Adicionar_Cod_Caixa_na_Tabela_Vendas;
+  CriarTabela_Romaneio;
+  Adicionar_RomaeneioID_na_Tabela_Vendas;
+  Adicionar_PesoBrunto_na_Tabela_ItensVendas;
+  Adicionar_PesoLiquido_na_Tabela_ItensVendas;
+  Adicionar_Status_na_Tabela_Romaneio;
+  Adicionar_Entregue_na_Tabela_Vendas;
+  Adicionar_Prorrogado_na_Tabela_Vendas;
 end;
 
 
@@ -485,17 +577,24 @@ Begin
       Result := llstTemp;
    End;
 End;
-{
-create Table Romaneio ( ID int Identity(1,1),
-                        Total Float,
-                        PesoB_Total Float,
-                        PesoL_total Float,
-                        Data_Cadastro Datetime,
-                        Data_movimento DateTime,
-                        Data_Atualizacao DateTime,
-                        Operador Varchar(50),
-                        Cod_Emp int
-                       )
 
- }
+procedure TDaoEstrutura.CriarTabela_Romaneio;
+begin
+   if not ExisteTabela( 'Romaneios', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Create Table Romaneios ( ID int Identity(1,1), '+
+                              'Total Float, '+
+                              'PesoB_Total Float, '+
+                              'PesoL_total Float, '+
+                              'Data_Cadastro Datetime,'+
+                              'Data_movimento DateTime,'+
+                              'Data_Atualizacao DateTime, '+
+                              'Operador Varchar(50),'+
+                              'FuncionarioID int,'+
+                              'Qtde_vendas int,'+
+                              'Cod_Emp int )';
+      FQryAjustes.ExecSQL;
+   end;
+end;
 end.

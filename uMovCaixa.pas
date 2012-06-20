@@ -163,7 +163,7 @@ begin
                           '     inner join t_FormasPagamento pag on Pag.Codigo = Desp.Cod_FormaPagamento '+
                           '     left Join T_vendas Ven on Ven.Seqvenda=Desp.Seqvenda '+
                           'Where Desp.Data_lancamento>=:parData_ini and Desp.Data_lancamento<=:parData_Fim  and  '+
-                          'Cod_Caixa=:parCod_Caixa '+lsWhere;
+                          'desp.Cod_Caixa=:parCod_Caixa '+lsWhere;
    qryPesquisa.Sql.Add('Order by Data_Lancamento ');
    qryPesquisa.Parambyname('parData_Ini').AsSqltimestamp := StrToSQLTimeStamp(dtpData_Ini.Text+' 00:00:00');
    qryPesquisa.Parambyname('parData_Fim').AsSqlTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
@@ -409,7 +409,7 @@ begin
                            'From t_Ctasreceber Ctas, T_Clientes Cli, T_Vendas Ven '+
                            'where Ctas.Status=:parStatus and Ctas.data_Pagamento=:parDataIni and '+
                            '      Ctas.data_emissao<>:parDataIni and Cli.Codigo=Ctas.Cod_Cliente and'+
-                           '      Ven.Seqvenda=Ctas.Seqvenda and  Cod_Caixa=:parCod_Caixa';
+                           '      Ven.Seqvenda=Ctas.Seqvenda and  ctas.Cod_Caixa=:parCod_Caixa';
    qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
    qryVariavel.ParamByName('parStatus').AsString        := '1';
    qryVariavel.Parambyname('parCod_Caixa').AsInteger    := cmbCaixa.KeyValue;
@@ -460,7 +460,7 @@ begin
    qryVariavel.Sql.Text := 'Select Mov.D_C, Pag.Codigo, Pag.Descricao, sum(Valor) as Vlr_Total '+
                            'From t_movcaixa Mov, T_FormasPagamento Pag '+
                            'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
-                           '      Pag.Codigo=Mov.cod_FormaPagamento and Cod_Caixa=:parCod_Caixa '+lsFiltro+' '+
+                           '      Pag.Codigo=Mov.cod_FormaPagamento and mov.Cod_Caixa=:parCod_Caixa '+lsFiltro+' '+
                            'Group by pag.codigo,pag.descricao,mov.D_C '+
                            'Order by Pag.Codigo,Mov.D_C ';
 
@@ -566,7 +566,7 @@ begin
                            'From t_movcaixa Mov '+
                            '     inner join t_vendas ven on ven.seqvenda=mov.seqvenda '+
                            'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
-                           '      PrePagamento=:parPrePagamento and ven.status=:parstatus and Cod_Caixa=:parCod_Caixa '+lsfiltro;
+                           '      PrePagamento=:parPrePagamento and ven.status=:parstatus and mov.Cod_Caixa=:parCod_Caixa '+lsfiltro;
 
    qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
    qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
@@ -587,7 +587,7 @@ begin
    qryVariavel.Sql.Text := 'Select sum(Valor) as Vlr_Total '+
                            'From t_movcaixa Mov ' +
                            'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
-                           '      SeqVenda is null and D_C=:parD_C and Cod_Caixa=:parCod_Caixa '+lsfiltro;
+                           '      SeqVenda is null and D_C=:parD_C and mov.Cod_Caixa=:parCod_Caixa '+lsfiltro;
 
    qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
    qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');

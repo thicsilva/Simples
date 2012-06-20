@@ -225,6 +225,13 @@ type
     MenuManegerBar13: TdxBar;
     actRomaneioEntrega: TAction;
     dxBarLargeButton22: TdxBarLargeButton;
+    actVendaloja: TAction;
+    actServicoAline: TAction;
+    dxBarSubItem1: TdxBarSubItem;
+    dxBarButton29: TdxBarButton;
+    dxBarButton30: TdxBarButton;
+    acrRecebimentoRomaneio: TAction;
+    dxBarLargeButton23: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -280,6 +287,9 @@ type
     procedure actAnaliseFinanceiraExecute(Sender: TObject);
     procedure actSelRelSaldosExecute(Sender: TObject);
     procedure actRomaneioEntregaExecute(Sender: TObject);
+    procedure actVendalojaExecute(Sender: TObject);
+    procedure actServicoAlineExecute(Sender: TObject);
+    procedure acrRecebimentoRomaneioExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -333,7 +343,8 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
-  uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga;
+  uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
+  uRecebimentoRomaneio;
 
 {$R *.dfm}
 
@@ -388,6 +399,12 @@ if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Captio
    End;
    frmCadCaixas := TfrmCadCaixas.create(Self);
    frmCadCaixas.showModal;
+end;
+
+procedure TfrmPrincipal.acrRecebimentoRomaneioExecute(Sender: TObject);
+begin
+   frmRecebimentoRomaneio := TfrmRecebimentoRomaneio.Create(Self);
+   frmRecebimentoRomaneio.ShowModal
 end;
 
 procedure TfrmPrincipal.actAbreOsExecute(Sender: TObject);
@@ -823,6 +840,19 @@ begin
    frmSequencias.showmodal;
 end;
 
+procedure TfrmPrincipal.actVendalojaExecute(Sender: TObject);
+const Venda_Externa = 2;
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := Venda_Externa;
+   frmVendas.Showmodal;
+end;
+
 procedure TfrmPrincipal.actVendasExecute(Sender: TObject);
 begin
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -1051,6 +1081,19 @@ begin
    End;
    frmSelRelDevolucoes := TfrmSelRelDevolucoes.create(Self);
    frmSelRelDevolucoes.Showmodal;
+end;
+
+procedure TfrmPrincipal.actServicoAlineExecute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := 3; // venda de serviços
+   frmvendas.liCaixa := 2;
+   frmVendas.Showmodal;
 end;
 
 procedure TfrmPrincipal.actServicosExecute(Sender: TObject);

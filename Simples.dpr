@@ -117,7 +117,11 @@ uses
   uDaoItemEntrada in 'Dao\uDaoItemEntrada.pas',
   uClassItemEntrada in 'Modelos\uClassItemEntrada.pas',
   uRelEstoque in 'uRelEstoque.pas' {FrmRelEstoque},
-  uRomaneioDeCarga in 'uRomaneioDeCarga.pas' {frmRomaneioDeEntrega};
+  uRomaneioDeCarga in 'uRomaneioDeCarga.pas' {frmRomaneioDeEntrega},
+  uClassRomaneio in 'Modelos\uClassRomaneio.pas',
+  uDaoRomaneio in 'Dao\uDaoRomaneio.pas',
+  uControllerRomaneio in 'Controller\uControllerRomaneio.pas',
+  uRecebimentoRomaneio in 'uRecebimentoRomaneio.pas' {frmRecebimentoRomaneio};
 
 {$R *.res}
 
@@ -129,6 +133,7 @@ begin
   Application.CreateForm(TfrmSelAnimal, frmSelAnimal);
   Application.CreateForm(TFrmRelEstoque, FrmRelEstoque);
   Application.CreateForm(TfrmRomaneioDeEntrega, frmRomaneioDeEntrega);
+  Application.CreateForm(TfrmRecebimentoRomaneio, frmRecebimentoRomaneio);
   Frmlogin.ShowModal;
   Application.Run;
 end.

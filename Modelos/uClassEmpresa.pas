@@ -36,6 +36,16 @@ implementation
 constructor TEmpresa.Create;
 begin
    Fendereco := TEndereco.Create;
+   Fendereco.logradouro := 'rua';
+   Fendereco.bairro := 'bairro';
+   Fendereco.cidade := 'cidade';
+   Fendereco.uf := 'RN';
+   Self.Site := 'site';
+   Self.Email := 'Email';
+   Self.Telefones := 'Telefes';
+
+    {
+   Fendereco := TEndereco.Create;
    Fendereco.logradouro := 'Rua Dos Caicos 1473';
    Fendereco.bairro := 'Alecrim';
    Fendereco.cidade := 'Natal';
@@ -43,6 +53,8 @@ begin
    Self.Site := 'www.MundoDigital.com.br';
    Self.Email := 'Contato@MundoDigital.com.br';
    Self.Telefones := '(84)3213 - 1476 / (84) 8876-1476 / (84) 8846-9153';
+     }
+
 end;
 
 procedure TEmpresa.SetDescricao(const Value: String);

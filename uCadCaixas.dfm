@@ -356,7 +356,7 @@ object frmCadCaixas: TfrmCadCaixas
     Top = 53
     Width = 635
     Height = 247
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -637,10 +637,6 @@ object frmCadCaixas: TfrmCadCaixas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80

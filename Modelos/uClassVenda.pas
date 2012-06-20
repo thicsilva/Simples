@@ -17,6 +17,10 @@ type TVenda = class
     FNumerovias: Integer;
     FVendaID: Integer;
     FValorPendendente: Real;
+    FData_Venda: TDateTime;
+    FValor_Total: Real;
+    FPeso_total: Real;
+    FRomaneioId: Integer;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -29,17 +33,28 @@ type TVenda = class
     procedure ImprimirGrafico80Colunas(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet;   CaminhoImpressora : String );
     procedure SetVendaID(const Value: Integer);
     procedure SetValorPendendente(const Value: Real);
+    procedure SetData_Venda(const Value: TDateTime);
+    procedure SetValor_Total(const Value: Real);
+    procedure SetPeso_total(const Value: Real);
+    procedure SetRomaneioId(const Value: Integer);
   public
      Constructor Create(Conexao : TConexao);
      procedure Imprimir(DadosVendas, DadosItensVendas: TClientDataSet; CaminhoImpressora: String; prTotalPago : Real; TipoImpressao : Integer );
      procedure ComprovanteDeEntrega(CaminhoImpressora : String);
+
+     property Numerovias : Integer read FNumerovias write SetNumerovias;
+     property VendaID : Integer read FVendaID write SetVendaID;
+     property ValorPendendente : Real read FValorPendendente write SetValorPendendente;
+     property Data_Venda : TDateTime read FData_Venda write SetData_Venda;
+     property Valor_Total : Real read FValor_Total write SetValor_Total;
+     property Peso_total : Real read FPeso_total write SetPeso_total;
+     property RomaneioId : Integer read FRomaneioId write SetRomaneioId;
+
      property Empresa : TEmpresa read FEmpresa write SetEmpresa;
      property Funcionario : TFuncionario read FFuncionario write SetFuncionario;
      property FormaPagamento : TFormaPagamento read FFormaPagamento write SetFormaPagamento;
      property Cliente : TCliente read FCliente write SetCliente;
-     property Numerovias : Integer read FNumerovias write SetNumerovias;
-     property VendaID : Integer read FVendaID write SetVendaID;
-     property ValorPendendente : Real read FValorPendendente write SetValorPendendente;
+
 end;
 
 implementation
@@ -78,10 +93,12 @@ end;
 
 constructor TVenda.Create(Conexao : TConexao);
 begin
+   Fconexao := Conexao;
    Empresa := TEmpresa.Create;
    Self.NumeroVias := 1;
-   Fconexao := Conexao;
    self.ValorPendendente := 0;
+   self.VendaID := 0;
+   Self.RomaneioId := 0;
 end;
 
 procedure TVenda.ImprimirGrafico(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet; prTotalPago : Real; CaminhoImpressora : String );
@@ -493,6 +510,11 @@ begin
   FCliente := Value;
 end;
 
+procedure TVenda.SetData_Venda(const Value: TDateTime);
+begin
+  FData_Venda := Value;
+end;
+
 procedure TVenda.SetEmpresa(const Value: TEmpresa);
 begin
   FEmpresa := Value;
@@ -513,9 +535,24 @@ begin
   FNumerovias := Value;
 end;
 
+procedure TVenda.SetPeso_total(const Value: Real);
+begin
+  FPeso_total := Value;
+end;
+
+procedure TVenda.SetRomaneioId(const Value: Integer);
+begin
+  FRomaneioId := Value;
+end;
+
 procedure TVenda.SetValorPendendente(const Value: Real);
 begin
   FValorPendendente := Value;
+end;
+
+procedure TVenda.SetValor_Total(const Value: Real);
+begin
+  FValor_Total := Value;
 end;
 
 procedure TVenda.SetVendaID(const Value: Integer);

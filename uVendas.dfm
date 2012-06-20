@@ -2,7 +2,7 @@ object frmVendas: TfrmVendas
   Left = 132
   Top = 129
   BorderIcons = []
-  Caption = 'Pedido de Venda'
+  Caption = ']'
   ClientHeight = 535
   ClientWidth = 760
   Color = clBtnFace
@@ -1904,7 +1904,6 @@ object frmVendas: TfrmVendas
     Position = 0
     SmallChange = 127
     LargeChange = 127
-    ExplicitTop = 495
   end
   object edtVlr_Desconto: TbsSkinEdit
     Left = 445
@@ -1968,7 +1967,6 @@ object frmVendas: TfrmVendas
     Position = 1
     SmallChange = 1
     LargeChange = 1
-    ExplicitHeight = 188
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
@@ -2338,7 +2336,7 @@ object frmVendas: TfrmVendas
         Layout = blGlyphTop
         Enabled = False
         OnClick = btnokClick
-        ExplicitLeft = 485
+        ExplicitLeft = 507
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
@@ -2510,6 +2508,14 @@ object frmVendas: TfrmVendas
       item
         Name = 'SetorId'
         DataType = ftInteger
+      end
+      item
+        Name = 'PesoBruto'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PesoLiquido'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
@@ -2518,7 +2524,7 @@ object frmVendas: TfrmVendas
     Left = 107
     Top = 300
     Data = {
-      2C0100009619E0BD01000000180000000D0000000000030000002C0106436F64
+      520100009619E0BD01000000180000000F000000000003000000520106436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
@@ -2527,7 +2533,8 @@ object frmVendas: TfrmVendas
       08000400000000000A706572635F436F6D6973080004000000000007556E6964
       61646501004900000001000557494454480200020003000D71746465456D6261
       6C6167656D04000100000000000873657156656E646104000100000000000753
-      65746F72496404000100000000000000}
+      65746F7249640400010000000000095065736F427275746F0800040000000000
+      0B5065736F4C69717569646F08000400000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
       DisplayWidth = 8
       FieldName = 'Codigo'
@@ -2584,6 +2591,14 @@ object frmVendas: TfrmVendas
     end
     object cdsItensVendasTMPSetorId: TIntegerField
       FieldName = 'SetorId'
+      Visible = False
+    end
+    object cdsItensVendasTMPPesoBruto: TFloatField
+      FieldName = 'PesoBruto'
+      Visible = False
+    end
+    object cdsItensVendasTMPPesoLiquido: TFloatField
+      FieldName = 'PesoLiquido'
       Visible = False
     end
   end
