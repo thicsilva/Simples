@@ -651,7 +651,6 @@ begin
      acanvas.Font.color := clred
   else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Finalizado' Then
      acanvas.Font.color := clGreen;
-
 end;
 
 procedure TfrmConsVendas.BorderodeEntrega1Click(Sender: TObject);

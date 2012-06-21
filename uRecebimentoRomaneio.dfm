@@ -30,8 +30,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitLeft = -93
-    ExplicitWidth = 811
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -78,7 +76,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 641
+        Left = 605
         Top = 0
         Width = 70
         Height = 49
@@ -120,13 +118,12 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
         Top = 0
-        Width = 83
+        Width = 77
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 103
       end
       object btnGerar: TbsSkinSpeedButton
         Left = 0
@@ -164,20 +161,20 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = btnGerarClick
         ExplicitLeft = -6
-        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 287
+        Left = 281
         Top = 0
-        Width = 354
+        Width = 82
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 287
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
-        Left = 180
+        Left = 174
         Top = 0
         Width = 107
         Height = 49
@@ -210,6 +207,56 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
+        OnClick = bsSkinSpeedButton1Click
+        ExplicitLeft = 186
+      end
+      object btnCancelar: TbsSkinSpeedButton
+        Left = 363
+        Top = 0
+        Width = 91
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 4
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = False
+        Flat = False
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Cancelar'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        OnClick = btnCancelarClick
+        ExplicitLeft = 472
+      end
+      object bsSkinBevel3: TbsSkinBevel
+        Left = 454
+        Top = 0
+        Width = 151
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitLeft = 460
       end
     end
   end
@@ -247,9 +294,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alClient
-    ExplicitTop = 53
-    ExplicitWidth = 718
-    ExplicitHeight = 251
     object ListVendas: TbsSkinListView
       Left = 1
       Top = 1
@@ -302,8 +346,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       TabOrder = 0
       ViewStyle = vsReport
       HeaderSkinDataName = 'resizetoolbutton'
-      ExplicitLeft = 2
-      ExplicitWidth = 740
     end
   end
   object bsSkinPanel3: TbsSkinPanel
@@ -340,8 +382,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel2'
     Align = alTop
-    ExplicitTop = 55
-    ExplicitWidth = 742
     object bsSkinLabel1: TbsSkinLabel
       Left = 9
       Top = 7
@@ -403,7 +443,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       RightImageHotIndex = -1
       RightImageDownIndex = -1
     end
-    object bsSkinButton3: TbsSkinButton
+    object btnCarregar: TbsSkinButton
       Left = 403
       Top = 3
       Width = 163
@@ -436,7 +476,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Caption = '    &Carregar'
       NumGlyphs = 1
       Spacing = 1
-      OnClick = bsSkinButton3Click
+      OnClick = btnCarregarClick
     end
     object bsSkinButton1: TbsSkinButton
       Left = 573
@@ -471,7 +511,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Caption = '    &Finalizar'
       NumGlyphs = 1
       Spacing = 1
-      OnClick = bsSkinButton3Click
+      OnClick = bsSkinButton1Click
     end
   end
 end

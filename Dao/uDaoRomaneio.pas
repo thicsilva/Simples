@@ -14,8 +14,10 @@ type TDaoRomaneio = Class
      constructor Create(Conexao : TConexao);
      function Incluir(Romaneio : TRomaneio) : Integer;
      function BuscarTodos : TClientDataSet;
+     function BuscarPorId(RomaneioId : Integer) : TClientDataSet;
      function RetornarProdutos(RomaneioId : integer) : TClientDataSet;
      function RetornarDadosFinanceiros (RomaneioId : integer) : TClientDataSet;
+     procedure FecharRomaneio(RomaneioId : integer);
      procedure Cancelar(RomaneioId : integer);
 End;
 
@@ -23,6 +25,17 @@ implementation
 
 
 { TDaoRomaneio }
+
+function TDaoRomaneio.BuscarPorId(RomaneioId : Integer): TClientDataSet;
+var Parametros : TStringList;
+begin
+  Parametros := TStringList.Create;
+  Parametros.Add(IntTostr(RomaneioId));
+  Result := FConexao.BuscarDadosSQL('Select Fun.descricao as Motorista, rom.* from Romaneios Rom '+
+                                    'left join T_funcionarios fun on Fun.Codigo = Rom.FuncionarioID '+
+                                    'where Id=:parId order by Data_Cadastro',Parametros);
+
+end;
 
 function TDaoRomaneio.BuscarTodos: TClientDataSet;
 var Parametros : TStringList;
@@ -47,6 +60,13 @@ begin
    FqryModific  := TSqlQuery.Create(Nil);
    FqryModific.SQLConnection := FConexao.Conection;
    FParametros := TStringList.Create;
+end;
+
+procedure TDaoRomaneio.FecharRomaneio(RomaneioId: integer);
+begin
+   FqryModific.Close;
+   FqryModific.SQL.Text := 'update Romaneios set Status = '+QuotedStr('F')+' where Id='+IntToStr(RomaneioId);
+   FqryModific.ExecSQL;
 end;
 
 function TDaoRomaneio.Incluir(Romaneio: TRomaneio) : Integer;
@@ -76,7 +96,7 @@ begin
   FParametros.clear;
   FParametros.add(IntToStr(RomaneioId));
   Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Pag.Descricao as Pagamento, '+
-                                    '       Ven.Entregue '+
+                                    '       Ven.Entregue, Ven.Prorrogado '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+
                                     '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+

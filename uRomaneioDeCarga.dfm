@@ -78,7 +78,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 671
+        Left = 705
         Top = 0
         Width = 70
         Height = 49
@@ -113,9 +113,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
-        ExplicitLeft = 764
-        ExplicitTop = 12
-        ExplicitHeight = 40
+        ExplicitLeft = 635
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
@@ -170,18 +168,17 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       object bsSkinBevel2: TbsSkinBevel
         Left = 180
         Top = 0
-        Width = 213
+        Width = 173
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -1
       end
       object btnCancelar: TbsSkinSpeedButton
-        Left = 393
+        Left = 353
         Top = 0
-        Width = 112
+        Width = 96
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -215,9 +212,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         OnClick = btnCancelarClick
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 505
+        Left = 449
         Top = 0
-        Width = 166
+        Width = 256
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
@@ -231,7 +228,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     Top = 53
     Width = 811
     Height = 387
-    ActivePage = PagNovoRomaneio
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -461,8 +458,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Sizeable = False
         Align = alTop
         Caption = 'Incluir Vendas no Romaneio'
-        ExplicitLeft = -1
-        ExplicitTop = -6
         object bsSkinLabel1: TbsSkinLabel
           Left = 24
           Top = 27
@@ -694,8 +689,10 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Height = 341
         Align = alClient
         TabOrder = 0
+        ExplicitTop = 31
         object GridRomaneio: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
+          OnCustomDrawCell = GridRomaneioCustomDrawCell
           DataController.DataSource = srcRomaneios
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -747,6 +744,10 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           object GridRomaneioOperador: TcxGridDBColumn
             DataBinding.FieldName = 'Operador'
             Width = 100
+          end
+          object Colum_NomeStatus: TcxGridDBColumn
+            DataBinding.FieldName = 'Status'
+            Visible = False
           end
         end
         object cxGridLevel1: TcxGridLevel

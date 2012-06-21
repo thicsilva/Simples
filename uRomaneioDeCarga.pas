@@ -80,6 +80,7 @@ type
     bsSkinLabel2: TbsSkinLabel;
     srcFuncionarios: TDataSource;
     bsSkinButton2: TbsSkinButton;
+    Colum_NomeStatus: TcxGridDBColumn;
     procedure bsSkinButton3Click(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure cdsVendasRomaneioAfterOpen(DataSet: TDataSet);
@@ -94,6 +95,9 @@ type
     procedure cmbNome_FuncionarioChange(Sender: TObject);
     procedure edtFuncionarioIdExit(Sender: TObject);
     procedure bsSkinButton2Click(Sender: TObject);
+    procedure GridRomaneioCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
   private
     { Private declarations }
     pviLinha : Integer;
@@ -385,6 +389,14 @@ begin
    DaoFuncionario := TDaofuncionario.Create(gConexao);
    srcFuncionarios.DataSet := DaoFuncionario.BuscarTodos;
    FreeandNil(DaoFuncionario);
+end;
+
+procedure TfrmRomaneioDeEntrega.GridRomaneioCustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='F' Then
+      acanvas.Font.color := clGreen;
 end;
 
 procedure TfrmRomaneioDeEntrega.impMatricialNewPage(Sender: TObject;

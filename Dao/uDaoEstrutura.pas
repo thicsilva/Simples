@@ -266,7 +266,7 @@ begin
    if not ExisteCampo( 'T_Vendas', 'Prorrogado', FConexao.Conection ) then
    begin
       FQryAjustes.Close;
-      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Prorrogado Integer';
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Prorrogado bit';
       FQryAjustes.ExecSQL;
    end;
 end;

@@ -23,6 +23,7 @@ type TDaoVenda = class
      Procedure MarcarComoServicoPago(IDVenda : Integer);
      procedure AtualizarRomaneio(RomaneiId,VendaId : Integer);
      procedure CancelarRomaneio(RomaneiId : Integer);
+     procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
 end;
 
@@ -127,10 +128,15 @@ end;
 procedure TDaoVenda.ProrrogarVencimento(VendaId, Dias: Integer);
 begin
   FqryModific.Close;
-  FqryModific.SQL.Text :='UpDate T_Ctasreceber set Data_Vencimento=(Data_Vencimento+:parDias) where SeqVenda=:parSeqvenda';
+  FqryModific.SQL.Text :='UpDate T_Ctasreceber set Data_Vencimento=Data_Vencimento+'+IntToStr(Dias)+' where SeqVenda=:parSeqvenda';
   FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
-  FqryModific.ParamByName('parDias').AsInteger     := Dias;
   FqryModific.ExecSql;
+
+  FqryModific.Close;
+  FqryModific.SQL.Text :='UpDate T_vendas set Prorrogado=1 where SeqVenda=:parSeqvenda';
+  FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
+  FqryModific.ExecSql;
+
 end;
 
 function TDaoVenda.RetonarVendasSemSinalPago: TclientDataSet;
@@ -147,6 +153,15 @@ begin
    Parametros := TStringList.Create;
    Parametros.Add(IntTostr(ClienteId));
    Result := not FConexao.BuscarDadosSQL('select SeqVenda from T_vendas where cod_Cliente=:parCod_Cliente',Parametros).IsEmpty;
+end;
+
+procedure TDaoVenda.TirarVendaRomaneio(VendaId: Integer);
+begin
+   FqryModific.Close;
+   FqryModific.SQL.Text :='Update T_vendas set RomaneioId=:parRomaneioID where SeqVenda=:parSeqvenda';
+   FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
+   FqryModific.ParamByName('parRomaneioID').AsInteger := 0;
+   FqryModific.ExecSql;
 end;
 
 end.
