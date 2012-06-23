@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, cxClasses, cxStyles, cxGridTableView, BusinessSkinForm,
-  ufuncoes,cl_TPerfil,uClassConexao,uTipos,
+  ufuncoes,cl_TPerfil,uClassConexao,uTipos,uClassEmpresa,
   bsSkinShellCtrls, bsSkinCtrls, bsSkinData, ActnList, XPStyleActnCtrls,
   ActnMan, ImgList, bsCategoryButtons,IniFiles, DB, SqlExpr,
   StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
@@ -232,6 +232,8 @@ type
     dxBarButton30: TdxBarButton;
     acrRecebimentoRomaneio: TAction;
     dxBarLargeButton23: TdxBarLargeButton;
+    actCadEmpresa: TAction;
+    dxBarLargeButton24: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -290,6 +292,7 @@ type
     procedure actVendalojaExecute(Sender: TObject);
     procedure actServicoAlineExecute(Sender: TObject);
     procedure acrRecebimentoRomaneioExecute(Sender: TObject);
+    procedure actCadEmpresaExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -298,6 +301,7 @@ type
     procedure ControleDeRepasse;
     procedure VerificarEstrutura;
     procedure VerificarAgendaAnimal;
+    procedure CarregarEmpresa;
     { Private declarations }
   public
     { Public declarations }
@@ -328,8 +332,8 @@ var
   gbSenhaMaster  : boolean;
   gsPerfilAcesso : Tperfil;
   gConexao       : TConexao;
+  gEmpresa       : TEmpresa;
   gbControleDeSenhaAtivo : Boolean;
-
   gxLinha         : array[ 1..5 ]  of string;
 
 implementation
@@ -344,7 +348,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
-  uRecebimentoRomaneio;
+  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa;
 
 {$R *.dfm}
 
@@ -390,9 +394,20 @@ begin
    frmCadClientes.show;
 end;
 
+procedure TfrmPrincipal.actCadEmpresaExecute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmCadEmpresa := TfrmCadEmpresa.create(Self);
+   frmCadEmpresa.showModal;
+end;
+
 procedure TfrmPrincipal.acrCaixasExecute(Sender: TObject);
 begin
-if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
@@ -448,7 +463,7 @@ end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-   gParametros              := TParametros.Create;
+   gParametros := TParametros.Create;
 
    DefinirDataSistema;
 
@@ -462,7 +477,16 @@ begin
 
    VerificarAgendaAnimal;
 
+   CarregarEmpresa;
 end;
+
+procedure TfrmPrincipal.CarregarEmpresa;
+var DaoEmpresa : TDaoEmpresa;
+begin
+  DaoEmpresa := TDaoEmpresa.Create(gConexao);
+  gEmpresa := Daoempresa.carregar;
+end;
+
 procedure TfrmPrincipal.VerificarAgendaAnimal;
 var DaoEventoAnimal : TdaoEventoAnimal;
 begin

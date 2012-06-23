@@ -4,10 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, bsSkinCtrls, StdCtrls, EditNew;
+  Dialogs, bsSkinCtrls, StdCtrls, EditNew,uFormBase;
 
 type
-  TFrmDescontoVenda = class(TForm)
+  TFrmDescontoVenda = class(TFormBase)
     bsSkinPanel3: TbsSkinPanel;
     bsSkinStdLabel7: TbsSkinStdLabel;
     bsSkinStdLabel9: TbsSkinStdLabel;

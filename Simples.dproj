@@ -37,8 +37,14 @@
       
       
       
-      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
     </Excluded_Packages><Source><Source Name="MainSource">Simples.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
@@ -71,6 +77,7 @@
     <DCCReference Include="Dao\uDaoCliente.pas" />
     <DCCReference Include="Dao\uDaoClienteAnimal.pas" />
     <DCCReference Include="Dao\uDaoCorrecao.pas" />
+    <DCCReference Include="Dao\uDaoEmpresa.pas" />
     <DCCReference Include="Dao\uDaoEstrutura.pas" />
     <DCCReference Include="Dao\uDaoEventoAnimal.pas" />
     <DCCReference Include="Dao\uDaoFormaPagamento.pas" />
@@ -117,6 +124,9 @@
     </DCCReference>
     <DCCReference Include="uCadClientes.pas">
       <Form>frmCadClientes</Form>
+    </DCCReference>
+    <DCCReference Include="uCadEmpresa.pas">
+      <Form>frmcadEmpresa</Form>
     </DCCReference>
     <DCCReference Include="uCadFabricantes.pas">
       <Form>frmCadFabricantes</Form>

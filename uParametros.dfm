@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 552
     Height = 340
-    ActivePage = Vendas
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1443,8 +1443,9 @@ object frmParametros: TfrmParametros
           'Grafico'
           'Epson LX-300'
           'Bematech - Termica'
-          'Grafico 80 Colunas')
-        ItemIndex = 0
+          'Grafico 80 Colunas'
+          '80 Colunas Modelo 01')
+        ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
         Font.Charset = DEFAULT_CHARSET
@@ -1551,8 +1552,6 @@ object frmParametros: TfrmParametros
     end
     object Vendas: TbsSkinTabSheet
       Caption = 'Vendas'
-      ExplicitLeft = 233
-      ExplicitTop = -100
       object chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox
         Left = 11
         Top = 4

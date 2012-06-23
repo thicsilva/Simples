@@ -124,6 +124,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object btnGerar: TbsSkinSpeedButton
         Left = 0
@@ -161,6 +162,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = btnGerarClick
         ExplicitLeft = -6
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 281
@@ -172,6 +174,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 287
+        ExplicitTop = -1
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 174
@@ -209,6 +212,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = bsSkinSpeedButton1Click
         ExplicitLeft = 186
+        ExplicitTop = 12
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 363
@@ -246,6 +250,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = btnCancelarClick
         ExplicitLeft = 472
+        ExplicitTop = 12
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 454
@@ -257,6 +262,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 460
+        ExplicitTop = -1
       end
     end
   end

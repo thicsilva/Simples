@@ -21,6 +21,7 @@ type TVenda = class
     FValor_Total: Real;
     FPeso_total: Real;
     FRomaneioId: Integer;
+    FEntregue: Boolean;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -31,12 +32,15 @@ type TVenda = class
     procedure ImprimirMatricial(DadosVendas,DadosItensVendas : TClientDataSet;CaminhoImpressora : String);
     procedure ImprimirBematec(DadosVendas, DadosItensVendas: TClientDataSet; CaminhoImpressora: String; prTotalPago : Real);
     procedure ImprimirGrafico80Colunas(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet;   CaminhoImpressora : String );
+    procedure ImprimirGrafico80ColunasM2(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet;   CaminhoImpressora : String );
     procedure SetVendaID(const Value: Integer);
     procedure SetValorPendendente(const Value: Real);
     procedure SetData_Venda(const Value: TDateTime);
     procedure SetValor_Total(const Value: Real);
     procedure SetPeso_total(const Value: Real);
     procedure SetRomaneioId(const Value: Integer);
+    procedure SetEntregue(const Value: Boolean);
+
   public
      Constructor Create(Conexao : TConexao);
      procedure Imprimir(DadosVendas, DadosItensVendas: TClientDataSet; CaminhoImpressora: String; prTotalPago : Real; TipoImpressao : Integer );
@@ -49,6 +53,7 @@ type TVenda = class
      property Valor_Total : Real read FValor_Total write SetValor_Total;
      property Peso_total : Real read FPeso_total write SetPeso_total;
      property RomaneioId : Integer read FRomaneioId write SetRomaneioId;
+     property Entregue : Boolean read FEntregue write SetEntregue;
 
      property Empresa : TEmpresa read FEmpresa write SetEmpresa;
      property Funcionario : TFuncionario read FFuncionario write SetFuncionario;
@@ -128,7 +133,7 @@ begin
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',39,0));
    FLinha := FLinha + 1;
-   impMatricial.Imp(FLinha,001,Copy(Empresa.Descricao,1,39));
+   impMatricial.Imp(FLinha,001,Copy(Empresa.Nome_Fantasia,1,39));
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',39,0));
    FLinha := FLinha + 1;
@@ -264,7 +269,7 @@ begin
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '_','_',80,0));
    FLinha := FLinha + 1;
-   impMatricial.ImpC(FLinha, 001, Empresa.Descricao, [] );
+   impMatricial.ImpC(FLinha, 001, Empresa.Nome_Fantasia, [] );
    FLinha := FLinha + 1;
    impMatricial.ImpC(FLinha, 001, Empresa.Endereco.logradouro+', '+Empresa.Endereco.numero+' Bairro.: '+Empresa.Endereco.bairro+' '+
                                   Empresa.Endereco.cidade+'-'+Empresa.Endereco.uf, [] );
@@ -349,6 +354,121 @@ begin
 end;
 
 
+procedure TVenda.ImprimirGrafico80ColunasM2(DadosVendas,
+  DadosItensVendas: TClientDataSet; CaminhoImpressora: String);
+var ImpMatricial   : TrdPrint;
+    lrTot_Produtos : Real;
+    lrTot_Desconto : Real;
+    liCont         : integer;
+    Mensagem       : TStringList;
+    ItendVendas    : TClientDataSet;
+    Cliente        : TCliente;
+    DaoCliente     : TDaoCliente;
+begin
+   ImpMatricial := TrdPrint.Create(Nil);
+   impMatricial.OpcoesPreview.PreviewZoom := 100;
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 33;
+   ImpMatricial.TamanhoQteColunas         := 80;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   impmatricial.Impressora                := Grafico;
+   impMatricial.UsaGerenciadorImpr        := False;
+   if CaminhoImpressora='LPT1' then
+     impMatricial.UsaGerenciadorImpr      := True;
+   impMatricial.Abrir;
+   DaoCliente := TDaoCliente.Create(FConexao);
+   Cliente := DaoCliente.Buscar(DadosVendas.FieldByName( 'Cod_Cliente' ).AsInteger);
+
+   FLinha := 01;
+   impMatricial.Imp(FLinha,030,'DOCUMENTO AUXILIAR DE VENDA');
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,IncDigito( '_','_',80,0));
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha, 001, Empresa.Nome_Fantasia, [] );
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha, 001, Empresa.Endereco.logradouro+', '+Empresa.Endereco.numero+' Bairro.: '+Empresa.Endereco.bairro+' '+
+                                  Empresa.Endereco.cidade+'-'+Empresa.Endereco.uf, [] );
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha, 001,'Telefones '+Empresa.Telefones, [] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',DadosVendas.FieldByName( 'Data_Venda' ).AsDateTime)+' Orc.: '+incZero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,8) );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Cliente...: '+Copy(IntToStr(Cliente.Id)+'-'+Cliente.Descricao,1,80 ) );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'CNPJ.:'+Cliente.CPF+' Inscrição Estadual.:'+Cliente.InscricaoEstadual );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Endereco..: '+Cliente.Endereco.logradouro+', '+Cliente.Endereco.numero+' Bairro.: '+Cliente.Endereco.bairro+' '+
+                                              Cliente.Endereco.cidade+'-'+Cliente.Endereco.uf );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Pto.Refere: '+Cliente.Endereco.PontoReferencia);
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
+   FLinha := FLinha + 1;                //   123456789,123456789,123456789,12345
+   impMatricial.Imp( FLinha, 001, 'Codigo |P R O D U T O S                       |Quatidade|Pc. Unit|   Vlr Total|' );
+   FLinha := FLinha + 1;        // 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789
+   impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
+   FLinha := FLinha + 1;
+   DadosVendas .First;
+   lrTot_Produtos := 0;
+   lrTot_Desconto := 0;
+   licont := 0;
+   DadosItensVendas.locate('Seqvenda',self.VendaID,[]);
+   While ( self.VendaID = DadosItensVendas.fieldByname('SeqVenda').AsInteger) and ( not DadosItensVendas.Eof) Do
+   Begin
+      impMatricial.Imp ( FLinha, 001, inczero(DadosItensVendas.FieldByName( 'Codigo' ).AsString,5));
+      impMatricial.Imp ( FLinha, 008,'|'+DadosItensVendas.FieldByName( 'Descricao' ).AsString );
+      impMatricial.ImpD( FLinha, 058,FormatFloat( '#,##0.00', DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat)+'|', [ ] );
+      impMatricial.ImpD( FLinha, 067,FormatFloat( '#,##0.00', Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) )+'|', [ ] );
+      impMatricial.ImpD( FLinha, 080,FormatFloat( '#,##0.00', Arredondar ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat *
+                                                                          ( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat -
+                                                                            DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat ), 2 ) )+'|' , [ ] );
+      lrTot_Produtos := lrTot_Produtos + ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
+      lrTot_Desconto := lrTot_Desconto + ( DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat * DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat );
+
+      liCont := liCont + 1;
+      FLinha := FLinha + 1;
+      DadosItensVendas .Next;
+   end;
+   impMatricial.Imp ( FLinha, 001, IncDigito( '-', '-', 80, 0 ) );
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, 'Total de Produtos Listado.: ' );
+   impMatricial.ImpD( FLinha, 039, IntToStr( liCont ), [ ] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, 'Valor a Pagar.............:');
+   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, 'Desconto Total ...........:' );
+   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', lrTot_Desconto ), [ ] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, 'Valor Total...............:');
+   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Forma Pag.: '+Copy(inczero(IntToStr(Self.FormaPagamento.Id),3)+'-'+FormaPagamento.Descricao,1,25));
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, IncDigito( '=', '=', 80, 0 ) );
+   FLinha := FLinha + 2;
+
+   impMatricial.Imp ( FLinha, 001, '___________________________');
+   FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, Cliente.Descricao);
+
+   if  FormaPagamento.ImprimeMensagem Then
+   Begin
+      impMatricial.Imp ( FLinha, 001, FormaPagamento.Mensagem);
+      FLinha := FLinha + 1;
+      impMatricial.Imp ( FLinha, 001, '___________________________');
+      FLinha := FLinha + 1;
+      impMatricial.Imp ( FLinha, 001, DadosVendas.FieldByName( 'Nome_Cliente' ).AsString);
+      FLinha := FLinha + 1;
+      impMatricial.Imp ( FLinha, 001, 'C.P.F..: '+Cliente.CPF);
+      FLinha := FLinha + 2;
+   End;
+   impMatricial.Fechar;
+end;
+
 procedure TVenda.ImprimirMatricial(DadosVendas,DadosItensVendas: TClientDataSet; CaminhoImpressora : String);
 const
   c17cpi      = #15;
@@ -364,7 +484,7 @@ begin
    WriteLn(F, '',c17cpi+EscDraft+IncDigito( '_','_',39,0));
    WriteLn(F, '',c17cpi+EscDraft+'Emitido em :' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
    WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
-   WriteLn(F, '',c17cpi+EscDraft+Copy(Empresa.Descricao,1,39));
+   WriteLn(F, '',c17cpi+EscDraft+Copy(Empresa.Nome_Fantasia,1,39));
    WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
    WriteLn(F, '',c17cpi+EscDraft+Copy('Nota de Pagamento',1,39));
    WriteLn(F, '',c17cpi+EscDraft+IncDigito( '-','-',39,0));
@@ -420,6 +540,7 @@ begin
      1: ImprimirMatricial(DadosVendas,DadosItensVendas,CaminhoImpressora);
      2: ImprimirBematec(DadosVendas,DadosItensVendas,CaminhoImpressora,prTotalPago);
      3: ImprimirGrafico80Colunas(DadosVendas,DadosItensVendas,CaminhoImpressora);
+     4: ImprimirGrafico80ColunasM2(DadosVendas,DadosItensVendas,CaminhoImpressora);
   end;
 end;
 
@@ -439,7 +560,7 @@ begin
      WriteLn(F, '',IncDigito( '_','_',39,0));
      WriteLn(F, '','Emitido em :' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
      WriteLn(F, '',IncDigito( '-','-',39,0));
-     WriteLn(F, '',Copy(Empresa.Descricao,1,39));
+     WriteLn(F, '',Copy(Empresa.Nome_Fantasia,1,39));
      WriteLn(F, '',IncDigito( '-','-',39,0));
      WriteLn(F, '',Copy('Nota de Pagamento',1,39));
      WriteLn(F, '',IncDigito( '-','-',39,0));
@@ -518,6 +639,11 @@ end;
 procedure TVenda.SetEmpresa(const Value: TEmpresa);
 begin
   FEmpresa := Value;
+end;
+
+procedure TVenda.SetEntregue(const Value: Boolean);
+begin
+  FEntregue := Value;
 end;
 
 procedure TVenda.SetFormaPagamento(const Value: TFormaPagamento);

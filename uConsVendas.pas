@@ -450,7 +450,7 @@ begin
    DaoVenda := TDaoVenda.Create(gConexao);
    loVenda  := DaoVenda.CarregarVenda(cdsVendas);
    loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
-   lovenda.Empresa.Descricao := GsNomeEmp;
+   lovenda.Empresa := gEmpresa;
    DaoItemVenda := TDaoItemVenda.Create(gConexao);
    loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
                     gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,

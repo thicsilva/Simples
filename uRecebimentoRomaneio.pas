@@ -5,10 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinCtrls, StdCtrls, Mask, bsSkinBoxCtrls, ExtCtrls, ToolWin,
-  ComCtrls, DBClient, CheckLst;
+  ComCtrls, DBClient, CheckLst,uFormBase;
 
 type
-  TfrmRecebimentoRomaneio = class(TForm)
+  TfrmRecebimentoRomaneio = class(TFormBase)
     bsSkinCoolBar3: TbsSkinCoolBar;
     bsSkinToolBar3: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;

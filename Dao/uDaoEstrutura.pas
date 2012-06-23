@@ -44,6 +44,7 @@ type TDaoEstrutura = class
     procedure Adicionar_Status_na_Tabela_Romaneio;
     procedure Adicionar_Entregue_na_Tabela_Vendas;
     procedure Adicionar_Prorrogado_na_Tabela_Vendas;
+    procedure CriarTabela_Empresa;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -502,6 +503,7 @@ begin
   Adicionar_Status_na_Tabela_Romaneio;
   Adicionar_Entregue_na_Tabela_Vendas;
   Adicionar_Prorrogado_na_Tabela_Vendas;
+  CriarTabela_Empresa;
 end;
 
 
@@ -597,4 +599,50 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.CriarTabela_Empresa;
+begin
+   if not ExisteTabela( 'Empresa', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'CREATE TABLE Empresa ( '+
+	                           '[ID_Empresa] [int] IDENTITY(1,1) NOT NULL, '+
+	                           '[Nome_Fantasia] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL, '+
+	                           '[CNPJCPF] [char](14) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Endereco] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Bairro] [varchar](30) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Cidade] [varchar](30) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[UF] [char](2) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Telefone] [char](13) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[celular] [char](13) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Operador] [varchar](30) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Data_Cad] [datetime] NULL, '+
+	                           '[Data_Atu] [datetime] NULL, '+
+	                           '[Limite_Credito] [float] NULL, '+
+	                           '[Status] [char](1) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[ativo] [char](1) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Cod_Atividade] [int] NULL, '+
+	                           '[Cep] [char](9) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Cod_Rota] [int] NULL, '+
+	                           '[Qtde_PedAberto] [int] NULL, '+
+	                           '[razao_Social] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Pto_Referencia] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Fax] [char](13) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Responsavel] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[cod_Funcionario] [int] NULL, '+
+	                           '[email] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[DiretorGeral] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[DiretorEncino] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[DiretorDetran] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Liberado] [bit] NULL, '+
+	                           '[DiretorEnsino] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[NomeDiretor] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[HomePage] [varchar](100) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Diretor] [varchar](50) COLLATE Latin1_General_CI_AS NULL, '+
+	                           '[Local] [varchar](100) COLLATE Latin1_General_CI_AS NULL ) ';
+
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 end.

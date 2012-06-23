@@ -133,6 +133,12 @@ end;
 procedure TfrmRomaneioDeEntrega.bsSkinButton2Click(Sender: TObject);
 var ControllerRomaneio : TControllerRomaneio;
 begin
+   if srcRomaneios.DataSet.fieldByName('Status').AsString='F' then
+   begin
+      CaixaMensagem( 'Romaneio ja Finalizado', ctAviso, [ cbOk ], 0 );
+      exit;
+   end;
+
    if CaixaMensagem( 'Deseja cancelar o Romaneio '+srcRomaneios.DataSet.fieldByName('Id').AsString, ctConfirma, [ cbSimNao ], 0 ) then
    begin
       ControllerRomaneio := TControllerRomaneio.Create(gConexao);
@@ -175,6 +181,14 @@ begin
          MudarFoco;
          Exit;
       end;
+
+      if Venda.Entregue then
+      begin
+         CaixaMensagem( 'A Venda já foi entregue ', ctAviso, [ cbOk ], 0 );
+         MudarFoco;
+         Exit;
+      end;
+
 
       cdsVendasRomaneio.Append;
       cdsVendasRomaneio.FieldByName('NumeroVenda').AsInteger :=  Venda.VendaID;

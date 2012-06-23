@@ -2,7 +2,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
   Left = 0
   Top = 0
   Caption = 'Efetuar Desconto'
-  ClientHeight = 169
+  ClientHeight = 201
   ClientWidth = 235
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
     Left = 1
     Top = 0
     Width = 234
-    Height = 169
+    Height = 201
     HintImageIndex = 0
     TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
@@ -48,6 +48,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alRight
+    ExplicitHeight = 169
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 66
       Top = 12

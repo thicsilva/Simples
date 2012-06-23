@@ -9,11 +9,15 @@ type TEndereco = Class
     Fuf: string;
     Fnumero: string;
     Fcidade: string;
+    Fcep: String;
+    FPontoReferencia: String;
     procedure Setbairro(const Value: string);
     procedure Setcidade(const Value: string);
     procedure Setlogradouro(const Value: string);
     procedure Setnumero(const Value: string);
     procedure Setuf(const Value: string);
+    procedure Setcep(const Value: String);
+    procedure SetPontoReferencia(const Value: String);
   published
 
    public
@@ -22,6 +26,8 @@ type TEndereco = Class
      property cidade : string read Fcidade write Setcidade;
      property uf : string read Fuf write Setuf;
      property numero : string read Fnumero write Setnumero;
+     property cep : String read Fcep write Setcep;
+     property PontoReferencia : String read FPontoReferencia write SetPontoReferencia;
 
 end;
 
@@ -32,6 +38,11 @@ implementation
 procedure TEndereco.Setbairro(const Value: string);
 begin
   Fbairro := Value;
+end;
+
+procedure TEndereco.Setcep(const Value: String);
+begin
+  Fcep := Value;
 end;
 
 procedure TEndereco.Setcidade(const Value: string);
@@ -47,6 +58,11 @@ end;
 procedure TEndereco.Setnumero(const Value: string);
 begin
   Fnumero := Value;
+end;
+
+procedure TEndereco.SetPontoReferencia(const Value: String);
+begin
+  FPontoReferencia := Value;
 end;
 
 procedure TEndereco.Setuf(const Value: string);

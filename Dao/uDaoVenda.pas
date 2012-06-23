@@ -80,6 +80,7 @@ begin
     venda.Valor_Total    := DadosVendas.FieldByName('Vlr_Total').AsFloat;
     venda.romaneioId     := DadosVendas.FieldByName('RomaneioId').AsInteger;
     venda.Peso_Total     := self.PesoTotal( DadosVendas.FieldByName('SeqVenda').AsInteger);
+    venda.Entregue       := DadosVendas.FieldByName('Entregue').AsBoolean;
     Result := Venda;
 end;
 
@@ -158,9 +159,10 @@ end;
 procedure TDaoVenda.TirarVendaRomaneio(VendaId: Integer);
 begin
    FqryModific.Close;
-   FqryModific.SQL.Text :='Update T_vendas set RomaneioId=:parRomaneioID where SeqVenda=:parSeqvenda';
-   FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
+   FqryModific.SQL.Text :='Update T_vendas set RomaneioId=:parRomaneioID, Prorrogado=:parProrrogar where SeqVenda=:parSeqvenda';
+   FqryModific.ParamByName('parSeqVenda').AsInteger   := VendaId;
    FqryModific.ParamByName('parRomaneioID').AsInteger := 0;
+   FqryModific.ParamByName('parProrrogar').AsInteger  := 0;
    FqryModific.ExecSql;
 end;
 

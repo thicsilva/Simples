@@ -37,7 +37,9 @@ begin
      Cliente.Endereco.cidade := Dados.FieldByName('cidade').AsString;
      Cliente.Endereco.uf      := Dados.FieldByName('UF').AsString;
      Cliente.Endereco.logradouro := Dados.FieldByName('endereco').AsString;
+     Cliente.Endereco.PontoReferencia := Dados.FieldByName('Pto_Referencia').AsString;
      Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
+     Cliente.InscricaoEstadual := Dados.FieldByName('InscricaoEstadual').AsString;
      Result := Cliente;
   Finally
     FreeandNil(Dados);

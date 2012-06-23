@@ -1352,7 +1352,7 @@ begin
       loVenda  := DaoVenda.CarregarVenda(cdsVenda);
       DaoFuncionario    := TDaoFuncionario.Create(gConexao);
       lovenda.Funcionario := Daofuncionario.Buscar(cdsVenda.FieldByName('Cod_Funcionario').AsInteger);
-      lovenda.Empresa.Descricao := GsNomeEmp;
+      lovenda.Empresa := gEmpresa;
       loVenda.VendaID := 1;
       loVenda.Imprimir(cdsVenda,cdsItensVendasTMP,
                        gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,

@@ -78,7 +78,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 705
+        Left = 679
         Top = 0
         Width = 70
         Height = 49
@@ -114,6 +114,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 635
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
@@ -174,11 +176,12 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 353
         Top = 0
-        Width = 96
+        Width = 70
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -210,9 +213,11 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Align = alLeft
         Spacing = 2
         OnClick = btnCancelarClick
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 449
+        Left = 423
         Top = 0
         Width = 256
         Height = 49
@@ -220,6 +225,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 449
+        ExplicitTop = -1
       end
     end
   end
@@ -228,7 +235,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     Top = 53
     Width = 811
     Height = 387
-    ActivePage = bsSkinTabSheet1
+    ActivePage = PagNovoRomaneio
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -689,7 +696,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Height = 341
         Align = alClient
         TabOrder = 0
-        ExplicitTop = 31
         object GridRomaneio: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           OnCustomDrawCell = GridRomaneioCustomDrawCell

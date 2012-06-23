@@ -121,7 +121,9 @@ uses
   uClassRomaneio in 'Modelos\uClassRomaneio.pas',
   uDaoRomaneio in 'Dao\uDaoRomaneio.pas',
   uControllerRomaneio in 'Controller\uControllerRomaneio.pas',
-  uRecebimentoRomaneio in 'uRecebimentoRomaneio.pas' {frmRecebimentoRomaneio};
+  uRecebimentoRomaneio in 'uRecebimentoRomaneio.pas' {frmRecebimentoRomaneio},
+  uCadEmpresa in 'uCadEmpresa.pas' {frmcadEmpresa},
+  uDaoEmpresa in 'Dao\uDaoEmpresa.pas';
 
 {$R *.res}
 
@@ -134,6 +136,7 @@ begin
   Application.CreateForm(TFrmRelEstoque, FrmRelEstoque);
   Application.CreateForm(TfrmRomaneioDeEntrega, frmRomaneioDeEntrega);
   Application.CreateForm(TfrmRecebimentoRomaneio, frmRecebimentoRomaneio);
+  Application.CreateForm(TfrmcadEmpresa, frmcadEmpresa);
   Frmlogin.ShowModal;
   Application.Run;
 end.
