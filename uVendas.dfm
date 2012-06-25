@@ -2,7 +2,7 @@ object frmVendas: TfrmVendas
   Left = 132
   Top = 129
   BorderIcons = []
-  Caption = ']'
+  Caption = 'Pedidos de Venda'
   ClientHeight = 535
   ClientWidth = 760
   Color = clBtnFace

@@ -12,7 +12,7 @@ uses
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
   SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL, bsSkinGrids,
-  bsDBGrids ;
+  bsDBGrids, Menus ;
 
 type
   TfrmPrincipal = class(TForm)
@@ -234,6 +234,8 @@ type
     dxBarLargeButton23: TdxBarLargeButton;
     actCadEmpresa: TAction;
     dxBarLargeButton24: TdxBarLargeButton;
+    PopupMenu1: TPopupMenu;
+    MarcarEventocomRealizado1: TMenuItem;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -293,6 +295,7 @@ type
     procedure actServicoAlineExecute(Sender: TObject);
     procedure acrRecebimentoRomaneioExecute(Sender: TObject);
     procedure actCadEmpresaExecute(Sender: TObject);
+    procedure MarcarEventocomRealizado1Click(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -597,6 +600,18 @@ begin
    pviLinha:=Pvilinha+1;
    TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
    pviLinha:=Pvilinha+1;
+end;
+
+procedure TfrmPrincipal.MarcarEventocomRealizado1Click(Sender: TObject);
+var  DaoEventoAnimal : TdaoEventoAnimal;
+begin
+   if CaixaMensagem( 'Deseja marcar evento como concluido', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
+      DaoEventoAnimal.RealizarEvento(srcEventoAnimal.DataSet.FieldByName('EventoId').AsInteger,gsOperador);
+      FreeAndNil(DaoEventoAnimal);
+   end;
+   VerificarAgendaAnimal;
 end;
 
 procedure TfrmPrincipal.actCadFuncionariosExecute(Sender: TObject);

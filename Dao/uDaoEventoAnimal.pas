@@ -29,7 +29,7 @@ begin
   Parametros.add(FormatDatetime('dd/mm/yyyy',Now));
   Result:= FConexao.BuscarDadosSQL(' Select Cli.Codigo,cli.Descricao,Animais.NomeAnimal,'+
                                    '         Animais.Especie,Animais.Raca,Eventos.Evento, '+
-                                   '         Eventos.Data_Agendada '+
+                                   '         Eventos.Data_Agendada,Eventos.EventoId '+
                                    'From EventosAnimais Eventos '+
                                    '     left join ClienteAnimais animais on Animais.AnimalId = Eventos.AnimalId '+
                                    '     left join T_clientes Cli on Cli.Codigo=Animais.ClienteId where Eventos.Data_Agendada<=:parData_Agendada and Data_Realizada is null',

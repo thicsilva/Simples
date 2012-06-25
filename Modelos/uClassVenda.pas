@@ -22,6 +22,7 @@ type TVenda = class
     FPeso_total: Real;
     FRomaneioId: Integer;
     FEntregue: Boolean;
+    FVencimentos: TStringList;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -40,6 +41,7 @@ type TVenda = class
     procedure SetPeso_total(const Value: Real);
     procedure SetRomaneioId(const Value: Integer);
     procedure SetEntregue(const Value: Boolean);
+    procedure SetVencimentos(const Value: TStringList);
 
   public
      Constructor Create(Conexao : TConexao);
@@ -59,12 +61,13 @@ type TVenda = class
      property Funcionario : TFuncionario read FFuncionario write SetFuncionario;
      property FormaPagamento : TFormaPagamento read FFormaPagamento write SetFormaPagamento;
      property Cliente : TCliente read FCliente write SetCliente;
+     property Vencimentos : TStringList read FVencimentos write SetVencimentos;
 
 end;
 
 implementation
 
-uses ufuncoes, uDaoCliente;
+uses ufuncoes;
 
 { TVenda }
 
@@ -249,9 +252,7 @@ var ImpMatricial   : TrdPrint;
     liCont         : integer;
     Mensagem       : TStringList;
     ItendVendas    : TClientDataSet;
-    Cliente        : TCliente;
-    DaoCliente     : TDaoCliente;
-begin
+Begin
    ImpMatricial := TrdPrint.Create(Nil);
    impMatricial.OpcoesPreview.PreviewZoom := 100;
    ImpMatricial.OpcoesPreview.Preview     := true;
@@ -282,8 +283,6 @@ begin
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
    FLinha := FLinha + 1;
-   DaoCliente := TDaoCliente.Create(FConexao);
-   Cliente := DaoCliente.Buscar(DadosVendas.FieldByName( 'Cod_Cliente' ).AsInteger);
    impMatricial.Imp(FLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',DadosVendas.FieldByName( 'Data_Venda' ).AsDateTime)+' Orc.: '+incZero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,8) );
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,'Cliente...: '+Copy(IntToStr(Cliente.Id)+'-'+Cliente.Descricao,1,80 ) );
@@ -362,8 +361,7 @@ var ImpMatricial   : TrdPrint;
     liCont         : integer;
     Mensagem       : TStringList;
     ItendVendas    : TClientDataSet;
-    Cliente        : TCliente;
-    DaoCliente     : TDaoCliente;
+    I              : Integer;
 begin
    ImpMatricial := TrdPrint.Create(Nil);
    impMatricial.OpcoesPreview.PreviewZoom := 100;
@@ -377,8 +375,6 @@ begin
    if CaminhoImpressora='LPT1' then
      impMatricial.UsaGerenciadorImpr      := True;
    impMatricial.Abrir;
-   DaoCliente := TDaoCliente.Create(FConexao);
-   Cliente := DaoCliente.Buscar(DadosVendas.FieldByName( 'Cod_Cliente' ).AsInteger);
 
    FLinha := 01;
    impMatricial.Imp(FLinha,030,'DOCUMENTO AUXILIAR DE VENDA');
@@ -447,7 +443,36 @@ begin
    impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,'Forma Pag.: '+Copy(inczero(IntToStr(Self.FormaPagamento.Id),3)+'-'+FormaPagamento.Descricao,1,25));
+   FLinha := FLinha + 2;
+   impMatricial.Imp(FLinha,001,'Vencimento: ' );
    FLinha := FLinha + 1;
+   for I := 0 to Self.Vencimentos.Count - 1 do
+   begin
+       case I of
+          0: impMatricial.Imp(FLinha,004,Self.Vencimentos[I]+'_________________' );
+          1: impMatricial.Imp(FLinha,041,Self.Vencimentos[I]+'_________________' );
+          2:
+          begin
+             FLinha := FLinha + 1;
+             impMatricial.Imp(FLinha,004,Self.Vencimentos[I]+'_________________' );
+          end;
+          3: impMatricial.Imp(FLinha,041,Self.Vencimentos[I]+'_________________' );
+          4:
+          begin
+             FLinha := FLinha + 1;
+             impMatricial.Imp(FLinha,004,Self.Vencimentos[I]+'_________________' );
+          end;
+          5: impMatricial.Imp(FLinha,041,Self.Vencimentos[I]+'_________________' );
+          6:
+          begin
+             FLinha := FLinha + 1;
+             impMatricial.Imp(FLinha,004,Self.Vencimentos[I]+'_________________' );
+          end;
+          7: impMatricial.Imp(FLinha,041,Self.Vencimentos[I]+'_________________' );
+       end;
+   end;
+   FLinha := FLinha + 1;
+
    impMatricial.Imp ( FLinha, 001, IncDigito( '=', '=', 80, 0 ) );
    FLinha := FLinha + 2;
 
@@ -679,6 +704,11 @@ end;
 procedure TVenda.SetValor_Total(const Value: Real);
 begin
   FValor_Total := Value;
+end;
+
+procedure TVenda.SetVencimentos(const Value: TStringList);
+begin
+  FVencimentos := Value;
 end;
 
 procedure TVenda.SetVendaID(const Value: Integer);

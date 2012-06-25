@@ -25,6 +25,7 @@ type TDaoVenda = class
      procedure CancelarRomaneio(RomaneiId : Integer);
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
+     function RetornarVencimentos(VendaId : Integer) : TStringList; 
 end;
 
 
@@ -81,6 +82,7 @@ begin
     venda.romaneioId     := DadosVendas.FieldByName('RomaneioId').AsInteger;
     venda.Peso_Total     := self.PesoTotal( DadosVendas.FieldByName('SeqVenda').AsInteger);
     venda.Entregue       := DadosVendas.FieldByName('Entregue').AsBoolean;
+    Venda.Vencimentos    := self.RetornarVencimentos(Venda.VendaID);
     Result := Venda;
 end;
 
@@ -146,6 +148,24 @@ begin
    Parametros := TStringList.Create;
    Parametros.Add('1');
    Result := FConexao.BuscarDadosSQL('select seqvenda,Controle,Nome_Cliente,vlr_total from T_vendas where PagouSinal<>:parPagouSinal',Parametros);
+end;
+
+function TDaoVenda.RetornarVencimentos(VendaId: Integer): TStringList;
+var  dados : TClientDataSet;
+     lstVencimento : TStringList;
+     Parametros : TStringList;
+begin
+   Parametros := TStringList.Create;
+   Parametros.Add(IntToStr(VendaId));
+   dados := FConexao.BuscarDadosSQL('Select vlr_Areceber, Data_Vencimento from T_Ctasreceber where SeqVenda=:parSeqvenda order by 2',Parametros);
+   lstVencimento := TStringList.Create;
+   while not dados.Eof do
+   begin
+      lstVencimento.Add(FormatFloat('0.00',dados.FieldByName('Vlr_Areceber').AsFloat)+' - '+FormatDateTime('dd/mm/yyyy',dados.FieldByName('Data_Vencimento').AsDateTime));
+      dados.Next;
+   end;
+   FreeAndNil(Parametros);
+   Result := lstVencimento;
 end;
 
 function TDaoVenda.TemVenda(ClienteId: Integer): Boolean;

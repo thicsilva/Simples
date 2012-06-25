@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = Tab_VendasEServicos
+    ActivePage = Tab_ProdutosDescontos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -2519,7 +2519,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 591
-        Top = -1
+        Top = -3
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -5041,8 +5041,8 @@ object frmCadClientes: TfrmCadClientes
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 453
-    Top = 464
+    Left = 325
+    Top = 208
   end
   object qryRelatorio: TSQLQuery
     MaxBlobSize = -1
@@ -5136,6 +5136,14 @@ object frmCadClientes: TfrmCadClientes
     object N4ClientescomDebitoemContaCorrente1: TMenuItem
       Caption = '4 - Clientes com debito em Conta-Corrente'
       OnClick = N4ClientescomDebitoemContaCorrente1Click
+    end
+    object N5ClientesporVendedoreBairro1: TMenuItem
+      Caption = '5 - Clientes por Vendedor e Bairro'
+      OnClick = N5ClientesporVendedoreBairro1Click
+    end
+    object N6ClientesSemComprasamaisde60dias1: TMenuItem
+      Caption = '6 - Clientes sem compras a mais de 60 dias'
+      OnClick = N6ClientesSemComprasamaisde60dias1Click
     end
   end
   object cdsClientesDebitos: TClientDataSet
@@ -5231,8 +5239,8 @@ object frmCadClientes: TfrmCadClientes
     Top = 328
   end
   object PopupMenu1: TPopupMenu
-    Left = 800
-    Top = 104
+    Left = 512
+    Top = 192
     object Configurar1: TMenuItem
       Caption = 'Configurar'
       OnClick = Configurar1Click
@@ -5266,8 +5274,8 @@ object frmCadClientes: TfrmCadClientes
     Top = 415
   end
   object PopapAnimais: TPopupMenu
-    Left = 520
-    Top = 224
+    Left = 552
+    Top = 336
     object MenuItem1: TMenuItem
       Caption = 'Realizar Evento'
       OnClick = MenuItem1Click

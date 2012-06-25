@@ -335,6 +335,8 @@ type
     MenuItem1: TMenuItem;
     bsSkinStdLabel24: TbsSkinStdLabel;
     edtSequenciaEntrega: TbsSkinSpinEdit;
+    N5ClientesporVendedoreBairro1: TMenuItem;
+    N6ClientesSemComprasamaisde60dias1: TMenuItem;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -398,6 +400,8 @@ type
     procedure bsSkinSpeedButton1Click(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure cdsClienteAnimaisAfterScroll(DataSet: TDataSet);
+    procedure N5ClientesporVendedoreBairro1Click(Sender: TObject);
+    procedure N6ClientesSemComprasamaisde60dias1Click(Sender: TObject);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -423,7 +427,7 @@ implementation
 
 uses uPrincipal,ufuncoes,cxGridCommon, uselrelClientes, uConfigTabSheet,
   uDaoClienteAnimal, uCapturaImagem, uClassAnimal, uClassEventoAnimal,
-  uDaoEventoAnimal, uDaoVenda;
+  uDaoEventoAnimal, uDaoVenda, uRelCLientesVendedorBairro;
 
 procedure TfrmCadClientes.MenuItem1Click(Sender: TObject);
 var  DaoEventoAnimal : TdaoEventoAnimal;
@@ -534,6 +538,56 @@ begin
    pvilinha := pvilinha+1;
    impmatricial.Imp(pvilinha,001,'Total a Receber...');
    impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',TotalAReceber),[]);
+   impmatricial.Fechar;
+end;
+
+procedure TfrmCadClientes.N5ClientesporVendedoreBairro1Click(Sender: TObject);
+begin
+  frmRelClientesVendedoresBairro := TfrmRelClientesVendedoresBairro.Create(Self);
+  frmRelClientesVendedoresBairro.ShowModal;
+end;
+
+procedure TfrmCadClientes.N6ClientesSemComprasamaisde60dias1Click(Sender: TObject);
+var lsNome_Vendedor : String;
+begin
+
+   pitipoRel := StrtoInt(Copy(TmenuItem(Sender).Caption,1,1));
+
+   GstituloRel  :='Clientes sem compras a mais de 60 dias';
+
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 66;
+   ImpMatricial.TamanhoQteColunas         := 135;
+   ImpMatricial.FonteTamanhoPadrao        := s17cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+   qryRelatorio.Close;
+   qryRelatorio.SQL.Text :='Select Cli.Codigo, Cli.Descricao, Cli.Endereco, Cli.Bairro, Cli.Cidade, '+
+                           '       Max(Ven.Data_Venda) As Ultima_Compra '+
+                           'From T_Clientes Cli '+
+                           '     left join T_Vendas Ven on Ven.Cod_Cliente=Cli.Codigo '+
+                           'where Cli.Codigo not in( select Distinct(Cod_Cliente) from T_Vendas where data_venda>=getdate()-60 ) '+
+                           'group by Cli.Codigo, Cli.Descricao, Cli.Endereco, Cli.Bairro, Cli.Cidade '+
+                           'Order by 6 ';
+   cdsRelatorio.Close;
+   cdsRelatorio.ProviderName := dspRelatorio.Name;
+   cdsRelatorio.Open;
+   cdsRelatorio.First;
+   while not cdsRelatorio.Eof do
+   Begin
+      impmatricial.Imp(pvilinha,001,Copy( IncZero(cdsRelatorio.FieldByName('Codigo').AsString,5)+' '+cdsRelatorio.FieldByName('Descricao').AsString,1,40 ) );
+      impmatricial.Imp(pvilinha,042,Copy(cdsRelatorio.FieldByName('Endereco').AsString,1,40) );
+      impmatricial.Imp(pvilinha,082,cdsRelatorio.FieldByName('Bairro').AsString );
+      impmatricial.Imp(pvilinha,105,cdsRelatorio.FieldByName('Cidade').AsString );
+      impmatricial.Imp(pvilinha,125,FormatDateTime('dd/mm/yyyy',cdsRelatorio.FieldByName('Ultima_Compra').AsDateTime ));
+      pviLinha:=Pvilinha+1;
+      if pvilinha>60 then
+         impmatricial.Novapagina;
+      cdsRelatorio.next;
+   End;
+   impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
    impmatricial.Fechar;
 end;
 
@@ -867,8 +921,11 @@ begin
       CaixaMensagem( 'O Evento Não pode ser vazio ', ctAviso, [ cbOk ], 0 );
       Exit
    end;
-   
-
+   if StrToIntDef(cdsClienteAnimais.FieldByName('AnimalId').AsString,0) = 0 then
+   begin
+     CaixaMensagem( 'O Animal não foi selecionado  ', ctAviso, [ cbOk ], 0 );
+     Exit
+   end;
    EventoAnimal := TEventoAnimal.Create;
    DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
 
@@ -1861,6 +1918,15 @@ begin
       2 : // Relatori de clientes que podem vender
       Begin
          TRdPrint( Sender ).imp(pvilinha,001,'Codigo Descricao                       Endereco                                  Bairro                     Tot.Venda Vlr. Recebido     Nº Venda ');
+         pviLinha:=Pvilinha+1;
+         TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',135,0));
+         pviLinha:=Pvilinha+1;
+
+      End;
+       6 : // Relatori de clientes que podem vender
+      Begin
+         pviLinha:=Pvilinha+1;
+         TRdPrint( Sender ).imp(pvilinha,001,'Codigo Descricao                         Endereco                                 Bairro               Cidade           Dt.Ulti.Compra ');
          pviLinha:=Pvilinha+1;
          TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',135,0));
          pviLinha:=Pvilinha+1;

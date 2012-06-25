@@ -123,7 +123,8 @@ uses
   uControllerRomaneio in 'Controller\uControllerRomaneio.pas',
   uRecebimentoRomaneio in 'uRecebimentoRomaneio.pas' {frmRecebimentoRomaneio},
   uCadEmpresa in 'uCadEmpresa.pas' {frmcadEmpresa},
-  uDaoEmpresa in 'Dao\uDaoEmpresa.pas';
+  uDaoEmpresa in 'Dao\uDaoEmpresa.pas',
+  uRelCLientesVendedorBairro in 'uRelCLientesVendedorBairro.pas' {frmRelClientesVendedoresBairro};
 
 {$R *.res}
 
@@ -137,6 +138,7 @@ begin
   Application.CreateForm(TfrmRomaneioDeEntrega, frmRomaneioDeEntrega);
   Application.CreateForm(TfrmRecebimentoRomaneio, frmRecebimentoRomaneio);
   Application.CreateForm(TfrmcadEmpresa, frmcadEmpresa);
+  Application.CreateForm(TfrmRelClientesVendedoresBairro, frmRelClientesVendedoresBairro);
   Frmlogin.ShowModal;
   Application.Run;
 end.
