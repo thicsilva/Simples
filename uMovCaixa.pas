@@ -620,9 +620,9 @@ begin
    ImpMatricial.imp (pvilinha,001,'Total Recebido.............:');
    impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrTotal_recebido-lrTotal_Extras),[]);
    pviLinha:=Pvilinha+1;
-   ImpMatricial.imp (pvilinha,001,'Total a Receber............:');
-   impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',(lrDiferenca-lrTotal_recebido)),[]);
-   pviLinha:=Pvilinha+1;
+   // ImpMatricial.imp (pvilinha,001,'Total a Receber............:');
+   //impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',(lrDiferenca-lrTotal_recebido)),[]);
+   //pviLinha:=Pvilinha+1;
    lrDiferenca:=0;
    ImpMatricial.imp (pvilinha,001,'---------------------------------------');
    pviLinha:=Pvilinha+1;
@@ -656,7 +656,7 @@ begin
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
-               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda and Mov.Data_cad=Itens.Data_cad '+
+               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda  '+
                'where Mov.Cod_Caixa=:parCod_Caixa and '+
                '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
                'Group by Grupo.Codigo,Grupo.Descricao';
@@ -669,10 +669,10 @@ begin
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
-               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda and Mov.Data_cad=Itens.Data_cad '+
+               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda '+ // and Mov.Data_cad=Itens.Data_cad '+ tem que comparar so a data
                'where mov.Cod_Caixa=:parCod_Caixa And '+
                '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
-               'Group by Prod.Codigo,Grupo.Descricao';
+               'Group by Prod.Codigo,prod.Descricao';
 
    End;
 

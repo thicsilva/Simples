@@ -1793,7 +1793,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text := RetornarSelectProdutos+' From Produtos order by Descricao ';;
+   qryVariavel.SQL.text := RetornarSelectProdutos+' From T_Produtos order by Descricao ';;
 
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;
