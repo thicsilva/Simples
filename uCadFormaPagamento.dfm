@@ -51,10 +51,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 226
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -258,10 +254,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Left = 0
         Top = 33
         Width = 592
-        Height = 186
+        Height = 184
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 193
         object GridFormaPagamento: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -316,10 +311,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = -174
-      ExplicitTop = 2
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 13
         Top = 12
@@ -569,7 +560,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
             'A Vista'
             'A Prazo'
             'Prazo Informado')
-          ItemIndex = 0
+          ItemIndex = -1
           DropDownCount = 8
           HorizontalExtent = False
           Font.Charset = DEFAULT_CHARSET
@@ -771,10 +762,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object tabMensagem: TbsSkinTabSheet
       Caption = 'Mensagem Complementar'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 226
       object MemoMensagem: TMemo
         Left = 0
         Top = 0
@@ -782,7 +769,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Height = 217
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 226
       end
     end
   end
@@ -797,19 +783,16 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 588
+        Width = 590
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 579
+      Width = 581
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -853,9 +836,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 488
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -889,6 +872,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         OnClick = btnFecharClick
         ExplicitLeft = 518
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

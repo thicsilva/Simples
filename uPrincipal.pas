@@ -236,6 +236,7 @@ type
     dxBarLargeButton24: TdxBarLargeButton;
     PopupMenu1: TPopupMenu;
     MarcarEventocomRealizado1: TMenuItem;
+    actTabeladePreco: TAction;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -296,6 +297,7 @@ type
     procedure acrRecebimentoRomaneioExecute(Sender: TObject);
     procedure actCadEmpresaExecute(Sender: TObject);
     procedure MarcarEventocomRealizado1Click(Sender: TObject);
+    procedure actTabeladePrecoExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -351,7 +353,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
-  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa;
+  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco;
 
 {$R *.dfm}
 
@@ -372,6 +374,12 @@ begin
        SkinPrincipal.LoadFromCompressedFile(OD.FileName);
        gsParametros.WriteString('ADM','SkinPadrao',OD.FileName);
    end;
+end;
+
+procedure TfrmPrincipal.actTabeladePrecoExecute(Sender: TObject);
+begin
+   frmrelTabPreco := TfrmrelTabPreco.Create(Self);
+   frmrelTabPreco.ShowModal;
 end;
 
 procedure TfrmPrincipal.actTrocaDeUsuarioExecute(Sender: TObject);

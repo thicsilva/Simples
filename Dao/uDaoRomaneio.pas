@@ -18,6 +18,7 @@ type TDaoRomaneio = Class
      function RetornarProdutos(RomaneioId : integer) : TClientDataSet;
      function RetornarDadosFinanceiros (RomaneioId : integer) : TClientDataSet;
      procedure FecharRomaneio(RomaneioId : integer);
+     function RetornarNomeMotorista (RomaneioId : integer) : String;
      procedure Cancelar(RomaneioId : integer);
 End;
 
@@ -102,6 +103,15 @@ begin
                                     '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+
                                     'where romaneioId=:parRomaneioId ',FParametros);
 
+end;
+
+function TDaoRomaneio.RetornarNomeMotorista(RomaneioId: integer): String;
+begin
+   FParametros.clear;
+   FParametros.add(IntToStr(RomaneioId));
+   Result := fConexao.BuscarDadosSQL('Select Fun.Descricao from Romaneios Roma '+
+                                     'left join T_funcionarios fun on Fun.Codigo=Roma.FuncionarioId '+
+                                     'where ID=:parRomaneioId',FParametros).Fieldbyname('Descricao').AsString;
 end;
 
 function TDaoRomaneio.RetornarProdutos(RomaneioId: integer): TClientDataSet;

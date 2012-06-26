@@ -230,7 +230,7 @@ begin
       impmatricial.Imp(pvilinha,045,cdsDadosRelatorio.FieldByName('Unid').AsString);
       impmatricial.Impd(pvilinha,063,FormatFloat(',0.000',cdsDadosRelatorio.FieldByName('Qtde_total').AsFloat),[]);
       impmatricial.Impd(pvilinha,077,FormatFloat(',0.000',cdsDadosRelatorio.FieldByName('PesoBruto').AsFloat),[]);
-      total := total + cdsDadosRelatorio.FieldByName('Qtde_total').AsFloat;
+      total := total + cdsDadosRelatorio.FieldByName('PesoBruto').AsFloat;
       pviLinha:=Pvilinha+1;
       cdsDadosRelatorio.next;
       if pvilinha>=60 then
@@ -277,7 +277,14 @@ begin
    pviLinha:=Pvilinha+1;
    impmatricial.Imp(pvilinha,001,'Total Geral......  Qunatidade de Vendas '+intTostr(cdsDadosRelatorio.RecordCount));
    impmatricial.Impd(pvilinha,060,Formatfloat(',0.00',total),[]);
+   pviLinha:=Pvilinha+5;
+
+   impmatricial.Imp(pvilinha,026,'_______________________________________');
    pviLinha:=Pvilinha+1;
+   impmatricial.Imp(pvilinha,026,DaoRomaneio.RetornarNomeMotorista(srcRomaneios.DataSet.FieldByName('ID').AsInteger));
+   pviLinha:=Pvilinha+1;
+   impmatricial.Imp(pvilinha,026,'Motorista Responsavel');
+
    ImpMatricial.Fechar;
 end;
 

@@ -235,7 +235,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     Top = 53
     Width = 811
     Height = 387
-    ActivePage = PagNovoRomaneio
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText

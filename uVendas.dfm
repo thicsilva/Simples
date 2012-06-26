@@ -53,10 +53,10 @@ object frmVendas: TfrmVendas
     Caption = 'pnlDadosClientes'
     Align = alTop
     object btnCadAlunos: TbsSkinSpeedButton
-      Left = 487
-      Top = 30
+      Left = 483
+      Top = 33
       Width = 23
-      Height = 23
+      Height = 20
       HintImageIndex = 0
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'toolbutton'
@@ -1675,7 +1675,7 @@ object frmVendas: TfrmVendas
       ListBoxUseSkinFont = True
       ListBoxUseSkinItemHeight = True
       KeyField = 'codigo'
-      ListField = 'Descricao;Codigo'
+      ListField = 'Descricao;pco_Venda'
       ListSource = srcCadProdutos
       OnChange = cmbNome_ProdutoChange
     end

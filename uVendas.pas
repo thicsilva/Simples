@@ -32,7 +32,6 @@ const
     VENDAS_NORMAIS = 0;
     OS_FINALIZADA = 4;
     LANCAMENTO_MATERIAL = 5;
-
 type
   TfrmVendas = class(TFormBase)
     dspItensVendas: TDataSetProvider;
@@ -296,10 +295,12 @@ End;
 
 procedure tfrmVendas.VerLimite();
 Begin
-    if StrToFloat(edtTotalLiquido.Text)>StrTOfloat(edtLimite_Credito.Text) then
+
+   if StrToFloat(edtTotalLiquido.Text)>StrTOfloat(edtLimite_Credito.Text) then
    Begin
       CaixaMensagem( 'O cliente ultrapassou o limite de credito ', ctAviso, [ cbOk ], 0 );
-      btnok.Enabled          :=False;
+      if cdsCadFormasPagamento.FieldByName('TipoPagamento').AsInteger>0 then
+         btnok.Enabled          :=False;
       edtTotalLiquido.Color := clred;
    End
    Else
@@ -830,7 +831,9 @@ begin
       edtcod_Cliente.SetFocus;
    End;
    edtLimite_Credito.Text := FormatFloat('0.00',(cdsCadClientes.FieldByName('Limite_Credito').AsFloat-sdtsConsultaCli.FieldByName('Total').AsFloat));
-   VerLimite();
+
+    VerLimite();
+
    if (sdtsConsultaCli.FieldByName('Qtde').AsInteger>=cdsCadClientes.FieldByName('Qtde_PedAberto').AsInteger) and ( frmVendas.Tag <> 4 ) then
    begin
       CaixaMensagem( 'O cliente possui '+sdtsConsultaCli.FieldByName('Qtde').asString+' pedidos em aberto !', ctAviso, [ cbOk ], 0 );

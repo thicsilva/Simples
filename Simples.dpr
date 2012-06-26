@@ -124,7 +124,8 @@ uses
   uRecebimentoRomaneio in 'uRecebimentoRomaneio.pas' {frmRecebimentoRomaneio},
   uCadEmpresa in 'uCadEmpresa.pas' {frmcadEmpresa},
   uDaoEmpresa in 'Dao\uDaoEmpresa.pas',
-  uRelCLientesVendedorBairro in 'uRelCLientesVendedorBairro.pas' {frmRelClientesVendedoresBairro};
+  uRelCLientesVendedorBairro in 'uRelCLientesVendedorBairro.pas' {frmRelClientesVendedoresBairro},
+  uRelTabelaPreco in 'uRelTabelaPreco.pas' {frmrelTabPreco};
 
 {$R *.res}
 
@@ -139,6 +140,7 @@ begin
   Application.CreateForm(TfrmRecebimentoRomaneio, frmRecebimentoRomaneio);
   Application.CreateForm(TfrmcadEmpresa, frmcadEmpresa);
   Application.CreateForm(TfrmRelClientesVendedoresBairro, frmRelClientesVendedoresBairro);
+  Application.CreateForm(TfrmrelTabPreco, frmrelTabPreco);
   Frmlogin.ShowModal;
   Application.Run;
 end.
