@@ -2,7 +2,7 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
   Left = 0
   Top = 0
   Caption = 'Relatorio de Clientes Por Vendedor'
-  ClientHeight = 198
+  ClientHeight = 202
   ClientWidth = 524
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,8 +31,6 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitLeft = -60
-    ExplicitWidth = 507
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -155,6 +153,7 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = -6
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
@@ -177,6 +176,7 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end
@@ -184,7 +184,7 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
     Left = 0
     Top = 53
     Width = 524
-    Height = 145
+    Height = 149
     HintImageIndex = 0
     TabOrder = 1
     SkinData = frmPrincipal.SkinPrincipal
@@ -215,8 +215,8 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
     Spacing = 2
     Caption = 'Informe o vendedor para o relarorio'
     Align = alClient
-    ExplicitTop = 55
-    object bsSkinStdLabel4: TbsSkinStdLabel
+    ExplicitHeight = 145
+    object lblFiltro01: TbsSkinStdLabel
       Left = 5
       Top = 45
       Width = 76
@@ -232,7 +232,7 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
       SkinDataName = 'stdlabel'
       Caption = 'Vendedor Inicial'
     end
-    object bsSkinStdLabel5: TbsSkinStdLabel
+    object lblFiltro02: TbsSkinStdLabel
       Left = 10
       Top = 71
       Width = 71

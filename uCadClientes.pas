@@ -337,6 +337,7 @@ type
     edtSequenciaEntrega: TbsSkinSpinEdit;
     N5ClientesporVendedoreBairro1: TMenuItem;
     N6ClientesSemComprasamaisde60dias1: TMenuItem;
+    N5ClientesporVendedoreBairro2: TMenuItem;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -402,6 +403,7 @@ type
     procedure cdsClienteAnimaisAfterScroll(DataSet: TDataSet);
     procedure N5ClientesporVendedoreBairro1Click(Sender: TObject);
     procedure N6ClientesSemComprasamaisde60dias1Click(Sender: TObject);
+    procedure N5ClientesporVendedoreBairro2Click(Sender: TObject);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -544,6 +546,14 @@ end;
 procedure TfrmCadClientes.N5ClientesporVendedoreBairro1Click(Sender: TObject);
 begin
   frmRelClientesVendedoresBairro := TfrmRelClientesVendedoresBairro.Create(Self);
+  frmRelClientesVendedoresBairro.pTipoRelatorio := 1;
+  frmRelClientesVendedoresBairro.ShowModal;
+end;
+
+procedure TfrmCadClientes.N5ClientesporVendedoreBairro2Click(Sender: TObject);
+begin
+  frmRelClientesVendedoresBairro := TfrmRelClientesVendedoresBairro.Create(Self);
+  frmRelClientesVendedoresBairro.pTipoRelatorio := 0;
   frmRelClientesVendedoresBairro.ShowModal;
 end;
 

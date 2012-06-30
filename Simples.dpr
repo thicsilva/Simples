@@ -126,7 +126,8 @@ uses
   uDaoEmpresa in 'Dao\uDaoEmpresa.pas',
   uRelCLientesVendedorBairro in 'uRelCLientesVendedorBairro.pas' {frmRelClientesVendedoresBairro},
   uRelTabelaPreco in 'uRelTabelaPreco.pas' {frmrelTabPreco},
-  uClassCaixa in 'Modelos\uClassCaixa.pas';
+  uClassCaixa in 'Modelos\uClassCaixa.pas',
+  uDaoRota in 'Dao\uDaoRota.pas';
 
 {$R *.res}
 

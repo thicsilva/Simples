@@ -2519,7 +2519,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 591
-        Top = -3
+        Top = -5
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -5144,6 +5144,10 @@ object frmCadClientes: TfrmCadClientes
     object N6ClientesSemComprasamaisde60dias1: TMenuItem
       Caption = '6 - Clientes sem compras a mais de 60 dias'
       OnClick = N6ClientesSemComprasamaisde60dias1Click
+    end
+    object N5ClientesporVendedoreBairro2: TMenuItem
+      Caption = '7 - Clientes por Rota e Bairro'
+      OnClick = N5ClientesporVendedoreBairro2Click
     end
   end
   object cdsClientesDebitos: TClientDataSet
