@@ -125,7 +125,8 @@ uses
   uCadEmpresa in 'uCadEmpresa.pas' {frmcadEmpresa},
   uDaoEmpresa in 'Dao\uDaoEmpresa.pas',
   uRelCLientesVendedorBairro in 'uRelCLientesVendedorBairro.pas' {frmRelClientesVendedoresBairro},
-  uRelTabelaPreco in 'uRelTabelaPreco.pas' {frmrelTabPreco};
+  uRelTabelaPreco in 'uRelTabelaPreco.pas' {frmrelTabPreco},
+  uClassCaixa in 'Modelos\uClassCaixa.pas';
 
 {$R *.res}
 

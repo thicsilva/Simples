@@ -5,10 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinBoxCtrls, bsdbctrls, StdCtrls, bsSkinCtrls, ExtCtrls, ToolWin,
-  ComCtrls, FMTBcd, RDprint, SqlExpr, Provider, DB, DBClient;
+  ComCtrls, FMTBcd, RDprint, SqlExpr, Provider, DB, DBClient,uFormBase;
 
 type
-  TfrmrelTabPreco = class(TForm)
+  TfrmrelTabPreco = class(TFormBase)
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
@@ -32,6 +32,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure ImpMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure btnFecharClick(Sender: TObject);
+    procedure cmbNome_GrupoChange(Sender: TObject);
+    procedure cmbCod_GrupoChange(Sender: TObject);
   private
     pviLinha : integer;
     { Private declarations }
@@ -115,6 +117,16 @@ begin
    impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
    pviLinha:=Pvilinha+1;
    impmatricial.Fechar;
+end;
+
+procedure TfrmrelTabPreco.cmbCod_GrupoChange(Sender: TObject);
+begin
+   cmbNome_Grupo.KeyValue := cmbCod_Grupo.KeyValue
+end;
+
+procedure TfrmrelTabPreco.cmbNome_GrupoChange(Sender: TObject);
+begin
+   cmbCod_Grupo.KeyValue := cmbNome_Grupo.KeyValue
 end;
 
 procedure TfrmrelTabPreco.FormShow(Sender: TObject);

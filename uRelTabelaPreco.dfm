@@ -212,7 +212,6 @@ object frmrelTabPreco: TfrmrelTabPreco
     Sizeable = False
     Align = alClient
     Caption = 'Selecione os filtros'
-    ExplicitHeight = 143
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 28
       Top = 63
@@ -253,6 +252,8 @@ object frmrelTabPreco: TfrmrelTabPreco
       ListBoxUseSkinItemHeight = True
       KeyField = 'codigo'
       ListField = 'Codigo;descricao'
+      ListSource = srcGrupo
+      OnChange = cmbCod_GrupoChange
     end
     object cmbNome_Grupo: TbsSkinDBLookupComboBox
       Left = 118
@@ -277,6 +278,8 @@ object frmrelTabPreco: TfrmrelTabPreco
       ListBoxUseSkinItemHeight = True
       KeyField = 'codigo'
       ListField = 'descricao;codigo'
+      ListSource = srcGrupo
+      OnChange = cmbNome_GrupoChange
     end
   end
   object srcGrupo: TDataSource
@@ -355,17 +358,15 @@ object frmrelTabPreco: TfrmrelTabPreco
     OpcoesPreview.BotaoGravar = Ativo
     OpcoesPreview.BotaoLer = Ativo
     OpcoesPreview.BotaoProcurar = Ativo
-    OpcoesPreview.BotaoPDF = Ativo
-    OpcoesPreview.BotaoEMAIL = Ativo
     Margens.Left = 10
     Margens.Right = 10
     Margens.Top = 10
     Margens.Bottom = 10
     Autor = Deltress
     RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
-    RegistroUsuario.SerieProduto = 'SINGLE-1011/00320'
-    RegistroUsuario.AutorizacaoKey = 'NULK-ZDDC-IY94-XSDZ-IM57'
-    About = 'RDprint 5.0 - Registrado'
+    RegistroUsuario.SerieProduto = 'SITE-0306/00320'
+    RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
+    About = 'RDprint 4.0c - Registrado'
     Acentuacao = Transliterate
     CaptionSetup = 'Rdprint Setup'
     TitulodoRelatorio = 'Gerado por RDprint'
@@ -421,7 +422,7 @@ object frmrelTabPreco: TfrmrelTabPreco
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = ImpMatricialNewPage
-    Left = 240
-    Top = 80
+    Left = 312
+    Top = 40
   end
 end

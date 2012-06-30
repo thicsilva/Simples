@@ -237,6 +237,7 @@ type
     PopupMenu1: TPopupMenu;
     MarcarEventocomRealizado1: TMenuItem;
     actTabeladePreco: TAction;
+    dxBarButton31: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);

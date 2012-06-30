@@ -562,7 +562,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851900
+        ValueTime = 0.502512476851851800
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -597,7 +597,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851900
+        ValueTime = 0.502512476851851800
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -632,7 +632,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851900
+        ValueTime = 0.502512476851851800
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -1670,12 +1670,13 @@ object frmVendas: TfrmVendas
       DefaultWidth = 0
       DefaultHeight = 20
       UseSkinFont = True
+      DropDownWidth = 400
       DefaultColor = clWindow
       ListBoxDefaultItemHeight = 20
       ListBoxUseSkinFont = True
       ListBoxUseSkinItemHeight = True
       KeyField = 'codigo'
-      ListField = 'Descricao;pco_Venda'
+      ListField = 'Descricao;Pco_Venda'
       ListSource = srcCadProdutos
       OnChange = cmbNome_ProdutoChange
     end
@@ -2038,7 +2039,7 @@ object frmVendas: TfrmVendas
     EditPrecision = 0
     ValueInteger = 0
     ValueDate = 39369.000000000000000000
-    ValueTime = 0.502512476851851900
+    ValueTime = 0.502512476851851800
     TimeSeconds = False
     FirstCharUpper = False
     FirstCharUpList = ' ('

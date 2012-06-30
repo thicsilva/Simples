@@ -79,6 +79,7 @@
     <DCCReference Include="Modelos\ItemRemessa.pas" />
     <DCCReference Include="Modelos\Remessa.pas" />
     <DCCReference Include="Modelos\uClassAnimal.pas" />
+    <DCCReference Include="Modelos\uClassCaixa.pas" />
     <DCCReference Include="Modelos\uClassCliente.pas" />
     <DCCReference Include="Modelos\uclassContaCorrente.pas" />
     <DCCReference Include="Modelos\uClassCorrecao.pas" />
