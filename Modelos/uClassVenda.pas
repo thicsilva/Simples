@@ -67,7 +67,7 @@ end;
 
 implementation
 
-uses ufuncoes;
+uses ufuncoes, uClassCaixa;
 
 { TVenda }
 
@@ -576,8 +576,11 @@ const
      lrTot_Produtos : Real;
      lrTot_Desconto : Real;
      liCont         : Integer;
-  I: Integer;
+     I: Integer;
+     DaoCaixa : TDaoCaixa;
 begin
+  DaoCaixa := TDaoCaixa.Create(FConexao);
+
   for I := 0 to Self.Numerovias-1 do
   begin
      AssignFile(F, CaminhoImpressora  );
@@ -594,6 +597,7 @@ begin
      WriteLn(F, '','Forma Pag.: '+Copy(inczero(IntToStr(Self.FormaPagamento.Id),3)+'-'+FormaPagamento.Descricao,1,25));
      WriteLn(F, '','Vendedor..: '+Copy(inczero(DadosVendas.FieldByName( 'Cod_Funcionario' ).AsString,3)+'-'+Self.Funcionario.Descricao,1,25));
      WriteLn(F, '','NºControle: '+inczero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,6) );
+     WriteLn(F, '','Caixa.....: '+DaoCaixa.RetornarNomeCaixa( DadosVendas.FieldByName( 'Cod_Caixa' ).AsInteger) );
      WriteLn(F, '',IncDigito( '=','=',39,0));
      WriteLn(F, '','Codigo |P R O D U T O S           |Und|' );
      WriteLn(F, '','Quatidade|Pc. Unit| Desc.|   Vlr Total|' );

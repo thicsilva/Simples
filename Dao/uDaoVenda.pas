@@ -147,7 +147,7 @@ var Parametros : TStringList;
 begin
    Parametros := TStringList.Create;
    Parametros.Add('1');
-   Result := FConexao.BuscarDadosSQL('select seqvenda,Controle,Nome_Cliente,vlr_total from T_vendas where PagouSinal<>:parPagouSinal',Parametros);
+   Result := FConexao.BuscarDadosSQL('select Cod_Caixa,seqvenda,Controle,Nome_Cliente,vlr_total from T_vendas where PagouSinal<>:parPagouSinal',Parametros);
 end;
 
 function TDaoVenda.RetornarVencimentos(VendaId: Integer): TStringList;
