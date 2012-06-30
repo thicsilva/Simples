@@ -32,7 +32,6 @@ object frmPrePagamento: TfrmPrePagamento
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 521
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -267,7 +266,6 @@ object frmPrePagamento: TfrmPrePagamento
     Spacing = 2
     Caption = 'Informa'#231#245'es do Pre-Pagamento'
     Align = alTop
-    ExplicitWidth = 521
     object bsSkinStdLabel6: TbsSkinStdLabel
       Left = 299
       Top = 53
@@ -479,7 +477,6 @@ object frmPrePagamento: TfrmPrePagamento
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitWidth = 521
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -652,7 +649,6 @@ object frmPrePagamento: TfrmPrePagamento
     NumGlyphs = 1
     Spacing = 2
     Align = alTop
-    ExplicitWidth = 521
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 3
       Top = 9
@@ -821,9 +817,6 @@ object frmPrePagamento: TfrmPrePagamento
     Caption = 'bsSkinStatusBar1'
     Align = alBottom
     SizeGrip = False
-    ExplicitLeft = -8
-    ExplicitTop = 366
-    ExplicitWidth = 521
     object bsSkinStatusPanel1: TbsSkinStatusPanel
       Left = 424
       Top = 0
@@ -856,8 +849,6 @@ object frmPrePagamento: TfrmPrePagamento
       AutoSize = False
       ImageIndex = -1
       NumGlyphs = 1
-      ExplicitLeft = 436
-      ExplicitTop = 6
     end
     object edtVlr_FaltaReceber: TbsSkinEdit
       Left = 351
@@ -962,7 +953,6 @@ object frmPrePagamento: TfrmPrePagamento
       AutoSize = False
       ImageIndex = -1
       NumGlyphs = 1
-      ExplicitLeft = 3
     end
     object EdtTroco: TbsSkinEdit
       Left = 478
@@ -1032,7 +1022,6 @@ object frmPrePagamento: TfrmPrePagamento
       AutoSize = False
       ImageIndex = -1
       NumGlyphs = 1
-      ExplicitLeft = 81
     end
   end
   object dbgConsulta: TbsSkinDBGrid

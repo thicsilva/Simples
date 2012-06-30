@@ -79,6 +79,7 @@ type
     procedure edtPco_VendaExit(Sender: TObject);
   private
     { Private declarations }
+    pCodCaixa : integer;
   public
     { Public declarations }
   end;
@@ -143,9 +144,9 @@ var liseqParcela    : Integer;
     Parametros      : TStringList;
   Daofuncionario: TDaoFuncionario;
 begin
-     TotalPago := 0;
+   TotalPago := 0;
    case frmPrePagamento.tag of
-      0: // prepagamento
+      0 : // prepagamento
       Begin
          if StrTofloat(edtVlr_Recebido.Text)>StrTofloat(edtTotalTitulo.Text) then
          Begin
@@ -198,7 +199,7 @@ begin
          sdtsPesqOS.Open;
 
          cdsMovCaixa.Append;
-         cdsMovCaixa.FieldByName('Cod_Caixa').AsString             := '001';
+         cdsMovCaixa.FieldByName('Cod_Caixa').AsInteger            := sdtsPesqOS.FieldByName('Cod_Caixa').AsInteger;
          cdsMovCaixa.FieldByName('Valor').asFloat                  := cdsTempPagamentos.FieldByName('Valor').AsFloat;
          cdsMovCaixa.FieldByName('Historico').asString             := 'Pre-Pagamento O.S. nº '+edtNumeroOs.text;
          cdsMovCaixa.FieldByName('Data_Lancamento').AsSqlTimeStamp := DateTimeToSqlTimeStamp(gsData_Mov);
@@ -330,6 +331,7 @@ begin
       cmbTipoPesquisa.ItemIndex := 1;
       edtNumeroOsExit(edtNumeroOs);
       edtcod_Pagamento.SetFocus;
+      pCodCaixa := frmConsultaSemSinalPago.pCodCaixa;
    end;
 end;
 
@@ -387,7 +389,7 @@ begin
    if frmPRePagamento.Tag=0 then
    Begin
       sdtsPesqOS.Close;
-      sdtsPesqOS.DataSet.CommandText :='Select Status,SeqVenda,Nome_cliente, Vlr_Total From T_vendas '+lsWhere;
+      sdtsPesqOS.DataSet.CommandText :='Select Cod_Caixa,Status,SeqVenda,Nome_cliente, Vlr_Total From T_vendas '+lsWhere;
       sdtsPesqOS.DataSet.ParamByName('parControle').AsString := edtNumeroOs.Text;
       sdtsPesqOS.Open;
    End

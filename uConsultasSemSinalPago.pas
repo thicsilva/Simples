@@ -25,6 +25,7 @@ type
   public
     { Public declarations }
     pNumeroVenda : Integer;
+    PCodCaixa : Integer;
   end;
 
 var
@@ -39,6 +40,7 @@ uses uDaoVenda,uPrincipal;
 procedure TfrmConsultaSemSinalPago.bsSkinSpeedButton1Click(Sender: TObject);
 begin
    pNumeroVenda := srcVendas.DataSet.FieldByname('SeqVenda').AsInteger;
+   PCodCaixa    := srcVendas.DataSet.FieldByname('Cod_Caixa').AsInteger;
    Close;
 end;
 
