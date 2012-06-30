@@ -49,6 +49,7 @@ object frmSequencias: TfrmSequencias
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -93,6 +94,7 @@ object frmSequencias: TfrmSequencias
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -141,6 +143,7 @@ object frmSequencias: TfrmSequencias
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -194,6 +197,7 @@ object frmSequencias: TfrmSequencias
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -338,6 +342,12 @@ object frmSequencias: TfrmSequencias
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtSeqVendaExit
     end
     object edtData_Mov: TbsSkinDateEdit
@@ -363,6 +373,8 @@ object frmSequencias: TfrmSequencias
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -381,6 +393,12 @@ object frmSequencias: TfrmSequencias
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object edtSeqEntrada: TbsSkinEdit
       Left = 127
@@ -406,6 +424,12 @@ object frmSequencias: TfrmSequencias
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtSeqVendaExit
     end
     object edtNumeroOS: TbsSkinEdit
@@ -432,6 +456,12 @@ object frmSequencias: TfrmSequencias
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtSeqVendaExit
     end
     object edtSeqAvaria: TbsSkinEdit
@@ -458,6 +488,12 @@ object frmSequencias: TfrmSequencias
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtSeqVendaExit
     end
     object edtSeqInventario: TbsSkinEdit
@@ -484,6 +520,12 @@ object frmSequencias: TfrmSequencias
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
       OnExit = edtSeqVendaExit
     end
   end

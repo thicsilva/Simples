@@ -293,7 +293,6 @@ begin
    edtNumeroOS.Text      := '00000001';
    edtSeqAvaria.Text     := '00000001';
    edtSeqInventario.Text := '00000001';
-   edtData_Mov.Text    := FormatDateTime('dd/mm/yyyy',Now);
    // --> valores padrões
 
    while not sdtsSequencia.Eof Do
@@ -312,7 +311,7 @@ begin
          edtSeqInventario.Text := sdtsSequencia.FieldByname('Sequencia').AsString;
        sdtsSequencia.Next;
    End;
-
+   edtData_Mov.Text  := FormatDateTime('dd/mm/yyyy',gsData_Mov);
 end;
 
 procedure TfrmSequencias.btnFecharClick(Sender: TObject);
