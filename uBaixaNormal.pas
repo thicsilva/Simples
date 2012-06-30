@@ -466,7 +466,7 @@ begin
    End;
 
 
-   if TotalPago>0 then
+   if (TotalPago>0) and ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteBaixa','0',gsOperador ) ) ) then
    Begin
       Parametros := TStringList.Create;
       Parametros.Add(edtNrVenda.Text);

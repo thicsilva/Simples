@@ -1261,6 +1261,8 @@ object frmParametros: TfrmParametros
     end
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = 'Impress'#227'o'
+      ExplicitLeft = 9
+      ExplicitTop = 28
       object Label1: TLabel
         Left = 8
         Top = 9
@@ -1269,8 +1271,8 @@ object frmParametros: TfrmParametros
         Caption = 'Caminho da impressora'
       end
       object Label2: TLabel
-        Left = 6
-        Top = 136
+        Left = 18
+        Top = 170
         Width = 159
         Height = 14
         Caption = 'Numero de Vias do Comprovante'
@@ -1344,8 +1346,8 @@ object frmParametros: TfrmParametros
         Caption = 'Emitir a etiqueta no fechamento da OS'
       end
       object editNumeroVias: TbsSkinSpinEdit
-        Left = 171
-        Top = 130
+        Left = 186
+        Top = 161
         Width = 54
         Height = 20
         HintImageIndex = 0
@@ -1368,8 +1370,8 @@ object frmParametros: TfrmParametros
         MaxLength = 0
       end
       object bsSkinLabel7: TbsSkinLabel
-        Left = 6
-        Top = 173
+        Left = 18
+        Top = 207
         Width = 108
         Height = 21
         HintImageIndex = 0
@@ -1397,8 +1399,8 @@ object frmParametros: TfrmParametros
         AutoSize = False
       end
       object cmbTipoImpressora: TbsSkinComboBox
-        Left = 114
-        Top = 173
+        Left = 129
+        Top = 204
         Width = 143
         Height = 20
         HintImageIndex = 0
@@ -1515,6 +1517,36 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Imprimir Comprovante da Venda '
+      end
+      object chkImprimeComprovanteBaixa: TbsSkinCheckRadioBox
+        Left = 3
+        Top = 120
+        Width = 294
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 8
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Imprimir comprovante  de pagamento na baixa'
       end
     end
     object bsSkinTabSheet4: TbsSkinTabSheet
