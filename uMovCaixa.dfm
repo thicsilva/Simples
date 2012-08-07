@@ -4,7 +4,7 @@ object frmMovCaixa: TfrmMovCaixa
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o de lan'#231'amentos do caixa'
   ClientHeight = 399
-  ClientWidth = 813
+  ClientWidth = 800
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmMovCaixa: TfrmMovCaixa
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 813
+    Width = 800
     Height = 44
     AutoSize = True
     Bands = <
@@ -27,7 +27,7 @@ object frmMovCaixa: TfrmMovCaixa
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 809
+        Width = 796
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -73,7 +73,7 @@ object frmMovCaixa: TfrmMovCaixa
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 800
+      Width = 787
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -117,7 +117,7 @@ object frmMovCaixa: TfrmMovCaixa
       Flat = True
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 775
+        Left = 711
         Top = 0
         Width = 70
         Height = 40
@@ -156,7 +156,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object btnPrePagamento: TbsSkinSpeedButton
-        Left = 292
+        Left = 256
         Top = 0
         Width = 97
         Height = 40
@@ -234,7 +234,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object BtnCancela: TbsSkinSpeedButton
-        Left = 591
+        Left = 549
         Top = 0
         Width = 70
         Height = 40
@@ -274,19 +274,19 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 731
+        Left = 689
         Top = 0
-        Width = 44
+        Width = 22
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 603
+        ExplicitLeft = 731
         ExplicitTop = -5
       end
       object btnok: TbsSkinSpeedButton
-        Left = 661
+        Left = 619
         Top = 0
         Width = 70
         Height = 40
@@ -328,29 +328,28 @@ object frmMovCaixa: TfrmMovCaixa
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
         Top = 0
-        Width = 55
+        Width = 19
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 64
         ExplicitTop = -5
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 389
+        Left = 353
         Top = 0
-        Width = 37
+        Width = 31
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 286
+        ExplicitLeft = 389
         ExplicitTop = -5
       end
       object btnEstornar: TbsSkinSpeedButton
-        Left = 125
+        Left = 89
         Top = 0
         Width = 70
         Height = 40
@@ -389,7 +388,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object btnFecharcaixa: TbsSkinSpeedButton
-        Left = 496
+        Left = 454
         Top = 0
         Width = 70
         Height = 40
@@ -428,7 +427,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object btnImprimir: TbsSkinSpeedButton
-        Left = 426
+        Left = 384
         Top = 0
         Width = 70
         Height = 40
@@ -467,7 +466,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = 8
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 566
+        Left = 524
         Top = 0
         Width = 25
         Height = 40
@@ -479,7 +478,7 @@ object frmMovCaixa: TfrmMovCaixa
         ExplicitTop = -5
       end
       object btnRecebimentos: TbsSkinSpeedButton
-        Left = 195
+        Left = 159
         Top = 0
         Width = 97
         Height = 40
@@ -522,7 +521,7 @@ object frmMovCaixa: TfrmMovCaixa
   object PagCadastro: TbsSkinPageControl
     Left = 0
     Top = 44
-    Width = 813
+    Width = 800
     Height = 355
     ActivePage = bsSkinTabSheet1
     Align = alClient
@@ -556,7 +555,7 @@ object frmMovCaixa: TfrmMovCaixa
       object GridMovCaixa: TcxGrid
         Left = 0
         Top = 49
-        Width = 811
+        Width = 798
         Height = 285
         Align = alClient
         TabOrder = 0
@@ -639,7 +638,7 @@ object frmMovCaixa: TfrmMovCaixa
       object PanelConsulta: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 811
+        Width = 798
         Height = 49
         HintImageIndex = 0
         TabOrder = 1

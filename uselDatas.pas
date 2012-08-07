@@ -10,22 +10,19 @@ uses
 type
   TfrmSelDatas = class(TForm)
     PanelConsulta: TbsSkinPanel;
-    lblTurma: TbsSkinStdLabel;
-    dtpData_Fim: TbsSkinDateEdit;
     dtpData_Ini: TbsSkinDateEdit;
-    cmbPeriodo: TbsSkinComboBox;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
     btnincluir: TbsSkinSpeedButton;
     bsSkinBevel1: TbsSkinBevel;
     bsSkinBevel2: TbsSkinBevel;
-    cmbturno: TbsSkinComboBox;
     cmbTipoResumoVenda: TbsSkinComboBox;
-    procedure cmbPeriodoChange(Sender: TObject);
+    cmbturno: TbsSkinComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
+    procedure dtpData_IniChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,11 +57,10 @@ begin
    DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
    Dados := DaoCaixaMovimento.RetornarTurnosFechados(dtpData_Ini.Date, idCaixa);
    cmbturno.Items.Clear;
+   cmbturno.Items.Add('Caixa Aberto');
    while not Dados.Eof do
    begin
-     if Dados.FieldByName('Turno').AsInteger=0 then
-        cmbturno.Items.Add('Caixa Aberto')
-     else
+     if Dados.FieldByName('Turno').AsInteger<>0 then
         cmbturno.Items.Add('Turno '+Dados.FieldByName('Turno').AsString);
      Dados.Next;
    end;
@@ -74,15 +70,15 @@ begin
    end;
 end;
 
-procedure TfrmSelDatas.cmbPeriodoChange(Sender: TObject);
+procedure TfrmSelDatas.dtpData_IniChange(Sender: TObject);
 begin
-   ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
    CarregarDoTurno;
 end;
 
 procedure TfrmSelDatas.FormShow(Sender: TObject);
 begin
-   cmbPeriodoChange(Sender)
+  dtpData_Ini.Date := gsData_Mov;
+  CarregarDoTurno;
 end;
 
 end.

@@ -2,8 +2,8 @@ object frmSelDatas: TfrmSelDatas
   Left = 0
   Top = 0
   Caption = 'Selecione o Intervalo de Datas'
-  ClientHeight = 95
-  ClientWidth = 725
+  ClientHeight = 105
+  ClientWidth = 483
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object frmSelDatas: TfrmSelDatas
   object PanelConsulta: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 725
-    Height = 41
+    Width = 483
+    Height = 56
     HintImageIndex = 0
     TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
@@ -50,27 +50,10 @@ object frmSelDatas: TfrmSelDatas
     Spacing = 2
     Caption = 'PanelConsulta'
     Align = alTop
-    object lblTurma: TbsSkinStdLabel
-      Left = 123
-      Top = 14
-      Width = 19
-      Height = 13
-      EllipsType = bsetNone
-      UseSkinFont = True
-      UseSkinColor = True
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = -11
-      DefaultFont.Name = 'MS Sans Serif'
-      DefaultFont.Style = []
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'stdlabel'
-      Caption = 'Ate.'
-    end
-    object dtpData_Fim: TbsSkinDateEdit
-      Left = 151
-      Top = 11
-      Width = 89
+    object dtpData_Ini: TbsSkinDateEdit
+      Left = 19
+      Top = 21
+      Width = 137
       Height = 18
       EditMask = '!99/99/0000;1; '
       Text = '  /  /    '
@@ -116,257 +99,15 @@ object frmSelDatas: TfrmSelDatas
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
-    end
-    object dtpData_Ini: TbsSkinDateEdit
-      Left = 24
-      Top = 11
-      Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
-      Text = '  /  /    '
-      AlphaBlend = False
-      AlphaBlendAnimation = False
-      AlphaBlendValue = 0
-      UseSkinFont = True
-      TodayDefault = False
-      CalendarWidth = 200
-      CalendarHeight = 150
-      CalendarFont.Charset = DEFAULT_CHARSET
-      CalendarFont.Color = clWindowText
-      CalendarFont.Height = 14
-      CalendarFont.Name = 'Arial'
-      CalendarFont.Style = []
-      CalendarBoldDays = False
-      CalendarUseSkinFont = True
-      CalendarSkinDataName = 'panel'
-      FirstDayOfWeek = Sun
-      WeekNumbers = False
-      ShowToday = False
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clBlack
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      ButtonMode = True
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'buttonedit'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      MaxLength = 10
-      ParentFont = False
-      TabOrder = 1
-      LeftImageIndex = -1
-      LeftImageHotIndex = -1
-      LeftImageDownIndex = -1
-      RightImageIndex = -1
-      RightImageHotIndex = -1
-      RightImageDownIndex = -1
-    end
-    object cmbPeriodo: TbsSkinComboBox
-      Left = 246
-      Top = 11
-      Width = 180
-      Height = 20
-      HintImageIndex = 0
-      TabOrder = 2
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'combobox'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      UseSkinSize = True
-      ToolButtonStyle = False
-      AlphaBlend = False
-      AlphaBlendValue = 0
-      AlphaBlendAnimation = False
-      ListBoxCaptionMode = False
-      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
-      ListBoxDefaultFont.Color = clWindowText
-      ListBoxDefaultFont.Height = 14
-      ListBoxDefaultFont.Name = 'Arial'
-      ListBoxDefaultFont.Style = []
-      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
-      ListBoxDefaultCaptionFont.Color = clWindowText
-      ListBoxDefaultCaptionFont.Height = 14
-      ListBoxDefaultCaptionFont.Name = 'Arial'
-      ListBoxDefaultCaptionFont.Style = []
-      ListBoxDefaultItemHeight = 20
-      ListBoxCaptionAlignment = taLeftJustify
-      ListBoxUseSkinFont = True
-      ListBoxUseSkinItemHeight = True
-      ListBoxWidth = 0
-      HideSelection = True
-      AutoComplete = True
-      ImageIndex = -1
-      TabWidths.Strings = (
-        'Nenhum'
-        'Ontem'
-        'Hoje'
-        'Amanh'#227
-        'Semana Anterior'
-        'Esta Semana'
-        'Pr'#243'xima Semana'
-        'Quinzena Anterior'
-        'Esta Quinzena'
-        'Pr'#243'xima Quinzena '
-        'Nos '#218'ltimos 15 dias'
-        'Nos Pr'#243'ximos 15 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 15 dias'
-        'M'#234's Anterior'
-        'Este M'#234's'
-        'Pr'#243'ximo M'#234's'
-        'Nos '#218'ltimos 30 dias'
-        'Nos Pr'#243'ximos 30 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 30 dias'
-        'Nos '#218'ltimos 45 dias'
-        'Nos Pr'#243'ximos 45 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 45 dias'
-        'Nos '#218'ltimos 60 dias'
-        'Nos Pr'#243'ximos 60 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 60 dias'
-        'Trimestre Anterior'
-        'Neste Trimestre'
-        'Pr'#243'ximo Trimestre'
-        'Nos '#218'ltimos 90 dias'
-        'Nos Pr'#243'ximos 90 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 90 dias'
-        'Semestre Passado'
-        'Neste Semestre'
-        'Pr'#243'ximo Semestre'
-        'Nos '#218'ltimos 120 dias'
-        'Nos Pr'#243'ximos 120 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 120 dias'
-        'Ano Passado'
-        'Neste Ano'
-        'Pr'#243'ximo Ano')
-      CharCase = ecNormal
-      DefaultColor = clWindow
-      Text = 'Hoje'
-      Items.Strings = (
-        'Nenhum'
-        'Ontem'
-        'Hoje'
-        'Amanh'#227
-        'Semana Anterior'
-        'Esta Semana'
-        'Pr'#243'xima Semana'
-        'Quinzena Anterior'
-        'Esta Quinzena'
-        'Pr'#243'xima Quinzena '
-        'Nos '#218'ltimos 15 dias'
-        'Nos Pr'#243'ximos 15 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 15 dias'
-        'M'#234's Anterior'
-        'Este M'#234's'
-        'Pr'#243'ximo M'#234's'
-        'Nos '#218'ltimos 30 dias'
-        'Nos Pr'#243'ximos 30 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 30 dias'
-        'Nos '#218'ltimos 45 dias'
-        'Nos Pr'#243'ximos 45 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 45 dias'
-        'Nos '#218'ltimos 60 dias'
-        'Nos Pr'#243'ximos 60 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 60 dias'
-        'Trimestre Anterior'
-        'Neste Trimestre'
-        'Pr'#243'ximo Trimestre'
-        'Nos '#218'ltimos 90 dias'
-        'Nos Pr'#243'ximos 90 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 90 dias'
-        'Semestre Passado'
-        'Neste Semestre'
-        'Pr'#243'ximo Semestre'
-        'Nos '#218'ltimos 120 dias'
-        'Nos Pr'#243'ximos 120 dias'
-        'Nos '#218'ltimos e Pr'#243'ximos 120 dias'
-        'Ano Passado'
-        'Neste Ano'
-        'Pr'#243'ximo Ano')
-      ItemIndex = 2
-      DropDownCount = 8
-      HorizontalExtent = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      Sorted = False
-      Style = bscbFixedStyle
-      OnChange = cmbPeriodoChange
-    end
-    object cmbturno: TbsSkinComboBox
-      Left = 440
-      Top = 11
-      Width = 112
-      Height = 20
-      HintImageIndex = 0
-      TabOrder = 3
-      SkinData = frmPrincipal.SkinEntradaDados
-      SkinDataName = 'combobox'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      UseSkinFont = True
-      UseSkinSize = True
-      ToolButtonStyle = False
-      AlphaBlend = False
-      AlphaBlendValue = 0
-      AlphaBlendAnimation = False
-      ListBoxCaptionMode = False
-      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
-      ListBoxDefaultFont.Color = clWindowText
-      ListBoxDefaultFont.Height = 14
-      ListBoxDefaultFont.Name = 'Arial'
-      ListBoxDefaultFont.Style = []
-      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
-      ListBoxDefaultCaptionFont.Color = clWindowText
-      ListBoxDefaultCaptionFont.Height = 14
-      ListBoxDefaultCaptionFont.Name = 'Arial'
-      ListBoxDefaultCaptionFont.Style = []
-      ListBoxDefaultItemHeight = 20
-      ListBoxCaptionAlignment = taLeftJustify
-      ListBoxUseSkinFont = True
-      ListBoxUseSkinItemHeight = True
-      ListBoxWidth = 0
-      HideSelection = True
-      AutoComplete = True
-      ImageIndex = 0
-      CharCase = ecNormal
-      DefaultColor = clWindow
-      Text = 'Saida'
-      ItemIndex = -1
-      DropDownCount = 8
-      HorizontalExtent = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      Sorted = False
-      Style = bscbFixedStyle
+      OnChange = dtpData_IniChange
     end
     object cmbTipoResumoVenda: TbsSkinComboBox
-      Left = 567
-      Top = 11
+      Left = 311
+      Top = 21
       Width = 142
       Height = 20
       HintImageIndex = 0
-      TabOrder = 4
+      TabOrder = 1
       SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -403,11 +144,69 @@ object frmSelDatas: TfrmSelDatas
       ImageIndex = 0
       CharCase = ecNormal
       DefaultColor = clWindow
-      Text = 'Venda Resumida'
+      Text = 'Venda Detalhada'
       Items.Strings = (
         'Venda Resumida'
         'Venda Detalhada')
-      ItemIndex = 0
+      ItemIndex = 1
+      DropDownCount = 8
+      HorizontalExtent = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      Sorted = False
+      Style = bscbFixedStyle
+    end
+    object cmbturno: TbsSkinComboBox
+      Left = 162
+      Top = 21
+      Width = 142
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 2
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      UseSkinSize = True
+      ToolButtonStyle = False
+      AlphaBlend = False
+      AlphaBlendValue = 0
+      AlphaBlendAnimation = False
+      ListBoxCaptionMode = False
+      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultFont.Color = clWindowText
+      ListBoxDefaultFont.Height = 14
+      ListBoxDefaultFont.Name = 'Arial'
+      ListBoxDefaultFont.Style = []
+      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultCaptionFont.Color = clWindowText
+      ListBoxDefaultCaptionFont.Height = 14
+      ListBoxDefaultCaptionFont.Name = 'Arial'
+      ListBoxDefaultCaptionFont.Style = []
+      ListBoxDefaultItemHeight = 20
+      ListBoxCaptionAlignment = taLeftJustify
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      ListBoxWidth = 0
+      HideSelection = True
+      AutoComplete = True
+      ImageIndex = 0
+      CharCase = ecNormal
+      DefaultColor = clWindow
+      Text = 'Venda Detalhada'
+      Items.Strings = (
+        'Venda Resumida'
+        'Venda Detalhada')
+      ItemIndex = -1
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -422,7 +221,7 @@ object frmSelDatas: TfrmSelDatas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 725
+    Width = 483
     Height = 53
     AutoSize = True
     Bands = <
@@ -430,7 +229,7 @@ object frmSelDatas: TfrmSelDatas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 721
+        Width = 479
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -439,7 +238,7 @@ object frmSelDatas: TfrmSelDatas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 712
+      Width = 470
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -482,7 +281,7 @@ object frmSelDatas: TfrmSelDatas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 634
+        Left = 370
         Top = 0
         Width = 70
         Height = 49
@@ -522,7 +321,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
-        Left = 563
+        Left = 0
         Top = 0
         Width = 70
         Height = 49
@@ -561,7 +360,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 633
+        Left = 369
         Top = 0
         Width = 1
         Height = 49
@@ -573,15 +372,15 @@ object frmSelDatas: TfrmSelDatas
         ExplicitTop = -1
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 0
+        Left = 70
         Top = 0
-        Width = 563
+        Width = 299
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = -9
+        ExplicitTop = -1
       end
     end
   end
