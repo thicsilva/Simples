@@ -162,8 +162,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnokClick
-        ExplicitLeft = -6
-        ExplicitTop = 8
+        ExplicitLeft = 9
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 85

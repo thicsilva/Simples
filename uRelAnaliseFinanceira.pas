@@ -57,6 +57,7 @@ Var ldData_Ini : TDatetime;
     TotalRecebido : Real;
     Participacao : Real;
     TotalReceita : Real;
+  lrLucroBruto: real;
 begin
    gsTituloRel  := 'Relatorio Analise Financeira ';
    gsPeriodoRel := 'Periodo de '+FormatDateTime('dd/mm/yyyy',ldData_Ini)+' a '+FormatDateTime('dd/mm/yyyy',ldData_Fim);
@@ -67,11 +68,12 @@ begin
    qryRelatorio.Close;
    qryRelatorio.SQL.text:='select Tipo.Descricao, Sum(Ven.Vlr_total) as Total '+
                           'from T_Vendas  ven '+
-                          '     left join T_TipoVendas Tipo on Tipo.codigo=Ven.Cod_tipoVenda '+
-                          'where ( Data_Venda>=:parData_vendaini and Data_venda<=:pardata_vendaFim ) '+
-                          'group by Ven.Cod_TipoVenda,Tipo.Descricao ';
+                          '     left join T_formasPagamento Tipo on Tipo.codigo=Ven.Cod_FormaPagamento '+
+                          'where ( Data_Venda>=:parData_vendaini and Data_venda<=:pardata_vendaFim and Status<>:parStatus  ) '+
+                          'group by Ven.Cod_TipoVenda,Tipo.Descricao order by 2 desc ';
    qryRelatorio.ParamByName('parData_VendaIni').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
    qryRelatorio.ParamByName('pardata_vendaFim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
+   qryRelatorio.ParamByName('parStatus').AsString := 'C';
 
    cdsRelatorio.Close;
    cdsRelatorio.Open;
@@ -99,10 +101,40 @@ begin
    pvilinha := pvilinha+1;
    impmatricial.Imp(pvilinha,001,'Venda Bruta do Periodo....');
    impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',TotalRecebido),[]);
+
+
+   qryRelatorio.Close;
+   qryRelatorio.SQL.text:='select  Sum(Itens.Qtde_Venda*Prod.Pco_Custo) as CustoTotal '+
+                          'from  T_vendas Ven '+
+                          '      left join T_itensVendas Itens on itens.SeqVenda=Ven.Seqvenda '+
+                          '      left join T_Produtos Prod on Prod.Codigo=itens.Cod_Produto '+
+                          'Where Ven.Data_Venda>=:parData_Ini and Ven.Data_Venda<=:parData_Fim and Ven.Status<>:parStatus';
+   qryRelatorio.ParamByName('parData_Ini').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
+   qryRelatorio.ParamByName('parData_Fim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
+   qryRelatorio.ParamByName('parStatus').AsString         := 'C';
+
+   cdsRelatorio.Close;
+   cdsRelatorio.Open;
+
+   pvilinha := pvilinha+1;
+   impmatricial.Imp(pvilinha,001,'Custo de Mercadoria Vendida...');
+   impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsRelatorio.fieldByname('CustoTotal').Asfloat),[]);
    pvilinha := pvilinha+1;
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
    pvilinha := pvilinha+1;
 
+   impmatricial.Imp(pvilinha,001,'Lucro Bruto...');
+   impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',TotalRecebido-cdsRelatorio.fieldByname('CustoTotal').Asfloat),[]);
+   pvilinha := pvilinha+1;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+   pvilinha := pvilinha+1;
+   impmatricial.Imp(pvilinha,001,'Despesas do periodo...');
+   pvilinha := pvilinha+1;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+   pvilinha := pvilinha+1;
+   lrLucroBruto := TotalRecebido-cdsRelatorio.fieldByname('CustoTotal').Asfloat;
+
+   {
    qryRelatorio.Close;
    qryRelatorio.SQL.text:='Select mov.Cod_FormaPagamento,max(Pag.Descricao) As Descricao, Sum(mov.Valor) As Total '+
                                            'From T_movCaixa mov '+
@@ -136,6 +168,7 @@ begin
    pvilinha := pvilinha+1;
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
    pvilinha := pvilinha+1;
+   }
 
    qryRelatorio.Close;
    qryRelatorio.SQL.text:= 'Select mov.Cod_TipoDespesa,max(Ope.Descricao) As Descricao, Sum(mov.Valor) As Total '+
@@ -167,8 +200,8 @@ begin
    impmatricial.Imp(pvilinha,001,'Total de Despesas no Periodo....');
    impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',TotalRecebido),[]);
    pvilinha := pvilinha+2;
-   impmatricial.Imp(pvilinha,001,'Lucro Operacional....');
-   impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',(TotalReceita-TotalRecebido)),[]);
+   impmatricial.Imp(pvilinha,001,'Lucro Liquido....');
+   impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',(lrLucroBruto-TotalRecebido)),[]);
    pvilinha := pvilinha+2;
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
    ImpMatricial.Fechar;
