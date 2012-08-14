@@ -415,7 +415,7 @@ begin
       ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
       pviLinha:=Pvilinha+1;
       while not cdsrelatorio.Eof do
-      Begin--
+      Begin
          impmatricial.Imp(pvilinha,001,Copy(cdsrelatorio.FieldByName('Codigo').AsString+' '+cdsrelatorio.FieldByName('Descricao').AsString,1,20) );
          pviLinha:=Pvilinha+1;
          impmatricial.ImpD(pvilinha,010,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);

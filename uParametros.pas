@@ -87,6 +87,15 @@ type
     Vendas: TbsSkinTabSheet;
     chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox;
     chkImprimeComprovanteBaixa: TbsSkinCheckRadioBox;
+    bsSkinGroupBox1: TbsSkinGroupBox;
+    bsSkinLabel9: TbsSkinLabel;
+    bsSkinLabel10: TbsSkinLabel;
+    edtDespesasFixas: TbsSkinEdit;
+    edtDespesaVariaveis: TbsSkinEdit;
+    bsSkinLabel11: TbsSkinLabel;
+    edtJuros: TbsSkinEdit;
+    bsSkinLabel12: TbsSkinLabel;
+    edtMulta: TbsSkinEdit;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -131,6 +140,7 @@ end;
 procedure TfrmParametros.btnokClick(Sender: TObject);
 begin
 
+   GravarParametrosAdiministrativos;
    GravarParametrosContaAReceber;
    GravarParametrosImpressao;
    GravarParametrosGerais;
@@ -218,13 +228,16 @@ begin
    RecuperarParametrosImpressao;
    RecuperarParametrosGerais;
    RecuperarParametrosVendas;
+   RecuperarParametrosAdiministrativos;
 
    CarregarTodosOsParametros;
 end;
 
 procedure TfrmParametros.GravarParametrosAdiministrativos;
 begin
-   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', RetornaSimouNao(chkMarcaOsNoCaixa.Checked) ,gsOperador );
+   //gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', RetornaSimouNao(chkMarcaOsNoCaixa.Checked) ,gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', edtDespesaVariaveis.Text ,gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasFixas', edtDespesasFixas.Text ,gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosContaAReceber;
@@ -234,7 +247,8 @@ begin
    gParametros.Gravar( '', '[CONTASRECEBER]', 'TipoBaixa', IntToStr(cmbTipoBaixa.ItemIndex) ,gsOperador );
    gParametros.Gravar( '', '[CONTASRECEBER]', 'BaixaMultiplosClientes', RetornaSimouNao(chkBaixaMultiplosClientes.Checked) ,gsOperador );
    gParametros.Gravar( '', '[CONTASRECEBER]', 'NumeroDeTurnos', EdtNumeroDeTurnos.Text ,gsOperador );
-
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'Juros', edtJuros.Text ,gsOperador );
+   gParametros.Gravar( '', '[CONTASRECEBER]', 'Multa', edtMulta.Text ,gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosGerais;
@@ -263,6 +277,8 @@ end;
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
 begin
    chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
+   edtDespesaVariaveis.Text   := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
+   edtDespesasFixas.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );
 end;
 
 procedure TfrmParametros.RecuperarParametrosVendas;
@@ -277,6 +293,9 @@ begin
    chkTrabalhaComRemessa.Checked     := RetornarVerdadeirOuFalso(Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'TrabalhaComRemessa', 'NAO' )));
    chkRecebimentoLote.Checked        := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'RecebimentoLote', 'NAO' )));
    chkBaixaMultiplosClientes.Checked := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[CONTASRECEBER]', 'BaixaMultiplosClientes', 'NAO' )));
+   edtJuros.Text                     := gParametros.Ler( '', '[CONTASRECEBER]', 'Juros', '0' );
+   edtMulta.Text                     := gParametros.Ler( '', '[CONTASRECEBER]', 'Multa', '0' );
+
 end;
 
 procedure TfrmParametros.RecuperarParametrosGerais;

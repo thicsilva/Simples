@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinGrids, bsDBGrids, bsSkinCtrls, DB, DBClient, StdCtrls, EditNew,
   bsdbctrls, Mask, bsSkinBoxCtrls, ExtCtrls, ToolWin, ComCtrls, FMTBcd, SqlExpr,sqltimst,
-  SimpleDS, Provider, BusinessSkinForm,uclassVenda, RDprint;
+  SimpleDS, Provider, BusinessSkinForm,uclassVenda, RDprint, 
+  uDaoCaixaMovimento;
 
 type
   TfrmPrePagamento = class(TForm)
@@ -142,7 +143,8 @@ var liseqParcela    : Integer;
     cdsItensVenda   : TClientDataSet;
     cdsVendas       : TClientDataSet;
     Parametros      : TStringList;
-  Daofuncionario: TDaoFuncionario;
+    Daofuncionario  : TDaoFuncionario;
+    loDaoMovCaixa   : TDaoCaixamovimento;
 begin
    TotalPago := 0;
    case frmPrePagamento.tag of
@@ -179,12 +181,27 @@ begin
       End;
    end;
 
-
    cdsTempPagamentos.First;
    while not cdsTempPagamentos.Eof Do
    Begin
       if cdsTempPagamentos.FieldByName('TipoPagamento').Asinteger = 0 then
       Begin
+         sdtsPesqOS.Close;
+         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total, * From T_vendas Where SeqVenda=:parControle';
+         sdtsPesqOS.DataSet.ParamByName('parControle').AsString := cdsTempPagamentos.FieldByName('SeqOS').AsString;
+         sdtsPesqOS.Open;
+
+         loDaoMovCaixa := TDaoCaixamovimento.Create(gConexao);
+         try
+            if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,sdtsPesqOS.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) then
+            begin
+               CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
+               exit;
+            end;
+         finally
+            FreeAndNil(loDaoMovCaixa);
+         end;
+
          QryMovCaixa.Close;
          QryMovCaixa.Params.clear;
          QryMovCaixa.SQL.Text := 'Select * from T_MovCaixa where 1=2 ';
@@ -192,11 +209,6 @@ begin
          cdsMovCaixa.Close;
          cdsMovCaixa.ProviderName := dspMovCaixa.Name;
          cdsMovCaixa.Open;
-
-         sdtsPesqOS.Close;
-         sdtsPesqOS.DataSet.CommandText :='Select SeqVenda, Vlr_Total, * From T_vendas Where SeqVenda=:parControle';
-         sdtsPesqOS.DataSet.ParamByName('parControle').AsString := cdsTempPagamentos.FieldByName('SeqOS').AsString;
-         sdtsPesqOS.Open;
 
          cdsMovCaixa.Append;
          cdsMovCaixa.FieldByName('Cod_Caixa').AsInteger            := sdtsPesqOS.FieldByName('Cod_Caixa').AsInteger;

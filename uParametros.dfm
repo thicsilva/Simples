@@ -4,7 +4,7 @@ object frmParametros: TfrmParametros
   BorderIcons = []
   Caption = 'Configura'#231'ao de parametros do Sistema'
   ClientHeight = 414
-  ClientWidth = 552
+  ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmParametros: TfrmParametros
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
     Top = 393
-    Width = 552
+    Width = 635
     Height = 21
     HintImageIndex = 0
     TabOrder = 0
@@ -55,9 +55,9 @@ object frmParametros: TfrmParametros
   object bsSkinPageControl1: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 552
+    Width = 635
     Height = 340
-    ActivePage = bsSkinTabSheet3
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1258,11 +1258,102 @@ object frmParametros: TfrmParametros
         EditorEnabled = True
         MaxLength = 0
       end
+      object bsSkinLabel11: TbsSkinLabel
+        Left = 14
+        Top = 167
+        Width = 71
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 7
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Juros ao Dia'
+        AutoSize = False
+      end
+      object edtJuros: TbsSkinEdit
+        Left = 91
+        Top = 166
+        Width = 66
+        Height = 18
+        Text = '0,00'
+        DefaultColor = clWindow
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        UseSkinFont = True
+        DefaultWidth = 0
+        DefaultHeight = 0
+        ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'edit'
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 8
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
+      end
+      object bsSkinLabel12: TbsSkinLabel
+        Left = 14
+        Top = 194
+        Width = 71
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 9
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Multa'
+        AutoSize = False
+      end
     end
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = 'Impress'#227'o'
-      ExplicitLeft = 9
-      ExplicitTop = 28
       object Label1: TLabel
         Left = 8
         Top = 9
@@ -1581,6 +1672,166 @@ object frmParametros: TfrmParametros
         GroupIndex = 0
         Caption = 'Permitir que o caixa marque como entregue  uma ordem de servi'#231'o'
       end
+      object bsSkinGroupBox1: TbsSkinGroupBox
+        Left = 8
+        Top = 44
+        Width = 209
+        Height = 129
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinDataName = 'groupbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taLeftJustify
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = True
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = 'Custo dos Produtos'
+        object bsSkinLabel9: TbsSkinLabel
+          Left = 16
+          Top = 36
+          Width = 105
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 0
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Caption = 'Despesas Variaveis'
+          AutoSize = False
+        end
+        object bsSkinLabel10: TbsSkinLabel
+          Left = 16
+          Top = 71
+          Width = 105
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 1
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = True
+          UseSkinFontColor = True
+          BorderStyle = bvFrame
+          Caption = 'Despesas Fixas'
+          AutoSize = False
+        end
+        object edtDespesasFixas: TbsSkinEdit
+          Left = 127
+          Top = 71
+          Width = 66
+          Height = 18
+          Text = '0,00'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Alignment = taRightJustify
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtDespesaVariaveis: TbsSkinEdit
+          Left = 127
+          Top = 36
+          Width = 66
+          Height = 18
+          Text = '0,00'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Alignment = taRightJustify
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+      end
     end
     object Vendas: TbsSkinTabSheet
       Caption = 'Vendas'
@@ -1619,7 +1870,7 @@ object frmParametros: TfrmParametros
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 552
+    Width = 635
     Height = 53
     AutoSize = True
     Bands = <
@@ -1627,7 +1878,7 @@ object frmParametros: TfrmParametros
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 548
+        Width = 631
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -1636,7 +1887,7 @@ object frmParametros: TfrmParametros
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 539
+      Width = 622
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1769,6 +2020,39 @@ object frmParametros: TfrmParametros
         ExplicitTop = -1
       end
     end
+  end
+  object edtMulta: TbsSkinEdit
+    Left = 92
+    Top = 264
+    Width = 66
+    Height = 18
+    Text = '0,00'
+    DefaultColor = clWindow
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clBlack
+    DefaultFont.Height = 14
+    DefaultFont.Name = 'Arial'
+    DefaultFont.Style = []
+    UseSkinFont = True
+    DefaultWidth = 0
+    DefaultHeight = 0
+    ButtonMode = False
+    SkinData = frmPrincipal.SkinEntradaDados
+    SkinDataName = 'edit'
+    Alignment = taRightJustify
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = 14
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    LeftImageIndex = -1
+    LeftImageHotIndex = -1
+    LeftImageDownIndex = -1
+    RightImageIndex = -1
+    RightImageHotIndex = -1
+    RightImageDownIndex = -1
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
     QuickButtons = <>

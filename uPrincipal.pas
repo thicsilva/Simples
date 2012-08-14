@@ -238,6 +238,8 @@ type
     MarcarEventocomRealizado1: TMenuItem;
     actTabeladePreco: TAction;
     dxBarButton31: TdxBarButton;
+    dxBarButton32: TdxBarButton;
+    actServicoLauro: TAction;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -299,6 +301,7 @@ type
     procedure actCadEmpresaExecute(Sender: TObject);
     procedure MarcarEventocomRealizado1Click(Sender: TObject);
     procedure actTabeladePrecoExecute(Sender: TObject);
+    procedure actServicoLauroExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -403,7 +406,7 @@ begin
       Exit;
    End;
    frmCadClientes := TfrmCadClientes.create(Self);
-   frmCadClientes.show;
+   frmCadClientes.showModal;
 end;
 
 procedure TfrmPrincipal.actCadEmpresaExecute(Sender: TObject);
@@ -1108,6 +1111,19 @@ begin
       Exit;
    End;
 End;
+
+procedure TfrmPrincipal.actServicoLauroExecute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := 3; // venda de serviços
+   frmvendas.liCaixa := 2;
+   frmVendas.Showmodal;
+end;
 
 procedure TfrmPrincipal.actManutencaoOSExecute(Sender: TObject);
 begin
