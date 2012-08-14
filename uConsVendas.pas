@@ -122,6 +122,7 @@ type
     Print: TPrintDialog;
     checkUsarleitor: TbsSkinCheckRadioBox;
     SkinForm: TbsBusinessSkinForm;
+    colum_NomeAnimal: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -170,11 +171,12 @@ procedure TfrmConsVendas.btnSelecionarClick(Sender: TObject);
 begin
    qryVendas.Close;
    qryVendas.Params.Clear;
-   qryVendas.SQL.Text :='Select Cli.Descricao, cli.cnpjcpf, fun.Descricao as Vendedor, Ven.*  From  T_Vendas Ven '+
+   qryVendas.SQL.Text :='Select Animal.NomeAnimal,Cli.Descricao, cli.cnpjcpf, fun.Descricao as Vendedor, Ven.*  From  T_Vendas Ven '+
                         'Left Join T_Clientes Cli On  '+
                         '     Cli.Codigo=Ven.Cod_Cliente '+
                         'Left Join T_Funcionarios Fun On '+
                         '     Fun.Codigo=Ven.Cod_funcionario '+
+                        'Left join ClienteAnimais Animal on Animal.AnimalId=Ven.AnimalId '+
                         'where  Tipo_Venda=:parTipo_Venda ';
 
    if cmbStatus.ItemIndex <> 0 Then
@@ -624,7 +626,7 @@ begin
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
    grdvendas.Columns[0].Visible := False;
-   grdvendas.Columns[9].Visible := True;
+   colum_NomeAnimal.Visible := True;
    IF frmconsvendas.Tag = 3 Then
    Begin
       frmConsVendas.Caption := 'Consulta e manutenção de Serviços  ';
@@ -636,7 +638,6 @@ begin
       lblsituacao.Visible   := True;
       btnFinalizar.Visible   := True;
       btnCupomFiscal.Enabled := false;
-      grdvendas.Columns[9].Visible := False;
       grdvendas.Columns[0].Visible := True;
    End;
    btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
@@ -655,6 +656,7 @@ end;
 
 procedure TfrmConsVendas.BorderodeEntrega1Click(Sender: TObject);
 var liSeqVenda     : Integer;
+    liRomaneio     : Integer;
     trdNrTransacao : TTransactionDesc;
     vlr_anterior   : Double;
     vlr_Atual      : Double;
@@ -668,6 +670,7 @@ begin
 
    liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
    liSeqVenda     := cdsVendas.FieldByName('SeqVenda').AsInteger;
+   liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;
 
    {$ENDREGION}
 
@@ -1113,6 +1116,7 @@ begin
 
    frmDevolucaoVenda := TfrmDevolucaoVenda.create(Self);
    frmDevolucaoVenda.piSeqVenda := cdsVendas.FieldByName('Seqvenda').AsInteger;
+   frmDevolucaoVenda.piRomaneioId := cdsVendas.FieldByName('RomaneioId').AsInteger;
    if not cdsVendas.FieldByName('SeqOS').IsNull then
       frmDevolucaoVenda.piSeqOS    := cdsVendas.FieldByName('SeqOS').AsInteger;
    frmDevolucaoVenda.grpDevolveItem.Caption := cdsVendas.FieldByName('Seqvenda').AsString+'-'+cdsVendas.FieldByName('Nome_Cliente').AsString;

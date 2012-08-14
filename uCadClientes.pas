@@ -11,8 +11,9 @@ uses
   cxGridLevel, cxClasses, cxControls, cxGridCustomView,cxContainer,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   bsdbctrls, SimpleDS,ConfigUtils, RDprint, Menus, bsSkinMenus,uFormBase,
-  EditNew, dxSkinsCore;
-
+  EditNew, dxSkinsCore, uDaoClienteAnimal;
+const
+     TELEFONE = 5;
 type
   TfrmCadClientes = class(TFormBase)
     pagCadastro: TbsSkinPageControl;
@@ -291,7 +292,7 @@ type
     bsSkinPanel5: TbsSkinPanel;
     Label4: TLabel;
     edtNomeAnimal: TbsSkinEdit;
-    bsSkinButton1: TbsSkinButton;
+    btnRemoverAnimal: TbsSkinButton;
     btnAdicionarAnimal: TbsSkinButton;
     Label7: TLabel;
     edtEspecie: TbsSkinEdit;
@@ -338,6 +339,8 @@ type
     N5ClientesporVendedoreBairro1: TMenuItem;
     N6ClientesSemComprasamaisde60dias1: TMenuItem;
     N5ClientesporVendedoreBairro2: TMenuItem;
+    btnAlterarAnimal: TbsSkinButton;
+    btnImprimirAnimais: TbsSkinButton;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -404,6 +407,8 @@ type
     procedure N5ClientesporVendedoreBairro1Click(Sender: TObject);
     procedure N6ClientesSemComprasamaisde60dias1Click(Sender: TObject);
     procedure N5ClientesporVendedoreBairro2Click(Sender: TObject);
+    procedure cxGridDBTableView1DblClick(Sender: TObject);
+    procedure btnImprimirAnimaisClick(Sender: TObject);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -413,8 +418,10 @@ type
    pviLinha            : Integer;
    pitipoRel           : Integer;
    pdSaldoConta        : Double;
+   pAnimalId : integer;
     procedure DesabilitarTabSheets;
     procedure MostrarAnimaisCliente;
+    procedure LimpaAnimal;
    { Private declarations }
   public
     pvsCNPJCPF    : String;
@@ -428,7 +435,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes,cxGridCommon, uselrelClientes, uConfigTabSheet,
-  uDaoClienteAnimal, uCapturaImagem, uClassAnimal, uClassEventoAnimal,
+  uCapturaImagem, uClassAnimal, uClassEventoAnimal,
   uDaoEventoAnimal, uDaoVenda, uRelCLientesVendedorBairro;
 
 procedure TfrmCadClientes.MenuItem1Click(Sender: TObject);
@@ -813,7 +820,12 @@ begin
    Begin
       lswhere := 'Where Contrato like :parDescricao ';
       lsCoringa := '';
-   End;
+   End
+   Else IF cmbtipoconsulta.ItemIndex = TELEFONE Then
+   begin
+      lswhere := 'Where Telefone like :parDescricao ';
+      lsCoringa := '';
+   end;
 
    qrypesquisa.Close;
    qryPesquisa.Params.Clear;
@@ -826,7 +838,7 @@ begin
       qryPesquisa.ParamByName('parDescricao').AsString := EdtPesquisa.Text;
    IF cmbtipoconsulta.ItemIndex = 3 Then
       qryPesquisa.ParamByName('parDescricao').AsString    := lsCoringa+EdtPesquisa.Text+'%';
-   IF cmbtipoconsulta.ItemIndex = 4 Then
+   IF (cmbtipoconsulta.ItemIndex = 4 ) or (cmbtipoconsulta.ItemIndex = TELEFONE ) Then
       qryPesquisa.ParamByName('parDescricao').AsString    := lsCoringa+EdtPesquisa.Text+'%';
 
    cdspesquisa.Close;
@@ -1000,6 +1012,40 @@ begin
     Close;
 end;
 
+procedure TfrmCadClientes.btnImprimirAnimaisClick(Sender: TObject);
+var Daonimais : TDaoClienteAnimal;
+begin
+   pitipoRel := 7;
+   GstituloRel  :='Relatorio de animais Cadastrados';
+
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 66;
+   ImpMatricial.TamanhoQteColunas         := 135;
+   ImpMatricial.FonteTamanhoPadrao        := s17cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+   Daonimais := TDaoClienteAnimal.Create(gConexao);
+   cdsRelatorio := Daonimais.BuscarTodos;
+   cdsRelatorio.First;
+   while not cdsRelatorio.Eof do
+   Begin
+      impmatricial.Imp(pvilinha,001,Copy( IncZero(cdsRelatorio.FieldByName('ClienteId').AsString,5)+'   '+cdsRelatorio.FieldByName('NomeAnimal').AsString,1,40 ) );
+      impmatricial.Imp(pvilinha,037,Copy(cdsRelatorio.FieldByName('Especie').AsString,1,20) );
+      impmatricial.Imp(pvilinha,055,cdsRelatorio.FieldByName('Raca').AsString );
+      impmatricial.Imp(pvilinha,076,cdsRelatorio.FieldByName('Cor').AsString );
+      impmatricial.Imp(pvilinha,090,FormatDateTime('dd/mm/yyyy',cdsRelatorio.FieldByName('Data_Aquisicao').AsDateTime ));
+      impmatricial.Imp(pvilinha,108,FormatDateTime('dd/mm/yyyy',cdsRelatorio.FieldByName('Data_Nascimento').AsDateTime ));
+      pviLinha:=Pvilinha+1;
+      if pvilinha>60 then
+         impmatricial.Novapagina;
+      cdsRelatorio.next;
+   End;
+   impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
+   impmatricial.Fechar;
+end;
+
 procedure TfrmCadClientes.FormShow(Sender: TObject);
 var i,j : Integer;
 begin
@@ -1164,7 +1210,7 @@ end;
 
 procedure TfrmCadClientes.cdspesquisaCalcFields(DataSet: TDataSet);
 begin
-   case  cdsPesquisa.FieldByName('Status').AsInteger Of
+   case  StrTointDef(cdsPesquisa.FieldByName('Status').AsString,0) Of
      0 : cdsPesquisa.FieldByName('Nome_Status').AsString := 'Liberado';
      1 : cdsPesquisa.FieldByName('Nome_Status').AsString := 'Cobrança';
      2 : cdsPesquisa.FieldByName('Nome_Status').AsString := 'Bloqueado';
@@ -1488,6 +1534,7 @@ begin
    begin
       MostrarAnimaisCliente;
       edtdataAgendada.Date := gsData_Mov;
+      pAnimalId := 0;
    End;
    pnlClientesDescontos.Visible := False;
    if pagCadastro.ActivePageIndex>1 then
@@ -1692,6 +1739,7 @@ begin
    inherited;
    Animal := TAnimal.Create;
    DaoClienteAnimal := TDaoClienteAnimal.Create(gConexao);
+   animal.id := pAnimalId;
    Animal.Nome := edtNomeAnimal.Text;
    Animal.Especie := EdtEspecie.Text;
    Animal.Raca := edtRaca.Text;
@@ -1706,6 +1754,11 @@ begin
    FreeAndNil(Animal);
    FreeAndNil(DaoClienteAnimal);
    MostrarAnimaisCliente;
+   panimalId := 0;
+   btnAdicionarAnimal.Enabled := True;
+   btnRemoverAnimal.Enabled := True;
+   btnAlterarAnimal.Enabled := False;
+   LimpaAnimal;
 end;
 
 procedure TfrmCadClientes.MostrarAnimaisCliente;
@@ -1773,6 +1826,31 @@ begin
          frmConfigTabSheet.chkConfiguracao.Items.add((self.Components[liCont] as Tbsskintabsheet).Caption );
    end;
    frmConfigTabSheet.showModal;
+end;
+
+procedure TfrmCadClientes.cxGridDBTableView1DblClick(Sender: TObject);
+begin
+   edtNomeAnimal.Text     := cdsClienteAnimais.FieldByName('NomeAnimal').AsString;
+   EdtEspecie.Text        := cdsClienteAnimais.FieldByName('Especie').AsString;
+   edtRaca.Text           := cdsClienteAnimais.FieldByName('Raca').AsString;
+   edtCor.text            := cdsClienteAnimais.FieldByName('Cor').AsString;
+   edtDataNascimento.Date := cdsClienteAnimais.FieldByName('Data_Nascimento').AsDateTime;
+   edtDataAquisicao.date  := cdsClienteAnimais.FieldByName('Data_Aquisicao').AsDateTime;
+   pAnimalId              := cdsClienteAnimais.FieldByName('AnimalId').AsInteger;
+   btnAdicionarAnimal.Enabled := False;
+   btnRemoverAnimal.Enabled := False;
+   btnAlterarAnimal.Enabled := True;
+end;
+
+procedure TfrmCadClientes.LimpaAnimal;
+begin
+   edtNomeAnimal.Text     := '';
+   EdtEspecie.Text        := '';
+   edtRaca.Text           := '';
+   edtCor.text            := '';
+   edtDataNascimento.Date := null;
+   edtDataAquisicao.date  := Null;
+   pAnimalId              := 0;
 end;
 
 procedure TfrmCadClientes.edtCnpjCpfExit(Sender: TObject);
@@ -1942,6 +2020,14 @@ begin
          pviLinha:=Pvilinha+1;
 
       End;
+      7:
+      begin
+         pviLinha:=Pvilinha+1;
+         TRdPrint( Sender ).imp(pvilinha,001,'Cliente Animal                      Especie           Raça                 Cor           Data Nascimento   Data Aquisição ');
+         pviLinha:=Pvilinha+1;
+         TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',135,0));
+         pviLinha:=Pvilinha+1;
+      end;
    End;
 end;
 

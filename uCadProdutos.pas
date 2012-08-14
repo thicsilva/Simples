@@ -188,6 +188,37 @@ type
     bsSkinStdLabel15: TbsSkinStdLabel;
     edtPesoBruto: TbsSkinNumericEdit;
     edtPesoLiquido: TbsSkinNumericEdit;
+    pagCustos: TbsSkinTabSheet;
+    bsSkinPanel3: TbsSkinPanel;
+    bsSkinStdLabel16: TbsSkinStdLabel;
+    edtCustoProduto: TbsSkinNumericEdit;
+    bsSkinStdLabel17: TbsSkinStdLabel;
+    edtPrecoSugerido: TbsSkinNumericEdit;
+    bsSkinExPanel2: TbsSkinExPanel;
+    bsSkinPanel4: TbsSkinPanel;
+    bsSkinStdLabel18: TbsSkinStdLabel;
+    edtPercentualCusto: TbsSkinNumericEdit;
+    edtDescricaoCusto: TbsSkinEdit;
+    cmbtipo: TbsSkinComboBox;
+    bsSkinStdLabel19: TbsSkinStdLabel;
+    bsSkinStdLabel20: TbsSkinStdLabel;
+    bsSkinDBGrid1: TbsSkinDBGrid;
+    bsSkinPanel5: TbsSkinPanel;
+    btnAdicionarAnimal: TbsSkinButton;
+    btnRemoverAnimal: TbsSkinButton;
+    cdsCustoProduto: TClientDataSet;
+    cdsCustoProdutoDescricao: TStringField;
+    cdsCustoProdutoTipo: TIntegerField;
+    cdsCustoProdutoNome_Tipo: TStringField;
+    cdsCustoProdutoValor: TFloatField;
+    srcCustoProduto: TDataSource;
+    cdsCustoProdutoTotal: TFloatField;
+    pnlDescProduto2: TbsSkinPaintPanel;
+    lblNomeProdutoFicha2: TbsSkinStdLabel;
+    bsSkinStdLabel21: TbsSkinStdLabel;
+    edtMargem: TbsSkinNumericEdit;
+    bsSkinButton1: TbsSkinButton;
+    cdsCustoProdutoIDCusto: TIntegerField;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -224,6 +255,10 @@ type
     procedure chkMetroQuadradoClick(Sender: TObject);
     procedure chkMetroLinearClick(Sender: TObject);
     procedure ransferenciaEntreSetores1Click(Sender: TObject);
+    procedure btnAdicionarAnimalClick(Sender: TObject);
+    procedure btnRemoverAnimalClick(Sender: TObject);
+    procedure edtCustoProdutoExit(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
   private
      pvQualBotao  : String;
      vlr_VendaAnt : Double;
@@ -231,6 +266,10 @@ type
      pviCodSel    : integer;
      procedure CarregarFrabricante;
      procedure AjustarTela;
+    function CalculaPrecoSugerido: Real;
+    procedure Atualizacusto;
+    function RetornaCMV: Real;
+    procedure AducionarCustos(prPrecoSugerido : real; prTipo : Integer);
     { Private declarations }
   public
      piCod_Produto : Integer;
@@ -244,7 +283,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uEstoqueManutencao, uInventario, uselRelEtiquetas,
-  uTransferenciaEntreSetores;
+  uTransferenciaEntreSetores,uDaoCustoProduto,uClassCustoProduto;
 
 {$R *.dfm}
 //
@@ -319,6 +358,121 @@ begin
           ImagemProduto.Repaint;
          End;
       End;
+      5 :
+      begin
+         pnlDescProduto2.CaptionMode  := False;
+         lblNomeProdutoFicha2.Caption := upperCase( inczero( cdsCadProdutos.FieldByName('Codigo').AsString,5)+' - '+cdsCadProdutos.FieldByName('Descricao').AsString);
+         pnlDescProduto2.Update;
+         edtCustoProduto.text := Formatfloat( '0.00', cdsCadProdutos.FieldByName('pco_Custo').AsFloat);
+         edtMargem.text := Formatfloat( '0.00', cdsCadProdutos.FieldByName('Margem').AsFloat);
+         AtualizaCusto;
+      end;
+   end;
+end;
+procedure TfrmCadProdutos.Atualizacusto;
+var PrecoSugerido : Real;
+    LucroBruto : Real;
+    DespesasVariaveis : Real;
+    DespesasFixas : Real;
+    MargemContribuicao : Real;
+begin
+   cdsCustoProduto.EmptyDataSet;
+
+   PrecoSugerido         :=  CalculaPrecoSugerido;
+   edtPrecoSugerido.text := FormatFloat('0.00',CalculaPrecoSugerido);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Preco de Venda';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4;
+   cdsCustoProduto.fieldByname('Total').AsFloat       :=  PrecoSugerido;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       :=  100;;
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Preco de Custo';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4;
+   cdsCustoProduto.fieldByname('Total').AsFloat       :=  StrTofloat(edtCustoProduto.Text);
+   cdsCustoProduto.fieldByname('Valor').AsFloat       :=  arredondar((StrTofloat(edtCustoProduto.Text) / PrecoSugerido ) * 100,2);
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   AducionarCustos(PrecoSugerido,1);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Custo de Mercadoria Vendida';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4;
+   cdsCustoProduto.fieldByname('Total').AsFloat       :=  RetornaCMV;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       :=  arredondar( (RetornaCMV / PrecoSugerido ) * 100,2);
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   LucroBruto := (CalculaPrecoSugerido - RetornaCMV);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Lucro Bruto do Produto';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      := 4;
+   cdsCustoProduto.fieldByname('Total').AsFloat       := LucroBruto;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       := arredondar( ((CalculaPrecoSugerido - RetornaCMV) / PrecoSugerido ) * 100,2);
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   DespesasVariaveis :=  Arredondar( ( PrecoSugerido *  StrtoFloat(gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' ))) / 100,2);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Despesas Variaveis ';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       := StrtoFloat(gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' ));
+   cdsCustoProduto.fieldByname('Total').AsFloat       := DespesasVariaveis;
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   MargemContribuicao := (LucroBruto-DespesasVariaveis);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Margem de Contribuição';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4;
+   cdsCustoProduto.fieldByname('Total').AsFloat       := MargemContribuicao;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       := Arredondar((MargemContribuicao/PrecoSugerido)*100,2);
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   DespesasFixas :=  Arredondar( ( PrecoSugerido *  StrtoFloat(gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' ))) / 100,2);
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Despesas Fixas ';
+   cdsCustoProduto.fieldByname('Tipo').AsInteger      :=  4 ;
+   cdsCustoProduto.fieldByname('Valor').AsFloat       := StrtoFloat(gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' ));
+   cdsCustoProduto.fieldByname('Total').AsFloat       := DespesasFixas;
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+
+   cdsCustoProduto.Append;
+   cdsCustoProduto.fieldByname('Descricao').AsString  := 'Lucro Liquido';
+   cdsCustoProduto.fieldByname('Valor').AsFloat       :=  Arredondar(((MargemContribuicao - DespesasFixas)/PrecoSugerido)*100,2);
+   cdsCustoProduto.fieldByname('Total').AsFloat       := (MargemContribuicao - DespesasFixas);
+   cdsCustoProduto.fieldByname('IdCusto').AsInteger   := 0;
+   cdsCustoProduto.Post;
+end;
+procedure TfrmCadProdutos.AducionarCustos(prPrecoSugerido : real; prTipo : Integer);
+var cdsDados : TclientDataSet;
+    DaoCustoProduto : TDaoCustoProduto;
+begin
+   DaoCustoProduto := TDaoCustoProduto.Create(gConexao);
+   cdsDados        := DaoCustoProduto.BuscarPorProduto(cdsCadProdutos.FieldByName('Codigo').AsInteger);
+   while not cdsDados.eof do
+   begin
+      if cdsDados.fieldByname('Tipo').AsInteger = prTipo then
+      begin
+        cdsCustoProduto.Append;
+        cdsCustoProduto.fieldByname('Descricao').AsString  := cdsDados.fieldByname('Descricao').AsString;
+        cdsCustoProduto.fieldByname('Tipo').AsInteger      := cdsDados.fieldByname('Tipo').AsInteger;
+        cdsCustoProduto.fieldByname('Total').AsFloat       := cdsDados.fieldByname('Valor').AsFloat;
+        cdsCustoProduto.fieldByname('IdCusto').AsInteger   := cdsDados.fieldByname('ID').AsInteger;
+        cdsCustoProduto.fieldByname('Valor').AsFloat       := Arredondar((cdsDados.fieldByname('Valor').AsFloat/prPrecoSugerido)*100,2);
+        cdsCustoProduto.Post;
+      end;
+      cdsDados.next;
    end;
 end;
 
@@ -354,7 +508,6 @@ begin
    BtnCancela.Enabled :=True;
    PagCadastro.ActivePageIndex:=1;
    edtCod_barras.SetFocus;
-
 end;
 
 procedure TfrmCadProdutos.btnokClick(Sender: TObject);
@@ -531,6 +684,23 @@ begin
 
 end;
 
+procedure TfrmCadProdutos.btnRemoverAnimalClick(Sender: TObject);
+var  DaoCustoProduto : TDaoCustoProduto;
+begin
+  inherited;
+  if ( cdsCustoProduto.fieldByname('IdCusto').AsInteger = 0 )then
+  begin
+     CaixaMensagem( 'Lancamentos automáticos não podem ser excluido ', ctAviso, [ cbOk ], 0 );
+     Exit
+  end;
+  DaoCustoProduto := TDaoCustoProduto.Create(gConexao);
+  DaoCustoProduto.Excluir( cdsCustoProduto.fieldByname('IdCusto').AsInteger );
+  cdsCustoProduto.Delete;
+  edtPrecoSugerido.text := FormatFloat('0.00',CalculaPrecoSugerido);
+  FreeAndNil(DaoCustoProduto);
+  AtualizaCusto;
+end;
+
 procedure TfrmCadProdutos.btnRemoverClick(Sender: TObject);
 begin
    IF cdsFichaTecnica.IsEmpty Then
@@ -597,6 +767,87 @@ begin
    ImagemProduto.Repaint;
 end;
 
+procedure TfrmCadProdutos.bsSkinButton1Click(Sender: TObject);
+var ProdutoId : Integer;
+begin
+   if CaixaMensagem( 'Deseja atualizar o Custo do Produto ', ctAviso, [ cbSimNao ], 0 ) then
+   begin
+     ProdutoId := cdsCadProdutos.FieldByName('Codigo').AsInteger;
+     qryModific.Close;
+     qryModific.Sql.text := 'Update T_produtos set Pco_custo=:parPco_Custo, '+
+                            '                      Margem=:parParmagem  '+
+                            'where codigo=:parCodigo';
+     qryModific.ParamByName('parParmagem').asFloat  := StrTofloat(edtMargem.text);
+     qryModific.ParamByName('parPco_Custo').asFloat := Strtofloat(edtCustoProduto.text);
+     qryModific.ParamByName('parCodigo').AsInteger  := cdsCadProdutos.FieldByName('Codigo').AsInteger;
+     qryModific.ExecSQL;
+     cdsCadProdutos.close;
+     cdsCadProdutos.Open;
+     cdsCadProdutos.Locate('Codigo',ProdutoId,[]);
+     AtualizaCusto;
+   end;
+end;
+
+procedure TfrmCadProdutos.btnAdicionarAnimalClick(Sender: TObject);
+ var DaoCustoProduto : TDaoCustoProduto;
+     CustoProduto : TCustoProduto;
+begin
+  CustoProduto := TCustoProduto.Create;
+  CustoProduto.Descricao := edtDescricaoCusto.text;
+  CustoProduto.Tipo      := (cmbTipo.ItemIndex+1);
+  CustoProduto.ProdutoId := cdsCadProdutos.FieldByName('Codigo').AsInteger;
+  CustoProduto.Valor     := Strtofloat(edtPercentualCusto.text);
+  CustoProduto.Ordem     := 0;
+  DaoCustoProduto := TDaoCustoProduto.Create(gConexao);
+  DaoCustoProduto.Incluir(CustoProduto);
+  FreeandNil(CustoProduto);
+  FreeandNil(DaoCustoProduto);
+  AtualizaCusto;
+end;
+
+function TfrmCadProdutos.CalculaPrecoSugerido : Real;
+var PercentualTotal : Real;
+    ValorFinal : Real;
+    cdsDados : TClientDataSet;
+    DaoCustoProduto : TDaoCustoProduto;
+begin
+   PercentualTotal := 0;
+   ValorFinal := RetornaCMV;
+   DaoCustoProduto := TDaoCustoProduto.Create(gConexao);
+   cdsDados := DaoCustoProduto.BuscarPorProduto(cdsCadProdutos.FieldByName('Codigo').AsInteger);
+   PercentualTotal := Strtofloat(edtmargem.Text);
+   {
+   while not cdsDados.Eof do
+   begin
+     if cdsDados.FieldByName('Tipo').AsFloat = 2 then
+        PercentualTotal := PercentualTotal + cdsDados.FieldByName('Valor').AsFloat;
+     cdsDados.Next;
+   end;
+   }
+   Result := arredondar( ValorFinal / ((100-PercentualTotal)/100),2 ) ; 
+end;
+
+function TfrmCadProdutos.RetornaCMV : Real;
+var PercentualTotal : Real;
+    ValorFinal : Real;
+    cdsDados : TClientDataSet;
+    DaoCustoProduto : TDaoCustoProduto;
+begin
+   PercentualTotal := 0;
+   DaoCustoProduto := TDaoCustoProduto.Create(gConexao);
+   cdsDados := DaoCustoProduto.BuscarPorProduto(cdsCadProdutos.FieldByName('Codigo').AsInteger);
+   cdsDados.first;
+   ValorFinal := StrTofloat(edtCustoProduto.text);
+   while not cdsDados.Eof do
+   begin
+     if cdsDados.FieldByName('Tipo').AsFloat = 1 then
+        ValorFinal := ValorFinal + cdsDados.FieldByName('Valor').AsFloat;
+     cdsDados.Next;
+   end;
+   Result := ValorFinal ;
+end;
+
+
 procedure TfrmCadProdutos.btnAdicionarClick(Sender: TObject);
 begin
    if Trim(edtCod_Produto.text)='' then
@@ -631,7 +882,7 @@ begin
    cdsFichaTecnica.ApplyUpdates(-1);
 
    MostraPesquisa();
-   
+
 end;
 
 procedure TfrmCadProdutos.btnalterarClick(Sender: TObject);
@@ -971,6 +1222,11 @@ begin
          edtCod_Produto.Setfocus;
       End;
    End;
+end;
+
+procedure TfrmCadProdutos.edtCustoProdutoExit(Sender: TObject);
+begin
+   Atualizacusto;
 end;
 
 procedure TfrmCadProdutos.GridProdutosDblClick(Sender: TObject);

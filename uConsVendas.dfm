@@ -4,7 +4,7 @@ object frmConsVendas: TfrmConsVendas
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o das Vendas Efetuadas'
   ClientHeight = 539
-  ClientWidth = 894
+  ClientWidth = 1171
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
     Top = 153
-    Width = 894
+    Width = 1171
     Height = 386
     HintImageIndex = 0
     TabOrder = 0
@@ -55,7 +55,7 @@ object frmConsVendas: TfrmConsVendas
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 892
+      Width = 1169
       Height = 384
       Align = alClient
       TabOrder = 0
@@ -133,6 +133,11 @@ object frmConsVendas: TfrmConsVendas
           DataBinding.FieldName = 'Nome_Cliente'
           Width = 200
         end
+        object colum_NomeAnimal: TcxGridDBColumn
+          Caption = 'Nome do Animal'
+          DataBinding.FieldName = 'NomeAnimal'
+          Width = 110
+        end
         object Colum_Data_Venda: TcxGridDBColumn
           Caption = 'Data'
           DataBinding.FieldName = 'Data_Venda'
@@ -160,6 +165,7 @@ object frmConsVendas: TfrmConsVendas
         object Colum_NumeroCupom: TcxGridDBColumn
           Caption = 'Numero Cupom'
           DataBinding.FieldName = 'numerocupom'
+          Visible = False
           Width = 100
         end
         object Column_Vendedor: TcxGridDBColumn
@@ -167,6 +173,7 @@ object frmConsVendas: TfrmConsVendas
           Width = 150
         end
         object Column_Status_Pagamento: TcxGridDBColumn
+          Caption = 'Situa'#231#227'o Pagamento'
           DataBinding.FieldName = 'Status_Pagamento'
         end
       end
@@ -262,7 +269,7 @@ object frmConsVendas: TfrmConsVendas
   object panelconsulta: TbsSkinPanel
     Left = 0
     Top = 77
-    Width = 894
+    Width = 1171
     Height = 76
     HintImageIndex = 0
     TabOrder = 1
@@ -849,7 +856,7 @@ object frmConsVendas: TfrmConsVendas
   object pnlmensagem: TPanel
     Left = 0
     Top = 53
-    Width = 894
+    Width = 1171
     Height = 24
     Align = alTop
     Caption = 'Consulta de Vendas'
@@ -866,7 +873,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 894
+    Width = 1171
     Height = 53
     AutoSize = True
     Bands = <
@@ -874,7 +881,7 @@ object frmConsVendas: TfrmConsVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 890
+        Width = 1167
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -883,7 +890,7 @@ object frmConsVendas: TfrmConsVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 881
+      Width = 1158
       Height = 49
       HintImageIndex = 0
       TabOrder = 0

@@ -9,7 +9,7 @@ uses
   Provider, DBClient, bsdbctrls, bsSkinGrids, bsDBGrids, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGrid;
+  cxControls, cxGridCustomView, cxGrid, uDaoCaixaMovimento;
 
 type
   TfrmBaixaNormal = class(TForm)
@@ -225,6 +225,7 @@ var lsupDate        : String;
   Parametros: TStringList;
   Venda : TVenda;
   DaoFuncionario : TDaoFuncionario;
+  loDaoMovCaixa : TDaoCaixamovimento;
 begin
    lrValorRecebido := 0;
    if frmBaixaNormal.Tag <> 2 then
@@ -246,6 +247,8 @@ begin
          if not CaixaMensagem( 'Deseja Efetuar o pagamento Parcial do titulo '+edtDocumento.text, ctConfirma, [ cbSimNao ], 0 )  Then
             Exit;
       End;
+
+
 
       if CaixaMensagem( 'Confirma o recebimento Documento -> '+edtDocumento.text, ctConfirma, [ cbSimNao ], 0 )  Then
       Begin
@@ -270,6 +273,18 @@ begin
                0 : // Lancamento no Caixa
                Begin
                   Try
+
+                     loDaoMovCaixa := TDaoCaixamovimento.Create(gConexao);
+                     try
+                        if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) then
+                        begin
+                           CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
+                           exit;
+                        end;
+                     finally
+                        FreeAndNil(loDaoMovCaixa);
+                     end;
+
                      qryModific.Close;
                      qryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
                                             '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
