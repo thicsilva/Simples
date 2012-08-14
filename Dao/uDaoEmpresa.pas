@@ -31,10 +31,11 @@ begin
    Empresa.Endereco.logradouro :=  Dados.FieldByName('Endereco').AsString;
    Empresa.Endereco.Bairro     :=  Dados.FieldByName('Bairro').AsString;
    Empresa.Endereco.Cidade     :=  Dados.FieldByName('Cidade').AsString;
-   Empresa.Telefone            :=  Dados.FieldByName('Telefone').AsString;
+   Empresa.Telefones           :=  Dados.FieldByName('Telefone').AsString;
    Empresa.Endereco.Cep        :=  Dados.FieldByName('Cep').AsString;
    Empresa.Endereco.Uf         :=  Dados.FieldByName('UF').AsString;
    Empresa.Email               :=  Dados.FieldByName('Email').AsString;
+   Empresa.Site                :=  Dados.FieldByName('HomePage').AsString;
    Empresa.Fax                 :=  Dados.FieldByName('Fax').AsString;
    Result := Empresa;
 end;

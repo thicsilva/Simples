@@ -11,8 +11,9 @@ type TDaoCliente = class
      FQryModific : TSqlQuery;
    public
      Constructor Create( conexao : TConexao);
-     function Buscar(idCliente : Integer) : TCliente;
-     function Excluir(idCliente : Integer) : Boolean;
+     function Buscar(ClienteId : Integer) : TCliente;
+     function Excluir(ClienteId : Integer) : Boolean;
+     procedure AtualizarSequencia(ClienteId,SequenciaEntrega: Integer);
 end;
 
 
@@ -20,14 +21,24 @@ implementation
 
 { TDaoCliente }
 
-function TDaoCliente.Buscar(idCliente: Integer): TCliente;
+procedure TDaoCliente.AtualizarSequencia(ClienteId,SequenciaEntrega: Integer);
+begin
+   FQryModific.Close;
+   FQryModific.SQLConnection := Fconexao.Conection;
+   FQryModific.SQL.Text := 'Update T_Clientes set Sequenciaentrega=:parSequenciaEntrega where Codigo=:parId ';
+   FQryModific.ParamByName('parId').AsInteger := ClienteId;
+   FQryModific.ParamByName('parSequenciaEntrega').AsInteger := SequenciaEntrega;
+   FQryModific.ExecSQL;
+end;
+
+function TDaoCliente.Buscar(ClienteId: Integer): TCliente;
 var Cliente : TCliente;
     Parametros : TStringList;
     Dados : TClientDataSet;
 begin
   Cliente := TCliente.Create;
   Parametros := TStringList.Create;
-  Parametros.ADD(IntToStr(idCliente));
+  Parametros.ADD(IntToStr(ClienteId));
   Try
      Dados := FConexao.BuscarDadosSQL('Select * from T_clientes where Codigo=:parcodigo',Parametros);
      Cliente.Id         := Dados.FieldByName('Codigo').AsInteger;
@@ -40,6 +51,8 @@ begin
      Cliente.Endereco.PontoReferencia := Dados.FieldByName('Pto_Referencia').AsString;
      Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
      Cliente.InscricaoEstadual := Dados.FieldByName('InscricaoEstadual').AsString;
+     Cliente.Sequencia := Dados.FieldByName('Sequenciaentrega').AsString;
+
      Result := Cliente;
   Finally
     FreeandNil(Dados);
@@ -54,12 +67,12 @@ begin
   FQryModific := TSqlQuery.Create(nil);
 end;
 
-function TDaoCliente.Excluir(idCliente: Integer): Boolean;
+function TDaoCliente.Excluir(ClienteId: Integer): Boolean;
 begin
    FQryModific.Close;
    FQryModific.SQLConnection := Fconexao.Conection;
    FQryModific.SQL.Text := 'Delete from T_Clientes where Codigo=:parId ';
-   FQryModific.ParamByName('parId').AsInteger := idCliente;
+   FQryModific.ParamByName('parId').AsInteger := ClienteId;
    FQryModific.ExecSQL;
 end;
 

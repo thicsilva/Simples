@@ -17,15 +17,31 @@ type TDaoRomaneio = Class
      function BuscarPorId(RomaneioId : Integer) : TClientDataSet;
      function RetornarProdutos(RomaneioId : integer) : TClientDataSet;
      function RetornarDadosFinanceiros (RomaneioId : integer) : TClientDataSet;
+     function RetornarPedidosNaoEntregues : TClientDataSet;
      procedure FecharRomaneio(RomaneioId : integer);
      function RetornarNomeMotorista (RomaneioId : integer) : String;
      procedure Cancelar(RomaneioId : integer);
+     procedure AtualizarTotalDoRomaneio(RomaneioId : integer);
 End;
 
 implementation
 
 
 { TDaoRomaneio }
+
+procedure TDaoRomaneio.AtualizarTotalDoRomaneio(RomaneioId: integer);
+var Parametros : TStringList;
+    lrTotal : Real;
+begin
+   Parametros := TStringList.Create;
+   Parametros.Add(IntTostr(RomaneioId));
+   lrTotal := FConexao.BuscarDadosSQL('select sum(vlr_Total) as Total from T_vendas where romaneioId=:parRomaneioId',Parametros).FieldByname('Total').AsFloat;
+   FqryModific.Close;
+   FqryModific.Sql.Text := 'Update Romaneios set Total=:parTotal where id=:parId';
+   FqryModific.ParamByName('parId').AsInteger    := RomaneioId;
+   FqryModific.ParamByName('parTotal').AsFloat   := lrTotal;
+   FqryModific.ExecSQL;
+end;
 
 function TDaoRomaneio.BuscarPorId(RomaneioId : Integer): TClientDataSet;
 var Parametros : TStringList;
@@ -96,12 +112,13 @@ function TDaoRomaneio.RetornarDadosFinanceiros(RomaneioId: integer): TClientData
 begin
   FParametros.clear;
   FParametros.add(IntToStr(RomaneioId));
+  FParametros.add('5');
   Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Pag.Descricao as Pagamento, '+
                                     '       Ven.Entregue, Ven.Prorrogado '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+
                                     '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+
-                                    'where romaneioId=:parRomaneioId ',FParametros);
+                                    'where romaneioId=:parRomaneioId and ( ven.status<>:parStatus or ven.Status is Null ) ',FParametros);
 
 end;
 
@@ -114,19 +131,33 @@ begin
                                      'where ID=:parRomaneioId',FParametros).Fieldbyname('Descricao').AsString;
 end;
 
-function TDaoRomaneio.RetornarProdutos(RomaneioId: integer): TClientDataSet;
+function TDaoRomaneio.RetornarPedidosNaoEntregues: TClientDataSet;
 begin
   FParametros.clear;
-  FParametros.add(IntToStr(RomaneioId));
-  Result := FConexao.BuscarDadosSQL('select Cod_Produto, max(Prod.Descricao) as Descricao, '+
-                                    'Sum(Qtde_Venda) as Qtde_Total, Sum(Itens.PesoBruto) as PesoBruto, '+
-                                    'Max(Prod.Unid) as Unid '+
-                                    'from T_vendas Ven '+
-                                    '     inner Join T_itensVendas Itens on Itens.SeqVenda=Ven.Seqvenda '+
-                                    '     left join T_produtos Prod on Prod.Codigo=Itens.Cod_Produto '+
-                                    'where romaneioID=:parRomaneioId '+
-                                    'group by Cod_produto',FParametros);
+  FParametros.add('0');
+  FParametros.add('5');
+  Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Pag.Descricao as Pagamento, '+
+                                    '       Ven.Entregue, Ven.Prorrogado '+
+                                    'from t_vendas ven '+
+                                    '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+
+                                    '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+
+                                    'where ( Entregue=:parEntregue or Entregue is null ) and '+
+                                    '( ven.status<>:parStatus or ven.Status is Null ) order by 3',FParametros);
+end;
 
+function TDaoRomaneio.RetornarProdutos(RomaneioId: integer): TClientDataSet;
+begin
+   FParametros.clear;
+   FParametros.add(IntToStr(RomaneioId));
+   FParametros.add('C');
+   Result := FConexao.BuscarDadosSQL('select Cod_Produto, max(Prod.Descricao) as Descricao, '+
+                                     'Sum(Qtde_Venda) as Qtde_Total, Sum(Itens.PesoBruto) as PesoBruto, '+
+                                     'Max(Prod.Unid) as Unid '+
+                                     'from T_vendas Ven '+
+                                     '     inner Join T_itensVendas Itens on Itens.SeqVenda=Ven.Seqvenda '+
+                                     '     left join T_produtos Prod on Prod.Codigo=Itens.Cod_Produto '+
+                                     'where romaneioID=:parRomaneioId and ( Itens.status<>:parStatus or Itens.Status is Null ) '+
+                                     'group by Cod_produto order by 2',FParametros);
 end;
 
 end.

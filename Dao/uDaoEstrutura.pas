@@ -45,6 +45,9 @@ type TDaoEstrutura = class
     procedure Adicionar_Entregue_na_Tabela_Vendas;
     procedure Adicionar_Prorrogado_na_Tabela_Vendas;
     procedure CriarTabela_Empresa;
+    procedure CriarTabela_ProdutosCusto;
+    procedure Adicionar_status_na_tabela_ItensVendas;
+    procedure Adicionar_Margem_na_tabela_Produtos;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -183,6 +186,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Margem_na_tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'Margem', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD Margem Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_MetroLinear_na_Tabela_Produtos;
 begin
    if not ExisteCampo( 'T_Produtos', 'MetroLinear', FConexao.Conection ) then
@@ -268,6 +281,16 @@ begin
    begin
       FQryAjustes.Close;
       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Prorrogado bit';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_status_na_tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'Status', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD Status char(1)';
       FQryAjustes.ExecSQL;
    end;
 end;
@@ -473,10 +496,6 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
-  //EfetuarCriacaoDosCamposAntigos;
-  //Adicionar_PagouSinal_na_Tabela_vendas;
-  //Adicionar_ServicoPago_na_Tabela_vendas;
-  //Adicionar_QtdeEmbalagem_na_Tabela_Produtos;
   Adicionar_PrecoVendaExterna_na_Tabela_Produtos;
   Adicionar_Cod_Caixa_na_Tabela_CtasReceber;
   Adicionar_SetorId_na_Tabela_ItensVendas;
@@ -504,6 +523,9 @@ begin
   Adicionar_Entregue_na_Tabela_Vendas;
   Adicionar_Prorrogado_na_Tabela_Vendas;
   CriarTabela_Empresa;
+  CriarTabela_ProdutosCusto;
+  Adicionar_status_na_tabela_ItensVendas;
+  Adicionar_Margem_na_tabela_Produtos;
 end;
 
 
@@ -645,4 +667,25 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.CriarTabela_ProdutosCusto;
+begin
+   if not ExisteTabela( 'Romaneios', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Create Table ProdutosCusto '+
+                              '( ID int Identity(1,1), '+
+                              '  ProdutoId Int, '+
+                              '  Descricao Varchar(50), '+
+                              '  Nome_Tipo Varchar(30), '+
+                              '  cifra varchar(2), '+
+                              '  TipoId Int, '+
+                              '  Valor float,'+
+                              '  Total float )';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
 end.
+
+

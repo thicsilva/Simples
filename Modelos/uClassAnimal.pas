@@ -15,6 +15,7 @@ type TAnimal = class
     FNome: String;
     FCaminhoImagem: String;
     FData_Aquisicao: TDateTime;
+    FId: Integer;
     procedure SetClienteId(const Value: Integer);
     procedure SetCor(const Value: String);
     procedure SetData_Atualizacao(const Value: TDateTime);
@@ -26,6 +27,7 @@ type TAnimal = class
     procedure SetRaca(const Value: String);
     procedure SetCaminhoImagem(const Value: String);
     procedure SetData_Aquisicao(const Value: TDateTime);
+    procedure SetId(const Value: Integer);
   published
    public
      property Nome : String read FNome write SetNome;
@@ -39,6 +41,7 @@ type TAnimal = class
      property ClienteId : Integer read FClienteId write SetClienteId;
      property Data_Atualizacao :TDateTime read FData_Atualizacao write SetData_Atualizacao;
      property Data_Aquisicao : TDateTime read FData_Aquisicao write SetData_Aquisicao;
+     property Id : Integer read FId write SetId;
 end;
 
 implementation
@@ -84,6 +87,11 @@ end;
 procedure TAnimal.SetEspecie(const Value: String);
 begin
   FEspecie := Value;
+end;
+
+procedure TAnimal.SetId(const Value: Integer);
+begin
+  FId := Value;
 end;
 
 procedure TAnimal.SetNome(const Value: String);
