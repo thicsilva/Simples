@@ -53,6 +53,21 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
+    bsSkinTabSheet3: TbsSkinTabSheet;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
+    cxGridDBColumn1: TcxGridDBColumn;
+    cxGridDBColumn2: TcxGridDBColumn;
+    cxGridDBColumn3: TcxGridDBColumn;
+    cxGridDBColumn4: TcxGridDBColumn;
+    cxGridDBColumn5: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
+    bsSkinPanel2: TbsSkinPanel;
+    lblCliente: TbsSkinLabel;
+    SequenciaEntrega: TbsSkinSpinEdit;
+    btnAdicionarAnimal: TbsSkinButton;
+    srcClientesRotas: TDataSource;
+    cdsClientesRotas: TClientDataSet;
     procedure btnincluirClick(Sender: TObject);
     procedure LimpaCampos();
     procedure btnokClick(Sender: TObject);
@@ -60,8 +75,12 @@ type
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure pagCadastroChange(Sender: TObject);
+    procedure cdsClientesRotasAfterScroll(DataSet: TDataSet);
+    procedure btnAdicionarAnimalClick(Sender: TObject);
   private
      pvQualBotao : String;
+    procedure AtualizaClientesRotas;
     { Private declarations }
   public
     { Public declarations }
@@ -72,7 +91,7 @@ var
 
 implementation
 
-uses uPrincipal,Ufuncoes;
+uses uPrincipal,Ufuncoes,uDaoRota,uDaoCliente;
 
 {$R *.dfm}
 
@@ -80,6 +99,16 @@ procedure TfrmCadRotas.LimpaCampos();
 Begin
    EdtDescricao.Text := '';
 End;
+procedure TfrmCadRotas.pagCadastroChange(Sender: TObject);
+begin
+   IF sdtsPesquisa.IsEmpty Then
+   Begin
+      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+  AtualizaClientesRotas;
+end;
+
 procedure TfrmCadRotas.btnincluirClick(Sender: TObject);
 begin
    pvQualBotao := 'INCLUIR';
@@ -150,6 +179,11 @@ begin
 
 end;
 
+procedure TfrmCadRotas.cdsClientesRotasAfterScroll(DataSet: TDataSet);
+begin
+   lblCliente.Caption := cdsClientesRotas.FieldByName('descricao').AsString;
+end;
+
 procedure TfrmCadRotas.BtnCancelaClick(Sender: TObject);
 begin
 
@@ -177,6 +211,41 @@ begin
                                        'Where Descricao like :parDescricao ';
    sdtsPesquisa.DataSet.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+'%';
    sdtsPesquisa.Open;
+end;
+
+procedure TfrmCadRotas.btnAdicionarAnimalClick(Sender: TObject);
+var DaoCliente : TDaoCliente;
+    ClienteId : Integer;
+begin
+   DaoCliente := TDaoCliente.Create(gConexao);
+   ClienteId := cdsClientesRotas.FieldByName('Codigo').AsInteger;
+   if cdsClientesRotas.locate('SequenciaEntrega',StrtointDef(SequenciaEntrega.Text,0),[]) then
+   begin
+      DaoCliente.AtualizarSequencia(ClienteId,StrToint(SequenciaEntrega.Text));
+      while not cdsClientesRotas.eof do
+      begin
+         DaoCliente.AtualizarSequencia(cdsClientesRotas.FieldByName('Codigo').AsInteger,cdsClientesRotas.FieldByName('Sequenciaentrega').AsInteger+1);
+         cdsClientesRotas.Next;
+      end;
+   end
+   else
+     DaoCliente.AtualizarSequencia(ClienteId,StrToint(SequenciaEntrega.Text));
+   FreeAndNil(DaoCliente);
+   AtualizaClientesRotas;
+end;
+
+procedure TfrmCadRotas.AtualizaClientesRotas;
+var
+  DaoRota: TDaoRota;
+begin
+  case pagCadastro.ActivePageIndex of
+    2:
+      begin
+        DaoRota := TDaoRota.Create(gConexao);
+        cdsClientesRotas.data := DaoRota.BuscarClientesDarota(sdtsPesquisa.FieldByName('Codigo').AsInteger).Data;
+        FreeAndNil(DaoRota);
+      end;
+  end;
 end;
 
 procedure TfrmCadRotas.btnalterarClick(Sender: TObject);

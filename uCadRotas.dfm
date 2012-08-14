@@ -3,7 +3,7 @@ object frmCadRotas: TfrmCadRotas
   Top = 302
   BorderIcons = []
   Caption = 'Cadastro e manuten'#231#227'o de rotas'
-  ClientHeight = 292
+  ClientHeight = 396
   ClientWidth = 643
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object frmCadRotas: TfrmCadRotas
     Left = 0
     Top = 53
     Width = 643
-    Height = 239
+    Height = 343
     ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -30,6 +30,7 @@ object frmCadRotas: TfrmCadRotas
     ParentFont = False
     Style = tsButtons
     TabOrder = 0
+    OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
     TabsOffset = 0
@@ -244,7 +245,7 @@ object frmCadRotas: TfrmCadRotas
         Left = 0
         Top = 33
         Width = 641
-        Height = 182
+        Height = 286
         Align = alClient
         TabOrder = 1
         object GridAtividades: TcxGridDBTableView
@@ -301,6 +302,10 @@ object frmCadRotas: TfrmCadRotas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -443,6 +448,184 @@ object frmCadRotas: TfrmCadRotas
         RightImageIndex = -1
         RightImageHotIndex = -1
         RightImageDownIndex = -1
+      end
+    end
+    object bsSkinTabSheet3: TbsSkinTabSheet
+      Caption = 'Clientes da Rota'
+      object cxGrid2: TcxGrid
+        Left = 0
+        Top = 33
+        Width = 641
+        Height = 286
+        Align = alClient
+        TabOrder = 0
+        object cxGridDBTableView1: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = srcClientesRotas
+          DataController.Summary.DefaultGroupSummaryItems = <
+            item
+              Format = '0'
+              Kind = skCount
+            end>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Format = '0'
+              Kind = skCount
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsData.Deleting = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsView.GroupByBox = False
+          OptionsView.GroupSummaryLayout = gslAlignWithColumns
+          Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+          object cxGridDBColumn1: TcxGridDBColumn
+            DataBinding.FieldName = 'Codigo'
+            Width = 50
+          end
+          object cxGridDBColumn2: TcxGridDBColumn
+            DataBinding.FieldName = 'Descricao'
+            Width = 223
+          end
+          object cxGridDBColumn3: TcxGridDBColumn
+            DataBinding.FieldName = 'Cidade'
+            Width = 150
+          end
+          object cxGridDBColumn4: TcxGridDBColumn
+            DataBinding.FieldName = 'Bairro'
+            Width = 127
+          end
+          object cxGridDBColumn5: TcxGridDBColumn
+            Caption = 'Sequencia'
+            DataBinding.FieldName = 'SequenciaEntrega'
+            Width = 72
+          end
+        end
+        object cxGridLevel1: TcxGridLevel
+          GridView = cxGridDBTableView1
+        end
+      end
+      object bsSkinPanel2: TbsSkinPanel
+        Left = 0
+        Top = 0
+        Width = 641
+        Height = 33
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinDataName = 'panel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taLeftJustify
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = False
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = 'bsSkinPanel2'
+        Align = alTop
+        object lblCliente: TbsSkinLabel
+          Left = 3
+          Top = 6
+          Width = 329
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 0
+          SkinDataName = 'label'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -16
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = [fsBold]
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          ShadowEffect = False
+          ShadowColor = clBlack
+          ShadowOffset = 0
+          ShadowSize = 3
+          ReflectionEffect = False
+          ReflectionOffset = -5
+          EllipsType = bsetNoneEllips
+          UseSkinSize = False
+          UseSkinFontColor = False
+          BorderStyle = bvFrame
+          Caption = 'lblCliente'
+          AutoSize = False
+        end
+        object SequenciaEntrega: TbsSkinSpinEdit
+          Left = 349
+          Top = 6
+          Width = 57
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 1
+          SkinDataName = 'spinedit'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -16
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = [fsBold]
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          DefaultColor = clWindow
+          UseSkinSize = True
+          ValueType = vtInteger
+          Increment = 1.000000000000000000
+          EditorEnabled = True
+          MaxLength = 0
+        end
+        object btnAdicionarAnimal: TbsSkinButton
+          Left = 415
+          Top = 6
+          Width = 110
+          Height = 25
+          HintImageIndex = 0
+          TabOrder = 2
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 10
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '    &Atualizar'
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = btnAdicionarAnimalClick
+        end
       end
     end
   end
@@ -825,5 +1008,18 @@ object frmCadRotas: TfrmCadRotas
     DataSet = sdtsPesquisa
     Left = 188
     Top = 195
+  end
+  object srcClientesRotas: TDataSource
+    DataSet = cdsClientesRotas
+    Left = 244
+    Top = 196
+  end
+  object cdsClientesRotas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCadAtividades'
+    AfterScroll = cdsClientesRotasAfterScroll
+    Left = 244
+    Top = 224
   end
 end
