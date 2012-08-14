@@ -64,6 +64,7 @@
     <DCCReference Include="Dao\uDaoCliente.pas" />
     <DCCReference Include="Dao\uDaoClienteAnimal.pas" />
     <DCCReference Include="Dao\uDaoCorrecao.pas" />
+    <DCCReference Include="Dao\uDaoCustoProduto.pas" />
     <DCCReference Include="Dao\uDaoEmpresa.pas" />
     <DCCReference Include="Dao\uDaoEstrutura.pas" />
     <DCCReference Include="Dao\uDaoEventoAnimal.pas" />
@@ -84,6 +85,7 @@
     <DCCReference Include="Modelos\uClassCliente.pas" />
     <DCCReference Include="Modelos\uclassContaCorrente.pas" />
     <DCCReference Include="Modelos\uClassCorrecao.pas" />
+    <DCCReference Include="Modelos\uClassCustoProduto.pas" />
     <DCCReference Include="Modelos\uClassDaoContaCorrente.pas" />
     <DCCReference Include="Modelos\uClassEmpresa.pas" />
     <DCCReference Include="Modelos\uClassEndereco.pas" />
