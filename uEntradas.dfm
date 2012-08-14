@@ -312,18 +312,11 @@ object frmEntradas: TfrmEntradas
       end
     end
   end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 517
-    Width = 705
-    Height = 19
-    Panels = <>
-  end
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 44
     Width = 705
-    Height = 473
+    Height = 492
     ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -333,7 +326,7 @@ object frmEntradas: TfrmEntradas
     Font.Style = []
     ParentFont = False
     Style = tsButtons
-    TabOrder = 2
+    TabOrder = 1
     OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
@@ -353,8 +346,10 @@ object frmEntradas: TfrmEntradas
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitHeight = 473
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitHeight = 449
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -820,9 +815,10 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 62
         Width = 703
-        Height = 387
+        Height = 406
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 387
         object GrdCompras: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcConsEntradas
@@ -964,6 +960,7 @@ object frmEntradas: TfrmEntradas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manuten'#231#227'o'
+      ExplicitHeight = 449
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -1717,7 +1714,7 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 208
         Width = 684
-        Height = 241
+        Height = 260
         HintImageIndex = 0
         TabOrder = 1
         SkinData = frmPrincipal.SkinPrincipal
@@ -2030,7 +2027,7 @@ object frmEntradas: TfrmEntradas
         Left = 684
         Top = 208
         Width = 19
-        Height = 241
+        Height = 260
         HintImageIndex = 0
         TabOrder = 3
         SkinData = frmPrincipal.SkinPrincipal
@@ -2055,6 +2052,7 @@ object frmEntradas: TfrmEntradas
         Position = 1
         SmallChange = 1
         LargeChange = 1
+        ExplicitHeight = 241
       end
       object bsSkinCoolBar2: TbsSkinCoolBar
         Left = 0
@@ -2238,6 +2236,7 @@ object frmEntradas: TfrmEntradas
     end
     object tabCtasPagar: TbsSkinTabSheet
       Caption = 'Contas a Pagar'
+      ExplicitHeight = 449
       object bsSkinGroupBox2: TbsSkinGroupBox
         Left = 84
         Top = 53
@@ -2995,61 +2994,6 @@ object frmEntradas: TfrmEntradas
     DataSet = cdsCadOperacoes
     Left = 241
     Top = 465
-  end
-  object SkinForm: TbsBusinessSkinForm
-    QuickButtons = <>
-    QuickButtonsShowHint = False
-    QuickButtonsShowDivider = True
-    ClientInActiveEffect = False
-    ClientInActiveEffectType = bsieSemiTransparent
-    DisableSystemMenu = False
-    AlwaysResize = False
-    PositionInMonitor = bspDefault
-    UseFormCursorInNCArea = False
-    MaxMenuItemsInWindow = 0
-    ClientWidth = 0
-    ClientHeight = 0
-    HideCaptionButtons = False
-    AlwaysShowInTray = False
-    LogoBitMapTransparent = False
-    AlwaysMinimizeToTray = False
-    UseSkinFontInMenu = True
-    ShowIcon = False
-    MaximizeOnFullScreen = False
-    AlphaBlend = False
-    AlphaBlendAnimation = False
-    AlphaBlendValue = 200
-    ShowObjectHint = False
-    MenusAlphaBlend = False
-    MenusAlphaBlendAnimation = False
-    MenusAlphaBlendValue = 200
-    DefCaptionFont.Charset = DEFAULT_CHARSET
-    DefCaptionFont.Color = clBtnText
-    DefCaptionFont.Height = 14
-    DefCaptionFont.Name = 'Arial'
-    DefCaptionFont.Style = [fsBold]
-    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
-    DefInActiveCaptionFont.Color = clBtnShadow
-    DefInActiveCaptionFont.Height = 14
-    DefInActiveCaptionFont.Name = 'Arial'
-    DefInActiveCaptionFont.Style = [fsBold]
-    DefMenuItemHeight = 20
-    DefMenuItemFont.Charset = DEFAULT_CHARSET
-    DefMenuItemFont.Color = clWindowText
-    DefMenuItemFont.Height = 14
-    DefMenuItemFont.Name = 'Arial'
-    DefMenuItemFont.Style = []
-    UseDefaultSysMenu = True
-    SkinData = frmPrincipal.SkinPrincipal
-    MinHeight = 0
-    MinWidth = 0
-    MaxHeight = 0
-    MaxWidth = 0
-    Magnetic = False
-    MagneticSize = 5
-    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 496
-    Top = 380
   end
   object qryItensEntradas: TSQLQuery
     MaxBlobSize = -1

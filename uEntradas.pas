@@ -8,11 +8,11 @@ uses
   bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, DB,
   DBClient, ADODB, Provider, EditNew, BusinessSkinForm, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,uFormBase,
   cxControls, cxGridCustomView, cxGrid, FMTBcd, SqlExpr, SqlTimSt;
 
 type
-  TfrmEntradas = class(TForm)
+  TfrmEntradas = class(TFormBase)
     bsSkinCoolBar1: TbsSkinCoolBar;
     bsSkinToolBar1: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
@@ -21,7 +21,6 @@ type
     bsSkinBevel1: TbsSkinBevel;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
-    StatusBar1: TStatusBar;
     pagCadastro: TbsSkinPageControl;
     bsSkinTabSheet1: TbsSkinTabSheet;
     bsSkinPanel1: TbsSkinPanel;
@@ -77,7 +76,6 @@ type
     srcconsItensEntradas: TDataSource;
     tabCtasPagar: TbsSkinTabSheet;
     srcCadOperacoes: TDataSource;
-    SkinForm: TbsBusinessSkinForm;
     cxGrid1: TcxGrid;
     GrdCompras: TcxGridDBTableView;
     colum_SEqEntrada: TcxGridDBColumn;
