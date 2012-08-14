@@ -100,7 +100,7 @@ begin
                             'From T_Clientes Cli '+
                             '     Left Join '+lsTabela+' Fun On Fun.Codigo=Cli.'+lsCampo+' '+
                             'where ( Cli.'+lsCampo+'>=:parCodigoIni and Cli.'+lsCampo+'<=:parCodigoFim ) ' +
-                            'Order by Cli.'+lsCampo+', Cli.Bairro ';
+                            'Order by Cli.'+lsCampo+', Cli.Bairro, Cli.Cidade ';
 
    qryRelatorio.ParamByName('parCodigoIni').AsInteger := cmbCod_FuncionarioIni.Keyvalue;
    qryRelatorio.ParamByName('parCodigoFim').AsInteger := cmbCod_FuncionarioFim.Keyvalue;

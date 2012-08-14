@@ -215,7 +215,6 @@ object frmRelClientesVendedoresBairro: TfrmRelClientesVendedoresBairro
     Spacing = 2
     Caption = 'Informe o vendedor para o relarorio'
     Align = alClient
-    ExplicitHeight = 145
     object lblFiltro01: TbsSkinStdLabel
       Left = 5
       Top = 45
