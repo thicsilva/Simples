@@ -456,7 +456,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         'Produtos por Supervisor'
         'Cliente Sintetico'
         'Clientes Analitico'
-        'Produtos por Vendedor Comi'#231#245'es')
+        'Produtos por Vendedor Comi'#231#245'es'
+        'Vendedor e Atividade')
       ItemIndex = -1
       DropDownCount = 8
       HorizontalExtent = False

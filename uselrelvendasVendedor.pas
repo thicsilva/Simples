@@ -118,11 +118,14 @@ end;
 
 procedure TfrmselrelVendasVendedor.bsSkinSpeedButton1Click(Sender: TObject);
 var lsNome_Quebra   : String;
+    lsNome_Quebra_02: String;
     lrVlr_Vendedor  : Double;
     lrQtde_Vendedor : Double;
     lrVlr_Total     : Double;
+    lrTotal_Quebra_02: Double;
     lrQtde_Total    : Double;
     lsCampo         : String;
+    lsQuebra        : String;
     vlr_Comissao    : Double;
     vlr_ComissaoVendedor : Double;
 
@@ -159,6 +162,12 @@ begin
          lsCampo      := 'Atividade'
       End;
       8 : GstituloRel  :=' Relatorio de Comissões por produtos e vendedor ';
+      9 :
+      begin
+         GstituloRel  :=' Relatorio de Vendas por vendedor e atividade';
+         lsCampo      := 'Vendedor';
+         lsQuebra     := 'Atividade';
+      end;
    end;
 
 
@@ -171,40 +180,75 @@ begin
    ImpMatricial.Abrir;
 
    case cmbTipoResultado.ItemIndex of
-      0,1,3,4,6,7:
+      0,1,3,4,6,7,9:
       Begin
 
          lrVlr_Vendedor  := 0;
          lrVlr_Total     := 0;
+         lrTotal_Quebra_02 := 0;
          lsNome_Quebra :='FORCA QUEBRA';
+         lsNome_Quebra_02 :='FORCA QUEBRA';
 
          cdsRelatorio.First;
          While not cdsRelatorio.Eof Do
          begin
            case cmbTipoResultado.ItemIndex Of
-              0,3,6,7 :
+              0,3,6,7,9 :
               Begin
-                 if lsNome_Quebra<>cdsRelatorio.FieldByname(lsCampo).AsString then
-                 Begin
-                    IF lsNome_Quebra<>'FORCA QUEBRA' Then
+                 if Trim(lsCampo)<>'' then
+                 begin
+                    if lsNome_Quebra<>cdsRelatorio.FieldByname(lsCampo).AsString then
                     Begin
+                       IF lsNome_Quebra<>'FORCA QUEBRA' Then
+                       Begin
+                          if Trim(lsQuebra)<>'' then
+                          begin
+                             impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+                             pviLinha:=Pvilinha+1;
+                             impmatricial.Imp(pvilinha,001,'Total do '+lsQuebra);
+                             impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrTotal_Quebra_02),[]);
+                             pviLinha:=Pvilinha+2;
+                             lrTotal_Quebra_02  := 0;
+                          end;
+                          impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+                          pviLinha:=Pvilinha+1;
+                          impmatricial.Imp(pvilinha,001,'Total do '+lsCampo);
+                          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Vendedor),[]);
+                          pviLinha:=Pvilinha+2;
+                          lrVlr_Vendedor  := 0;
+                          lsNome_Quebra_02 := 'FORCA QUEBRA';
+                       End;
+                       impmatricial.Imp(pvilinha,001,cdsrelatorio.FieldByName(lsCampo).AsString );
+                       pviLinha:=Pvilinha+1;
                        impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
                        pviLinha:=Pvilinha+1;
-                       impmatricial.Imp(pvilinha,001,'Total do '+lsCampo);
-                       impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Vendedor),[]);
-                       pviLinha:=Pvilinha+2;
-                       lrVlr_Vendedor  := 0;
+                       lsNome_Quebra:=cdsRelatorio.FieldByname(lsCampo).AsString;
                     End;
-                    impmatricial.Imp(pvilinha,001,cdsrelatorio.FieldByName(lsCampo).AsString );
-                    pviLinha:=Pvilinha+1;
-                    impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-                    pviLinha:=Pvilinha+1;
-                    lsNome_Quebra:=cdsRelatorio.FieldByname(lsCampo).AsString;
-                 End;
-                 case cmbTipoResultado.ItemIndex Of
-                    0,6,7:
+                 end;
+                 if Trim(lsQuebra)<>'' then
+                 begin
+                    if lsNome_Quebra_02<>cdsRelatorio.FieldByname(lsQuebra).AsString then
                     Begin
-                       impmatricial.Imp(pvilinha,001,IncZero(cdsrelatorio.FieldByName('Cod_Cliente').AsString,5)+' '+cdsrelatorio.FieldByName('Descricao').AsString );
+                       IF lsNome_Quebra_02<>'FORCA QUEBRA' Then
+                       Begin
+                          impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+                          pviLinha:=Pvilinha+1;
+                          impmatricial.Imp(pvilinha,001,'Total do '+lsQuebra);
+                          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrTotal_Quebra_02),[]);
+                          pviLinha:=Pvilinha+2;
+                          lrTotal_Quebra_02  := 0;
+                       End;
+                       impmatricial.Imp(pvilinha,001,cdsrelatorio.FieldByName(lsQuebra).AsString );
+                       pviLinha:=Pvilinha+1;
+                       impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+                       pviLinha:=Pvilinha+1;
+                       lsNome_Quebra_02:=cdsRelatorio.FieldByname(lsQuebra).AsString;
+                    End;
+                 end;
+                 case cmbTipoResultado.ItemIndex Of
+                    0,6,7,9:
+                    Begin
+                       impmatricial.Imp(pvilinha,001,Copy((IncZero(cdsrelatorio.FieldByName('Cod_Cliente').AsString,5)+' '+cdsrelatorio.FieldByName('Descricao').AsString),1,40));
                        impmatricial.Imp(pvilinha,044,IncZero(cdsrelatorio.FieldByName('SeqVenda').AsString,8)+' '+
                                                      cdsrelatorio.FieldByName('Controle').AsString );
                        impmatricial.Imp(pvilinha,061, formatdatetime('dd/mm/yyyy',cdsRelatorio.FieldByName('Data_Mov').AsDatetime));
@@ -238,6 +282,7 @@ begin
                  end;
                  impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
                  lrVlr_Vendedor  := lrVlr_Vendedor + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+                 lrTotal_Quebra_02 :=  lrTotal_Quebra_02 + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
               End;
               1,4 :
               Begin
@@ -251,7 +296,15 @@ begin
               impmatricial.Novapagina;
            cdsRelatorio.Next;
          end;
-         if cmbTipoResultado.ItemIndex=0 then
+         if Trim(lsQuebra)<>'' then
+         begin
+            impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+            pviLinha:=Pvilinha+1;
+            impmatricial.Imp(pvilinha,001,'Total do '+lsQuebra);
+            impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrTotal_Quebra_02),[]);
+            pviLinha:=Pvilinha+2;
+         end;
+         if Trim(lsCampo)<>'' then
          Begin
             impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
             pviLinha:=Pvilinha+1;
@@ -259,13 +312,11 @@ begin
             impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Vendedor),[]);
             pviLinha:=Pvilinha+2;
          End;
-
          impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
          pviLinha:=Pvilinha+1;
          impmatricial.Imp(pvilinha,001,'Total Geral ');
          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrvlr_Total),[]);
          pviLinha:=Pvilinha+2;
-
       End;
       2,5,8 :
       Begin
@@ -355,6 +406,12 @@ procedure TfrmselrelVendasVendedor.btnPesquisarClick(Sender: TObject);
 var lsCampos : String;
     lsJoin   : String;
 begin
+   if Trim(cmbTipoResultado.text)='' then
+   begin
+      CaixaMensagem( 'Selecione o tipo de relatorio ', ctAviso, [ cbOk ], 0 );
+      cmbTipoResultado.SetFocus;
+      Exit
+   end;
    lsJoin := '';
 
    GridProdutos.Visible   := False;
@@ -362,10 +419,10 @@ begin
    GridSupervisor.Visible := False;
 
    Case cmbTipoResultado.ItemIndex Of
-     0,1,4,6,7 : GridClientes.Visible := True;
-     2,8       : GridProdutos.Visible := True;
-     3         : GridSupervisor.Visible := True;
-     5         : GridProdutos.Visible := True;
+     0,1,4,6,7,9 : GridClientes.Visible := True;
+     2,8         : GridProdutos.Visible := True;
+     3           : GridSupervisor.Visible := True;
+     5           : GridProdutos.Visible := True;
    End;
 
    case cmbTipoResultado.ItemIndex of
@@ -395,7 +452,7 @@ begin
                      '      Sup.Codigo=Fun.Cod_Supervisor ';
          lsCampos := ' Sup.Descricao as Vendedor, ';
      End;
-     6,7 :
+     6,7,9 :
      Begin
         lsCampos := ' Ven.Cod_Funcionario, Ven.Cod_Cliente, Ati.Descricao as Atividade, '+
                     ' Cli.Descricao, Ven.Seqvenda,Ven.Controle,Ven.Data_Mov,Fun.Descricao as Vendedor, '+
@@ -407,7 +464,7 @@ begin
    end;
 
    Case cmbTipoResultado.ItemIndex Of
-      0,1,3,4,6,7 :
+      0,1,3,4,6,7,9 :
       Begin
          qryRelatorio.Close;
          qryRelatorio.SQL.Text := 'SELECT  '+lsCampos+' '+
@@ -418,7 +475,7 @@ begin
                                   '     Fun.Codigo=Ven.Cod_Funcionario '+ lsJoin+' '+
                                   'WHERE ( Ven.Data_Venda>=:parData_VendaIni And '+
                                   '        Ven.Data_Venda<=:parData_VendaFim ) and '+
-                                  '        Ven.Status<>:parStatus ';
+                                  '        Ven.Status<>:parStatus and Ven.Status<>:parStatus_Cancelada ';
          if cmbCod_VendedorIni.KeyValue <> null then
             qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' And ( Ven.Cod_Funcionario>=:parCod_FuncionarioIni and Ven.Cod_Funcionario<=:parCod_FuncionarioFim)';
          Case cmbTipoResultado.ItemIndex Of
@@ -426,11 +483,18 @@ begin
             4 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' Group BY Fun.Cod_Supervisor,Sup.Descricao';
             3 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' Group BY Ven.Cod_Funcionario,Fun.Cod_Supervisor,Fun.Descricao,Sup.Descricao';
          End;
-         qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1 ';
+         Case cmbTipoResultado.ItemIndex Of
+            9 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1,3,2 ';
+            6 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 3 ';
+            else
+               qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1 ';
+
+         End;
 
          qryRelatorio.ParamByName('parData_VendaIni').AsSQLTimeStamp      := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
          qryRelatorio.ParamByName('parData_VendaFim').AsSQLTimeStamp      := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
          qryRelatorio.ParamByName('parStatus').AsString                   := '5';
+         qryRelatorio.ParamByName('parStatus_Cancelada').AsString         := 'C';
 
          if cmbCod_VendedorIni.KeyValue <> null then
          Begin
@@ -478,7 +542,6 @@ begin
           qryRelatorio.ParamByName('parStatus').AsString                  := '5';
       End;
    End;
-
    cdsRelatorio.Close;
    cdsRelatorio.ProviderName := dspRelatorio.Name;
    cdsRelatorio.Open;
@@ -565,6 +628,7 @@ begin
       1 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                                        Total ');
       2 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                    Qtde. Pco.Medio Vlr.Total ');
       8 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                        Qtde.     Pco.Medio Vlr.Total Comissao');
+      9 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                        Nº Venda              Data      Total ');
    end;
    pviLinha:=Pvilinha+1;
    TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
