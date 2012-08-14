@@ -78,7 +78,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 679
+        Left = 714
         Top = 0
         Width = 70
         Height = 49
@@ -118,15 +118,15 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 97
+        Left = 285
         Top = 0
-        Width = 83
+        Width = 120
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 70
+        ExplicitLeft = 289
         ExplicitTop = -1
       end
       object btnGerar: TbsSkinSpeedButton
@@ -168,18 +168,19 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 180
+        Left = 97
         Top = 0
-        Width = 173
+        Width = 118
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 152
         ExplicitTop = -1
       end
       object btnCancelar: TbsSkinSpeedButton
-        Left = 353
+        Left = 405
         Top = 0
         Width = 70
         Height = 49
@@ -213,20 +214,59 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Align = alLeft
         Spacing = 2
         OnClick = btnCancelarClick
+        ExplicitLeft = 359
         ExplicitTop = 12
         ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 423
+        Left = 475
         Top = 0
-        Width = 256
+        Width = 239
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 449
+        ExplicitLeft = 520
         ExplicitTop = -1
+      end
+      object bsSkinSpeedButton1: TbsSkinSpeedButton
+        Left = 215
+        Top = 0
+        Width = 70
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'resizebutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 70
+        DefaultHeight = 40
+        UseSkinFont = False
+        CheckedMode = False
+        UseSkinSize = False
+        UseSkinFontColor = False
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = -1
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Pendentes de Entrega'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 2
+        OnClick = bsSkinSpeedButton1Click
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
     end
   end

@@ -61,6 +61,7 @@ type
      piSeqVenda       : Integer;
      piseqOS          : Integer;
      pilote           : Integer;
+     piRomaneioId     : Integer;
     { Public declarations }
   end;
 
@@ -69,7 +70,7 @@ var
 
 implementation
 
-uses uPrincipal,Ufuncoes, uVendeBrinde, uSelMotivoStatus, uBaixaTipo_01_Brinde;
+uses uPrincipal,Ufuncoes, uVendeBrinde, uSelMotivoStatus, uBaixaTipo_01_Brinde,uDaoRomaneio;
 
 {$R *.dfm}
 
@@ -100,6 +101,7 @@ Var  trdNrTransacao : TTransactionDesc;
      vlr_anterior   : Double;
      vlr_Atual      : Double;
      lsitensDevolvidos : String;
+     loDaoRomaneio : TDaoRomaneio;
 begin
    btnTotalizarClick(btnTotalizar);
 
@@ -136,31 +138,37 @@ begin
       Begin
          if cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger > 0 then
          Begin
-                  lrVlr_Devolvido := lrVlr_Devolvido + (cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
-            lrVlr_Desconto  := lrVlr_Desconto +  (cdsTmpItensDevolucoes.FieldByName('Vlr_Desconto').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
-                  lrvlr_TotalItem :=( ( cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').asFloat - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger ) *
-                                 cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat ) ;
+
+             lrVlr_Devolvido := lrVlr_Devolvido + (cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
+             lrVlr_Desconto  := lrVlr_Desconto +  (cdsTmpItensDevolucoes.FieldByName('Vlr_Desconto').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
+             lrvlr_TotalItem := ( ( cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').asFloat - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger ) *
+                                    cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat ) ;
             Try
                qrymodific.Close;
                qrymodific.Params.Clear;
                qrymodific.SQL.Text :='Update T_Itensvendas set Qtde_Devolvida = ( Qtde_Devolvida + :parQtde_Devolvida ), '+
-                                     '                          Qtde_Venda = ( Qtde_Venda - :parQtde_Devolvida_02 ), '+
-                                     '                          Vlr_total=:parVlr_Total, Operador=:parOperador '+
+                                     '                         Qtde_Venda = ( Qtde_Venda - :parQtde_Devolvida_02 ), '+
+                                     '                         Status = :parStatus, '+
+                                     '                         Vlr_total=:parVlr_Total, Operador=:parOperador '+
                                      'Where SeqVenda=:parSeqvenda and Cod_Produto=:parCod_Produto ';
-                     qrymodific.ParamByName('ParSeqVenda').AsInteger          := strtoint(copy(grpDevolveItem.Caption,1,(pos('-',grpDevolveItem.Caption)-1)));
+               qrymodific.ParamByName('ParSeqVenda').AsInteger          := strtoint(copy(grpDevolveItem.Caption,1,(pos('-',grpDevolveItem.Caption)-1)));
                qrymodific.ParamByName('ParCod_Produto').AsInteger       := cdsTmpItensDevolucoes.FieldByName('Codigo').asInteger;
                qrymodific.ParamByName('ParQtde_Devolvida').AsInteger    := cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger;
                qrymodific.ParamByName('ParOperador').AsString           := gsOperador;
                qrymodific.ParamByName('ParQtde_Devolvida_02').AsInteger := cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger;
                qrymodific.ParamByName('ParVlr_Total').AsFloat           := lrvlr_TotalItem;
+               qrymodific.ParamByName('parStatus').AsString      := 'N';
+               if Arredondar(cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').asFloat - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsFloat,2)=0 Then
+                  qrymodific.ParamByName('parStatus').AsString   := 'C';
                qrymodific.ExecSQL;
             except
                frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
                Exit;
             End;
-                  qryItensDevolucoes.Close;
+
+            qryItensDevolucoes.Close;
             qryItensDevolucoes.SQL.Text :='Select * from T_ItensDevolucoes where 1=2';
-                  cdsItensDevolucoes.Close;
+            cdsItensDevolucoes.Close;
             cdsItensDevolucoes.ProviderName := dspItensDevolucoes.Name;
             cdsItensDevolucoes.Open;
 
@@ -273,6 +281,7 @@ begin
              qrymodific.ParamByName('ParVlr_Total').AsFloat           := lrVlr_Devolvido;
              qrymodific.ParamByName('ParVlr_Desconto').AsFloat        := lrVlr_Desconto;
              qrymodific.ExecSQL;
+
           End;
 
       except
@@ -334,6 +343,10 @@ begin
    End;
    frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
    frmDevolucaoVenda.tag := 1;
+
+   loDaoRomaneio := TdaoRomaneio.Create(gConexao);
+   loDaoRomaneio.AtualizarTotalDoRomaneio(piRomaneioId);
+   FreeAndNil(loDaoRomaneio);
    close;
 End;
 

@@ -81,6 +81,7 @@ type
     srcFuncionarios: TDataSource;
     bsSkinButton2: TbsSkinButton;
     Colum_NomeStatus: TcxGridDBColumn;
+    bsSkinSpeedButton1: TbsSkinSpeedButton;
     procedure bsSkinButton3Click(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure cdsVendasRomaneioAfterOpen(DataSet: TDataSet);
@@ -98,6 +99,7 @@ type
     procedure GridRomaneioCustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
+    procedure bsSkinSpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     pviLinha : Integer;
@@ -212,6 +214,7 @@ var DaoRomaneio : TDaoRomaneio;
     total : Real;
 begin
    GstituloRel  :='Relatorio de Produtos do Romaneio Nº '+srcRomaneios.DataSet.FieldByName('ID').AsString;
+
    pviTipoRelatorio := ROMANEIO_PRODUTOS;
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
@@ -226,6 +229,7 @@ begin
    total := 0;
    while not cdsDadosRelatorio.Eof do
    begin
+
       impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('Cod_Produto').AsString,5)+' - '+cdsDadosRelatorio.FieldByName('Descricao').AsString);
       impmatricial.Imp(pvilinha,045,cdsDadosRelatorio.FieldByName('Unid').AsString);
       impmatricial.Impd(pvilinha,063,FormatFloat(',0.000',cdsDadosRelatorio.FieldByName('Qtde_total').AsFloat),[]);
@@ -235,13 +239,14 @@ begin
       cdsDadosRelatorio.next;
       if pvilinha>=60 then
          impMatricial.Novapagina;
+
    end;
    impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
    pviLinha:=Pvilinha+1;
    impmatricial.Imp(pvilinha,001,'Peso Total do Romaneioo...... ');
    impmatricial.Impd(pvilinha,077,Formatfloat(',0.000',total),[]);
    pviLinha:=Pvilinha+1;
-  ImpMatricial.Fechar;
+   ImpMatricial.Fechar;
 end;
 
 procedure TfrmRomaneioDeEntrega.bsSkinButton5Click(Sender: TObject);
@@ -284,6 +289,44 @@ begin
    impmatricial.Imp(pvilinha,026,DaoRomaneio.RetornarNomeMotorista(srcRomaneios.DataSet.FieldByName('ID').AsInteger));
    pviLinha:=Pvilinha+1;
    impmatricial.Imp(pvilinha,026,'Motorista Responsavel');
+
+   ImpMatricial.Fechar;
+end;
+
+procedure TfrmRomaneioDeEntrega.bsSkinSpeedButton1Click(Sender: TObject);
+var DaoRomaneio : TDaoRomaneio;
+    cdsDadosRelatorio : TClientDataSet;
+    total : Real;
+begin
+   GstituloRel  :='Relatorio Pedidos pendentes de entrega';
+   pviTipoRelatorio := ROMANEIO_FINANCEIRO;
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 66;
+   ImpMatricial.TamanhoQteColunas         := 80;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+   DaoRomaneio := TDaoRomaneio.Create(gConexao);
+   cdsDadosRelatorio := DaoRomaneio.RetornarPedidosNaoEntregues;
+   total := 0;
+   while not cdsDadosRelatorio.Eof do
+   begin
+      impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('SeqVenda').AsString,8)+' '+Copy(cdsDadosRelatorio.FieldByName('Descricao').AsString,1,38));
+      impmatricial.Impd(pvilinha,060,Formatfloat(',0.00',cdsDadosRelatorio.FieldByName('Vlr_total').AsFloat),[]);
+      impmatricial.Imp(pvilinha,061,cdsDadosRelatorio.FieldByName('Pagamento').AsString);
+      pviLinha:=Pvilinha+1;
+      total := total + cdsDadosRelatorio.FieldByName('Vlr_total').AsFloat;
+      cdsDadosRelatorio.next;
+      if pvilinha>=60 then
+         impMatricial.Novapagina;
+   end;
+   impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+   pviLinha:=Pvilinha+1;
+   impmatricial.Imp(pvilinha,001,'Total Geral......  Qunatidade de Vendas '+intTostr(cdsDadosRelatorio.RecordCount));
+   impmatricial.Impd(pvilinha,060,Formatfloat(',0.00',total),[]);
+   pviLinha:=Pvilinha+5;
 
    ImpMatricial.Fechar;
 end;
