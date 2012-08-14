@@ -2,8 +2,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
   Left = 0
   Top = 0
   Caption = 'Efetuar Desconto'
-  ClientHeight = 201
-  ClientWidth = 235
+  ClientHeight = 195
+  ClientWidth = 260
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,10 +14,10 @@ object FrmDescontoVenda: TFrmDescontoVenda
   PixelsPerInch = 96
   TextHeight = 13
   object bsSkinPanel3: TbsSkinPanel
-    Left = 1
+    Left = 0
     Top = 0
-    Width = 234
-    Height = 201
+    Width = 260
+    Height = 195
     HintImageIndex = 0
     TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
@@ -47,11 +47,12 @@ object FrmDescontoVenda: TFrmDescontoVenda
     NumGlyphs = 1
     Spacing = 2
     Caption = 'bsSkinPanel3'
-    Align = alRight
-    ExplicitHeight = 169
+    Align = alClient
+    ExplicitWidth = 285
+    ExplicitHeight = 201
     object bsSkinStdLabel7: TbsSkinStdLabel
-      Left = 66
-      Top = 12
+      Left = 46
+      Top = 22
       Width = 83
       Height = 20
       EllipsType = bsetNone
@@ -72,9 +73,9 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object bsSkinStdLabel9: TbsSkinStdLabel
-      Left = 3
-      Top = 54
-      Width = 150
+      Left = 51
+      Top = 57
+      Width = 78
       Height = 20
       EllipsType = bsetNone
       UseSkinFont = False
@@ -90,7 +91,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
-      Caption = 'Valor do Desconto'
+      Caption = 'Desconto'
       ParentFont = False
     end
     object bsSkinStdLabel10: TbsSkinStdLabel
@@ -115,8 +116,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object bsSkinStdLabel11: TbsSkinStdLabel
-      Left = 26
-      Top = 95
+      Left = 6
+      Top = 91
       Width = 123
       Height = 20
       EllipsType = bsetNone
@@ -137,8 +138,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       ParentFont = False
     end
     object edtTotalVenda: TEditN
-      Left = 162
-      Top = 12
+      Left = 180
+      Top = 22
       Width = 69
       Height = 24
       TabStop = False
@@ -173,8 +174,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       TextHint = True
     end
     object edtTotDesconto: TEditN
-      Left = 162
-      Top = 54
+      Left = 180
+      Top = 57
       Width = 69
       Height = 24
       TabStop = False
@@ -208,8 +209,8 @@ object FrmDescontoVenda: TFrmDescontoVenda
       TextHint = True
     end
     object edtTotalLiquido: TEditN
-      Left = 162
-      Top = 95
+      Left = 180
+      Top = 91
       Width = 69
       Height = 24
       TabStop = False
@@ -244,9 +245,9 @@ object FrmDescontoVenda: TFrmDescontoVenda
       TextHint = True
     end
     object btnFinalizar: TbsSkinButton
-      Left = 14
-      Top = 132
-      Width = 211
+      Left = 3
+      Top = 121
+      Width = 246
       Height = 25
       HintImageIndex = 0
       TabOrder = 3
@@ -277,6 +278,64 @@ object FrmDescontoVenda: TFrmDescontoVenda
       NumGlyphs = 1
       Spacing = 1
       OnClick = btnFinalizarClick
+    end
+    object cmbTipoDesconto: TbsSkinComboBox
+      Left = 135
+      Top = 57
+      Width = 39
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 4
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      UseSkinSize = True
+      ToolButtonStyle = False
+      AlphaBlend = False
+      AlphaBlendValue = 0
+      AlphaBlendAnimation = False
+      ListBoxCaptionMode = False
+      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultFont.Color = clWindowText
+      ListBoxDefaultFont.Height = 14
+      ListBoxDefaultFont.Name = 'Arial'
+      ListBoxDefaultFont.Style = []
+      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultCaptionFont.Color = clWindowText
+      ListBoxDefaultCaptionFont.Height = 14
+      ListBoxDefaultCaptionFont.Name = 'Arial'
+      ListBoxDefaultCaptionFont.Style = []
+      ListBoxDefaultItemHeight = 20
+      ListBoxCaptionAlignment = taLeftJustify
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      ListBoxWidth = 0
+      HideSelection = True
+      AutoComplete = True
+      ImageIndex = -1
+      CharCase = ecNormal
+      DefaultColor = clWindow
+      Text = '$'
+      Items.Strings = (
+        '$'
+        '%')
+      ItemIndex = 0
+      DropDownCount = 8
+      HorizontalExtent = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      Sorted = False
+      Style = bscbFixedStyle
     end
   end
 end
