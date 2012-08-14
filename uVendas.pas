@@ -254,10 +254,11 @@ begin
    cdsItensVendasTmp.First;
    while not cdsItensVendasTmp.Eof do
    begin
-      lrVlr_desconto := ((cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) * lrPercDesconto )/100;
+      lrVlr_desconto := ( ( cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat ) * lrPercDesconto )/100;
+
       cdsItensVendasTmp.Edit;
-      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat := Arredondar(lrVlr_desconto ,2);
-      cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( ( cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat );
+      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat := Arredondar(( ( cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat ) * lrPercDesconto )/100 ,2);
+      cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( ( cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - lrVlr_desconto );
       cdsItensVendasTmp.Post;
       cdsItensVendasTmp.Next;
    end;
@@ -583,10 +584,10 @@ var TotalDesconto : Real;
 begin
    TotalDesconto := 0;
    Total := 0;
-  cdsItensVendasTmp.First;
+   cdsItensVendasTmp.First;
    while not cdsItensVendasTmp.Eof do
    begin
-      TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat);
+      TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat );
       Total := Total + (cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat);
       cdsItensVendasTmp.Next;
    end;
@@ -765,6 +766,7 @@ Var liSeqvenda     : integer;
     DaoItemVenda : TDaoItemVenda;
     DaoFuncionario: TdaoFuncionario;
     liCaixaFinalizado : Integer;
+    lbServicoPago : Boolean;
 begin
 
    {$REGION 'Criticas e Validação das Informações'}
@@ -1030,6 +1032,8 @@ begin
    DaoItemVenda.Connection := frmPrincipal.dbxPrincipal;
    DaoItemVenda.Inserir(cdsItensVendasTMP,loItemVenda);
 
+   lbServicoPago := False;
+
    {$REGION 'Lancamento do Financeiro'}
 
    Try
@@ -1223,6 +1227,7 @@ begin
                qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
                qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := strToInt(edtCod_FormaPagamento.Text);
                qryModific.ExecSQL;
+               lbServicoPago := True;
             End;
             2 :
             Begin
@@ -1363,6 +1368,13 @@ begin
       FreeAndNil(DaoVenda);
       FreeAndNil(lovenda);
    End;
+   if lbServicoPago then
+   begin
+       DaoVenda := TDaoVenda.Create(gConexao);
+       DaoVenda.MarcarComoServicoPago(liSeqvenda);
+       FreeAndNil(DaoVenda);
+   end;
+
 {$ENDREGION}
 
    {$REGION 'Mensagem Final ao Usuario'}
@@ -1389,7 +1401,6 @@ end;
 
 procedure TfrmVendas.btnincluirClick(Sender: TObject);
 begin
-
    btnok.Enabled            := True;
    BtnCancela.Enabled       := True;
    btnincluir.Enabled       := False;
@@ -1422,6 +1433,7 @@ end;
 
 procedure TfrmVendas.BtnCancelaClick(Sender: TObject);
 begin
+
    btnAdicionar.Enabled  := False;
    btnExcluir.Enabled    := False;
    pnlProdutos.Enabled   := False;
@@ -1433,11 +1445,9 @@ begin
    BtnCancela.Enabled    := False;
    btnincluir.Enabled    := True;
 
-
    LimpaCampos();
    if (frmVendas.tag = 4) or (frmVendas.tag = 5) then
       Close;
-
 
 end;
 
@@ -1533,6 +1543,7 @@ end;
 
 procedure TfrmVendas.btnDescontoClick(Sender: TObject);
 begin
+
    FrmDescontoVenda := TFrmDescontoVenda.Create(self);
    FrmDescontoVenda.edtTotalVenda.text := edtTotalVenda.Text;
    FrmDescontoVenda.edtTotalLiquido.text := edtTotalVenda.Text;
@@ -1542,6 +1553,7 @@ begin
       AtualizaDesconto(FrmDescontoVenda.pPercDesconto);
       TotalizarVenda(FrmDescontoVenda.pTotalDesconto);
    end;
+
 end;
 
 procedure TfrmVendas.btnExcluirClick(Sender: TObject);
@@ -1674,6 +1686,10 @@ begin
    Begin
       edtCod_Cliente.text   :=  cmbCod_Cliente.Text;
       edtNome_Cliente.Text  :=  cmbNome_Cliente.Text;
+      try
+         edtCod_FormaPagamento.SetFocus
+      except
+      end;
       MostrarAnimaisCliente
    End;
 end;

@@ -562,7 +562,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851800
+        ValueTime = 0.502512476851851900
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -597,7 +597,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851800
+        ValueTime = 0.502512476851851900
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -632,7 +632,7 @@ object frmVendas: TfrmVendas
         EditPrecision = 0
         ValueInteger = 0
         ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851800
+        ValueTime = 0.502512476851851900
         TimeSeconds = False
         FirstCharUpper = False
         FirstCharUpList = ' ('
@@ -2039,7 +2039,7 @@ object frmVendas: TfrmVendas
     EditPrecision = 0
     ValueInteger = 0
     ValueDate = 39369.000000000000000000
-    ValueTime = 0.502512476851851800
+    ValueTime = 0.502512476851851900
     TimeSeconds = False
     FirstCharUpper = False
     FirstCharUpList = ' ('
