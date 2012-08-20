@@ -2,17 +2,19 @@ unit uDaoCaixaMovimento;
 
 interface
 
-uses uClassConexao,classes,SysUtils,DbClient;
+uses uClassConexao,classes,SysUtils,DbClient,uClassLancamento, SqlExpr,SqlTimst;
 
 Type TDaoCaixaMovimento = Class
   private
     FConexao : TConexao;
+    FQueryModific : TSqlQuery;
   public
     Constructor Create(Conexao : TConexao);
     function RetornarUltimoTurno(ptDataAtual: TdateTime; IdCaixa : integer) : integer;
     function RetornarTurnosFechados(ptDataAtual: TdateTime; IdCaixa : integer) : TClientDataSet;
     function TemCaixaAberto(ptDataAtual: TdateTime) : Boolean;
     function RetornarCaixaDoLancamento(SeqVenda : Integer) : integer;
+    procedure Lancar(lacamento : TLancamento);
 end;
 
 implementation
@@ -21,7 +23,29 @@ implementation
 
 constructor TDaoCaixaMovimento.Create(Conexao: TConexao);
 begin
-   FConexao :=  Conexao;
+  FConexao :=  Conexao;
+  FQueryModific := TSqlQuery.Create(Nil);
+  FQueryModific.SQLConnection := FConexao.Conection;
+end;
+
+procedure TDaoCaixaMovimento.Lancar(lacamento: TLancamento);
+begin
+   FQueryModific.Close;
+   FQueryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
+                          '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
+                          '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
+
+   FQueryModific.ParamByName('parCod_Caixa').AsInteger            := lacamento.Cod_Caixa;
+   FQueryModific.ParamByName('parValor').asFloat                  := lacamento.Valor;
+   FQueryModific.ParamByName('parHistorico').asString             := lacamento.Historico;
+   FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToSqlTimeStamp(lacamento.Data_Lancamento);
+   FQueryModific.ParamByName('parD_C').AsString                   := lacamento.D_C;
+   FQueryModific.ParamByName('parSeqVenda').asInteger             := lacamento.SeqVenda;
+   FQueryModific.ParamByName('parCod_tipoDespesa').AsString       := lacamento.Cod_tipoDespesa;
+   FQueryModific.ParamByName('parSeqeuencia').AsString            := lacamento.Sequencia;
+   FQueryModific.ParamByName('parCod_FormaPagamento').AsInteger   := lacamento.Cod_FormaPagamento;
+   FQueryModific.ParamByName('parOperador').AsString              := lacamento.Operador;
+   FQueryModific.ExecSQL;
 end;
 
 function TDaoCaixaMovimento.RetornarCaixaDoLancamento(SeqVenda: Integer): integer;

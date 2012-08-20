@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinCtrls, StdCtrls, Mask, bsSkinBoxCtrls, ExtCtrls, ToolWin,
-  ComCtrls, DBClient, CheckLst,uFormBase;
+  ComCtrls, DBClient, CheckLst,uFormBase,uDaoContaReceber,uClassContaReceber;
 
 type
   TfrmRecebimentoRomaneio = class(TFormBase)
@@ -21,19 +21,26 @@ type
     edtRomaneioId: TbsSkinEdit;
     btnCarregar: TbsSkinButton;
     ListVendas: TbsSkinListView;
-    bsSkinSpeedButton1: TbsSkinSpeedButton;
+    btnProrrogarVencimento: TbsSkinSpeedButton;
     bsSkinButton1: TbsSkinButton;
     btnCancelar: TbsSkinSpeedButton;
     bsSkinBevel3: TbsSkinBevel;
+    btnMarcarRecebido: TbsSkinSpeedButton;
+    bsSkinBevel4: TbsSkinBevel;
     procedure btnCarregarClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
-    procedure bsSkinSpeedButton1Click(Sender: TObject);
+    procedure btnProrrogarVencimentoClick(Sender: TObject);
     procedure bsSkinButton1Click(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure btnMarcarRecebidoClick(Sender: TObject);
   private
     function EstaPendente(LinhaId: integer): Boolean;
     function FoiProrrogado(LinhaId: Integer): Boolean;
+    procedure BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String);
+    procedure EfetuarLancamentoNoCaixa(prValorBaixa: Real; priNumeroVenda: String);
+    procedure BaixarTitulo(prValorBaixa: Real; priNumeroVenda: String);
+    function FoiRecebido(LinhaId: Integer): Boolean;
     { Private declarations }
   public
     { Public declarations }
@@ -44,9 +51,53 @@ var
 
 implementation
 
-uses uDaoRomaneio,uPrincipal, uDaoVenda, uFuncoes;
+uses uDaoRomaneio,uPrincipal, uDaoVenda, uFuncoes,uClassLancamento, uDaoCaixaMovimento ;
 
 {$R *.dfm}
+
+procedure TfrmRecebimentoRomaneio.BaixarTitulo(prValorBaixa: Real; priNumeroVenda: String);
+var loContaAReceber   : TContaReceber;
+    loDaoContaReceber : TdaoContaReceber;
+begin
+   loContaAReceber := TContaReceber.Create;
+   loDaoContaReceber := TdaoContaReceber.Create(gConexao);
+
+   loContaAReceber.Documento      := IncZero(priNumeroVenda,8)+'001';
+   loContaAReceber.Data_Pagamento := now;
+   loContaAReceber.Data_Atu       := now;
+   loContaAReceber.Operador       := gsOperador;
+   loContaAReceber.Status         := 1;
+   loContaAReceber.Tipo_Baixa     := 'PT';
+   loContaAReceber.vlr_Desconto   := 0;
+   loContaAReceber.Vlr_Recebido   := prValorBaixa;
+   loDaoContaReceber.BaixarTitulo(loContaAReceber);
+end;
+
+procedure TfrmRecebimentoRomaneio.BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String);
+begin
+   EfetuarLancamentoNoCaixa(prValorBaixa,priNumeroVenda);
+   BaixarTitulo(prValorBaixa,priNumeroVenda);
+end;
+
+procedure TfrmRecebimentoRomaneio.EfetuarLancamentoNoCaixa( prValorBaixa : real; priNumeroVenda : String );
+var loLancamento  : TLancamento;
+    loDaoMovCaixa : TDaoCaixaMovimento;
+begin
+   lolancamento  := TLancamento.Create;
+   loDaoMovCaixa := TDaoCaixaMovimento.Create(gConexao);
+
+   lolancamento.Cod_Caixa          := 1;
+   lolancamento.Valor              := prValorBaixa;
+   lolancamento.Historico          := 'Recebimento de Venda nº(Romaneio) '+priNumeroVenda;
+   lolancamento.Data_Lancamento    := now;
+   lolancamento.D_C                := 'C';
+   lolancamento.SeqVenda           := StrToint(priNumeroVenda);
+   lolancamento.Cod_tipoDespesa    := '0101';
+   lolancamento.Sequencia          := Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8);
+   lolancamento.Cod_FormaPagamento := 1; // tem que ser dinheiro
+   lolancamento.Operador           := gsOperador;
+   loDaoMovCaixa.Lancar(lolancamento);
+end;
 
 procedure TfrmRecebimentoRomaneio.bsSkinButton1Click(Sender: TObject);
 var I : Integer;
@@ -63,9 +114,16 @@ begin
            CaixaMensagem( 'Existe Vendas Pendentes, Inpossivel Fechar o Romaneio ', ctAviso, [ cbOk ], 0 );
            exit;
         end;
+     end;
+
+     for I := 0 to ListVendas.Items.Count - 1 do
+     begin
         if FoiProrrogado(I) then
            DaoVenda.TirarVendaRomaneio( StrToInt(ListVendas.Items[I].Caption));
+        if FoiRecebido(I) then
+           BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption);
      end;
+
      DaoRomaneio.FecharRomaneio(StrToint(edtRomaneioId.Text));
      btnCancelarClick(btnCancelar);
    finally
@@ -77,6 +135,11 @@ end;
 function TfrmRecebimentoRomaneio.FoiProrrogado(LinhaId : Integer) : Boolean;
 begin
   Result := (ListVendas.Items[LinhaId].SubItems[4]='Prorrogado');
+end;
+
+function TfrmRecebimentoRomaneio.FoiRecebido(LinhaId : Integer) : Boolean;
+begin
+  Result := (ListVendas.Items[LinhaId].SubItems[4]='Recebido');
 end;
 
 procedure TfrmRecebimentoRomaneio.btnCarregarClick(Sender: TObject);
@@ -124,6 +187,8 @@ begin
       llstTemp.SubItems.Add(FormatFloat('0.00', Dados.FieldByName('Vlr_total').AsFloat));
       if Dados.FieldByName('Entregue').Asboolean then
          llstTemp.SubItems.Add('Entregue')
+      else if Dados.FieldByName('ServicoPago').Asboolean then
+         llstTemp.SubItems.Add('Recebido')
       else if Dados.FieldByName('Prorrogado').Asboolean then
          llstTemp.SubItems.Add('Prorrogado')
       else
@@ -133,7 +198,7 @@ begin
 end;
 
 
-procedure TfrmRecebimentoRomaneio.bsSkinSpeedButton1Click(Sender: TObject);
+procedure TfrmRecebimentoRomaneio.btnProrrogarVencimentoClick(Sender: TObject);
 var lsDias : String;
     liDias : Integer;
     DaoVenda : TDaoVenda;
@@ -188,6 +253,33 @@ begin
       begin
          if EstaPendente(I) then
             DaoVenda.MarcarComoEntregue(StrToint(ListVendas.Items[I].Caption))
+         else
+         begin
+           CaixaMensagem( 'A Venda não esta pendentea ', ctAviso, [ cbOk ], 0 );
+           exit;
+         end;
+      end;
+   end;
+   FreeAndNil(DaoVenda);
+   btnCarregarClick(btnCarregar);
+end;
+
+procedure TfrmRecebimentoRomaneio.btnMarcarRecebidoClick(Sender: TObject);
+var lsDias : String;
+    liDias : Integer;
+    DaoVenda : TDaoVenda;
+    I: Integer;
+begin
+   DaoVenda := TDaoVenda.Create(gConexao);
+   for I := 0 to ListVendas.Items.Count - 1 do
+   begin
+      if ListVendas.Items[I].Checked then
+      begin
+         if EstaPendente(I) then
+         begin
+            DaoVenda.MarcarComoServicoPago(StrToint(ListVendas.Items[I].Caption));
+            DaoVenda.MarcarComoEntregue(StrToint(ListVendas.Items[I].Caption));
+         end
          else
          begin
            CaixaMensagem( 'A Venda não esta pendentea ', ctAviso, [ cbOk ], 0 );

@@ -63,8 +63,6 @@ type
     chkEmiteEtiqueta: TbsSkinCheckRadioBox;
     editNumeroVias: TbsSkinSpinEdit;
     Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     cmbCaixaBalcao: TbsSkinDBLookupComboBox;
     cmbCaixaVendasExternas: TbsSkinDBLookupComboBox;
     srcCadCaixa: TDataSource;
@@ -77,7 +75,6 @@ type
     bsSkinTabSheet4: TbsSkinTabSheet;
     chkMarcaOsNoCaixa: TbsSkinCheckRadioBox;
     chkBaixaMultiplosClientes: TbsSkinCheckRadioBox;
-    Label5: TLabel;
     cmbEstoqueVendaExterna: TbsSkinDBLookupComboBox;
     srcSetoresEstoque: TDataSource;
     cdsSetoresEstoque: TClientDataSet;
@@ -96,6 +93,9 @@ type
     edtJuros: TbsSkinEdit;
     bsSkinLabel12: TbsSkinLabel;
     edtMulta: TbsSkinEdit;
+    Label5: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

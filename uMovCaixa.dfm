@@ -73,7 +73,7 @@ object frmMovCaixa: TfrmMovCaixa
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 787
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -552,18 +552,13 @@ object frmMovCaixa: TfrmMovCaixa
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GridMovCaixa: TcxGrid
         Left = 0
         Top = 49
         Width = 798
-        Height = 284
+        Height = 285
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 285
         object GrdDespesas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa

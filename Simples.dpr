@@ -129,7 +129,12 @@ uses
   uClassCaixa in 'Modelos\uClassCaixa.pas',
   uDaoRota in 'Dao\uDaoRota.pas',
   uDaoCustoProduto in 'Dao\uDaoCustoProduto.pas',
-  uClassCustoProduto in 'Modelos\uClassCustoProduto.pas';
+  uClassCustoProduto in 'Modelos\uClassCustoProduto.pas',
+  uDaoPlanoDeConta in 'Dao\uDaoPlanoDeConta.pas',
+  uAlteraVencimento_TipoPagamento in 'uAlteraVencimento_TipoPagamento.pas' {frmAlteraVencimento_TipoPagamento},
+  uDaoContaReceber in 'Dao\uDaoContaReceber.pas',
+  uClassLancamento in 'Modelos\uClassLancamento.pas',
+  uClassContaReceber in 'Modelos\uClassContaReceber.pas';
 
 {$R *.res}
 
@@ -145,6 +150,7 @@ begin
   Application.CreateForm(TfrmcadEmpresa, frmcadEmpresa);
   Application.CreateForm(TfrmRelClientesVendedoresBairro, frmRelClientesVendedoresBairro);
   Application.CreateForm(TfrmrelTabPreco, frmrelTabPreco);
+  Application.CreateForm(TfrmAlteraVencimento_TipoPagamento, frmAlteraVencimento_TipoPagamento);
   Frmlogin.ShowModal;
   Application.Run;
 end.

@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 340
-    ActivePage = bsSkinTabSheet1
+    ActivePage = Vendas
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -86,6 +86,13 @@ object frmParametros: TfrmParametros
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
+      object Label5: TLabel
+        Left = 12
+        Top = 246
+        Width = 113
+        Height = 14
+        Caption = 'Estoque Venda Externa'
+      end
       object Label3: TLabel
         Left = 11
         Top = 270
@@ -99,13 +106,6 @@ object frmParametros: TfrmParametros
         Width = 101
         Height = 14
         Caption = 'Caixa Venda Externa'
-      end
-      object Label5: TLabel
-        Left = 12
-        Top = 246
-        Width = 113
-        Height = 14
-        Caption = 'Estoque Venda Externa'
       end
       object bsSkinCheckRadioBox1: TbsSkinCheckRadioBox
         Left = 11
@@ -1027,6 +1027,8 @@ object frmParametros: TfrmParametros
     end
     object tabContasAReceber: TbsSkinTabSheet
       Caption = 'Contas a Receber/Caixa'
+      ExplicitLeft = 2
+      ExplicitTop = 15
       object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
         Left = 12
         Top = 6
@@ -1350,6 +1352,39 @@ object frmParametros: TfrmParametros
         BorderStyle = bvFrame
         Caption = 'Multa'
         AutoSize = False
+      end
+      object edtMulta: TbsSkinEdit
+        Left = 91
+        Top = 194
+        Width = 66
+        Height = 18
+        Text = '0,00'
+        DefaultColor = clWindow
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        UseSkinFont = True
+        DefaultWidth = 0
+        DefaultHeight = 0
+        ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'edit'
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 10
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
       end
     end
     object bsSkinTabSheet3: TbsSkinTabSheet
@@ -2020,39 +2055,6 @@ object frmParametros: TfrmParametros
         ExplicitTop = -1
       end
     end
-  end
-  object edtMulta: TbsSkinEdit
-    Left = 92
-    Top = 264
-    Width = 66
-    Height = 18
-    Text = '0,00'
-    DefaultColor = clWindow
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clBlack
-    DefaultFont.Height = 14
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    UseSkinFont = True
-    DefaultWidth = 0
-    DefaultHeight = 0
-    ButtonMode = False
-    SkinData = frmPrincipal.SkinEntradaDados
-    SkinDataName = 'edit'
-    Alignment = taRightJustify
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = 14
-    Font.Name = 'Arial'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 3
-    LeftImageIndex = -1
-    LeftImageHotIndex = -1
-    LeftImageDownIndex = -1
-    RightImageIndex = -1
-    RightImageHotIndex = -1
-    RightImageDownIndex = -1
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
     QuickButtons = <>

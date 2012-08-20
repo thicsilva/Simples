@@ -63,6 +63,7 @@
     <DCCReference Include="Dao\uDaoCaixaMovimento.pas" />
     <DCCReference Include="Dao\uDaoCliente.pas" />
     <DCCReference Include="Dao\uDaoClienteAnimal.pas" />
+    <DCCReference Include="Dao\uDaoContaReceber.pas" />
     <DCCReference Include="Dao\uDaoCorrecao.pas" />
     <DCCReference Include="Dao\uDaoCustoProduto.pas" />
     <DCCReference Include="Dao\uDaoEmpresa.pas" />
@@ -73,6 +74,7 @@
     <DCCReference Include="Dao\uDaoItemEntrada.pas" />
     <DCCReference Include="Dao\uDaoItemVenda.pas" />
     <DCCReference Include="Dao\uDaoPerfil.pas" />
+    <DCCReference Include="Dao\uDaoPlanoDeConta.pas" />
     <DCCReference Include="Dao\uDaoRomaneio.pas" />
     <DCCReference Include="Dao\uDaoRota.pas" />
     <DCCReference Include="Dao\uDaoSaldo.pas" />
@@ -84,6 +86,7 @@
     <DCCReference Include="Modelos\uClassCaixa.pas" />
     <DCCReference Include="Modelos\uClassCliente.pas" />
     <DCCReference Include="Modelos\uclassContaCorrente.pas" />
+    <DCCReference Include="Modelos\uClassContaReceber.pas" />
     <DCCReference Include="Modelos\uClassCorrecao.pas" />
     <DCCReference Include="Modelos\uClassCustoProduto.pas" />
     <DCCReference Include="Modelos\uClassDaoContaCorrente.pas" />
@@ -95,11 +98,15 @@
     <DCCReference Include="Modelos\uClassFuncionario.pas" />
     <DCCReference Include="Modelos\uClassItemEntrada.pas" />
     <DCCReference Include="Modelos\uClassItemVenda.pas" />
+    <DCCReference Include="Modelos\uClassLancamento.pas" />
     <DCCReference Include="Modelos\uClassRomaneio.pas" />
     <DCCReference Include="Modelos\uClassSaldo.pas" />
     <DCCReference Include="Modelos\uClassVenda.pas" />
     <DCCReference Include="uAbreOS.pas">
       <Form>frmabreos</Form>
+    </DCCReference>
+    <DCCReference Include="uAlteraVencimento_TipoPagamento.pas">
+      <Form>frmAlteraVencimento_TipoPagamento</Form>
     </DCCReference>
     <DCCReference Include="uBaixaNormal.pas">
       <Form>frmBaixaNormal</Form>

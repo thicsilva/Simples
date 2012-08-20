@@ -3,7 +3,7 @@ object frmCtasReceber: TfrmCtasReceber
   Top = 161
   BorderIcons = []
   Caption = 'Cadastro e Manuten'#231#227'o de contas a receber'
-  ClientHeight = 462
+  ClientHeight = 470
   ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frmCtasReceber: TfrmCtasReceber
     Left = 0
     Top = 53
     Width = 737
-    Height = 409
+    Height = 417
     ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -49,16 +49,21 @@ object frmCtasReceber: TfrmCtasReceber
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitLeft = 8
+    ExplicitTop = 29
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitHeight = 385
       object cxGrid1: TcxGrid
         Left = 0
         Top = 176
         Width = 735
-        Height = 209
+        Height = 217
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
+        ExplicitLeft = -1
+        ExplicitTop = 182
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -77,6 +82,7 @@ object frmCtasReceber: TfrmCtasReceber
           NavigatorButtons.SaveBookmark.Visible = True
           NavigatorButtons.GotoBookmark.Visible = True
           NavigatorButtons.Filter.Visible = True
+          OnCellDblClick = GridCtasReceberCellDblClick
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -169,6 +175,11 @@ object frmCtasReceber: TfrmCtasReceber
             DataBinding.FieldName = 'Historico'
             Width = 150
           end
+          object Nome_FormaPagamento: TcxGridDBColumn
+            Caption = 'Forma de Pagamento'
+            DataBinding.FieldName = 'Nome_FormaPagamento'
+            Width = 136
+          end
           object GridCtasReceberData_Atu: TcxGridDBColumn
             Caption = 'Atualizado Em'
             DataBinding.FieldName = 'Data_Atu'
@@ -191,7 +202,8 @@ object frmCtasReceber: TfrmCtasReceber
             DataBinding.FieldName = 'sequencia'
             Visible = False
           end
-          object GridCtasReceberCod_FormaPagamento: TcxGridDBColumn
+          object Cod_FormaPagamento: TcxGridDBColumn
+            Caption = 'Cod FormaPagamento'
             DataBinding.FieldName = 'Cod_FormaPagamento'
             Visible = False
           end
@@ -1115,9 +1127,11 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object tabCadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = -23
+      ExplicitHeight = 385
       object bsSkinStdLabel1: TbsSkinStdLabel
-        Left = 94
-        Top = 98
+        Left = 172
+        Top = 131
         Width = 41
         Height = 13
         EllipsType = bsetNone
@@ -1133,8 +1147,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Historico'
       end
       object bsSkinStdLabel5: TbsSkinStdLabel
-        Left = 105
-        Top = 50
+        Left = 183
+        Top = 83
         Width = 32
         Height = 13
         EllipsType = bsetNone
@@ -1150,8 +1164,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Cliente'
       end
       object bsSkinStdLabel8: TbsSkinStdLabel
-        Left = 306
-        Top = 16
+        Left = 384
+        Top = 49
         Width = 68
         Height = 13
         EllipsType = bsetNone
@@ -1167,8 +1181,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Data Cadastro'
       end
       object bsSkinStdLabel2: TbsSkinStdLabel
-        Left = 96
-        Top = 122
+        Left = 174
+        Top = 155
         Width = 39
         Height = 13
         EllipsType = bsetNone
@@ -1184,8 +1198,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Emiss'#227'o'
       end
       object lblVencimentos: TbsSkinStdLabel
-        Left = 296
-        Top = 120
+        Left = 374
+        Top = 153
         Width = 69
         Height = 13
         EllipsType = bsetNone
@@ -1201,8 +1215,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = '1'#186' Vencimento'
       end
       object lblDiasa: TbsSkinStdLabel
-        Left = 114
-        Top = 147
+        Left = 192
+        Top = 180
         Width = 21
         Height = 13
         EllipsType = bsetNone
@@ -1218,8 +1232,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Dias'
       end
       object bsSkinStdLabel6: TbsSkinStdLabel
-        Left = 269
-        Top = 147
+        Left = 347
+        Top = 180
         Width = 96
         Height = 13
         EllipsType = bsetNone
@@ -1235,8 +1249,8 @@ object frmCtasReceber: TfrmCtasReceber
         Caption = 'Numero de Parcelas'
       end
       object Label1: TLabel
-        Left = 144
-        Top = 250
+        Left = 222
+        Top = 283
         Width = 80
         Height = 19
         Caption = 'Valor Total'
@@ -1248,9 +1262,9 @@ object frmCtasReceber: TfrmCtasReceber
         ParentFont = False
       end
       object bsSkinStdLabel7: TbsSkinStdLabel
-        Left = 57
-        Top = 76
-        Width = 76
+        Left = 135
+        Top = 109
+        Width = 78
         Height = 13
         EllipsType = bsetNone
         UseSkinFont = True
@@ -1262,11 +1276,11 @@ object frmCtasReceber: TfrmCtasReceber
         DefaultFont.Style = []
         SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
-        Caption = 'Centro de Custo'
+        Caption = 'Plano de Contas'
       end
       object cmbCod_Fornecedor: TbsSkinDBLookupComboBox
-        Left = 142
-        Top = 45
+        Left = 220
+        Top = 78
         Width = 63
         Height = 20
         HintImageIndex = 0
@@ -1291,8 +1305,8 @@ object frmCtasReceber: TfrmCtasReceber
         OnChange = cmbCod_FornecedorChange
       end
       object edtHistorico: TbsSkinEdit
-        Left = 142
-        Top = 93
+        Left = 220
+        Top = 126
         Width = 325
         Height = 18
         DefaultColor = clWindow
@@ -1323,8 +1337,8 @@ object frmCtasReceber: TfrmCtasReceber
         RightImageDownIndex = -1
       end
       object edtData_cad: TbsSkinEdit
-        Left = 388
-        Top = 11
+        Left = 466
+        Top = 44
         Width = 74
         Height = 18
         DefaultColor = clScrollBar
@@ -1355,8 +1369,8 @@ object frmCtasReceber: TfrmCtasReceber
         RightImageDownIndex = -1
       end
       object edtCod_Fornecedor: TbsSkinEdit
-        Left = 141
-        Top = 45
+        Left = 219
+        Top = 78
         Width = 45
         Height = 18
         DefaultColor = clWindow
@@ -1388,8 +1402,8 @@ object frmCtasReceber: TfrmCtasReceber
         OnExit = edtCod_FornecedorExit
       end
       object cmbNome_Fornecedor: TbsSkinDBLookupComboBox
-        Left = 208
-        Top = 45
+        Left = 289
+        Top = 76
         Width = 259
         Height = 20
         HintImageIndex = 0
@@ -1414,8 +1428,8 @@ object frmCtasReceber: TfrmCtasReceber
         OnChange = cmbNome_FornecedorChange
       end
       object edtData_Emissao: TbsSkinDateEdit
-        Left = 142
-        Top = 117
+        Left = 220
+        Top = 150
         Width = 91
         Height = 18
         EditMask = '!99/99/0000;1; '
@@ -1464,8 +1478,8 @@ object frmCtasReceber: TfrmCtasReceber
         RightImageDownIndex = -1
       end
       object edtData_Vencimento: TbsSkinDateEdit
-        Left = 378
-        Top = 117
+        Left = 456
+        Top = 150
         Width = 91
         Height = 18
         EditMask = '!99/99/0000;1; '
@@ -1514,8 +1528,8 @@ object frmCtasReceber: TfrmCtasReceber
         RightImageDownIndex = -1
       end
       object rdgTipoVencimento: TbsSkinRadioGroup
-        Left = 142
-        Top = 168
+        Left = 220
+        Top = 201
         Width = 331
         Height = 65
         HintImageIndex = 0
@@ -1561,8 +1575,8 @@ object frmCtasReceber: TfrmCtasReceber
           'Numero de dias')
       end
       object edtParcelas: TbsSkinSpinEdit
-        Left = 379
-        Top = 140
+        Left = 457
+        Top = 173
         Width = 91
         Height = 20
         HintImageIndex = 0
@@ -1585,8 +1599,8 @@ object frmCtasReceber: TfrmCtasReceber
         MaxLength = 0
       end
       object edtDias: TbsSkinSpinEdit
-        Left = 142
-        Top = 140
+        Left = 220
+        Top = 173
         Width = 91
         Height = 20
         HintImageIndex = 0
@@ -1609,8 +1623,8 @@ object frmCtasReceber: TfrmCtasReceber
         MaxLength = 0
       end
       object EdtVlr_total: TEditN
-        Left = 392
-        Top = 245
+        Left = 470
+        Top = 278
         Width = 81
         Height = 24
         Color = clWhite
@@ -1642,8 +1656,8 @@ object frmCtasReceber: TfrmCtasReceber
         TextHint = True
       end
       object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
-        Left = 210
-        Top = 69
+        Left = 288
+        Top = 102
         Width = 258
         Height = 20
         HintImageIndex = 0
@@ -1668,8 +1682,8 @@ object frmCtasReceber: TfrmCtasReceber
         OnChange = cmbNome_CentroCustoChange
       end
       object cmbCod_CentroCusto: TbsSkinDBLookupComboBox
-        Left = 142
-        Top = 69
+        Left = 220
+        Top = 102
         Width = 63
         Height = 20
         HintImageIndex = 0
@@ -1694,8 +1708,8 @@ object frmCtasReceber: TfrmCtasReceber
         OnChange = cmbCod_CentroCustoChange
       end
       object edtCod_CentroCusto: TbsSkinEdit
-        Left = 141
-        Top = 69
+        Left = 219
+        Top = 102
         Width = 45
         Height = 18
         DefaultColor = clWindow
@@ -2117,21 +2131,21 @@ object frmCtasReceber: TfrmCtasReceber
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 508
-    Top = 247
+    Left = 516
+    Top = 223
   end
   object srcPesquisa: TDataSource
     DataSet = cdsPesquisa
-    Left = 533
-    Top = 247
+    Left = 541
+    Top = 223
   end
   object srcCadCtoCusto: TDataSource
-    Left = 481
-    Top = 247
+    Left = 489
+    Top = 223
   end
   object MenuRelatorios: TbsSkinPopupMenu
-    Left = 288
-    Top = 241
+    Left = 480
+    Top = 25
     object BorderodeEntrega1: TMenuItem
       Caption = 'Contas a Receber'
       OnClick = BorderodeEntrega1Click
@@ -2249,32 +2263,32 @@ object frmCtasReceber: TfrmCtasReceber
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 589
-    Top = 192
+    Left = 597
+    Top = 168
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 589
-    Top = 220
+    Left = 597
+    Top = 196
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 508
-    Top = 275
+    Left = 516
+    Top = 251
   end
   object cdsCadCtoCusto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 481
-    Top = 275
+    Left = 489
+    Top = 251
   end
   object dspPesquisa: TDataSetProvider
     DataSet = QryPesquisa
-    Left = 533
-    Top = 219
+    Left = 541
+    Top = 195
   end
   object QryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -2282,8 +2296,8 @@ object frmCtasReceber: TfrmCtasReceber
     SQL.Strings = (
       'Select * from T_Ctasreceber where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 533
-    Top = 191
+    Left = 541
+    Top = 167
   end
   object cdsPesquisa: TClientDataSet
     Aggregates = <>
@@ -2291,15 +2305,15 @@ object frmCtasReceber: TfrmCtasReceber
     ProviderName = 'dspPesquisa'
     AfterOpen = cdsPesquisaAfterOpen
     OnCalcFields = cdsPesquisaCalcFields
-    Left = 534
-    Top = 275
+    Left = 542
+    Top = 251
   end
   object QryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 561
-    Top = 192
+    Left = 569
+    Top = 168
   end
   object CxPropriedades: TcxPropertiesStore
     Components = <
@@ -2498,7 +2512,7 @@ object frmCtasReceber: TfrmCtasReceber
           'Width')
       end
       item
-        Component = GridCtasReceberCod_FormaPagamento
+        Component = Cod_FormaPagamento
         Properties.Strings = (
           'AlternateCaption'
           'BestFitMaxWidth'
@@ -3131,6 +3145,10 @@ object frmCtasReceber: TfrmCtasReceber
       Caption = 'Marcar como entregue'
       OnClick = Marcarcomoentregue1Click
     end
+    object alterarVencimentoeTipodePagamento1: TMenuItem
+      Caption = 'Alterar Vencimento e Tipo de Pagamento'
+      OnClick = alterarVencimentoeTipodePagamento1Click
+    end
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
     Left = 196
@@ -3144,13 +3162,13 @@ object frmCtasReceber: TfrmCtasReceber
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 453
-    Top = 275
+    Left = 461
+    Top = 251
   end
   object DataSource1: TDataSource
     DataSet = cdsRelatorio
-    Left = 453
-    Top = 247
+    Left = 461
+    Top = 223
   end
   object srcSupervisor: TDataSource
     Left = 117

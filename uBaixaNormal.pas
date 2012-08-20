@@ -142,7 +142,7 @@ var
 implementation
 
 uses uPrincipal,Ufuncoes,UnitDeclaracoes,uClassDaoContaCorrente,uClassContaCorrente,
-  uDaoVenda,uClassVenda,uDaoFuncionario;
+  uDaoVenda,uClassVenda,uDaoFuncionario,uClassLancamento,uClassContaReceber,uDaoContaReceber;
 
 {$R *.dfm}
 
@@ -226,6 +226,9 @@ var lsupDate        : String;
   Venda : TVenda;
   DaoFuncionario : TDaoFuncionario;
   loDaoMovCaixa : TDaoCaixamovimento;
+  lolancamento : TLancamento;
+  loContaAReceber : TContaReceber;
+  loDaoContaReceber : TdaoContaReceber;
 begin
    lrValorRecebido := 0;
    if frmBaixaNormal.Tag <> 2 then
@@ -281,29 +284,24 @@ begin
                            CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
                            exit;
                         end;
+                        lolancamento := TLancamento.Create;
+                        lolancamento.Cod_Caixa          := cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger;
+                        lolancamento.Valor              := cdsTempPagamentos.FieldByName('Valor').AsFloat;
+                        If lblTroco.Caption = 'Troco' Then
+                           lolancamento.Valor           := cdsTempPagamentos.FieldByName('Valor').AsFloat;
+                        lolancamento.Historico          := 'Recebimento de Venda nº '+edtNrVenda.Text+lstexto;qryModific.Close;
+                        lolancamento.Data_Lancamento    := StrToDateTime(edtData_Pagamento.Text);
+                        lolancamento.D_C                := 'C';
+                        lolancamento.SeqVenda           := StrtoInt(edtNrVenda.Text);
+                        lolancamento.Cod_tipoDespesa    := '0101';
+                        lolancamento.Sequencia          := Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8);
+                        lolancamento.Cod_FormaPagamento := strToInt(cdsTempPagamentos.FieldByName('Codigo').AsString);
+                        lolancamento.Operador           := gsOperador;
+                        loDaoMovCaixa.Lancar(lolancamento);
                      finally
                         FreeAndNil(loDaoMovCaixa);
+                        FreeAndNil(lolancamento);
                      end;
-
-                     qryModific.Close;
-                     qryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
-                                            '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
-                                            '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
-
-                     qryModific.ParamByName('parCod_Caixa').AsInteger            := cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger;
-                     qryModific.ParamByName('parValor').asFloat                  := cdsTempPagamentos.FieldByName('Valor').AsFloat;
-                     If lblTroco.Caption = 'Troco' Then
-                        qryModific.ParamByName('parValor').asFloat               := StrToFloat(edtTotalTitulo.text);
-                     qryModific.ParamByName('parHistorico').asString             := 'Recebimento de Venda nº '+edtNrVenda.Text+lstexto;
-                     qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := StrToSqlTimeStamp(edtData_Pagamento.Text);
-                     qryModific.ParamByName('parD_C').AsString                   := 'C';
-                     qryModific.ParamByName('parSeqVenda').asInteger             := StrtoInt(edtNrVenda.Text);
-                     qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
-                     qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
-                     qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := strToInt(cdsTempPagamentos.FieldByName('Codigo').AsString);
-                     qryModific.ParamByName('parOperador').AsString              := gsOperador;
-                     qryModific.ExecSQL;
-
                      lrValorRecebido := lrValorRecebido + cdsTempPagamentos.FieldByName('Valor').AsFloat;
                   Except
                      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
@@ -369,34 +367,30 @@ begin
 
          // atualização do contas a receber
          Try
-            qryModific.Close;
-            qryModific.SQL.Text := 'update T_Ctasreceber set Status=:parStatus,Operador=:parOperador, Tipo_Baixa=:parTipo_Baixa, vlr_Recebido=:parvlr_Recebido,'+
-                                   '                     Vlr_Devolvido=:parvlr_Devolvido,Vlr_Comissao=:parvlr_Comissao, Data_Pagamento=:parData_Pagamento, '+
-                                   'Vlr_Desconto=:parvlr_desconto, Data_Atu=:parData_Atu '+lsUpdate+' '+
-                                   'where Documento=:parDocumento ';
-            qryModific.ParamByName('parDocumento').AsString            := edtDocumento.Text;
-            qryModific.ParamByName('parData_Pagamento').asSqlTimeStamp := StrToSqlTimeStamp(DateToStr(edtData_Pagamento.Date));
-            qryModific.ParamByName('parData_Atu').asSqlTimeStamp       := DateTimeToSQLTimeStamp(now);
-            qryModific.ParamByName('parOperador').AsString             := gsOperador;
-            qryModific.ParamByName('parStatus').AsInteger              := 1;
-            qryModific.ParamByName('parTipo_Baixa').AsString           := 'PT';
+            loContaAReceber := TContaReceber.Create;
+            loDaoContaReceber := TdaoContaReceber.Create(gConexao);
+
+            loContaAReceber.Documento      := edtDocumento.Text;
+            loContaAReceber.Data_Pagamento := edtData_Pagamento.Date;
+            loContaAReceber.Data_Atu       := now;
+            loContaAReceber.Operador       := gsOperador;
+            loContaAReceber.Status         := 1;
+            loContaAReceber.Tipo_Baixa     := 'PT';
             if (StrToFloat(edtTotalReceber.Text)> 0) or (lrValorRecebido < StrToFloat(edtTotalTitulo.text)) Then
-               qryModific.ParamByName('parTipo_Baixa').AsString        := 'PP';
-            qryModific.ParamByName('parVlr_Desconto').AsFloat          := strTofloat(edtVlr_Desconto.Text);
-            qryModific.ParamByName('parVlr_Comissao').Asfloat          := 0;
-            qryModific.ParamByName('parVlr_Recebido').AsFloat          := lrValorRecebido;
+                loContaAReceber.Tipo_Baixa := 'PP';
+            loContaAReceber.vlr_Desconto   := strTofloat(edtVlr_Desconto.Text);
+            loContaAReceber.Vlr_Recebido   := lrValorRecebido;
             If lblTroco.Caption = 'Troco' Then
-               qryModific.ParamByName('parVlr_Recebido').AsFloat       := StrToFloat(edtTotalTitulo.text);
-            qryModific.ParamByname('parVlr_Devolvido').AsFloat         := 0;
+               loContaAReceber.Vlr_Recebido:= StrToFloat(edtTotalTitulo.text);
+            loDaoContaReceber.BaixarTitulo(loContaAReceber);
 
             DaoVenda := TdaoVenda.Create(gconexao);
             if qryModific.ParamByName('parTipo_Baixa').AsString = 'PT' then
                DaoVenda.MarcarComoServicoPago(StrToint(edtNrVenda.Text));
             FreeAndNil(DaoVenda);
-
-
+            FreeAndNil(loDaoContaReceber);
+            FreeAndNil(loContaAReceber);
             qryModific.ExecSQL;
-
          Except
             frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
             Exit;

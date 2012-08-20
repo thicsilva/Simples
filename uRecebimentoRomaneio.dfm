@@ -1,7 +1,7 @@
 object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
   Left = 0
   Top = 0
-  Caption = 'frmRecebimentoRomaneio'
+  Caption = 'Recebimento e presta'#231#227'o de contas do romaneio.'
   ClientHeight = 397
   ClientWidth = 743
   Color = clBtnFace
@@ -76,7 +76,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 605
+        Left = 579
         Top = 0
         Width = 70
         Height = 49
@@ -118,7 +118,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
         Top = 0
-        Width = 77
+        Width = 48
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
@@ -165,19 +165,19 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 281
+        Left = 252
         Top = 0
-        Width = 82
+        Width = 40
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 287
+        ExplicitLeft = 281
         ExplicitTop = -1
       end
-      object bsSkinSpeedButton1: TbsSkinSpeedButton
-        Left = 174
+      object btnProrrogarVencimento: TbsSkinSpeedButton
+        Left = 145
         Top = 0
         Width = 107
         Height = 49
@@ -205,17 +205,17 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = 'Prorrocar Vencimento'
+        Caption = 'Prorrogar Vencimento'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
-        OnClick = bsSkinSpeedButton1Click
-        ExplicitLeft = 186
+        OnClick = btnProrrogarVencimentoClick
+        ExplicitLeft = 129
         ExplicitTop = 12
       end
       object btnCancelar: TbsSkinSpeedButton
-        Left = 363
+        Left = 424
         Top = 0
         Width = 91
         Height = 49
@@ -253,15 +253,65 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         ExplicitTop = 12
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 454
+        Left = 515
         Top = 0
-        Width = 151
+        Width = 64
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 460
+        ExplicitLeft = 561
+        ExplicitTop = -1
+      end
+      object btnMarcarRecebido: TbsSkinSpeedButton
+        Left = 292
+        Top = 0
+        Width = 107
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 3
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = False
+        Flat = False
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Marcar Como Recebido'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        OnClick = btnMarcarRecebidoClick
+        ExplicitLeft = 186
+        ExplicitTop = 12
+      end
+      object bsSkinBevel4: TbsSkinBevel
+        Left = 399
+        Top = 0
+        Width = 25
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitLeft = 463
         ExplicitTop = -1
       end
     end
