@@ -114,7 +114,7 @@ begin
   FParametros.add(IntToStr(RomaneioId));
   FParametros.add('5');
   Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Pag.Descricao as Pagamento, '+
-                                    '       Ven.Entregue, Ven.Prorrogado '+
+                                    '       Ven.Entregue, Ven.Prorrogado, Ven.ServicoPago '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+
                                     '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+
@@ -150,14 +150,16 @@ begin
    FParametros.clear;
    FParametros.add(IntToStr(RomaneioId));
    FParametros.add('C');
-   Result := FConexao.BuscarDadosSQL('select Cod_Produto, max(Prod.Descricao) as Descricao, '+
+   Result := FConexao.BuscarDadosSQL('select Cod_Produto, Cod_Grupo, max(Prod.Descricao) as Descricao, '+
+                                     '       max(Gru.Descricao) as Nome_Grupo, '+
                                      'Sum(Qtde_Venda) as Qtde_Total, Sum(Itens.PesoBruto) as PesoBruto, '+
                                      'Max(Prod.Unid) as Unid '+
                                      'from T_vendas Ven '+
                                      '     inner Join T_itensVendas Itens on Itens.SeqVenda=Ven.Seqvenda '+
                                      '     left join T_produtos Prod on Prod.Codigo=Itens.Cod_Produto '+
+                                     '     left Join T_Grupos Gru on Gru.codigo=Prod.Cod_Grupo '+
                                      'where romaneioID=:parRomaneioId and ( Itens.status<>:parStatus or Itens.Status is Null ) '+
-                                     'group by Cod_produto order by 2',FParametros);
+                                     'group by Cod_Produto,Cod_Grupo order by 2,3',FParametros);
 end;
 
 end.
