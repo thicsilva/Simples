@@ -212,6 +212,7 @@ procedure TfrmRomaneioDeEntrega.bsSkinButton4Click(Sender: TObject);
 var DaoRomaneio : TDaoRomaneio;
     cdsDadosRelatorio : TClientDataSet;
     total : Real;
+    lsQuebra : String;
 begin
    GstituloRel  :='Relatorio de Produtos do Romaneio Nº '+srcRomaneios.DataSet.FieldByName('ID').AsString;
 
@@ -229,7 +230,16 @@ begin
    total := 0;
    while not cdsDadosRelatorio.Eof do
    begin
-
+      if lsQuebra<>cdsDadosRelatorio.FieldByname('Cod_Grupo').AsString then
+      Begin
+         impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+         pviLinha:=Pvilinha+1;
+         impmatricial.Imp(pvilinha,001,cdsDadosRelatorio.FieldByName('Cod_Grupo').AsString+'-'+cdsDadosRelatorio.FieldByName('Nome_Grupo').AsString );
+         pviLinha:=Pvilinha+1;
+         impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+         pviLinha:=Pvilinha+1;
+         lsQuebra:=cdsDadosRelatorio.FieldByname('Cod_Grupo').AsString;
+      End;
       impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('Cod_Produto').AsString,5)+' - '+cdsDadosRelatorio.FieldByName('Descricao').AsString);
       impmatricial.Imp(pvilinha,045,cdsDadosRelatorio.FieldByName('Unid').AsString);
       impmatricial.Impd(pvilinha,063,FormatFloat(',0.000',cdsDadosRelatorio.FieldByName('Qtde_total').AsFloat),[]);
@@ -239,7 +249,6 @@ begin
       cdsDadosRelatorio.next;
       if pvilinha>=60 then
          impMatricial.Novapagina;
-
    end;
    impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
    pviLinha:=Pvilinha+1;

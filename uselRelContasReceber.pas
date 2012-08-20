@@ -16,7 +16,7 @@ uses
   cxGridTableView, cxGridDBTableView, cxGrid, bsSkinBoxCtrls, StdCtrls, Mask,
   FMTBcd, BusinessSkinForm, RDprint, DBClient, Provider, SqlExpr, SqlTimSt,
   Menus, bsSkinMenus, dxBar, cxGridCustomPopupMenu, cxGridPopupMenu,UformBase,
-  dxSkinsCore;
+  dxSkinsCore, bsdbctrls;
 
 type
   TfrmSelRelContasReceber = class(TFormBase)
@@ -66,6 +66,16 @@ type
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
     btnExportaExcel: TbsSkinMenuSpeedButton;
+    cmbNome_VendedorIni: TbsSkinDBLookupComboBox;
+    cmbCod_VendedorIni: TbsSkinDBLookupComboBox;
+    bsSkinStdLabel3: TbsSkinStdLabel;
+    btnLimpa: TbsSkinButton;
+    bsSkinStdLabel4: TbsSkinStdLabel;
+    cmbCod_rota: TbsSkinDBLookupComboBox;
+    cmbNome_Rota: TbsSkinDBLookupComboBox;
+    bsSkinButton1: TbsSkinButton;
+    srcVendedor: TDataSource;
+    srcRotas: TDataSource;
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
@@ -79,8 +89,15 @@ type
     procedure RetirardoRepasse1Click(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
     procedure MenuItem2Click(Sender: TObject);
+    procedure btnLimpaClick(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
+    procedure cmbCod_VendedorIniChange(Sender: TObject);
+    procedure cmbNome_VendedorIniChange(Sender: TObject);
+    procedure cmbCod_rotaChange(Sender: TObject);
+    procedure cmbNome_RotaChange(Sender: TObject);
   private
      pviLinha : integer;
+
     { Private declarations }
   public
     { Public declarations }
@@ -91,13 +108,25 @@ var
 
 implementation
 
-uses uprincipal,ufuncoes;
+uses uprincipal,ufuncoes,uDaoFuncionario,uDaoRota;
 
 {$R *.dfm}
+
+procedure TfrmSelRelContasReceber.bsSkinButton1Click(Sender: TObject);
+begin
+   cmbCod_rota.KeyValue := Null;
+   cmbNome_Rota.KeyValue := Null;
+end;
 
 procedure TfrmSelRelContasReceber.btnFecharClick(Sender: TObject);
 begin
    Close;
+end;
+
+procedure TfrmSelRelContasReceber.btnLimpaClick(Sender: TObject);
+begin
+   cmbCod_VendedorIni.KeyValue := Null;
+   cmbNome_VendedorIni.KeyValue := Null;
 end;
 
 procedure TfrmSelRelContasReceber.btnokClick(Sender: TObject);
@@ -333,14 +362,20 @@ begin
       qryRelatorio.SQL.Add(' And ( Rec.Data_Pagamento>=:parData_Ini And Rec.Data_Pagamento<=:parData_Fim ) ');
    if cmbRepasse.ItemIndex <> 0 then
       qryRelatorio.SQL.Add(' And Rec.Repasse=:parRepasse ');
+   if Trim(cmbCod_VendedorIni.Text)<>'' then
+      qryRelatorio.SQL.Add(' And Ven.Cod_Funcionario=:parCod_Funcionario ');
+   if Trim(cmbCod_rota.Text)<>'' then
+      qryRelatorio.SQL.Add(' And Cli.Cod_Rota=:parCod_Rota');
 
    case cmbTipoResultado.ItemIndex of
       0,1 : qryRelatorio.SQL.Add(' ORDER BY Cli.Cod_Rota,Ven.Controle ');
       2,3 : qryRelatorio.SQL.Add(' ORDER BY Ven.Cod_Funcionario,Ven.Controle ');
    end;
 
-
-
+   if Trim(cmbCod_VendedorIni.Text)<>'' then
+      qryRelatorio.ParamByName('parCod_Funcionario').AsString := cmbCod_VendedorIni.Text;
+   if Trim(cmbCod_rota.Text)<>'' then
+      qryRelatorio.ParamByName('parCod_Rota').AsString         := cmbCod_rota.Text;
 
    qryRelatorio.ParamByName('parData_Ini').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
    qryRelatorio.ParamByName('parData_Fim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
@@ -367,6 +402,26 @@ begin
       cdsRelatorio.FieldByName('Nome_Repasse').AsString := 'Sim'
    Else
       cdsRelatorio.FieldByName('Nome_Repasse').AsString := 'Não';
+end;
+
+procedure TfrmSelRelContasReceber.cmbCod_rotaChange(Sender: TObject);
+begin
+   cmbNome_Rota.KeyValue :=  cmbCod_rota.KeyValue;
+end;
+
+procedure TfrmSelRelContasReceber.cmbCod_VendedorIniChange(Sender: TObject);
+begin
+   cmbNome_VendedorIni.KeyValue :=   cmbCod_VendedorIni.KeyValue;
+end;
+
+procedure TfrmSelRelContasReceber.cmbNome_RotaChange(Sender: TObject);
+begin
+   cmbCod_Rota.KeyValue :=  cmbNome_rota.KeyValue;
+end;
+
+procedure TfrmSelRelContasReceber.cmbNome_VendedorIniChange(Sender: TObject);
+begin
+   cmbCod_VendedorIni.KeyValue := cmbNome_VendedorIni.KeyValue;
 end;
 
 procedure TfrmSelRelContasReceber.cmbPeriodoChange(Sender: TObject);
@@ -402,8 +457,16 @@ begin
 end;
 
 procedure TfrmSelRelContasReceber.FormShow(Sender: TObject);
+var DaoFuncionario : TDaoFuncionario;
+    DaoRota        : TDaoRota;
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+   DaoFuncionario      := TDaoFuncionario.Create(gConexao);
+   srcVendedor.DataSet := DaoFuncionario.BuscarTodos;
+   FreeAndNil(DaoFuncionario);
+   DaoRota          := TDaoRota.Create(gConexao);
+   srcRotas.DataSet := DaoRota.BuscarTodos;
+   FreeAndNil(DaoRota);
 end;
 
 procedure TfrmSelRelContasReceber.impMatricialNewPage(Sender: TObject;

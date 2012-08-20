@@ -3,7 +3,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
   Top = 0
   BorderIcons = []
   Caption = 'Relatorio de Contas a Receber'
-  ClientHeight = 446
+  ClientHeight = 454
   ClientWidth = 773
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Left = 0
     Top = 53
     Width = 773
-    Height = 66
+    Height = 92
     HintImageIndex = 0
     TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
@@ -51,8 +51,10 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
+    ExplicitLeft = 8
+    ExplicitTop = 93
     object lblTurma: TbsSkinStdLabel
-      Left = 125
+      Left = 107
       Top = 14
       Width = 19
       Height = 13
@@ -69,7 +71,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Caption = 'Ate.'
     end
     object bsSkinStdLabel1: TbsSkinStdLabel
-      Left = 24
+      Left = 6
       Top = 40
       Width = 81
       Height = 13
@@ -102,8 +104,42 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       SkinDataName = 'stdlabel'
       Caption = 'Tipo de Resultado'
     end
+    object bsSkinStdLabel3: TbsSkinStdLabel
+      Left = 40
+      Top = 69
+      Width = 46
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Vendedor'
+    end
+    object bsSkinStdLabel4: TbsSkinStdLabel
+      Left = 423
+      Top = 69
+      Width = 23
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Rota'
+    end
     object dtpData_Ini: TbsSkinDateEdit
-      Left = 24
+      Left = 6
       Top = 11
       Width = 95
       Height = 18
@@ -153,7 +189,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       RightImageDownIndex = -1
     end
     object dtpData_Fim: TbsSkinDateEdit
-      Left = 156
+      Left = 138
       Top = 11
       Width = 95
       Height = 18
@@ -376,7 +412,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       OnChange = cmbPeriodoChange
     end
     object cmbTipoRelatorio: TbsSkinComboBox
-      Left = 112
+      Left = 94
       Top = 37
       Width = 140
       Height = 20
@@ -678,14 +714,204 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Style = bscbFixedStyle
       OnChange = cmbTipoRelatorioChange
     end
+    object cmbNome_VendedorIni: TbsSkinDBLookupComboBox
+      Left = 171
+      Top = 62
+      Width = 185
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 7
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 20
+      UseSkinFont = True
+      DefaultColor = clWindow
+      ListBoxDefaultItemHeight = 20
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      KeyField = 'codigo'
+      ListField = 'Descricao;Codigo'
+      ListSource = srcVendedor
+      OnChange = cmbNome_VendedorIniChange
+    end
+    object cmbCod_VendedorIni: TbsSkinDBLookupComboBox
+      Left = 92
+      Top = 62
+      Width = 76
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 8
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 20
+      UseSkinFont = True
+      DefaultColor = clWindow
+      ListBoxDefaultItemHeight = 20
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      KeyField = 'codigo'
+      ListField = 'Codigo;Descricao'
+      ListSource = srcVendedor
+      ParentFont = False
+      TabStop = False
+      OnChange = cmbCod_VendedorIniChange
+    end
+    object btnLimpa: TbsSkinButton
+      Left = 362
+      Top = 62
+      Width = 24
+      Height = 22
+      Hint = 'Limpar Sele'#231#227'o'
+      HintImageIndex = 0
+      TabOrder = 9
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      CheckedMode = False
+      ImageList = frmPrincipal.cxSmallImages
+      ImageIndex = 10
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnLimpaClick
+    end
+    object cmbCod_rota: TbsSkinDBLookupComboBox
+      Left = 452
+      Top = 62
+      Width = 76
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 10
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 20
+      UseSkinFont = True
+      DefaultColor = clWindow
+      ListBoxDefaultItemHeight = 20
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      KeyField = 'codigo'
+      ListField = 'Codigo;Descricao'
+      ListSource = srcRotas
+      ParentFont = False
+      TabStop = False
+      OnChange = cmbCod_rotaChange
+    end
+    object cmbNome_Rota: TbsSkinDBLookupComboBox
+      Left = 531
+      Top = 62
+      Width = 185
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 11
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 20
+      UseSkinFont = True
+      DefaultColor = clWindow
+      ListBoxDefaultItemHeight = 20
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      KeyField = 'codigo'
+      ListField = 'Descricao;Codigo'
+      ListSource = srcRotas
+      OnChange = cmbNome_RotaChange
+    end
+    object bsSkinButton1: TbsSkinButton
+      Left = 722
+      Top = 62
+      Width = 24
+      Height = 22
+      Hint = 'Limpar Sele'#231#227'o'
+      HintImageIndex = 0
+      TabOrder = 12
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      CheckedMode = False
+      ImageList = frmPrincipal.cxSmallImages
+      ImageIndex = 10
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = bsSkinButton1Click
+    end
   end
   object grdRelatorio: TcxGrid
     Left = 0
-    Top = 119
+    Top = 145
     Width = 773
-    Height = 327
+    Height = 309
     Align = alClient
     TabOrder = 1
+    ExplicitLeft = 8
+    ExplicitTop = 185
     object GridRelatorio: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio
@@ -1013,13 +1239,13 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 250
-    Top = 131
+    Left = 258
+    Top = 219
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
-    Left = 250
-    Top = 159
+    Left = 258
+    Top = 247
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
@@ -1027,13 +1253,13 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     ProviderName = 'dspItensVendas'
     BeforeOpen = cdsRelatorioBeforeOpen
     OnCalcFields = cdsRelatorioCalcFields
-    Left = 250
-    Top = 187
+    Left = 258
+    Top = 275
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 250
-    Top = 215
+    Left = 258
+    Top = 303
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -1127,8 +1353,8 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 279
-    Top = 131
+    Left = 287
+    Top = 219
   end
   object PopRepasse: TbsSkinPopupMenu
     Left = 328
@@ -1146,8 +1372,8 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 222
-    Top = 131
+    Left = 230
+    Top = 219
   end
   object ExpMenu: TbsSkinPopupMenu
     Left = 384
@@ -1171,5 +1397,13 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       end>
     Left = 432
     Top = 216
+  end
+  object srcVendedor: TDataSource
+    Left = 58
+    Top = 231
+  end
+  object srcRotas: TDataSource
+    Left = 86
+    Top = 231
   end
 end
