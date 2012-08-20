@@ -77,7 +77,7 @@ type
     GridCtasReceberHistorico: TcxGridDBColumn;
     GridCtasReceberData_Vencimento: TcxGridDBColumn;
     GridCtasReceberData_Cad: TcxGridDBColumn;
-    GridCtasReceberCod_FormaPagamento: TcxGridDBColumn;
+    Cod_FormaPagamento: TcxGridDBColumn;
     GridCtasReceberData_Atu: TcxGridDBColumn;
     GridCtasReceberOperador: TcxGridDBColumn;
     GridCtasReceberCod_emp: TcxGridDBColumn;
@@ -134,6 +134,8 @@ type
     lblVendedor: TbsSkinLabel;
     lblLote: TbsSkinLabel;
     cmbTipoData: TbsSkinComboBox;
+    alterarVencimentoeTipodePagamento1: TMenuItem;
+    Nome_FormaPagamento: TcxGridDBColumn;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -165,6 +167,10 @@ type
     procedure cmbNome_FuncionarioChange(Sender: TObject);
     procedure PanelSelecaoClick(Sender: TObject);
     procedure cmbLoteChange(Sender: TObject);
+    procedure GridCtasReceberCellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure alterarVencimentoeTipodePagamento1Click(Sender: TObject);
 
   private
    pvQualBotao : String;
@@ -182,7 +188,8 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uBaixaTipo_01_Brinde, uBaixaNormal,
-  uselRelContasReceber, DaoSupervisor,DaoRemessa;
+  uselRelContasReceber, DaoSupervisor,DaoRemessa,
+  uAlteraVencimento_TipoPagamento;
 
 procedure TfrmCtasReceber.LimpaCampos();
 Begin
@@ -358,6 +365,17 @@ begin
  }
 end;
 
+procedure TfrmCtasReceber.alterarVencimentoeTipodePagamento1Click(
+  Sender: TObject);
+begin
+  frmAlteraVencimento_TipoPagamento := TfrmAlteraVencimento_TipoPagamento.Create(Self);
+  frmAlteraVencimento_TipoPagamento.cmbNome_formaPagamento.KeyValue := cdsPesquisa.FieldByname('Cod_FormaPagamento').AsString;
+  frmAlteraVencimento_TipoPagamento.edtData_Vencimento.Date         := cdsPesquisa.FieldByname('Data_Vencimento').AsDateTime;
+  frmAlteraVencimento_TipoPagamento.pContaAReceberId                := cdsPesquisa.FieldByname('Sequencia').AsInteger;
+  frmAlteraVencimento_TipoPagamento.ShowModal;
+  btnSelecionarClick(Self); 
+end;
+
 procedure TfrmCtasReceber.BorderodeEntrega1Click(Sender: TObject);
 begin
    frmselRelContasReceber := TfrmselRelContasReceber.Create(Self);
@@ -456,6 +474,13 @@ begin
      EdtPesquisa.SetFocus;
    except
    end;
+end;
+
+procedure TfrmCtasReceber.GridCtasReceberCellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+   btnexcluirClick(btnexcluir);
 end;
 
 procedure TfrmCtasReceber.rdgTipoVencimentoClick(Sender: TObject);
@@ -663,6 +688,7 @@ procedure TfrmCtasReceber.btnSelecionarClick(Sender: TObject);
 var lsCoringa : String;
     lsWhere : String;
 begin
+
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
@@ -674,11 +700,14 @@ begin
 
    qryPesquisa.Close;
    qryPesquisa.SQL.Text :=  'Select cli.Cod_rota,Rota.Descricao as Nome_Rota, Ven.Nome_cliente as Descricao, Cli.CnpjCpf, '+
-                            '       Ven.Controle, Ven.Tipo_Venda, Ven.Status as Entregue, Rec.* '+
-                            'from T_CtasReceber Rec, T_Clientes Cli, T_Vendas ven, T_Rotas Rota '+
+                            '       Ven.Controle, Ven.Tipo_Venda, Ven.Status as Entregue, Forma.Descricao as Nome_FormaPagamento, Rec.* '+
+                            'from T_CtasReceber Rec, T_Clientes Cli, T_Vendas ven, T_Rotas Rota, T_FormasPagamento Forma '+
                             'where '+lsWhere+' '+
                             '       Rec.Vlr_Areceber>:parVlr_Areceber AND '+
-                            '      Cli.Codigo=Rec.Cod_Cliente and ven.Seqvenda=Rec.Seqvenda And Rota.Codigo=Cli.Cod_Rota ';
+                            '       Cli.Codigo=Rec.Cod_Cliente and '+
+                            '       ven.Seqvenda=Rec.Seqvenda And '+
+                            '       Rota.Codigo=Cli.Cod_Rota And '+
+                            '       Forma.codigo=Rec.Cod_FormaPagamento';
 
    Case cmbTipoPesquisa.ItemIndex Of
       0 : qryPesquisa.SQL.Add(' And Cli.Descricao like :parPesquisa ');

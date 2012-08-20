@@ -356,7 +356,7 @@ object frmCadCaixas: TfrmCadCaixas
     Top = 53
     Width = 635
     Height = 247
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText

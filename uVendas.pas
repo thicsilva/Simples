@@ -233,6 +233,7 @@ type
      liSeqVendaAtu : Integer;
      liSeqOs       : Integer;
      liCaixa       : Integer;
+     liTotalLiquido : Real;
      procedure PrepararFinalizacaoOS;
      procedure AtualizaTabelas();
     { Public declarations }
@@ -575,6 +576,7 @@ begin
   btnok.Caption := '&Finalizar';
   lblControle.Visible := True;
   edtControle.Visible := True;
+  liTotalLiquido := StrtoFloat(edtTotalLiquido.Text);
 end;
 
 procedure TfrmVendas.TotalizarVenda(lrTotalDesconto : Real);
@@ -1368,12 +1370,13 @@ begin
       FreeAndNil(DaoVenda);
       FreeAndNil(lovenda);
    End;
+   DaoVenda := TDaoVenda.Create(gConexao);
+   if Formatfloat('0.00',liTotalLiquido)<>FormatFloat('0.00',StrTofloat(edtTotalLiquido.Text)) then
+      DaoVenda.MarcarComoNaoServicoPago(liSeqvenda);
+
    if lbServicoPago then
-   begin
-       DaoVenda := TDaoVenda.Create(gConexao);
-       DaoVenda.MarcarComoServicoPago(liSeqvenda);
-       FreeAndNil(DaoVenda);
-   end;
+      DaoVenda.MarcarComoServicoPago(liSeqvenda);
+   FreeAndNil(DaoVenda);
 
 {$ENDREGION}
 

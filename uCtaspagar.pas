@@ -32,31 +32,12 @@ type
     EdtPesquisa: TbsSkinEdit;
     chkPesqTodoTexto: TbsSkinCheckRadioBox;
     bsSkinTabSheet2: TbsSkinTabSheet;
-    bsSkinStdLabel1: TbsSkinStdLabel;
-    bsSkinStdLabel5: TbsSkinStdLabel;
-    edtHistorico: TbsSkinEdit;
     srcCadFornecedores: TDataSource;
-    bsSkinStdLabel8: TbsSkinStdLabel;
-    edtData_cad: TbsSkinEdit;
     dspVariavel: TDataSetProvider;
     SkinForm: TbsBusinessSkinForm;
     bsSkinStatusBar1: TbsSkinStatusBar;
     btnSelecionar: TSpeedButton;
     bsSkinScrollBar2: TbsSkinScrollBar;
-    edtCod_Fornecedor: TbsSkinEdit;
-    cmbCod_Fornecedor: TbsSkinDBLookupComboBox;
-    cmbNome_Fornecedor: TbsSkinDBLookupComboBox;
-    bsSkinStdLabel2: TbsSkinStdLabel;
-    lblVencimentos: TbsSkinStdLabel;
-    edtData_Emissao: TbsSkinDateEdit;
-    edtData_Vencimento: TbsSkinDateEdit;
-    rdgTipoVencimento: TbsSkinRadioGroup;
-    lblDiasa: TbsSkinStdLabel;
-    bsSkinStdLabel6: TbsSkinStdLabel;
-    edtParcelas: TbsSkinSpinEdit;
-    edtDias: TbsSkinSpinEdit;
-    EdtVlr_total: TEditN;
-    Label1: TLabel;
     srcCtasPagar: TDataSource;
     dtpData_Ini: TbsSkinDateEdit;
     lblTurma: TbsSkinStdLabel;
@@ -66,10 +47,6 @@ type
     edtData_fim: TEditN;
     edtData_Ini: TEditN;
     cmbTipoFiltro: TComboBox;
-    bsSkinStdLabel7: TbsSkinStdLabel;
-    cmbNome_CentroCusto: TbsSkinDBLookupComboBox;
-    cmbCod_CentroCusto: TbsSkinDBLookupComboBox;
-    edtCod_CentroCusto: TbsSkinEdit;
     srcCadCtoCusto: TDataSource;
     BtnEstornado: TbsSkinSpeedButton;
     bsSkinBevel3: TbsSkinBevel;
@@ -96,6 +73,30 @@ type
     QryVariavel: TSQLQuery;
     srcPesquisa: TDataSource;
     cdsPesquisa: TClientDataSet;
+    bsSkinExPanel1: TbsSkinExPanel;
+    bsSkinStdLabel1: TbsSkinStdLabel;
+    bsSkinStdLabel5: TbsSkinStdLabel;
+    bsSkinStdLabel8: TbsSkinStdLabel;
+    bsSkinStdLabel2: TbsSkinStdLabel;
+    lblVencimentos: TbsSkinStdLabel;
+    lblDiasa: TbsSkinStdLabel;
+    bsSkinStdLabel6: TbsSkinStdLabel;
+    Label1: TLabel;
+    bsSkinStdLabel7: TbsSkinStdLabel;
+    cmbCod_Fornecedor: TbsSkinDBLookupComboBox;
+    edtHistorico: TbsSkinEdit;
+    edtData_cad: TbsSkinEdit;
+    edtCod_Fornecedor: TbsSkinEdit;
+    cmbNome_Fornecedor: TbsSkinDBLookupComboBox;
+    edtData_Emissao: TbsSkinDateEdit;
+    edtData_Vencimento: TbsSkinDateEdit;
+    rdgTipoVencimento: TbsSkinRadioGroup;
+    edtParcelas: TbsSkinSpinEdit;
+    edtDias: TbsSkinSpinEdit;
+    EdtVlr_total: TEditN;
+    cmbNome_CentroCusto: TbsSkinDBLookupComboBox;
+    cmbCod_CentroCusto: TbsSkinDBLookupComboBox;
+    edtCod_CentroCusto: TbsSkinEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -500,33 +501,34 @@ end;
 
 procedure TfrmCtasPagar.btnSelecionarClick(Sender: TObject);
 var lsCoringa : String;
+    lsWhere : String;
+    lstParametros : TStringList;
 begin
+
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
+   lstParametros := TStringList.Create;
+   lstParametros.add(dtpData_Ini.Text);
+   lstParametros.add(dtpData_Fim.Text);
+   lstParametros.add(lsCoringa+EdtPesquisa.Text+'%');
 
-   QryVariavel.Close;
-   QryVariavel.SQL.Text := 'Select Forne.Descricao, Pag.* from T_CtasPagar Pag, T_fornecedores Forne '+
-                            ' where Data_Vencimento>=:parDataIni and Data_Vencimento<=:parDataFim And '+
-                            '       Forne.Codigo=Pag.Cod_Fornecedor ';
+   lsWhere  :='Select Forne.Descricao, Pag.* from T_CtasPagar Pag, T_fornecedores Forne '+
+              ' where Data_Vencimento>=:parDataIni and Data_Vencimento<=:parDataFim And '+
+              '       Forne.Codigo=Pag.Cod_Fornecedor ';
 
    If cmbTipoPesquisa.ItemIndex = 0 Then
-      QryVariavel.SQL.Add('And Forne.Descricao like :parDescricao ')
+      lsWhere :=  lsWhere + 'And Forne.Descricao like :parDescricao '
    Else If cmbTipoPesquisa.ItemIndex = 1 Then
-      QryVariavel.SQL.Add('And Pag.Historico like :parDescricao ');
+      lsWhere :=  lsWhere + 'And Pag.Historico like :parDescricao ';
    if cmbTipoFiltro.ItemIndex <> 2 Then
-      QryVariavel.SQL.Add('And Pag.Status =:parStatus ');
-   QryVariavel.SQL.Add('Order by Pag.data_Vencimento ');
+   Begin
+      lsWhere := lsWhere +' And Pag.Status =:parStatus ';
+      lstParametros.add(IntToStr(cmbTipoFiltro.ItemIndex));
+   End;
+   lsWhere :=  lsWhere +' Order by Pag.data_Vencimento ';
 
-   QryVariavel.ParamByName('parDescricao').AsString:= lsCoringa+EdtPesquisa.Text+'%';
-   if cmbTipoFiltro.ItemIndex <> 2 Then
-      QryVariavel.ParamByName('parStatus').asInteger := cmbTipoFiltro.ItemIndex;
-   QryVariavel.ParamByName('parDataIni').AsString    := dtpData_Ini.Text;
-   QryVariavel.ParamByName('parDatafim').AsString    := dtpData_Fim.Text;
-
-   cdsPesquisa.Close;
-   cdsPesquisa.ProviderName := dspVariavel.name;
-   cdsPesquisa.Open;
+   cdsPesquisa.Data := gConexao.BuscarDadosSQL(lsWhere, lstParametros).Data;
 
 end;
 

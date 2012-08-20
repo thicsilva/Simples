@@ -11,6 +11,7 @@ type TDaoFormaPagamento = class
    public
      Constructor Create( conexao : TConexao);
      function Buscar(idFormaPagamento : Integer) : TFormaPagamento;
+     function BuscarTodos : TClientDataSet;
 end;
 
 
@@ -37,6 +38,11 @@ begin
     FreeandNil(Parametros);
   End;
 
+end;
+
+function TDaoFormaPagamento.BuscarTodos : TClientDataSet;
+begin
+   Result := FConexao.BuscarDadosSQL('Select * from T_FormasPagamento order by Descricao', Nil);
 end;
 
 constructor TDaoFormaPagamento.Create(conexao: TConexao);

@@ -2,7 +2,7 @@ object frmCadOperacoes: TfrmCadOperacoes
   Left = 242
   Top = 180
   BorderIcons = []
-  Caption = 'Cadastro e manuten'#231'ao de Operac'#245'es'
+  Caption = 'Cadastro e manuten'#231'ao de Plano de Contas '
   ClientHeight = 305
   ClientWidth = 616
   Color = clBtnFace
@@ -51,6 +51,10 @@ object frmCadOperacoes: TfrmCadOperacoes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -255,9 +259,10 @@ object frmCadOperacoes: TfrmCadOperacoes
         Left = 0
         Top = 33
         Width = 614
-        Height = 195
+        Height = 197
         Align = alClient
         TabOrder = 2
+        ExplicitHeight = 195
         object GridOperacoes: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
