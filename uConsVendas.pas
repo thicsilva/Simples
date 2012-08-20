@@ -686,12 +686,13 @@ begin
       CaixaMensagem( 'A Venda ja Esta Cancelada ', ctAviso, [ cbOk ],0 );
       Exit
    End;
-   if cdsVendas.FieldByName('Status').AsString = '3' Then
+   {
+   if cdsVendas.FieldByName('Status').AsString  '3' Then
    Begin
       CaixaMensagem( 'Venda ja finalizada ', ctAviso, [ cbOk ],0 );
       Exit
    End;
-
+    }
    {$ENDREGION}
 
    if CaixaMensagem( 'Deseja Efetuar o Cancelamento da Venda nº '+cdsVendas.FieldByName('SeqVenda').AsString, ctConfirma, [ cbSimNao ], 0 )  Then
