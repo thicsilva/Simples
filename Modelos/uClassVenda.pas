@@ -382,8 +382,7 @@ begin
    FLinha := FLinha + 1;
    impMatricial.ImpC(FLinha,RetornarPosicaoCentral(Length(Trim(Empresa.Nome_Fantasia)),ImpMatricial.TamanhoQteColunas ), Trim(Empresa.Nome_Fantasia), [] );
    FLinha := FLinha + 1;
-   impMatricial.ImpC(FLinha, RetornarPosicaoCentral(
-                                                     Length(Trim(Empresa.Endereco.logradouro)+', '+Trim(Empresa.Endereco.numero)+' Bairro.: '+Trim(Empresa.Endereco.bairro)+' '+
+   impMatricial.ImpC(FLinha, RetornarPosicaoCentral(Length(Trim(Empresa.Endereco.logradouro)+', '+Trim(Empresa.Endereco.numero)+' Bairro.: '+Trim(Empresa.Endereco.bairro)+' '+
                                                             Trim(Empresa.Endereco.cidade)+'-'+Empresa.Endereco.uf),ImpMatricial.TamanhoQteColunas ),
                                   Empresa.Endereco.logradouro+', '+Empresa.Endereco.numero+' Bairro.: '+Empresa.Endereco.bairro+' '+
                                   Empresa.Endereco.cidade+'-'+Empresa.Endereco.uf, [] );
@@ -392,7 +391,8 @@ begin
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
    FLinha := FLinha + 1;
-   impMatricial.Imp(FLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',DadosVendas.FieldByName( 'Data_Venda' ).AsDateTime)+' Orc.: '+incZero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,8)+ ' Sequencia..: '+Cliente.Sequencia );
+   impMatricial.Imp (FLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',DadosVendas.FieldByName( 'Data_Venda' ).AsDateTime));
+   impMatricial.Impd(FLinha,080,'Orc.: '+incZero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,8)+ ' Sequencia..: '+Cliente.Sequencia,[] );
    FLinha := FLinha + 1;
    impMatricial.ImpF(FLinha,001,'Cliente...: '+Copy(IntToStr(Cliente.Id)+'-'+Cliente.Descricao,1,80 ),[negrito] );
    FLinha := FLinha + 1;
@@ -401,10 +401,10 @@ begin
    impMatricial.Imp(FLinha,001,'Endereco..: '+Cliente.Endereco.logradouro+', '+Cliente.Endereco.numero+' Bairro.: '+Cliente.Endereco.bairro+' '+
                                               Cliente.Endereco.cidade+'-'+Cliente.Endereco.uf );
    FLinha := FLinha + 1;
-   impMatricial.Imp(FLinha,001,'Pto.Refere: '+Cliente.Endereco.PontoReferencia);
+   impMatricial.Imp(FLinha,001,'Pto.Refere: '+Cliente.Endereco.PontoReferencia+' Telefone.:'+cliente.Telefones);
    FLinha := FLinha + 1;
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
-   FLinha := FLinha + 1;                //   123456789,123456789,123456789,12345
+   FLinha := FLinha + 1;      //  123456789,123456789,123456789,12345
    impMatricial.Imp( FLinha, 001, 'Codigo |P R O D U T O S                       |Quatidade|Pc. Unit|   Vlr Total|' );
    FLinha := FLinha + 1;        // 123456789,123456789,123456789,123456789,123456789,123456789,123456789,123456789
    impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
@@ -436,18 +436,23 @@ begin
    end;
    impMatricial.Imp ( FLinha, 001, IncDigito( '-', '-', 80, 0 ) );
    FLinha := FLinha + 1;
+   {
    impMatricial.Imp ( FLinha, 039, 'Total de Produtos Listado.: ' );
    impMatricial.ImpD( FLinha, 079, IntToStr( liCont ), [ ] );
-   FLinha := FLinha + 1;
+   FLinha := FLinha + 1;   }
+   impMatricial.Imp(FLinha,001,'Vendedor..: '+Copy(inczero(DadosVendas.FieldByName( 'Cod_Funcionario' ).AsString,3)+'-'+Self.Funcionario.Descricao,1,25));
    impMatricial.Imp ( FLinha, 039, 'Valor Total...............:');
    impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', ( lrTot_Produtos ) ), [ ] );
    FLinha := FLinha + 1;
-   impMatricial.Imp ( FLinha, 039, 'Desconto Total ...........:' );
-   impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', lrTot_Desconto ), [ ] );
-   FLinha := FLinha + 1;
-   impMatricial.Imp ( FLinha, 039, 'Valor a Pagar.............:');
-   impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
-   FLinha := FLinha + 1;
+   if lrTot_Desconto>0 then
+   begin
+      impMatricial.Imp ( FLinha, 039, 'Desconto Total ...........:' );
+      impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', lrTot_Desconto ), [ ] );
+      FLinha := FLinha + 1;
+      impMatricial.Imp ( FLinha, 039, 'Valor a Pagar.............:');
+      impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
+      FLinha := FLinha + 1;
+   end;
    impMatricial.Imp(FLinha,001,'Forma Pag.: '+Copy(inczero(IntToStr(Self.FormaPagamento.Id),3)+'-'+FormaPagamento.Descricao,1,25));
    FLinha := FLinha + 2;
    impMatricial.Imp(FLinha,001,'Vencimento: ' );
