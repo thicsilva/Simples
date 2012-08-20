@@ -409,6 +409,9 @@ type
     procedure N5ClientesporVendedoreBairro2Click(Sender: TObject);
     procedure cxGridDBTableView1DblClick(Sender: TObject);
     procedure btnImprimirAnimaisClick(Sender: TObject);
+    procedure GridClintesCellDblClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
    pvQualBotao         : String;
    FFonts              : TFonts;
@@ -1946,6 +1949,13 @@ procedure TfrmCadClientes.edtCnpjCpfEnter(Sender: TObject);
 begin
    edtCNPJCPF.EditMask := '';
    edtCNPJCPF.SelectAll;
+end;
+
+procedure TfrmCadClientes.GridClintesCellDblClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+  btnalterarClick(btnalterar);
 end;
 
 procedure TfrmCadClientes.GridClintesDblClick(Sender: TObject);
