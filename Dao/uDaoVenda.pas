@@ -25,7 +25,8 @@ type TDaoVenda = class
      procedure CancelarRomaneio(RomaneiId : Integer);
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
-     function RetornarVencimentos(VendaId : Integer) : TStringList; 
+     function RetornarVencimentos(VendaId : Integer) : TStringList;
+     procedure MarcarComoNaoServicoPago(IDVenda: Integer);
 end;
 
 
@@ -106,6 +107,14 @@ procedure TDaoVenda.MarcarComoServicoPago(IDVenda: Integer);
 begin
   FqryModific.Close;
   FqryModific.SQL.Text :='UpDate T_vendas set ServicoPago=1 where SeqVenda=:parSeqvenda';
+  FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
+  FqryModific.ExecSql;
+end;
+
+procedure TDaoVenda.MarcarComoNaoServicoPago(IDVenda: Integer);
+begin
+  FqryModific.Close;
+  FqryModific.SQL.Text :='UpDate T_vendas set ServicoPago=0 where SeqVenda=:parSeqvenda';
   FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
   FqryModific.ExecSql;
 end;
