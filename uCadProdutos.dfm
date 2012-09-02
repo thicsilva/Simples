@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 752
     Height = 460
-    ActivePage = pagCustos
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -51,7 +51,6 @@ object frmCadProdutos: TfrmCadProdutos
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 50
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
@@ -344,7 +343,7 @@ object frmCadProdutos: TfrmCadProdutos
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 73
         Top = 19
-        Width = 530
+        Width = 536
         Height = 310
         HintImageIndex = 0
         TabOrder = 0
@@ -546,23 +545,6 @@ object frmCadProdutos: TfrmCadProdutos
           SkinDataName = 'stdlabel'
           Caption = 'Aliquota do ECF'
           Visible = False
-        end
-        object lblComissao: TbsSkinStdLabel
-          Left = 66
-          Top = 259
-          Width = 45
-          Height = 13
-          EllipsType = bsetNone
-          UseSkinFont = True
-          UseSkinColor = True
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = -11
-          DefaultFont.Name = 'MS Sans Serif'
-          DefaultFont.Style = []
-          SkinData = frmPrincipal.SkinEntradaDados
-          SkinDataName = 'stdlabel'
-          Caption = 'Comiss'#227'o'
         end
         object lblCadFabricante: TbsSkinStdLabel
           Left = 298
@@ -770,7 +752,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 271
           Height = 20
           HintImageIndex = 0
-          TabOrder = 15
+          TabOrder = 14
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -797,7 +779,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 63
           Height = 20
           HintImageIndex = 0
-          TabOrder = 14
+          TabOrder = 13
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -884,7 +866,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 179
           Height = 21
           HintImageIndex = 0
-          TabOrder = 13
+          TabOrder = 12
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1051,7 +1033,7 @@ object frmCadProdutos: TfrmCadProdutos
           CharCase = ecUpperCase
           MaxLength = 3
           ParentFont = False
-          TabOrder = 16
+          TabOrder = 15
           Visible = False
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1095,48 +1077,13 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
-        object edtComissao: TbsSkinNumericEdit
-          Left = 120
-          Top = 256
-          Width = 58
-          Height = 18
-          Text = '0,00'
-          Increment = 1.000000000000000000
-          SupportUpDownKeys = False
-          Alignment = taRightJustify
-          UseSkinFont = True
-          ValueType = vtFloat
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
-          DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          DefaultWidth = 0
-          DefaultHeight = 0
-          ButtonMode = False
-          SkinData = frmPrincipal.SkinEntradaDados
-          SkinDataName = 'edit'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = 14
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 11
-          LeftImageIndex = -1
-          LeftImageHotIndex = -1
-          LeftImageDownIndex = -1
-          RightImageIndex = -1
-          RightImageHotIndex = -1
-          RightImageDownIndex = -1
-        end
         object cmbNome_Fabricante: TbsSkinDBLookupComboBox
           Left = 352
           Top = 256
           Width = 105
           Height = 20
           HintImageIndex = 0
-          TabOrder = 12
+          TabOrder = 11
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1225,7 +1172,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 139
           Height = 21
           HintImageIndex = 0
-          TabOrder = 17
+          TabOrder = 16
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1274,7 +1221,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           MaxLength = 10
           ParentFont = False
-          TabOrder = 18
+          TabOrder = 17
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1310,7 +1257,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 19
+          TabOrder = 18
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1346,7 +1293,194 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 20
+          TabOrder = 19
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+      end
+      object bsSkinExPanel3: TbsSkinExPanel
+        Left = 73
+        Top = 336
+        Width = 536
+        Height = 66
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'expanel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CaptionImageIndex = -1
+        NumGlyphs = 1
+        Spacing = 2
+        RealWidth = 0
+        RealHeight = 0
+        ShowRollButton = False
+        ShowCloseButton = False
+        DefaultCaptionHeight = 21
+        RollState = False
+        RollKind = rkRollVertical
+        Moveable = False
+        Sizeable = False
+        Caption = 'Controle de Comi'#231#245'es'
+        object lblComissao: TbsSkinStdLabel
+          Left = 9
+          Top = 37
+          Width = 96
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Comiss'#227'o Primaria %'
+        end
+        object bsSkinStdLabel22: TbsSkinStdLabel
+          Left = 183
+          Top = 37
+          Width = 113
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Comiss'#227'o Secundaria %'
+        end
+        object bsSkinStdLabel23: TbsSkinStdLabel
+          Left = 373
+          Top = 37
+          Width = 95
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Margem Secundaria'
+        end
+        object edtComissao: TbsSkinNumericEdit
+          Left = 113
+          Top = 34
+          Width = 58
+          Height = 18
+          Text = '0,00'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtcomissaoSecundaria: TbsSkinNumericEdit
+          Left = 302
+          Top = 34
+          Width = 58
+          Height = 18
+          Text = '0,00'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtMargemSecundaria: TbsSkinNumericEdit
+          Left = 472
+          Top = 34
+          Width = 58
+          Height = 18
+          Text = '0,00'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

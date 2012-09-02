@@ -89,7 +89,6 @@ type
     bsSkinStdLabel6: TbsSkinStdLabel;
     bsSkinStdLabel7: TbsSkinStdLabel;
     bsSkinStdLabel9: TbsSkinStdLabel;
-    lblComissao: TbsSkinStdLabel;
     edtDescricao: TbsSkinEdit;
     edtCodigo: TbsSkinEdit;
     edtData_cad: TbsSkinEdit;
@@ -126,7 +125,6 @@ type
     GridFichaTecinicaColumn3: TcxGridDBColumn;
     GridFichaTecinicaColumn4: TcxGridDBColumn;
     edtPco_Venda: TbsSkinNumericEdit;
-    edtComissao: TbsSkinNumericEdit;
     qryModific: TSQLQuery;
     Label2: TLabel;
     qrySaldos: TSQLQuery;
@@ -219,6 +217,13 @@ type
     edtMargem: TbsSkinNumericEdit;
     bsSkinButton1: TbsSkinButton;
     cdsCustoProdutoIDCusto: TIntegerField;
+    bsSkinExPanel3: TbsSkinExPanel;
+    lblComissao: TbsSkinStdLabel;
+    edtComissao: TbsSkinNumericEdit;
+    bsSkinStdLabel22: TbsSkinStdLabel;
+    edtcomissaoSecundaria: TbsSkinNumericEdit;
+    bsSkinStdLabel23: TbsSkinStdLabel;
+    edtMargemSecundaria: TbsSkinNumericEdit;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -573,6 +578,8 @@ begin
    cdsCadProdutos.FieldByName('MetroLinear').AsBoolean := chkMetroLinear.Checked;
    cdsCadProdutos.FieldByName('PesoLiquido').AsFloat   := StrTofloat(edtPesoLiquido.Text);
    cdsCadProdutos.FieldByName('PesoBruto').AsFloat     := StrTofloat(edtPesoBruto.Text);
+   cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat := StrTofloat(edtComissaoSecundaria.Text);
+   cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat   := StrTofloat(edtMargemSecundaria.Text);
    cdsCadProdutos.Post;
 
    If cdsCadProdutos.ChangeCount > 0  Then // se houve mudancas
@@ -919,6 +926,9 @@ begin
    vlr_VendaAnt      := cdsCadProdutos.FieldByName('Pco_Venda').AsFloat;
    edtPesoBruto.Text   := FormatFloat('0.000',cdsCadProdutos.FieldByName('PesoBruto').AsFloat);
    edtPesoLiquido.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('PesoLiquido').AsFloat);
+   edtComissaoSecundaria.Text := Formatfloat('0.00', cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat);
+   edtMargemSecundaria.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat);
+
 
 
    BtnIncluir.Enabled := False;

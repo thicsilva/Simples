@@ -2,7 +2,7 @@ unit uClassCliente;
 
 interface
 
-uses uClassEndereco;
+uses uClassEndereco,uClassRota;
 
 type TCliente = class
   private
@@ -13,6 +13,7 @@ type TCliente = class
     FEndereco: TEndereco;
     FTelefones: String;
     FSequencia: String;
+    FRota: TRota;
     procedure SetDescricao(const Value: string);
     procedure SetCPF(const Value: String);
     procedure SetId(const Value: integer);
@@ -20,6 +21,7 @@ type TCliente = class
     procedure SetEndereco(const Value: TEndereco);
     procedure SetTelefones(const Value: String);
     procedure SetSequencia(const Value: String);
+    procedure SetRota(const Value: TRota);
   published
    public
      Constructor Create;
@@ -30,6 +32,7 @@ type TCliente = class
      property InscricaoEstadual : String read FInscricaoEstadual write SetInscricaoEstadual;
      property Endereco : TEndereco read FEndereco write SetEndereco;
      property Telefones : String read FTelefones write SetTelefones;
+     property Rota : TRota read FRota write SetRota;
 end;
 implementation
 
@@ -63,6 +66,11 @@ end;
 procedure TCliente.SetInscricaoEstadual(const Value: String);
 begin
   FInscricaoEstadual := Value;
+end;
+
+procedure TCliente.SetRota(const Value: TRota);
+begin
+  FRota := Value;
 end;
 
 procedure TCliente.SetSequencia(const Value: String);

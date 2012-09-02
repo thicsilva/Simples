@@ -177,13 +177,16 @@ type
     btnDesconto: TbsSkinSpeedButton;
     cdsItensVendasTMPPesoBruto: TFloatField;
     cdsItensVendasTMPPesoLiquido: TFloatField;
+    cdsItensVendasTMPPrecoCusto: TFloatField;
+    cdsItensVendasTMPMargemSecundaria: TFloatField;
+    cdsItensVendasTMPLucroBruto: TFloatField;
+    PanelStatus: TbsSkinStatusPanel;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
     procedure cmbNome_ProdutoChange(Sender: TObject);
     procedure EdtPco_VendaExit(Sender: TObject);
     procedure edtQtde_VendaExit(Sender: TObject);
-    procedure btnAdicionarClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure edtTotalExit(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
@@ -216,6 +219,7 @@ type
     procedure cmbNome_TipoVendaChange(Sender: TObject);
     procedure cmbNome_TipoVendaExit(Sender: TObject);
     procedure btnDescontoClick(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -228,6 +232,7 @@ type
      procedure AtualizaDesconto(lrPercDesconto : Real);
      procedure TotalizarVenda(lrTotalDesconto: Real);
     function RetornarSelectProdutos: String;
+    procedure AtaulizaLucroBruto;
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
@@ -301,7 +306,7 @@ Begin
    if StrToFloat(edtTotalLiquido.Text)>StrTOfloat(edtLimite_Credito.Text) then
    Begin
       CaixaMensagem( 'O cliente ultrapassou o limite de credito ', ctAviso, [ cbOk ], 0 );
-      if cdsCadFormasPagamento.FieldByName('TipoPagamento').AsInteger>0 then
+      if Trim(cdsCadFormasPagamento.FieldByName('Descricao').AsString)<>'A VISTA' then
          btnok.Enabled          :=False;
       edtTotalLiquido.Color := clred;
    End
@@ -677,6 +682,9 @@ begin
    cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := StrToFloat (edtPco_Venda.Text);
    cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat    := StrToFloat (edtPco_Tabela.Text);
    cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := StrToFloat ( edtTotal.Text);
+   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := cdsCadProdutos.fieldbyname('Pco_Custo').asFloat;
+   cdsItensVendasTmp.FieldByName('LucroBruto').asFloat    := Arredondar((( StrToFloat(edtPco_Venda.Text) - cdsCadProdutos.fieldbyname('Pco_Custo').asFloat )/StrToFloat(edtPco_Venda.Text))*100,4);
+   cdsItensVendasTmp.FieldByName('MargemSecundaria').asFloat := cdsCadProdutos.fieldbyname('MargemSecundaria').asFloat;
    cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat    := cdsCadProdutos.fieldbyname('Perc_Comissao').asFloat;
    cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := StrToFloat ( edtVlr_Desconto.Text);
    cdsItensVendasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
@@ -713,32 +721,25 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
    VerLimite();
+   AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
-
 end;
-
-procedure TfrmVendas.btnAdicionarClick(Sender: TObject);
+procedure  TfrmVendas.AtaulizaLucroBruto;
+var PerLucroBruto : real;
+    LucroBruto : Real;
+    ValorTotal : real;
+    CustoTotal : Real;
 begin
-
-   pvQualBotao := 'Incluir';
-
-   edtCod_Produto.Enabled  := True;
-   cmbNome_Produto.Enabled := True;
-   btnCadProdutos.Enabled  := True;
-
-   btnAdicionar.Enabled     := False;
-   btnExcluir.Enabled       := False;
-   btnAlterar.Enabled       := False;
-   btnOkProd.Enabled        := True;
-   btnCancelar.Enabled      := True;
-   btnCadProdutos.Enabled   := True;
-   If frmVendas.tag <> 4 then
-   Begin
-      Try
-         edtCod_Produto.SetFocus;
-      Except
-      End;
-   End;
+  cdsItensVendasTmp.first;
+  while not cdsItensVendasTmp.eof do
+  begin
+     ValorTotal := ValorTotal +   cdsItensVendasTmp.FieldByName('vlr_Total').asFloat;
+     CustoTotal := CustoTotal + ( cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat * cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat );
+     cdsItensVendasTmp.next;
+  end;
+  PerLucroBruto := ((ValorTotal - CustoTotal)/ ValorTotal)*100;
+  LucroBruto := ValorTotal - CustoTotal;
+  panelstatus.Caption := ' Lucru Bruto % ..: '+FormatFloat('0.0000', PerLucroBruto)+' | Lucro Bruto R$ ... : '+FormatFloat('0.00', LucroBruto);
 end;
 
 
@@ -769,6 +770,7 @@ Var liSeqvenda     : integer;
     DaoFuncionario: TdaoFuncionario;
     liCaixaFinalizado : Integer;
     lbServicoPago : Boolean;
+  lrCustoTotal: real;
 begin
 
    {$REGION 'Criticas e Validação das Informações'}
@@ -887,6 +889,7 @@ begin
                                               cdsItensVendasTmp.FieldByName('Codigo').asInteger,
                                               cdsItensVendasTmp.FieldByName('Qtde_Venda').AsInteger, gsOperador  );
         end;
+        lrCustoTotal := lrCustoTotal + ( cdsItensVendasTmp.FieldByName('Qtde_Venda').Asfloat*cdsItensVendasTmp.FieldByName('PrecoCusto').Asfloat );
       except
          on E: Exception do
          Begin
@@ -894,6 +897,7 @@ begin
             CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
             Exit;
          End;
+
       End;
 
       {$REGION 'Controle de Saldo de estoque (Valor)'}
@@ -977,12 +981,15 @@ begin
    cdsVenda.FieldByname('Cod_Funcionario').Asinteger := StrToInt(cmbCod_Funcionario.KeyValue);
    cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := StrToInt(cmbCod_formaPagamento.KeyValue);
    cdsVenda.FieldByname('Vlr_Total').AsFloat         := (StrToFloat( edtTotalVenda.Text )-StrToFloat( edtTotDesconto.Text ));
+   cdsVenda.FieldByname('CustoTotal').AsFloat        := lrCustoTotal;
+   cdsVenda.FieldByname('LucroBruto').AsFloat        := ((( cdsVenda.FieldByname('Vlr_Total').AsFloat - lrCustoTotal ) / cdsVenda.FieldByname('Vlr_Total').AsFloat)*100);
    cdsVenda.FieldByname('Vlr_Desconto').AsFloat      := StrToFloat( edtTotDesconto.Text );
    cdsVenda.FieldByname('Status').AsString           := 'N';
    cdsVenda.FieldByname('Operador').AsString         := gsOperador;
    cdsVenda.FieldByname('Cod_Emp').AsString          := gsCod_emp;
    cdsVenda.FieldByName('Data_Mov').asDateTime       := gsData_Mov;
    cdsVenda.FieldByName('Data_venda').asDateTime     := edtDataVenda.Date;
+
    If frmVendas.tag <> 4 then
       cdsVenda.FieldByName('Data_Cad').asDateTime       := now;
    cdsVenda.FieldByname('Vlr_DescProd').AsFloat      := lrVlr_DescProd;
@@ -1574,7 +1581,33 @@ begin
       edtTotalLiquido.Text  := FormatFloat('0.00',StrToFloat(edtTotalLiquido.Text) -  cdsItensVendasTMP.FieldByname('Vlr_total').asFloat);
       cdsItensVendasTMP.Delete;
    End;
-   VerLimite()
+   VerLimite();
+   AtaulizaLucroBruto;
+end;
+
+procedure TfrmVendas.btnAdicionarClick(Sender: TObject);
+begin
+
+   pvQualBotao := 'Incluir';
+
+   edtCod_Produto.Enabled  := True;
+   cmbNome_Produto.Enabled := True;
+   btnCadProdutos.Enabled  := True;
+
+   btnAdicionar.Enabled     := False;
+   btnExcluir.Enabled       := False;
+   btnAlterar.Enabled       := False;
+   btnOkProd.Enabled        := True;
+   btnCancelar.Enabled      := True;
+   btnCadProdutos.Enabled   := True;
+   If frmVendas.tag <> 4 then
+   Begin
+      Try
+         edtCod_Produto.SetFocus;
+      Except
+      End;
+   End;
+
 end;
 
 procedure TfrmVendas.btnAlterarClick(Sender: TObject);
@@ -1598,7 +1631,8 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
 
-   edtQtde_Venda.SetFocus
+   edtQtde_Venda.SetFocus;
+   AtaulizaLucroBruto;
 
 end;
 
@@ -1833,7 +1867,7 @@ Begin
    precoDeVenda:= 'Pco_Venda';
    if frmVendas.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
-   Result :=  'Select PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+   Result :=  'Select ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
 end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin
