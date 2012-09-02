@@ -462,8 +462,7 @@ object frmMovCaixa: TfrmMovCaixa
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnImprimirClick
-        ExplicitLeft = 335
-        ExplicitTop = 8
+        ExplicitLeft = 390
       end
       object bsSkinBevel4: TbsSkinBevel
         Left = 524
@@ -1065,10 +1064,6 @@ object frmMovCaixa: TfrmMovCaixa
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manutencao'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 160
         Top = 47

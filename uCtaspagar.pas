@@ -320,44 +320,42 @@ end;
 procedure TfrmCtasPagar.btnexcluirClick(Sender: TObject);
 var lisequencia : Integer;
 begin
-   IF qryCtaspagar.IsEmpty Then
+
+   IF cdsPesquisa.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   if (qryCtaspagar.FieldByName('Status').AsInteger = 1 ) Then  // 0 aberto 1 Pago
-   Begin
-      CaixaMensagem( 'So é possivel Baixar Titulos em aberto', ctAviso, [ cbOk ],0 );
-      Exit
-   End;
 
-   if CaixaMensagem( 'Deseja Efetuar a Baixa deste titulo ( '+qryCtaspagar.FieldByName('Historico').AsString+' ) ', ctConfirma, [ cbSimNao ], 0 )  Then
+
+   if CaixaMensagem( 'Deseja baixar esta conta ( '+cdsPesquisa.FieldByName('Historico').AsString+' ) ', ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
       qryModific.Close;
-      qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Operacao, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda ) Values '+
-                             '                       ( :parCod_Operacao, :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
+      qryModific.SQL.Text := 'Insert into T_movCaixa ( Sequencia, Cod_TipoDespesa, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda ) Values '+
+                             '                       ( :parSequencia,:parCod_TipoDespesa, :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
                              '                         :parD_C,:parSeqVenda ) ';
 
-      qryModific.ParamByName('parCod_Caixa').AsString             := '001';
-      qryModific.ParamByName('parValor').AsFloat                  := ( qryCtaspagar.fieldByname('valor').AsFloat);
-      qryModific.ParamByName('parHistorico').AsString             := 'Pagameto de Titulo ('+qryCtaspagar.fieldByname('Historico').AsString+')';
+      qryModific.ParamByName('parCod_Caixa').AsInteger            := 1;
+      qryModific.ParamByName('parValor').AsFloat                  := ( cdsPesquisa.fieldByname('valor').AsFloat);
+      qryModific.ParamByName('parHistorico').AsString             := 'Pagameto de Titulo ('+cdsPesquisa.fieldByname('Historico').AsString+')';
       qryModific.ParamByName('parData_Lancamento').AsSQLTimeStamp := DateTimeToSQLTimeStamp(Now);
       qryModific.ParamByName('parD_C').AsString                   := 'D';
-      qryModific.ParamByName('parCod_Operacao').AsString       := qryCtaspagar.fieldByname('Cod_Operacao').AsString;
+      qryModific.ParamByName('parCod_TipoDespesa').AsString          := cdsPesquisa.fieldByname('Cod_Operacao').AsString;
       qryModific.ParamByName('parSeqVenda').AsInteger             := 1;
+      qryModific.ParamByName('parSequencia').AsInteger             := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
       qryModific.ExecSQL;
 
       qryModific.Close;
       qryModific.SQL.Text := 'update T_Ctaspagar set Status=:parStatus '+
                              'where Sequencia=:parSequencia ';
-      qryModific.ParamByName('parSequencia').AsInteger       := qryCtaspagar.fieldByname('Sequencia').AsInteger;
+      qryModific.ParamByName('parSequencia').AsInteger       := cdsPesquisa.fieldByname('Sequencia').AsInteger;
       qryModific.ParamByName('parStatus').AsInteger          := 1;
       qryModific.ExecSQL;
 
-      qryCtaspagar.Close;
-      qryCtaspagar.Open;
+      cdsPesquisa.Close;
+      cdsPesquisa.Open;
 
-      qryCtaspagar.Locate('Sequencia',liSequencia, [] );
+      cdsPesquisa.Locate('Sequencia',liSequencia, [] );
    End;
 end;
 
@@ -574,15 +572,19 @@ end;
 procedure TfrmCtasPagar.BtnEstornadoClick(Sender: TObject);
 var lisequencia : Integer;
 begin
-   IF qryCtaspagar.IsEmpty Then
+   IF cdsPesquisa.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-
-   if CaixaMensagem( 'Deseja Estornar Este Titulo ( '+qryCtaspagar.FieldByName('Historico').AsString+' ) ', ctConfirma, [ cbSimNao ], 0 )  Then
+   if (cdsPesquisa.FieldByName('Status').AsInteger = 0 ) Then  // 0 aberto 1 Pago
    Begin
-      if (qryCtaspagar.FieldByName('Status').AsInteger = 1 ) Then  // 0 aberto 1 Pago
+      CaixaMensagem( 'Impossivel estornar a conta que ainda não foi paga ', ctAviso, [ cbOk ], 0 );
+      Exit
+   end;
+   if CaixaMensagem( 'Deseja Cancelar a baixa da conta ( '+cdsPesquisa.FieldByName('Historico').AsString+' ) ', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      if (cdsPesquisa.FieldByName('Status').AsInteger = 1 ) Then  // 0 aberto 1 Pago
       Begin
          qryModific.Close;
          qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Operacao, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda ) Values '+
@@ -590,11 +592,11 @@ begin
                                 '                         :parD_C,:parSeqVenda ) ';
 
          qryModific.ParamByName('parCod_Caixa').AsString        := '001';
-         qryModific.ParamByName('parValor').AsFloat             := ( qryCtaspagar.fieldByname('valor').AsFloat);
-         qryModific.ParamByName('parHistorico').AsString        := 'Estorno de Pagameto de Titulo ( '+qryCtaspagar.fieldByname('Historico').AsString+' )';
+         qryModific.ParamByName('parValor').AsFloat             := ( cdsPesquisa.fieldByname('valor').AsFloat);
+         qryModific.ParamByName('parHistorico').AsString        := 'Estorno de Pagameto de Titulo ( '+cdsPesquisa.fieldByname('Historico').AsString+' )';
          qryModific.ParamByName('parData_Lancamento').AsSQLTimeStamp := DateTimeToSQLTimeStamp(Now);
          qryModific.ParamByName('parD_C').AsString              := 'C';
-         qryModific.ParamByName('parCod_Operacao').AsString  := qryCtaspagar.fieldByname('Cod_Operacao').AsString;
+         qryModific.ParamByName('parCod_Operacao').AsString  := cdsPesquisa.fieldByname('Cod_Operacao').AsString;
          qryModific.ParamByName('parSeqVenda').Asinteger        := 1;
          qryModific.ExecSQL;
       End;
@@ -602,14 +604,14 @@ begin
       qryModific.Close;
       qryModific.SQL.Text := 'update T_Ctaspagar set Status=:parStatus '+
                              'where Sequencia=:parSequencia ';
-      qryModific.ParamByName('parSequencia').AsInteger       := qryCtaspagar.fieldByname('Sequencia').AsInteger;
-      qryModific.ParamByName('parStatus').AsInteger          := 2;
+      qryModific.ParamByName('parSequencia').AsInteger       := cdsPesquisa.fieldByname('Sequencia').AsInteger;
+      qryModific.ParamByName('parStatus').AsInteger          := 0;
       qryModific.ExecSQL;
 
-      qryCtaspagar.Close;
-      qryCtaspagar.Open;
+      cdsPesquisa.Close;
+      cdsPesquisa.Open;
 
-      qryCtaspagar.Locate('Sequencia',liSequencia, [] );
+      cdsPesquisa.Locate('Sequencia',liSequencia, [] );
    End;
 
 end;
@@ -619,6 +621,9 @@ var lsCoringa    : String;
     lsVencimento : String;
     lrDia        : Real;
     lrTotal      : Real;
+    lstParametros : TStringList;
+    CdsRelatorio : TClientDataSet;
+  lsWhere: String;
 begin
    lrDia        := 0;
    lrTotal      := 0;
@@ -627,26 +632,27 @@ begin
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
 
-   qryCtasPagar.Close;
-   qryCtasPagar.SQL.Text := 'Select Forne.Descricao, Pag.* from T_CtasPagar Pag, T_fornecedores Forne '+
-                            ' where Data_Vencimento>=:parDataIni and Data_Vencimento<=:parDataFim And '+
-                            '       Forne.Codigo=Pag.Cod_Fornecedor ';
+   lstParametros := TStringList.Create;
+   lstParametros.add(dtpData_Ini.Text);
+   lstParametros.add(dtpData_Fim.Text);
+   lstParametros.add(lsCoringa+EdtPesquisa.Text+'%');
+
+   lsWhere  :='Select Forne.Descricao, Pag.* from T_CtasPagar Pag, T_fornecedores Forne '+
+              ' where Data_Vencimento>=:parDataIni and Data_Vencimento<=:parDataFim And '+
+              '       Forne.Codigo=Pag.Cod_Fornecedor ';
 
    If cmbTipoPesquisa.ItemIndex = 0 Then
-      qryCtasPagar.SQL.Add('And Forne.Descricao like :parDescricao ')
+      lsWhere :=  lsWhere + 'And Forne.Descricao like :parDescricao '
    Else If cmbTipoPesquisa.ItemIndex = 1 Then
-      qryCtasPagar.SQL.Add('And Pag.Historico like :parDescricao ');
+      lsWhere :=  lsWhere + 'And Pag.Historico like :parDescricao ';
    if cmbTipoFiltro.ItemIndex <> 2 Then
-      qryCtasPagar.SQL.Add('And Pag.Status =:parStatus ');
+   Begin
+      lsWhere := lsWhere +' And Pag.Status =:parStatus ';
+      lstParametros.add(IntToStr(cmbTipoFiltro.ItemIndex));
+   End;
+   lsWhere :=  lsWhere +' Order by Pag.data_Vencimento ';
 
-  qryCtasPagar.SQL.Add('Order by Pag.data_Vencimento ');
-
-   qryCtasPagar.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+'%';
-   if cmbTipoFiltro.ItemIndex <> 2 Then
-      qryCtasPagar.ParamByName('parStatus').AsInteger := cmbTipoFiltro.ItemIndex;
-   qryCtasPagar.ParamByName('parDataIni').AsString    := dtpData_Ini.Text;
-   qryCtasPagar.ParamByName('parDatafim').AsString    := dtpData_Fim.Text;
-   qryCtasPagar.Open;    //
+   cdsRelatorio := gConexao.BuscarDadosSQL(lsWhere, lstParametros);
 
 
    gsTituloRel  := 'Relatorio de contas a pagar ';
@@ -661,11 +667,11 @@ begin
    ImpMatricial.UsaGerenciadorImpr        := True;
    ImpMatricial.Abrir;
 
-   lsVencimento := qryCtasPagar.FieldByname('data_Vencimento').AsString;
+   lsVencimento := cdsRelatorio.FieldByname('data_Vencimento').AsString;
 
-   While not qryCtasPagar.Eof Do
+   While not cdsRelatorio.Eof Do
    Begin
-      if lsVencimento <> qryCtasPagar.FieldByname('data_Vencimento').AsString Then
+      if lsVencimento <> cdsRelatorio.FieldByname('data_Vencimento').AsString Then
       Begin
          impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
          pvilinha := pvilinha+1;
@@ -674,21 +680,21 @@ begin
          pvilinha := pvilinha+1;
          impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
          pvilinha := pvilinha+1;
-         lsVencimento := qryCtasPagar.FieldByname('data_Vencimento').AsString;
+         lsVencimento := cdsRelatorio.FieldByname('data_Vencimento').AsString;
          lrDia := 0;
       End;
-      impmatricial.Imp(pvilinha,001,IncZero( qryCtasPagar.FieldByname('Cod_Fornecedor').asString,3));
-      impmatricial.Imp(pvilinha,008,qryCtasPagar.FieldByname('Descricao').asString);
-      impmatricial.Imp(pvilinha,048,FormatDateTime('dd/mm/yyyy',qryCtasPagar.FieldByname('data_Vencimento').asDateTime));
-      impmatricial.Imp(pvilinha,060,qryCtasPagar.FieldByname('SeqParCela').asString);
-      impmatricial.Imp(pvilinha,064,qryCtasPagar.FieldByname('Historico').asString);
-      impmatricial.ImpD(pvilinha,124,FormatFloat(',0.00',qryCtasPagar.FieldByname('Valor').asFloat),[]);
+      impmatricial.Imp(pvilinha,001,IncZero( cdsRelatorio.FieldByname('Cod_Fornecedor').asString,3));
+      impmatricial.Imp(pvilinha,008,cdsRelatorio.FieldByname('Descricao').asString);
+      impmatricial.Imp(pvilinha,048,FormatDateTime('dd/mm/yyyy',cdsRelatorio.FieldByname('data_Vencimento').asDateTime));
+      impmatricial.Imp(pvilinha,060,cdsRelatorio.FieldByname('SeqParCela').asString);
+      impmatricial.Imp(pvilinha,064,cdsRelatorio.FieldByname('Historico').asString);
+      impmatricial.ImpD(pvilinha,124,FormatFloat(',0.00',cdsRelatorio.FieldByname('Valor').asFloat),[]);
       pvilinha := pvilinha+1;
-      lrDia    := lrDia + qryCtasPagar.FieldByname('Valor').asFloat;
-      lrTotal  := lrTotal + qryCtasPagar.FieldByname('Valor').asFloat;
+      lrDia    := lrDia + cdsRelatorio.FieldByname('Valor').asFloat;
+      lrTotal  := lrTotal + cdsRelatorio.FieldByname('Valor').asFloat;
       if pvilinha > 60 Then
          impmatricial.Novapagina;
-      qryCtasPagar.Next;
+      cdsRelatorio.Next;
    End;
    impmatricial.imp(pviLinha,001,incdigito( '-','-',135,0));
    pvilinha := pvilinha+1;

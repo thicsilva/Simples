@@ -730,16 +730,16 @@ begin
 
    if tipo = 0 then
    Begin
-      Result :='Select Grupo.Codigo,Grupo.Descricao,avg(Itens.pco_Venda)as Pco_UnitMedio, '+
+      Result :='Select Grupo.Codigo,Grupo.Descricao,Itens.pco_Venda as Pco_UnitMedio, '+
                '         Sum(Itens.Vlr_total) as Vlr_Total, '+
                '         Sum(Itens.Qtde_Venda) as Qtde_Total '+
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
                '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda  '+
-               'where Mov.Cod_Caixa=:parCod_Caixa and '+
+               'where Mov.Cod_Caixa=:parCod_Caixa and Mov.Data_Lancamento=Itens.Data_Mov and '+
                '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
-               'Group by Grupo.Codigo,Grupo.Descricao';
+               'Group by Grupo.Codigo,Itens.Pco_Venda,Grupo.Descricao';
    End
    Else
    Begin
@@ -749,10 +749,10 @@ begin
                'from  T_itensvendas itens '+
                '     Inner Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
                '     Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
-               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda '+ // and Mov.Data_cad=Itens.Data_cad '+ tem que comparar so a data
+               '     inner join T_MovCaixa Mov on mov.Seqvenda=Itens.SeqVenda and Mov.Data_Lancamento=Itens.Data_Mov '+//+ tem que comparar so a data
                'where mov.Cod_Caixa=:parCod_Caixa And '+
                '    ( Mov.data_Lancamento>=:parDataIni and Mov.data_Lancamento<=:parDataFim )'+lsFiltro+' '+
-               'Group by Prod.Codigo,prod.Descricao';
+               'Group by Prod.Codigo,Itens.Pco_Venda,prod.Descricao';
 
    End;
 

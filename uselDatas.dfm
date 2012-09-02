@@ -142,6 +142,7 @@ object frmSelDatas: TfrmSelDatas
       HideSelection = True
       AutoComplete = True
       ImageIndex = 0
+      Enabled = False
       CharCase = ecNormal
       DefaultColor = clWindow
       Text = 'Venda Detalhada'

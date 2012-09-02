@@ -432,7 +432,7 @@ object frmCtasPagar: TfrmCtasPagar
     Top = 44
     Width = 728
     Height = 343
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -460,8 +460,6 @@ object frmCtasPagar: TfrmCtasPagar
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = -88
-    ExplicitTop = 52
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object cxGrid1: TcxGrid
@@ -1037,8 +1035,6 @@ object frmCtasPagar: TfrmCtasPagar
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 2
-      ExplicitTop = 18
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 110
         Top = 17
@@ -1191,7 +1187,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 144
           Top = 253
           Width = 80
-          Height = 17
+          Height = 19
           Caption = 'Valor Total'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1793,8 +1789,8 @@ object frmCtasPagar: TfrmCtasPagar
     Top = 301
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
-    Left = 328
-    Top = 9
+    Left = 376
+    Top = 25
     object BorderodeEntrega1: TMenuItem
       Caption = 'Contas a Pagar'
       OnClick = BorderodeEntrega1Click

@@ -70,7 +70,7 @@ var
 
 implementation
 
-uses uPrincipal,Ufuncoes, uVendeBrinde, uSelMotivoStatus, uBaixaTipo_01_Brinde,uDaoRomaneio;
+uses uPrincipal,Ufuncoes, uVendeBrinde, uSelMotivoStatus, uBaixaTipo_01_Brinde,uDaoRomaneio,uDaoContaReceber;
 
 {$R *.dfm}
 
@@ -102,6 +102,8 @@ Var  trdNrTransacao : TTransactionDesc;
      vlr_Atual      : Double;
      lsitensDevolvidos : String;
      loDaoRomaneio : TDaoRomaneio;
+     loDaoContaAReceber : TDaoContareceber;
+     VendaId : Integer;
 begin
    btnTotalizarClick(btnTotalizar);
 
@@ -128,7 +130,7 @@ begin
    end;
 
    lsitensDevolvidos := '';
-
+   VendaId := strtoint(copy(grpDevolveItem.Caption,1,(pos('-',grpDevolveItem.Caption)-1)));
    {$REGION 'Devolução dos Itens '}
 
    if frmDevolucaoVenda.Tag<>2 then
@@ -151,7 +153,7 @@ begin
                                      '                         Status = :parStatus, '+
                                      '                         Vlr_total=:parVlr_Total, Operador=:parOperador '+
                                      'Where SeqVenda=:parSeqvenda and Cod_Produto=:parCod_Produto ';
-               qrymodific.ParamByName('ParSeqVenda').AsInteger          := strtoint(copy(grpDevolveItem.Caption,1,(pos('-',grpDevolveItem.Caption)-1)));
+               qrymodific.ParamByName('ParSeqVenda').AsInteger          := VendaId;
                qrymodific.ParamByName('ParCod_Produto').AsInteger       := cdsTmpItensDevolucoes.FieldByName('Codigo').asInteger;
                qrymodific.ParamByName('ParQtde_Devolvida').AsInteger    := cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger;
                qrymodific.ParamByName('ParOperador').AsString           := gsOperador;
@@ -175,7 +177,7 @@ begin
             Try
                cdsItensDevolucoes.Append;
                cdsItensDevolucoes.FieldByName('Cod_Produto').asInteger      := cdsTmpItensDevolucoes.FieldByName('Codigo').asInteger;
-               cdsItensDevolucoes.FieldByName('SeqVenda').asInteger         := strtoint(copy(grpDevolveItem.Caption,1,(pos('-',grpDevolveItem.Caption)-1)));
+               cdsItensDevolucoes.FieldByName('SeqVenda').asInteger         := VendaId;
                cdsItensDevolucoes.FieldByName('Qtde_Devolvida').asFloat     := cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger;
                cdsItensDevolucoes.FieldByName('Pco_Venda').asFloat          := cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat;
                cdsItensDevolucoes.FieldByName('Pco_Custo').asFloat          := cdsTmpItensDevolucoes.FieldByName('Pco_Custo').Asfloat;
@@ -195,7 +197,7 @@ begin
             Begin
                vlr_anterior := (cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger ) ;
                vlr_Atual    := (cdsTmpItensDevolucoes.FieldByName('Pco_Venda_Atual').Asfloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger ) ;
-                     qrySaldos.Close;
+                qrySaldos.Close;
                qrySaldos.Params.Clear;
                qrySaldos.Sql.Text :='Select * from T_saldos where 1=2';
                Try
@@ -343,6 +345,10 @@ begin
    End;
    frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
    frmDevolucaoVenda.tag := 1;
+
+   loDaoContaAReceber := TDaoContareceber.Create(gConexao);
+   loDaoContaAReceber.AtualizarValorDosTitulos(VendaID,StrTofloat(edtVlr_Recebido.Text));
+   FreeAndnil(loDaoContaAReceber);
 
    loDaoRomaneio := TdaoRomaneio.Create(gConexao);
    loDaoRomaneio.AtualizarTotalDoRomaneio(piRomaneioId);

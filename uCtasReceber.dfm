@@ -49,11 +49,8 @@ object frmCtasReceber: TfrmCtasReceber
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = 8
-    ExplicitTop = 29
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitHeight = 385
       object cxGrid1: TcxGrid
         Left = 0
         Top = 176
@@ -62,8 +59,6 @@ object frmCtasReceber: TfrmCtasReceber
         Align = alClient
         PopupMenu = MenuGrid
         TabOrder = 1
-        ExplicitLeft = -1
-        ExplicitTop = 182
         object GridCtasReceber: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           NavigatorButtons.First.Visible = True
@@ -83,6 +78,7 @@ object frmCtasReceber: TfrmCtasReceber
           NavigatorButtons.GotoBookmark.Visible = True
           NavigatorButtons.Filter.Visible = True
           OnCellDblClick = GridCtasReceberCellDblClick
+          OnCustomDrawCell = GridCtasReceberCustomDrawCell
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -151,7 +147,7 @@ object frmCtasReceber: TfrmCtasReceber
             DataBinding.FieldName = 'Data_Emissao'
             Width = 70
           end
-          object GridCtasReceberData_Vencimento: TcxGridDBColumn
+          object Data_Vencimento: TcxGridDBColumn
             Caption = 'Vencimento'
             DataBinding.FieldName = 'Data_Vencimento'
             Width = 80
@@ -1127,8 +1123,6 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object tabCadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = -23
-      ExplicitHeight = 385
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 172
         Top = 131
@@ -2444,6 +2438,74 @@ object frmCtasReceber: TfrmCtasReceber
           'Width')
       end
       item
+        Component = Cod_FormaPagamento
+        Properties.Strings = (
+          'AlternateCaption'
+          'BestFitMaxWidth'
+          'Caption'
+          'DataBinding'
+          'DateTimeGrouping'
+          'FakeComponentLink1'
+          'FakeComponentLink2'
+          'FakeComponentLink3'
+          'FooterAlignmentHorz'
+          'GroupIndex'
+          'GroupSummaryAlignment'
+          'HeaderAlignmentHorz'
+          'HeaderAlignmentVert'
+          'HeaderGlyph'
+          'HeaderGlyphAlignmentHorz'
+          'HeaderGlyphAlignmentVert'
+          'MinWidth'
+          'Name'
+          'Options'
+          'Properties'
+          'PropertiesClassName'
+          'RepositoryItem'
+          'SortIndex'
+          'SortOrder'
+          'Styles'
+          'Summary'
+          'Tag'
+          'Visible'
+          'VisibleForCustomization'
+          'Width')
+      end
+      item
+        Component = Data_Vencimento
+        Properties.Strings = (
+          'AlternateCaption'
+          'BestFitMaxWidth'
+          'Caption'
+          'DataBinding'
+          'DateTimeGrouping'
+          'FakeComponentLink1'
+          'FakeComponentLink2'
+          'FakeComponentLink3'
+          'FooterAlignmentHorz'
+          'GroupIndex'
+          'GroupSummaryAlignment'
+          'HeaderAlignmentHorz'
+          'HeaderAlignmentVert'
+          'HeaderGlyph'
+          'HeaderGlyphAlignmentHorz'
+          'HeaderGlyphAlignmentVert'
+          'MinWidth'
+          'Name'
+          'Options'
+          'Properties'
+          'PropertiesClassName'
+          'RepositoryItem'
+          'SortIndex'
+          'SortOrder'
+          'Styles'
+          'Summary'
+          'Tag'
+          'Visible'
+          'VisibleForCustomization'
+          'Width')
+      end
+      item
         Component = GridCtasReceberCod_Cliente
         Properties.Strings = (
           'AlternateCaption'
@@ -2479,40 +2541,6 @@ object frmCtasReceber: TfrmCtasReceber
       end
       item
         Component = GridCtasReceberCod_emp
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Cod_FormaPagamento
         Properties.Strings = (
           'AlternateCaption'
           'BestFitMaxWidth'
@@ -2683,40 +2711,6 @@ object frmCtasReceber: TfrmCtasReceber
       end
       item
         Component = GridCtasReceberData_Emissao
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridCtasReceberData_Vencimento
         Properties.Strings = (
           'AlternateCaption'
           'BestFitMaxWidth'

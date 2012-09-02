@@ -75,7 +75,7 @@ type
     GridCtasRecebersequencia: TcxGridDBColumn;
     GridCtasRecebervlr_Areceber: TcxGridDBColumn;
     GridCtasReceberHistorico: TcxGridDBColumn;
-    GridCtasReceberData_Vencimento: TcxGridDBColumn;
+    Data_Vencimento: TcxGridDBColumn;
     GridCtasReceberData_Cad: TcxGridDBColumn;
     Cod_FormaPagamento: TcxGridDBColumn;
     GridCtasReceberData_Atu: TcxGridDBColumn;
@@ -171,6 +171,9 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure alterarVencimentoeTipodePagamento1Click(Sender: TObject);
+    procedure GridCtasReceberCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
 
   private
    pvQualBotao : String;
@@ -481,6 +484,14 @@ procedure TfrmCtasReceber.GridCtasReceberCellDblClick(
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
    btnexcluirClick(btnexcluir);
+end;
+
+procedure TfrmCtasReceber.GridCtasReceberCustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  IF aviewinfo.GridRecord.Values[Data_Vencimento.Index]<RetornarDataSistema Then
+     acanvas.Font.color := clred
 end;
 
 procedure TfrmCtasReceber.rdgTipoVencimentoClick(Sender: TObject);
