@@ -2,8 +2,8 @@ unit uDaoContaReceber;
 
 interface
 
-uses uClassConexao,uClassContaReceber,
-     SqlExpr,SqltimSt, SysUtils;
+uses uClassConexao,uClassContaReceber,ufuncoes,
+     SqlExpr,SqltimSt, SysUtils, DBClient,Classes;
 
 type TDaoContaReceber = class
   private
@@ -12,8 +12,9 @@ type TDaoContaReceber = class
 
   public
     constructor Create(Conexao : TConexao);
-    procedure AtualizarVencimento(prNovoVencimento : TDateTime; prsFormaPagamento : String; ContasAReceberId : Integer  );
+    procedure AtualizarVencimento(prNovoVencimento : TDateTime; prsFormaPagamento : String; ContasAReceberId : Integer; SeqvendaId : Integer = 0  );
     procedure BaixarTitulo(proContaAreceber : TContaReceber);
+    procedure AtualizarValorDosTitulos(VendaId : Integer; ValorDiminuir : Real);
 
 end;
 
@@ -22,17 +23,48 @@ implementation
 
 { TDaoContaReceber }
 
-procedure TDaoContaReceber.AtualizarVencimento(prNovoVencimento : TDateTime;
-  prsFormaPagamento: String; ContasAReceberId: Integer);
+procedure TDaoContaReceber.AtualizarValorDosTitulos(VendaId: Integer; ValorDiminuir: Real);
+var Dados : TclientDataSet;
+    Parametros : TStringList;
+    lrvlrDiminuir : Real;
+    lrAjuste : Real;
 begin
+   Parametros := TStringList.Create;
+   Parametros.Add(IntToStr(VendaId));
+   Dados := Fconexao.BuscarDadosSQL('Select vlr_areceber,Sequencia from T_ctasreceber where seqvenda=:parSeqVenda', Parametros );
+   lrvlrDiminuir := Arredondar((ValorDiminuir/Dados.RecordCount),2);
+   lrAjuste      := ValorDiminuir - (lrvlrDiminuir*Dados.RecordCount);
+   while not Dados.eof do
+   begin
+      FqryModific.Close;
+      FqryModific.SQL.Text := 'Update T_Ctasreceber set Vlr_Areceber= ( Vlr_Areceber - :parVlr_Areceber )'+
+                              'where Sequencia=:parSequencia ';
+      FqryModific.paramByName('parVlr_Areceber').AsFloat   := lrAjuste+lrvlrDiminuir;
+      FqryModific.paramByName('parSequencia').AsInteger    := Dados.FieldByname('Sequencia').AsInteger;
+      FqryModific.ExecSQL;
+      lrAjuste := 0;
+      Dados.next;
+   end;
+end;
+
+procedure TDaoContaReceber.AtualizarVencimento(prNovoVencimento : TDateTime; prsFormaPagamento : String;
+ ContasAReceberId : Integer; SeqvendaId : Integer = 0  );
+var lswhere : String;
+begin
+   lswhere := 'where Sequencia=:parSequencia';
+   if SeqvendaId<>0 then
+      lswhere := 'where SeqVenda=:parSequencia';
+
+
    FqryModific.Close;
    FqryModific.SQL.Text := 'Update T_Ctasreceber set Data_Vencimento=:parData_vencimentom, '+
-                           '                         Cod_FormaPagamento=:parCod_FormaPagamento '+
-                           'where Sequencia=:parSequencia ';
+                           '                         Cod_FormaPagamento=:parCod_FormaPagamento'+' '+lswhere;
 
    FqryModific.paramByName('parData_vencimentom').AsSqlTimeStamp := DateTimeToSqlTimeStamp(prNovoVencimento);
    FqryModific.paramByName('parCod_FormaPagamento').AsInteger    := StrToInt(prsFormaPagamento);
    FqryModific.paramByName('parSequencia').AsInteger             := ContasAReceberId;
+   if SeqvendaId<>0 then
+      FqryModific.paramByName('parSequencia').AsInteger          := SeqvendaId;
    FqryModific.ExecSQL;
 end;
 

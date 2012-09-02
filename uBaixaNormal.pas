@@ -376,21 +376,25 @@ begin
             loContaAReceber.Operador       := gsOperador;
             loContaAReceber.Status         := 1;
             loContaAReceber.Tipo_Baixa     := 'PT';
-            if (StrToFloat(edtTotalReceber.Text)> 0) or (lrValorRecebido < StrToFloat(edtTotalTitulo.text)) Then
+            if (Arredondar(StrToFloat(edtTotalReceber.Text),2)> 0) or (Arredondar(lrValorRecebido,2) < Arredondar(strToFloat(edtTotalTitulo.text),2)) Then
                 loContaAReceber.Tipo_Baixa := 'PP';
             loContaAReceber.vlr_Desconto   := strTofloat(edtVlr_Desconto.Text);
             loContaAReceber.Vlr_Recebido   := lrValorRecebido;
             If lblTroco.Caption = 'Troco' Then
-               loContaAReceber.Vlr_Recebido:= StrToFloat(edtTotalTitulo.text);
+            begin
+               loContaAReceber.Vlr_Recebido := StrToFloat(edtTotalTitulo.text);
+               loContaAReceber.Tipo_Baixa     := 'PT';
+               TotalPago := StrToFloat(edtTotalTitulo.text);
+            end;
             loDaoContaReceber.BaixarTitulo(loContaAReceber);
 
             DaoVenda := TdaoVenda.Create(gconexao);
-            if qryModific.ParamByName('parTipo_Baixa').AsString = 'PT' then
+            if loContaAReceber.Tipo_Baixa = 'PT' then
                DaoVenda.MarcarComoServicoPago(StrToint(edtNrVenda.Text));
+
             FreeAndNil(DaoVenda);
             FreeAndNil(loDaoContaReceber);
             FreeAndNil(loContaAReceber);
-            qryModific.ExecSQL;
          Except
             frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
             Exit;

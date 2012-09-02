@@ -27,6 +27,9 @@ type
     bsSkinBevel3: TbsSkinBevel;
     btnMarcarRecebido: TbsSkinSpeedButton;
     bsSkinBevel4: TbsSkinBevel;
+    btnNaoRecebido: TbsSkinSpeedButton;
+    bsSkinBevel5: TbsSkinBevel;
+    bsSkinBevel6: TbsSkinBevel;
     procedure btnCarregarClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -34,6 +37,7 @@ type
     procedure bsSkinButton1Click(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnMarcarRecebidoClick(Sender: TObject);
+    procedure btnNaoRecebidoClick(Sender: TObject);
   private
     function EstaPendente(LinhaId: integer): Boolean;
     function FoiProrrogado(LinhaId: Integer): Boolean;
@@ -41,6 +45,8 @@ type
     procedure EfetuarLancamentoNoCaixa(prValorBaixa: Real; priNumeroVenda: String);
     procedure BaixarTitulo(prValorBaixa: Real; priNumeroVenda: String);
     function FoiRecebido(LinhaId: Integer): Boolean;
+    function NaoFoiRecebido(LinhaId: Integer): Boolean;
+    procedure MudarVencimentoTitulos(prValorBaixa: Real; priNumeroVenda, TipoPagamento: String);
     { Private declarations }
   public
     { Public declarations }
@@ -78,6 +84,15 @@ begin
    EfetuarLancamentoNoCaixa(prValorBaixa,priNumeroVenda);
    BaixarTitulo(prValorBaixa,priNumeroVenda);
 end;
+
+procedure TfrmRecebimentoRomaneio.MudarVencimentoTitulos(prValorBaixa: Real; priNumeroVenda, TipoPagamento: String);
+var DaoContaAReceber : TDaoContaReceber;
+begin
+   DaoContaAReceber := TDaoContaReceber.Create(gConexao);
+   DaoContaAReceber.AtualizarVencimento( RetornarDataSistema,TipoPagamento,0,StrToInt(priNumeroVenda) );
+   Close;
+end;
+
 
 procedure TfrmRecebimentoRomaneio.EfetuarLancamentoNoCaixa( prValorBaixa : real; priNumeroVenda : String );
 var loLancamento  : TLancamento;
@@ -122,6 +137,9 @@ begin
            DaoVenda.TirarVendaRomaneio( StrToInt(ListVendas.Items[I].Caption));
         if FoiRecebido(I) then
            BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption);
+        if NaoFoiRecebido(I) then
+           MudarVencimentoTitulos(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption,ListVendas.Items[I].SubItems[5]);
+
      end;
 
      DaoRomaneio.FecharRomaneio(StrToint(edtRomaneioId.Text));
@@ -140,6 +158,11 @@ end;
 function TfrmRecebimentoRomaneio.FoiRecebido(LinhaId : Integer) : Boolean;
 begin
   Result := (ListVendas.Items[LinhaId].SubItems[4]='Recebido');
+end;
+
+function TfrmRecebimentoRomaneio.NaoFoiRecebido(LinhaId : Integer) : Boolean;
+begin
+  Result := (ListVendas.Items[LinhaId].SubItems[4]='Cheque Não Recebido');
 end;
 
 procedure TfrmRecebimentoRomaneio.btnCarregarClick(Sender: TObject);
@@ -185,7 +208,9 @@ begin
       llstTemp.SubItems.Add(Dados.FieldByName('Descricao').AsString);
       llstTemp.SubItems.Add(Dados.FieldByName('Pagamento').AsString);
       llstTemp.SubItems.Add(FormatFloat('0.00', Dados.FieldByName('Vlr_total').AsFloat));
-      if Dados.FieldByName('Entregue').Asboolean then
+      if not Dados.FieldByName('PagouSinal').Asboolean then
+         llstTemp.SubItems.Add('Cheque Não Recebido')
+      else if Dados.FieldByName('Entregue').Asboolean then
          llstTemp.SubItems.Add('Entregue')
       else if Dados.FieldByName('ServicoPago').Asboolean then
          llstTemp.SubItems.Add('Recebido')
@@ -193,6 +218,9 @@ begin
          llstTemp.SubItems.Add('Prorrogado')
       else
         llstTemp.SubItems.Add('Pendente');
+      llstTemp.SubItems.Add(Dados.FieldByName('Cod_formaPagamento').AsString);
+
+
       Dados.Next;
    end;
 end;
@@ -278,6 +306,33 @@ begin
          if EstaPendente(I) then
          begin
             DaoVenda.MarcarComoServicoPago(StrToint(ListVendas.Items[I].Caption));
+            DaoVenda.MarcarComoEntregue(StrToint(ListVendas.Items[I].Caption));
+         end
+         else
+         begin
+           CaixaMensagem( 'A Venda não esta pendentea ', ctAviso, [ cbOk ], 0 );
+           exit;
+         end;
+      end;
+   end;
+   FreeAndNil(DaoVenda);
+   btnCarregarClick(btnCarregar);
+end;
+
+procedure TfrmRecebimentoRomaneio.btnNaoRecebidoClick(Sender: TObject);
+var lsDias : String;
+    liDias : Integer;
+    DaoVenda : TDaoVenda;
+    I: Integer;
+begin
+   DaoVenda := TDaoVenda.Create(gConexao);
+   for I := 0 to ListVendas.Items.Count - 1 do
+   begin
+      if ListVendas.Items[I].Checked then
+      begin
+         if EstaPendente(I) then
+         begin
+            DaoVenda.MarcarComoNaoPagouSinal(StrToint(ListVendas.Items[I].Caption));
             DaoVenda.MarcarComoEntregue(StrToint(ListVendas.Items[I].Caption));
          end
          else
