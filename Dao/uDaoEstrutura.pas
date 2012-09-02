@@ -48,6 +48,13 @@ type TDaoEstrutura = class
     procedure CriarTabela_ProdutosCusto;
     procedure Adicionar_status_na_tabela_ItensVendas;
     procedure Adicionar_Margem_na_tabela_Produtos;
+    procedure Adicionar_ComissaoSecundaria_na_Tabela_Produtos;
+    procedure Adicionar_margemSecundaria_na_Tabela_itensVendas;
+    procedure Adicionar_margemSecundaria_na_Tabela_Produtos;
+    procedure Adicionar_pco_Custo_na_Tabela_ItenVendas;
+    procedure Adicionar_LucroBrunto_na_Tabela_ItenVendas;
+    procedure Adicionar_LucroBrunto_na_Tabela_Vendas;
+    procedure Adicionar_CustoTotal_na_Tabela_Vendas;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -150,6 +157,37 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_ComissaoSecundaria_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'ComissaoSecundaria', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD ComissaoSecundaria Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_margemSecundaria_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'MargemSecundaria', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD MargemSecundaria Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_margemSecundaria_na_Tabela_itensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'MargemSecundaria', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD MargemSecundaria Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
 procedure TDaoEstrutura.Adicionar_Defult_SotorId;
 var loDaoCorrecao : TDaoCorrecao;
     loCorrecao    : TCorrecao;
@@ -216,6 +254,46 @@ begin
 
        FQryAjustes.Close;
        FQryAjustes.SQL.Text := 'ALTER TABLE T_vendas ADD CONSTRAINT DF_ServicoPago DEFAULT 0 FOR ServicoPago';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_pco_Custo_na_Tabela_ItenVendas;
+begin
+    if not ExisteCampo( 'T_ItensVendas', 'PrecoCusto', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD PrecoCusto float';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_LucroBrunto_na_Tabela_ItenVendas;
+begin
+    if not ExisteCampo( 'T_ItensVendas', 'LucroBruto', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD LucroBruto float';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_LucroBrunto_na_Tabela_Vendas;
+begin
+    if not ExisteCampo( 'T_Vendas', 'LucroBruto', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD LucroBruto float';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_CustoTotal_na_Tabela_Vendas;
+begin
+    if not ExisteCampo( 'T_Vendas', 'CustoTotal', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD CustoTotal float';
        FQryAjustes.ExecSQL;
     end;
 end;
@@ -526,6 +604,13 @@ begin
   CriarTabela_ProdutosCusto;
   Adicionar_status_na_tabela_ItensVendas;
   Adicionar_Margem_na_tabela_Produtos;
+  Adicionar_ComissaoSecundaria_na_Tabela_Produtos;
+  Adicionar_margemSecundaria_na_Tabela_itensVendas;
+  Adicionar_margemSecundaria_na_Tabela_Produtos;
+  Adicionar_pco_Custo_na_Tabela_ItenVendas;
+  Adicionar_LucroBrunto_na_Tabela_ItenVendas;
+  Adicionar_CustoTotal_na_Tabela_Vendas;
+  Adicionar_LucroBrunto_na_Tabela_Vendas;
 end;
 
 
