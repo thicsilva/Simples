@@ -9,7 +9,8 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
-  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, dxSkinsCore;
+  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, dxSkinsCore,
+  frxClass, frxDBSet;
 
 type
   TfrmCadRotas = class(TFormBase)
@@ -68,6 +69,14 @@ type
     btnAdicionarAnimal: TbsSkinButton;
     srcClientesRotas: TDataSource;
     cdsClientesRotas: TClientDataSet;
+    RelClientesDaRota: TfrxReport;
+    cdsClientesRotasCodigo: TIntegerField;
+    cdsClientesRotasDescricao: TStringField;
+    cdsClientesRotasBairro: TStringField;
+    cdsClientesRotasCidade: TStringField;
+    cdsClientesRotasSequenciaEntrega: TIntegerField;
+    frxDBDataset1: TfrxDBDataset;
+    bsSkinButton1: TbsSkinButton;
     procedure btnincluirClick(Sender: TObject);
     procedure LimpaCampos();
     procedure btnokClick(Sender: TObject);
@@ -78,6 +87,8 @@ type
     procedure pagCadastroChange(Sender: TObject);
     procedure cdsClientesRotasAfterScroll(DataSet: TDataSet);
     procedure btnAdicionarAnimalClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
   private
      pvQualBotao : String;
     procedure AtualizaClientesRotas;
@@ -211,6 +222,22 @@ begin
                                        'Where Descricao like :parDescricao ';
    sdtsPesquisa.DataSet.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+'%';
    sdtsPesquisa.Open;
+end;
+
+procedure TfrmCadRotas.FormShow(Sender: TObject);
+begin
+  inherited;
+  pagCadastro.ActivePageIndex := 0;
+end;
+
+procedure TfrmCadRotas.bsSkinButton1Click(Sender: TObject);
+begin
+   IF cdsClientesRotas.IsEmpty Then
+   Begin
+      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+   RelClientesDaRota.ShowReport;
 end;
 
 procedure TfrmCadRotas.btnAdicionarAnimalClick(Sender: TObject);

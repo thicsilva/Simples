@@ -985,7 +985,7 @@ begin
       Exit;
    End;
    frmCtasReceber := TfrmCtasReceber.create(Self);
-   frmCtasReceber.show;
+   frmCtasReceber.showModal;
 end;
 
 procedure TfrmPrincipal.actCurva_abc_ClienteExecute(Sender: TObject);
