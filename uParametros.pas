@@ -96,6 +96,8 @@ type
     Label5: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    MemoMensagemVenda: TbsSkinMemo;
+    bsSkinLabel13: TbsSkinLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -206,6 +208,7 @@ begin
       gParametros.Gravar( '', '[CADASTRO]', 'Data_Automatica', 'SIM' ,gsOperador )
    Else
       gParametros.Gravar( '', '[CADASTRO]', 'Data_Automatica', 'NAO' ,gsOperador );
+   MemoMensagemVenda.Lines.SaveToFile(gsPath+'MensagemPDV.txt');
    Close;
 end;
 
@@ -231,6 +234,10 @@ begin
    RecuperarParametrosAdiministrativos;
 
    CarregarTodosOsParametros;
+
+   if FileExists(RetornaPastaDoSistema+'MensagemPDV.txt') then
+      MemoMensagemVenda.Lines.LoadFromFile(gsPath+'MensagemPDV.txt');
+
 end;
 
 procedure TfrmParametros.GravarParametrosAdiministrativos;

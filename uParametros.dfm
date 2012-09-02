@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 340
-    ActivePage = Vendas
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1027,8 +1027,6 @@ object frmParametros: TfrmParametros
     end
     object tabContasAReceber: TbsSkinTabSheet
       Caption = 'Contas a Receber/Caixa'
-      ExplicitLeft = 2
-      ExplicitTop = 15
       object chkTrabalhaComRemessa: TbsSkinCheckRadioBox
         Left = 12
         Top = 6
@@ -1673,6 +1671,58 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Imprimir comprovante  de pagamento na baixa'
+      end
+      object MemoMensagemVenda: TbsSkinMemo
+        Left = 310
+        Top = 195
+        Width = 299
+        Height = 89
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ScrollBars = ssBoth
+        TabOrder = 9
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        UseSkinFont = True
+        UseSkinFontColor = True
+        BitMapBG = True
+        SkinDataName = 'memo'
+      end
+      object bsSkinLabel13: TbsSkinLabel
+        Left = 310
+        Top = 168
+        Width = 171
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 10
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvNone
+        Caption = 'Mensagem padr'#227'o para a venda'
+        AutoSize = False
       end
     end
     object bsSkinTabSheet4: TbsSkinTabSheet
