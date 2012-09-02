@@ -134,7 +134,8 @@ uses
   uAlteraVencimento_TipoPagamento in 'uAlteraVencimento_TipoPagamento.pas' {frmAlteraVencimento_TipoPagamento},
   uDaoContaReceber in 'Dao\uDaoContaReceber.pas',
   uClassLancamento in 'Modelos\uClassLancamento.pas',
-  uClassContaReceber in 'Modelos\uClassContaReceber.pas';
+  uClassContaReceber in 'Modelos\uClassContaReceber.pas',
+  uClassRota in 'Modelos\uClassRota.pas';
 
 {$R *.res}
 

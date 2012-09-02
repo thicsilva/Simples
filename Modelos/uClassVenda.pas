@@ -57,7 +57,6 @@ type TVenda = class
      property Peso_total : Real read FPeso_total write SetPeso_total;
      property RomaneioId : Integer read FRomaneioId write SetRomaneioId;
      property Entregue : Boolean read FEntregue write SetEntregue;
-
      property Empresa : TEmpresa read FEmpresa write SetEmpresa;
      property Funcionario : TFuncionario read FFuncionario write SetFuncionario;
      property FormaPagamento : TFormaPagamento read FFormaPagamento write SetFormaPagamento;
@@ -360,7 +359,7 @@ var ImpMatricial   : TrdPrint;
     lrTot_Produtos : Real;
     lrTot_Desconto : Real;
     liCont         : integer;
-    Mensagem       : TStringList;
+    lsMensagem     : TStringList;
     ItendVendas    : TClientDataSet;
     I              : Integer;
 begin
@@ -436,11 +435,7 @@ begin
    end;
    impMatricial.Imp ( FLinha, 001, IncDigito( '-', '-', 80, 0 ) );
    FLinha := FLinha + 1;
-   {
-   impMatricial.Imp ( FLinha, 039, 'Total de Produtos Listado.: ' );
-   impMatricial.ImpD( FLinha, 079, IntToStr( liCont ), [ ] );
-   FLinha := FLinha + 1;   }
-   impMatricial.Imp(FLinha,001,'Vendedor..: '+Copy(inczero(DadosVendas.FieldByName( 'Cod_Funcionario' ).AsString,3)+'-'+Self.Funcionario.Descricao,1,25));
+   impMatricial.Imp(FLinha,001,'Rota..: '+Copy(inczero(IntToStr(Cliente.Rota.Id),3)+'-'+Cliente.Rota.Descricao,1,25));
    impMatricial.Imp ( FLinha, 039, 'Valor Total...............:');
    impMatricial.ImpD( FLinha, 079, FormatFloat( '#,##0.00', ( lrTot_Produtos ) ), [ ] );
    FLinha := FLinha + 1;
@@ -485,22 +480,25 @@ begin
    FLinha := FLinha + 1;
 
    impMatricial.Imp ( FLinha, 001, IncDigito( '=', '=', 80, 0 ) );
+   FLinha := FLinha + 1;
+   if FileExists(RetornaPastaDoSistema+'MensagemPDV.txt') then
+   begin
+       lsMensagem := TstringList.Create;
+       lsMensagem.LoadFromFile(RetornaPastaDoSistema+'MensagemPDV.txt');
+       impMatricial.Imp ( FLinha, 001, lsMensagem.Text );
+       FreeAndNil(lsMensagem);
+   end;
    FLinha := FLinha + 2;
 
    impMatricial.Imp ( FLinha, 001, '___________________________');
    FLinha := FLinha + 1;
    impMatricial.Imp ( FLinha, 001, Cliente.Descricao);
+   FLinha := FLinha + 1;
 
    if  FormaPagamento.ImprimeMensagem Then
    Begin
       impMatricial.Imp ( FLinha, 001, FormaPagamento.Mensagem);
       FLinha := FLinha + 1;
-      impMatricial.Imp ( FLinha, 001, '___________________________');
-      FLinha := FLinha + 1;
-      impMatricial.Imp ( FLinha, 001, DadosVendas.FieldByName( 'Nome_Cliente' ).AsString);
-      FLinha := FLinha + 1;
-      impMatricial.Imp ( FLinha, 001, 'C.P.F..: '+Cliente.CPF);
-      FLinha := FLinha + 2;
    End;
    impMatricial.Fechar;
 end;

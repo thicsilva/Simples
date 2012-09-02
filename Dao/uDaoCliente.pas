@@ -2,7 +2,7 @@ unit uDaoCliente;
 
 interface
 
-uses uClassconexao,uClassCliente,
+uses uClassconexao,uClassCliente,uDaoRota,
      Classes,DBClient,SysUtils, SqlExpr;
 
 type TDaoCliente = class
@@ -34,8 +34,10 @@ end;
 function TDaoCliente.Buscar(ClienteId: Integer): TCliente;
 var Cliente : TCliente;
     Parametros : TStringList;
+    DaoRota : TDaoRota;
     Dados : TClientDataSet;
 begin
+  DaoRota := TDaoRota.Create(FConexao);
   Cliente := TCliente.Create;
   Parametros := TStringList.Create;
   Parametros.ADD(IntToStr(ClienteId));
@@ -52,11 +54,12 @@ begin
      Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
      Cliente.InscricaoEstadual := Dados.FieldByName('InscricaoEstadual').AsString;
      Cliente.Sequencia := Dados.FieldByName('Sequenciaentrega').AsString;
-
+     Cliente.Rota := DaoRota.BuscarPorId(Dados.FieldByName('Cod_rota').AsInteger);
      Result := Cliente;
   Finally
     FreeandNil(Dados);
     FreeandNil(Parametros);
+    FreeAndNil(DaoRota);
   End;
 
 end;
