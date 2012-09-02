@@ -47,12 +47,15 @@ var loDaoSaldo : TDaoSaldo;
 begin
    FQueryModific.Close;
    FQueryModific.SQLConnection := FConnection;
-   FQueryModific.Sql.Text := 'Insert into T_ItensVendas ( Cod_Produto,Qtde_Venda,Pco_Venda,vlr_Desconto, '+
-                             'vlr_Total,Operador,Data_Cad,Data_Mov,Complemento,'+
-                             'Cod_emp,SeqVenda,Perc_Comis, SetorId,PesoBruto,PesoLiquido) Values     '+
+   FQueryModific.Sql.Text := 'Insert into T_ItensVendas '+
+                             '( Cod_Produto,Qtde_Venda,Pco_Venda,vlr_Desconto, '+
+                             '  vlr_Total,Operador,Data_Cad,Data_Mov,Complemento,'+
+                             '  Cod_emp,SeqVenda,Perc_Comis, SetorId,PesoBruto,PesoLiquido,'+
+                             '  MargemSecundaria,PrecoCusto,Pco_Tabela,LucroBruto ) Values '+
                              '(:parCod_Produto,:parQtde_Venda,:parPco_Venda,:parvlr_Desconto, '+
-                             ':parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,:parComplemento,'+
-                             ':parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId, :parPesoBruto,:parPesoLiquido)';
+                             ' :parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,:parComplemento,'+
+                             ' :parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId, :parPesoBruto,:parPesoLiquido,'+
+                             ' :parMargemSecundaria,:parPrecoCusto,:parPco_Tabela,:parLucroBruto)';
 
    FQueryModific.Prepared := True;
    ItensVendas.first;
@@ -86,6 +89,10 @@ begin
       FQueryModific.ParamByName('parSetorId').asInteger       := ItensVendas.FieldByName('SetorId').asInteger;
       FQueryModific.ParamByName('parPesoLiquido').asFloat     := ItensVendas.FieldByName('PesoLiquido').AsFloat;
       FQueryModific.ParamByName('parPesoBruto').asFloat       := ItensVendas.FieldByName('PesoBruto').AsFloat;
+      FQueryModific.ParamByName('parMargemSecundaria').asFloat:= ItensVendas.FieldByName('MargemSecundaria').AsFloat;
+      FQueryModific.ParamByName('parPrecoCusto').asFloat      := ItensVendas.FieldByName('PrecoCusto').AsFloat;
+      FQueryModific.ParamByName('parLucroBruto').asFloat      := ItensVendas.FieldByName('LucroBruto').AsFloat;
+      FQueryModific.ParamByName('parPco_Tabela').asFloat      := ItensVendas.FieldByName('Pco_Tabela').AsFloat;
       FQueryModific.ExecSql;
       ItensVendas.next;
    End;

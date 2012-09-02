@@ -28,10 +28,10 @@ uses
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
-  uClassDaoContaCorrente;
+  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu;
 
 type
-  TfrmConsVendas = class(TForm)
+  TfrmConsVendas = class(TFormBase)
     bsSkinPanel3: TbsSkinPanel;
     srcItensVendas: TDataSource;
     srcVendas: TDataSource;
@@ -82,7 +82,6 @@ type
     cdsVendas: TClientDataSet;
     pnlmensagem: TPanel;
     colum_Controle: TcxGridDBColumn;
-    cxPropertiesStore1: TcxPropertiesStore;
     Colum_NumeroCupom: TcxGridDBColumn;
     Column_Vendedor: TcxGridDBColumn;
     grdDevolucoes: TcxGridDBTableView;
@@ -121,8 +120,15 @@ type
     Column_Status_Pagamento: TcxGridDBColumn;
     Print: TPrintDialog;
     checkUsarleitor: TbsSkinCheckRadioBox;
-    SkinForm: TbsBusinessSkinForm;
     colum_NomeAnimal: TcxGridDBColumn;
+    cxGridPopupMenu1: TcxGridPopupMenu;
+    Status_Entrega: TcxGridDBColumn;
+    cxPropertiesStore1: TcxPropertiesStore;
+    bsSkinPopupMenu2: TbsSkinPopupMenu;
+    MenuItem1: TMenuItem;
+    LucroBruto: TcxGridDBColumn;
+    Item_LucroBruto: TcxGridDBColumn;
+    LucroBrutoReal: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -148,6 +154,7 @@ type
     procedure GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
+    procedure MenuItem1Click(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -488,6 +495,8 @@ var licont : Integer ;
 begin
    CriarCalculado (DataSet,'Nome_Status',ftString,15);
    CriarCalculado (DataSet,'Status_Pagamento',ftString,20);
+   CriarCalculado (DataSet,'Status_Entrega',ftString,20);
+   CriarCalculado (DataSet,'LucroBrutoReais',ftFloat,0);
    for liCont := 1 To DataSet.FieldCount Do
    begin
       if DataSet.Fields[ liCont - 1 ].DataType = ftFloat Then
@@ -515,7 +524,12 @@ begin
    else
       cdsVendas.FieldByName('Status_Pagamento').AsString := 'Pendente de Pagamento';
 
+  if cdsVendas.FieldByName('Entregue').AsBoolean then
+      cdsVendas.FieldByName('Status_Entrega').AsString := 'Pedido Entrege'
+   else
+      cdsVendas.FieldByName('Status_Entrega').AsString := 'Pendente de Entrega';
 
+   cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );  
 
 
 end;
@@ -625,8 +639,8 @@ begin
    cmbStatus.ItemIndex    := 0;
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
-   grdvendas.Columns[0].Visible := False;
-   colum_NomeAnimal.Visible := True;
+   //grdvendas.Columns[0].Visible := False;
+   colum_NomeAnimal.Visible := False;
    IF frmconsvendas.Tag = 3 Then
    Begin
       frmConsVendas.Caption := 'Consulta e manutenção de Serviços  ';
@@ -638,7 +652,7 @@ begin
       lblsituacao.Visible   := True;
       btnFinalizar.Visible   := True;
       btnCupomFiscal.Enabled := false;
-      grdvendas.Columns[0].Visible := True;
+      //grdvendas.Columns[0].Visible := True;
    End;
    btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    btnSelecionarClick(btnSelecionar);
@@ -652,6 +666,26 @@ begin
      acanvas.Font.color := clred
   else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Finalizado' Then
      acanvas.Font.color := clGreen;
+end;
+
+procedure TfrmConsVendas.MenuItem1Click(Sender: TObject);
+var VendaId : Integer;
+begin
+   if cdsVendas.FieldByName('Entregue').AsBoolean then
+   Begin
+      CaixaMensagem( 'Pedido já entregue', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   VendaId := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
+   if CaixaMensagem( 'Confirma a entrega da venda ???', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      qryModific.Close;
+      qryModific.SQL.Text := 'Update T_Vendas set Entregue=1 Where seqvenda=:parSeqvenda ';
+      qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
+      qryModific.ExecSQL;
+   End;
+   btnSelecionarClick(btnSelecionar);
+   cdsVendas.Locate('SeqVenda',VendaId,[]);
 end;
 
 procedure TfrmConsVendas.BorderodeEntrega1Click(Sender: TObject);

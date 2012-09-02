@@ -20,13 +20,14 @@ type TDaoVenda = class
      function PesoTotal(IDVenda : Integer) : Real;
      procedure MarcarComoEntregue(IDVenda : Integer);
      Procedure MarcarComoPagouSinal(IDVenda : Integer);
+     Procedure MarcarComoNaoPagouSinal(IDVenda : Integer);
      Procedure MarcarComoServicoPago(IDVenda : Integer);
+     procedure MarcarComoNaoServicoPago(IDVenda: Integer);
      procedure AtualizarRomaneio(RomaneiId,VendaId : Integer);
      procedure CancelarRomaneio(RomaneiId : Integer);
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
      function RetornarVencimentos(VendaId : Integer) : TStringList;
-     procedure MarcarComoNaoServicoPago(IDVenda: Integer);
 end;
 
 
@@ -111,21 +112,29 @@ begin
   FqryModific.ExecSql;
 end;
 
-procedure TDaoVenda.MarcarComoNaoServicoPago(IDVenda: Integer);
+procedure TDaoVenda.MarcarComoNaoPagouSinal(IDVenda: Integer);
 begin
   FqryModific.Close;
-  FqryModific.SQL.Text :='UpDate T_vendas set ServicoPago=0 where SeqVenda=:parSeqvenda';
+  FqryModific.SQL.Text :='UpDate T_vendas set PagouSinal=0 where SeqVenda=:parSeqvenda';
   FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
   FqryModific.ExecSql;
 end;
 
+procedure TDaoVenda.MarcarComoNaoServicoPago(IDVenda: Integer);
+begin
+   FqryModific.Close;
+   FqryModific.SQL.Text :='UpDate T_vendas set ServicoPago=0 where SeqVenda=:parSeqvenda';
+   FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
+   FqryModific.ExecSql;
+end;
+
 procedure TDaoVenda.MarcarComoEntregue(IDVenda: Integer);
 begin
-  FqryModific.Close;
-  FqryModific.SQL.Text :='UpDate T_vendas set Entregue=1, Data_entrega=:parData_entrega where SeqVenda=:parSeqvenda';
-  FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
-  FqryModific.ParamByName('parData_entrega').AsSQLTimeStamp := DateTimeToSqlTimeStamp(now);
-  FqryModific.ExecSql;
+   FqryModific.Close;
+   FqryModific.SQL.Text :='UpDate T_vendas set Entregue=1, Data_entrega=:parData_entrega where SeqVenda=:parSeqvenda';
+   FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
+   FqryModific.ParamByName('parData_entrega').AsSQLTimeStamp := DateTimeToSqlTimeStamp(now);
+   FqryModific.ExecSql;
 end;
 
 function TDaoVenda.PesoTotal(IDVenda: Integer): Real;

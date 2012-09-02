@@ -3,7 +3,7 @@ object frmVendas: TfrmVendas
   Top = 129
   BorderIcons = []
   Caption = 'Pedidos de Venda'
-  ClientHeight = 535
+  ClientHeight = 534
   ClientWidth = 760
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -1878,12 +1878,11 @@ object frmVendas: TfrmVendas
   end
   object bsSkinScrollBar1: TbsSkinScrollBar
     Left = 0
-    Top = 516
+    Top = 494
     Width = 760
     Height = 19
     HintImageIndex = 0
     TabOrder = 3
-    Visible = False
     SkinDataName = 'hscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -1901,10 +1900,11 @@ object frmVendas: TfrmVendas
     Kind = sbHorizontal
     PageSize = 0
     Min = 0
-    Max = 0
+    Max = 127
     Position = 0
-    SmallChange = 127
-    LargeChange = 127
+    SmallChange = 42
+    LargeChange = 42
+    ExplicitTop = 516
   end
   object edtVlr_Desconto: TbsSkinEdit
     Left = 445
@@ -1943,7 +1943,7 @@ object frmVendas: TfrmVendas
     Left = 741
     Top = 307
     Width = 19
-    Height = 209
+    Height = 187
     HintImageIndex = 0
     TabOrder = 5
     SkinData = frmPrincipal.SkinPrincipal
@@ -1968,12 +1968,13 @@ object frmVendas: TfrmVendas
     Position = 1
     SmallChange = 1
     LargeChange = 1
+    ExplicitHeight = 209
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
     Top = 307
     Width = 741
-    Height = 209
+    Height = 187
     HintImageIndex = 0
     TabOrder = 6
     SkinData = frmPrincipal.SkinPrincipal
@@ -2405,6 +2406,41 @@ object frmVendas: TfrmVendas
       end
     end
   end
+  object PanelStatus: TbsSkinStatusPanel
+    Left = 0
+    Top = 513
+    Width = 760
+    Height = 21
+    HintImageIndex = 0
+    TabOrder = 11
+    SkinData = frmPrincipal.SkinEntradaDados
+    SkinDataName = 'statuspanel'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 14
+    DefaultFont.Name = 'Arial'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    ShadowEffect = False
+    ShadowColor = clBlack
+    ShadowOffset = 0
+    ShadowSize = 3
+    ReflectionEffect = False
+    ReflectionOffset = -5
+    EllipsType = bsetNoneEllips
+    UseSkinSize = True
+    UseSkinFontColor = True
+    BorderStyle = bvFrame
+    Align = alBottom
+    Caption = 'PanelStatus'
+    AutoSize = False
+    ImageIndex = -1
+    NumGlyphs = 1
+    ExplicitLeft = -8
+    ExplicitTop = 527
+  end
   object dspItensVendas: TDataSetProvider
     DataSet = qryItensVendas
     Left = 305
@@ -2517,6 +2553,18 @@ object frmVendas: TfrmVendas
       item
         Name = 'PesoLiquido'
         DataType = ftFloat
+      end
+      item
+        Name = 'PrecoCusto'
+        DataType = ftFloat
+      end
+      item
+        Name = 'MargemSecundaria'
+        DataType = ftFloat
+      end
+      item
+        Name = 'LucroBruto'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
@@ -2525,7 +2573,7 @@ object frmVendas: TfrmVendas
     Left = 107
     Top = 300
     Data = {
-      520100009619E0BD01000000180000000F000000000003000000520106436F64
+      910100009619E0BD010000001800000012000000000003000000910106436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
@@ -2535,7 +2583,9 @@ object frmVendas: TfrmVendas
       61646501004900000001000557494454480200020003000D71746465456D6261
       6C6167656D04000100000000000873657156656E646104000100000000000753
       65746F7249640400010000000000095065736F427275746F0800040000000000
-      0B5065736F4C69717569646F08000400000000000000}
+      0B5065736F4C69717569646F08000400000000000A507265636F437573746F08
+      00040000000000104D617267656D536563756E64617269610800040000000000
+      0A4C7563726F427275746F08000400000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
       DisplayWidth = 8
       FieldName = 'Codigo'
@@ -2601,6 +2651,15 @@ object frmVendas: TfrmVendas
     object cdsItensVendasTMPPesoLiquido: TFloatField
       FieldName = 'PesoLiquido'
       Visible = False
+    end
+    object cdsItensVendasTMPPrecoCusto: TFloatField
+      FieldName = 'PrecoCusto'
+    end
+    object cdsItensVendasTMPMargemSecundaria: TFloatField
+      FieldName = 'MargemSecundaria'
+    end
+    object cdsItensVendasTMPLucroBruto: TFloatField
+      FieldName = 'LucroBruto'
     end
   end
   object srcItensVendasTMP: TDataSource

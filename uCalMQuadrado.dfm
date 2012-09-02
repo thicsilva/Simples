@@ -200,7 +200,6 @@ object frmCalMQuadrado: TfrmCalMQuadrado
     Sizeable = False
     Align = alClient
     Caption = 'Informe as Medidas para o Metro Quadrado'
-    ExplicitHeight = 180
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 51
       Top = 37
@@ -535,7 +534,6 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       ButtonMode = False
       SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'edit'
-      ReadOnly = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = 14

@@ -4,7 +4,7 @@ object frmConsVendas: TfrmConsVendas
   BorderIcons = []
   Caption = 'Consulta e manuten'#231#227'o das Vendas Efetuadas'
   ClientHeight = 539
-  ClientWidth = 1171
+  ClientWidth = 1187
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
     Top = 153
-    Width = 1171
+    Width = 1187
     Height = 386
     HintImageIndex = 0
     TabOrder = 0
@@ -55,11 +55,12 @@ object frmConsVendas: TfrmConsVendas
     object cxGrid1: TcxGrid
       Left = 1
       Top = 1
-      Width = 1169
+      Width = 1185
       Height = 384
       Align = alClient
       TabOrder = 0
       object GrdVendas: TcxGridDBTableView
+        PopupMenu = bsSkinPopupMenu2
         NavigatorButtons.ConfirmDelete = False
         OnCustomDrawCell = GrdVendasCustomDrawCell
         DataController.DataSource = srcVendas
@@ -133,11 +134,6 @@ object frmConsVendas: TfrmConsVendas
           DataBinding.FieldName = 'Nome_Cliente'
           Width = 200
         end
-        object colum_NomeAnimal: TcxGridDBColumn
-          Caption = 'Nome do Animal'
-          DataBinding.FieldName = 'NomeAnimal'
-          Width = 110
-        end
         object Colum_Data_Venda: TcxGridDBColumn
           Caption = 'Data'
           DataBinding.FieldName = 'Data_Venda'
@@ -148,10 +144,25 @@ object frmConsVendas: TfrmConsVendas
           DataBinding.FieldName = 'Vlr_Desconto'
           Width = 65
         end
+        object colum_NomeAnimal: TcxGridDBColumn
+          Caption = 'Nome do Animal'
+          DataBinding.FieldName = 'NomeAnimal'
+          Width = 110
+        end
         object Colum_Vlr_Total: TcxGridDBColumn
           Caption = 'Total'
           DataBinding.FieldName = 'Vlr_Total'
           Width = 65
+        end
+        object LucroBruto: TcxGridDBColumn
+          Caption = 'Lucro Bruto %'
+          DataBinding.FieldName = 'LucroBruto'
+          Width = 85
+        end
+        object LucroBrutoReal: TcxGridDBColumn
+          Caption = 'Lucro Bruto $'
+          DataBinding.FieldName = 'LucroBrutoReais'
+          Width = 85
         end
         object Colum_Operador: TcxGridDBColumn
           DataBinding.FieldName = 'Operador'
@@ -170,11 +181,17 @@ object frmConsVendas: TfrmConsVendas
         end
         object Column_Vendedor: TcxGridDBColumn
           DataBinding.FieldName = 'Vendedor'
-          Width = 150
+          Width = 134
         end
         object Column_Status_Pagamento: TcxGridDBColumn
           Caption = 'Situa'#231#227'o Pagamento'
           DataBinding.FieldName = 'Status_Pagamento'
+          Width = 130
+        end
+        object Status_Entrega: TcxGridDBColumn
+          Caption = 'Status Entrega'
+          DataBinding.FieldName = 'Status_Entrega'
+          Width = 120
         end
       end
       object GrdItensVendas: TcxGridDBTableView
@@ -221,6 +238,11 @@ object frmConsVendas: TfrmConsVendas
           Caption = 'Total'
           DataBinding.FieldName = 'Vlr_Total'
           Width = 70
+        end
+        object Item_LucroBruto: TcxGridDBColumn
+          Caption = 'Lucro Bruto'
+          DataBinding.FieldName = 'LucroBruto'
+          Width = 75
         end
         object Colum_Complemento: TcxGridDBColumn
           DataBinding.FieldName = 'Complemento'
@@ -269,7 +291,7 @@ object frmConsVendas: TfrmConsVendas
   object panelconsulta: TbsSkinPanel
     Left = 0
     Top = 77
-    Width = 1171
+    Width = 1187
     Height = 76
     HintImageIndex = 0
     TabOrder = 1
@@ -856,7 +878,7 @@ object frmConsVendas: TfrmConsVendas
   object pnlmensagem: TPanel
     Left = 0
     Top = 53
-    Width = 1171
+    Width = 1187
     Height = 24
     Align = alTop
     Caption = 'Consulta de Vendas'
@@ -873,7 +895,7 @@ object frmConsVendas: TfrmConsVendas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 1171
+    Width = 1187
     Height = 53
     AutoSize = True
     Bands = <
@@ -881,7 +903,7 @@ object frmConsVendas: TfrmConsVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 1167
+        Width = 1183
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -890,7 +912,7 @@ object frmConsVendas: TfrmConsVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 1158
+      Width = 1174
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1564,864 +1586,6 @@ object frmConsVendas: TfrmConsVendas
     Left = 318
     Top = 363
   end
-  object cxPropertiesStore1: TcxPropertiesStore
-    Components = <
-      item
-        Component = cmbPeriodo
-        Properties.Strings = (
-          'Align'
-          'AlignWithMargins'
-          'AlphaBlend'
-          'AlphaBlendAnimation'
-          'AlphaBlendValue'
-          'Anchors'
-          'AutoComplete'
-          'CharCase'
-          'Cursor'
-          'DefaultColor'
-          'DefaultFont'
-          'DefaultHeight'
-          'DefaultWidth'
-          'DropDownCount'
-          'Enabled'
-          'Font'
-          'Height'
-          'HelpContext'
-          'HelpKeyword'
-          'HelpType'
-          'HideSelection'
-          'Hint'
-          'HintImageIndex'
-          'HintImageList'
-          'HintTitle'
-          'HorizontalExtent'
-          'ImageIndex'
-          'Images'
-          'ItemIndex'
-          'Items'
-          'Left'
-          'ListBoxCaption'
-          'ListBoxCaptionAlignment'
-          'ListBoxCaptionMode'
-          'ListBoxDefaultCaptionFont'
-          'ListBoxDefaultFont'
-          'ListBoxDefaultItemHeight'
-          'ListBoxUseSkinFont'
-          'ListBoxUseSkinItemHeight'
-          'ListBoxWidth'
-          'Margins'
-          'Name'
-          'PopupMenu'
-          'ShowHint'
-          'SkinData'
-          'SkinDataName'
-          'Sorted'
-          'Style'
-          'TabOrder'
-          'TabStop'
-          'TabWidths'
-          'Tag'
-          'Text'
-          'ToolButtonStyle'
-          'Top'
-          'UseSkinFont'
-          'UseSkinSize'
-          'Visible'
-          'Width')
-      end
-      item
-        Component = cmbStatus
-        Properties.Strings = (
-          'Align'
-          'AlignWithMargins'
-          'AlphaBlend'
-          'AlphaBlendAnimation'
-          'AlphaBlendValue'
-          'Anchors'
-          'AutoComplete'
-          'CharCase'
-          'Cursor'
-          'DefaultColor'
-          'DefaultFont'
-          'DefaultHeight'
-          'DefaultWidth'
-          'DropDownCount'
-          'Enabled'
-          'Font'
-          'Height'
-          'HelpContext'
-          'HelpKeyword'
-          'HelpType'
-          'HideSelection'
-          'Hint'
-          'HorizontalExtent'
-          'ImageIndex'
-          'Images'
-          'ItemIndex'
-          'Items'
-          'Left'
-          'ListBoxCaption'
-          'ListBoxCaptionAlignment'
-          'ListBoxCaptionMode'
-          'ListBoxDefaultCaptionFont'
-          'ListBoxDefaultFont'
-          'ListBoxDefaultItemHeight'
-          'ListBoxUseSkinFont'
-          'ListBoxUseSkinItemHeight'
-          'ListBoxWidth'
-          'Margins'
-          'Name'
-          'PopupMenu'
-          'ShowHint'
-          'SkinData'
-          'SkinDataName'
-          'Sorted'
-          'Style'
-          'TabOrder'
-          'TabStop'
-          'TabWidths'
-          'Tag'
-          'Text'
-          'Top'
-          'UseSkinFont'
-          'UseSkinSize'
-          'Visible'
-          'Width')
-      end
-      item
-        Component = cmbTipoData
-        Properties.Strings = (
-          'Align'
-          'AlignWithMargins'
-          'AlphaBlend'
-          'AlphaBlendAnimation'
-          'AlphaBlendValue'
-          'Anchors'
-          'AutoComplete'
-          'CharCase'
-          'Cursor'
-          'DefaultColor'
-          'DefaultFont'
-          'DefaultHeight'
-          'DefaultWidth'
-          'DropDownCount'
-          'Enabled'
-          'Font'
-          'Height'
-          'HelpContext'
-          'HelpKeyword'
-          'HelpType'
-          'HideSelection'
-          'Hint'
-          'HorizontalExtent'
-          'ImageIndex'
-          'Images'
-          'ItemIndex'
-          'Items'
-          'Left'
-          'ListBoxCaption'
-          'ListBoxCaptionAlignment'
-          'ListBoxCaptionMode'
-          'ListBoxDefaultCaptionFont'
-          'ListBoxDefaultFont'
-          'ListBoxDefaultItemHeight'
-          'ListBoxUseSkinFont'
-          'ListBoxUseSkinItemHeight'
-          'ListBoxWidth'
-          'Margins'
-          'Name'
-          'PopupMenu'
-          'ShowHint'
-          'SkinData'
-          'SkinDataName'
-          'Sorted'
-          'Style'
-          'TabOrder'
-          'TabStop'
-          'TabWidths'
-          'Tag'
-          'Text'
-          'Top'
-          'UseSkinFont'
-          'UseSkinSize'
-          'Visible'
-          'Width')
-      end
-      item
-        Component = cmbTipoFiltro
-        Properties.Strings = (
-          'Align'
-          'AlignWithMargins'
-          'AlphaBlend'
-          'AlphaBlendAnimation'
-          'AlphaBlendValue'
-          'Anchors'
-          'AutoComplete'
-          'CharCase'
-          'Cursor'
-          'DefaultColor'
-          'DefaultFont'
-          'DefaultHeight'
-          'DefaultWidth'
-          'DropDownCount'
-          'Enabled'
-          'Font'
-          'Height'
-          'HelpContext'
-          'HelpKeyword'
-          'HelpType'
-          'HideSelection'
-          'Hint'
-          'HorizontalExtent'
-          'ImageIndex'
-          'Images'
-          'ItemIndex'
-          'Items'
-          'Left'
-          'ListBoxCaption'
-          'ListBoxCaptionAlignment'
-          'ListBoxCaptionMode'
-          'ListBoxDefaultCaptionFont'
-          'ListBoxDefaultFont'
-          'ListBoxDefaultItemHeight'
-          'ListBoxUseSkinFont'
-          'ListBoxUseSkinItemHeight'
-          'ListBoxWidth'
-          'Margins'
-          'Name'
-          'PopupMenu'
-          'ShowHint'
-          'SkinData'
-          'SkinDataName'
-          'Sorted'
-          'Style'
-          'TabOrder'
-          'TabStop'
-          'TabWidths'
-          'Tag'
-          'Text'
-          'Top'
-          'UseSkinFont'
-          'UseSkinSize'
-          'Visible'
-          'Width')
-      end
-      item
-        Component = Colum_Cod_Aluno
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Codigo
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Complemento
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = colum_Controle
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Data_Venda
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Desconto
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Descricao
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Descrisao
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_NomeStatus
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_NumeroCupom
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Operador
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_PcoVenda
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Quantidade
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Seqvenda
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = colum_Vlr_Desconto
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_Vlr_Total
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Colum_VlrTotal
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = Column_Vendedor
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end>
-    StorageName = 'cxPropertiesStore1'
-    Left = 560
-    Top = 304
-  end
   object qryItensDevolucoes: TSQLQuery
     MaxBlobSize = -1
     Params = <>
@@ -2492,59 +1656,407 @@ object frmConsVendas: TfrmConsVendas
     Left = 632
     Top = 248
   end
-  object SkinForm: TbsBusinessSkinForm
-    QuickButtons = <>
-    QuickButtonsShowHint = False
-    QuickButtonsShowDivider = True
-    ClientInActiveEffect = False
-    ClientInActiveEffectType = bsieSemiTransparent
-    DisableSystemMenu = False
-    AlwaysResize = False
-    PositionInMonitor = bspDefault
-    UseFormCursorInNCArea = False
-    MaxMenuItemsInWindow = 0
-    ClientWidth = 0
-    ClientHeight = 0
-    HideCaptionButtons = False
-    AlwaysShowInTray = False
-    LogoBitMapTransparent = False
-    AlwaysMinimizeToTray = False
-    UseSkinFontInMenu = True
-    ShowIcon = False
-    MaximizeOnFullScreen = False
-    AlphaBlend = False
-    AlphaBlendAnimation = True
-    AlphaBlendValue = 200
-    ShowObjectHint = False
-    MenusAlphaBlend = False
-    MenusAlphaBlendAnimation = False
-    MenusAlphaBlendValue = 200
-    DefCaptionFont.Charset = DEFAULT_CHARSET
-    DefCaptionFont.Color = clBtnText
-    DefCaptionFont.Height = 14
-    DefCaptionFont.Name = 'Arial'
-    DefCaptionFont.Style = [fsBold]
-    DefInActiveCaptionFont.Charset = DEFAULT_CHARSET
-    DefInActiveCaptionFont.Color = clBtnShadow
-    DefInActiveCaptionFont.Height = 14
-    DefInActiveCaptionFont.Name = 'Arial'
-    DefInActiveCaptionFont.Style = [fsBold]
-    DefMenuItemHeight = 20
-    DefMenuItemFont.Charset = DEFAULT_CHARSET
-    DefMenuItemFont.Color = clWindowText
-    DefMenuItemFont.Height = 14
-    DefMenuItemFont.Name = 'Arial'
-    DefMenuItemFont.Style = []
-    UseDefaultSysMenu = True
-    SkinData = frmPrincipal.SkinPrincipal
-    MinHeight = 0
-    MinWidth = 0
-    MaxHeight = 0
-    MaxWidth = 0
-    Magnetic = False
-    MagneticSize = 5
-    BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 348
-    Top = 216
+  object cxGridPopupMenu1: TcxGridPopupMenu
+    Grid = cxGrid1
+    PopupMenus = <>
+    Left = 528
+    Top = 232
+  end
+  object cxPropertiesStore1: TcxPropertiesStore
+    Components = <
+      item
+        Component = cmbPeriodo
+        Properties.Strings = (
+          'Align'
+          'AlignWithMargins'
+          'AlphaBlend'
+          'AlphaBlendAnimation'
+          'AlphaBlendValue'
+          'Anchors'
+          'AutoComplete'
+          'CharCase'
+          'Cursor'
+          'DefaultColor'
+          'DefaultFont'
+          'DefaultHeight'
+          'DefaultWidth'
+          'DropDownCount'
+          'Enabled'
+          'Font'
+          'Height'
+          'HelpContext'
+          'HelpKeyword'
+          'HelpType'
+          'HideSelection'
+          'Hint'
+          'HintImageIndex'
+          'HintImageList'
+          'HintTitle'
+          'HorizontalExtent'
+          'ImageIndex'
+          'Images'
+          'ItemIndex'
+          'Items'
+          'Left'
+          'ListBoxCaption'
+          'ListBoxCaptionAlignment'
+          'ListBoxCaptionMode'
+          'ListBoxDefaultCaptionFont'
+          'ListBoxDefaultFont'
+          'ListBoxDefaultItemHeight'
+          'ListBoxUseSkinFont'
+          'ListBoxUseSkinItemHeight'
+          'ListBoxWidth'
+          'Margins'
+          'Name'
+          'PopupMenu'
+          'ShowHint'
+          'SkinData'
+          'SkinDataName'
+          'Sorted'
+          'Style'
+          'TabOrder'
+          'TabStop'
+          'TabWidths'
+          'Tag'
+          'Text'
+          'ToolButtonStyle'
+          'Top'
+          'UseSkinFont'
+          'UseSkinSize'
+          'Width')
+      end
+      item
+        Component = cmbStatus
+        Properties.Strings = (
+          'Align'
+          'AlignWithMargins'
+          'AlphaBlend'
+          'AlphaBlendAnimation'
+          'AlphaBlendValue'
+          'Anchors'
+          'AutoComplete'
+          'CharCase'
+          'Cursor'
+          'DefaultColor'
+          'DefaultFont'
+          'DefaultHeight'
+          'DefaultWidth'
+          'DropDownCount'
+          'Enabled'
+          'Font'
+          'Height'
+          'HelpContext'
+          'HelpKeyword'
+          'HelpType'
+          'HideSelection'
+          'Hint'
+          'HintImageIndex'
+          'HintImageList'
+          'HintTitle'
+          'HorizontalExtent'
+          'ImageIndex'
+          'Images'
+          'ItemIndex'
+          'Items'
+          'Left'
+          'ListBoxCaption'
+          'ListBoxCaptionAlignment'
+          'ListBoxCaptionMode'
+          'ListBoxDefaultCaptionFont'
+          'ListBoxDefaultFont'
+          'ListBoxDefaultItemHeight'
+          'ListBoxUseSkinFont'
+          'ListBoxUseSkinItemHeight'
+          'ListBoxWidth'
+          'Margins'
+          'Name'
+          'PopupMenu'
+          'ShowHint'
+          'SkinData'
+          'SkinDataName'
+          'Sorted'
+          'Style'
+          'TabOrder'
+          'TabStop'
+          'TabWidths'
+          'Tag'
+          'Text'
+          'ToolButtonStyle'
+          'Top'
+          'UseSkinFont'
+          'UseSkinSize'
+          'Width')
+      end
+      item
+        Component = cmbTipoData
+        Properties.Strings = (
+          'Align'
+          'AlignWithMargins'
+          'AlphaBlend'
+          'AlphaBlendAnimation'
+          'AlphaBlendValue'
+          'Anchors'
+          'AutoComplete'
+          'CharCase'
+          'Cursor'
+          'DefaultColor'
+          'DefaultFont'
+          'DefaultHeight'
+          'DefaultWidth'
+          'DropDownCount'
+          'Enabled'
+          'Font'
+          'Height'
+          'HelpContext'
+          'HelpKeyword'
+          'HelpType'
+          'HideSelection'
+          'Hint'
+          'HintImageIndex'
+          'HintImageList'
+          'HintTitle'
+          'HorizontalExtent'
+          'ImageIndex'
+          'Images'
+          'ItemIndex'
+          'Items'
+          'Left'
+          'ListBoxCaption'
+          'ListBoxCaptionAlignment'
+          'ListBoxCaptionMode'
+          'ListBoxDefaultCaptionFont'
+          'ListBoxDefaultFont'
+          'ListBoxDefaultItemHeight'
+          'ListBoxUseSkinFont'
+          'ListBoxUseSkinItemHeight'
+          'ListBoxWidth'
+          'Margins'
+          'Name'
+          'PopupMenu'
+          'ShowHint'
+          'SkinData'
+          'SkinDataName'
+          'Sorted'
+          'Style'
+          'TabOrder'
+          'TabStop'
+          'TabWidths'
+          'Tag'
+          'Text'
+          'ToolButtonStyle'
+          'Top'
+          'UseSkinFont'
+          'UseSkinSize'
+          'Width')
+      end
+      item
+        Component = cmbTipoFiltro
+        Properties.Strings = (
+          'Align'
+          'AlignWithMargins'
+          'AlphaBlend'
+          'AlphaBlendAnimation'
+          'AlphaBlendValue'
+          'Anchors'
+          'AutoComplete'
+          'CharCase'
+          'Cursor'
+          'DefaultColor'
+          'DefaultFont'
+          'DefaultHeight'
+          'DefaultWidth'
+          'DropDownCount'
+          'Enabled'
+          'Font'
+          'Height'
+          'HelpContext'
+          'HelpKeyword'
+          'HelpType'
+          'HideSelection'
+          'Hint'
+          'HintImageIndex'
+          'HintImageList'
+          'HintTitle'
+          'HorizontalExtent'
+          'ImageIndex'
+          'Images'
+          'ItemIndex'
+          'Items'
+          'Left'
+          'ListBoxCaption'
+          'ListBoxCaptionAlignment'
+          'ListBoxCaptionMode'
+          'ListBoxDefaultCaptionFont'
+          'ListBoxDefaultFont'
+          'ListBoxDefaultItemHeight'
+          'ListBoxUseSkinFont'
+          'ListBoxUseSkinItemHeight'
+          'ListBoxWidth'
+          'Margins'
+          'Name'
+          'PopupMenu'
+          'ShowHint'
+          'SkinData'
+          'SkinDataName'
+          'Sorted'
+          'Style'
+          'TabOrder'
+          'TabStop'
+          'TabWidths'
+          'Tag'
+          'Text'
+          'ToolButtonStyle'
+          'Top'
+          'UseSkinFont'
+          'UseSkinSize'
+          'Width')
+      end
+      item
+        Component = Colum_Cod_Aluno
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Codigo
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Complemento
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = colum_Controle
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Data_Venda
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Desconto
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Descricao
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Descrisao
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = colum_NomeAnimal
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_NomeStatus
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_NumeroCupom
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Operador
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_PcoVenda
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Quantidade
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Seqvenda
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = colum_Vlr_Desconto
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_Vlr_Total
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Colum_VlrTotal
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Column_Status_Pagamento
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Column_Vendedor
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = cxGrid1
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = grdDevolucoesColumn1
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = GrdItensDevolvidosColumn1
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = GrdItensDevolvidosColumn2
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = LucroBruto
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = Status_Entrega
+        Properties.Strings = (
+          'Visible')
+      end
+      item
+        Component = VisualizarDevolvidos1
+        Properties.Strings = (
+          'Visible')
+      end>
+    StorageName = 'cxPropertiesStore1'
+    Left = 592
+    Top = 344
+  end
+  object bsSkinPopupMenu2: TbsSkinPopupMenu
+    Left = 616
+    Top = 296
+    object MenuItem1: TMenuItem
+      Caption = 'Marcar como entregue'
+      OnClick = MenuItem1Click
+    end
   end
 end
