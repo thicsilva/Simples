@@ -134,10 +134,10 @@ begin
      for I := 0 to ListVendas.Items.Count - 1 do
      begin
         if FoiProrrogado(I) then
-           DaoVenda.TirarVendaRomaneio( StrToInt(ListVendas.Items[I].Caption));
-        if FoiRecebido(I) then
-           BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption);
-        if NaoFoiRecebido(I) then
+           DaoVenda.TirarVendaRomaneio( StrToInt(ListVendas.Items[I].Caption))
+        else if FoiRecebido(I) then
+           BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption)
+        else if NaoFoiRecebido(I) then
            MudarVencimentoTitulos(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption,ListVendas.Items[I].SubItems[5]);
 
      end;
@@ -210,12 +210,12 @@ begin
       llstTemp.SubItems.Add(FormatFloat('0.00', Dados.FieldByName('Vlr_total').AsFloat));
       if not Dados.FieldByName('PagouSinal').Asboolean then
          llstTemp.SubItems.Add('Cheque Não Recebido')
-      else if Dados.FieldByName('Entregue').Asboolean then
-         llstTemp.SubItems.Add('Entregue')
       else if Dados.FieldByName('ServicoPago').Asboolean then
          llstTemp.SubItems.Add('Recebido')
       else if Dados.FieldByName('Prorrogado').Asboolean then
          llstTemp.SubItems.Add('Prorrogado')
+      else if Dados.FieldByName('Entregue').Asboolean then
+         llstTemp.SubItems.Add('Entregue')
       else
         llstTemp.SubItems.Add('Pendente');
       llstTemp.SubItems.Add(Dados.FieldByName('Cod_formaPagamento').AsString);

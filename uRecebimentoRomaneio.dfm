@@ -30,7 +30,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 743
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -301,6 +300,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = btnMarcarRecebidoClick
         ExplicitLeft = 286
+        ExplicitTop = 12
       end
       object bsSkinBevel4: TbsSkinBevel
         Left = 399
@@ -312,6 +312,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 394
+        ExplicitTop = -1
       end
       object btnNaoRecebido: TbsSkinSpeedButton
         Left = 424
@@ -349,6 +350,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Spacing = 1
         OnClick = btnNaoRecebidoClick
         ExplicitLeft = 519
+        ExplicitTop = 12
       end
       object bsSkinBevel5: TbsSkinBevel
         Left = 531
@@ -360,6 +362,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 533
+        ExplicitTop = -1
       end
       object bsSkinBevel6: TbsSkinBevel
         Left = 781
@@ -371,6 +374,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 780
+        ExplicitTop = -1
       end
     end
   end
@@ -408,7 +412,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alClient
-    ExplicitWidth = 743
     object ListVendas: TbsSkinListView
       Left = 1
       Top = 1
@@ -465,8 +468,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       TabOrder = 0
       ViewStyle = vsReport
       HeaderSkinDataName = 'resizetoolbutton'
-      ExplicitLeft = 2
-      ExplicitTop = 0
     end
   end
   object bsSkinPanel3: TbsSkinPanel
@@ -503,7 +504,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel2'
     Align = alTop
-    ExplicitWidth = 743
     object bsSkinLabel1: TbsSkinLabel
       Left = 9
       Top = 7
