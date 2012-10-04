@@ -98,6 +98,8 @@ type
     Label4: TLabel;
     MemoMensagemVenda: TbsSkinMemo;
     bsSkinLabel13: TbsSkinLabel;
+    edtDescontoMaximo: TbsSkinEdit;
+    bsSkinLabel14: TbsSkinLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -245,6 +247,7 @@ begin
    //gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', RetornaSimouNao(chkMarcaOsNoCaixa.Checked) ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', edtDespesaVariaveis.Text ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasFixas', edtDespesasFixas.Text ,gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DescontoMaximo', edtDescontoMaximo.Text ,gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosContaAReceber;
@@ -286,6 +289,7 @@ begin
    chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
    edtDespesaVariaveis.Text   := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
    edtDespesasFixas.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );
+   edtDescontoMaximo.Text     := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DescontoMaximo', '0' );
 end;
 
 procedure TfrmParametros.RecuperarParametrosVendas;

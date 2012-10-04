@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 340
-    ActivePage = bsSkinTabSheet3
+    ActivePage = bsSkinTabSheet4
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1916,6 +1916,69 @@ object frmParametros: TfrmParametros
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
+      end
+      object edtDescontoMaximo: TbsSkinEdit
+        Left = 223
+        Top = 182
+        Width = 66
+        Height = 18
+        Text = '0,00'
+        DefaultColor = clWindow
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        UseSkinFont = True
+        DefaultWidth = 0
+        DefaultHeight = 0
+        ButtonMode = False
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'edit'
+        Alignment = taRightJustify
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 14
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
+      end
+      object bsSkinLabel14: TbsSkinLabel
+        Left = 8
+        Top = 182
+        Width = 209
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Desconto maximo para comiss'#227'o'
+        AutoSize = False
       end
     end
     object Vendas: TbsSkinTabSheet

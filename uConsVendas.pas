@@ -121,7 +121,6 @@ type
     Print: TPrintDialog;
     checkUsarleitor: TbsSkinCheckRadioBox;
     colum_NomeAnimal: TcxGridDBColumn;
-    cxGridPopupMenu1: TcxGridPopupMenu;
     Status_Entrega: TcxGridDBColumn;
     cxPropertiesStore1: TcxPropertiesStore;
     bsSkinPopupMenu2: TbsSkinPopupMenu;
@@ -129,6 +128,8 @@ type
     LucroBruto: TcxGridDBColumn;
     Item_LucroBruto: TcxGridDBColumn;
     LucroBrutoReal: TcxGridDBColumn;
+    btnEntregaVenda: TbsSkinSpeedButton;
+    MenuDeControle: TcxGridPopupMenu;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -155,6 +156,7 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure MenuItem1Click(Sender: TObject);
+    procedure btnEntregaVendaClick(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -621,12 +623,13 @@ begin
    btnEntregue.Visible    := True;
    cmbTipoFiltro.Enabled  := True;
    cmbStatus.Enabled      := True;
-
+   btnEntregaVenda.Visible := False;
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
    Begin
       btnCupomFiscal.Visible := False;
       btnEmproducao.Visible  := False;
       btnEntregue.Visible    := False;
+      btnEntregaVenda.Visible := True;
       separador.Width        := separador.Width+( btnEntregue.Width * 4 );
    End;
 
@@ -656,6 +659,8 @@ begin
    End;
    btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    btnSelecionarClick(btnSelecionar);
+   if gbMaster then
+      MenuDeControle.UseBuiltInPopupMenus := True;
 end;
 
 procedure TfrmConsVendas.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
@@ -1082,11 +1087,16 @@ begin
    btnselecionarclick(btnselecionar);
 end;
 
+procedure TfrmConsVendas.btnEntregaVendaClick(Sender: TObject);
+begin
+  inherited;
+  MenuItem1Click(MenuItem1);
+end;
+
 procedure TfrmConsVendas.btnEntregueClick(Sender: TObject);
 var Parametros : TStringList;
     DaoVenda   : TDaoVenda;
     Venda      : Tvenda;
-
 begin
    if not cdsVendas.FieldByName('ServicoPago').AsBoolean then
    begin
@@ -1111,14 +1121,6 @@ begin
       qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
       qryModific.ParamByName('parStatus').AsString    := '4';
       qryModific.ExecSQL;
-      {
-      Parametros := TStringList.Create;
-      Parametros.Add(cdsVendas.FieldByName('SeqVenda').AsString);
-      cdsVendas := gConexao.BuscarDadosSQL('Select * From T_vendas Where SeqVenda=:parSeqVenda', Parametros );
-      DaoVenda := TDaoVenda.Create(gConexao);
-      Venda := DaoVenda.CarregarVenda(cdsVendas);
-      venda.Numerovias := StrtoInt(gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador ));
-       }
    End;
    btnselecionarclick(btnselecionar);
 end;

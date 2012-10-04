@@ -55,6 +55,7 @@ type TDaoEstrutura = class
     procedure Adicionar_LucroBrunto_na_Tabela_ItenVendas;
     procedure Adicionar_LucroBrunto_na_Tabela_Vendas;
     procedure Adicionar_CustoTotal_na_Tabela_Vendas;
+    procedure CriarTabela_CustosProduto;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -611,6 +612,7 @@ begin
   Adicionar_LucroBrunto_na_Tabela_ItenVendas;
   Adicionar_CustoTotal_na_Tabela_Vendas;
   Adicionar_LucroBrunto_na_Tabela_Vendas;
+  CriarTabela_CustosProduto;
 end;
 
 
@@ -769,8 +771,26 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+procedure TDaoEstrutura.CriarTabela_CustosProduto;
+begin
+   if not ExisteTabela( 'CustosProduto', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := ' CREATE TABLE CustosProduto( ID int IDENTITY(1,1) NOT NULL, '+
+'              	ProdutoId int, '+
+'            	Descricao varchar(50),'+
+'            	Nome_Tipo varchar(30), '+
+'            	cifra varchar(2),'+
+'            	Tipo int,'+
+'            	Ordem int,'+
+'            	Valor float,'+
+'            	Total float) ';
+      FQryAjustes.ExecSQL;
+   end;
+end;
 
 
 end.
+
 
 

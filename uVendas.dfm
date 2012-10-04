@@ -1902,9 +1902,8 @@ object frmVendas: TfrmVendas
     Min = 0
     Max = 127
     Position = 0
-    SmallChange = 42
-    LargeChange = 42
-    ExplicitTop = 516
+    SmallChange = 63
+    LargeChange = 63
   end
   object edtVlr_Desconto: TbsSkinEdit
     Left = 445
@@ -1968,7 +1967,6 @@ object frmVendas: TfrmVendas
     Position = 1
     SmallChange = 1
     LargeChange = 1
-    ExplicitHeight = 209
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
@@ -2438,8 +2436,6 @@ object frmVendas: TfrmVendas
     AutoSize = False
     ImageIndex = -1
     NumGlyphs = 1
-    ExplicitLeft = -8
-    ExplicitTop = 527
   end
   object dspItensVendas: TDataSetProvider
     DataSet = qryItensVendas
@@ -2657,8 +2653,10 @@ object frmVendas: TfrmVendas
     end
     object cdsItensVendasTMPMargemSecundaria: TFloatField
       FieldName = 'MargemSecundaria'
+      Visible = False
     end
     object cdsItensVendasTMPLucroBruto: TFloatField
+      DisplayLabel = 'Lucro Bruto %'
       FieldName = 'LucroBruto'
     end
   end

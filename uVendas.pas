@@ -25,7 +25,8 @@ uses
   Dialogs, DB, DBClient, Provider, ADODB, StdCtrls, bsSkinCtrls, Mask,
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
-  SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda;
+  SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
+  uDaoCustoProduto;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -654,7 +655,12 @@ begin
 end;
 
 procedure TfrmVendas.btnOkProdClick(Sender: TObject);
+var DaoCustoPtoduto : TdaoCustoProduto;
+    PrecoCusto : Real;
+    lrPerc_Desconto : Real;
+    lrDiferenca :Real;
 begin
+   DaoCustoPtoduto := TdaoCustoProduto.Create(gConexao);
    if strtofloat(Edttotal.text ) <=0 Then
    Begin
       CaixaMensagem( 'O Valor Total não pode ser zero ', ctAviso, [ cbOk ], 0 );
@@ -677,15 +683,24 @@ begin
       cdsItensVendasTmp.Edit;
       edtTotalVenda.Text := FormatFloat('0.00', StrToFloat(edtTotalVenda.Text)-pvrvlr_TotalAnt);
    End;
+   lrPerc_Desconto := 0;
+   lrDiferenca     := 0;
+   PrecoCusto           := DaoCustoPtoduto.CustoMercadoriaVendida(StrToInt(edtCod_Produto.Text));
+   lrDiferenca          := StrToFloat(edtPco_Tabela.Text) - StrToFloat(edtPco_Venda.Text);
+   if StrToFloat(edtPco_Tabela.Text)>0 then
+      lrPerc_Desconto := Arredondar( ( lrDiferenca / StrToFloat(edtPco_Tabela.Text) * 100),2);
+   cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat := cdsCadProdutos.fieldbyname('Perc_Comissao').asFloat;
+   if lrPerc_Desconto > StrTofloat( gParametros.Ler( '', '[ADMINISTRATIVO]', 'DescontoMaximo', '0' ))then
+      cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat := cdsCadProdutos.fieldbyname('ComissaoSecundaria').asFloat;
+
    cdsItensVendasTmp.FieldByName('Codigo').asInteger      := StrToInt(edtCod_Produto.Text);
    cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat    := StrToFloat (edtQtde_Venda.Text);
    cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := StrToFloat (edtPco_Venda.Text);
    cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat    := StrToFloat (edtPco_Tabela.Text);
    cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := StrToFloat ( edtTotal.Text);
-   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := cdsCadProdutos.fieldbyname('Pco_Custo').asFloat;
-   cdsItensVendasTmp.FieldByName('LucroBruto').asFloat    := Arredondar((( StrToFloat(edtPco_Venda.Text) - cdsCadProdutos.fieldbyname('Pco_Custo').asFloat )/StrToFloat(edtPco_Venda.Text))*100,4);
+   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := PrecoCusto;
+   cdsItensVendasTmp.FieldByName('LucroBruto').asFloat    := Arredondar((( StrToFloat(edtPco_Venda.Text) - PrecoCusto )/StrToFloat(edtPco_Venda.Text))*100,4);
    cdsItensVendasTmp.FieldByName('MargemSecundaria').asFloat := cdsCadProdutos.fieldbyname('MargemSecundaria').asFloat;
-   cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat    := cdsCadProdutos.fieldbyname('Perc_Comissao').asFloat;
    cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := StrToFloat ( edtVlr_Desconto.Text);
    cdsItensVendasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
    cdsItensVendasTmp.FieldByName('Unidade').asString      := cdsCadProdutos.FieldByName('Unid').AsString;
@@ -695,7 +710,7 @@ begin
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    if frmVendas.Tag=VENDAS_EXTERNAS then
-      cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
+      cdsItensVendasTmp.FieldByName('Seto rId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
 
    edtTotDesconto.Text  := FormatFloat('0.00', StrToFloat(edtTotDesconto.Text)+( StrToFloat(edtVlr_Desconto.Text)*StrTofloat(edtQtde_Venda.Text)) );
@@ -721,7 +736,7 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
    VerLimite();
-   AtaulizaLucroBruto;
+  // AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
 procedure  TfrmVendas.AtaulizaLucroBruto;
@@ -731,13 +746,17 @@ var PerLucroBruto : real;
     CustoTotal : Real;
 begin
   cdsItensVendasTmp.first;
+  ValorTotal := 0;
+  CustoTotal := 0;
   while not cdsItensVendasTmp.eof do
   begin
      ValorTotal := ValorTotal +   cdsItensVendasTmp.FieldByName('vlr_Total').asFloat;
      CustoTotal := CustoTotal + ( cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat * cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat );
      cdsItensVendasTmp.next;
   end;
-  PerLucroBruto := ((ValorTotal - CustoTotal)/ ValorTotal)*100;
+  PerLucroBruto := 0;
+  if ValorTotal>0 then
+     PerLucroBruto := ((ValorTotal - CustoTotal)/ ValorTotal)*100;
   LucroBruto := ValorTotal - CustoTotal;
   panelstatus.Caption := ' Lucru Bruto % ..: '+FormatFloat('0.0000', PerLucroBruto)+' | Lucro Bruto R$ ... : '+FormatFloat('0.00', LucroBruto);
 end;

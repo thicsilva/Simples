@@ -163,6 +163,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = 9
+        ExplicitTop = 8
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 85

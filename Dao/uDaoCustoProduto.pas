@@ -10,10 +10,11 @@ type TDaoCustoProduto = class
     FqryModific : TSqlQuery;
     FParametros : TStringList;
   public
-     constructor create(Conexao : TConexao);
+     constructor Create(Conexao : TConexao);
      function BuscarPorProduto(ProdutoId : Integer) : TClientDataSet;
      procedure Incluir(CustoPrtoduto : TCustoProduto);
      procedure Excluir(idCustoProduto: Integer);
+     Function CustoMercadoriaVendida( ProdutoId : Integer ) : Real;
 end;
 
 implementation
@@ -33,6 +34,26 @@ begin
    FqryModific  := TSqlQuery.Create(Nil);
    FqryModific.SQLConnection := FConexao.Conection;
    FParametros := TStringList.Create;
+end;
+
+function TDaoCustoProduto.CustoMercadoriaVendida(ProdutoId: Integer): Real;
+var Dados : TClientDataSet;
+    lrValor : Real;
+begin
+   FParametros.Clear;
+   FParametros.Add(IntToStr(ProdutoId));
+   Dados := FConexao.BuscarDadosSQL('Select * from CustosProduto where ProdutoId=:parProdutoId order by Tipo',FParametros);
+   lrValor := 0;
+   while not dados.eof do
+   begin
+      lrValor := lrValor + Dados.FieldByname('Valor').AsFloat;
+      dados.next;
+   end;
+   FParametros.Clear;
+   FParametros.Add(IntToStr(ProdutoId));
+   lrValor := lrValor + FConexao.BuscarDadosSQL('Select Pco_Custo from T_Produtos where Codigo=:parProdutoId ',FParametros).fieldByname('Pco_Custo').AsFloat;
+   Result  := lrValor;
+   FreeAndNil(Dados);
 end;
 
 procedure TDaoCustoProduto.Excluir(idCustoProduto: Integer);

@@ -60,7 +60,6 @@ object frmConsVendas: TfrmConsVendas
       Align = alClient
       TabOrder = 0
       object GrdVendas: TcxGridDBTableView
-        PopupMenu = bsSkinPopupMenu2
         NavigatorButtons.ConfirmDelete = False
         OnCustomDrawCell = GrdVendasCustomDrawCell
         DataController.DataSource = srcVendas
@@ -955,7 +954,7 @@ object frmConsVendas: TfrmConsVendas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 753
+        Left = 823
         Top = 0
         Width = 70
         Height = 49
@@ -990,6 +989,7 @@ object frmConsVendas: TfrmConsVendas
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
+        ExplicitLeft = 753
         ExplicitTop = 12
         ExplicitHeight = 40
       end
@@ -1007,7 +1007,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 281
+        Left = 351
         Top = 0
         Width = 17
         Height = 49
@@ -1020,7 +1020,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitHeight = 40
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 368
+        Left = 438
         Top = 0
         Width = 35
         Height = 49
@@ -1033,7 +1033,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitHeight = 40
       end
       object btnFinalizar: TbsSkinSpeedButton
-        Left = 298
+        Left = 368
         Top = 0
         Width = 70
         Height = 49
@@ -1151,7 +1151,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitTop = 12
       end
       object btnCupomFiscal: TbsSkinSpeedButton
-        Left = 524
+        Left = 594
         Top = 0
         Width = 70
         Height = 49
@@ -1190,7 +1190,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitTop = 12
       end
       object bsSkinBevel5: TbsSkinBevel
-        Left = 594
+        Left = 664
         Top = 0
         Width = 159
         Height = 49
@@ -1198,10 +1198,11 @@ object frmConsVendas: TfrmConsVendas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 594
         ExplicitTop = -1
       end
       object btnImpComprovante: TbsSkinSpeedButton
-        Left = 403
+        Left = 473
         Top = 0
         Width = 70
         Height = 49
@@ -1241,7 +1242,7 @@ object frmConsVendas: TfrmConsVendas
         ExplicitHeight = 40
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 473
+        Left = 543
         Top = 0
         Width = 51
         Height = 49
@@ -1295,6 +1296,44 @@ object frmConsVendas: TfrmConsVendas
         TrackButtonMode = False
         ExplicitTop = 8
         ExplicitHeight = 40
+      end
+      object btnEntregaVenda: TbsSkinSpeedButton
+        Left = 281
+        Top = 0
+        Width = 70
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 8
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = '&Entregue '
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        Layout = blGlyphTop
+        OnClick = btnEntregaVendaClick
+        ExplicitLeft = 292
       end
     end
   end
@@ -1656,9 +1695,10 @@ object frmConsVendas: TfrmConsVendas
     Left = 632
     Top = 248
   end
-  object cxGridPopupMenu1: TcxGridPopupMenu
+  object MenuDeControle: TcxGridPopupMenu
     Grid = cxGrid1
     PopupMenus = <>
+    UseBuiltInPopupMenus = False
     Left = 528
     Top = 232
   end
