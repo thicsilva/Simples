@@ -27,19 +27,18 @@ object frmFechaCaixa: TfrmFechaCaixa
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 468
+        Width = 470
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.Skindata
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 454
+      Width = 461
       Height = 40
+      HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -49,6 +48,8 @@ object frmFechaCaixa: TfrmFechaCaixa
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      RibbonStyle = False
+      ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
       RealHeight = 1
@@ -81,7 +82,7 @@ object frmFechaCaixa: TfrmFechaCaixa
         Top = 0
         Width = 70
         Height = 40
-        SkinData = frmPrincipal.Skindata
+        HintImageIndex = 0
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -91,6 +92,7 @@ object frmFechaCaixa: TfrmFechaCaixa
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -119,7 +121,6 @@ object frmFechaCaixa: TfrmFechaCaixa
         Width = 15
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -129,7 +130,7 @@ object frmFechaCaixa: TfrmFechaCaixa
         Top = 0
         Width = 70
         Height = 40
-        SkinData = frmPrincipal.Skindata
+        HintImageIndex = 0
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -139,6 +140,7 @@ object frmFechaCaixa: TfrmFechaCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -167,7 +169,6 @@ object frmFechaCaixa: TfrmFechaCaixa
         Width = 290
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -179,8 +180,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     Top = 44
     Width = 474
     Height = 23
+    HintImageIndex = 0
     TabOrder = 1
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -190,6 +191,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    RibbonStyle = False
+    ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
     RealHeight = -1
@@ -212,9 +215,11 @@ object frmFechaCaixa: TfrmFechaCaixa
     Top = 67
     Width = 474
     Height = 204
+    HintImageIndex = 0
     TabOrder = 2
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'grid'
+    Transparent = False
+    WallpaperStretch = False
     UseSkinFont = False
     UseSkinCellHeight = True
     GridLineColor = clWindowText
@@ -224,6 +229,7 @@ object frmFechaCaixa: TfrmFechaCaixa
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    DrawGraphicFields = False
     UseColumnsFont = False
     MouseWheelSupport = False
     SaveMultiSelection = False
@@ -245,8 +251,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     Top = 271
     Width = 474
     Height = 25
+    HintImageIndex = 0
     TabOrder = 3
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'statusbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -256,6 +262,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    RibbonStyle = False
+    ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
     RealHeight = -1
@@ -327,6 +335,13 @@ object frmFechaCaixa: TfrmFechaCaixa
     Top = 133
   end
   object SkinForm: TbsBusinessSkinForm
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
+    DisableSystemMenu = False
+    AlwaysResize = False
     PositionInMonitor = bspDefault
     UseFormCursorInNCArea = False
     MaxMenuItemsInWindow = 0
@@ -343,7 +358,6 @@ object frmFechaCaixa: TfrmFechaCaixa
     AlphaBlendAnimation = True
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -364,7 +378,6 @@ object frmFechaCaixa: TfrmFechaCaixa
     DefMenuItemFont.Name = 'Arial'
     DefMenuItemFont.Style = []
     UseDefaultSysMenu = True
-    SkinData = frmPrincipal.Skindata
     MinHeight = 0
     MinWidth = 0
     MaxHeight = 0

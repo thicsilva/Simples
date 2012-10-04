@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, bsSkinBoxCtrls, bsSkinCtrls, DB, DBClient,
   bsSkinGrids, bsDBGrids, ExtCtrls, ToolWin, ComCtrls, FMTBcd, Provider, SqlExpr,
-  EditNew, bsdbctrls, BusinessSkinForm;
+  EditNew, bsdbctrls, BusinessSkinForm, uDaoCaixaMovimento;
 
 type
   TfrmFechaCaixa = class(TForm)
@@ -38,6 +38,7 @@ type
   private
     { Private declarations }
   public
+    piCaixaID : Integer;
     { Public declarations }
   end;
 
@@ -56,6 +57,7 @@ begin
 end;
 
 procedure TfrmFechaCaixa.btnokClick(Sender: TObject);
+var DaoCaixaMovimento : TDaoCaixaMovimento;
 begin
    qrydspPagamentoInformado.Close;
    qrydspPagamentoInformado.Params.Clear;
@@ -65,6 +67,8 @@ begin
    cdspagamentoinformado.ProviderName := dspdspPagamentoInformado.name;
    cdspagamentoinformado.Open;
    cdsTempPagamentos.First;
+
+   DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
    while  not cdsTempPagamentos.Eof do
    Begin
       if cdsTempPagamentos.fieldbyname('Valor').AsFloat <> 0 then
@@ -75,14 +79,15 @@ begin
          cdspagamentoinformado.FieldByName('data_cad').AsDateTime   := now;
          cdspagamentoinformado.FieldByName('vlr_Informado').AsFloat := cdsTempPagamentos.FieldByName('Valor').AsFloat;
          cdspagamentoinformado.FieldByName('Cod_Emp').AsString      :='001';
-         cdspagamentoinformado.FieldByName('Cod_Caixa').AsString    :='001';
-         cdspagamentoinformado.FieldByName('Turno').AsString        := '1';
+         cdspagamentoinformado.FieldByName('Cod_Caixa').AsInteger   := piCaixaId;
+         cdspagamentoinformado.FieldByName('Turno').AsInteger       :=(DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,piCaixaId)+1);
          cdspagamentoinformado.FieldByName('Cod_FormaPagamento').Asinteger := cdsTempPagamentos.FieldByName('codigo').Asinteger;
          cdspagamentoinformado.Post;
       End;
       cdsTempPagamentos.Next;
    End;
    cdspagamentoinformado.ApplyUpdates(-1);
+   FreeAndNil(DaoCaixaMovimento);
    frmFechaCaixa.tag:=1;
    close;
    //Registro( 'ImpressoraMatricial', trString, 'Epson', raGravar );

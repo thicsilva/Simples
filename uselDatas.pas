@@ -57,7 +57,7 @@ begin
    DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
    Dados := DaoCaixaMovimento.RetornarTurnosFechados(dtpData_Ini.Date, idCaixa);
    cmbturno.Items.Clear;
-   cmbturno.Items.Add('Caixa Aberto');
+   //cmbturno.Items.Add('Caixa Aberto');
    while not Dados.Eof do
    begin
      if Dados.FieldByName('Turno').AsInteger<>0 then
@@ -68,6 +68,11 @@ begin
    cmbturno.ItemIndex := 0;
    except
    end;
+   btnincluir.Enabled := False;
+   if cmbturno.Items.Count>0 then
+      btnincluir.Enabled := True;
+
+   
 end;
 
 procedure TfrmSelDatas.dtpData_IniChange(Sender: TObject);

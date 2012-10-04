@@ -22,7 +22,6 @@ uses
   uMovCaixa in 'uMovCaixa.pas' {frmMovCaixa},
   uFechaCaixa in 'uFechaCaixa.pas' {frmFechaCaixa},
   uPrePagamento in 'uPrePagamento.pas' {frmPrePagamento},
-  uCadFornecedores in 'uCadFornecedores.pas' {frmCadFornecedores},
   uCadClientes in 'uCadClientes.pas' {frmCadClientes},
   uEntradas in 'uEntradas.pas' {frmEntradas},
   uselrelvendasVendedor in 'uselrelvendasVendedor.pas' {frmselrelVendasVendedor},
@@ -135,7 +134,8 @@ uses
   uDaoContaReceber in 'Dao\uDaoContaReceber.pas',
   uClassLancamento in 'Modelos\uClassLancamento.pas',
   uClassContaReceber in 'Modelos\uClassContaReceber.pas',
-  uClassRota in 'Modelos\uClassRota.pas';
+  uClassRota in 'Modelos\uClassRota.pas',
+  uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores};
 
 {$R *.res}
 
@@ -144,14 +144,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmSelAnimal, frmSelAnimal);
-  Application.CreateForm(TFrmRelEstoque, FrmRelEstoque);
-  Application.CreateForm(TfrmRomaneioDeEntrega, frmRomaneioDeEntrega);
-  Application.CreateForm(TfrmRecebimentoRomaneio, frmRecebimentoRomaneio);
-  Application.CreateForm(TfrmcadEmpresa, frmcadEmpresa);
-  Application.CreateForm(TfrmRelClientesVendedoresBairro, frmRelClientesVendedoresBairro);
-  Application.CreateForm(TfrmrelTabPreco, frmrelTabPreco);
-  Application.CreateForm(TfrmAlteraVencimento_TipoPagamento, frmAlteraVencimento_TipoPagamento);
   Frmlogin.ShowModal;
   Application.Run;
 end.

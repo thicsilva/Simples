@@ -254,37 +254,43 @@ var DaoCaixaMovimento : TdaoCaixaMovimento;
 begin
    if CaixaMensagem( 'Deseja Fazer o fehamento do Caixa '+cmbCaixa.Text, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
-      RelatorioDeCaixaModelo02(FECHAMENTO);
+      frmFechaCaixa := TfrmFechaCaixa.create(self);
+      frmFechaCaixa.piCaixaID := cmbCaixa.KeyValue;
+      frmFechaCaixa.showModal;
+      if frmfechacaixa.Tag=1 then
+      Begin
+         RelatorioDeCaixaModelo02(FECHAMENTO);
 
-      DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
+         DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
 
-      qryModific.Close;
-      qryModific.SQL.Text := 'UPDATE T_MovCaixa SET turno=:parTurno '+
-                             'where Data_Lancamento=:parData_Lancamento and Cod_Caixa=:parCod_Caixa and turno is null ';
-      qryModific.ParamByName( 'parData_Lancamento' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',gsData_mov));
-      qryModific.ParamByName( 'parCod_Caixa' ).AsInteger            := cmbCaixa.KeyValue;
-      qryModific.ParamByName( 'parTurno' ).AsInteger                := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
-      qryModific.ExecSQL;
-
-      if ((DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)) = strToint(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ))) and
-         (not DaoCaixaMovimento.TemCaixaAberto(gsData_mov) ) then
-      begin
          qryModific.Close;
-         qryModific.SQL.Text := 'UPDATE T_Sequencias SET Sequencia=:parSequencia, '+
-                                'Data_Atu=:parData_Atu, Cod_emp=:parCod_emp where Tipo_sequencia=:parTipo_sequencia And Cod_Emp=:parCod_Emp ';
-         qryModific.ParamByName( 'parData_Atu' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',now));
-         qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
-         gsData_mov := gsData_mov+1;
-         if FormatDateTime('DDD',gsData_Mov)='dom' then
-         begin
-            qryModific.ParamByName( 'parSequencia' ).AsString      := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
-            gsData_mov := gsData_mov+1;
-         end;
-         qryModific.ParamByName( 'parCod_Emp' ).AsString           := gsCod_Emp;
-         qryModific.ParamByName( 'parTipo_Sequencia' ).AsString    := 'Data_Mov';
-         frmPrincipal.StatusBar.Panels[0].Text := 'Data do Movimento .: '+qryModific.ParamByName( 'parSequencia' ).AsString;
+         qryModific.SQL.Text := 'UPDATE T_MovCaixa SET turno=:parTurno '+
+                                'where Data_Lancamento=:parData_Lancamento and Cod_Caixa=:parCod_Caixa and turno is null ';
+         qryModific.ParamByName( 'parData_Lancamento' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',gsData_mov));
+         qryModific.ParamByName( 'parCod_Caixa' ).AsInteger            := cmbCaixa.KeyValue;
+         qryModific.ParamByName( 'parTurno' ).AsInteger                := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
          qryModific.ExecSQL;
-       end;
+
+         if ((DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)) = strToint(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ))) and
+            (not DaoCaixaMovimento.TemCaixaAberto(gsData_mov) ) then
+         begin
+            qryModific.Close;
+            qryModific.SQL.Text := 'UPDATE T_Sequencias SET Sequencia=:parSequencia, '+
+                                   'Data_Atu=:parData_Atu, Cod_emp=:parCod_emp where Tipo_sequencia=:parTipo_sequencia And Cod_Emp=:parCod_Emp ';
+            qryModific.ParamByName( 'parData_Atu' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',now));
+            qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
+            gsData_mov := gsData_mov+1;
+            if FormatDateTime('DDD',gsData_Mov)='dom' then
+            begin
+               qryModific.ParamByName( 'parSequencia' ).AsString      := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
+               gsData_mov := gsData_mov+1;
+            end;
+            qryModific.ParamByName( 'parCod_Emp' ).AsString           := gsCod_Emp;
+            qryModific.ParamByName( 'parTipo_Sequencia' ).AsString    := 'Data_Mov';
+            frmPrincipal.StatusBar.Panels[0].Text := 'Data do Movimento .: '+qryModific.ParamByName( 'parSequencia' ).AsString;
+            qryModific.ExecSQL;
+          end;
+      end;
    end;
 end;
 
@@ -319,6 +325,7 @@ var lrTotal_Venda    : Real;
     liCod_TipoPagamento : Integer;
     lrTotal : Real;
     lsNomePagamento: String;
+    DaoCaixaMovimento : TDaoCaixaMovimento;
 begin
 
    gsTituloRel := 'Movimento dia '+FormatDateTime('dd/mm/yyyy', dtpData_Fim.Date);
@@ -344,7 +351,7 @@ begin
       begin
          dataInicial := frmSelDatas.dtpData_Ini.Date;
          dataFinal   := frmSelDatas.dtpData_Ini.Date;
-         Turno       := frmSelDatas.cmbturno.ItemIndex;
+         Turno       := frmSelDatas.cmbturno.ItemIndex+1;
          NomeTurno   := frmSelDatas.cmbturno.Text;
          Tipo        := frmSelDatas.cmbTipoResumoVenda.ItemIndex;
       end
@@ -547,17 +554,9 @@ begin
    if Turno>0 then
       qryVariavel.Parambyname('parturno').AsInteger     := Turno;
 
-
    cdsRelatorio.close;
    cdsRelatorio.ProviderName := dspVariavel.name;
    cdsRelatorio.Open;
-
-   sdtsTempPagInformado := TsimpleDataSet.Create(self);
-   sdtsTempPagInformado.Connection := frmprincipal.dbxPrincipal;
-   sdtsTempPagInformado.dataSet.CommandText := 'Select * from t_PagamentosInformados '+
-                                               'where data_mov=:parData_Mov' ;
-   sdtsTempPagInformado.dataSet.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
-   sdtsTempPagInformado.open;
 
    if not cdsRelatorio.IsEmpty then
    begin
@@ -666,53 +665,31 @@ begin
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
    pvilinha := pviLinha + 1;
 
-   {vlr_Prepagamento := cdsRelatorio.FieldByname('Vlr_Total').AsFloat;
-   qryVariavel.close;
-   qryVariavel.Params.Clear;
-   qryVariavel.Sql.Text := 'Select sum(Valor) as Vlr_Total '+
-                           'From t_movcaixa Mov ' +
-                           'Where data_Lancamento>=:parDataIni and data_Lancamento<=:parDataFim and '+
-                           '      SeqVenda is null and D_C=:parD_C and mov.Cod_Caixa=:parCod_Caixa '+lsfiltro;
-
-   qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
-   qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
-   qryVariavel.ParamByName('parD_C').AsString           := 'C';
-   qryVariavel.Parambyname('parCod_Caixa').AsInteger    := cmbCaixa.KeyValue;
-   if Turno>0 then
-      qryVariavel.Parambyname('parturno').AsInteger     := Turno;
-
-   cdsRelatorio.close;
-   cdsRelatorio.ProviderName := dspVariavel.name;
-   cdsRelatorio.Open;
-
-   lrTotal_Extras := cdsrelatorio.fieldByname('Vlr_Total').asfloat;
-
-
-                                  //23456789.123456789.123456789.123456789.12345678
-   ImpMatricial.imp (pvilinha,001,'---------------------------------------');
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp (pvilinha,001,'  Resumo da movimentação do dia');
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp (pvilinha,001,'---------------------------------------');
-   pviLinha:=Pvilinha+1;
-   lrDiferenca := (lrTotal_Venda+lrTotal_Baixa+lrTotal_Extras);
-   ImpMatricial.imp (pvilinha,001,'Total Vendido no Dia...:');
-   impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',(lrTotal_Venda+lrTotal_Baixa+lrTotal_Extras)),[]);
-   pviLinha:=Pvilinha+2;
-   ImpMatricial.imp (pvilinha,001,'Total Extras...............:');
-   impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrTotal_Extras),[]);
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp (pvilinha,001,'Total Recebido.............:');
-   impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrTotal_recebido-lrTotal_Extras),[]);
-   pviLinha:=Pvilinha+1;
-   lrDiferenca:=0;
-   ImpMatricial.imp (pvilinha,001,'---------------------------------------');
-   pviLinha:=Pvilinha+1;
-   lrDiferenca := 0;
-   ImpMatricial.imp (pvilinha,001,'Diferença..................:');
-   impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrDiferenca),[]);
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));      }
+   if prTipo<>RELATORIO then
+   Begin
+      DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
+      sdtsTempPagInformado := TsimpleDataSet.Create(self);
+      sdtsTempPagInformado.Connection := frmprincipal.dbxPrincipal;
+      sdtsTempPagInformado.dataSet.CommandText := 'Select Pag.*, forma.Descricao from t_PagamentosInformados Pag '+
+                                                  'left join t_formaspagamento forma on forma.Codigo=pag.Cod_formapagamento '+
+                                                  'where data_mov=:parData_Mov and Cod_Caixa=:parCod_Caixa and Turno=:parTurno ' ;
+      sdtsTempPagInformado.dataSet.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
+      sdtsTempPagInformado.dataSet.ParamByName('parCod_Caixa').AsInteger := cmbCaixa.KeyValue;
+      sdtsTempPagInformado.dataSet.ParamByName('parTurno').AsInteger     := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
+      sdtsTempPagInformado.open;
+      impmatricial.Imp(pvilinha,001,'Valores Informados no Fechamento' );
+      pvilinha := pviLinha + 1;
+      while not sdtsTempPagInformado.Eof do
+      Begin
+         impmatricial.Imp(pvilinha,001, sdtsTempPagInformado.FieldByName('Descricao').AsString );
+         impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
+         sdtsTempPagInformado.Next;
+      End;
+      FreeAndNil(DaoCaixaMovimento);
+      pvilinha := pviLinha + 1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+      pvilinha := pviLinha + 1;
+   End;
    pviLinha:=Pvilinha+3;
    ImpMatricial.imp (pvilinha,001,'.');
    ImpMatricial.TamanhoQteLinhas := pviLinha;

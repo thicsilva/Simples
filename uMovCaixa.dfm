@@ -463,6 +463,7 @@ object frmMovCaixa: TfrmMovCaixa
         Layout = blGlyphTop
         OnClick = btnImprimirClick
         ExplicitLeft = 390
+        ExplicitTop = 8
       end
       object bsSkinBevel4: TbsSkinBevel
         Left = 524

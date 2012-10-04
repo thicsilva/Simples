@@ -51,10 +51,6 @@ object frmCadOperacoes: TfrmCadOperacoes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -259,10 +255,9 @@ object frmCadOperacoes: TfrmCadOperacoes
         Left = 0
         Top = 33
         Width = 614
-        Height = 197
+        Height = 195
         Align = alClient
         TabOrder = 2
-        ExplicitHeight = 195
         object GridOperacoes: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcPesquisa
@@ -501,13 +496,12 @@ object frmCadOperacoes: TfrmCadOperacoes
         ImageIndex = 0
         CharCase = ecNormal
         DefaultColor = clWindow
-        Text = 'Despesas Operacionais'
+        Text = 'Despesas Fixas'
         Items.Strings = (
-          'Despesas Operacionais'
-          'Receitas de Vendas'
-          'Outras Despesas'
-          'Outras Receitas')
-        ItemIndex = -1
+          'Despesas Fixas'
+          'Despesas Variaveis'
+          'Receitas')
+        ItemIndex = 0
         DropDownCount = 8
         HorizontalExtent = False
         Font.Charset = DEFAULT_CHARSET
