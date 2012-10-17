@@ -76,8 +76,20 @@ var lsNome_Vendedor : String;
     lsCampo : String;
   lsTabela: string;
 begin
+   if cmbCod_FuncionarioIni.Keyvalue= null then
+   begin
+      CaixaMensagem( 'Informe o Vendedor inicial ', ctAviso, [ cbOk ], 0 );
+      Exit
+   end;
+   if cmbCod_FuncionarioFim.Keyvalue= null then
+   begin
+      CaixaMensagem( 'Informe o Vendedor Final ', ctAviso, [ cbOk ], 0 );
+      Exit
+   end;
+
+
     GstituloRel  := 'Relatorio de clientes por Vendedor e Bairro';
-    lsCampo      := 'Cod_Funcioanrio';
+    lsCampo      := 'Cod_Funcionario';
     lsTabela     := 'T_Funcionarios';
     if pTipoRelatorio = TIPO_ROTA then
     begin

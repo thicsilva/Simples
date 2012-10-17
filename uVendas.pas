@@ -736,7 +736,7 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
    VerLimite();
-  // AtaulizaLucroBruto;
+   AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
 procedure  TfrmVendas.AtaulizaLucroBruto;
