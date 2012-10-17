@@ -52,12 +52,12 @@ object frmParametros: TfrmParametros
     Align = alBottom
     SizeGrip = False
   end
-  object bsSkinPageControl1: TbsSkinPageControl
+  object PaginaPrincipal: TbsSkinPageControl
     Left = 0
     Top = 53
     Width = 635
     Height = 340
-    ActivePage = bsSkinTabSheet4
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -84,6 +84,8 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitLeft = 360
+    ExplicitTop = 325
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
       object Label5: TLabel
@@ -714,6 +716,36 @@ object frmParametros: TfrmParametros
         KeyField = 'codigo'
         ListField = 'Descricao;Codigo'
         ListSource = srcSetoresEstoque
+      end
+      object chkNaoMostrarExtorno: TbsSkinCheckRadioBox
+        Left = 343
+        Top = 240
+        Width = 297
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 21
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'N'#227'o Mostrar Lancamento Estornados no caixa'
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet

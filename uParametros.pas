@@ -11,7 +11,7 @@ uses
 type
   TfrmParametros = class(TForm)
     bsSkinStatusBar1: TbsSkinStatusBar;
-    bsSkinPageControl1: TbsSkinPageControl;
+    PaginaPrincipal: TbsSkinPageControl;
     bsSkinTabSheet1: TbsSkinTabSheet;
     bsBusinessSkinForm1: TbsBusinessSkinForm;
     bsSkinCheckRadioBox1: TbsSkinCheckRadioBox;
@@ -100,6 +100,7 @@ type
     bsSkinLabel13: TbsSkinLabel;
     edtDescontoMaximo: TbsSkinEdit;
     bsSkinLabel14: TbsSkinLabel;
+    chkNaoMostrarExtorno: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -228,7 +229,7 @@ procedure TfrmParametros.FormShow(Sender: TObject);
 begin
 
    CarregarTabelas;
-
+   PaginaPrincipal.ActivePageIndex := 0;
    RecuperarParametrosContasAReceber;
    RecuperarParametrosImpressao;
    RecuperarParametrosGerais;
@@ -244,10 +245,10 @@ end;
 
 procedure TfrmParametros.GravarParametrosAdiministrativos;
 begin
-   //gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', RetornaSimouNao(chkMarcaOsNoCaixa.Checked) ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', edtDespesaVariaveis.Text ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasFixas', edtDespesasFixas.Text ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DescontoMaximo', edtDescontoMaximo.Text ,gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno',RetornaSimouNao(chkNaoMostrarExtorno.Checked),gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosContaAReceber;
@@ -286,6 +287,7 @@ end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
 begin
+   chkNaoMostrarExtorno.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' )));
    chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
    edtDespesaVariaveis.Text   := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
    edtDespesasFixas.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );
