@@ -561,6 +561,7 @@ object frmMovCaixa: TfrmMovCaixa
         TabOrder = 0
         object GrdDespesas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
+          OnCustomDrawCell = GrdDespesasCustomDrawCell
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item

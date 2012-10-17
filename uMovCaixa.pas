@@ -118,6 +118,9 @@ type
     procedure btnRecebimentosClick(Sender: TObject);
     procedure cmbNome_CaixaChange(Sender: TObject);
     procedure cmbCod_CaixaChange(Sender: TObject);
+    procedure GrdDespesasCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
   private
     pviLinha : Integer;
     procedure RelatorioDeCaixaModelo01;
@@ -156,6 +159,9 @@ begin
    lswhere := '';
    if not chkMostraCaixaFechado.Checked then
       lsWhere :=' and Turno is null ';
+
+  if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' ))) then
+     lsWhere := lsWhere + ' and Estornado<>'+QuotedStr('S');
 
    qryPesquisa.Close;
    qryPesquisa.Params.Clear;
@@ -1717,6 +1723,18 @@ begin
    end;
 
    PagCadastro.ActivePageIndex := 0;
+end;
+
+procedure TfrmMovCaixa.GrdDespesasCustomDrawCell(Sender: TcxCustomGridTableView;
+  ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+  var ADone: Boolean);
+begin
+  if aviewinfo.GridRecord.Values[Column_Esrtornado.Index]='S'  Then
+     acanvas.Font.color := clBlack
+  else IF aviewinfo.GridRecord.Values[colum_NomeD_C.Index]='Entrada' Then
+     acanvas.Font.color := clBlue
+  Else if aviewinfo.GridRecord.Values[colum_NomeD_C.Index]='Saida' Then
+     acanvas.Font.color := clred
 end;
 
 procedure TfrmMovCaixa.impMatricialNewPage(Sender: TObject; Pagina: Integer);
