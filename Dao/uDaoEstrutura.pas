@@ -55,6 +55,7 @@ type TDaoEstrutura = class
     procedure Adicionar_LucroBrunto_na_Tabela_ItenVendas;
     procedure Adicionar_LucroBrunto_na_Tabela_Vendas;
     procedure Adicionar_CustoTotal_na_Tabela_Vendas;
+    procedure Adicionar_Email_na_Tabela_Clientes;
     procedure CriarTabela_CustosProduto;
 
   public
@@ -394,6 +395,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Email_na_Tabela_Clientes;
+begin
+   if not ExisteCampo( 'T_Clientes', 'Email', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Clientes ADD Email varchar(100)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_Entregue_na_Tabela_Vendas;
 begin
    if not ExisteCampo( 'T_Vendas', 'Entregue', FConexao.Conection ) then
@@ -613,6 +624,7 @@ begin
   Adicionar_CustoTotal_na_Tabela_Vendas;
   Adicionar_LucroBrunto_na_Tabela_Vendas;
   CriarTabela_CustosProduto;
+  Adicionar_Email_na_Tabela_Clientes;
 end;
 
 

@@ -265,8 +265,6 @@ type
     GridCtasReceberColumn2: TcxGridDBColumn;
     GrdVendasColumn1: TcxGridDBColumn;
     Columm_Dias: TcxGridDBColumn;
-    bsSkinStdLabel23: TbsSkinStdLabel;
-    edtContrato: TbsSkinEdit;
     Contrato: TcxGridDBColumn;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar1: TbsSkinToolBar;
@@ -341,6 +339,8 @@ type
     N5ClientesporVendedoreBairro2: TMenuItem;
     btnAlterarAnimal: TbsSkinButton;
     btnImprimirAnimais: TbsSkinButton;
+    bsSkinStdLabel23: TbsSkinStdLabel;
+    edtEmail: TbsSkinEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -742,7 +742,7 @@ begin
    cdsCadClientes.FieldByName('Cod_Emp').AsString         := gsCod_Emp;
    cdsCadClientes.FieldByName('Qtde_PedAberto').AsInteger := StrToInt(edtNumeroPedAberto.Text);
    cdsCadClientes.FieldByName('Pto_referencia').AsString  := edtPto_Referencia.Text;
-   cdsCadClientes.FieldByName('Contrato').AsString        := edtContrato.Text;
+   cdsCadClientes.FieldByName('Email').AsString             := edtEmail.Text;
    cdsCadClientes.FieldByName('InscricaoEstadual').AsString := edtInscricaoEstadual.Text;
    cdsCadClientes.FieldByName('SequenciaEntrega').AsInteger := StrtoInt(edtSequenciaEntrega.Text);
    cdsCadClientes.Post;
@@ -922,8 +922,8 @@ begin
    EdtData_cad.text := FormatDateTime('dd/mm/yyyy',cdspesquisa.FieldByName('Data_Cad').AsDateTime);
    EdtNumeroPedAberto.Value   := cdspesquisa.FieldByName('Qtde_PedAberto').AsInteger;
    edtPto_Referencia.Text     := cdspesquisa.FieldByName('Pto_referencia').AsString;
-   edtContrato.Text           := cdspesquisa.FieldByName('Contrato').AsString;
    edtInscricaoEstadual.Text  := cdspesquisa.FieldByName('InscricaoEstadual').AsString;
+   edtEmail.Text              := cdspesquisa.FieldByName('Email').AsString;
 
    BtnIncluir.Enabled :=False;
    BtnAlterar.Enabled :=False;
@@ -1088,8 +1088,6 @@ begin
    cdsCadFuncionarios.Open;
 
    PagCadastro.ActivePageIndex:=0;
-   if StrToInt(gsParametros.ReadString('ACESSODADOS','TipoSistema','0'))= 0 then
-      lblrazao.Caption :='Nome da Mãe';
    piCod_Produto  := 0;
 
    FGridBrushMasterCell := TBrush.Create;
