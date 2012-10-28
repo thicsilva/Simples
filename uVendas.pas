@@ -229,6 +229,7 @@ type
      pDescontoCliente : Boolean;
      pAnimalId         : Integer;
      procedure MostrarAnimaisCliente;
+     procedure VerificarSaldoDevedor(ClienteID : Integer);
      procedure VerLimite();
      procedure AtualizaDesconto(lrPercDesconto : Real);
      procedure TotalizarVenda(lrTotalDesconto: Real);
@@ -251,7 +252,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
-  uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,
+  uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
   uselAnimal, uDescontoVenda;
 
 {$R *.dfm}
@@ -300,6 +301,23 @@ Begin
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
 End;
+
+procedure TfrmVendas.VerificarSaldoDevedor(ClienteID : Integer);
+var DaoCliente : TDaocliente;
+    ValorEmAberto : Real;
+begin
+   DaoCliente := TDaocliente.Create(gConexao);
+   pnlRemessaAberta.Visible:= False;
+   pnlRemessaAberta.Caption := 'Verndedor Com Remessa Aberta';
+   pnlRemessaAberta.Color := clSkyBlue;
+   ValorEmAberto := DaoCliente.SaldoDevedor(ClienteID, RetornarDataSistema );
+   IF ValorEmAberto > 0 Then
+   begin
+      pnlRemessaAberta.Visible:= True;
+      pnlRemessaAberta.Caption := 'Valor Emaberto..: '+Formatfloat(',0.00',ValorEmAberto);
+      pnlRemessaAberta.Color := clRed;
+   end
+end;
 
 procedure tfrmVendas.VerLimite();
 Begin
@@ -541,6 +559,11 @@ begin
       if (cdsCadProdutos.fieldbyname('M2').asString ='S') or (cdsCadProdutos.fieldbyname('MetroLinear').AsBoolean) then
       Begin
          frmCalMQuadrado := TfrmCalMQuadrado.create(Self);
+      if (cdsCadProdutos.fieldbyname('M2').asString ='S') then
+          frmCalMQuadrado.tag :=  2;
+      if cdsCadProdutos.fieldbyname('MetroLinear').AsBoolean then
+          frmCalMQuadrado.tag :=  3;
+
          frmCalMQuadrado.edtVlrMetro.text := edtPco_venda.Text;
          frmCalMQuadrado.ShowModal;
          if frmCalMQuadrado.Tag = 1 then
@@ -736,7 +759,7 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
    VerLimite();
-   AtaulizaLucroBruto;
+   //AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
 procedure  TfrmVendas.AtaulizaLucroBruto;
@@ -1746,7 +1769,8 @@ begin
          edtCod_FormaPagamento.SetFocus
       except
       end;
-      MostrarAnimaisCliente
+      MostrarAnimaisCliente;
+      VerificarSaldoDevedor(StrTointDef(cmbCod_Cliente.Text,0))
    End;
 end;
 

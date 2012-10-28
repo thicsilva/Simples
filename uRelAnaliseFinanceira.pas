@@ -138,50 +138,14 @@ begin
    pvilinha := pvilinha+1;
    lrLucroBruto := TotalRecebido-cdsRelatorio.fieldByname('CustoTotal').Asfloat;
 
-   {
    qryRelatorio.Close;
-   qryRelatorio.SQL.text:='Select mov.Cod_FormaPagamento,max(Pag.Descricao) As Descricao, Sum(mov.Valor) As Total '+
-                                           'From T_movCaixa mov '+
-                                           '     Left Join T_FormasPagamento Pag on Pag.Codigo=Mov.Cod_FormaPagamento '+
-                                           'Where D_C='+QuotedStr('C')+' and mov.estornado<>'+QuotedStr('S')+' and '+
-                                           '      Data_Lancamento>=:parData_Ini and Data_Lancamento<=:parData_Fim '+
-                                           'Group by mov.Cod_FormaPagamento '+
-                                           'Order by 3 desc ';
-
-
-   qryRelatorio.ParamByName('parData_Ini').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
-   qryRelatorio.ParamByName('parData_Fim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
-
-   cdsRelatorio.Close;
-   cdsRelatorio.Open;
-
-   TotalReceita := 0;
-   cdsRelatorio.First;
-   while not cdsRelatorio.Eof Do
-   Begin
-      impmatricial.Imp(pvilinha,001,cdsRelatorio.fieldByname('Descricao').AsString );
-      impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsRelatorio.fieldByname('Total').Asfloat) ,[]);
-      pvilinha := pvilinha+1;
-      TotalReceita := TotalReceita + cdsRelatorio.fieldByname('Total').Asfloat;
-      cdsRelatorio.Next;
-   End;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-   pvilinha := pvilinha+1;
-   impmatricial.Imp(pvilinha,001,'Receita do Periodo....');
-   impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',TotalReceita),[]);
-   pvilinha := pvilinha+1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-   pvilinha := pvilinha+1;
-   }
-
-   qryRelatorio.Close;
-   qryRelatorio.SQL.text:= 'Select mov.Cod_TipoDespesa,max(Ope.Descricao) As Descricao, Sum(mov.Valor) As Total, ope.Tipo_Conta  '+
+   qryRelatorio.SQL.text:= 'Select mov.Cod_TipoDespesa,max(Ope.Descricao) As Descricao, Sum(mov.Valor) As Total, ope.Tipo_Conta '+
                                            'From T_movCaixa mov '+
                                            '     Left Join T_operacoes Ope on Ope.Codigo=Mov.cod_tipodespesa '+
                                            'Where D_C='+QuotedStr('D')+' and mov.estornado<>'+QuotedStr('S')+' and '+
                                            '      Data_Lancamento>=:parData_Ini and Data_Lancamento<=:parData_Fim '+
                                            'Group by mov.Cod_TipoDespesa, ope.Tipo_Conta '+
-                                           'Order by ope.Tipo_Conta,1 ';
+                                           'Order by Ope.Tipo_Conta,1';
 
    qryRelatorio.ParamByName('parData_Ini').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
    qryRelatorio.ParamByName('parData_Fim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
@@ -204,9 +168,9 @@ begin
             impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',lrTotalConta),[]);
             pvilinha := pvilinha+2;
          end;
-         if cdsRelatorio.fieldByname('Tipo_Conta').AsString='0' then
-            impmatricial.Imp(pvilinha,001,'Despesas Fixas');
          if cdsRelatorio.fieldByname('Tipo_Conta').AsString='1' then
+            impmatricial.Imp(pvilinha,001,'Despesas Fixas');
+         if cdsRelatorio.fieldByname('Tipo_Conta').AsString='0' then
             impmatricial.Imp(pvilinha,001,'Despesas Variaveis');
          pvilinha := pvilinha+1;
          lrTotalConta := 0;

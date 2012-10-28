@@ -262,6 +262,7 @@ procedure TfrmRomaneioDeEntrega.bsSkinButton5Click(Sender: TObject);
 var DaoRomaneio : TDaoRomaneio;
     cdsDadosRelatorio : TClientDataSet;
     total : Real;
+    prCustoTotal : Real;
 begin
    GstituloRel  :='Relatorio de Financeiro de Romaneio Nº '+srcRomaneios.DataSet.FieldByName('ID').AsString;
    pviTipoRelatorio := ROMANEIO_FINANCEIRO;
@@ -276,6 +277,7 @@ begin
    DaoRomaneio := TDaoRomaneio.Create(gConexao);
    cdsDadosRelatorio := DaoRomaneio.RetornarDadosFinanceiros(srcRomaneios.DataSet.FieldByName('ID').AsInteger);
    total := 0;
+   prCustoTotal := 0;
    while not cdsDadosRelatorio.Eof do
    begin
       impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('SeqVenda').AsString,8)+' '+Copy(cdsDadosRelatorio.FieldByName('Descricao').AsString,1,38));
@@ -283,6 +285,7 @@ begin
       impmatricial.Imp(pvilinha,061,cdsDadosRelatorio.FieldByName('Pagamento').AsString);
       pviLinha:=Pvilinha+1;
       total := total + cdsDadosRelatorio.FieldByName('Vlr_total').AsFloat;
+      prCustoTotal := prCustoTotal + cdsDadosRelatorio.FieldByName('CustoTotal').AsFloat;
       cdsDadosRelatorio.next;
       if pvilinha>=60 then
          impMatricial.Novapagina;
@@ -291,6 +294,8 @@ begin
    pviLinha:=Pvilinha+1;
    impmatricial.Imp(pvilinha,001,'Total Geral......  Qunatidade de Vendas '+intTostr(cdsDadosRelatorio.RecordCount));
    impmatricial.Impd(pvilinha,060,Formatfloat(',0.00',total),[]);
+   pviLinha:=Pvilinha+1;
+   impmatricial.Imp(pvilinha,001,'Custo total.....: '+Formatfloat(',0.00',prCustoTotal)+'  Lucratividade..: '+Formatfloat(',0.00',( (total-prCustoTotal)/total)*100 )+'%');
    pviLinha:=Pvilinha+5;
 
    impmatricial.Imp(pvilinha,026,'_______________________________________');

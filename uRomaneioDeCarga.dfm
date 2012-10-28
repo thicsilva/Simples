@@ -78,7 +78,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 705
+        Left = 669
         Top = 0
         Width = 70
         Height = 49
@@ -118,7 +118,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 321
+        Left = 285
         Top = 0
         Width = 120
         Height = 49
@@ -180,7 +180,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         ExplicitTop = -1
       end
       object btnCancelar: TbsSkinSpeedButton
-        Left = 441
+        Left = 405
         Top = 0
         Width = 70
         Height = 49
@@ -219,7 +219,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 511
+        Left = 475
         Top = 0
         Width = 194
         Height = 49
@@ -227,11 +227,13 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 511
+        ExplicitTop = -1
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 215
         Top = 0
-        Width = 106
+        Width = 70
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -263,6 +265,8 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Align = alLeft
         Spacing = 2
         OnClick = bsSkinSpeedButton1Click
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
     end
   end
