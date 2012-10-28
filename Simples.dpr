@@ -135,7 +135,8 @@ uses
   uClassLancamento in 'Modelos\uClassLancamento.pas',
   uClassContaReceber in 'Modelos\uClassContaReceber.pas',
   uClassRota in 'Modelos\uClassRota.pas',
-  uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores};
+  uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores},
+  uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas';
 
 {$R *.res}
 

@@ -14,6 +14,7 @@ type TDaoCliente = class
      function Buscar(ClienteId : Integer) : TCliente;
      function Excluir(ClienteId : Integer) : Boolean;
      procedure AtualizarSequencia(ClienteId,SequenciaEntrega: Integer);
+     function SaldoDevedor(ClienteId: Integer; Data : TDateTime): real;
 end;
 
 
@@ -77,6 +78,19 @@ begin
    FQryModific.SQL.Text := 'Delete from T_Clientes where Codigo=:parId ';
    FQryModific.ParamByName('parId').AsInteger := ClienteId;
    FQryModific.ExecSQL;
+end;
+
+function TDaoCliente.SaldoDevedor(ClienteId: Integer; Data : TDateTime): real;
+var lstParametros : TStringList;
+   lcdsDados : TClientDataSet;
+begin
+   lstParametros := TStringList.Create;
+   lstParametros.Add(IntToStr(ClienteId));
+   lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where Cod_Cliente=:parCod_cliente and '+
+                                        'Tipo_baixa='+QuotedSTR('AB')+' and data_vencimento<'+QuotedSTR(FormatDateTime('dd/mm/yyyy',Data)),lstParametros);
+   Result    := lcdsDados.FieldByName('Total').AsFloat;
+   FreeAndNil(lstParametros);
+   FreeAndnil(lcdsDados);
 end;
 
 end.

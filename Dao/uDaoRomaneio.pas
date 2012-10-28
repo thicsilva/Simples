@@ -61,7 +61,7 @@ begin
   Parametros.Add('C');
   Result := FConexao.BuscarDadosSQL('Select Fun.descricao as Motorista, rom.* from Romaneios Rom '+
                                     'left join T_funcionarios fun on Fun.Codigo = Rom.FuncionarioID '+
-                                    'where (Status<>:parStatus or Status IS Null) order by Data_Cadastro',Parametros);
+                                    'where (Status<>:parStatus or Status IS Null) order by Data_Cadastro Desc ',Parametros);
 end;
 
 procedure TDaoRomaneio.Cancelar(RomaneioId : integer);
@@ -113,7 +113,7 @@ begin
   FParametros.clear;
   FParametros.add(IntToStr(RomaneioId));
   FParametros.add('5');
-  Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Pag.Descricao as Pagamento, '+
+  Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Ven.CustoTotal, Pag.Descricao as Pagamento, '+
                                     '       Ven.Entregue, Ven.Prorrogado, Ven.ServicoPago, Ven.PagouSinal, Ven.Cod_formaPagamento '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+

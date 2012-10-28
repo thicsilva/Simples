@@ -62,6 +62,7 @@
     <DCCReference Include="Dao\uDaoCaixaMovimento.pas" />
     <DCCReference Include="Dao\uDaoCliente.pas" />
     <DCCReference Include="Dao\uDaoClienteAnimal.pas" />
+    <DCCReference Include="Dao\uDaoContaAPagar.pas" />
     <DCCReference Include="Dao\uDaoContaReceber.pas" />
     <DCCReference Include="Dao\uDaoCorrecao.pas" />
     <DCCReference Include="Dao\uDaoCustoProduto.pas" />

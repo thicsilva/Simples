@@ -15,6 +15,7 @@ type TDaoContaReceber = class
     procedure AtualizarVencimento(prNovoVencimento : TDateTime; prsFormaPagamento : String; ContasAReceberId : Integer; SeqvendaId : Integer = 0  );
     procedure BaixarTitulo(proContaAreceber : TContaReceber);
     procedure AtualizarValorDosTitulos(VendaId : Integer; ValorDiminuir : Real);
+    Function TotalEmAberto(Data : TDateTime) : Real;
 
 end;
 
@@ -93,6 +94,14 @@ begin
    FConexao := Conexao;
    FqryModific := TSqlQuery.Create(Nil);
    FqryModific.SQLConnection := FConexao.Conection;
+end;
+
+function TDaoContaReceber.TotalEmAberto(Data: TDateTime): Real;
+var lcdsDados : TClientDataSet;
+begin
+   lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where '+
+                                        'Tipo_baixa='+QuotedSTR('AB')+' and data_vencimento<'+QuotedSTR(FormatDateTime('dd/mm/yyyy',Data)),Nil);
+   Result    := lcdsDados.FieldByName('Total').AsFloat;
 end;
 
 end.
