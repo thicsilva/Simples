@@ -821,7 +821,7 @@ begin
       lswhere := 'Where Endereco like :parDescricao '
    Else IF cmbtipoconsulta.ItemIndex = 4 Then
    Begin
-      lswhere := 'Where Contrato like :parDescricao ';
+      lswhere := 'Where Responsavel like :parDescricao ';
       lsCoringa := '';
    End
    Else IF cmbtipoconsulta.ItemIndex = TELEFONE Then

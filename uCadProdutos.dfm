@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 752
     Height = 460
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1382,6 +1382,7 @@ object frmCadProdutos: TfrmCadProdutos
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Margem Secundaria'
+          Visible = False
         end
         object edtComissao: TbsSkinNumericEdit
           Left = 113
@@ -1481,6 +1482,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          Visible = False
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

@@ -1,7 +1,7 @@
 object frmCalMQuadrado: TfrmCalMQuadrado
   Left = 0
   Top = 0
-  Caption = 'Calculo de metro Quadrado'
+  Caption = 'Calculo do pre'#231'o por  metro '
   ClientHeight = 244
   ClientWidth = 349
   Color = clBtnFace
@@ -169,7 +169,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       end
     end
   end
-  object bsSkinExPanel1: TbsSkinExPanel
+  object panelgeral: TbsSkinExPanel
     Left = 0
     Top = 44
     Width = 349

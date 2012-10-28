@@ -7,8 +7,8 @@ uses
   Dialogs,uFormBase, StdCtrls, bsSkinCtrls, Mask, bsSkinBoxCtrls, ExtCtrls,
   ToolWin, ComCtrls;
 
-const METRO_QUADRADO = 1;
-      METRO_LINEAR = 2;
+const METRO_QUADRADO = 2;
+      METRO_LINEAR = 3;
 type
 
   TfrmCalMQuadrado = class(TFormbase)
@@ -17,7 +17,7 @@ type
     btnFechar: TbsSkinSpeedButton;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
-    bsSkinExPanel1: TbsSkinExPanel;
+    panelgeral: TbsSkinExPanel;
     edtaltura: TbsSkinNumericEdit;
     bsSkinStdLabel1: TbsSkinStdLabel;
     edtcomprimento: TbsSkinNumericEdit;
@@ -74,10 +74,12 @@ end;
 procedure TfrmCalMQuadrado.FormShow(Sender: TObject);
 begin
   inherited;
+  panelgeral.caption:= 'Informe as Medidas para o Metro Linear';
   if frmCalMQuadrado.tag = METRO_QUADRADO then
   begin
      edtComplemento.Visible := False;
      lbl01.Visible := False;
+     panelgeral.caption:= 'Informe as Medidas para o Metro Quadrado'
   end;
 end;
 

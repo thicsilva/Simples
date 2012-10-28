@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = Tab_Consulta
+    ActivePage = Tab_Cadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -90,7 +90,7 @@ object frmCadClientes: TfrmCadClientes
         PopupMenu = PopupMenu1
         object cmbtipoconsulta: TbsSkinComboBox
           Left = 8
-          Top = 8
+          Top = 7
           Width = 120
           Height = 20
           HintImageIndex = 0
@@ -136,7 +136,7 @@ object frmCadClientes: TfrmCadClientes
             'CNPJ/CPF'
             'Codigo'
             'Endere'#231'o'
-            'Contrato'
+            'Contato'
             'Telefone')
           ItemIndex = -1
           DropDownCount = 8
@@ -1166,9 +1166,9 @@ object frmCadClientes: TfrmCadClientes
           Caption = 'Raz'#227'o Social'
         end
         object bsSkinStdLabel20: TbsSkinStdLabel
-          Left = 248
+          Left = 274
           Top = 178
-          Width = 62
+          Width = 37
           Height = 13
           EllipsType = bsetNone
           UseSkinFont = True
@@ -1180,7 +1180,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultFont.Style = []
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
-          Caption = 'Responsavel'
+          Caption = 'Contato'
         end
         object bsSkinStdLabel24: TbsSkinStdLabel
           Left = 5
@@ -2521,7 +2521,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 605
-        Top = 2
+        Top = 0
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]

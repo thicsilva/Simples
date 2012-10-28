@@ -498,10 +498,10 @@ object frmCadOperacoes: TfrmCadOperacoes
         DefaultColor = clWindow
         Text = 'Despesas Fixas'
         Items.Strings = (
-          'Despesas Fixas'
           'Despesas Variaveis'
+          'Despesas Fixas'
           'Receitas')
-        ItemIndex = 0
+        ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
         Font.Charset = DEFAULT_CHARSET
