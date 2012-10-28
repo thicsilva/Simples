@@ -51,8 +51,6 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Spacing = 2
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
-    ExplicitLeft = 8
-    ExplicitTop = 93
     object lblTurma: TbsSkinStdLabel
       Left = 107
       Top = 14
@@ -910,8 +908,6 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Height = 309
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 185
     object GridRelatorio: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = srcRelatorio

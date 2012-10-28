@@ -115,6 +115,11 @@ object frmConsVendas: TfrmConsVendas
         OptionsView.GroupSummaryLayout = gslAlignWithColumns
         Styles.GroupByBox = frmPrincipal.cxStyle4
         Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+        object Colum_Seqvenda: TcxGridDBColumn
+          Caption = 'Venda N'#186
+          DataBinding.FieldName = 'SeqVenda'
+          Width = 55
+        end
         object colum_Controle: TcxGridDBColumn
           Caption = 'N'#186' Controle'
           DataBinding.FieldName = 'controle'
@@ -166,11 +171,6 @@ object frmConsVendas: TfrmConsVendas
         object Colum_Operador: TcxGridDBColumn
           DataBinding.FieldName = 'Operador'
           Width = 120
-        end
-        object Colum_Seqvenda: TcxGridDBColumn
-          Caption = 'Venda N'#186
-          DataBinding.FieldName = 'SeqVenda'
-          Width = 55
         end
         object Colum_NumeroCupom: TcxGridDBColumn
           Caption = 'Numero Cupom'
@@ -1334,6 +1334,7 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnEntregaVendaClick
         ExplicitLeft = 292
+        ExplicitTop = 12
       end
     end
   end

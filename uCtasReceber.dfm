@@ -120,6 +120,11 @@ object frmCtasReceber: TfrmCtasReceber
           OptionsView.GroupSummaryLayout = gslAlignWithColumns
           Styles.GroupByBox = frmPrincipal.cxStyle4
           Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+          object GridCtasReceberseqvenda: TcxGridDBColumn
+            Caption = 'Venda N'#186
+            DataBinding.FieldName = 'seqvenda'
+            Width = 60
+          end
           object Column_Nome_Status: TcxGridDBColumn
             Caption = 'Situa'#231#227'o'
             DataBinding.FieldName = 'Nome_Status'
@@ -180,11 +185,6 @@ object frmCtasReceber: TfrmCtasReceber
             Caption = 'Atualizado Em'
             DataBinding.FieldName = 'Data_Atu'
             Width = 110
-          end
-          object GridCtasReceberseqvenda: TcxGridDBColumn
-            Caption = 'Venda N'#186
-            DataBinding.FieldName = 'seqvenda'
-            Width = 60
           end
           object GridCtasReceberOperador: TcxGridDBColumn
             DataBinding.FieldName = 'Operador'
