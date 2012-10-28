@@ -636,4 +636,85 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       OnClick = bsSkinButton1Click
     end
   end
+  object TmpDados: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Venda'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Codigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Cliente'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'FormaPagemento'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'Valor'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Status'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'Cod_FormaPagamento'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'Status'
+    Params = <>
+    StoreDefs = True
+    Left = 432
+    Top = 144
+    Data = {
+      C60000009619E0BD010000001800000007000000000003000000C6000556656E
+      6461040001000000000006436F6469676F040001000000000007436C69656E74
+      6501004900000001000557494454480200020064000E466F726D61506167656D
+      656E746F01004900000001000557494454480200020032000556616C6F720800
+      040000000000065374617475730100490000000100055749445448020002001E
+      0012436F645F466F726D61506167616D656E746F010049000000010005574944
+      54480200020014000000}
+    object TmpDadosVenda: TIntegerField
+      FieldName = 'Venda'
+    end
+    object TmpDadosCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object TmpDadosCliente: TStringField
+      FieldName = 'Cliente'
+      Size = 100
+    end
+    object TmpDadosValor: TFloatField
+      FieldName = 'Valor'
+    end
+    object TmpDadosStatus: TStringField
+      FieldName = 'Status'
+      Size = 30
+    end
+    object TmpDadosFormaPagemento: TStringField
+      FieldName = 'FormaPagemento'
+      Size = 50
+    end
+    object TmpDadosCod_FormaPagamento: TStringField
+      FieldName = 'Cod_FormaPagamento'
+    end
+  end
 end

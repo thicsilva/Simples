@@ -58,7 +58,9 @@ end;
 
 procedure TfrmFechaCaixa.btnokClick(Sender: TObject);
 var DaoCaixaMovimento : TDaoCaixaMovimento;
+    Valor : Real;
 begin
+
    qrydspPagamentoInformado.Close;
    qrydspPagamentoInformado.Params.Clear;
    qrydspPagamentoInformado.SQL.Text := 'Select * from T_PagamentosInformados where 1=2';
@@ -69,6 +71,18 @@ begin
    cdsTempPagamentos.First;
 
    DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
+   valor := 0;
+   while  not cdsTempPagamentos.Eof do
+   Begin
+      valor := Valor + cdsTempPagamentos.FieldByName('Valor').AsFloat;
+      cdsTempPagamentos.Next;
+   end;
+   if Valor = 0 then
+   begin
+      CaixaMensagem( 'Informe os valores para fechar ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   end;
+
    while  not cdsTempPagamentos.Eof do
    Begin
       if cdsTempPagamentos.fieldbyname('Valor').AsFloat <> 0 then

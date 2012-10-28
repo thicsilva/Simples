@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinCtrls, StdCtrls, Mask, bsSkinBoxCtrls, ExtCtrls, ToolWin,
-  ComCtrls, DBClient, CheckLst,uFormBase,uDaoContaReceber,uClassContaReceber;
+  ComCtrls, DBClient, CheckLst,uFormBase,uDaoContaReceber,uClassContaReceber, DB;
 
 type
   TfrmRecebimentoRomaneio = class(TFormBase)
@@ -30,6 +30,14 @@ type
     btnNaoRecebido: TbsSkinSpeedButton;
     bsSkinBevel5: TbsSkinBevel;
     bsSkinBevel6: TbsSkinBevel;
+    TmpDados: TClientDataSet;
+    TmpDadosVenda: TIntegerField;
+    TmpDadosCodigo: TIntegerField;
+    TmpDadosCliente: TStringField;
+    TmpDadosValor: TFloatField;
+    TmpDadosStatus: TStringField;
+    TmpDadosFormaPagemento: TStringField;
+    TmpDadosCod_FormaPagamento: TStringField;
     procedure btnCarregarClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -47,6 +55,7 @@ type
     function FoiRecebido(LinhaId: Integer): Boolean;
     function NaoFoiRecebido(LinhaId: Integer): Boolean;
     procedure MudarVencimentoTitulos(prValorBaixa: Real; priNumeroVenda, TipoPagamento: String);
+    procedure OrganizaListView;
     { Private declarations }
   public
     { Public declarations }
@@ -219,10 +228,42 @@ begin
       else
         llstTemp.SubItems.Add('Pendente');
       llstTemp.SubItems.Add(Dados.FieldByName('Cod_formaPagamento').AsString);
-
-
       Dados.Next;
    end;
+   OrganizaListView;
+end;
+
+procedure TfrmRecebimentoRomaneio.OrganizaListView;
+var I : Integer;
+    llstTemp: TListItem;
+begin
+  TmpDados.EmptyDataSet;
+  for I := 0 to ListVendas.Items.Count - 1 do
+  begin
+     TmpDados.Append;
+     TmpDados.FieldByname('Venda').Asinteger :=  StrToInt(ListVendas.Items[I].Caption);
+     TmpDados.FieldByname('Codigo').Asinteger := StrToInt(ListVendas.Items[I].SubItems[0]);
+     TmpDados.FieldByname('Cliente').AsString := ListVendas.Items[I].SubItems[1];
+     TmpDados.FieldByname('FormaPagemento').AsString := ListVendas.Items[I].SubItems[2];
+     TmpDados.FieldByname('Valor').AsFloat := StrTofloat(ListVendas.Items[I].SubItems[3]);
+     TmpDados.FieldByname('Status').AsString := ListVendas.Items[I].SubItems[4];
+     TmpDados.FieldByname('Cod_FormaPagamento').AsString := ListVendas.Items[I].SubItems[5];
+     TmpDados.Post;
+  end;
+  ListVendas.Items.Clear;
+  tmpDados.First;
+  while not TmpDados.Eof do
+  begin
+     llstTemp := ListVendas.Items.add;
+     llstTemp.Caption := TmpDados.FieldByName('Venda').AsString;
+     llstTemp.SubItems.Add(TmpDados.FieldByName('Codigo').AsString);
+     llstTemp.SubItems.Add(TmpDados.FieldByName('Cliente').AsString);
+     llstTemp.SubItems.Add(TmpDados.FieldByName('FormaPagemento').AsString);
+     llstTemp.SubItems.Add(FormatFloat('0.00', TmpDados.FieldByName('Valor').AsFloat));
+     llstTemp.SubItems.Add(TmpDados.FieldByName('Status').AsString);
+     llstTemp.SubItems.Add(TmpDados.FieldByName('Cod_formaPagamento').AsString);
+     TmpDados.Next;
+  end;
 end;
 
 

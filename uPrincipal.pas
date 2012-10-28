@@ -240,6 +240,8 @@ type
     dxBarButton31: TdxBarButton;
     dxBarButton32: TdxBarButton;
     actServicoLauro: TAction;
+    pnlContasReceber: TPanel;
+    pnlContasApagar: TPanel;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -311,6 +313,8 @@ type
     procedure VerificarEstrutura;
     procedure VerificarAgendaAnimal;
     procedure CarregarEmpresa;
+    procedure AtualizarPainelAReceber;
+    procedure AtualizarPainelAPagar;
     { Private declarations }
   public
     { Public declarations }
@@ -350,11 +354,11 @@ implementation
 uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uCadProdutos, uCadRotas, uCadFormaPagamento, uParametros, usequencias,
   uVendas, uCtasreceber , uConsVendas, uMovCaixa, uCadGrupos,UnitDeclaracoes,
-  uCadFornecedores, uEntradas, uselrelvendasVendedor,
+  uCadFornecedores, uEntradas, uselrelvendasVendedor,uDaoContaAPagar,
   ucadUsuarios, uselrelContaCorrenteEstoque, uFechaDia, uCtaspagar,
   uControleRepasse, uSelRelDevolucoes, uAbreOS, uConsultaOrdemServico,
   uCadPerfil, uProposta, uSelRelEntradas, uselrelvendas, uCadFabricantes,
-  ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,
+  ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,uDaoContaReceber,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco;
@@ -493,6 +497,42 @@ begin
    VerificarAgendaAnimal;
 
    CarregarEmpresa;
+
+  // AtualizarPainelAReceber;
+
+  // AtualizarPainelAPagar;
+
+end;
+
+procedure TfrmPrincipal.AtualizarPainelAReceber;
+var uDaoContaReceber : TDaoContaReceber;
+    Total : Real;
+begin
+   uDaoContaReceber := TDaoContaReceber.Create(gConexao);
+   Total := uDaoContaReceber.TotalEmAberto(RetornarDataSistema);
+   pnlContasReceber.Visible := False;
+   if total>0 then
+   begin
+      pnlContasReceber.Visible := True;
+      pnlContasReceber.Caption := '  Total a Receber..: '+FormatFloat(',0.00',Total);
+   end;
+   FreeAndNil(uDaoContaReceber);
+end;
+
+
+procedure TfrmPrincipal.AtualizarPainelAPagar;
+var uDaoContaApagar : TDaoContaAPagar;
+    Total : Real;
+begin
+   uDaoContaApagar := TDaoContaAPagar.Create(gConexao);
+   Total := uDaoContaApagar.TotalEmAberto(RetornarDataSistema);
+   pnlContasApagar.Visible := False;
+   if total>0 then
+   begin
+      pnlContasApagar.Visible := True;
+      pnlContasApagar.Caption := '  Total a Pagar....: '+FormatFloat(',0.00',Total);
+   end;
+   FreeAndNil(uDaoContaApagar);
 end;
 
 procedure TfrmPrincipal.CarregarEmpresa;
@@ -508,7 +548,8 @@ begin
   DaoEventoAnimal := TdaoEventoAnimal.Create(gConexao);
   srcEventoAnimal.DataSet := DaoEventoAnimal.AgendaPendente;
   FreeAndNil(DaoEventoAnimal);
-  PanelEventos.Visible := ( not srcEventoAnimal.DataSet.IsEmpty);
+  PanelEventos.Visible   := ( not srcEventoAnimal.DataSet.IsEmpty);
+  PanelEventos.RollState := ( not srcEventoAnimal.DataSet.IsEmpty);
 end;
 
 procedure TfrmPrincipal.ConfiguraAmbiente;
