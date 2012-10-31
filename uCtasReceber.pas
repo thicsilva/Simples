@@ -847,6 +847,8 @@ begin
 End;
 
 procedure TfrmCtasReceber.btnexcluirClick(Sender: TObject);
+var vlrJuros : Real;
+    vlrMulta : Real;
 begin
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
    begin
@@ -868,6 +870,8 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
+   vlrJuros := 0;
+   vlrMulta := 0;
 
    If  StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
    Begin
@@ -882,9 +886,10 @@ begin
       frmbaixaBrinde.edtData_Emissao.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Emissao').AsDatetime);
       frmbaixaBrinde.edtData_Repasse.Text := FormatDateTime('dd/mm/yyyy',gsData_Mov);
       frmbaixaBrinde.cmbRota.KeyValue     := cdsPesquisa.FieldByName('Cod_Rota').AsString;
-      frmbaixaBrinde.edtSupervisor.text   := edtCod_Funcionario.Text; 
+      frmbaixaBrinde.edtSupervisor.text   := edtCod_Funcionario.Text;
       frmbaixaBrinde.pilote               := StrToInt(cmbLote.Text);
       frmbaixaBrinde.pbNovoRepasse        := False;
+
       if not cdsPesquisa.FieldByName('Data_Repasse').IsNull then
          frmbaixaBrinde.edtData_Repasse.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Repasse').AsDatetime)
       Else
@@ -894,6 +899,8 @@ begin
    End
    Else if StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 0 Then
    Begin
+      vlrJuros := ((StrToFloat(gParametros.Ler( '', '[CONTASRECEBER]', 'Juros', '0' ))*cdsPesquisa.fieldByname('Vlr_Areceber').asfloat)/100);
+      vlrMulta := ((StrToFloat(gParametros.Ler( '', '[CONTASRECEBER]', 'Multa', '0' ))*cdsPesquisa.fieldByname('Vlr_Areceber').asfloat)/100);
       frmBaixaNormal := TfrmBaixaNormal.Create(Self);
       frmBaixaNormal.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;
       frmBaixaNormal.edtNomeCliente.Text  := cdsPesquisa.FieldByName('Descricao').AsString;
@@ -906,6 +913,8 @@ begin
       frmBaixaNormal.edtData_Emissao.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Emissao').AsDatetime);
       frmBaixaNormal.edtCod_FormaPagamento.Text := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
       frmBaixaNormal.edtCod_Caixa.Text    := cdsPesquisa.FieldByName('Cod_Caixa').AsString;
+      frmBaixaNormal.edtJuros.Text        := FormatFloat('0.00',vlrJuros);
+      frmBaixaNormal.edtMulta.Text        := FormatFloat('0.00',vlrMulta);
       frmBaixaNormal.pbeServico := False;
       if cdspesquisa.FieldByName('Tipo_Venda').AsString='S' then
          frmBaixaNormal.pbeServico := True;

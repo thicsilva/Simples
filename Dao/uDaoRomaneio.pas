@@ -10,6 +10,8 @@ type TDaoRomaneio = Class
      FConexao : TConexao;
      FqryModific : TSqlQuery;
      FParametros : TStringList;
+    FDataSistema: TDatetime;
+    procedure SetDataSistema(const Value: TDatetime);
    public
      constructor Create(Conexao : TConexao);
      function Incluir(Romaneio : TRomaneio) : Integer;
@@ -18,10 +20,12 @@ type TDaoRomaneio = Class
      function RetornarProdutos(RomaneioId : integer) : TClientDataSet;
      function RetornarDadosFinanceiros (RomaneioId : integer) : TClientDataSet;
      function RetornarPedidosNaoEntregues : TClientDataSet;
-     procedure FecharRomaneio(RomaneioId : integer);
+     function PendenciasDoRomaneio(RomaneioId: integer): TClientDataSet;
      function RetornarNomeMotorista (RomaneioId : integer) : String;
+     procedure FecharRomaneio(RomaneioId : integer);
      procedure Cancelar(RomaneioId : integer);
      procedure AtualizarTotalDoRomaneio(RomaneioId : integer);
+     property DataSistema : TDatetime read FDataSistema write SetDataSistema;
 End;
 
 implementation
@@ -122,6 +126,21 @@ begin
 
 end;
 
+function TDaoRomaneio.PendenciasDoRomaneio(RomaneioId: integer): TClientDataSet;
+begin
+  FParametros.clear;
+  FParametros.add(IntToStr(RomaneioId));
+  FParametros.add('5');
+  FParametros.add('AB');
+  Result := FConexao.BuscarDadosSQL('Select Cli.codigo,Cli.Descricao, Rec.Data_Vencimento,Rec.Vlr_Areceber as vlr_Total,Pag.Descricao as Pagamento '+
+                                    'from t_vendas ven '+
+                                    '     inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente ' +
+                                    '     inner join T_Ctasreceber Rec on Rec.Cod_Cliente=Cli.Codigo '+
+                                    '     left join T_formaspagamento pag on pag.codigo=Rec.Cod_formaPagamento '+
+                                    'where romaneioId=:parRomaneioId and ( ven.status<>:parStatus or ven.Status is Null ) and '+
+                                    '        Rec.Tipo_Baixa=:parTipoBaixa and Rec.Data_Vencimento<'+QuotedStr(FormatDateTime('mm/dd/yyyy',self.DataSistema))+' order by 1,3 ',FParametros);
+end;
+
 function TDaoRomaneio.RetornarNomeMotorista(RomaneioId: integer): String;
 begin
    FParametros.clear;
@@ -160,6 +179,11 @@ begin
                                      '     left Join T_Grupos Gru on Gru.codigo=Prod.Cod_Grupo '+
                                      'where romaneioID=:parRomaneioId and ( Itens.status<>:parStatus or Itens.Status is Null ) '+
                                      'group by Cod_Produto,Cod_Grupo order by 2,3',FParametros);
+end;
+
+procedure TDaoRomaneio.SetDataSistema(const Value: TDatetime);
+begin
+  FDataSistema := Value;
 end;
 
 end.

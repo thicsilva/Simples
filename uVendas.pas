@@ -325,7 +325,7 @@ Begin
    if StrToFloat(edtTotalLiquido.Text)>StrTOfloat(edtLimite_Credito.Text) then
    Begin
       CaixaMensagem( 'O cliente ultrapassou o limite de credito ', ctAviso, [ cbOk ], 0 );
-      if Trim(cdsCadFormasPagamento.FieldByName('Descricao').AsString)<>'A VISTA' then
+      if Copy(Trim(cdsCadFormasPagamento.FieldByName('Descricao').AsString),1,7)<>'A VISTA' then
          btnok.Enabled          :=False;
       edtTotalLiquido.Color := clred;
    End
@@ -759,7 +759,7 @@ begin
    btnAdicionar.Enabled     := False;
    btnAlterar.Enabled       := False;
    VerLimite();
-   //AtaulizaLucroBruto;
+   AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
 procedure  TfrmVendas.AtaulizaLucroBruto;

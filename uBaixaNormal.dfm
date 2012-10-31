@@ -248,7 +248,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Caption = 'Cliente'
     end
     object bsSkinStdLabel4: TbsSkinStdLabel
-      Left = 375
+      Left = 444
       Top = 63
       Width = 52
       Height = 13
@@ -338,8 +338,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       Caption = 'Data de Pagamento'
     end
     object bsSkinStdLabel1: TbsSkinStdLabel
-      Left = 408
-      Top = 89
+      Left = 450
+      Top = 92
       Width = 46
       Height = 13
       EllipsType = bsetNone
@@ -353,9 +353,41 @@ object frmBaixaNormal: TfrmBaixaNormal
       SkinDataName = 'stdlabel'
       Caption = 'Desconto'
     end
+    object bsSkinStdLabel5: TbsSkinStdLabel
+      Left = 224
+      Top = 91
+      Width = 26
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinDataName = 'stdlabel'
+      Caption = 'Multa'
+    end
+    object bsSkinStdLabel9: TbsSkinStdLabel
+      Left = 341
+      Top = 91
+      Width = 25
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinDataName = 'stdlabel'
+      Caption = 'Juros'
+    end
     object edtControle: TbsSkinEdit
-      Left = 405
-      Top = 87
+      Left = 271
+      Top = 55
       Width = 40
       Height = 18
       Text = 'emissao'
@@ -419,7 +451,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtCnpjcpf: TbsSkinEdit
-      Left = 459
+      Left = 502
       Top = 58
       Width = 101
       Height = 18
@@ -483,7 +515,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtTotalTitulo: TEditN
-      Left = 457
+      Left = 502
       Top = 28
       Width = 101
       Height = 24
@@ -548,8 +580,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtNrVenda: TbsSkinEdit
-      Left = 223
-      Top = 86
+      Left = 89
+      Top = 54
       Width = 43
       Height = 18
       Text = 'Venda'
@@ -631,8 +663,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object Cod_Cliente: TbsSkinEdit
-      Left = 271
-      Top = 87
+      Left = 137
+      Top = 55
       Width = 40
       Height = 18
       Text = 'cliente'
@@ -664,8 +696,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtCod_FormaPagamento: TbsSkinEdit
-      Left = 315
-      Top = 87
+      Left = 181
+      Top = 55
       Width = 40
       Height = 18
       Text = 'pagamento'
@@ -697,8 +729,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtData_Emissao: TbsSkinEdit
-      Left = 359
-      Top = 87
+      Left = 225
+      Top = 55
       Width = 40
       Height = 18
       Text = 'emissao'
@@ -730,7 +762,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtVlr_Desconto: TbsSkinNumericEdit
-      Left = 457
+      Left = 500
       Top = 89
       Width = 61
       Height = 18
@@ -766,7 +798,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       OnExit = edtVlr_DescontoExit
     end
     object cmbTipoDesconto: TbsSkinComboBox
-      Left = 524
+      Left = 567
       Top = 88
       Width = 36
       Height = 20
@@ -855,6 +887,78 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
+    end
+    object edtMulta: TbsSkinNumericEdit
+      Left = 259
+      Top = 88
+      Width = 61
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 14
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = edtVlr_DescontoExit
+    end
+    object edtJuros: TbsSkinNumericEdit
+      Left = 373
+      Top = 88
+      Width = 61
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = edtVlr_DescontoExit
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox
@@ -1751,8 +1855,8 @@ object frmBaixaNormal: TfrmBaixaNormal
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 460
-    Top = 235
+    Left = 628
+    Top = 211
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1

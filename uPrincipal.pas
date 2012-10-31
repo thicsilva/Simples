@@ -498,9 +498,9 @@ begin
 
    CarregarEmpresa;
 
-  // AtualizarPainelAReceber;
+   AtualizarPainelAReceber;
 
-  // AtualizarPainelAPagar;
+   AtualizarPainelAPagar;
 
 end;
 

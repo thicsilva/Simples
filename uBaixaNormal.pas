@@ -113,6 +113,10 @@ type
     cdsTempPagamentosTipoLancamento: TIntegerField;
     cdsTempPagamentosCod_Caixa: TIntegerField;
     edtCod_Caixa: TbsSkinEdit;
+    bsSkinStdLabel5: TbsSkinStdLabel;
+    edtMulta: TbsSkinNumericEdit;
+    bsSkinStdLabel9: TbsSkinStdLabel;
+    edtJuros: TbsSkinNumericEdit;
     procedure FormShow(Sender: TObject);
     procedure btnReceberClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -182,7 +186,9 @@ begin
 
    edtcod_Pagamento.SetFocus;
 
-   edtTotalReceber.text := edtTotalTitulo.Text;
+   edtTotalReceber.text := FormatFloat('0.00', StrTofloat(edtTotalTitulo.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
+   edtTotalTitulo.text  := FormatFloat('0.00', StrTofloat(edtTotalTitulo.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
+
    edtData_Pagamento.Date := gsData_Mov;
    cdsTempPagamentos.EmptyDataSet;
 
