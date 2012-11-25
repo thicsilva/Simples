@@ -117,6 +117,8 @@ type
     edtMulta: TbsSkinNumericEdit;
     bsSkinStdLabel9: TbsSkinStdLabel;
     edtJuros: TbsSkinNumericEdit;
+    edtValorOriginal: TbsSkinNumericEdit;
+    bsSkinStdLabel10: TbsSkinStdLabel;
     procedure FormShow(Sender: TObject);
     procedure btnReceberClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -132,7 +134,9 @@ type
     procedure GridCtasClientesCellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
+    procedure edtData_PagamentoChange(Sender: TObject);
   private
+    procedure AtualizarJuros;
     { Private declarations }
   public
     lrDesc : Real;
@@ -185,11 +189,10 @@ begin
    panelRecebimento.RollState := False;
 
    edtcod_Pagamento.SetFocus;
-
-   edtTotalReceber.text := FormatFloat('0.00', StrTofloat(edtTotalTitulo.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
-   edtTotalTitulo.text  := FormatFloat('0.00', StrTofloat(edtTotalTitulo.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
-
    edtData_Pagamento.Date := gsData_Mov;
+
+   AtualizarJuros;
+
    cdsTempPagamentos.EmptyDataSet;
 
 end;
@@ -237,6 +240,7 @@ var lsupDate        : String;
   loDaoContaReceber : TdaoContaReceber;
 begin
    lrValorRecebido := 0;
+   bsSkinCoolBar1.SetFocus;
    if frmBaixaNormal.Tag <> 2 then
    Begin
       if StrTofloat(edtVlr_Recebido.Text)=0 Then
@@ -386,6 +390,7 @@ begin
                 loContaAReceber.Tipo_Baixa := 'PP';
             loContaAReceber.vlr_Desconto   := strTofloat(edtVlr_Desconto.Text);
             loContaAReceber.Vlr_Recebido   := lrValorRecebido;
+            loContaAReceber.ValorAReceber  := strToFloat(edtTotalTitulo.text);
             If lblTroco.Caption = 'Troco' Then
             begin
                loContaAReceber.Vlr_Recebido := StrToFloat(edtTotalTitulo.text);
@@ -399,7 +404,6 @@ begin
                DaoVenda.MarcarComoServicoPago(StrToint(edtNrVenda.Text));
 
             FreeAndNil(DaoVenda);
-            FreeAndNil(loDaoContaReceber);
             FreeAndNil(loContaAReceber);
          Except
             frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
@@ -420,7 +424,7 @@ begin
                cdsPagamento.Append;
                cdsPagamento.FieldByName('Sequencia').AsInteger          := StrToInt(Sequencia('Sequencia',False,'T_CtasReceber',FrmPrincipal.dbxPrincipal,'',False,8));
                cdsPagamento.FieldByName('Vlr_Areceber').AsFloat         := StrToFloat(edtTotalReceber.Text);
-               cdsPagamento.FieldByName('Data_Vencimento').AsDateTime   := StrToDateTime(edtVenciemento.Text);
+               cdsPagamento.FieldByName('Data_Vencimento').AsDateTime   := StrToDateTime(edtData_Pagamento.Text);
                cdsPagamento.FieldByName('Data_cad').AsDateTime          := (now);
                cdsPagamento.FieldByName('Data_Emissao').AsDateTime      := StrToDateTime(edtData_Emissao.Text);
                cdsPagamento.FieldByName('Historico').AsString           := 'Restante do Titulo '+edtDocumento.Text;
@@ -429,7 +433,7 @@ begin
                cdsPagamento.FieldByName('SeqVenda').AsInteger           := StrToInt(edtNrVenda.text);
                cdsPagamento.FieldByname('Cod_Emp').AsString             := gsCod_emp;
                cdsPagamento.FieldByname('Operador').AsString            := gsOperador;
-               cdsPagamento.FieldByname('Documento').AsString           := Copy(edtDocumento.text,1,8)+IncZero(IntToStr(StrToInt(Copy(edtDocumento.text,9,3))+1),3);
+               cdsPagamento.FieldByname('Documento').AsString           := Copy(edtDocumento.text,1,8)+IncZero(IntToStr(loDaoContaReceber.NovaSequenciaTitulo(StrtoInt(edtNrVenda.text))),3);
                cdsPagamento.FieldByName('Status').AsInteger             := 0;
                cdsPagamento.FieldByname('Cod_Caixa').AsInteger          := StrToint(edtCod_Caixa.Text);
                cdsPagamento.Post;
@@ -439,6 +443,7 @@ begin
                Exit;
             End;
          End;
+         FreeAndNil(loDaoContaReceber);
          frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
          if (pbeServico) and RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' ))) then
          Begin
@@ -641,6 +646,29 @@ begin
    End;
 end;
 
+procedure TfrmBaixaNormal.edtData_PagamentoChange(Sender: TObject);
+begin
+  AtualizarJuros;
+end;
+
+procedure TfrmBaixaNormal.AtualizarJuros;
+begin
+   edtMulta.Text := FormatFloat('0.00', RetornarMulta(StrToFloat(edtValorOriginal.Text)));
+   edtJuros.Text := FormatFloat('0.00', RetornarJuros(StrTodate(edtData_Pagamento.Text),StrTodate(edtVenciemento.Text), StrToFloat(edtValorOriginal.Text)));
+   if StrToFloat(edtJuros.Text)>0 then
+   Begin
+      edtTotalReceber.text := FormatFloat('0.00', StrTofloat(edtValorOriginal.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
+      edtTotalTitulo.text := FormatFloat('0.00', StrTofloat(edtValorOriginal.Text) + StrTofloat(edtMulta.Text) + StrTofloat(edtJuros.Text));
+   End
+   else
+   Begin
+      edtTotalReceber.text := FormatFloat('0.00', StrTofloat(edtValorOriginal.Text) );
+      edtTotalTitulo.text := FormatFloat('0.00', StrTofloat(edtValorOriginal.Text) );
+      edtMulta.Text := FormatFloat('0.00', 0);
+      edtJuros.Text := FormatFloat('0.00', 0);
+   End;
+end;
+
 procedure TfrmBaixaNormal.edtPco_VendaExit(Sender: TObject);
 begin
    btnAdicionarClick(btnAdicionar);
@@ -664,8 +692,9 @@ begin
       if lrPerc_Desconto > gsPerfilAcesso.Desc_Maximo then
       Begin
          CaixaMensagem( 'O valor do desconto ultrapassa sua margem de '+formatFloat('0.00',gsPerfilAcesso.Desc_Maximo), ctAviso, [ cbOk ], 0 );
+         edtVlr_Desconto.text    := FormatFloat('0.00',0);
          edtVlr_Desconto.SetFocus;
-         Exit;
+         Abort;
       End;
       edtTotalReceber.text   := FormatFloat('0.00',strTofloat(edtTotalTitulo.Text)-( StrTofloat(edtVlr_Desconto.text) + StrTofloat(edtVlr_Recebido.Text ) ) );
    End;
@@ -673,6 +702,14 @@ end;
 
 procedure TfrmBaixaNormal.btnAdicionarClick(Sender: TObject);
 begin
+   if Trim(cmbNome_FormaPagamento.text)=''  then
+   Begin
+      CaixaMensagem( 'Informe o Tipo de Pagamento', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+
+
+
    cdsTempPagamentos.Append;
    cdsTempPagamentos.FieldByName('Codigo').AsString          := inczero(edtcod_Pagamento.Text,3);
    cdsTempPagamentos.FieldByName('Descricao').AsString       := cmbNome_FormaPagamento.text;

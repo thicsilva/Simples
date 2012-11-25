@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = Tab_Cadastro
+    ActivePage = Tab_VendasEServicos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -138,7 +138,7 @@ object frmCadClientes: TfrmCadClientes
             'Endere'#231'o'
             'Contato'
             'Telefone')
-          ItemIndex = -1
+          ItemIndex = 0
           DropDownCount = 8
           HorizontalExtent = False
           Font.Charset = DEFAULT_CHARSET
@@ -2180,6 +2180,7 @@ object frmCadClientes: TfrmCadClientes
         TabOrder = 0
         object GrdVendas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
+          OnCustomDrawCell = GrdVendasCustomDrawCell
           DataController.DataSource = srcVendas
           DataController.DetailKeyFieldNames = 'Seqvenda'
           DataController.KeyFieldNames = 'SeqVenda'
@@ -2521,7 +2522,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 605
-        Top = 0
+        Top = -4
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]

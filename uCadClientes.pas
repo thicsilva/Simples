@@ -412,7 +412,10 @@ type
     procedure GridClintesCellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
-  private
+    procedure GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
+      var ADone: Boolean);
+   private
    pvQualBotao         : String;
    FFonts              : TFonts;
    FCustomDrawingStyle : TCustomDrawingStyleArr;
@@ -1243,7 +1246,9 @@ begin
    Else If cdsVendas.FieldByName('Status').AsString = '3' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Finalizado'
    Else If cdsVendas.FieldByName('Status').AsString = '4' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue';
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue'
+   Else If cdsVendas.FieldByName('Status').AsString = '5' Then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Cancelado';
 
    If cdsVendas.FieldByName('Tipo_Venda').AsString = 'S' Then
       cdsVendas.FieldByName('Tipo').AsString := 'Serviço'
@@ -1949,6 +1954,14 @@ begin
    edtCNPJCPF.SelectAll;
 end;
 
+procedure TfrmCadClientes.GrdVendasCustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+   IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Cancelado' Then
+      acanvas.Font.color := clred;
+end;
+
 procedure TfrmCadClientes.GridClintesCellDblClick(
   Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
@@ -1976,17 +1989,19 @@ begin
      acanvas.Font.color := clGreen
   Else if aviewinfo.GridRecord.Values[colum_status.Index]='Cancelado'  Then
      acanvas.Font.color := clBlue;
-
-  IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>60 Then
-  Begin
-     acanvas.Brush.color := clRed;
-     acanvas.Font.color  := clblack;
-  End
-  Else IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>30 Then
-  Begin
-     acanvas.Brush.color := clYellow;
-     acanvas.Font.color  := clblack;
-  End;
+  IF aviewinfo.GridRecord.Values[colum_status.Index]='A Receber' Then
+  begin
+     IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>60 Then
+     Begin
+        acanvas.Brush.color := clRed;
+        acanvas.Font.color  := clblack;
+     End
+     Else IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>30 Then
+     Begin
+        acanvas.Brush.color := clYellow;
+        acanvas.Font.color  := clblack;
+     End;
+  end;
 
 end;
 

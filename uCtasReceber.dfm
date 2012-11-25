@@ -2153,9 +2153,11 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object ExportarExcelExpandido1: TMenuItem
       Caption = 'Exportar Excel Expandido'
+      Visible = False
     end
     object ExportarExcelCondensado1: TMenuItem
       Caption = 'Exportar Excel Condensado'
+      Visible = False
     end
   end
   object ImpMatricial: TRDprint

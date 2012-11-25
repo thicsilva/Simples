@@ -381,6 +381,11 @@ end;
 
 procedure TfrmCtasReceber.BorderodeEntrega1Click(Sender: TObject);
 begin
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Receber','Imprimir',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
    frmselRelContasReceber := TfrmselRelContasReceber.Create(Self);
    frmselRelContasReceber.ShowModal;
 end;
@@ -515,6 +520,12 @@ end;
 procedure TfrmCtasReceber.RecebimentosporLote1Click(Sender: TObject);
 var lrTotal : Double;
 begin
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Receber','Imprimir',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    piTipoRel := 1;
    QryVariavel.Close;
    QryVariavel.SQL.text := 'select Sum(Vlr_areceber)  as Tot_Areceber, '+
@@ -700,6 +711,12 @@ var lsCoringa : String;
     lsWhere : String;
 begin
 
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Receber','Consultar',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
@@ -850,6 +867,12 @@ procedure TfrmCtasReceber.btnexcluirClick(Sender: TObject);
 var vlrJuros : Real;
     vlrMulta : Real;
 begin
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Receber','Efetuar Baixa',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
    begin
       if (Trim(edtCod_Funcionario.text)='') and (edtCod_Funcionario.Visible) then
@@ -870,9 +893,6 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   vlrJuros := 0;
-   vlrMulta := 0;
-
    If  StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
    Begin
       frmbaixaBrinde := TfrmbaixaBrinde.Create(Self);
@@ -899,13 +919,12 @@ begin
    End
    Else if StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 0 Then
    Begin
-      vlrJuros := ((StrToFloat(gParametros.Ler( '', '[CONTASRECEBER]', 'Juros', '0' ))*cdsPesquisa.fieldByname('Vlr_Areceber').asfloat)/100);
-      vlrMulta := ((StrToFloat(gParametros.Ler( '', '[CONTASRECEBER]', 'Multa', '0' ))*cdsPesquisa.fieldByname('Vlr_Areceber').asfloat)/100);
       frmBaixaNormal := TfrmBaixaNormal.Create(Self);
       frmBaixaNormal.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;
       frmBaixaNormal.edtNomeCliente.Text  := cdsPesquisa.FieldByName('Descricao').AsString;
       frmBaixaNormal.edtVenciemento.Text  := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Vencimento').AsDateTime);
       frmBaixaNormal.edtTotalTitulo.Text  := FormatFloat('0.00',cdsPesquisa.FieldByName('Vlr_Areceber').AsFloat);
+      frmBaixaNormal.edtValorOriginal.Text:= FormatFloat('0.00',cdsPesquisa.FieldByName('Vlr_Areceber').AsFloat);
       frmBaixaNormal.edtCnpjcpf.Text      := cdsPesquisa.FieldByName('Cnpjcpf').AsString;
       frmBaixaNormal.edtNrVenda.Text      := cdsPesquisa.FieldByName('Seqvenda').AsString;
       frmBaixaNormal.edtControle.Text     := cdsPesquisa.FieldByName('Controle').AsString;
@@ -913,8 +932,6 @@ begin
       frmBaixaNormal.edtData_Emissao.Text := FormatDateTime('dd/mm/yyyy',cdsPesquisa.FieldByName('Data_Emissao').AsDatetime);
       frmBaixaNormal.edtCod_FormaPagamento.Text := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
       frmBaixaNormal.edtCod_Caixa.Text    := cdsPesquisa.FieldByName('Cod_Caixa').AsString;
-      frmBaixaNormal.edtJuros.Text        := FormatFloat('0.00',vlrJuros);
-      frmBaixaNormal.edtMulta.Text        := FormatFloat('0.00',vlrMulta);
       frmBaixaNormal.pbeServico := False;
       if cdspesquisa.FieldByName('Tipo_Venda').AsString='S' then
          frmBaixaNormal.pbeServico := True;

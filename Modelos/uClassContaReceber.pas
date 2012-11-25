@@ -12,6 +12,7 @@ type TContaReceber = class
     FOperador: String;
     FData_Atu: TDateTime;
     FTipo_Baixa: String;
+    FValorAReceber: Real;
     procedure SetData_Atu(const Value: TDateTime);
     procedure SetData_Pagamento(const Value: TdateTime);
     procedure SetDocumento(const Value: String);
@@ -20,6 +21,7 @@ type TContaReceber = class
     procedure SetTipo_Baixa(const Value: String);
     procedure SetVlr_Desconto(const Value: Real);
     procedure SetVlr_Recebido(const Value: Real);
+    procedure SetValorAReceber(const Value: Real);
   published
    public
    property Documento : String read FDocumento write SetDocumento;
@@ -30,6 +32,7 @@ type TContaReceber = class
    property Tipo_Baixa : String read FTipo_Baixa write SetTipo_Baixa;
    property Vlr_Desconto : Real read FVlr_Desconto write SetVlr_Desconto;
    property Vlr_Recebido : Real read FVlr_Recebido write SetVlr_Recebido;
+   property ValorAReceber : Real read FValorAReceber write SetValorAReceber;
 
 
 
@@ -68,6 +71,11 @@ end;
 procedure TContaReceber.SetTipo_Baixa(const Value: String);
 begin
   FTipo_Baixa := Value;
+end;
+
+procedure TContaReceber.SetValorAReceber(const Value: Real);
+begin
+  FValorAReceber := Value;
 end;
 
 procedure TContaReceber.SetVlr_Desconto(const Value: Real);

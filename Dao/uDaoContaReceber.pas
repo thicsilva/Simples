@@ -16,6 +16,7 @@ type TDaoContaReceber = class
     procedure BaixarTitulo(proContaAreceber : TContaReceber);
     procedure AtualizarValorDosTitulos(VendaId : Integer; ValorDiminuir : Real);
     Function TotalEmAberto(Data : TDateTime) : Real;
+    function NovaSequenciaTitulo(SeqVendaID : Integer) : Integer;
 
 end;
 
@@ -76,6 +77,7 @@ begin
                            '                         Operador=:parOperador, Tipo_Baixa=:parTipo_Baixa, '+
                            '                         vlr_Recebido   =:parvlr_Recebido, '+
                            '                         Data_Pagamento =:parData_Pagamento, '+
+                           '                         Vlr_Areceber =:parVlr_Areceber, '+
                            'Vlr_Desconto=:parvlr_desconto, Data_Atu =:parData_Atu '+
                            'where Documento=:parDocumento ';
    FqryModific.ParamByName('parDocumento').AsString            := proContaAreceber.Documento;
@@ -86,6 +88,7 @@ begin
    FqryModific.ParamByName('parTipo_Baixa').AsString           := proContaAreceber.Tipo_Baixa;
    FqryModific.ParamByName('parVlr_Desconto').AsFloat          := proContaAreceber.vlr_Desconto;
    FqryModific.ParamByName('parVlr_Recebido').AsFloat          := proContaAreceber.Vlr_Recebido;
+   FqryModific.ParamByName('parVlr_Areceber').AsFloat          := proContaAreceber.ValorAReceber;
    FqryModific.ExecSQL;
 end;
 
@@ -96,11 +99,17 @@ begin
    FqryModific.SQLConnection := FConexao.Conection;
 end;
 
+function TDaoContaReceber.NovaSequenciaTitulo(SeqVendaID: Integer): Integer;
+begin
+   Result := Fconexao.BuscarDadosSQL('select Count(SeqVenda) as Total from T_ctasreceber where SeqVenda='+
+                                       IntTostr(SeqVendaID),Nil).FieldByname('Total').AsInteger+1
+end;
+
 function TDaoContaReceber.TotalEmAberto(Data: TDateTime): Real;
 var lcdsDados : TClientDataSet;
 begin
    lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where '+
-                                        'Tipo_baixa='+QuotedSTR('AB')+' and data_vencimento<'+QuotedSTR(FormatDateTime('dd/mm/yyyy',Data)),Nil);
+                                        'Tipo_baixa='+QuotedSTR('AB')+' and data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data)),Nil);
    Result    := lcdsDados.FieldByName('Total').AsFloat;
 end;
 

@@ -232,7 +232,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     Align = alTop
     object bsSkinStdLabel2: TbsSkinStdLabel
       Left = 27
-      Top = 63
+      Top = 62
       Width = 32
       Height = 13
       EllipsType = bsetNone
@@ -248,7 +248,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Caption = 'Cliente'
     end
     object bsSkinStdLabel4: TbsSkinStdLabel
-      Left = 444
+      Left = 489
       Top = 63
       Width = 52
       Height = 13
@@ -299,7 +299,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Caption = 'Vencimento'
     end
     object bsSkinStdLabel6: TbsSkinStdLabel
-      Left = 336
+      Left = 417
       Top = 29
       Width = 115
       Height = 20
@@ -338,7 +338,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Caption = 'Data de Pagamento'
     end
     object bsSkinStdLabel1: TbsSkinStdLabel
-      Left = 450
+      Left = 495
       Top = 92
       Width = 46
       Height = 13
@@ -385,6 +385,23 @@ object frmBaixaNormal: TfrmBaixaNormal
       SkinDataName = 'stdlabel'
       Caption = 'Juros'
     end
+    object bsSkinStdLabel10: TbsSkinStdLabel
+      Left = 354
+      Top = 62
+      Width = 62
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Valor Original'
+    end
     object edtControle: TbsSkinEdit
       Left = 271
       Top = 55
@@ -420,8 +437,8 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
     object edtNomeCliente: TbsSkinEdit
       Left = 65
-      Top = 55
-      Width = 289
+      Top = 59
+      Width = 272
       Height = 18
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -451,8 +468,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtCnpjcpf: TbsSkinEdit
-      Left = 502
-      Top = 58
+      Left = 547
+      Top = 59
       Width = 101
       Height = 18
       DefaultColor = clWindow
@@ -515,7 +532,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtTotalTitulo: TEditN
-      Left = 502
+      Left = 547
       Top = 28
       Width = 101
       Height = 24
@@ -661,6 +678,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
+      OnChange = edtData_PagamentoChange
     end
     object Cod_Cliente: TbsSkinEdit
       Left = 137
@@ -762,7 +780,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageDownIndex = -1
     end
     object edtVlr_Desconto: TbsSkinNumericEdit
-      Left = 500
+      Left = 545
       Top = 89
       Width = 61
       Height = 18
@@ -798,7 +816,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       OnExit = edtVlr_DescontoExit
     end
     object cmbTipoDesconto: TbsSkinComboBox
-      Left = 567
+      Left = 612
       Top = 88
       Width = 36
       Height = 20
@@ -856,8 +874,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       Style = bscbFixedStyle
     end
     object edtCod_Caixa: TbsSkinEdit
-      Left = 225
-      Top = 63
+      Left = 282
+      Top = 55
       Width = 40
       Height = 18
       Text = '0'
@@ -959,6 +977,42 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageHotIndex = -1
       RightImageDownIndex = -1
       OnExit = edtVlr_DescontoExit
+    end
+    object edtValorOriginal: TbsSkinNumericEdit
+      Left = 422
+      Top = 59
+      Width = 61
+      Height = 18
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'edit'
+      ReadOnly = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 16
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox
