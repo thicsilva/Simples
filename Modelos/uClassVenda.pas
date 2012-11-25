@@ -415,8 +415,8 @@ begin
    DadosItensVendas.locate('Seqvenda',self.VendaID,[]);
    While ( self.VendaID = DadosItensVendas.fieldByname('SeqVenda').AsInteger) and ( not DadosItensVendas.Eof) Do
    Begin
-      if DadosItensVendas.fieldByname('Qtde_venda').Asfloat>0 then
-      Begin
+      //if DadosItensVendas.fieldByname('Qtde_venda').Asfloat>0 then
+      //Begin
          impMatricial.Imp ( FLinha, 001, inczero(DadosItensVendas.FieldByName( 'Codigo' ).AsString,5));
          impMatricial.Imp ( FLinha, 008,'|'+DadosItensVendas.FieldByName( 'Descricao' ).AsString );
          impMatricial.ImpD( FLinha, 058,FormatFloat( '#,##0.00', DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat)+'|', [ ] );
@@ -429,7 +429,7 @@ begin
 
          liCont := liCont + 1;
          FLinha := FLinha + 1;
-      End;
+      //End;
 
       DadosItensVendas.Next;
    end;

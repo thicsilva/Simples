@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 752
     Height = 460
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -344,7 +344,7 @@ object frmCadProdutos: TfrmCadProdutos
         Left = 73
         Top = 19
         Width = 536
-        Height = 310
+        Height = 327
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinEntradaDados
@@ -598,9 +598,9 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Preco de venda Externa'
         end
         object bsSkinStdLabel12: TbsSkinStdLabel
-          Left = 6
-          Top = 90
-          Width = 105
+          Left = 57
+          Top = 91
+          Width = 54
           Height = 13
           EllipsType = bsetNone
           UseSkinFont = True
@@ -612,7 +612,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultFont.Style = []
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
-          Caption = 'Codigo do Fornecedor'
+          Caption = 'Fornecedor'
         end
         object bsSkinStdLabel14: TbsSkinStdLabel
           Left = 56
@@ -1301,10 +1301,40 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageHotIndex = -1
           RightImageDownIndex = -1
         end
+        object chkBloquiaEstoqueNegativo: TbsSkinCheckRadioBox
+          Left = 14
+          Top = 304
+          Width = 243
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 20
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'checkbox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          WordWrap = False
+          AllowGrayed = False
+          State = cbUnchecked
+          ImageIndex = 0
+          Flat = True
+          UseSkinFontColor = True
+          TabStop = True
+          CanFocused = True
+          Radio = False
+          Checked = False
+          GroupIndex = 0
+          Caption = 'Bloqueia Venda Deste produto sem estoque'
+        end
       end
       object bsSkinExPanel3: TbsSkinExPanel
-        Left = 73
-        Top = 336
+        Left = 72
+        Top = 352
         Width = 536
         Height = 66
         HintImageIndex = 0

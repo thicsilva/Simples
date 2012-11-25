@@ -346,10 +346,8 @@ object frmEntradas: TfrmEntradas
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitHeight = 473
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitHeight = 449
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -818,7 +816,6 @@ object frmEntradas: TfrmEntradas
         Height = 406
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 387
         object GrdCompras: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcConsEntradas
@@ -960,7 +957,6 @@ object frmEntradas: TfrmEntradas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manuten'#231#227'o'
-      ExplicitHeight = 449
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -2052,7 +2048,6 @@ object frmEntradas: TfrmEntradas
         Position = 1
         SmallChange = 1
         LargeChange = 1
-        ExplicitHeight = 241
       end
       object bsSkinCoolBar2: TbsSkinCoolBar
         Left = 0
@@ -2236,7 +2231,6 @@ object frmEntradas: TfrmEntradas
     end
     object tabCtasPagar: TbsSkinTabSheet
       Caption = 'Contas a Pagar'
-      ExplicitHeight = 449
       object bsSkinGroupBox2: TbsSkinGroupBox
         Left = 84
         Top = 53

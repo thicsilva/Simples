@@ -330,6 +330,13 @@ end;
 
 procedure TfrmEntradas.btnAdicionarClick(Sender: TObject);
 begin
+   if trim(cmbSetores.text )='' Then
+   Begin
+      CaixaMensagem( 'Informe o setor para entrada', ctAviso, [ cbOk ], 0 );
+      edtCod_Produto.SetFocus;
+      Exit;
+   End;
+
    if strtofloat(Edttotal.text ) <=0 Then
    Begin
       CaixaMensagem( 'O Valor Total não pode ser zero ', ctAviso, [ cbOk ], 0 );

@@ -224,6 +224,7 @@ type
     edtcomissaoSecundaria: TbsSkinNumericEdit;
     bsSkinStdLabel23: TbsSkinStdLabel;
     edtMargemSecundaria: TbsSkinNumericEdit;
+    chkBloquiaEstoqueNegativo: TbsSkinCheckRadioBox;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -519,6 +520,7 @@ procedure TfrmCadProdutos.btnokClick(Sender: TObject);
 VAR vlr_anterior : Double;
     vlr_Atual   : Double;
 begin
+
    if (cmbNome_Fabricante.KeyValue = null) and (cmbNome_Fabricante.Visible) Then
    Begin
       CaixaMensagem( 'Informe o Fabricante ', ctAviso, [ cbOk ], 0 );
@@ -580,6 +582,8 @@ begin
    cdsCadProdutos.FieldByName('PesoBruto').AsFloat     := StrTofloat(edtPesoBruto.Text);
    cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat := StrTofloat(edtComissaoSecundaria.Text);
    cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat   := StrTofloat(edtMargemSecundaria.Text);
+   cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean := chkBloquiaEstoqueNegativo.Checked;
+
    cdsCadProdutos.Post;
 
    If cdsCadProdutos.ChangeCount > 0  Then // se houve mudancas
@@ -928,8 +932,7 @@ begin
    edtPesoLiquido.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('PesoLiquido').AsFloat);
    edtComissaoSecundaria.Text := Formatfloat('0.00', cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat);
    edtMargemSecundaria.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat);
-
-
+   chkBloquiaEstoqueNegativo.Checked := cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean;
 
    BtnIncluir.Enabled := False;
    BtnAlterar.Enabled := False;

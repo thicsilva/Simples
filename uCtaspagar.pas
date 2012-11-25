@@ -321,6 +321,12 @@ procedure TfrmCtasPagar.btnexcluirClick(Sender: TObject);
 var lisequencia : Integer;
 begin
 
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Pagar','Efetuar Baixa',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    IF cdsPesquisa.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
@@ -503,6 +509,12 @@ var lsCoringa : String;
     lstParametros : TStringList;
 begin
 
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Pagar','Consultar',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    lsCoringa := '';
    if chkPesqTodoTexto.Checked Then
       lsCoringa := '%';
@@ -625,6 +637,13 @@ var lsCoringa    : String;
     CdsRelatorio : TClientDataSet;
   lsWhere: String;
 begin
+
+   if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Pagar','Imprimir',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    lrDia        := 0;
    lrTotal      := 0;
 

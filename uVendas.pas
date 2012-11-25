@@ -308,13 +308,13 @@ var DaoCliente : TDaocliente;
 begin
    DaoCliente := TDaocliente.Create(gConexao);
    pnlRemessaAberta.Visible:= False;
-   pnlRemessaAberta.Caption := 'Verndedor Com Remessa Aberta';
+   pnlRemessaAberta.Caption := 'Vendedor Com Remessa Aberta';
    pnlRemessaAberta.Color := clSkyBlue;
    ValorEmAberto := DaoCliente.SaldoDevedor(ClienteID, RetornarDataSistema );
    IF ValorEmAberto > 0 Then
    begin
       pnlRemessaAberta.Visible:= True;
-      pnlRemessaAberta.Caption := 'Valor Emaberto..: '+Formatfloat(',0.00',ValorEmAberto);
+      pnlRemessaAberta.Caption := 'Valor Em Aberto..: '+Formatfloat(',0.00',ValorEmAberto);
       pnlRemessaAberta.Color := clRed;
    end
 end;
@@ -573,10 +573,11 @@ begin
          End;
       End;
       edtDesconto.Enabled := True;
-      if ( cdsCadProdutos.fieldbyname('Saldo').asInteger <= 0 ) And
-         (Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'SIM') AND
-         ( (frmVendas.Tag= 0 ) OR (frmVendas.Tag= 5 ) ) And
-         (cdsCadProdutos.fieldbyname('Tipo_Produto').asInteger=0) Then
+      if (( cdsCadProdutos.fieldbyname('Saldo').asInteger <= 0 ) And
+         ( ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'SIM') or
+           ( cdsCadProdutos.fieldbyname('BloqueiaNegativo').asBoolean) ) AND
+         ( (frmVendas.Tag= 0 ) OR (frmVendas.Tag= 5 ) ) ) And
+           (cdsCadProdutos.fieldbyname('Tipo_Produto').asInteger=0) Then
       Begin
          CaixaMensagem( 'Produto Sem Estoque ', ctAviso, [ cbOk ], 0 );
          edtCod_Produto.SetFocus;
@@ -733,7 +734,7 @@ begin
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    if frmVendas.Tag=VENDAS_EXTERNAS then
-      cdsItensVendasTmp.FieldByName('Seto rId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
+      cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
 
    edtTotDesconto.Text  := FormatFloat('0.00', StrToFloat(edtTotDesconto.Text)+( StrToFloat(edtVlr_Desconto.Text)*StrTofloat(edtQtde_Venda.Text)) );
@@ -1910,7 +1911,7 @@ Begin
    precoDeVenda:= 'Pco_Venda';
    if frmVendas.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
-   Result :=  'Select ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+   Result :=  'Select BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
 end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin
