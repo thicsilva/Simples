@@ -56,6 +56,7 @@ type TDaoEstrutura = class
     procedure Adicionar_LucroBrunto_na_Tabela_Vendas;
     procedure Adicionar_CustoTotal_na_Tabela_Vendas;
     procedure Adicionar_Email_na_Tabela_Clientes;
+    procedure Adicionar_BloqueioEstoque_na_Tabela_Produtos;
     procedure CriarTabela_CustosProduto;
 
   public
@@ -128,6 +129,16 @@ begin
    end;
 end;
 
+
+procedure TDaoEstrutura.Adicionar_BloqueioEstoque_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'BloqueiaNegativo', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD BloqueiaNegativo bit';
+      FQryAjustes.ExecSQL;
+   end;
+end;
 
 procedure TDaoEstrutura.Adicionar_CodigoFornecedor_na_Tabela_Produtos;
 begin
@@ -625,6 +636,7 @@ begin
   Adicionar_LucroBrunto_na_Tabela_Vendas;
   CriarTabela_CustosProduto;
   Adicionar_Email_na_Tabela_Clientes;
+  Adicionar_BloqueioEstoque_na_Tabela_Produtos;
 end;
 
 

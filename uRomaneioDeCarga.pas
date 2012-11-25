@@ -137,6 +137,11 @@ end;
 procedure TfrmRomaneioDeEntrega.bsSkinButton2Click(Sender: TObject);
 var ControllerRomaneio : TControllerRomaneio;
 begin
+   if not gsPerfilacesso.VerificaAcesso('Movimento','Romaneio de Entrega','Cancelar',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
    if srcRomaneios.DataSet.fieldByName('Status').AsString='F' then
    begin
       CaixaMensagem( 'Romaneio ja Finalizado', ctAviso, [ cbOk ], 0 );

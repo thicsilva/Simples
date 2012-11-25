@@ -138,7 +138,7 @@ begin
                                     '     inner join T_Ctasreceber Rec on Rec.Cod_Cliente=Cli.Codigo '+
                                     '     left join T_formaspagamento pag on pag.codigo=Rec.Cod_formaPagamento '+
                                     'where romaneioId=:parRomaneioId and ( ven.status<>:parStatus or ven.Status is Null ) and '+
-                                    '        Rec.Tipo_Baixa=:parTipoBaixa and Rec.Data_Vencimento<'+QuotedStr(FormatDateTime('mm/dd/yyyy',self.DataSistema))+' order by 1,3 ',FParametros);
+                                    '        Rec.Tipo_Baixa=:parTipoBaixa and Rec.Data_Vencimento<'+QuotedStr(FormatDateTime('dd/mm/yyyy',self.DataSistema))+' order by 1,3 ',FParametros);
 end;
 
 function TDaoRomaneio.RetornarNomeMotorista(RomaneioId: integer): String;

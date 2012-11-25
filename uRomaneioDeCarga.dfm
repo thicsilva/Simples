@@ -79,9 +79,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 669
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -115,6 +115,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         OnClick = btnFecharClick
         ExplicitLeft = 635
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 285
@@ -180,9 +181,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 405
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -215,6 +216,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         OnClick = btnCancelarClick
         ExplicitLeft = 359
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 475
@@ -230,9 +232,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 215
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'resizebutton'
@@ -264,6 +266,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Spacing = 2
         OnClick = bsSkinSpeedButton1Click
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
     end
   end
@@ -301,18 +304,13 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     SkinDataName = 'tab'
     object PagNovoRomaneio: TbsSkinTabSheet
       Caption = 'Inclus'#227'o de Romaneio'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 81
         Width = 809
-        Height = 284
+        Height = 285
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 285
         object GrdVendas: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = srcVendasRomaneio
@@ -731,10 +729,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     end
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta Romaneio'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid2: TcxGrid
         Left = 0
         Top = 29
@@ -742,7 +736,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Height = 337
         Align = alClient
         TabOrder = 0
-        ExplicitTop = 33
         object GridRomaneio: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           OnCustomDrawCell = GridRomaneioCustomDrawCell
@@ -913,7 +906,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         end
         object bsSkinButton2: TbsSkinButton
           Left = 3
-          Top = 2
+          Top = 1
           Width = 180
           Height = 25
           HintImageIndex = 0

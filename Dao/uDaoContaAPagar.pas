@@ -27,7 +27,7 @@ function TDaoContaAPagar.TotalEmAberto(Data: TDateTime): Real;
 var lcdsDados : TClientDataSet;
 begin
    lcdsDados := Fconexao.BuscarDadosSQL('select Sum(Valor) as Total from T_CtasPagar where '+
-                                        'Status=0 and data_vencimento<'+QuotedSTR(FormatDateTime('dd/mm/yyyy',Data)),Nil);
+                                        'Status=0 and data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data)),Nil);
    Result    := lcdsDados.FieldByName('Total').AsFloat;
 end;
 

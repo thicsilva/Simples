@@ -715,6 +715,12 @@ begin
 
 {$REGION 'Fazendo Criticas do Processo'}
 
+   {IF liRomaneio>0 Then
+   Begin
+      CaixaMensagem( 'Impossivel Cancelar venda com romaneio Emitido ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;}
+
    IF cdsVendas.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
@@ -1147,9 +1153,17 @@ end;
 procedure TfrmConsVendas.Etiquetas1Click(Sender: TObject);
 var
    liNumeroVenda   : Integer;
+   liromaneio : Integer;
 begin
 
    liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
+   liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;
+
+   {IF liRomaneio>0 Then
+   Begin
+      CaixaMensagem( 'Impossivel Cacelar venda com romaneio Emitido ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;}
 
    frmDevolucaoVenda := TfrmDevolucaoVenda.create(Self);
    frmDevolucaoVenda.piSeqVenda := cdsVendas.FieldByName('Seqvenda').AsInteger;
