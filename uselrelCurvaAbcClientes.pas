@@ -66,6 +66,8 @@ var lstParametros : TStringlist;
     lrTotalGeral : Real;
     ImprimiuCurva : Boolean;
     ImprimiuCurvab: Boolean;
+    lsWhere : String;
+    lsSelect : String;
 begin
    if StrToFloat(edtCurvaa.Text)+StrToFloat(edtCurvab.Text)+StrToFloat(edtCurvaC.Text)>100 then
    begin
@@ -77,25 +79,28 @@ begin
    lstParametros.Add(dtpData_Ini.Text);
    lstParametros.Add(dtpData_Fim.Text);
 
+   lsWhere := RetornarCriticaVenda;
+   lsSelect := RetornarVinculoDaVenda;
+
    cdsDadosImpressao := gconexao.BuscarDadosSQL( 'select sum(Itens.Qtde_venda) as Qtde_Total, '+
                                                  '       Sum(Itens.Vlr_total) as Valor_Total '+
-                                                 'from T_vendas venda '+
-                                                 '     inner join T_itensVendas itens on itens.seqvenda = venda.Seqvenda '+
-                                                 '     Left Join T_Produtos Prod on Prod.Codigo=Itens.Cod_Produto '+
-                                                 'where Data_Venda>=:parDataInicial and Data_Venda<=:parDataFinal' ,lstParametros);
+                                                 'from T_vendas ven '+
+                                                 '     inner join T_itensVendas itens on itens.seqvenda = ven.Seqvenda '+
+                                                 '     Left Join T_Produtos Prod on Prod.Codigo=Itens.Cod_Produto '+ lsSelect +' '+
+                                                 'where '+lsWhere+' Data_Venda>=:parDataInicial and Data_Venda<=:parDataFinal' ,lstParametros);
    lrValorTotal :=  cdsDadosImpressao.FieldByName('Valor_Total').AsFloat;
    lrQtde_Total :=  cdsDadosImpressao.FieldByName('Qtde_Total').AsFloat;
 
-   cdsDadosImpressao := gconexao.BuscarDadosSQL( 'select Venda.Cod_Cliente as Cod_Produto, '+
+   cdsDadosImpressao := gconexao.BuscarDadosSQL( 'select Ven.Cod_Cliente as Cod_Produto, '+
                                                  '        Cli.Descricao, '+
                                                  '        sum(Itens.Qtde_venda) as Qtde_Total, '+
                                                  '        Sum(Itens.Vlr_total) as Valor_Total '+
-                                                 'from T_vendas venda '+
-                                                 '     inner join T_itensVendas itens on itens.seqvenda = venda.Seqvenda '+
+                                                 'from T_vendas ven '+
+                                                 '     inner join T_itensVendas itens on itens.seqvenda = ven.Seqvenda '+
                                                  '     Left Join T_Produtos Prod on Prod.Codigo=Itens.Cod_Produto '+
-                                                 '     Left Join T_Clientes Cli on Cli.Codigo=Venda.Cod_Cliente '+
-                                                 'where Data_Venda>=:parDataInicial and Data_Venda<=:parDataFinal '+
-                                                 'group by venda.Cod_Cliente,Cli.Descricao '+
+                                                 '     Left Join T_Clientes Cli on Cli.Codigo=Ven.Cod_Cliente '+lsSelect+' '+
+                                                 'where '+lsWhere+' Data_Venda>=:parDataInicial and Data_Venda<=:parDataFinal '+
+                                                 'group by ven.Cod_Cliente,Cli.Descricao '+
                                                  'order by 4 desc ',lstParametros);
    InicializarImpressao(impmatricial);
    lrTotalCurvaA := 0;

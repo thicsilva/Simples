@@ -668,7 +668,8 @@ begin
       End;
    End;
    If ( cdsCadProdutos.FieldByname('Saldo').asInteger<StrToFloat(edtQtde_Venda.text))  And
-      ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'SIM') AND
+      ( ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'SIM') OR
+      ( cdsCadProdutos.fieldbyname('BloqueiaNegativo').asBoolean) )  AND
       ( (frmVendas.Tag= 0 ) OR (frmVendas.Tag= 5 ) ) And
       (cdsCadProdutos.fieldbyname('Tipo_Produto').asInteger=0) Then
    Begin
@@ -1075,6 +1076,7 @@ begin
 
 {$ENDREGION}
 
+   {$REGION 'Item da Venda'}
    loItemVenda := TItemVenda.Create;
    loItemVenda.Operador := gsOperador;
    loItemVenda.DataMovimento := gsdata_Mov;
@@ -1085,6 +1087,8 @@ begin
    DaoItemVenda.Inserir(cdsItensVendasTMP,loItemVenda);
 
    lbServicoPago := False;
+
+{$ENDREGION}
 
    {$REGION 'Lancamento do Financeiro'}
 

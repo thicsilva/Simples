@@ -164,11 +164,14 @@ end;
 
 procedure TfrmSelRelVendas.btnPesquisarClick(Sender: TObject);
 var lsWhere : String;
+    lsSelect : String;
 begin
    lsWhere := '';
+   lsSelect := 'inner join T_FormasPagamento Forma on Forma.Codigo=Ven.Cod_FormaPagamento';
    IF cmbStatus.ItemIndex <> 0 Then
      lsWhere := ' Ven.Status=:parstatus AND ';
 
+   lsWhere := lsWhere + ' Forma.SomaVenda<>'+QuotedStr('T')+' AND ';
    qryRelatorio.Close;
    qryRelatorio.SQL.Text := 'Select Gru.Descricao as Grupo, Itens.Cod_Produto, Prod.Descricao, sum(Itens.Qtde_Venda)as Qtde_Total, '+
                             ' Sum(Itens.vlr_Total) as vlr_Total '+
@@ -178,8 +181,8 @@ begin
                             'inner join T_produtos Prod on  '+
                             '      Prod.Codigo=Itens.Cod_Produto '+
                             'inner join T_Grupos Gru on  '+
-                            '      Gru.Codigo=Prod.Cod_Grupo '+
-                            'where Ven.Tipo_Venda=:parTipo_venda  AND ' +lsWhere+' '+
+                            '      Gru.Codigo=Prod.Cod_Grupo '+lsSelect+' '+
+                           'where Ven.Tipo_Venda=:parTipo_venda  AND ' +lsWhere+' '+
                             ' ( Ven.Data_Venda>=:parData_VendaIni And Ven.Data_Venda<=:parData_VendaFim ) '+
                             'Group by Itens.Cod_Produto, Prod.Descricao, Gru.Descricao '+
                             'Order by 1 ';

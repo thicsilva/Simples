@@ -16,6 +16,7 @@ type TDaoContaReceber = class
     procedure BaixarTitulo(proContaAreceber : TContaReceber);
     procedure AtualizarValorDosTitulos(VendaId : Integer; ValorDiminuir : Real);
     Function TotalEmAberto(Data : TDateTime) : Real;
+    Function BuscarVendaID(VendaId : Integer) : TClientDataSet;
     function NovaSequenciaTitulo(SeqVendaID : Integer) : Integer;
 
 end;
@@ -90,6 +91,15 @@ begin
    FqryModific.ParamByName('parVlr_Recebido').AsFloat          := proContaAreceber.Vlr_Recebido;
    FqryModific.ParamByName('parVlr_Areceber').AsFloat          := proContaAreceber.ValorAReceber;
    FqryModific.ExecSQL;
+end;
+
+function TDaoContaReceber.BuscarVendaID(VendaId: Integer): TClientDataSet;
+Var Parametros : TStringList;
+begin
+   Parametros := TStringList.Create;
+   Parametros.Add(IntToStr(VendaId));
+   Result := Fconexao.BuscarDadosSQL('select * from T_ctasreceber where SeqVenda=:parSeqvenda',Parametros);
+   FreeAndNil(Parametros);
 end;
 
 constructor TDaoContaReceber.Create(Conexao: TConexao);

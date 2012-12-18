@@ -404,6 +404,8 @@ end;
 procedure TfrmselrelVendasVendedor.btnPesquisarClick(Sender: TObject);
 var lsCampos : String;
     lsJoin   : String;
+    lswhere : String;
+    lsSelect : String;
 begin
    if Trim(cmbTipoResultado.text)='' then
    begin
@@ -416,6 +418,8 @@ begin
    GridProdutos.Visible   := False;
    GridClientes.Visible   := False;
    GridSupervisor.Visible := False;
+   lsWhere := RetornarCriticaVenda;
+   lsSelect := RetornarVinculoDaVenda;
 
    Case cmbTipoResultado.ItemIndex Of
      0,1,4,6,7,9 : GridClientes.Visible := True;
@@ -471,8 +475,8 @@ begin
                                   'LEFT JOIN T_Clientes Cli ON '+
                                   '     Cli.Codigo=Ven.Cod_Cliente '+
                                   'LEFT JOIN T_Funcionarios Fun ON '+
-                                  '     Fun.Codigo=Ven.Cod_Funcionario '+ lsJoin+' '+
-                                  'WHERE ( Ven.Data_Venda>=:parData_VendaIni And '+
+                                  '     Fun.Codigo=Ven.Cod_Funcionario '+ lsJoin+' '+lsSelect+' '+
+                                  'WHERE '+lsWhere+'  ( Ven.Data_Venda>=:parData_VendaIni And '+
                                   '        Ven.Data_Venda<=:parData_VendaFim ) and '+
                                   '        Ven.Status<>:parStatus and Ven.Status<>:parStatus_Cancelada ';
          if cmbCod_VendedorIni.KeyValue <> null then
@@ -518,8 +522,8 @@ begin
                                   '     Left Join T_Vendas Ven on '+
                                   '          Ven.seqvenda=Itens.Seqvenda '+
                                   '     Left Join T_Funcionarios Fun on '+
-                                  '          Fun.Codigo=Ven.Cod_Funcionario '+ lsJoin +' '+
-                                  'WHERE ( Ven.Data_Mov>=:parData_VendaIni And '+
+                                  '          Fun.Codigo=Ven.Cod_Funcionario '+ lsJoin +' '+lsSelect+' '+
+                                  'WHERE '+lswhere+' ( Ven.Data_Mov>=:parData_VendaIni And '+
                                   '        Ven.Data_Mov<=:parData_VendaFim  ) and '+
                                   '        Ven.Status<>:parStatus ';
          if cmbCod_VendedorIni.KeyValue <> null then

@@ -73,19 +73,25 @@ uses uDaoRomaneio,uPrincipal, uDaoVenda, uFuncoes,uClassLancamento, uDaoCaixaMov
 procedure TfrmRecebimentoRomaneio.BaixarTitulo(prValorBaixa: Real; priNumeroVenda: String);
 var loContaAReceber   : TContaReceber;
     loDaoContaReceber : TdaoContaReceber;
+    Dados : TClientDataSet;
 begin
    loContaAReceber := TContaReceber.Create;
    loDaoContaReceber := TdaoContaReceber.Create(gConexao);
-
-   loContaAReceber.Documento      := IncZero(priNumeroVenda,8)+'001';
-   loContaAReceber.Data_Pagamento := now;
-   loContaAReceber.Data_Atu       := now;
-   loContaAReceber.Operador       := gsOperador;
-   loContaAReceber.Status         := 1;
-   loContaAReceber.Tipo_Baixa     := 'PT';
-   loContaAReceber.vlr_Desconto   := 0;
-   loContaAReceber.Vlr_Recebido   := prValorBaixa;
-   loDaoContaReceber.BaixarTitulo(loContaAReceber);
+   Dados := loDaoContaReceber.BuscarVendaID(StrToint(priNumeroVenda));
+   while not Dados.Eof do
+   begin
+      loContaAReceber.Documento      := Dados.FieldByName('Documento').asString;
+      loContaAReceber.Data_Pagamento := now;
+      loContaAReceber.Data_Atu       := now;
+      loContaAReceber.Operador       := gsOperador;
+      loContaAReceber.Status         := 1;
+      loContaAReceber.Tipo_Baixa     := 'PT';
+      loContaAReceber.vlr_Desconto   := 0;
+      loContaAReceber.Vlr_Recebido   := Dados.FieldByName('Vlr_Areceber').AsFloat;
+      loContaAReceber.ValorAReceber  := Dados.FieldByName('Vlr_Areceber').AsFloat;
+      loDaoContaReceber.BaixarTitulo(loContaAReceber);
+      Dados.Next;
+   end;
 end;
 
 procedure TfrmRecebimentoRomaneio.BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String);

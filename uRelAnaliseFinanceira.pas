@@ -60,20 +60,23 @@ Var ldData_Ini : TDatetime;
     lrLucroBruto: real;
     lsTipoConta : String;
     lrTotalConta : Real;
+    lsWhere : String;
+    lsSelect : String;
 begin
    ldData_Ini := StrToDateTime(DateTimeToStr(dtpData_Ini.Date)+' 00:00:00');
    ldData_Fim := StrToDateTime(DateTimeToStr(dtpData_Fim.Date)+' 23:59:00');
 
    gsTituloRel  := 'Relatorio Analise Financeira ';
    gsPeriodoRel := 'Periodo de '+FormatDateTime('dd/mm/yyyy',ldData_Ini)+' a '+FormatDateTime('dd/mm/yyyy',ldData_Fim);
-
+   lsWhere := RetornarCriticaVenda;
+   lsSelect := RetornarVinculoDaVenda;
 
    qryRelatorio.Close;
-   qryRelatorio.SQL.text:='select Tipo.Descricao, Sum(Ven.Vlr_total) as Total '+
+   qryRelatorio.SQL.text:='select Forma.Descricao, Sum(Ven.Vlr_total) as Total '+
                           'from T_Vendas  ven '+
-                          '     left join T_formasPagamento Tipo on Tipo.codigo=Ven.Cod_FormaPagamento '+
-                          'where ( Data_Venda>=:parData_vendaini and Data_venda<=:pardata_vendaFim and Ven.Status<>:parStatus and Ven.Status<>:parStatus2 ) '+
-                          'group by Ven.Cod_TipoVenda,Tipo.Descricao order by 2 desc ';
+                          '     left join T_formasPagamento Forma on Forma.codigo=Ven.Cod_FormaPagamento '+
+                          'where '+lsWhere+' ( Data_Venda>=:parData_vendaini and Data_venda<=:pardata_vendaFim and Ven.Status<>:parStatus and Ven.Status<>:parStatus2 ) '+
+                          'group by Ven.Cod_TipoVenda,Forma.Descricao order by 2 desc ';
    qryRelatorio.ParamByName('parData_VendaIni').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
    qryRelatorio.ParamByName('pardata_vendaFim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
    qryRelatorio.ParamByName('parStatus').AsString := 'C';
@@ -111,11 +114,12 @@ begin
    qryRelatorio.SQL.text:='select  Sum(Itens.Qtde_Venda*Prod.Pco_Custo) as CustoTotal '+
                           'from  T_vendas Ven '+
                           '      left join T_itensVendas Itens on itens.SeqVenda=Ven.Seqvenda '+
-                          '      left join T_Produtos Prod on Prod.Codigo=itens.Cod_Produto '+
-                          'Where Ven.Data_Venda>=:parData_Ini and Ven.Data_Venda<=:parData_Fim and Ven.Status<>:parStatus';
+                          '      left join T_Produtos Prod on Prod.Codigo=itens.Cod_Produto '+lsSelect+' '+
+                          'Where '+lsWhere+' Ven.Data_Venda>=:parData_Ini and Ven.Data_Venda<=:parData_Fim and Ven.Status<>:parStatus and Ven.Status<>:parStatus2 ';
    qryRelatorio.ParamByName('parData_Ini').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
    qryRelatorio.ParamByName('parData_Fim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
    qryRelatorio.ParamByName('parStatus').AsString         := 'C';
+   qryRelatorio.ParamByName('parStatus2').AsString        := '5';
 
    cdsRelatorio.Close;
    cdsRelatorio.Open;
