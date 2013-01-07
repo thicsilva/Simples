@@ -253,7 +253,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
-  uselAnimal, uDescontoVenda;
+  uselAnimal, uDescontoVenda, uDelivery;
 
 {$R *.dfm}
 procedure TfrmVendas.AtualizaDesconto(lrPercDesconto: Real);
@@ -1685,6 +1685,12 @@ end;
 
 procedure TfrmVendas.btnCadAlunosClick(Sender: TObject);
 begin
+   if PetShop then
+   begin
+      frmDelivery := TFrmDelivery.Create(Self);
+      frmDelivery.ShowModal;
+      Exit;
+   end;
    frmCadClientes := TfrmCadClientes.Create(Nil);
    frmCadClientes.Tag := 5;
    frmCadClientes.showmodal;

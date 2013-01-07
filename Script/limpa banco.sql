@@ -25,6 +25,10 @@ go
 delete from t_Rotas
 go 
 delete from t_funcionarios
+go
+delete from T_fornecedores
+go
+Delete from T_movEstoque
 
 
 

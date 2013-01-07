@@ -49,7 +49,6 @@ uses
   ucadUsuarios in '..\Compartilhados\ucadUsuarios.pas' {frmCadUsuarios},
   uCadPerfil in '..\Compartilhados\uCadPerfil.pas' {frmCadPerfil},
   uFormBase in '..\Compartilhados\uFormBase.pas' {FormBase},
-  uFuncoes in '..\Compartilhados\uFuncoes.pas',
   ufechames in 'ufechames.pas' {frmfechames},
   uCalMQuadrado in 'uCalMQuadrado.pas' {frmCalMQuadrado},
   uselrelvendas in 'uselrelvendas.pas' {frmSelRelVendas},
@@ -136,7 +135,9 @@ uses
   uClassContaReceber in 'Modelos\uClassContaReceber.pas',
   uClassRota in 'Modelos\uClassRota.pas',
   uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores},
-  uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas';
+  uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas',
+  uDelivery in 'uDelivery.pas' {frmDelivery},
+  uFuncoes in '..\Compartilhados\uFuncoes.pas';
 
 {$R *.res}
 
@@ -145,6 +146,7 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmDelivery, frmDelivery);
   Frmlogin.ShowModal;
   Application.Run;
 end.

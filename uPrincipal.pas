@@ -361,7 +361,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,uDaoContaReceber,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
-  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco;
+  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery;
 
 {$R *.dfm}
 
@@ -562,7 +562,7 @@ begin
    actconsServicos.Visible  := False;
    RibonFiscal.Visible      := False;
 
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1' Then
+   If (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1')  or (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='2')  Then
    Begin
        actServicos.Visible      := True;
        actconsServicos.Visible  := True;

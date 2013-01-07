@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = Tab_VendasEServicos
+    ActivePage = Tab_Cadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -50,6 +50,7 @@ object frmCadClientes: TfrmCadClientes
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitTop = 84
     object Tab_Consulta: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
@@ -2521,8 +2522,8 @@ object frmCadClientes: TfrmCadClientes
         end
       end
       object pnlBloqueado: TPanel
-        Left = 605
-        Top = -4
+        Left = 603
+        Top = 2
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -4941,24 +4942,24 @@ object frmCadClientes: TfrmCadClientes
     DataSet.Params = <>
     Params = <>
     Left = 277
-    Top = 331
+    Top = 339
   end
   object srcOcorrencias: TDataSource
     DataSet = sdtsOcorrencias
     Left = 277
-    Top = 359
+    Top = 367
   end
   object cdsCadRotas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 557
-    Top = 331
+    Top = 339
   end
   object srcCadRotas: TDataSource
     DataSet = cdsCadRotas
     Left = 558
-    Top = 359
+    Top = 367
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
@@ -4968,29 +4969,29 @@ object frmCadClientes: TfrmCadClientes
     AfterOpen = cdsVendasAfterOpen
     OnCalcFields = cdsVendasCalcFields
     Left = 502
-    Top = 331
+    Top = 339
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
     Left = 474
-    Top = 331
+    Top = 339
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
     Left = 474
-    Top = 359
+    Top = 367
   end
   object srcVendas: TDataSource
     DataSet = cdsVendas
     Left = 502
-    Top = 359
+    Top = 367
   end
   object srcCtasReceber: TDataSource
     DataSet = cdsCtasReceber
     Left = 530
-    Top = 359
+    Top = 367
   end
   object cdsCtasReceber: TClientDataSet
     Aggregates = <>
@@ -5000,7 +5001,7 @@ object frmCadClientes: TfrmCadClientes
     AfterOpen = cdsCtasReceberAfterOpen
     OnCalcFields = cdsCtasReceberCalcFields
     Left = 530
-    Top = 331
+    Top = 339
   end
   object qryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -5137,17 +5138,17 @@ object frmCadClientes: TfrmCadClientes
     Params = <>
     ProviderName = 'dspItensVendas'
     Left = 446
-    Top = 331
+    Top = 339
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
     Left = 446
-    Top = 359
+    Top = 367
   end
   object srcCalientesDescontos: TDataSource
     DataSet = cdsClientesDescontos
     Left = 418
-    Top = 359
+    Top = 367
   end
   object cdsClientesDescontos: TClientDataSet
     Aggregates = <>
@@ -5155,7 +5156,7 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspClientesDescontos'
     BeforeOpen = cdsClientesDescontosBeforeOpen
     Left = 418
-    Top = 331
+    Top = 339
   end
   object dspClientesDescontos: TDataSetProvider
     DataSet = qryClientesDescontos
@@ -5174,12 +5175,12 @@ object frmCadClientes: TfrmCadClientes
     Params = <>
     ProviderName = 'dspCadProdutos'
     Left = 390
-    Top = 331
+    Top = 339
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
     Left = 390
-    Top = 359
+    Top = 367
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
@@ -5241,14 +5242,14 @@ object frmCadClientes: TfrmCadClientes
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
     Left = 362
-    Top = 359
+    Top = 367
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 362
-    Top = 331
+    Top = 339
   end
   object qryValidaCPFCNPJ: TSQLQuery
     MaxBlobSize = -1
@@ -5270,12 +5271,12 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspValidaCPFCNPJ'
     BeforeOpen = cdsClientesDescontosBeforeOpen
     Left = 334
-    Top = 331
+    Top = 339
   end
   object srcValidaCPFCNPJ: TDataSource
     DataSet = cdsValidaCPFCNPJ
     Left = 334
-    Top = 359
+    Top = 367
   end
   object cdsContaCorrente: TClientDataSet
     Aggregates = <>
@@ -5284,12 +5285,12 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsContaCorrenteBeforeOpen
     OnCalcFields = cdsContaCorrenteCalcFields
     Left = 585
-    Top = 331
+    Top = 339
   end
   object srcContaCorrente: TDataSource
     DataSet = cdsContaCorrente
     Left = 586
-    Top = 359
+    Top = 367
   end
   object cdsTemp: TClientDataSet
     Aggregates = <>
@@ -5297,7 +5298,7 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
     Left = 305
-    Top = 331
+    Top = 339
   end
   object qryRelcliente: TSQLQuery
     MaxBlobSize = -1
@@ -5316,7 +5317,7 @@ object frmCadClientes: TfrmCadClientes
     Params = <>
     ProviderName = 'dspRelCliente'
     Left = 216
-    Top = 328
+    Top = 336
   end
   object PopupMenu1: TPopupMenu
     Left = 512
@@ -5329,7 +5330,7 @@ object frmCadClientes: TfrmCadClientes
   object srcClienteAnimais: TDataSource
     DataSet = cdsClienteAnimais
     Left = 249
-    Top = 359
+    Top = 367
   end
   object cdsClienteAnimais: TClientDataSet
     Aggregates = <>
@@ -5338,7 +5339,7 @@ object frmCadClientes: TfrmCadClientes
     AfterScroll = cdsClienteAnimaisAfterScroll
     OnCalcFields = cdsContaCorrenteCalcFields
     Left = 249
-    Top = 331
+    Top = 339
   end
   object cdsEventosAnimais: TClientDataSet
     Aggregates = <>
@@ -5346,16 +5347,16 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
     Left = 221
-    Top = 331
+    Top = 339
   end
   object srcEventosAnimais: TDataSource
     DataSet = cdsEventosAnimais
     Left = 221
-    Top = 359
+    Top = 367
   end
   object PopapAnimais: TPopupMenu
     Left = 552
-    Top = 336
+    Top = 344
     object MenuItem1: TMenuItem
       Caption = 'Realizar Evento'
       OnClick = MenuItem1Click

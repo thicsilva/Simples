@@ -75,21 +75,22 @@ var loContaAReceber   : TContaReceber;
     loDaoContaReceber : TdaoContaReceber;
     Dados : TClientDataSet;
 begin
-   loContaAReceber := TContaReceber.Create;
    loDaoContaReceber := TdaoContaReceber.Create(gConexao);
    Dados := loDaoContaReceber.BuscarVendaID(StrToint(priNumeroVenda));
    while not Dados.Eof do
    begin
+      loContaAReceber := TContaReceber.Create;
       loContaAReceber.Documento      := Dados.FieldByName('Documento').asString;
       loContaAReceber.Data_Pagamento := now;
       loContaAReceber.Data_Atu       := now;
-      loContaAReceber.Operador       := gsOperador;
+      loContaAReceber.Operador       := gsOperador+'**';
       loContaAReceber.Status         := 1;
       loContaAReceber.Tipo_Baixa     := 'PT';
       loContaAReceber.vlr_Desconto   := 0;
       loContaAReceber.Vlr_Recebido   := Dados.FieldByName('Vlr_Areceber').AsFloat;
       loContaAReceber.ValorAReceber  := Dados.FieldByName('Vlr_Areceber').AsFloat;
       loDaoContaReceber.BaixarTitulo(loContaAReceber);
+      FreeAndNil(loContaAReceber);
       Dados.Next;
    end;
 end;

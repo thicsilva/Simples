@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 340
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -84,8 +84,8 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = 360
-    ExplicitTop = 325
+    ExplicitLeft = -8
+    ExplicitTop = 157
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
       object Label5: TLabel
@@ -949,10 +949,10 @@ object frmParametros: TfrmParametros
         BorderStyle = bsNone
       end
       object rdgTipoSistema: TbsSkinRadioGroup
-        Left = 348
-        Top = 24
+        Left = 459
+        Top = 17
         Width = 150
-        Height = 90
+        Height = 133
         HintImageIndex = 0
         TabOrder = 4
         SkinData = frmPrincipal.SkinPrincipal
@@ -990,7 +990,8 @@ object frmParametros: TfrmParametros
         ButtonDefaultFont.Style = []
         Items.Strings = (
           'Distribui'#231#227'o de Revenda'
-          'Comercio e Servi'#231'o')
+          'Comercio e Servi'#231'o'
+          'Pet Shop')
       end
       object bsSkinLabel3: TbsSkinLabel
         Left = 11
@@ -1024,7 +1025,7 @@ object frmParametros: TfrmParametros
       end
       object edtNomeEmpresa: TbsSkinMaskEdit
         Left = 127
-        Top = 136
+        Top = 144
         Width = 354
         Height = 18
         Text = 'edtSenha'
@@ -2253,53 +2254,53 @@ object frmParametros: TfrmParametros
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 377
-    Top = 176
+    Left = 369
+    Top = 280
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 325
-    Top = 130
+    Left = 317
+    Top = 234
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 325
-    Top = 157
+    Left = 317
+    Top = 261
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 477
-    Top = 198
+    Left = 469
+    Top = 302
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 477
-    Top = 170
+    Left = 469
+    Top = 274
   end
   object srcCadCaixa: TDataSource
     DataSet = cdsCadCaixa
-    Left = 449
-    Top = 198
+    Left = 441
+    Top = 302
   end
   object cdsCadCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 449
-    Top = 170
+    Left = 441
+    Top = 274
   end
   object srcSetoresEstoque: TDataSource
     DataSet = cdsSetoresEstoque
-    Left = 421
-    Top = 198
+    Left = 413
+    Top = 302
   end
   object cdsSetoresEstoque: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 421
-    Top = 170
+    Left = 413
+    Top = 274
   end
 end

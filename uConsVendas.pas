@@ -618,7 +618,6 @@ begin
 
    cmbPeriodoChange(cmbPeriodo);
 
-   btnCupomFiscal.Visible := True;
    btnEmproducao.Visible  := True;
    btnEntregue.Visible    := True;
    cmbTipoFiltro.Enabled  := True;
@@ -643,7 +642,7 @@ begin
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
    //grdvendas.Columns[0].Visible := False;
-   colum_NomeAnimal.Visible := False;
+   //colum_NomeAnimal.Visible := False;
    IF frmconsvendas.Tag = 3 Then
    Begin
       frmConsVendas.Caption := 'Consulta e manutenção de Serviços  ';

@@ -138,6 +138,11 @@ object frmConsVendas: TfrmConsVendas
           DataBinding.FieldName = 'Nome_Cliente'
           Width = 200
         end
+        object colum_NomeAnimal: TcxGridDBColumn
+          Caption = 'Nome do Animal'
+          DataBinding.FieldName = 'NomeAnimal'
+          Width = 110
+        end
         object Colum_Data_Venda: TcxGridDBColumn
           Caption = 'Data'
           DataBinding.FieldName = 'Data_Venda'
@@ -147,11 +152,6 @@ object frmConsVendas: TfrmConsVendas
           Caption = 'Desconto'
           DataBinding.FieldName = 'Vlr_Desconto'
           Width = 65
-        end
-        object colum_NomeAnimal: TcxGridDBColumn
-          Caption = 'Nome do Animal'
-          DataBinding.FieldName = 'NomeAnimal'
-          Width = 110
         end
         object Colum_Vlr_Total: TcxGridDBColumn
           Caption = 'Total'
