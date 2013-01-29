@@ -12,7 +12,7 @@ uses
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
   SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL, bsSkinGrids,
-  bsDBGrids, Menus ;
+  bsDBGrids, Menus, jpeg, cxDropDownEdit, cxBarEditItem ;
 
 type
   TfrmPrincipal = class(TForm)
@@ -242,6 +242,17 @@ type
     actServicoLauro: TAction;
     pnlContasReceber: TPanel;
     pnlContasApagar: TPanel;
+    dxBarLargeButton25: TdxBarLargeButton;
+    actAtendimento: TAction;
+    bsSkinLinkImage1: TbsSkinLinkImage;
+    SkinGrids: TbsSkinData;
+    skinStorage3: TbsCompressedStoredSkin;
+    cxBarEditItem1: TcxBarEditItem;
+    dxBarButton33: TdxBarButton;
+    actSkinGrid: TAction;
+    actSkinDados: TAction;
+    dxBarButton34: TdxBarButton;
+    dxBarButton35: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -304,6 +315,9 @@ type
     procedure MarcarEventocomRealizado1Click(Sender: TObject);
     procedure actTabeladePrecoExecute(Sender: TObject);
     procedure actServicoLauroExecute(Sender: TObject);
+    procedure actAtendimentoExecute(Sender: TObject);
+    procedure actSkinGridExecute(Sender: TObject);
+    procedure actSkinDadosExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -458,6 +472,13 @@ begin
    frmRelAnaliseFinanceira.showModal;
 end;
 
+procedure TfrmPrincipal.actAtendimentoExecute(Sender: TObject);
+begin
+   frmDelivery := TFrmDelivery.Create(Self);
+   frmDelivery.WindowState := wsMaximized;
+   frmDelivery.ShowModal;
+end;
+
 procedure TfrmPrincipal.actCadastroDeSetoresExecute(Sender: TObject);
 begin
   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -568,6 +589,10 @@ begin
        actconsServicos.Visible  := True;
        RibonAtendimentoCliente.Visible  := False;
    End;
+   actAtendimento.Visible      := False;
+   if PetShop then
+       actAtendimento.Visible      := True;
+
 
 end;
 
@@ -1152,6 +1177,44 @@ begin
       Exit;
    End;
 End;
+
+procedure TfrmPrincipal.actSkinGridExecute(Sender: TObject);
+var
+  Ext: String;
+begin
+   OD.SkinData := SkinGrids;
+   if OD.Execute then
+   begin
+     Ext := ExtractFileExt(OD.FileName);
+     if LowerCase(Ext) = '.ini'
+     then
+       SkinGrids.LoadFromFile(OD.FileName)
+     else
+     if LowerCase(Ext) = '.skn'
+     then
+       SkinGrids.LoadFromCompressedFile(OD.FileName);
+       gsParametros.WriteString('ADM','SkinPadrao',OD.FileName);
+   end;
+end;
+
+procedure TfrmPrincipal.actSkinDadosExecute(Sender: TObject);
+var
+  Ext: String;
+begin
+   OD.SkinData := SkinEntradaDados;
+   if OD.Execute then
+   begin
+     Ext := ExtractFileExt(OD.FileName);
+     if LowerCase(Ext) = '.ini'
+     then
+       SkinEntradaDados.LoadFromFile(OD.FileName)
+     else
+     if LowerCase(Ext) = '.skn'
+     then
+       SkinEntradaDados.LoadFromCompressedFile(OD.FileName);
+       gsParametros.WriteString('ADM','SkinPadrao',OD.FileName);
+   end;
+end;
 
 procedure TfrmPrincipal.actServicoLauroExecute(Sender: TObject);
 begin

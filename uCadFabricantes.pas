@@ -60,6 +60,7 @@ type
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure btnexcluirClick(Sender: TObject);
   private
      pvQualBotao : String;
     { Private declarations }
@@ -203,6 +204,29 @@ begin
    PagCadastro.ActivePageIndex:=1;
 
    edtDescricao.SetFocus;
+
+end;
+
+procedure TfrmCadFabricantes.btnexcluirClick(Sender: TObject);
+begin
+   IF sdtsPesquisa.IsEmpty Then
+   Begin
+      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+   if CaixaMensagem( 'Deseja excluir o fabricante '+sdtsPesquisa.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      try
+         sdtsPesquisa.Delete;
+         sdtsPesquisa.ApplyUpdates(-1);
+      except
+         On E: Exception Do
+         Begin
+            CaixaMensagem( 'Não foi possível Excluir o fabricante "' + E.Message + '"', ctAviso, [ cbOk ], 0 );
+            Exit;
+         End;
+      end;
+   End;
 
 end;
 

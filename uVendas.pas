@@ -482,7 +482,6 @@ begin
 
    EdtPco_Venda.Enabled := gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Altera Preco de Venda',gbMaster);
 
-   pnlDadosClientes.Enabled := False;
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
    begin
       edtControle.Visible := False;
@@ -607,6 +606,10 @@ begin
   lblControle.Visible := True;
   edtControle.Visible := True;
   liTotalLiquido := StrtoFloat(edtTotalLiquido.Text);
+  pnlDadosClientes.Enabled := True;
+  cmbNome_formaPagamento.Enabled := True;
+  edtcod_Cliente.Enabled := False;
+  cmbNome_Cliente.Enabled := False;
 end;
 
 procedure TfrmVendas.TotalizarVenda(lrTotalDesconto : Real);
@@ -1694,6 +1697,7 @@ begin
    frmCadClientes := TfrmCadClientes.Create(Nil);
    frmCadClientes.Tag := 5;
    frmCadClientes.showmodal;
+
    edtcod_Cliente.Text := '';
    edtcod_ClienteExit(edtcod_Cliente);
 

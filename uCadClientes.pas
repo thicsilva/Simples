@@ -754,17 +754,25 @@ begin
       cdsCadClientes.ApplyUpdates(-1);
 
    BtnIncluir.Enabled := True;
-   BtnAlterar.Enabled := True;
+   BtnAlterar.Enabled := True;                          
    BtnExcluir.Enabled := True;
    BtnOk.Enabled      := False;
    BtnCancela.Enabled := False;
-
-   LimpaCampos();
 
    If pvQualBotao = 'ALTERAR' then
       btnPesquisarClick(btnPesquisar);
 
    PagCadastro.ActivePageIndex:=0;
+
+   if petShop then
+   begin
+      cmbtipoconsulta.ItemIndex := 0;
+      edtPesquisa.Text := edtNome_Fantasia.Text;
+      btnPesquisarClick(btnPesquisar);
+      PagCadastro.ActivePageIndex:=9;
+   end;
+
+   LimpaCampos();
 
 end;
 
@@ -1539,7 +1547,9 @@ begin
    else if pagCadastro.ActivePageIndex = 9 then
    begin
       MostrarAnimaisCliente;
-      edtdataAgendada.Date := gsData_Mov;
+      edtdataAgendada.Date   := gsData_Mov;
+      edtDataNascimento.Date := Now;
+      edtDataAquisicao.date  := Now;
       pAnimalId := 0;
    End;
    pnlClientesDescontos.Visible := False;
@@ -1854,8 +1864,8 @@ begin
    EdtEspecie.Text        := '';
    edtRaca.Text           := '';
    edtCor.text            := '';
-   edtDataNascimento.Date := null;
-   edtDataAquisicao.date  := Null;
+   edtDataNascimento.Date := Now;
+   edtDataAquisicao.date  := Now;
    pAnimalId              := 0;
 end;
 

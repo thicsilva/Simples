@@ -132,7 +132,7 @@ begin
   FParametros.add(IntToStr(RomaneioId));
   FParametros.add('5');
   FParametros.add('AB');
-  Result := FConexao.BuscarDadosSQL('Select Cli.codigo,Cli.Descricao, Rec.Data_Vencimento,Rec.Vlr_Areceber as vlr_Total,Pag.Descricao as Pagamento '+
+  Result := FConexao.BuscarDadosSQL('Select Ven.SeqVenda,Cli.codigo,Cli.Descricao, Rec.Data_Vencimento,Rec.Vlr_Areceber as vlr_Total,Pag.Descricao as Pagamento '+
                                     'from t_vendas ven '+
                                     '     inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente ' +
                                     '     inner join T_Ctasreceber Rec on Rec.Cod_Cliente=Cli.Codigo '+

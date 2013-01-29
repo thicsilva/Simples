@@ -1587,11 +1587,10 @@ begin
       qryVariavel.Close;
       qryVariavel.Params.clear;
       qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
-                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 or Tipo_Conta=:parTipo_Conta2 ) '+
+                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 ) '+
                                         'Order by Descricao ';
       qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
-      qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 2; // 1 Debito 2 Credito
-      qryVariavel.ParamByName('parTipo_Conta2').AsInteger := 3; // 1 Debito 2 Credito
+      qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 1; // 1 Debito 2 Credito
     End
     Else
     Begin
@@ -1599,16 +1598,14 @@ begin
       qryVariavel.Close;
       qryVariavel.Params.clear;
       qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
-                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1  ) '+
+                                     '( Tipo_Conta=:parTipo_Conta  ) '+
                                         'Order by Descricao ';
-      qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 1; // 1 Debito 2 Credito
-      qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 4; // 1 Debito 2 Credito
+      qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 2; // 1 Debito 2 Credito
     End;
 
     cdsCadOperacoes.Close;
     cdsCadOperacoes.ProviderName := dspVariavel.name;
     cdsCadOperacoes.Open;
-
 end;
 
 procedure TfrmMovCaixa.cmbNome_CaixaChange(Sender: TObject);

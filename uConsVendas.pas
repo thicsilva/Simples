@@ -284,12 +284,25 @@ procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
 var liRetorno : Integer;
     lsNumeroCupom : String;
     liNumeroVenda : Integer;
+    lsNomeCliente : String;
+    lsCNPJCPF : String;
+    lsMensagem : String;
 begin
 
    if Trim(cdsVendas.FieldByName('NumeroCupom').AsString)<>'' then
    Begin
       CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
       Exit;
+   End;
+   lsMensagem := 'Obrigado e volte sempre';
+   if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      if not inputQuery('Nome do Cliente','Nome do Cliente',lsNomeCliente) Then
+         Exit;
+      if not inputQuery('CNPJ/CPF','CNPJ ou CPF',lsCNPJCPF) Then
+         Exit;
+      lsMensagem := 'Cliente:'+lsNomeCliente+#13+#10;
+      lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
    End;
 
    If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
@@ -329,7 +342,7 @@ begin
         End;
         cdsItensvendas.Next;
       End;
-     Bematech_FI_FechaCupomResumido( 'Dinheiro','Obrigado e volte sempre');
+     Bematech_FI_FechaCupomResumido( 'Dinheiro',lsMensagem);
    End
    Else
    Begin

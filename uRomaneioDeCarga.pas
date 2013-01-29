@@ -337,10 +337,10 @@ begin
    prCustoTotal := 0;
    while not cdsDadosRelatorio.Eof do
    begin
-      impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('Codigo').AsString,5)+' '+Copy(cdsDadosRelatorio.FieldByName('Descricao').AsString,1,38));
+      impmatricial.Imp(pvilinha,001,inczero(cdsDadosRelatorio.FieldByName('SeqVenda').AsString,8)+' '+Copy(cdsDadosRelatorio.FieldByName('Descricao').AsString,1,38));
       impmatricial.Impd(pvilinha,060,Formatfloat(',0.00',cdsDadosRelatorio.FieldByName('Vlr_total').AsFloat),[]);
       impmatricial.Imp(pvilinha,061,cdsDadosRelatorio.FieldByName('Pagamento').AsString);
-    //  impmatricial.Impd(pvilinha,085,FormatDatetime('dd/mm/yyyy',cdsDadosRelatorio.FieldByName('Data_Vencimento').AsDateTime));
+      impmatricial.Impd(pvilinha,085,FormatDatetime('dd/mm/yyyy',cdsDadosRelatorio.FieldByName('Data_Vencimento').AsDateTime),[]);
       pviLinha:=Pvilinha+1;
       total := total + cdsDadosRelatorio.FieldByName('Vlr_total').AsFloat;
       cdsDadosRelatorio.next;

@@ -393,8 +393,8 @@ begin
       qryRelatorio.SQL.Add(' And Cli.Cod_Rota=:parCod_Rota');
 
    case cmbTipoResultado.ItemIndex of
-      0,1 : qryRelatorio.SQL.Add(' ORDER BY Cli.Cod_Rota,Ven.Controle ');
-      2,3 : qryRelatorio.SQL.Add(' ORDER BY Ven.Cod_Funcionario,Ven.Controle ');
+      0,1 : qryRelatorio.SQL.Add(' ORDER BY Cli.Cod_Rota,Cli.Codigo,Rec.Data_Vencimento ');
+      2,3 : qryRelatorio.SQL.Add(' ORDER BY Ven.Cod_Funcionario,Cli.Codigo,Rec.Data_Vencimento ');
    end;
 
    if Trim(cmbCod_VendedorIni.Text)<>'' then
