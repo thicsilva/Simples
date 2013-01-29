@@ -52,6 +52,7 @@ object frmVendas: TfrmVendas
     Spacing = 2
     Caption = 'pnlDadosClientes'
     Align = alTop
+    Enabled = False
     object btnCadAlunos: TbsSkinSpeedButton
       Left = 483
       Top = 33

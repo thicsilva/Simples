@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = Tab_Cadastro
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -50,7 +50,6 @@ object frmCadClientes: TfrmCadClientes
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 84
     object Tab_Consulta: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
@@ -2523,7 +2522,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 603
-        Top = 2
+        Top = 0
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
