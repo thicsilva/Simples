@@ -221,6 +221,9 @@
     <DCCReference Include="uManutencaoOs.pas">
       <Form>frmManutencaoOs</Form>
     </DCCReference>
+    <DCCReference Include="uMapa.pas">
+      <Form>frmMapa</Form>
+    </DCCReference>
     <DCCReference Include="uMensagens.pas">
       <Form>FrmMensagens</Form>
     </DCCReference>
@@ -271,6 +274,9 @@
     </DCCReference>
     <DCCReference Include="uselDatas.pas">
       <Form>frmSelDatas</Form>
+    </DCCReference>
+    <DCCReference Include="uSelHora.pas">
+      <Form>frmSelHora</Form>
     </DCCReference>
     <DCCReference Include="uSelMotivoStatus.pas">
       <Form>frmMotivoStatus</Form>

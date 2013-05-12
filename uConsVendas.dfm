@@ -1352,7 +1352,7 @@ object frmConsVendas: TfrmConsVendas
     Left = 64
     Top = 32
     object BorderodeEntrega1: TMenuItem
-      Caption = 'Devolu'#231#227'o Total'
+      Caption = 'Cancelar Pedido'
       OnClick = BorderodeEntrega1Click
     end
     object Etiquetas1: TMenuItem

@@ -1155,7 +1155,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 747
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1884,6 +1884,7 @@ object frmVendas: TfrmVendas
     Height = 19
     HintImageIndex = 0
     TabOrder = 3
+    Visible = False
     SkinDataName = 'hscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -1893,7 +1894,7 @@ object frmVendas: TfrmVendas
     DefaultWidth = 0
     DefaultHeight = 19
     UseSkinFont = True
-    Both = True
+    Both = False
     BothMarkerWidth = 19
     BothSkinDataName = 'bothhscrollbar'
     CanFocused = False
@@ -1946,6 +1947,7 @@ object frmVendas: TfrmVendas
     Height = 187
     HintImageIndex = 0
     TabOrder = 5
+    Visible = False
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'vscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1965,7 +1967,7 @@ object frmVendas: TfrmVendas
     PageSize = 1
     Min = 1
     Max = 0
-    Position = 1
+    Position = 0
     SmallChange = 1
     LargeChange = 1
   end
@@ -2169,9 +2171,9 @@ object frmVendas: TfrmVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 646
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -2205,7 +2207,6 @@ object frmVendas: TfrmVendas
         OnClick = btnFecharClick
         ExplicitLeft = 677
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0

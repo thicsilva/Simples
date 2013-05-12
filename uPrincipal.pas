@@ -172,7 +172,7 @@ type
     dxBarLargeButton15: TdxBarLargeButton;
     dxBarLargeButton16: TdxBarLargeButton;
     actManutencaoOS: TAction;
-    Ga: TbsSkinLinkImage;
+    ImagemFundoPet: TbsSkinLinkImage;
     cdsProcedimento: TClientDataSet;
     dspvariavel: TDataSetProvider;
     qryVariavel: TSQLQuery;
@@ -244,7 +244,7 @@ type
     pnlContasApagar: TPanel;
     dxBarLargeButton25: TdxBarLargeButton;
     actAtendimento: TAction;
-    bsSkinLinkImage1: TbsSkinLinkImage;
+    ImagemLogoSistema: TbsSkinLinkImage;
     SkinGrids: TbsSkinData;
     skinStorage3: TbsCompressedStoredSkin;
     cxBarEditItem1: TcxBarEditItem;
@@ -590,8 +590,13 @@ begin
        RibonAtendimentoCliente.Visible  := False;
    End;
    actAtendimento.Visible      := False;
+   ImagemFundoPet.visible      := False;
    if PetShop then
-       actAtendimento.Visible      := True;
+   begin
+      actAtendimento.Visible      := True;
+      ImagemFundoPet.visible      := True;
+   end;
+
 
 
 end;
@@ -602,7 +607,7 @@ begin
   sdtsSequencia.DataSet.CommandText := 'SELECT * FROM T_Sequencias where Tipo_sequencia=:parTipo_Sequencia';
   sdtsSequencia.DataSet.ParamByName('parTipo_Sequencia').AsString := 'Data_Mov';
   sdtsSequencia.Open;
-  
+
   if sdtsSequencia.IsEmpty then
     gsData_Mov := Now
   else

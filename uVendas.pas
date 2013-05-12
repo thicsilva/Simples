@@ -33,6 +33,7 @@ const
     VENDAS_NORMAIS = 0;
     OS_FINALIZADA = 4;
     LANCAMENTO_MATERIAL = 5;
+    ATENDIMENTO = 6;
 type
   TfrmVendas = class(TFormBase)
     dspItensVendas: TDataSetProvider;
@@ -241,6 +242,8 @@ type
      liSeqOs       : Integer;
      liCaixa       : Integer;
      liTotalLiquido : Real;
+     pAtendimento : Boolean;
+     pliCliente : Integer;
      procedure PrepararFinalizacaoOS;
      procedure AtualizaTabelas();
     { Public declarations }
@@ -436,6 +439,10 @@ end;
 procedure TfrmVendas.FormShow(Sender: TObject);
 begin
    AtualizaTabelas();
+   lblControle.Visible         := True;
+   edtControle.Visible         := True;
+   lblVencimento.Visible       := False;
+   edtdata_Vencimento.Visible  := False;
    If (frmVendas.tag = SERVICOS)  Then
    Begin
       frmVendas.Caption    := 'Cadastro e manuteção de vendas de serviços';
@@ -449,19 +456,13 @@ begin
    Begin
       frmVendas.Caption  := 'Inclusão de Material e Serviços executados ';
       btnincluir.Caption := '&Nova Venda';
-      lblControle.Visible         := False;
-      edtControle.Visible         := False;
    End
    Else
    Begin
       frmVendas.Caption  := 'Cadastro e manuteção de vendas ';
       btnincluir.Caption := '&Nova Venda';
-      lblControle.Visible         := False;
-      edtControle.Visible         := False;
    End;
 
-   lblVencimento.Visible      := False;
-   edtdata_Vencimento.Visible := False;
    cmbRota.Visible            := False;
 
    lblNomeTipoVenda.Visible   := (Not RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' ))));
@@ -469,16 +470,18 @@ begin
    edtCod_TipoVenda.Visible   := (Not RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' ))));
 
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
-   Begin
-      lblVencimento.Visible      := True;
-      edtdata_Vencimento.Visible := True;
       cmbRota.Visible            := True;
+
+   if Uppercase(gParametros.Ler('', '[CADASTRO]', 'VendaSemControle', 'NAO')) = 'SIM' then
+   begin
       lblControle.Visible        := True;
       edtControle.Visible        := True;
-   End;
-   // ajuste para joao maria
-   lblVencimento.Visible      := False;
-   edtdata_Vencimento.Visible := False;
+   end;
+   if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' ))) then
+   begin
+      lblVencimento.Visible       := True;
+      edtdata_Vencimento.Visible  := True;
+   end;
 
    EdtPco_Venda.Enabled := gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Altera Preco de Venda',gbMaster);
 
@@ -491,6 +494,8 @@ begin
    pAnimalId := 0;
    btnAdicionar.Enabled   := False;
    btnCadProdutos.Enabled := False;
+   if pAtendimento then
+      btnincluirClick(btnincluir);
 end;
 
 procedure TfrmVendas.edtCod_ProdutoExit(Sender: TObject);
@@ -1489,6 +1494,13 @@ begin
       except
       End;
    End;
+   if pAtendimento then
+   begin
+      edtcod_Cliente.text := intToStr(pliCliente);
+      edtcod_ClienteExit(edtcod_Cliente);
+   end;
+
+
 end;
 
 procedure TfrmVendas.BtnCancelaClick(Sender: TObject);

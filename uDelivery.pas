@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinCtrls, bsSkinGrids, bsDBGrids, StdCtrls, Mask, bsSkinBoxCtrls,
-  DB, uPrincipal, DBClient, uClassCliente,uFormBase, Menus,StrUtils, DBCtrls;
+  DB, uPrincipal, DBClient, uClassCliente,uFormBase, Menus,StrUtils, DBCtrls,
+  ComCtrls, bsSkinTabs, uDaoClienteAnimal, OleCtrls, SHDocVw;
 
 
 type
@@ -16,7 +17,6 @@ type
     edtNome: TbsSkinEdit;
     bsSkinPanel2: TbsSkinPanel;
     bsSkinExPanel2: TbsSkinExPanel;
-    dbgConsulta: TbsSkinDBGrid;
     srcClientes: TDataSource;
     bsSkinPanel3: TbsSkinPanel;
     bsSkinDBGrid1: TbsSkinDBGrid;
@@ -28,7 +28,6 @@ type
     srcLista: TDataSource;
     cdslistaId: TIntegerField;
     cdslistaNome: TStringField;
-    edtHora: TbsSkinEdit;
     cdslistaData: TDateTimeField;
     cdslistaHora: TStringField;
     edtData: TbsSkinDateEdit;
@@ -52,6 +51,17 @@ type
     edtBairro: TbsSkinEdit;
     edtCidade: TbsSkinEdit;
     edtPto_Referencia: TbsSkinEdit;
+    bsSkinButton2: TbsSkinButton;
+    cdslistaCodCliente: TIntegerField;
+    HoradeChegada1: TMenuItem;
+    bsSkinPageControl1: TbsSkinPageControl;
+    bsSkinTabSheet1: TbsSkinTabSheet;
+    dbgConsulta: TbsSkinDBGrid;
+    srcAnimais: TDataSource;
+    btnMostrarMapa: TbsSkinButton;
+    PrevisodeChegada1: TMenuItem;
+    edtHora: TbsSkinTimeEdit;
+    cdslistaLancado: TStringField;
     procedure edtNomeChange(Sender: TObject);
     procedure cdsClientesAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -63,6 +73,10 @@ type
     procedure MarcarcomoEntregue1Click(Sender: TObject);
     procedure MarcarComonoEntregue1Click(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
+    procedure HoradeChegada1Click(Sender: TObject);
+    procedure btnMostrarMapaClick(Sender: TObject);
+    procedure PrevisodeChegada1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,7 +89,7 @@ var
 implementation
 
 uses
-  uDaoCliente,ufuncoes, uCadClientes;
+  uDaoCliente,ufuncoes, uCadClientes, uVendas, uMapa, uSelHora;
 
 {$R *.dfm}
 
@@ -114,6 +128,32 @@ begin
    dbgConsulta.DefaultDrawColumnCell( Rect, DataCol, Column, State );
 end;
 
+procedure TfrmDelivery.bsSkinButton1Click(Sender: TObject);
+begin
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := 3; // venda de serviços
+   frmvendas.pAtendimento := True;
+   frmvendas.pliCliente := cdsLista.FieldByName('Id').AsInteger;
+   frmVendas.Showmodal;
+end;
+
+procedure TfrmDelivery.btnMostrarMapaClick(Sender: TObject);
+var consultaendereco : string;
+begin
+   consultaendereco := 'http://maps.google.com/maps?q=;';
+   if Trim(cdsClientes.FieldByName('Cidade').AsString)<> '' then
+      consultaendereco := consultaendereco + cdsClientes.FieldByName('Cidade').AsString +',';
+   if Trim(cdsClientes.FieldByName('UF').AsString) <> '' then
+      consultaendereco := consultaendereco + cdsClientes.FieldByName('UF').AsString + ',';
+   if Trim(cdsClientes.FieldByName('Endereco').AsString) <> ''  then
+      consultaendereco := consultaendereco + cdsClientes.FieldByName('Endereco').AsString+',';
+   if Trim(cdsClientes.FieldByName('Cep').AsString) <> ''  then
+      consultaendereco := consultaendereco + cdsClientes.FieldByName('Cep').AsString;
+   FrmMapa := TFrmMapa.create(Self);
+   FrmMapa.caption := consultaendereco;
+   FrmMapa.showmodal;
+end;
+
 procedure TfrmDelivery.btnAdicionarClick(Sender: TObject);
 begin
   if Trim(edtHora.Text)='' then
@@ -144,6 +184,7 @@ end;
 procedure TfrmDelivery.cdsClientesAfterScroll(DataSet: TDataSet);
 var DaoCliente : TDaoCliente;
     Cliente : TCliente;
+    DaoClienteAnimal : TDaoClienteAnimal;
 begin
    DaoCliente := TDaoCliente.Create(gConexao);
    Cliente := DaoCliente.Buscar(cdsClientes.FieldByName('Codigo').AsInteger);
@@ -151,6 +192,10 @@ begin
    edtBairro.Text := Cliente.Endereco.bairro;
    edtCidade.text := Cliente.Endereco.cidade;
    edtPto_Referencia.Text := Cliente.Endereco.PontoReferencia;
+
+   DaoClienteAnimal   := TDaoClienteAnimal.create(gConexao);
+   srcAnimais.DataSet := DaoClienteAnimal.BucarAnimalCliente(Cliente.Id);
+
    FreeAndNil(DaoCliente);
    FreeAndNil(Cliente);
 end;
@@ -175,6 +220,18 @@ begin
    edtData.date := Now;   
 end;
 
+procedure TfrmDelivery.HoradeChegada1Click(Sender: TObject);
+begin
+   frmSelHora := TfrmSelHora.Create(application);
+   frmSelHora.showModal;
+   if frmSelHora.Tag=1 then
+   begin
+      cdsLista.Edit;
+      cdsLista.FieldByname('HoraChegada').AsString := frmSelHora.edtHora.Text;
+      cdsLista.Post;
+   end;
+end;
+
 procedure TfrmDelivery.MarcarcomoEntregue1Click(Sender: TObject);
 begin
    cdsLista.Edit;
@@ -187,6 +244,18 @@ begin
    cdsLista.Edit;
    cdsLista.FieldByname('Status').AsString := 'N';
    cdsLista.Post;
+end;
+
+procedure TfrmDelivery.PrevisodeChegada1Click(Sender: TObject);
+begin
+   frmSelHora := TfrmSelHora.Create(application);
+   frmSelHora.showModal;
+   if frmSelHora.Tag=1 then
+   begin
+      cdsLista.Edit;
+      cdsLista.FieldByname('PrevisaoChegda').AsString := frmSelHora.edtHora.Text;
+      cdsLista.Post;
+   end;
 end;
 
 end.

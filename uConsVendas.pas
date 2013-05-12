@@ -716,6 +716,11 @@ var liSeqVenda     : Integer;
     DadosContaCorrente  : TContaCorrente;
     GravaContaCorrente  : TDaoContaCorrente;
 begin
+   if not gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Cancelamento',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
 
 {$REGION 'Inicializando Variaveis'}
 
@@ -1167,6 +1172,11 @@ var
    liNumeroVenda   : Integer;
    liromaneio : Integer;
 begin
+   if not gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Devolucao Parcial',gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
 
    liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
    liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;

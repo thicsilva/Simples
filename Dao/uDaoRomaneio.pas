@@ -116,13 +116,14 @@ function TDaoRomaneio.RetornarDadosFinanceiros(RomaneioId: integer): TClientData
 begin
   FParametros.clear;
   FParametros.add(IntToStr(RomaneioId));
-  FParametros.add('5');
+  //FParametros.add('5');
   Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Ven.CustoTotal, Pag.Descricao as Pagamento, '+
-                                    '       Ven.Entregue, Ven.Prorrogado, Ven.ServicoPago, Ven.PagouSinal, Ven.Cod_formaPagamento '+
+                                    '       Ven.Entregue, Ven.Prorrogado, Ven.ServicoPago, Ven.PagouSinal, Ven.Cod_formaPagamento, Ven.Status '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+
                                     '      left join T_formaspagamento pag on pag.codigo=Cod_formaPagamento '+
-                                    'where romaneioId=:parRomaneioId and ( ven.status<>:parStatus or ven.Status is Null ) ',FParametros);
+                                    'where romaneioId=:parRomaneioId ',FParametros);
+//                                    and ( ven.status<>:parStatus or ven.Status is Null )
 
 end;
 

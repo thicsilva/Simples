@@ -16,17 +16,8 @@ type
     bsBusinessSkinForm1: TbsBusinessSkinForm;
     bsSkinCheckRadioBox1: TbsSkinCheckRadioBox;
     bsSkinTabSheet2: TbsSkinTabSheet;
-    bsSkinStdLabel1: TbsSkinStdLabel;
-    bsSkinStdLabel2: TbsSkinStdLabel;
-    bsSkinStdLabel3: TbsSkinStdLabel;
-    bsSkinStdLabel4: TbsSkinStdLabel;
-    edtHostName: TbsSkinEdit;
-    edtDatabaseName: TbsSkinEdit;
-    edtUsuario: TbsSkinEdit;
-    edtSenha: TbsSkinMaskEdit;
     bsSkinLabel1: TbsSkinLabel;
     EdtNumeroCompras: TbsSkinSpinEdit;
-    rdgTipoSistema: TbsSkinRadioGroup;
     bsSkinLabel2: TbsSkinLabel;
     QryVariavel: TSQLQuery;
     dspVariavel: TDataSetProvider;
@@ -101,6 +92,17 @@ type
     edtDescontoMaximo: TbsSkinEdit;
     bsSkinLabel14: TbsSkinLabel;
     chkNaoMostrarExtorno: TbsSkinCheckRadioBox;
+    bsSkinExPanel1: TbsSkinExPanel;
+    bsSkinStdLabel1: TbsSkinStdLabel;
+    bsSkinStdLabel2: TbsSkinStdLabel;
+    bsSkinStdLabel3: TbsSkinStdLabel;
+    bsSkinStdLabel4: TbsSkinStdLabel;
+    edtHostName: TbsSkinEdit;
+    edtDatabaseName: TbsSkinEdit;
+    edtUsuario: TbsSkinEdit;
+    edtSenha: TbsSkinMaskEdit;
+    rdgTipoSistema: TbsSkinRadioGroup;
+    chkExibeVencimento: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -283,6 +285,7 @@ end;
 procedure TfrmParametros.GravarParametrosVendas;
 begin
    gParametros.Gravar( '', '[VENDA]', 'NaoMostraTipoDePagamento',RetornaSimouNao(chkNaoMostraTipoDePagamento.Checked),gsOperador );
+   gParametros.Gravar( '', '[VENDA]', 'ExibeVencimento',RetornaSimouNao(chkExibeVencimento.Checked),gsOperador );
 end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
@@ -297,6 +300,7 @@ end;
 procedure TfrmParametros.RecuperarParametrosVendas;
 begin
    chkNaoMostraTipoDePagamento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' )));
+   chkExibeVencimento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' )));
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;

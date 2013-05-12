@@ -224,7 +224,9 @@ begin
       llstTemp.SubItems.Add(Dados.FieldByName('Descricao').AsString);
       llstTemp.SubItems.Add(Dados.FieldByName('Pagamento').AsString);
       llstTemp.SubItems.Add(FormatFloat('0.00', Dados.FieldByName('Vlr_total').AsFloat));
-      if not Dados.FieldByName('PagouSinal').Asboolean then
+      if Dados.FieldByName('Status').AsString='5' then
+         llstTemp.SubItems.Add('Cancelado')
+      else if not Dados.FieldByName('PagouSinal').Asboolean then
          llstTemp.SubItems.Add('Cheque Não Recebido')
       else if Dados.FieldByName('ServicoPago').Asboolean then
          llstTemp.SubItems.Add('Recebido')

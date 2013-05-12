@@ -137,7 +137,9 @@ uses
   uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores},
   uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas',
   uDelivery in 'uDelivery.pas' {frmDelivery},
-  uFuncoes in '..\Compartilhados\uFuncoes.pas';
+  uFuncoes in '..\Compartilhados\uFuncoes.pas',
+  uMapa in 'uMapa.pas' {frmMapa},
+  uSelHora in 'uSelHora.pas' {frmSelHora};
 
 {$R *.res}
 
@@ -147,6 +149,8 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmDelivery, frmDelivery);
+  Application.CreateForm(TfrmMapa, frmMapa);
+  Application.CreateForm(TfrmSelHora, frmSelHora);
   Frmlogin.ShowModal;
   Application.Run;
 end.

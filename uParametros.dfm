@@ -3,7 +3,7 @@ object frmParametros: TfrmParametros
   Top = 220
   BorderIcons = []
   Caption = 'Configura'#231'ao de parametros do Sistema'
-  ClientHeight = 414
+  ClientHeight = 421
   ClientWidth = 635
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object frmParametros: TfrmParametros
   TextHeight = 13
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
-    Top = 393
+    Top = 400
     Width = 635
     Height = 21
     HintImageIndex = 0
@@ -56,8 +56,8 @@ object frmParametros: TfrmParametros
     Left = 0
     Top = 53
     Width = 635
-    Height = 340
-    ActivePage = bsSkinTabSheet2
+    Height = 347
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -84,8 +84,7 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = -8
-    ExplicitTop = 157
+    ExplicitTop = 93
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
       object Label5: TLabel
@@ -490,8 +489,8 @@ object frmParametros: TfrmParametros
         Caption = 'Permitir venda de Servi'#231'os'
       end
       object chkData_Automatica: TbsSkinCheckRadioBox
-        Left = 201
-        Top = 189
+        Left = 313
+        Top = 168
         Width = 224
         Height = 25
         HintImageIndex = 0
@@ -550,8 +549,8 @@ object frmParametros: TfrmParametros
         Caption = 'Cadastra Cliente sem CPF'
       end
       object chkVendaSemControle: TbsSkinCheckRadioBox
-        Left = 201
-        Top = 209
+        Left = 313
+        Top = 189
         Width = 297
         Height = 25
         HintImageIndex = 0
@@ -663,8 +662,8 @@ object frmParametros: TfrmParametros
         RightImageDownIndex = -1
       end
       object chkVendaExterna: TbsSkinCheckRadioBox
-        Left = 257
-        Top = 168
+        Left = 313
+        Top = 145
         Width = 224
         Height = 25
         HintImageIndex = 0
@@ -718,8 +717,8 @@ object frmParametros: TfrmParametros
         ListSource = srcSetoresEstoque
       end
       object chkNaoMostrarExtorno: TbsSkinCheckRadioBox
-        Left = 343
-        Top = 240
+        Left = 313
+        Top = 209
         Width = 297
         Height = 25
         HintImageIndex = 0
@@ -750,256 +749,14 @@ object frmParametros: TfrmParametros
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Configura'#231#227'o de Sistema'
-      object bsSkinStdLabel1: TbsSkinStdLabel
-        Left = 30
-        Top = 29
-        Width = 53
-        Height = 13
-        EllipsType = bsetNone
-        UseSkinFont = True
-        UseSkinColor = True
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = -11
-        DefaultFont.Name = 'MS Sans Serif'
-        DefaultFont.Style = []
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'stdlabel'
-        Caption = 'Host Name'
-      end
-      object bsSkinStdLabel2: TbsSkinStdLabel
-        Left = 6
-        Top = 53
-        Width = 77
-        Height = 13
-        EllipsType = bsetNone
-        UseSkinFont = True
-        UseSkinColor = True
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = -11
-        DefaultFont.Name = 'MS Sans Serif'
-        DefaultFont.Style = []
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'stdlabel'
-        Caption = 'Database Name'
-      end
-      object bsSkinStdLabel3: TbsSkinStdLabel
-        Left = 47
-        Top = 77
-        Width = 36
-        Height = 13
-        EllipsType = bsetNone
-        UseSkinFont = True
-        UseSkinColor = True
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = -11
-        DefaultFont.Name = 'MS Sans Serif'
-        DefaultFont.Style = []
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'stdlabel'
-        Caption = 'Usuario'
-      end
-      object bsSkinStdLabel4: TbsSkinStdLabel
-        Left = 52
-        Top = 101
-        Width = 31
-        Height = 13
-        EllipsType = bsetNone
-        UseSkinFont = True
-        UseSkinColor = True
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = -11
-        DefaultFont.Name = 'MS Sans Serif'
-        DefaultFont.Style = []
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'stdlabel'
-        Caption = 'Senha'
-      end
-      object edtHostName: TbsSkinEdit
-        Left = 88
-        Top = 24
-        Width = 121
-        Height = 18
-        Text = 'edtHostName'
-        DefaultColor = clWindow
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clBlack
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        UseSkinFont = True
-        DefaultWidth = 0
-        DefaultHeight = 0
-        ButtonMode = False
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'edit'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = 14
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        LeftImageIndex = -1
-        LeftImageHotIndex = -1
-        LeftImageDownIndex = -1
-        RightImageIndex = -1
-        RightImageHotIndex = -1
-        RightImageDownIndex = -1
-      end
-      object edtDatabaseName: TbsSkinEdit
-        Left = 88
-        Top = 48
-        Width = 121
-        Height = 18
-        Text = 'bsSkinEdit1'
-        DefaultColor = clWindow
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clBlack
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        UseSkinFont = True
-        DefaultWidth = 0
-        DefaultHeight = 0
-        ButtonMode = False
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'edit'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = 14
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        LeftImageIndex = -1
-        LeftImageHotIndex = -1
-        LeftImageDownIndex = -1
-        RightImageIndex = -1
-        RightImageHotIndex = -1
-        RightImageDownIndex = -1
-      end
-      object edtUsuario: TbsSkinEdit
-        Left = 88
-        Top = 72
-        Width = 121
-        Height = 18
-        Text = 'bsSkinEdit1'
-        DefaultColor = clWindow
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clBlack
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        UseSkinFont = True
-        DefaultWidth = 0
-        DefaultHeight = 0
-        ButtonMode = False
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'edit'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = 14
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-        LeftImageIndex = -1
-        LeftImageHotIndex = -1
-        LeftImageDownIndex = -1
-        RightImageIndex = -1
-        RightImageHotIndex = -1
-        RightImageDownIndex = -1
-      end
-      object edtSenha: TbsSkinMaskEdit
-        Left = 88
-        Top = 96
-        Width = 121
-        Height = 18
-        Text = 'edtSenha'
-        DefaultColor = clWindow
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clBlack
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        UseSkinFont = True
-        DefaultWidth = 0
-        DefaultHeight = 0
-        ButtonMode = False
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'edit'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = 14
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-        LeftImageIndex = -1
-        LeftImageHotIndex = -1
-        LeftImageDownIndex = -1
-        RightImageIndex = -1
-        RightImageHotIndex = -1
-        RightImageDownIndex = -1
-        AutoSize = False
-        BorderStyle = bsNone
-      end
-      object rdgTipoSistema: TbsSkinRadioGroup
-        Left = 459
-        Top = 17
-        Width = 150
-        Height = 133
-        HintImageIndex = 0
-        TabOrder = 4
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'groupbox'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        RibbonStyle = False
-        ImagePosition = bsipDefault
-        TransparentMode = False
-        CaptionImageIndex = -1
-        RealHeight = -1
-        AutoEnabledControls = True
-        CheckedMode = False
-        Checked = False
-        DefaultAlignment = taLeftJustify
-        DefaultCaptionHeight = 22
-        BorderStyle = bvFrame
-        CaptionMode = True
-        RollUpMode = False
-        RollUpState = False
-        NumGlyphs = 1
-        Spacing = 2
-        Caption = 'Selecione o tipo de empresa'
-        ButtonSkinDataName = 'radiobox'
-        ButtonDefaultFont.Charset = DEFAULT_CHARSET
-        ButtonDefaultFont.Color = clWindowText
-        ButtonDefaultFont.Height = 14
-        ButtonDefaultFont.Name = 'Arial'
-        ButtonDefaultFont.Style = []
-        Items.Strings = (
-          'Distribui'#231#227'o de Revenda'
-          'Comercio e Servi'#231'o'
-          'Pet Shop')
-      end
       object bsSkinLabel3: TbsSkinLabel
-        Left = 11
-        Top = 135
+        Left = 513
+        Top = 271
         Width = 110
         Height = 21
         HintImageIndex = 0
-        TabOrder = 5
+        TabOrder = 0
+        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'label'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -1024,9 +781,9 @@ object frmParametros: TfrmParametros
         AutoSize = False
       end
       object edtNomeEmpresa: TbsSkinMaskEdit
-        Left = 127
-        Top = 144
-        Width = 354
+        Left = 527
+        Top = 279
+        Width = 98
         Height = 18
         Text = 'edtSenha'
         DefaultColor = clWindow
@@ -1047,7 +804,8 @@ object frmParametros: TfrmParametros
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 1
+        Visible = False
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -1056,6 +814,279 @@ object frmParametros: TfrmParametros
         RightImageDownIndex = -1
         AutoSize = False
         BorderStyle = bsNone
+      end
+      object bsSkinExPanel1: TbsSkinExPanel
+        Left = 64
+        Top = 51
+        Width = 486
+        Height = 189
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'expanel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CaptionImageIndex = -1
+        NumGlyphs = 1
+        Spacing = 2
+        RealWidth = 0
+        RealHeight = 0
+        ShowRollButton = True
+        ShowCloseButton = True
+        DefaultCaptionHeight = 21
+        RollState = False
+        RollKind = rkRollVertical
+        Moveable = False
+        Sizeable = False
+        Caption = 'Configura'#231#245'es do Sistema'
+        object bsSkinStdLabel1: TbsSkinStdLabel
+          Left = 75
+          Top = 66
+          Width = 53
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Host Name'
+        end
+        object bsSkinStdLabel2: TbsSkinStdLabel
+          Left = 51
+          Top = 90
+          Width = 77
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Database Name'
+        end
+        object bsSkinStdLabel3: TbsSkinStdLabel
+          Left = 92
+          Top = 114
+          Width = 36
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Usuario'
+        end
+        object bsSkinStdLabel4: TbsSkinStdLabel
+          Left = 97
+          Top = 138
+          Width = 31
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'stdlabel'
+          Caption = 'Senha'
+        end
+        object edtHostName: TbsSkinEdit
+          Left = 133
+          Top = 61
+          Width = 121
+          Height = 18
+          Text = 'edtHostName'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtDatabaseName: TbsSkinEdit
+          Left = 133
+          Top = 85
+          Width = 121
+          Height = 18
+          Text = 'bsSkinEdit1'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtUsuario: TbsSkinEdit
+          Left = 133
+          Top = 109
+          Width = 121
+          Height = 18
+          Text = 'bsSkinEdit1'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+        object edtSenha: TbsSkinMaskEdit
+          Left = 133
+          Top = 133
+          Width = 121
+          Height = 18
+          Text = 'edtSenha'
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          AutoSize = False
+          BorderStyle = bsNone
+        end
+        object rdgTipoSistema: TbsSkinRadioGroup
+          Left = 268
+          Top = 59
+          Width = 150
+          Height = 92
+          HintImageIndex = 0
+          TabOrder = 4
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'groupbox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          RibbonStyle = False
+          ImagePosition = bsipDefault
+          TransparentMode = False
+          CaptionImageIndex = -1
+          RealHeight = -1
+          AutoEnabledControls = True
+          CheckedMode = False
+          Checked = False
+          DefaultAlignment = taLeftJustify
+          DefaultCaptionHeight = 22
+          BorderStyle = bvFrame
+          CaptionMode = True
+          RollUpMode = False
+          RollUpState = False
+          NumGlyphs = 1
+          Spacing = 2
+          Caption = 'Selecione o tipo de empresa'
+          ButtonSkinDataName = 'radiobox'
+          ButtonDefaultFont.Charset = DEFAULT_CHARSET
+          ButtonDefaultFont.Color = clWindowText
+          ButtonDefaultFont.Height = 14
+          ButtonDefaultFont.Name = 'Arial'
+          ButtonDefaultFont.Style = []
+          Items.Strings = (
+            'Distribui'#231#227'o de Revenda'
+            'Comercio e Servi'#231'o'
+            'Pet Shop')
+        end
       end
     end
     object tabContasAReceber: TbsSkinTabSheet
@@ -2019,7 +2050,7 @@ object frmParametros: TfrmParametros
       object chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox
         Left = 11
         Top = 4
-        Width = 357
+        Width = 206
         Height = 25
         HintImageIndex = 0
         TabOrder = 0
@@ -2045,6 +2076,36 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'N'#227'o mostra tipo  de venda'
+      end
+      object chkExibeVencimento: TbsSkinCheckRadioBox
+        Left = 12
+        Top = 26
+        Width = 205
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Exibe primeiro vencimento na venda'
       end
     end
   end
@@ -2255,52 +2316,52 @@ object frmParametros: TfrmParametros
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
     Left = 369
-    Top = 280
+    Top = 320
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 317
-    Top = 234
+    Left = 413
+    Top = 370
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 317
-    Top = 261
+    Left = 477
+    Top = 373
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
     Left = 469
-    Top = 302
+    Top = 342
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     Left = 469
-    Top = 274
+    Top = 314
   end
   object srcCadCaixa: TDataSource
     DataSet = cdsCadCaixa
     Left = 441
-    Top = 302
+    Top = 342
   end
   object cdsCadCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 441
-    Top = 274
+    Top = 314
   end
   object srcSetoresEstoque: TDataSource
     DataSet = cdsSetoresEstoque
     Left = 413
-    Top = 302
+    Top = 342
   end
   object cdsSetoresEstoque: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 413
-    Top = 274
+    Top = 314
   end
 end
