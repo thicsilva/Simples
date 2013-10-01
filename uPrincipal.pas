@@ -4,15 +4,19 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxClasses, cxStyles, cxGridTableView, BusinessSkinForm,
+  Dialogs, cxClasses, cxStyles,
   ufuncoes,cl_TPerfil,uClassConexao,uTipos,uClassEmpresa,
   bsSkinShellCtrls, bsSkinCtrls, bsSkinData, ActnList, XPStyleActnCtrls,
-  ActnMan, ImgList, bsCategoryButtons,IniFiles, DB, SqlExpr,
-  StdCtrls, verslab, dxBar, dxRibbon, dxStatusBar, dxRibbonStatusBar,
-  cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
-  DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
+  ImgList, bsCategoryButtons,IniFiles, DB, SqlExpr,
+  StdCtrls, verslab,
+  cxControls, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
+  DBClient,  FMTBcd, Provider, RDprint, ExtCtrls,
   SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL, bsSkinGrids,
-  bsDBGrids, Menus, jpeg, cxDropDownEdit, cxBarEditItem ;
+  bsDBGrids, Menus, jpeg, cxLookAndFeels,
+  cxLookAndFeelPainters, dxRibbonSkins, dxSkinsDefaultPainters,
+  dxSkinsdxBarPainter, cxDropDownEdit, SimpleDS, dxBar, dxBarExtItems,
+  cxBarEditItem, cxGridTableView, BusinessSkinForm, ActnMan, dxStatusBar,
+  dxRibbonStatusBar, dxRibbon ;
 
 type
   TfrmPrincipal = class(TForm)

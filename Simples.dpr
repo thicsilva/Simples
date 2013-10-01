@@ -1,11 +1,6 @@
 program Simples;
 
 uses
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uMensagens in 'uMensagens.pas' {FrmMensagens},

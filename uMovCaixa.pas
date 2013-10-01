@@ -1470,7 +1470,7 @@ begin
    btnPrePagamento.Enabled      := False;
    btnImprimir.Enabled          := False;
    btnFecharcaixa.Enabled       := False;
-
+   cmbD_CChange(cmbD_C);
 end;
 
 procedure TfrmMovCaixa.btnokClick(Sender: TObject);
@@ -1582,7 +1582,7 @@ end;
 
 procedure TfrmMovCaixa.cmbD_CChange(Sender: TObject);
 begin
-   If cmbD_C.ItemIndex = 0 Then
+   If cmbD_C.ItemIndex <> 0 Then
    Begin
       qryVariavel.Close;
       qryVariavel.Params.clear;

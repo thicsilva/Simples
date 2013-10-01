@@ -18,7 +18,8 @@ uses
   cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel, cxClasses,
   cxControls, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore,
-  cxGridCustomPopupMenu, cxGridPopupMenu,uformBase, dxSkinsCore;
+  cxGridCustomPopupMenu, cxGridPopupMenu,uformBase, dxSkinsCore, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCtasReceber = class(TFormBase)

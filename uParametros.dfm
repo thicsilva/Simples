@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = bsSkinTabSheet1
+    ActivePage = Vendas
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -84,7 +84,6 @@ object frmParametros: TfrmParametros
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 93
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
       object Label5: TLabel
@@ -549,8 +548,8 @@ object frmParametros: TfrmParametros
         Caption = 'Cadastra Cliente sem CPF'
       end
       object chkVendaSemControle: TbsSkinCheckRadioBox
-        Left = 313
-        Top = 189
+        Left = 300
+        Top = 178
         Width = 297
         Height = 25
         HintImageIndex = 0
