@@ -12,7 +12,8 @@ uses
   cxControls, dxBarExtItems, cxGraphics,MIDASLIB, WideStrings, cxPropertiesStore,
   DBClient, SimpleDS, dxRibbonGallery, FMTBcd, Provider, RDprint, ExtCtrls,
   SqlTimSt, bsSkinExCtrls, dxGDIPlusClasses, dxSkinsCore, DBXMsSQL, bsSkinGrids,
-  bsDBGrids, Menus ;
+  bsDBGrids, Menus, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
+  dxSkinsDefaultPainters, dxSkinsdxBarPainter ;
 
 type
   TfrmPrincipal = class(TForm)

@@ -1,11 +1,6 @@
 program Simples;
 
 uses
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   uPrincipal in 'uPrincipal.pas' {frmPrincipal},
   uMensagens in 'uMensagens.pas' {FrmMensagens},
@@ -107,7 +102,6 @@ uses
   uDescontoVenda in 'uDescontoVenda.pas' {FrmDescontoVenda},
   uConfigTabSheet in 'uConfigTabSheet.pas' {frmConfigTabSheet},
   uDaoClienteAnimal in 'Dao\uDaoClienteAnimal.pas',
-  uCapturaImagem in '..\AutoEscola\uCapturaImagem.pas' {frmCapturaImagem},
   uClassAnimal in 'Modelos\uClassAnimal.pas',
   uClassEventoAnimal in 'Modelos\uClassEventoAnimal.pas',
   uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas',
@@ -137,7 +131,8 @@ uses
   uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores},
   uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas',
   uDelivery in 'uDelivery.pas' {frmDelivery},
-  uFuncoes in '..\Compartilhados\uFuncoes.pas';
+  uFuncoes in '..\Compartilhados\uFuncoes.pas',
+  uCapturaImagem in '..\compartilhados\uCapturaImagem.pas' {frmCapturaImagem};
 
 {$R *.res}
 
@@ -147,6 +142,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmDelivery, frmDelivery);
+  Application.CreateForm(TfrmCapturaImagem, frmCapturaImagem);
   Frmlogin.ShowModal;
   Application.Run;
 end.
