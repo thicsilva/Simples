@@ -60,7 +60,7 @@ object frmConsVendas: TfrmConsVendas
       Align = alClient
       TabOrder = 0
       object GrdVendas: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         OnCustomDrawCell = GrdVendasCustomDrawCell
         DataController.DataSource = srcVendas
         DataController.DetailKeyFieldNames = 'Seqvenda'
@@ -194,7 +194,7 @@ object frmConsVendas: TfrmConsVendas
         end
       end
       object GrdItensVendas: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = srcItensVendas
         DataController.DetailKeyFieldNames = 'Seqvenda'
         DataController.Filter.Active = True
@@ -250,7 +250,7 @@ object frmConsVendas: TfrmConsVendas
         end
       end
       object grdDevolucoes: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = srcItensDevolucoes
         DataController.DetailKeyFieldNames = 'seqvenda'
         DataController.KeyFieldNames = 'seqvenda'
@@ -264,7 +264,7 @@ object frmConsVendas: TfrmConsVendas
         end
       end
       object GrdItensDevolvidos: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = srcItensDevolucoes
         DataController.DetailKeyFieldNames = 'SeqVenda'
         DataController.KeyFieldNames = 'SeqVenda'

@@ -275,11 +275,13 @@ end;
 procedure TfrmParametros.GravarParametrosImpressao;
 begin
    gParametros.Gravar( '', '[IMPRESSAO]', 'NumeroVias',editNumeroVias.Text,gsOperador );
-   gParametros.Gravar( '', '[IMPRESSAO]', 'TipoImpressora',intToStr(cmbTipoImpressora.ItemIndex),gsOperador );
+   //gParametros.Gravar( '', '[IMPRESSAO]', 'TipoImpressora',intToStr(cmbTipoImpressora.ItemIndex),gsOperador );
    gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante',RetornaSimouNao(chkImprimiCopiaComprovante.Checked),gsOperador );
    gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda',RetornaSimouNao(chkImprimeComprovanteVenda.Checked),gsOperador );
    gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteServico',RetornaSimouNao(chkImprimeComprovanteServico.Checked),gsOperador );
    gParametros.Gravar( '', '[IMPRESSAO]', 'ImprimeComprovanteBaixa',RetornaSimouNao(chkImprimeComprovanteBaixa.Checked),gsOperador );
+
+   gsParametros.WriteString('IMPRESSAO','TipoImpressora',intToStr(cmbTipoImpressora.ItemIndex));
 end;
 
 procedure TfrmParametros.GravarParametrosVendas;
@@ -396,11 +398,12 @@ end;
 procedure TfrmParametros.RecuperarParametrosImpressao;
 begin
    editNumeroVias.Text                  := gParametros.ler( '', '[IMPRESSAO]', 'NumeroVias','1',gsOperador );
-   cmbTipoImpressora.Itemindex          := StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador ));
+   //cmbTipoImpressora.Itemindex        := StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador ));
    chkImprimiCopiaComprovante.Checked   := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    chkImprimeComprovanteVenda.Checked   := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda','0',gsOperador ));
    chkImprimeComprovanteServico.Checked := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteServico','0',gsOperador ));
    chkImprimeComprovanteBaixa.Checked   := RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteBaixa','0',gsOperador ));
+   cmbTipoImpressora.Itemindex          := StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'));
 end;
 
 

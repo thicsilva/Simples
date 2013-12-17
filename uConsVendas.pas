@@ -28,7 +28,9 @@ uses
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
-  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu;
+  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmConsVendas = class(TFormBase)
@@ -294,7 +296,8 @@ begin
       CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
-   lsMensagem := 'Obrigado e volte sempre';
+   lsMensagem := 'Obrigado e volte sempre';                                                          
+   {
    if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
       if not inputQuery('Nome do Cliente','Nome do Cliente',lsNomeCliente) Then
@@ -304,7 +307,7 @@ begin
       lsMensagem := 'Cliente:'+lsNomeCliente+#13+#10;
       lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
    End;
-
+    }
    If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
    Begin
       liRetorno := Bematech_FI_AbreCupom( '');
