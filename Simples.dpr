@@ -102,7 +102,6 @@ uses
   uDescontoVenda in 'uDescontoVenda.pas' {FrmDescontoVenda},
   uConfigTabSheet in 'uConfigTabSheet.pas' {frmConfigTabSheet},
   uDaoClienteAnimal in 'Dao\uDaoClienteAnimal.pas',
-  uCapturaImagem in '..\AutoEscola\uCapturaImagem.pas' {frmCapturaImagem},
   uClassAnimal in 'Modelos\uClassAnimal.pas',
   uClassEventoAnimal in 'Modelos\uClassEventoAnimal.pas',
   uDaoEventoAnimal in 'Dao\uDaoEventoAnimal.pas',
@@ -134,7 +133,8 @@ uses
   uDelivery in 'uDelivery.pas' {frmDelivery},
   uFuncoes in '..\Compartilhados\uFuncoes.pas',
   uMapa in 'uMapa.pas' {frmMapa},
-  uSelHora in 'uSelHora.pas' {frmSelHora};
+  uSelHora in 'uSelHora.pas' {frmSelHora},
+  uCapturaImagem in '..\compartilhados\uCapturaImagem.pas' {frmCapturaImagem};
 
 {$R *.res}
 
@@ -146,6 +146,7 @@ begin
   Application.CreateForm(TfrmDelivery, frmDelivery);
   Application.CreateForm(TfrmMapa, frmMapa);
   Application.CreateForm(TfrmSelHora, frmSelHora);
+  Application.CreateForm(TfrmCapturaImagem, frmCapturaImagem);
   Frmlogin.ShowModal;
   Application.Run;
 end.

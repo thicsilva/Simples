@@ -36,9 +36,6 @@
     <DelphiCompile Include="Simples.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="..\AutoEscola\uCapturaImagem.pas">
-      <Form>frmCapturaImagem</Form>
-    </DCCReference>
     <DCCReference Include="..\Cadastros\uCadFornecedores.pas">
       <Form>frmCadFornecedores</Form>
     </DCCReference>
@@ -48,6 +45,9 @@
     </DCCReference>
     <DCCReference Include="..\Compartilhados\ucadUsuarios.pas">
       <Form>frmCadUsuarios</Form>
+    </DCCReference>
+    <DCCReference Include="..\compartilhados\uCapturaImagem.pas">
+      <Form>frmCapturaImagem</Form>
     </DCCReference>
     <DCCReference Include="..\Compartilhados\uClassConexao.pas" />
     <DCCReference Include="..\Compartilhados\uClassPerfil.pas" />
