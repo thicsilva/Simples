@@ -20,7 +20,8 @@ uses
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
   EditNew,SqlTimSt, RDprint,uFormBase, Menus, bsSkinMenus, dxGDIPlusClasses,
   bsSkinExCtrls, cxPropertiesStore, cxGridCustomPopupMenu, cxGridPopupMenu,
-  ExtDlgs, cxContainer, cxTextEdit, cxDBEdit, dxSkinsCore;
+  ExtDlgs, cxContainer, cxTextEdit, cxDBEdit, dxSkinsCore, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCadProdutos = class(TFormBase)
@@ -82,7 +83,7 @@ type
     bsSkinStdLabel1: TbsSkinStdLabel;
     bsSkinStdLabel5: TbsSkinStdLabel;
     bsSkinStdLabel8: TbsSkinStdLabel;
-    bsSkinStdLabel2: TbsSkinStdLabel;
+    lblPrevoVenda: TbsSkinStdLabel;
     bsSkinStdLabel3: TbsSkinStdLabel;
     bsSkinStdLabel11: TbsSkinStdLabel;
     bsSkinStdLabel4: TbsSkinStdLabel;
@@ -753,6 +754,13 @@ procedure TfrmCadProdutos.AjustarTela;
 begin
    lblPrecoVendaExterna.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
    edtPcoVendaExterna.Visible   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
+   if HeLocacao then
+   begin
+      lblPrecoVendaExterna.Visible := True;
+      edtPcoVendaExterna.Visible   := True;
+      lblPrecoVendaExterna.Caption := 'Preço Calção';
+      lblPrevoVenda.Caption        := 'Preço Locação';
+   end;
 end;
 
 procedure TfrmCadProdutos.AjustarValordoEstoque1Click(Sender: TObject);

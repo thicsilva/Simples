@@ -10,7 +10,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
   FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, dxSkinsCore,
-  frxClass, frxDBSet;
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmCadRotas = class(TFormBase)
@@ -69,13 +70,11 @@ type
     btnAdicionarAnimal: TbsSkinButton;
     srcClientesRotas: TDataSource;
     cdsClientesRotas: TClientDataSet;
-    RelClientesDaRota: TfrxReport;
     cdsClientesRotasCodigo: TIntegerField;
     cdsClientesRotasDescricao: TStringField;
     cdsClientesRotasBairro: TStringField;
     cdsClientesRotasCidade: TStringField;
     cdsClientesRotasSequenciaEntrega: TIntegerField;
-    frxDBDataset1: TfrxDBDataset;
     bsSkinButton1: TbsSkinButton;
     procedure btnincluirClick(Sender: TObject);
     procedure LimpaCampos();
@@ -237,7 +236,7 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   RelClientesDaRota.ShowReport;
+   //RelClientesDaRota.ShowReport;
 end;
 
 procedure TfrmCadRotas.btnAdicionarAnimalClick(Sender: TObject);

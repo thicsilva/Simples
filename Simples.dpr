@@ -134,7 +134,8 @@ uses
   uFuncoes in '..\Compartilhados\uFuncoes.pas',
   uMapa in 'uMapa.pas' {frmMapa},
   uSelHora in 'uSelHora.pas' {frmSelHora},
-  uCapturaImagem in '..\compartilhados\uCapturaImagem.pas' {frmCapturaImagem};
+  uCapturaImagem in '..\Compartilhados\uCapturaImagem.pas' {frmCapturaImagem},
+  uLocacao in 'uLocacao.pas' {frmLocacao};
 
 {$R *.res}
 
@@ -147,6 +148,7 @@ begin
   Application.CreateForm(TfrmMapa, frmMapa);
   Application.CreateForm(TfrmSelHora, frmSelHora);
   Application.CreateForm(TfrmCapturaImagem, frmCapturaImagem);
+  Application.CreateForm(TfrmLocacao, frmLocacao);
   Frmlogin.ShowModal;
   Application.Run;
 end.

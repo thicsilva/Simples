@@ -11,7 +11,8 @@ uses
   cxGridLevel, cxClasses, cxControls, cxGridCustomView,cxContainer,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   bsdbctrls, SimpleDS,ConfigUtils, RDprint, Menus, bsSkinMenus,uFormBase,
-  EditNew, dxSkinsCore, uDaoClienteAnimal;
+  EditNew, dxSkinsCore, uDaoClienteAnimal, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 const
      TELEFONE = 5;
 type

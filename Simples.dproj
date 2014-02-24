@@ -46,7 +46,7 @@
     <DCCReference Include="..\Compartilhados\ucadUsuarios.pas">
       <Form>frmCadUsuarios</Form>
     </DCCReference>
-    <DCCReference Include="..\compartilhados\uCapturaImagem.pas">
+    <DCCReference Include="..\Compartilhados\uCapturaImagem.pas">
       <Form>frmCapturaImagem</Form>
     </DCCReference>
     <DCCReference Include="..\Compartilhados\uClassConexao.pas" />
@@ -215,6 +215,9 @@
     </DCCReference>
     <DCCReference Include="uLancarComanda.pas">
       <Form>frmLancaComanda</Form>
+    </DCCReference>
+    <DCCReference Include="uLocacao.pas">
+      <Form>frmLocacao</Form>
     </DCCReference>
     <DCCReference Include="uLogin.pas">
       <Form>frmLogin</Form>

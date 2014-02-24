@@ -52,6 +52,10 @@ object frmCadRotas: TfrmCadRotas
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -246,11 +250,12 @@ object frmCadRotas: TfrmCadRotas
         Left = 0
         Top = 33
         Width = 641
-        Height = 286
+        Height = 288
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 286
         object GridAtividades: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -303,6 +308,10 @@ object frmCadRotas: TfrmCadRotas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -457,7 +466,7 @@ object frmCadRotas: TfrmCadRotas
         Align = alClient
         TabOrder = 0
         object cxGridDBTableView1: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcClientesRotas
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -536,7 +545,6 @@ object frmCadRotas: TfrmCadRotas
         Spacing = 2
         Caption = 'bsSkinPanel2'
         Align = alTop
-        ExplicitTop = 1
         object lblCliente: TbsSkinLabel
           Left = 3
           Top = 6
@@ -1071,376 +1079,5 @@ object frmCadRotas: TfrmCadRotas
     object cdsClientesRotasSequenciaEntrega: TIntegerField
       FieldName = 'SequenciaEntrega'
     end
-  end
-  object RelClientesDaRota: TfrxReport
-    Version = '4.11.7'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 41146.678733518520000000
-    ReportOptions.LastChange = 41146.683595208330000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      ''
-      'begin'
-      ''
-      'end.')
-    Left = 440
-    Top = 160
-    Datasets = <
-      item
-        DataSet = frxDBDataset1
-        DataSetName = 'frxDBDataset1'
-      end>
-    Variables = <
-      item
-        Name = ' New Category1'
-        Value = Null
-      end
-      item
-        Name = 'RelatorioTitulo'
-        Value = #39' '#39
-      end>
-    Style = <
-      item
-        Name = 'Title'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-      end
-      item
-        Name = 'Header'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-      end
-      item
-        Name = 'Group header'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Frame.Typ = [ftBottom]
-      end
-      item
-        Name = 'Data'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-      end
-      item
-        Name = 'Group footer'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Frame.Typ = [ftTop]
-      end
-      item
-        Name = 'Header line'
-        Color = clNone
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        Frame.Typ = [ftBottom]
-        Frame.Width = 2.000000000000000000
-      end>
-    object Data: TfrxDataPage
-      Height = 1000.000000000000000000
-      Width = 1000.000000000000000000
-    end
-    object Page1: TfrxReportPage
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
-      PaperSize = 9
-      LeftMargin = 10.000000000000000000
-      RightMargin = 10.000000000000000000
-      TopMargin = 10.000000000000000000
-      BottomMargin = 10.000000000000000000
-      object ReportTitle1: TfrxReportTitle
-        Height = 26.456710000000000000
-        Top = 18.897650000000000000
-        Width = 718.110700000000000000
-        object Memo1: TfrxMemoView
-          Align = baWidth
-          Width = 718.110700000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          HAlign = haCenter
-          Memo.UTF8 = (
-            'Relatorio de clientes da rota')
-          ParentFont = False
-          Style = 'Title'
-          VAlign = vaCenter
-        end
-        object RelatorioTitulo: TfrxMemoView
-          Left = 468.661720000000000000
-          Top = 2.559060000000000000
-          Width = 79.370130000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            '[RelatorioTitulo]')
-          ParentFont = False
-        end
-      end
-      object PageHeader1: TfrxPageHeader
-        Height = 22.677180000000000000
-        Top = 68.031540000000000000
-        Width = 718.110700000000000000
-        object Memo2: TfrxMemoView
-          Width = 718.110236220472400000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftBottom]
-          Frame.Width = 2.000000000000000000
-          ParentFont = False
-          Style = 'Header line'
-        end
-        object Memo3: TfrxMemoView
-          Width = 65.784807245915070000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Codigo')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo4: TfrxMemoView
-          Left = 65.784807245915070000
-          Width = 238.941650357289200000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Descricao')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo5: TfrxMemoView
-          Left = 304.726457603204200000
-          Width = 145.601247098448000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Bairro')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo6: TfrxMemoView
-          Left = 450.327704701652200000
-          Width = 147.782531518820300000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Cidade')
-          ParentFont = False
-          Style = 'Header'
-        end
-        object Memo7: TfrxMemoView
-          Left = 598.110236220472400000
-          Width = 120.000000000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'SequenciaEntrega')
-          ParentFont = False
-          Style = 'Header'
-        end
-      end
-      object MasterData1: TfrxMasterData
-        Height = 18.897650000000000000
-        Top = 151.181200000000000000
-        Width = 718.110700000000000000
-        DataSet = frxDBDataset1
-        DataSetName = 'frxDBDataset1'
-        RowCount = 0
-        object Memo8: TfrxMemoView
-          Width = 65.784807245915070000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Codigo'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBDataset1."Codigo"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo9: TfrxMemoView
-          Left = 65.784807245915070000
-          Width = 238.941650357289200000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Descricao'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBDataset1."Descricao"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo10: TfrxMemoView
-          Left = 304.726457603204200000
-          Width = 145.601247098448000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Bairro'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBDataset1."Bairro"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo11: TfrxMemoView
-          Left = 450.327704701652200000
-          Width = 147.782531518820300000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Cidade'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBDataset1."Cidade"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-        object Memo12: TfrxMemoView
-          Left = 598.110236220472400000
-          Width = 120.000000000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'SequenciaEntrega'
-          DataSet = frxDBDataset1
-          DataSetName = 'frxDBDataset1'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxDBDataset1."SequenciaEntrega"]')
-          ParentFont = False
-          Style = 'Data'
-        end
-      end
-      object PageFooter1: TfrxPageFooter
-        Height = 26.456710000000000000
-        Top = 230.551330000000000000
-        Width = 718.110700000000000000
-        object Memo13: TfrxMemoView
-          Align = baWidth
-          Width = 718.110700000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-          Frame.Width = 2.000000000000000000
-        end
-        object Memo14: TfrxMemoView
-          Top = 1.000000000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          AutoWidth = True
-          Memo.UTF8 = (
-            '[Date] [Time]')
-        end
-        object Memo15: TfrxMemoView
-          Align = baRight
-          Left = 642.520100000000000000
-          Top = 1.000000000000000000
-          Width = 75.590600000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          HAlign = haRight
-          Memo.UTF8 = (
-            'Page [Page#]')
-        end
-      end
-    end
-  end
-  object frxDBDataset1: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = cdsClientesRotas
-    BCDToCurrency = False
-    Left = 408
-    Top = 160
   end
 end

@@ -57,7 +57,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = Vendas
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1045,7 +1045,7 @@ object frmParametros: TfrmParametros
           Left = 268
           Top = 59
           Width = 150
-          Height = 92
+          Height = 110
           HintImageIndex = 0
           TabOrder = 4
           SkinData = frmPrincipal.SkinPrincipal
@@ -1084,7 +1084,8 @@ object frmParametros: TfrmParametros
           Items.Strings = (
             'Distribui'#231#227'o de Revenda'
             'Comercio e Servi'#231'o'
-            'Pet Shop')
+            'Pet Shop'
+            'Loca'#231#227'o')
         end
       end
     end
