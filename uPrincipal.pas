@@ -156,9 +156,8 @@ type
     dxBarLargeButton6: TdxBarLargeButton;
     MenuPrincipalTab3: TdxRibbonTab;
     dxBarGroup1: TdxBarGroup;
-    MenuManegerBar6: TdxBar;
+    TabServicos: TdxBar;
     RibonFiscal: TdxBar;
-    MenuManegerBar8: TdxBar;
     MenuManegerBar1: TdxBar;
     dxBarLargeButton12: TdxBarLargeButton;
     actSelRelExtratoEstoque: TAction;
@@ -226,7 +225,7 @@ type
     PanelEventos: TbsSkinExPanel;
     bsSkinDBGrid1: TbsSkinDBGrid;
     srcEventoAnimal: TDataSource;
-    MenuManegerBar13: TdxBar;
+    tabControleEntrega: TdxBar;
     actRomaneioEntrega: TAction;
     dxBarLargeButton22: TdxBarLargeButton;
     actVendaloja: TAction;
@@ -257,6 +256,15 @@ type
     actSkinDados: TAction;
     dxBarButton34: TdxBarButton;
     dxBarButton35: TdxBarButton;
+    TabVendasProdutos: TdxBar;
+    tabLocacao: TdxBar;
+    actLocacao: TAction;
+    actConsultaLocacao: TAction;
+    dxBarLargeButton26: TdxBarLargeButton;
+    dxBarButton36: TdxBarButton;
+    TabEntradas: TdxBar;
+    dxBarButton37: TdxBarButton;
+    dxBarLargeButton27: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -322,6 +330,7 @@ type
     procedure actAtendimentoExecute(Sender: TObject);
     procedure actSkinGridExecute(Sender: TObject);
     procedure actSkinDadosExecute(Sender: TObject);
+    procedure actLocacaoExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -379,7 +388,8 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   ucadTipoVenda, uDaoEstrutura, uselRelCurvaAbcProdutos,uDaoContaReceber,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
-  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery;
+  uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
+  uLocacao;
 
 {$R *.dfm}
 
@@ -586,7 +596,8 @@ begin
    actServicos.Visible      := False;
    actconsServicos.Visible  := False;
    RibonFiscal.Visible      := False;
-
+   tabLocacao.Visible       := False;
+   tabControleEntrega.Visible := False;
    If (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1')  or (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='2')  Then
    Begin
        actServicos.Visible      := True;
@@ -600,7 +611,12 @@ begin
       actAtendimento.Visible      := True;
       ImagemFundoPet.visible      := True;
    end;
-
+   if HeLocacao then
+   begin
+     TabVendasProdutos.Visible := False;
+     TabServicos.Visible := False;
+     tabLocacao.Visible := true;
+   end;
 
 
 end;
@@ -1186,6 +1202,12 @@ begin
       Exit;
    End;
 End;
+
+procedure TfrmPrincipal.actLocacaoExecute(Sender: TObject);
+begin
+   frmLocacao := tfrmLocacao.create(self);
+   frmLocacao.showmodal;
+end;
 
 procedure TfrmPrincipal.actSkinGridExecute(Sender: TObject);
 var

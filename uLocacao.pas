@@ -77,8 +77,6 @@ type
     dspVenda: TDataSetProvider;
     cdsVenda: TClientDataSet;
     srcVenda: TDataSource;
-    edtDesconto: TbsSkinEdit;
-    bsSkinStdLabel8: TbsSkinStdLabel;
     edtVlr_Desconto: TbsSkinEdit;
     cdsItensVendasTMPvlr_Desconto: TFloatField;
     edtTotalVenda: TEditN;
@@ -96,8 +94,6 @@ type
     bsSkinStdLabel6: TbsSkinStdLabel;
     cmbCod_formaPagamento: TbsSkinDBLookupComboBox;
     cmbNome_formaPagamento: TbsSkinDBLookupComboBox;
-    lblControle: TbsSkinStdLabel;
-    edtControle: TbsSkinEdit;
     lblCNPJCPF: TbsSkinStdLabel;
     edtCnpjCpf: TbsSkinEdit;
     bsSkinScrollBar2: TbsSkinScrollBar;
@@ -117,7 +113,6 @@ type
     cdsPagamento: TClientDataSet;
     srcPagamento: TDataSource;
     cdsCadFuncionarios: TClientDataSet;
-    cmbTipoDesconto: TbsSkinComboBox;
     bsSkinStdLabel16: TbsSkinStdLabel;
     edtDataVenda: TbsSkinDateEdit;
     cmbCNPJCPF: TbsSkinDBLookupComboBox;
@@ -137,7 +132,6 @@ type
     impMatricial: TRDprint;
     edtdata_Vencimento: TbsSkinDateEdit;
     lblVencimento: TbsSkinStdLabel;
-    edtNome_Cliente: TbsSkinEdit;
     sdtsPesqDescCli: TSimpleDataSet;
     qryItensMateriaPrima: TSQLQuery;
     dspItensMateriaPrima: TDataSetProvider;
@@ -146,7 +140,6 @@ type
     srcCadFichaTecnica: TDataSource;
     cdsCadFichaTecnica: TClientDataSet;
     sdtsVerSaldos: TSimpleDataSet;
-    cmbRota: TbsSkinDBLookupComboBox;
     cdsRotas: TClientDataSet;
     srcRotas: TDataSource;
     edtPco_Tabela: TbsSkinEdit;
@@ -167,7 +160,6 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel5: TbsSkinBevel;
-    pnlRemessaAberta: TPanel;
     cdsItensVendasTMPUnidade: TStringField;
     cdsItensVendasTMPqtdeEmbalagem: TIntegerField;
     cdsItensVendasTMPseqVenda: TIntegerField;
@@ -179,6 +171,10 @@ type
     cdsItensVendasTMPMargemSecundaria: TFloatField;
     cdsItensVendasTMPLucroBruto: TFloatField;
     PanelStatus: TbsSkinStatusPanel;
+    bsSkinStdLabel13: TbsSkinStdLabel;
+    bsSkinEdit1: TbsSkinEdit;
+    edtPrevisaoEntrega: TbsSkinDateEdit;
+    bsSkinStdLabel8: TbsSkinStdLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -190,7 +186,6 @@ type
     procedure btnincluirClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
     procedure cdsItensVendasTMPAfterOpen(DataSet: TDataSet);
-    procedure edtDescontoExit(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCadAlunosClick(Sender: TObject);
     procedure edtcod_ClienteExit(Sender: TObject);
@@ -198,7 +193,6 @@ type
     procedure cmbCod_ClienteChange(Sender: TObject);
     procedure limpacampos();
     procedure cmbCod_formaPagamentoChange(Sender: TObject);
-    procedure cmbNome_formaPagamentoChange(Sender: TObject);
     procedure cmbCod_FuncionarioChange(Sender: TObject);
     procedure cmbNome_FuncionarioChange(Sender: TObject);
     procedure cmbCNPJCPFClick(Sender: TObject);
@@ -210,7 +204,6 @@ type
     procedure btnOkProdClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure edtdata_VencimentoExit(Sender: TObject);
-    procedure edtControleExit(Sender: TObject);
     procedure cdsItensVendasTMPBeforeOpen(DataSet: TDataSet);
     procedure btnDescontoClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
@@ -298,20 +291,8 @@ Begin
 End;
 
 procedure TfrmLocacao.VerificarSaldoDevedor(ClienteID : Integer);
-var DaoCliente : TDaocliente;
-    ValorEmAberto : Real;
 begin
-   DaoCliente := TDaocliente.Create(gConexao);
-   pnlRemessaAberta.Visible:= False;
-   pnlRemessaAberta.Caption := 'Vendedor Com Remessa Aberta';
-   pnlRemessaAberta.Color := clSkyBlue;
-   ValorEmAberto := DaoCliente.SaldoDevedor(ClienteID, RetornarDataSistema );
-   IF ValorEmAberto > 0 Then
-   begin
-      pnlRemessaAberta.Visible:= True;
-      pnlRemessaAberta.Caption := 'Valor Em Aberto..: '+Formatfloat(',0.00',ValorEmAberto);
-      pnlRemessaAberta.Color := clRed;
-   end
+
 end;
 
 procedure tfrmLocacao.VerLimite();
@@ -339,13 +320,11 @@ Begin
    edtPco_Venda.Text           := '0,00';
    edtPco_Tabela.Text          := '0,00';
    edtTotal.Text               := '0,00';
-   edtDesconto.Text            := '0,00';
    edtTotDesconto.Text         := '0,00';
    edtVlr_Desconto.Text        := '0,00';
    edtTotalLiquido.Text        := '0,00';
    edtCod_Produto.Text         := '';
    edtCnpjCpf.Text             := '';
-   edtControle.Text            := '';
    edtCod_Funcionario.Text     := '';
    edtCod_FormaPagamento.Text  := '';
    cmbCod_formaPagamento.keyvalue  := null;
@@ -355,7 +334,6 @@ Begin
    cmbCod_Cliente.KeyValue         := Null;
    edtLimite_Credito.Text          := '0,00';
    cmbNome_Cliente.KeyValue        := Null;
-   edtNome_Cliente.text            := '';
 End;
 procedure TfrmLocacao.btnFecharClick(Sender: TObject);
 begin
@@ -429,16 +407,12 @@ end;
 procedure TfrmLocacao.FormShow(Sender: TObject);
 begin
    AtualizaTabelas();
-   lblControle.Visible         := True;
-   edtControle.Visible         := True;
    lblVencimento.Visible       := False;
    edtdata_Vencimento.Visible  := False;
    If (FrmLocacao.tag = SERVICOS)  Then
    Begin
       FrmLocacao.Caption    := 'Cadastro e manuteção de vendas de serviços';
       btnincluir.Caption   := '&Novo Serviço';
-      lblControle.Visible  := True;
-      edtControle.Visible  := True;
    End
    Else if (FrmLocacao.tag = OS_FINALIZADA ) then
       PrepararFinalizacaoOS
@@ -453,17 +427,6 @@ begin
       btnincluir.Caption := '&Nova Venda';
    End;
 
-   cmbRota.Visible            := False;
-
-
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
-      cmbRota.Visible            := True;
-
-   if Uppercase(gParametros.Ler('', '[CADASTRO]', 'VendaSemControle', 'NAO')) = 'SIM' then
-   begin
-      lblControle.Visible        := True;
-      edtControle.Visible        := True;
-   end;
    if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' ))) then
    begin
       lblVencimento.Visible       := True;
@@ -472,12 +435,6 @@ begin
 
    EdtPco_Venda.Enabled := gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Altera Preco de Venda',gbMaster);
 
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'SIM' Then
-   begin
-      edtControle.Visible := False;
-      cmbRota.Visible := False;
-      lblControle.Visible := False;
-   end;
    pAnimalId := 0;
    btnAdicionar.Enabled   := False;
    btnCadProdutos.Enabled := False;
@@ -495,18 +452,6 @@ begin
          CaixaMensagem( 'Produto não encontrado ', ctAviso, [ cbOk ], 0 );
          edtCod_Produto.Setfocus;
       End;
-   End;
-end;
-
-procedure TfrmLocacao.edtControleExit(Sender: TObject);
-var lscopia : String;
-begin
-   lsCopia := VerCopia( edtControle.Text, 'CONTROLE', 'T_Vendas', frmPrincipal.dbxPrincipal, gsCod_Emp, 'SeqVenda' );
-   If lsCopia <> '' Then
-   Begin
-      CaixaMensagem( 'Numero de controle ja inserido na O.S. ' + lsCopia, ctAviso, [ cbOk ], 0 );
-      edtControle.SetFocus;
-      Exit;
    End;
 end;
 
@@ -542,7 +487,6 @@ begin
             EdtPco_Venda.Text  := frmCalMQuadrado.edtTotal.text;
          End;
       End;
-      edtDesconto.Enabled := True;
       if (( cdsCadProdutos.fieldbyname('Saldo').asInteger <= 0 ) And
          ( ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'BloqueioEstoque', 'NAO' )) = 'SIM') or
            ( cdsCadProdutos.fieldbyname('BloqueiaNegativo').asBoolean) ) AND
@@ -560,8 +504,6 @@ procedure TfrmLocacao.PrepararFinalizacaoOS;
 begin
   FrmLocacao.Caption := 'Finalização de Serviço';
   btnok.Caption := '&Finalizar';
-  lblControle.Visible := True;
-  edtControle.Visible := True;
   liTotalLiquido := StrtoFloat(edtTotalLiquido.Text);
   pnlDadosClientes.Enabled := True;
   cmbNome_formaPagamento.Enabled := True;
@@ -613,17 +555,12 @@ begin
    sdtsPesqDescCli.DataSet.ParamByName('parCod_Cliente').AsInteger := StrToint(edtcod_Cliente.Text);
    sdtsPesqDescCli.DataSet.ParamByName('parCod_Produto').AsInteger := StrToint(edtCod_Produto.Text);
    sdtsPesqDescCli.Open;
-   edtDesconto.Enabled := True;
    pDescontoCliente := False;
    if Not sdtsPesqDescCli.IsEmpty then
    Begin
       If sdtsPesqDescCli.FieldByname('Qtde_Minima').asInteger<=StrToint(edtQtde_Venda.text) Then
       Begin
-         cmbTipoDesconto.ItemIndex := 1;
          pDescontoCliente := true;
-         edtDesconto.Text :=Formatfloat('0.00', sdtsPesqDescCli.FieldByname('Perc_Desconto').asFloat);
-         edtDescontoExit(edtDesconto);
-         edtDesconto.Enabled := false;
          EdtPco_Venda.SetFocus;
       End;
    End;
@@ -709,7 +646,6 @@ begin
    edtPco_Tabela.Text  := '0,00';
    edtTotal.Text       := '0,00';
    edtVlr_Desconto.text:= '0,00';
-   edtDesconto.text    := '0,00';
    pvrvlr_TotalAnt     := 0;
    edtCod_Produto.Enabled  := True;
    cmbNome_Produto.Enabled := True;
@@ -779,25 +715,6 @@ begin
 
    {$REGION 'Criticas e Validação das Informações'}
    lsContrato := '';
-   If (FrmLocacao.tag = 3) OR ( gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' ) Then
-   Begin
-      IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendaSemControle', 'NAO' )) = 'NAO' Then
-      begin
-        If trim(edtControle.Text) = '' Then
-        Begin
-           CaixaMensagem( 'Digite o numero de controle ', ctAviso, [ cbOk ], 0 );
-           edtControle.SetFocus;
-           Exit;
-        End;
-      end;
-      {
-      if Trim(cdsCadClientes.FieldByName('Contrato').AsString) = '' then
-      Begin
-         if not inputQuery('Digite o Contrato','Digite o Contrato',lsContrato) Then
-            Exit;
-      End;
-      }
-   End;
    If cdsItensVendasTMP.IsEmpty Then
    Begin
       CaixaMensagem( 'Venda Sem item digitado ', ctAviso, [ cbOk ], 0 );
@@ -877,27 +794,8 @@ begin
    cdsItensVendas.Open;
 
    cdsItensVendasTMP.First;
-   if pnlRemessaAberta.Visible then
-      DaoRemessa := TDaoRemessa.Create(gCoNexao);
    while not cdsItensVendasTMP.Eof Do
    Begin
-      Try
-        if pnlRemessaAberta.Visible then
-        begin
-           DaoRemessa.SomarItemNaRemessaVenda(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger,
-                                              cdsItensVendasTmp.FieldByName('Codigo').asInteger,
-                                              cdsItensVendasTmp.FieldByName('Qtde_Venda').AsInteger, gsOperador  );
-        end;
-        lrCustoTotal := lrCustoTotal + ( cdsItensVendasTmp.FieldByName('Qtde_Venda').Asfloat*cdsItensVendasTmp.FieldByName('PrecoCusto').Asfloat );
-      except
-         on E: Exception do
-         Begin
-            frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
-            CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
-            Exit;
-         End;
-
-      End;
 
       {$REGION 'Controle de Saldo de estoque (Valor)'}
 
@@ -992,9 +890,9 @@ begin
    If FrmLocacao.tag <> 4 then
       cdsVenda.FieldByName('Data_Cad').asDateTime       := now;
    cdsVenda.FieldByname('Vlr_DescProd').AsFloat      := lrVlr_DescProd;
-   cdsVenda.FieldByname('Controle').AsString         := edtControle.text;
+   cdsVenda.FieldByname('Controle').AsString         := '0';
    cdsVenda.FieldByname('Tipo_Venda').AsString       := 'P';
-   cdsVenda.FieldByName('Nome_Cliente').asString     := edtNome_Cliente.text;
+   cdsVenda.FieldByName('Nome_Cliente').asString     := cmbNome_Cliente.Text;
    cdsVenda.FieldByname('PagouSinal').AsBoolean      := True;
    if liseqOs <> 0 then
       cdsVenda.FieldByname('SeqOs').AsInteger        := liseqos;
@@ -1322,15 +1220,6 @@ begin
 
    {$REGION 'Atualiza Rota informada'}
 
-   if cmbRota.Visible then
-   Begin
-      qryModific.Close;
-      qryModific.Sql.text                             := 'Update T_Clientes Set Cod_Rota=:parCod_Rota where Codigo=:parCodigo ';
-      qryModific.ParamByName('parcod_Rota').asInteger := cmbRota.KeyValue;
-      qryModific.ParamByName('parCodigo').AsInteger   := StrToInt(edtcod_Cliente.Text);
-      qryModific.ExecSQL;
-   End;
-
    if Trim(lsContrato)<>'' then
    Begin
       qryModific.Close;
@@ -1421,6 +1310,7 @@ begin
    pnlProdutos.Enabled      := True;
    pnlDadosClientes.Enabled := True;
    btnCadProdutos.Enabled   := True;
+   edtPrevisaoEntrega.Date  := now;
 
    AtualizaTabelas;
    btnadicionarClick(btnadicionar);
@@ -1487,52 +1377,6 @@ begin
    end;
 end;
 
-procedure TfrmLocacao.edtDescontoExit(Sender: TObject);
-var lrDesconto : Real;
-    lrPerc_Desconto : Double;
-begin
-   edtDesconto.Text :=  SubstString(edtDesconto.Text,'.', ',', True );
-   EdtPco_Venda.ReadOnly := False;
-
-   if StrToFloat(edtDesconto.Text)>0 then
-   Begin
-      if (cmbTipoDesconto.ItemIndex=0) then
-         lrPerc_Desconto := arredondar( (StrToFloat(edtDesconto.Text)/StrToFloat(EdtPco_Venda.Text)) * 100,2)
-      Else
-         lrPerc_Desconto := StrToFloat(edtDesconto.Text);
-
-      if ( lrPerc_Desconto > gsPerfilAcesso.Desc_Maximo )  and (Not pDescontoCliente) then
-      Begin
-         CaixaMensagem( 'O valor do desconto ultrapassa sua margem de '+formatFloat('0.00',gsPerfilAcesso.Desc_Maximo), ctAviso, [ cbOk ], 0 );
-         edtDesconto.SetFocus;
-         Exit;
-      End;
-   End;
-
-  if (Strtofloat(edtDesconto.Text)>0) and (cmbTipoDesconto.ItemIndex=1) Then
-  Begin
-     lrdesconto := (StrToFloat(EdtPco_Venda.Text)*Strtofloat(edtDesconto.Text)/100);
-     edtVlr_Desconto.text    := FormatFloat('0.00',lrdesconto);
-     edtDesconto.Text        := FormatFloat('0.00',lrdesconto);
-     EdtPco_Venda.ReadOnly   := True;
-  End
-  else if (Strtofloat(edtDesconto.Text)>0) and (cmbTipoDesconto.ItemIndex=0) Then
-  Begin
-     lrdesconto := Strtofloat(edtDesconto.Text);
-     edtVlr_Desconto.text    := FormatFloat('0.00',lrdesconto);
-     edtDesconto.Text        := FormatFloat('0.00',lrdesconto);
-     EdtPco_Venda.ReadOnly   := True;
-  End
-  else
-  Begin
-     edtVlr_Desconto.text := '0,00';
-     edtDesconto.text     := '0,00';
-  end;
-  if not EdtPco_Venda.Enabled then
-     EdtPco_VendaExit(Sender);
-
-end;
-
 procedure TfrmLocacao.btnCancelarClick(Sender: TObject);
 begin
 
@@ -1542,7 +1386,6 @@ begin
    edtPco_Venda.Text   := '0,00';
    edtTotal.Text       := '0,00';
    edtVlr_Desconto.text:= '0,00';
-   edtDesconto.text    := '0,00';
 
    edtCod_Produto.Enabled  := True;
    cmbNome_Produto.Enabled := True;
@@ -1627,7 +1470,6 @@ begin
    btnCadProdutos.Enabled := False;
 
    edtQtde_Venda.Text  := FormatFloat('0',cdsItensVendasTMP.FieldByName('Qtde_Venda').AsFloat);
-   edtDesconto.Text    := FormatFloat('0.00',cdsItensVendasTMP.FieldByName('Vlr_Desconto').AsFloat);
    EdtPco_Venda.Text   := FormatFloat('0.00',cdsItensVendasTMP.FieldByName('pco_Venda').AsFloat);
    pvrvlr_TotalAnt     := cdsItensVendasTMP.FieldByName('Vlr_Total').AsFloat;
 
@@ -1735,7 +1577,6 @@ begin
    if Trim(cmbNome_Cliente.Text) <> '' Then
    Begin
       edtCod_Cliente.text   :=  cmbCod_Cliente.Text;
-      edtNome_Cliente.Text  :=  cmbNome_Cliente.Text;
       try
          edtCod_FormaPagamento.SetFocus
       except
@@ -1752,7 +1593,6 @@ begin
    Begin
       edtCod_Cliente.text  :=  cmbCod_Cliente.Text;
       edtCnpjCpf.Text      := Trim(cdsCadClientes.FieldByName('CnpjCpf').asString);
-      cmbRota.KeyValue      := cdsCadClientes.FieldByName('Cod_Rota').asString;
       if Length( edtCNPJCPF.Text ) <= 11 then
       begin
         lblCNPJCPF.Caption   := 'C.P.F.';
@@ -1771,13 +1611,6 @@ begin
       sdtsConsultaCli.DataSet.ParamByName('parStatus').AsInteger      := 0;
       sdtsConsultaCli.Open;
       cdsCadClientes.Locate('codigo',edtcod_Cliente.Text,[]);
-      edtNome_Cliente.Enabled := False;
-      if StrToInt(gParametros.Ler( '', '[CADASTRO]', 'ClientePadrao', '0' )) = StrToInt(edtCod_Cliente.Text) then
-      Begin
-          edtNome_Cliente.Enabled := True;
-          If FrmLocacao.tag <> 4 then
-             edtnome_cliente.SetFocus;
-      End;
       if cdsCadClientes.FieldByName('Status').AsString = '1' then
       Begin
          CaixaMensagem( 'Este Cliente esta em Cobrança ', ctAviso, [ cbOk ], 0 );
@@ -1810,21 +1643,13 @@ begin
       edtCod_FormaPagamento.Text      := inttostr(cmbCod_formaPagamento.KeyValue);
 end;
 
-procedure TfrmLocacao.cmbNome_formaPagamentoChange(Sender: TObject);
-begin
-   cmbCod_formaPagamento.KeyValue := cmbNome_formaPagamento.KeyValue;
-end;
-
 procedure TfrmLocacao.cmbCod_FuncionarioChange(Sender: TObject);
 var Daoremessa : TDaoRemessa;
 begin
    cmbNome_Funcionario.KeyValue  :=  cmbCod_Funcionario.KeyValue;
    if Trim(cmbCod_Funcionario.Text)<>'' Then
    begin
-      Daoremessa := TDaoRemessa.Create(gConexao);
       edtCod_Funcionario.Text := cmbCod_Funcionario.Text;
-      pnlRemessaAberta.Visible := DaoRemessa.TemRemessaAberta(cdsCadFuncionarios.FieldByName('Cod_Supervisor').AsInteger);
-      FreeAndNil(Daoremessa);
    end;
 end;
 
