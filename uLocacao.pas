@@ -26,7 +26,7 @@ uses
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
   SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
-  uDaoCustoProduto;
+  uDaoCustoProduto, dateUtils;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -175,6 +175,8 @@ type
     bsSkinEdit1: TbsSkinEdit;
     edtPrevisaoEntrega: TbsSkinDateEdit;
     bsSkinStdLabel8: TbsSkinStdLabel;
+    cdsItensVendasTMPDias: TIntegerField;
+    cdsItensVendasTMPPrevisao_Entrega: TDateTimeField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -207,6 +209,7 @@ type
     procedure cdsItensVendasTMPBeforeOpen(DataSet: TDataSet);
     procedure btnDescontoClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
+    procedure edtPrevisaoEntregaExit(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -221,6 +224,7 @@ type
      procedure TotalizarVenda(lrTotalDesconto: Real);
     function RetornarSelectProdutos: String;
     procedure AtaulizaLucroBruto;
+    function RetornarDias : integer;
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
@@ -289,6 +293,15 @@ Begin
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
 End;
+
+Function TfrmLocacao.RetornarDias : Integer;
+var Dias : Integer;
+begin
+  Dias := DaysBetween(edtPrevisaoEntrega.Date, now) + 1;
+  if dias <= 0 then
+    Dias := 1;
+  Result := Dias;  
+end;
 
 procedure TfrmLocacao.VerificarSaldoDevedor(ClienteID : Integer);
 begin
@@ -547,6 +560,13 @@ begin
   // edtTotal.Text     := Formatfloat( '0.00',StrToFloat(edtTotal.Text) - );
 end;
 
+procedure TfrmLocacao.edtPrevisaoEntregaExit(Sender: TObject);
+var Dias : integer;
+begin
+   Dias := RetornarDias;
+   edtTotal.Text  := Formatfloat( '0.00',  ( StrToFloat(edtQtde_Venda.Text) *  StrToFloat(EdtPco_Venda.text) ) * Dias );
+end;
+
 procedure TfrmLocacao.edtQtde_VendaExit(Sender: TObject);
 begin
    edtTotal.Text := Formatfloat ( '0.00',StrToFloat(edtQtde_Venda.Text) * StrToFloat(EdtPco_Venda.text));
@@ -631,6 +651,9 @@ begin
    cdsItensVendasTmp.FieldByName('PesoLiquido').asFloat    := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoLiquido').AsFloat;
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
+   cdsItensVendasTmp.FieldByName('Dias').asInteger         := RetornarDias;
+   cdsItensVendasTmp.FieldByName('Previsao_Entrega').AsDateTime := edtPrevisaoEntrega.date;
+
    if FrmLocacao.Tag=VENDAS_EXTERNAS then
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;

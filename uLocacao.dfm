@@ -299,7 +299,7 @@ object frmLocacao: TfrmLocacao
     end
     object edtCod_Funcionario: TbsSkinEdit
       Left = 123
-      Top = 105
+      Top = 103
       Width = 80
       Height = 18
       DefaultColor = clWindow
@@ -332,7 +332,7 @@ object frmLocacao: TfrmLocacao
     end
     object edtCod_FormaPagamento: TbsSkinEdit
       Left = 123
-      Top = 81
+      Top = 79
       Width = 80
       Height = 18
       DefaultColor = clWindow
@@ -968,7 +968,6 @@ object frmLocacao: TfrmLocacao
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitTop = 208
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -1256,8 +1255,7 @@ object frmLocacao: TfrmLocacao
         Layout = blGlyphTop
         Enabled = False
         OnClick = btnOkProdClick
-        ExplicitLeft = 651
-        ExplicitTop = 8
+        ExplicitLeft = 652
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 518
@@ -1337,7 +1335,6 @@ object frmLocacao: TfrmLocacao
     Caption = 'bsSkinPanel1'
     Align = alTop
     Enabled = False
-    ExplicitTop = 252
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 10
       Top = 6
@@ -1424,7 +1421,7 @@ object frmLocacao: TfrmLocacao
       Caption = 'Descricao'
     end
     object bsSkinStdLabel8: TbsSkinStdLabel
-      Left = 561
+      Left = 558
       Top = 6
       Width = 96
       Height = 13
@@ -1593,7 +1590,7 @@ object frmLocacao: TfrmLocacao
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 5
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1644,15 +1641,14 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 5
-      Visible = False
+      TabOrder = 4
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
-      OnExit = edtdata_VencimentoExit
+      OnExit = edtPrevisaoEntregaExit
     end
   end
   object bsSkinScrollBar1: TbsSkinScrollBar
@@ -1662,6 +1658,7 @@ object frmLocacao: TfrmLocacao
     Height = 19
     HintImageIndex = 0
     TabOrder = 3
+    Visible = False
     SkinDataName = 'hscrollbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -1679,14 +1676,16 @@ object frmLocacao: TfrmLocacao
     Kind = sbHorizontal
     PageSize = 0
     Min = 0
-    Max = 127
+    Max = 0
     Position = 0
-    SmallChange = 63
-    LargeChange = 63
+    SmallChange = 127
+    LargeChange = 127
+    ExplicitLeft = -1
+    ExplicitTop = 500
   end
   object edtVlr_Desconto: TbsSkinEdit
-    Left = 445
-    Top = 314
+    Left = 453
+    Top = 346
     Width = 45
     Height = 18
     Text = '0,00'
@@ -1746,8 +1745,6 @@ object frmLocacao: TfrmLocacao
     Position = 1
     SmallChange = 1
     LargeChange = 1
-    ExplicitTop = 307
-    ExplicitHeight = 187
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
@@ -1791,8 +1788,8 @@ object frmLocacao: TfrmLocacao
     TitleFont.Style = [fsBold]
   end
   object edtLimite_Credito: TEditN
-    Left = 198
-    Top = 400
+    Left = 206
+    Top = 432
     Width = 69
     Height = 24
     TabStop = False
@@ -1827,8 +1824,8 @@ object frmLocacao: TfrmLocacao
     TextHint = True
   end
   object edtPco_Tabela: TbsSkinEdit
-    Left = 642
-    Top = 330
+    Left = 650
+    Top = 362
     Width = 66
     Height = 18
     Text = '0,00'
@@ -1861,8 +1858,8 @@ object frmLocacao: TfrmLocacao
     OnExit = EdtPco_VendaExit
   end
   object memoMensagem: TbsSkinMemo
-    Left = 421
-    Top = 382
+    Left = 429
+    Top = 414
     Width = 185
     Height = 89
     Color = clInactiveBorder
@@ -2220,49 +2217,49 @@ object frmLocacao: TfrmLocacao
   end
   object dspItensVendas: TDataSetProvider
     DataSet = qryItensVendas
-    Left = 305
-    Top = 332
+    Left = 313
+    Top = 364
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 49
-    Top = 299
+    Left = 57
+    Top = 331
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 49
-    Top = 327
+    Left = 57
+    Top = 359
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 277
-    Top = 333
+    Left = 285
+    Top = 365
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 78
-    Top = 299
+    Left = 86
+    Top = 331
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 78
-    Top = 327
+    Left = 86
+    Top = 359
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 306
-    Top = 360
+    Left = 314
+    Top = 392
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
-    Left = 306
-    Top = 389
+    Left = 314
+    Top = 421
   end
   object cdsItensVendasTMP: TClientDataSet
     Active = True
@@ -2342,15 +2339,23 @@ object frmLocacao: TfrmLocacao
       item
         Name = 'LucroBruto'
         DataType = ftFloat
+      end
+      item
+        Name = 'Dias'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Previsao_Entrega'
+        DataType = ftDateTime
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
     BeforeOpen = cdsItensVendasTMPBeforeOpen
-    Left = 107
-    Top = 300
+    Left = 115
+    Top = 332
     Data = {
-      910100009619E0BD010000001800000012000000000003000000910106436F64
+      B70100009619E0BD010000001800000014000000000003000000B70106436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
@@ -2362,39 +2367,45 @@ object frmLocacao: TfrmLocacao
       65746F7249640400010000000000095065736F427275746F0800040000000000
       0B5065736F4C69717569646F08000400000000000A507265636F437573746F08
       00040000000000104D617267656D536563756E64617269610800040000000000
-      0A4C7563726F427275746F08000400000000000000}
+      0A4C7563726F427275746F080004000000000004446961730400010000000000
+      10507265766973616F5F456E747265676108000800000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
-      DisplayWidth = 7
+      DisplayWidth = 6
       FieldName = 'Codigo'
     end
     object cdsItensVendasTMPDescricao: TStringField
-      DisplayWidth = 33
+      DisplayWidth = 29
       FieldName = 'Descricao'
       Size = 50
     end
     object cdsItensVendasTMPUnidade: TStringField
-      DisplayWidth = 7
+      DisplayWidth = 6
       FieldName = 'Unidade'
       Size = 3
     end
     object cdsItensVendasTMPqtde_Venda: TFloatField
       DisplayLabel = 'Quantidade.'
-      DisplayWidth = 10
+      DisplayWidth = 9
       FieldName = 'qtde_Venda'
     end
     object cdsItensVendasTMPPco_Venda: TFloatField
-      DisplayLabel = 'Pco. Venda'
-      DisplayWidth = 10
+      DisplayLabel = 'Pco. P/Dia'
+      DisplayWidth = 9
       FieldName = 'Pco_Venda'
+    end
+    object cdsItensVendasTMPDias: TIntegerField
+      DisplayWidth = 5
+      FieldName = 'Dias'
     end
     object cdsItensVendasTMPvlr_Desconto: TFloatField
       DisplayLabel = 'Desconto'
       DisplayWidth = 10
       FieldName = 'vlr_Desconto'
+      Visible = False
     end
     object cdsItensVendasTMPvlr_Total: TFloatField
       DisplayLabel = 'Vlr. Total'
-      DisplayWidth = 10
+      DisplayWidth = 8
       FieldName = 'vlr_Total'
     end
     object cdsItensVendasTMPComplemento: TStringField
@@ -2405,6 +2416,10 @@ object frmLocacao: TfrmLocacao
     object cdsItensVendasTMPPco_tabela: TFloatField
       FieldName = 'Pco_tabela'
       Visible = False
+    end
+    object cdsItensVendasTMPPrevisao_Entrega: TDateTimeField
+      DisplayWidth = 13
+      FieldName = 'Previsao_Entrega'
     end
     object cdsItensVendasTMPperc_Comis: TFloatField
       FieldName = 'perc_Comis'
@@ -2431,8 +2446,9 @@ object frmLocacao: TfrmLocacao
       Visible = False
     end
     object cdsItensVendasTMPPrecoCusto: TFloatField
-      DisplayWidth = 9
+      DisplayWidth = 8
       FieldName = 'PrecoCusto'
+      Visible = False
     end
     object cdsItensVendasTMPMargemSecundaria: TFloatField
       FieldName = 'MargemSecundaria'
@@ -2442,105 +2458,106 @@ object frmLocacao: TfrmLocacao
       DisplayLabel = 'Lucro Bruto %'
       DisplayWidth = 10
       FieldName = 'LucroBruto'
+      Visible = False
     end
   end
   object srcItensVendasTMP: TDataSource
     DataSet = cdsItensVendasTMP
-    Left = 107
-    Top = 328
+    Left = 115
+    Top = 360
   end
   object dspVenda: TDataSetProvider
     DataSet = qryVenda
-    Left = 334
-    Top = 332
+    Left = 342
+    Top = 364
   end
   object cdsVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVenda'
-    Left = 334
-    Top = 360
+    Left = 342
+    Top = 392
   end
   object srcVenda: TDataSource
     DataSet = cdsVenda
-    Left = 334
-    Top = 389
+    Left = 342
+    Top = 421
   end
   object qryVenda: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 334
-    Top = 305
+    Left = 342
+    Top = 337
   end
   object qryItensVendas: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 305
-    Top = 305
+    Left = 313
+    Top = 337
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 362
-    Top = 304
+    Left = 370
+    Top = 336
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 277
-    Top = 306
+    Left = 285
+    Top = 338
   end
   object cdsCadFormasPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 21
-    Top = 299
+    Left = 29
+    Top = 331
   end
   object srcCadFormasPagamento: TDataSource
     DataSet = cdsCadFormasPagamento
-    Left = 21
-    Top = 327
+    Left = 29
+    Top = 359
   end
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
-    Left = 135
-    Top = 328
+    Left = 143
+    Top = 360
   end
   object qryPagamento: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 419
-    Top = 304
+    Left = 427
+    Top = 336
   end
   object dspPagamento: TDataSetProvider
     DataSet = qryPagamento
-    Left = 419
-    Top = 332
+    Left = 427
+    Top = 364
   end
   object cdsPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPagamento'
-    Left = 419
-    Top = 358
+    Left = 427
+    Top = 390
   end
   object srcPagamento: TDataSource
     DataSet = cdsPagamento
-    Left = 419
-    Top = 386
+    Left = 427
+    Top = 418
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 133
-    Top = 299
+    Left = 141
+    Top = 331
   end
   object sdtsConsultaCli: TSimpleDataSet
     Aggregates = <>
@@ -2555,8 +2572,8 @@ object frmLocacao: TfrmLocacao
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 160
-    Top = 298
+    Left = 168
+    Top = 330
     Data = {
       610000009619E0BD010000001800000003000000000003000000610006436F64
       69676F0100490000000100055749445448020002000300094465736372696361
@@ -2583,8 +2600,8 @@ object frmLocacao: TfrmLocacao
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 524
-    Top = 367
+    Left = 532
+    Top = 399
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -2677,8 +2694,8 @@ object frmLocacao: TfrmLocacao
     FonteTamanhoPadrao = S10cpp
     FonteEstiloPadrao = []
     Orientacao = poPortrait
-    Left = 600
-    Top = 336
+    Left = 608
+    Top = 368
   end
   object sdtsPesqDescCli: TSimpleDataSet
     Aggregates = <>
@@ -2686,44 +2703,44 @@ object frmLocacao: TfrmLocacao
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 552
-    Top = 367
+    Left = 560
+    Top = 399
   end
   object qryItensMateriaPrima: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 447
-    Top = 303
+    Left = 455
+    Top = 335
   end
   object dspItensMateriaPrima: TDataSetProvider
     DataSet = qryItensMateriaPrima
-    Left = 448
-    Top = 331
+    Left = 456
+    Top = 363
   end
   object cdsItensMateriaPrima: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensMateriaPrima'
-    Left = 448
-    Top = 359
+    Left = 456
+    Top = 391
   end
   object srcItensMateriaPrima: TDataSource
     DataSet = cdsItensMateriaPrima
-    Left = 448
-    Top = 387
+    Left = 456
+    Top = 419
   end
   object srcCadFichaTecnica: TDataSource
     DataSet = cdsCadFichaTecnica
-    Left = 188
-    Top = 326
+    Left = 196
+    Top = 358
   end
   object cdsCadFichaTecnica: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 188
-    Top = 298
+    Left = 196
+    Top = 330
   end
   object sdtsVerSaldos: TSimpleDataSet
     Aggregates = <>
@@ -2731,50 +2748,50 @@ object frmLocacao: TfrmLocacao
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 580
-    Top = 367
+    Left = 588
+    Top = 399
   end
   object cdsRotas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 216
-    Top = 298
+    Left = 224
+    Top = 330
   end
   object srcRotas: TDataSource
     DataSet = cdsRotas
-    Left = 216
-    Top = 326
+    Left = 224
+    Top = 358
   end
   object cdsSaldos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSaldos'
-    Left = 641
-    Top = 411
+    Left = 649
+    Top = 443
   end
   object dspSaldos: TDataSetProvider
     DataSet = qrySaldos
-    Left = 641
-    Top = 383
+    Left = 649
+    Top = 415
   end
   object qrySaldos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 641
-    Top = 355
+    Left = 649
+    Top = 387
   end
   object cdsTipoVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 245
-    Top = 299
+    Left = 253
+    Top = 331
   end
   object srcTipoVenda: TDataSource
     DataSet = cdsTipoVenda
-    Left = 245
-    Top = 327
+    Left = 253
+    Top = 359
   end
 end
