@@ -34,6 +34,7 @@ object frmLocacao: TfrmLocacao
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -301,7 +302,7 @@ object frmLocacao: TfrmLocacao
       Left = 123
       Top = 103
       Width = 80
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -322,6 +323,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -334,7 +336,7 @@ object frmLocacao: TfrmLocacao
       Left = 123
       Top = 79
       Width = 80
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -355,6 +357,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -367,7 +370,7 @@ object frmLocacao: TfrmLocacao
       Left = 123
       Top = 33
       Width = 112
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -388,6 +391,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -413,6 +417,7 @@ object frmLocacao: TfrmLocacao
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -431,32 +436,10 @@ object frmLocacao: TfrmLocacao
       Spacing = 2
       Caption = 'bsSkinPanel3'
       Align = alRight
-      object bsSkinStdLabel7: TbsSkinStdLabel
-        Left = 54
-        Top = 12
-        Width = 83
-        Height = 20
-        EllipsType = bsetNone
-        UseSkinFont = False
-        UseSkinColor = False
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clNavy
-        DefaultFont.Height = -16
-        DefaultFont.Name = 'MS Sans Serif'
-        DefaultFont.Style = [fsBold]
-        SkinDataName = 'stdlabel'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -16
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        Caption = 'Sub. Total'
-        ParentFont = False
-      end
       object bsSkinStdLabel9: TbsSkinStdLabel
-        Left = 59
-        Top = 50
-        Width = 78
+        Left = 33
+        Top = 34
+        Width = 120
         Height = 20
         EllipsType = bsetNone
         UseSkinFont = False
@@ -472,7 +455,7 @@ object frmLocacao: TfrmLocacao
         Font.Height = -16
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        Caption = 'Desconto'
+        Caption = 'Total de Pe'#231'as'
         ParentFont = False
       end
       object bsSkinStdLabel10: TbsSkinStdLabel
@@ -498,8 +481,8 @@ object frmLocacao: TfrmLocacao
       end
       object bsSkinStdLabel11: TbsSkinStdLabel
         Left = 14
-        Top = 80
-        Width = 123
+        Top = 60
+        Width = 139
         Height = 20
         EllipsType = bsetNone
         UseSkinFont = False
@@ -515,12 +498,12 @@ object frmLocacao: TfrmLocacao
         Font.Height = -16
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
-        Caption = 'Total da Venda'
+        Caption = 'Total da Loca'#231#227'o'
         ParentFont = False
       end
-      object edtTotalVenda: TEditN
-        Left = 143
-        Top = 8
+      object edtTotPecas: TEditN
+        Left = 159
+        Top = 30
         Width = 69
         Height = 24
         TabStop = False
@@ -553,9 +536,9 @@ object frmLocacao: TfrmLocacao
         WidthOnFocus = 0
         TextHint = True
       end
-      object edtTotDesconto: TEditN
-        Left = 143
-        Top = 50
+      object edtTotalLiquido: TEditN
+        Left = 159
+        Top = 60
         Width = 69
         Height = 24
         TabStop = False
@@ -568,41 +551,6 @@ object frmLocacao: TfrmLocacao
         ParentFont = False
         ReadOnly = True
         TabOrder = 1
-        Text = '0,00'
-        ColorOnFocus = clInfoBk
-        ColorOnNotFocus = clInfoBk
-        FontColorOnFocus = clRed
-        FontColorOnNotFocus = clBlack
-        FontColorOnOverWrite = clBlue
-        EditType = etFloat
-        EditKeyByTab = #9
-        EditAlign = etAlignRight
-        EditLengthAlign = 0
-        EditPrecision = 0
-        ValueInteger = 0
-        ValueDate = 39369.000000000000000000
-        ValueTime = 0.502512476851851900
-        TimeSeconds = False
-        FirstCharUpper = False
-        FirstCharUpList = ' ('
-        WidthOnFocus = 0
-        TextHint = True
-      end
-      object edtTotalLiquido: TEditN
-        Left = 143
-        Top = 80
-        Width = 69
-        Height = 24
-        TabStop = False
-        Color = clInfoBk
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -13
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 2
         Text = '0,00'
         ColorOnFocus = clInfoBk
         ColorOnNotFocus = clInfoBk
@@ -688,7 +636,7 @@ object frmLocacao: TfrmLocacao
       Left = 123
       Top = 58
       Width = 157
-      Height = 18
+      Height = 20
       TabStop = False
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -711,6 +659,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 11
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -756,8 +705,8 @@ object frmLocacao: TfrmLocacao
       Left = 123
       Top = 9
       Width = 114
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -795,6 +744,7 @@ object frmLocacao: TfrmLocacao
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -806,8 +756,8 @@ object frmLocacao: TfrmLocacao
       Left = 392
       Top = 9
       Width = 114
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -846,6 +796,7 @@ object frmLocacao: TfrmLocacao
       ParentFont = False
       TabOrder = 1
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -920,7 +871,7 @@ object frmLocacao: TfrmLocacao
       Left = 333
       Top = 58
       Width = 173
-      Height = 18
+      Height = 20
       TabStop = False
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -943,6 +894,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 14
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -985,6 +937,7 @@ object frmLocacao: TfrmLocacao
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1256,6 +1209,7 @@ object frmLocacao: TfrmLocacao
         Enabled = False
         OnClick = btnOkProdClick
         ExplicitLeft = 652
+        ExplicitTop = 8
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 518
@@ -1316,6 +1270,7 @@ object frmLocacao: TfrmLocacao
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1441,7 +1396,7 @@ object frmLocacao: TfrmLocacao
       Left = 10
       Top = 21
       Width = 65
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -1461,6 +1416,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1500,7 +1456,7 @@ object frmLocacao: TfrmLocacao
       Left = 370
       Top = 21
       Width = 66
-      Height = 18
+      Height = 20
       Text = '0'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1522,6 +1478,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1534,7 +1491,7 @@ object frmLocacao: TfrmLocacao
       Left = 456
       Top = 21
       Width = 66
-      Height = 18
+      Height = 20
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1556,6 +1513,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1568,7 +1526,7 @@ object frmLocacao: TfrmLocacao
       Left = 679
       Top = 21
       Width = 66
-      Height = 18
+      Height = 20
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1591,6 +1549,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1603,8 +1562,8 @@ object frmLocacao: TfrmLocacao
       Left = 543
       Top = 21
       Width = 114
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -1642,6 +1601,7 @@ object frmLocacao: TfrmLocacao
       MaxLength = 10
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1680,14 +1640,12 @@ object frmLocacao: TfrmLocacao
     Position = 0
     SmallChange = 127
     LargeChange = 127
-    ExplicitLeft = -1
-    ExplicitTop = 500
   end
   object edtVlr_Desconto: TbsSkinEdit
     Left = 453
     Top = 346
     Width = 45
-    Height = 18
+    Height = 20
     Text = '0,00'
     DefaultColor = clGray
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1709,6 +1667,7 @@ object frmLocacao: TfrmLocacao
     ParentFont = False
     TabOrder = 4
     Visible = False
+    ButtonImageIndex = -1
     LeftImageIndex = -1
     LeftImageHotIndex = -1
     LeftImageDownIndex = -1
@@ -1768,6 +1727,7 @@ object frmLocacao: TfrmLocacao
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ColSizingwithLine = False
     DrawGraphicFields = False
     UseColumnsFont = False
     DefaultRowHeight = 20
@@ -1827,7 +1787,7 @@ object frmLocacao: TfrmLocacao
     Left = 650
     Top = 362
     Width = 66
-    Height = 18
+    Height = 20
     Text = '0,00'
     DefaultColor = cl3DLight
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1849,6 +1809,7 @@ object frmLocacao: TfrmLocacao
     ParentFont = False
     TabOrder = 8
     Visible = False
+    ButtonImageIndex = -1
     LeftImageIndex = -1
     LeftImageHotIndex = -1
     LeftImageDownIndex = -1
@@ -1872,6 +1833,8 @@ object frmLocacao: TfrmLocacao
     ScrollBars = ssBoth
     TabOrder = 9
     Visible = False
+    Transparent = False
+    WallpaperStretch = False
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clBlack
     DefaultFont.Height = 14
@@ -1916,6 +1879,7 @@ object frmLocacao: TfrmLocacao
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -2176,7 +2140,6 @@ object frmLocacao: TfrmLocacao
         Spacing = 1
         Layout = blGlyphTop
         Enabled = False
-        OnClick = btnDescontoClick
         ExplicitLeft = 122
         ExplicitTop = 12
       end
@@ -2199,6 +2162,7 @@ object frmLocacao: TfrmLocacao
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    Transparent = False
     ShadowEffect = False
     ShadowColor = clBlack
     ShadowOffset = 0
@@ -2370,11 +2334,11 @@ object frmLocacao: TfrmLocacao
       0A4C7563726F427275746F080004000000000004446961730400010000000000
       10507265766973616F5F456E747265676108000800000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
-      DisplayWidth = 6
+      DisplayWidth = 5
       FieldName = 'Codigo'
     end
     object cdsItensVendasTMPDescricao: TStringField
-      DisplayWidth = 29
+      DisplayWidth = 26
       FieldName = 'Descricao'
       Size = 50
     end
@@ -2405,7 +2369,7 @@ object frmLocacao: TfrmLocacao
     end
     object cdsItensVendasTMPvlr_Total: TFloatField
       DisplayLabel = 'Vlr. Total'
-      DisplayWidth = 8
+      DisplayWidth = 7
       FieldName = 'vlr_Total'
     end
     object cdsItensVendasTMPComplemento: TStringField
@@ -2418,7 +2382,7 @@ object frmLocacao: TfrmLocacao
       Visible = False
     end
     object cdsItensVendasTMPPrevisao_Entrega: TDateTimeField
-      DisplayWidth = 13
+      DisplayWidth = 15
       FieldName = 'Previsao_Entrega'
     end
     object cdsItensVendasTMPperc_Comis: TFloatField

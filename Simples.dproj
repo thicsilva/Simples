@@ -18,10 +18,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Version>7.0</Version>
     <DCC_Define>DEBUG;madExcept</DCC_Define>
-    <DCC_ExeOutput>D:\Desenvolvimento\Projetos Desktop\Simples\Programa</DCC_ExeOutput>
-    <DCC_DcuOutput>D:\Desenvolvimento\Projetos Desktop\Simples\Dcu´s</DCC_DcuOutput>
-    <DCC_ObjOutput>D:\Desenvolvimento\Projetos Desktop\Simples\Dcu´s</DCC_ObjOutput>
-    <DCC_HppOutput>D:\Desenvolvimento\Projetos Desktop\Simples\Dcu´s</DCC_HppOutput>
+    <DCC_ExeOutput>.\Programa</DCC_ExeOutput>
+    <DCC_DcuOutput>.\Dcu´s</DCC_DcuOutput>
+    <DCC_ObjOutput>.\Dcu´s</DCC_ObjOutput>
+    <DCC_HppOutput>.\Dcu´s</DCC_HppOutput>
     <DCC_MapFile>3</DCC_MapFile>
     <DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE</DCC_UnitAlias>
   </PropertyGroup>
@@ -29,17 +29,17 @@
     <Borland.Personality>Delphi.Personality</Borland.Personality>
     <Borland.ProjectType>VCLApplication</Borland.ProjectType>
     <BorlandProject>
-<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">2</VersionInfo><VersionInfo Name="Build">13</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1046</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.2.13</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages></Excluded_Packages><Source><Source Name="MainSource">Simples.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">2</VersionInfo><VersionInfo Name="Build">14</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1046</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.2.14</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages></Excluded_Packages><Source><Source Name="MainSource">Simples.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
   <ItemGroup>
     <DelphiCompile Include="Simples.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="..\Cadastros\uCadFornecedores.pas">
+    <DCCReference Include="..\Compartilhados\uAmbienteSistema.pas" />
+    <DCCReference Include="..\Compartilhados\uCadFornecedores.pas">
       <Form>frmCadFornecedores</Form>
     </DCCReference>
-    <DCCReference Include="..\Compartilhados\uAmbienteSistema.pas" />
     <DCCReference Include="..\Compartilhados\uCadPerfil.pas">
       <Form>frmCadPerfil</Form>
     </DCCReference>
@@ -163,6 +163,9 @@
     </DCCReference>
     <DCCReference Include="uConsItensDevolvidos.pas">
       <Form>frmConsItensDevolvidos</Form>
+    </DCCReference>
+    <DCCReference Include="uConsLocacao.pas">
+      <Form>frmConsLocacao</Form>
     </DCCReference>
     <DCCReference Include="uConsultaOrdemServico.pas">
       <Form>frmConsultaOrdemServico</Form>

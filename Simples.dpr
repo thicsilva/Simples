@@ -128,14 +128,15 @@ uses
   uClassLancamento in 'Modelos\uClassLancamento.pas',
   uClassContaReceber in 'Modelos\uClassContaReceber.pas',
   uClassRota in 'Modelos\uClassRota.pas',
-  uCadFornecedores in '..\Cadastros\uCadFornecedores.pas' {frmCadFornecedores},
   uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas',
   uDelivery in 'uDelivery.pas' {frmDelivery},
   uFuncoes in '..\Compartilhados\uFuncoes.pas',
   uMapa in 'uMapa.pas' {frmMapa},
   uSelHora in 'uSelHora.pas' {frmSelHora},
   uCapturaImagem in '..\Compartilhados\uCapturaImagem.pas' {frmCapturaImagem},
-  uLocacao in 'uLocacao.pas' {frmLocacao};
+  uLocacao in 'uLocacao.pas' {frmLocacao},
+  uCadFornecedores in '..\Compartilhados\uCadFornecedores.pas' {frmCadFornecedores},
+  uConsLocacao in 'uConsLocacao.pas' {frmConsLocacao};
 
 {$R *.res}
 
@@ -149,6 +150,7 @@ begin
   Application.CreateForm(TfrmSelHora, frmSelHora);
   Application.CreateForm(TfrmCapturaImagem, frmCapturaImagem);
   Application.CreateForm(TfrmLocacao, frmLocacao);
+  Application.CreateForm(TfrmCadFornecedores, frmCadFornecedores);
   Frmlogin.ShowModal;
   Application.Run;
 end.

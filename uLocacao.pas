@@ -64,7 +64,6 @@ type
     srcCadProdutos: TDataSource;
     cdsItensVendas: TClientDataSet;
     srcItensVendas: TDataSource;
-    bsSkinStdLabel7: TbsSkinStdLabel;
     cdsItensVendasTMP: TClientDataSet;
     srcItensVendasTMP: TDataSource;
     cdsItensVendasTMPCodigo: TIntegerField;
@@ -79,9 +78,8 @@ type
     srcVenda: TDataSource;
     edtVlr_Desconto: TbsSkinEdit;
     cdsItensVendasTMPvlr_Desconto: TFloatField;
-    edtTotalVenda: TEditN;
     bsSkinStdLabel9: TbsSkinStdLabel;
-    edtTotDesconto: TEditN;
+    edtTotPecas: TEditN;
     edtTotalLiquido: TEditN;
     bsSkinStdLabel10: TbsSkinStdLabel;
     bsSkinStdLabel11: TbsSkinStdLabel;
@@ -207,7 +205,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure edtdata_VencimentoExit(Sender: TObject);
     procedure cdsItensVendasTMPBeforeOpen(DataSet: TDataSet);
-    procedure btnDescontoClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure edtPrevisaoEntregaExit(Sender: TObject);
 
@@ -300,7 +297,7 @@ begin
   Dias := DaysBetween(edtPrevisaoEntrega.Date, now) + 1;
   if dias <= 0 then
     Dias := 1;
-  Result := Dias;  
+  Result := Dias;
 end;
 
 procedure TfrmLocacao.VerificarSaldoDevedor(ClienteID : Integer);
@@ -328,12 +325,11 @@ End;
 procedure TfrmLocacao.limpacampos();
 Begin
    edtcod_Cliente.Text         := '';
-   edtTotalVenda.Text          := '0,00';
+   edtTotPecas.Text            := '0,00';
    edtQtde_Venda.Text          := '0';
    edtPco_Venda.Text           := '0,00';
    edtPco_Tabela.Text          := '0,00';
    edtTotal.Text               := '0,00';
-   edtTotDesconto.Text         := '0,00';
    edtVlr_Desconto.Text        := '0,00';
    edtTotalLiquido.Text        := '0,00';
    edtCod_Produto.Text         := '';
@@ -527,15 +523,18 @@ end;
 procedure TfrmLocacao.TotalizarVenda(lrTotalDesconto : Real);
 var TotalDesconto : Real;
     Total : Real;
-  lrdiferenca: real;
+    lrdiferenca : Real;
+    qtdePecas   : Real;
 begin
    TotalDesconto := 0;
-   Total := 0;
+   Total         := 0;
+   qtdePecas     := 0;
    cdsItensVendasTmp.First;
    while not cdsItensVendasTmp.Eof do
    begin
       TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat );
       Total := Total + (cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat);
+      qtdePecas := qtdePecas + (cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat);
       cdsItensVendasTmp.Next;
    end;
    if (Arredondar(lrTotalDesconto,2) <>  Arredondar(TotalDesconto,2)) then
@@ -546,9 +545,8 @@ begin
       cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( (cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat );
       cdsItensVendasTmp.Post;
    end;
-   
-   edtTotDesconto.Text  := FormatFloat('0.00', TotalDesconto );
-   edtTotalVenda.Text   := FormatFloat('0.00', TotalDesconto+Total);
+
+   edtTotPecas.Text   := FormatFloat('0.00', qtdePecas);
    edtTotalLiquido.Text := FormatFloat('0.00', Total );
 end;
 
@@ -601,6 +599,7 @@ var DaoCustoPtoduto : TdaoCustoProduto;
     PrecoCusto : Real;
     lrPerc_Desconto : Real;
     lrDiferenca :Real;
+    lrTotalVenda : Real;
 begin
    DaoCustoPtoduto := TdaoCustoProduto.Create(gConexao);
    if strtofloat(Edttotal.text ) <=0 Then
@@ -623,7 +622,6 @@ begin
    Else
    Begin
       cdsItensVendasTmp.Edit;
-      edtTotalVenda.Text := FormatFloat('0.00', StrToFloat(edtTotalVenda.Text)-pvrvlr_TotalAnt);
    End;
    lrPerc_Desconto := 0;
    lrDiferenca     := 0;
@@ -658,9 +656,9 @@ begin
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
 
-   edtTotDesconto.Text  := FormatFloat('0.00', StrToFloat(edtTotDesconto.Text)+( StrToFloat(edtVlr_Desconto.Text)*StrTofloat(edtQtde_Venda.Text)) );
-   edtTotalVenda.Text   := FormatFloat('0.00', StrToFloat(edtTotalVenda.Text)+ ( StrToFloat(edtTotal.Text) + ( StrToFloat(edtVlr_Desconto.Text)*StrToFloat(edtQtde_Venda.Text))));
-   edtTotalLiquido.Text := FormatFloat('0.00', StrToFloat(edtTotalVenda.Text)-StrToFloat(edtTotDesconto.Text));
+   lrTotalVenda   := (lrTotalVenda +  StrToFloat(edtTotal.Text));
+   edtTotalLiquido.Text := FormatFloat('0.00', lrTotalVenda);
+   edtTotPecas.Text := FormatFloat('0.00', StrToFloat (edtTotPecas.Text) + StrToFloat (edtQtde_Venda.Text));
 
    edtCod_Produto.Text := '';
    cmbNome_Produto.keyvalue := null;
@@ -900,10 +898,10 @@ begin
    cdsVenda.FieldByname('Cod_Cliente').Asinteger     := StrToInt(cmbCod_Cliente.KeyValue);
    cdsVenda.FieldByname('Cod_Funcionario').Asinteger := StrToInt(cmbCod_Funcionario.KeyValue);
    cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := StrToInt(cmbCod_formaPagamento.KeyValue);
-   cdsVenda.FieldByname('Vlr_Total').AsFloat         := (StrToFloat( edtTotalVenda.Text )-StrToFloat( edtTotDesconto.Text ));
+   cdsVenda.FieldByname('Vlr_Total').AsFloat         := (StrToFloat( edtTotalLiquido.Text ));
    cdsVenda.FieldByname('CustoTotal').AsFloat        := lrCustoTotal;
    cdsVenda.FieldByname('LucroBruto').AsFloat        := ((( cdsVenda.FieldByname('Vlr_Total').AsFloat - lrCustoTotal ) / cdsVenda.FieldByname('Vlr_Total').AsFloat)*100);
-   cdsVenda.FieldByname('Vlr_Desconto').AsFloat      := StrToFloat( edtTotDesconto.Text );
+   cdsVenda.FieldByname('Vlr_Desconto').AsFloat      := 0;
    cdsVenda.FieldByname('Status').AsString           := 'N';
    cdsVenda.FieldByname('Operador').AsString         := gsOperador;
    cdsVenda.FieldByname('Cod_Emp').AsString          := gsCod_emp;
@@ -1423,21 +1421,6 @@ begin
 
 end;
 
-procedure TfrmLocacao.btnDescontoClick(Sender: TObject);
-begin
-
-   FrmDescontoVenda := TFrmDescontoVenda.Create(self);
-   FrmDescontoVenda.edtTotalVenda.text := edtTotalVenda.Text;
-   FrmDescontoVenda.edtTotalLiquido.text := edtTotalVenda.Text;
-   FrmDescontoVenda.showmodal;
-   if ( StrToFloat(FrmDescontoVenda.edtTotDesconto.text)<>0 ) and ( FrmDescontoVenda.tag = 1 )then
-   begin
-      AtualizaDesconto(FrmDescontoVenda.pPercDesconto);
-      TotalizarVenda(FrmDescontoVenda.pTotalDesconto);
-   end;
-
-end;
-
 procedure TfrmLocacao.btnExcluirClick(Sender: TObject);
 begin
   IF cdsItensVendasTMP.IsEmpty Then
@@ -1447,9 +1430,7 @@ begin
    End;
    if CaixaMensagem( 'Deseja Excluir o Produto '+cdsItensVendasTMP.FieldByname('Descricao').asString, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
-      edtTotalVenda.Text    := FormatFloat('0.00',StrToFloat(edtTotalVenda.Text) -  ( cdsItensVendasTMP.FieldByname('Vlr_Total').asFloat +
-                                                                                    ( cdsItensVendasTMP.FieldByname('Qtde_Venda').AsFloat * cdsItensVendasTMP.FieldByname('Vlr_Desconto').asFloat) ) );
-      edtTotDesconto.Text   := FormatFloat('0.00',StrToFloat(edtTotDesconto.Text) -   ( cdsItensVendasTMP.FieldByname('Qtde_Venda').AsFloat * cdsItensVendasTMP.FieldByname('Vlr_Desconto').asFloat));
+      edtTotPecas.Text      := FormatFloat('0.00',StrToFloat(edtTotPecas.Text) -  cdsItensVendasTMP.FieldByname('Qtde_Venda').AsFloat );
       edtTotalLiquido.Text  := FormatFloat('0.00',StrToFloat(edtTotalLiquido.Text) -  cdsItensVendasTMP.FieldByname('Vlr_total').asFloat);
       cdsItensVendasTMP.Delete;
    End;
