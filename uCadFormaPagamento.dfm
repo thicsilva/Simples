@@ -33,6 +33,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     TabOrder = 0
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -68,6 +69,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -191,7 +193,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Left = 136
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -211,6 +213,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -258,7 +261,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Align = alClient
         TabOrder = 1
         object GridFormaPagamento: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -328,6 +331,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -345,6 +349,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         NumGlyphs = 1
         Spacing = 2
         Caption = 'Informe os dados da forma da pagamento'
+        UseSkinSize = True
         object bsSkinStdLabel1: TbsSkinStdLabel
           Left = 108
           Top = 51
@@ -451,7 +456,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Left = 150
           Top = 71
           Width = 346
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -471,6 +476,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -482,7 +488,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Left = 150
           Top = 47
           Width = 56
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -505,6 +511,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           MaxLength = 9
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -636,7 +643,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Left = 321
           Top = 97
           Width = 175
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -657,6 +664,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           ParentFont = False
           TabOrder = 4
           Visible = False
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -668,7 +676,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Left = 480
           Top = 30
           Width = 74
-          Height = 18
+          Height = 20
           TabStop = False
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -690,6 +698,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -806,6 +815,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False

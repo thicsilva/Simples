@@ -15,7 +15,9 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
-  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,uFormBase, dxSkinsCore;
+  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,uFormBase, dxSkinsCore,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmCadFormaPagamento = class(TFormBase)

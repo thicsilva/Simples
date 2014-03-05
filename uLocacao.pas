@@ -89,7 +89,6 @@ type
     edtcod_Cliente: TbsSkinEdit;
     bsSkinStdLabel12: TbsSkinStdLabel;
     btnCadProdutos: TbsSkinSpeedButton;
-    bsSkinStdLabel6: TbsSkinStdLabel;
     cmbCod_formaPagamento: TbsSkinDBLookupComboBox;
     cmbNome_formaPagamento: TbsSkinDBLookupComboBox;
     lblCNPJCPF: TbsSkinStdLabel;
@@ -175,6 +174,10 @@ type
     bsSkinStdLabel8: TbsSkinStdLabel;
     cdsItensVendasTMPDias: TIntegerField;
     cdsItensVendasTMPPrevisao_Entrega: TDateTimeField;
+    bsSkinStdLabel7: TbsSkinStdLabel;
+    edtPrePagamento: TEditN;
+    bsSkinStdLabel14: TbsSkinStdLabel;
+    edtValorCaucao: TEditN;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -207,6 +210,7 @@ type
     procedure cdsItensVendasTMPBeforeOpen(DataSet: TDataSet);
     procedure btnAdicionarClick(Sender: TObject);
     procedure edtPrevisaoEntregaExit(Sender: TObject);
+    procedure cmbNome_formaPagamentoChange(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -294,7 +298,7 @@ End;
 Function TfrmLocacao.RetornarDias : Integer;
 var Dias : Integer;
 begin
-  Dias := DaysBetween(edtPrevisaoEntrega.Date, now) + 1;
+  Dias := DaysBetween(SoData(edtPrevisaoEntrega.Date), SoData(edtDataVenda.Date)) + 1;
   if dias <= 0 then
     Dias := 1;
   Result := Dias;
@@ -346,7 +350,8 @@ Begin
 End;
 procedure TfrmLocacao.btnFecharClick(Sender: TObject);
 begin
-   Close;
+   if CaixaMensagem( 'Deseja abandonar a locação', ctConfirma, [ cbSimNao ], 0 ) Then
+      Close;
 end;
 
 procedure TfrmLocacao.FormCreate(Sender: TObject);
@@ -366,11 +371,9 @@ begin
    qryVariavel.Close;
    qryVariavel.Params.Clear;
    qryVariavel.SQL.text :='Select Codigo,Descricao,TipoPagamento,TipoLancamento,ImprimeMensagem,Prazo from T_formasPagamento  ';
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CondicaoNaVenda', 'NAO' )) = 'SIM' Then
-      qryVariavel.SQL.Add('WHERE TipoPagamento=:parTipoPagamento' );
+   qryVariavel.SQL.Add('WHERE TipoLancamento=:parTipoPagamento' );
    QryVariavel.SQL.Add(' Order by Descricao ' );
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'CondicaoNaVenda', 'NAO' )) = 'SIM' Then
-      qryVariavel.ParamByName('parTipoPagamento').AsInteger := 1;
+   qryVariavel.ParamByName('parTipoPagamento').AsInteger := 0;
 
    cdsCadFormasPagamento.Close;
    cdsCadFormasPagamento.ProviderName := dspVariavel.Name;
@@ -650,14 +653,14 @@ begin
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    cdsItensVendasTmp.FieldByName('Dias').asInteger         := RetornarDias;
-   cdsItensVendasTmp.FieldByName('Previsao_Entrega').AsDateTime := edtPrevisaoEntrega.date;
+   cdsItensVendasTmp.FieldByName('Previsao_Entrega').AsDateTime := SoData(edtPrevisaoEntrega.date);
 
    if FrmLocacao.Tag=VENDAS_EXTERNAS then
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
 
    lrTotalVenda   := (lrTotalVenda +  StrToFloat(edtTotal.Text));
-   edtTotalLiquido.Text := FormatFloat('0.00', lrTotalVenda);
+   edtTotalLiquido.Text := FormatFloat('0.00', Strtofloat( edtTotalLiquido.Text ) + lrTotalVenda);
    edtTotPecas.Text := FormatFloat('0.00', StrToFloat (edtTotPecas.Text) + StrToFloat (edtQtde_Venda.Text));
 
    edtCod_Produto.Text := '';
@@ -753,6 +756,12 @@ begin
       CaixaMensagem( 'Informe a forma de pagamento ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
+
+   if StrTOFloat(edtPrePagamento.Text) > StrTOFloat(edtTotalLiquido.Text) then
+   begin
+      CaixaMensagem( 'O Pre-Pagamento não pode ser maior que o valor da locação', ctAviso, [ cbOk ], 0 );
+      Exit;
+   end;
 
 
 
@@ -902,14 +911,14 @@ begin
    cdsVenda.FieldByname('CustoTotal').AsFloat        := lrCustoTotal;
    cdsVenda.FieldByname('LucroBruto').AsFloat        := ((( cdsVenda.FieldByname('Vlr_Total').AsFloat - lrCustoTotal ) / cdsVenda.FieldByname('Vlr_Total').AsFloat)*100);
    cdsVenda.FieldByname('Vlr_Desconto').AsFloat      := 0;
-   cdsVenda.FieldByname('Status').AsString           := 'N';
+   cdsVenda.FieldByname('Status').AsString           := '0';
    cdsVenda.FieldByname('Operador').AsString         := gsOperador;
    cdsVenda.FieldByname('Cod_Emp').AsString          := gsCod_emp;
    cdsVenda.FieldByName('Data_Mov').asDateTime       := gsData_Mov;
    cdsVenda.FieldByName('Data_venda').asDateTime     := edtDataVenda.Date;
 
    If FrmLocacao.tag <> 4 then
-      cdsVenda.FieldByName('Data_Cad').asDateTime       := now;
+      cdsVenda.FieldByName('Data_Cad').asDateTime    := now;
    cdsVenda.FieldByname('Vlr_DescProd').AsFloat      := lrVlr_DescProd;
    cdsVenda.FieldByname('Controle').AsString         := '0';
    cdsVenda.FieldByname('Tipo_Venda').AsString       := 'P';
@@ -948,6 +957,7 @@ begin
 {$ENDREGION}
 
    {$REGION 'Item da Venda'}
+
    loItemVenda := TItemVenda.Create;
    loItemVenda.Operador := gsOperador;
    loItemVenda.DataMovimento := gsdata_Mov;
@@ -963,6 +973,27 @@ begin
 
    {$REGION 'Lancamento do Financeiro'}
 
+    if StrTOFloat(edtPrePagamento.Text) > 0 then
+    Begin
+      qryModific.Close;
+      qryModific.SQL.Text := 'Insert into T_movCaixa ( Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento,Data_Cad,PrePagamento ) Values '+
+                             '                       ( :parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
+                             '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento,:parData_Cad,:parPrePagamento ) ';
+      qryModific.ParamByName('parCod_Caixa').AsInteger            := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '0001' );
+      qryModific.ParamByName('parValor').asFloat                  := StrTOFloat(edtPrePagamento.Text);
+      qryModific.ParamByName('parHistorico').asString             := 'Recebimento de Pre-Pagamento Venda nº '+IntToStr(liSeqvenda);
+      qryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := datetimeToSqlTimeStamp(gsData_Mov);
+      qryModific.ParamByName('parData_Cad').AsSqlTimeStamp        := datetimeToSqlTimeStamp(now);
+      qryModific.ParamByName('parPrePagamento').asString          := 'S';
+      qryModific.ParamByName('parD_C').AsString                   := 'C';
+      qryModific.ParamByName('parSeqVenda').asInteger             :=  liSeqvenda;
+      qryModific.ParamByName('parCod_tipoDespesa').AsString       := '0101';
+      qryModific.ParamByName('parSeqeuencia').AsInteger           := StrToInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
+      qryModific.ParamByName('parCod_FormaPagamento').AsInteger   := strToInt(edtCod_FormaPagamento.Text);
+      qryModific.ExecSQL;
+    End;
+
+   {
    Try
       if ( (FrmLocacao.Tag<>3) and ( FrmLocacao.Tag<>5 ) ) then // So Entra nesta rotina se for Venda oi finalização de OS
       Begin
@@ -1182,6 +1213,7 @@ begin
          Exit;
       End;
    End;
+   }
 {$ENDREGION}
 
    {$REGION 'Efetuando Registro de Materia Prima'}
@@ -1338,7 +1370,7 @@ begin
 
    LimpaCampos();
 
-   edtDataVenda.Date        := gsdata_Mov;
+   edtDataVenda.Date        := gsdata_Mov+1;
    If ( FrmLocacao.tag <> OS_FINALIZADA ) then
    Begin
       Try
@@ -1582,12 +1614,17 @@ begin
    Begin
       edtCod_Cliente.text   :=  cmbCod_Cliente.Text;
       try
-         edtCod_FormaPagamento.SetFocus
+         edtCod_Funcionario.SetFocus
       except
       end;
       MostrarAnimaisCliente;
       VerificarSaldoDevedor(StrTointDef(cmbCod_Cliente.Text,0))
    End;
+end;
+
+procedure TfrmLocacao.cmbNome_formaPagamentoChange(Sender: TObject);
+begin
+   cmbCod_formaPagamento.KeyValue := cmbNome_formaPagamento.KeyValue;
 end;
 
 procedure TfrmLocacao.cmbCod_ClienteChange(Sender: TObject);

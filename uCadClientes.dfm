@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 443
-    ActivePage = tab_Historico
+    ActivePage = bsSkinTabSheet9
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -34,6 +34,7 @@ object frmCadClientes: TfrmCadClientes
     OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -52,10 +53,6 @@ object frmCadClientes: TfrmCadClientes
     SkinDataName = 'tab'
     object Tab_Consulta: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -73,6 +70,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -157,7 +155,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 134
           Top = 9
           Width = 277
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -176,6 +174,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -231,6 +230,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -254,10 +254,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 843
-        Height = 388
+        Height = 386
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 386
         object GridClintes: TcxGridDBTableView
           OnDblClick = GridClintesDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -378,13 +377,9 @@ object frmCadClientes: TfrmCadClientes
     end
     object Tab_Cadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 0
-        Top = 283
+        Top = 281
         Width = 843
         Height = 138
         HintImageIndex = 0
@@ -399,6 +394,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -417,7 +413,7 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'Informa'#231#245'es Adicionais'
         Align = alBottom
-        ExplicitTop = 281
+        UseSkinSize = True
         object bsSkinStdLabel9: TbsSkinStdLabel
           Left = 20
           Top = 36
@@ -617,7 +613,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 104
           Top = 32
           Width = 68
-          Height = 18
+          Height = 20
           Text = '0.00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -641,6 +637,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -863,7 +860,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 472
           Top = 79
           Width = 122
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -884,6 +881,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 13
           ParentFont = False
           TabOrder = 10
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -895,7 +893,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 474
           Top = 106
           Width = 319
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -916,6 +914,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 100
           ParentFont = False
           TabOrder = 11
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -941,6 +940,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -1213,7 +1213,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 73
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1233,6 +1233,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1244,7 +1245,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 119
           Top = 49
           Width = 56
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1267,6 +1268,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 9
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1278,7 +1280,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 433
           Top = 25
           Width = 74
-          Height = 18
+          Height = 20
           TabStop = False
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1300,6 +1302,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 13
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1311,7 +1314,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 146
           Width = 137
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1331,6 +1334,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1342,7 +1346,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 175
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1363,6 +1367,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 9
           ParentFont = False
           TabOrder = 7
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1374,7 +1379,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 120
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1394,6 +1399,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1405,7 +1411,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 317
           Top = 146
           Width = 137
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1425,6 +1431,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 6
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1437,7 +1444,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 206
           Top = 175
           Width = 25
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1458,6 +1465,7 @@ object frmCadClientes: TfrmCadClientes
           CharCase = ecUpperCase
           ParentFont = False
           TabOrder = 8
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1469,7 +1477,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 204
           Width = 93
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1490,6 +1498,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 13
           ParentFont = False
           TabOrder = 10
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1501,7 +1510,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 317
           Top = 204
           Width = 137
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1522,6 +1531,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 13
           ParentFont = False
           TabOrder = 11
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1533,7 +1543,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 349
           Top = 51
           Width = 105
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1554,6 +1564,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 14
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1567,7 +1578,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 228
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1588,6 +1599,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 50
           ParentFont = False
           TabOrder = 12
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1599,7 +1611,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 117
           Top = 96
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1619,6 +1631,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1630,7 +1643,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 317
           Top = 175
           Width = 137
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1650,6 +1663,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 9
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1685,18 +1699,13 @@ object frmCadClientes: TfrmCadClientes
     end
     object Tab_Ocorrencias: TbsSkinTabSheet
       Caption = 'Ocorr'#234'ncias'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid2: TcxGrid
         Left = 0
         Top = 64
         Width = 843
-        Height = 357
+        Height = 355
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 355
         object GridOcorrencias: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcOcorrencias
@@ -1747,6 +1756,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1765,12 +1775,13 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'Informe os dados da ocorr'#234'ncia'
         Align = alTop
+        UseSkinSize = True
         object bsSkinDateEdit1: TbsSkinDateEdit
           Left = 9
           Top = 33
           Width = 121
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -1808,6 +1819,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1819,7 +1831,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 145
           Top = 33
           Width = 328
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1840,6 +1852,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 250
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1864,6 +1877,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -1886,10 +1900,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object Tab_ProdutosDescontos: TbsSkinTabSheet
       Caption = 'Produtos Descontos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 0
@@ -1906,6 +1916,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1974,7 +1985,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 6
           Top = 20
           Width = 64
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1993,6 +2004,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2017,6 +2029,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -2051,6 +2064,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -2073,7 +2087,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 406
           Top = 20
           Width = 65
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -2096,6 +2110,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2107,7 +2122,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 322
           Top = 20
           Width = 65
-          Height = 18
+          Height = 20
           Text = '0'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -2130,6 +2145,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2142,10 +2158,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 44
         Width = 843
-        Height = 377
+        Height = 375
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 375
         object GridProdutosDescontos: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcCalientesDescontos
@@ -2191,10 +2206,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object Tab_VendasEServicos: TbsSkinTabSheet
       Caption = 'Vendas e Servi'#231'os'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid3: TcxGrid
         Left = 0
         Top = 0
@@ -2365,21 +2376,16 @@ object frmCadClientes: TfrmCadClientes
     end
     object tab_Historico: TbsSkinTabSheet
       Caption = 'Recebido e a receber'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       DesignSize = (
         843
-        421)
+        419)
       object cxGrid4: TcxGrid
         Left = 0
         Top = 0
         Width = 843
-        Height = 421
+        Height = 419
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 419
         object GridCtasReceber: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           Navigator.Buttons.First.Visible = True
@@ -2551,7 +2557,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 604
-        Top = 3
+        Top = 1
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -2569,17 +2575,9 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet7: TbsSkinTabSheet
       Caption = 'Brindes'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object bsSkinTabSheet8: TbsSkinTabSheet
       Caption = 'Valida CPF / CNPJ'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -2596,6 +2594,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -2675,7 +2674,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 61
           Top = 6
           Width = 132
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -2694,6 +2693,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2718,6 +2718,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -2740,7 +2741,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 254
           Top = 6
           Width = 52
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -2760,6 +2761,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2806,10 +2808,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 843
-        Height = 388
+        Height = 386
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 386
         object GridValidaCNPJCPF: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcValidaCPFCNPJ
@@ -2872,10 +2873,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet9: TbsSkinTabSheet
       Caption = 'Conta Corrente'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PanelConsulta: TbsSkinPanel
         Left = 0
         Top = 0
@@ -2892,6 +2889,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -3031,8 +3029,8 @@ object frmCadClientes: TfrmCadClientes
           Left = 197
           Top = 9
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -3069,6 +3067,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3080,8 +3079,8 @@ object frmCadClientes: TfrmCadClientes
           Left = 70
           Top = 9
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -3118,6 +3117,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 10
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3267,10 +3267,9 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 41
         Width = 843
-        Height = 345
+        Height = 343
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 343
         object GrdDespesas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcContaCorrente
@@ -3339,7 +3338,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object bsSkinPanel4: TbsSkinPanel
         Left = 0
-        Top = 386
+        Top = 384
         Width = 843
         Height = 35
         HintImageIndex = 0
@@ -3353,6 +3352,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -3371,7 +3371,6 @@ object frmCadClientes: TfrmCadClientes
         Spacing = 2
         Caption = 'bsSkinPanel4'
         Align = alBottom
-        ExplicitTop = 384
         object bsSkinStdLabel22: TbsSkinStdLabel
           Left = 14
           Top = 5
@@ -3455,10 +3454,6 @@ object frmCadClientes: TfrmCadClientes
     end
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Animais de Estima'#231#227'o'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel5: TbsSkinPanel
         Left = 0
         Top = 0
@@ -3476,6 +3471,7 @@ object frmCadClientes: TfrmCadClientes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -3540,7 +3536,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 247
           Top = 17
           Width = 187
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -3560,6 +3556,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3585,6 +3582,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -3620,6 +3618,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -3642,7 +3641,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 247
           Top = 41
           Width = 187
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -3662,6 +3661,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3674,7 +3674,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 247
           Top = 65
           Width = 187
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -3693,6 +3693,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3705,7 +3706,7 @@ object frmCadClientes: TfrmCadClientes
           Left = 535
           Top = 17
           Width = 128
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -3725,6 +3726,7 @@ object frmCadClientes: TfrmCadClientes
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3736,8 +3738,8 @@ object frmCadClientes: TfrmCadClientes
           Left = 535
           Top = 40
           Width = 128
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -3775,6 +3777,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3786,8 +3789,8 @@ object frmCadClientes: TfrmCadClientes
           Left = 535
           Top = 64
           Width = 128
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -3825,6 +3828,7 @@ object frmCadClientes: TfrmCadClientes
           MaxLength = 10
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -3849,6 +3853,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          UseSkinSize = True
           CaptionImageIndex = -1
           NumGlyphs = 1
           Spacing = 2
@@ -3894,6 +3899,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 1
@@ -3930,6 +3936,7 @@ object frmCadClientes: TfrmCadClientes
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 6
@@ -3953,7 +3960,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 105
         Width = 843
-        Height = 316
+        Height = 314
         ActivePage = bsSkinTabSheet2
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -3965,6 +3972,7 @@ object frmCadClientes: TfrmCadClientes
         TabOrder = 1
         MouseWheelSupport = False
         TabExtededDraw = False
+        ButtonTabSkinDataName = 'resizetoolbutton'
         TabsOffset = 0
         TabSpacing = 1
         TextInHorizontal = False
@@ -3983,19 +3991,14 @@ object frmCadClientes: TfrmCadClientes
         SkinDataName = 'tab'
         object bsSkinTabSheet2: TbsSkinTabSheet
           Caption = 'Consulta '
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object cxGrid7: TcxGrid
             Left = 0
             Top = 0
             Width = 374
-            Height = 294
+            Height = 293
             Hint = 'Duplo cick para Alterar'
             Align = alClient
             TabOrder = 0
-            ExplicitHeight = 293
             object cxGridDBTableView1: TcxGridDBTableView
               OnDblClick = cxGridDBTableView1DblClick
               Navigator.Buttons.CustomButtons = <>
@@ -4055,7 +4058,7 @@ object frmCadClientes: TfrmCadClientes
             Left = 374
             Top = 0
             Width = 467
-            Height = 294
+            Height = 293
             HintImageIndex = 0
             TabOrder = 1
             SkinDataName = 'panel'
@@ -4067,6 +4070,7 @@ object frmCadClientes: TfrmCadClientes
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = True
+            EmptyDrawing = False
             RibbonStyle = False
             ImagePosition = bsipDefault
             TransparentMode = False
@@ -4085,7 +4089,6 @@ object frmCadClientes: TfrmCadClientes
             Spacing = 2
             Caption = 'bsSkinPanel6'
             Align = alRight
-            ExplicitHeight = 293
             object bsSkinExPanel3: TbsSkinExPanel
               Left = 1
               Top = 1
@@ -4103,6 +4106,7 @@ object frmCadClientes: TfrmCadClientes
               DefaultWidth = 0
               DefaultHeight = 0
               UseSkinFont = True
+              UseSkinSize = True
               CaptionImageIndex = -1
               NumGlyphs = 1
               Spacing = 2
@@ -4361,7 +4365,7 @@ object frmCadClientes: TfrmCadClientes
                 Left = 5
                 Top = 40
                 Width = 252
-                Height = 18
+                Height = 20
                 DefaultColor = clWindow
                 DefaultFont.Charset = DEFAULT_CHARSET
                 DefaultFont.Color = clBlack
@@ -4382,6 +4386,7 @@ object frmCadClientes: TfrmCadClientes
                 MaxLength = 100
                 ParentFont = False
                 TabOrder = 0
+                ButtonImageIndex = -1
                 LeftImageIndex = -1
                 LeftImageHotIndex = -1
                 LeftImageDownIndex = -1
@@ -4394,8 +4399,8 @@ object frmCadClientes: TfrmCadClientes
                 Left = 275
                 Top = 40
                 Width = 110
-                Height = 18
-                EditMask = '!99/99/0000;1; '
+                Height = 20
+                EditMask = '!99/99/9999;1; '
                 Text = '  /  /    '
                 AlphaBlend = False
                 AlphaBlendAnimation = False
@@ -4433,6 +4438,7 @@ object frmCadClientes: TfrmCadClientes
                 MaxLength = 10
                 ParentFont = False
                 TabOrder = 1
+                ButtonImageIndex = -1
                 LeftImageIndex = -1
                 LeftImageHotIndex = -1
                 LeftImageDownIndex = -1
@@ -4445,7 +4451,7 @@ object frmCadClientes: TfrmCadClientes
               Left = 1
               Top = 65
               Width = 465
-              Height = 228
+              Height = 227
               HintImageIndex = 0
               TabOrder = 1
               SkinData = frmPrincipal.SkinPrincipal
@@ -4456,6 +4462,7 @@ object frmCadClientes: TfrmCadClientes
               UseSkinCellHeight = True
               GridLineColor = clWindowText
               DefaultCellHeight = 20
+              ColSizingwithLine = False
               DrawGraphicFields = False
               UseColumnsFont = False
               DefaultRowHeight = 18
@@ -4532,6 +4539,7 @@ object frmCadClientes: TfrmCadClientes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -4744,9 +4752,9 @@ object frmCadClientes: TfrmCadClientes
       end
       object btnFechar: TbsSkinSpeedButton
         Left = 729
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -4780,6 +4788,7 @@ object frmCadClientes: TfrmCadClientes
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 8
+        ExplicitHeight = 40
       end
       object BtnCancela: TbsSkinSpeedButton
         Left = 543
@@ -4892,6 +4901,7 @@ object frmCadClientes: TfrmCadClientes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False

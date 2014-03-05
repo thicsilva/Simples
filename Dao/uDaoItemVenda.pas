@@ -14,6 +14,7 @@ type TDaoItemVenda = class
     Constructor Create(Conexao : TConexao);
     procedure Inserir(ItensVendas : TClientDataSet; ItemVenda : TItemVenda);
     function Buscar(SeqVenda : Integer) : TClientDataSet;
+    procedure MarcarComoRecebido(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime );
     property Connection : TSqlConnection read FConnection write SetConnection;
 end;
 
@@ -51,11 +52,11 @@ begin
                              '( Cod_Produto,Qtde_Venda,Pco_Venda,vlr_Desconto, '+
                              '  vlr_Total,Operador,Data_Cad,Data_Mov,Complemento,'+
                              '  Cod_emp,SeqVenda,Perc_Comis, SetorId,PesoBruto,PesoLiquido,'+
-                             '  MargemSecundaria,PrecoCusto,Pco_Tabela,LucroBruto ) Values '+
+                             '  MargemSecundaria,PrecoCusto,Pco_Tabela,LucroBruto,DataPrevisaoEntrega ) Values '+
                              '(:parCod_Produto,:parQtde_Venda,:parPco_Venda,:parvlr_Desconto, '+
                              ' :parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,:parComplemento,'+
                              ' :parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId, :parPesoBruto,:parPesoLiquido,'+
-                             ' :parMargemSecundaria,:parPrecoCusto,:parPco_Tabela,:parLucroBruto)';
+                             ' :parMargemSecundaria,:parPrecoCusto,:parPco_Tabela,:parLucroBruto,:parDataPrevisaoEntrega)';
 
    FQueryModific.Prepared := True;
    ItensVendas.first;
@@ -93,9 +94,16 @@ begin
       FQueryModific.ParamByName('parPrecoCusto').asFloat      := ItensVendas.FieldByName('PrecoCusto').AsFloat;
       FQueryModific.ParamByName('parLucroBruto').asFloat      := ItensVendas.FieldByName('LucroBruto').AsFloat;
       FQueryModific.ParamByName('parPco_Tabela').asFloat      := ItensVendas.FieldByName('Pco_Tabela').AsFloat;
+      FQueryModific.ParamByName('parDataPrevisaoEntrega').AsSQLTimeStamp := DatetimeToSqltimeStamp(ItensVendas.FieldByName('Previsao_Entrega').AsDateTime);
+
       FQueryModific.ExecSql;
       ItensVendas.next;
    End;
+end;
+
+procedure TDaoItemVenda.MarcarComoRecebido(ProdutoId, VendaID: Integer; DataDevolucao : TDateTime);
+begin
+   fConexao.Conection.ExecuteDirect('update T_ItensVendas set status=1, DataDevolucao='+ QuotedStr(FormatDateTime('dd/mm/yyyy', DataDevolucao ))+' where Cod_Produto='+IntTostr(ProdutoId)+' and SeqVenda='+IntTostr(VendaId));
 end;
 
 procedure TDaoItemVenda.SetConnection(const Value: TSqlConnection);

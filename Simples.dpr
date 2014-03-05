@@ -136,7 +136,8 @@ uses
   uCapturaImagem in '..\Compartilhados\uCapturaImagem.pas' {frmCapturaImagem},
   uLocacao in 'uLocacao.pas' {frmLocacao},
   uCadFornecedores in '..\Compartilhados\uCadFornecedores.pas' {frmCadFornecedores},
-  uConsLocacao in 'uConsLocacao.pas' {frmConsLocacao};
+  uConsLocacao in 'uConsLocacao.pas' {frmConsLocacao},
+  uFechaLocacao in 'uFechaLocacao.pas' {frmFechaLocacao};
 
 {$R *.res}
 

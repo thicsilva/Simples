@@ -21,7 +21,7 @@ object frmLocacao: TfrmLocacao
     Left = 0
     Top = 53
     Width = 760
-    Height = 132
+    Height = 135
     HintImageIndex = 0
     TabOrder = 0
     SkinData = frmPrincipal.SkinPrincipal
@@ -144,23 +144,6 @@ object frmLocacao: TfrmLocacao
       SkinDataName = 'stdlabel'
       Caption = 'Cliente'
     end
-    object bsSkinStdLabel6: TbsSkinStdLabel
-      Left = 13
-      Top = 84
-      Width = 101
-      Height = 13
-      EllipsType = bsetNone
-      UseSkinFont = True
-      UseSkinColor = True
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = -11
-      DefaultFont.Name = 'MS Sans Serif'
-      DefaultFont.Style = []
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'stdlabel'
-      Caption = 'Forma de Pagamento'
-    end
     object lblCNPJCPF: TbsSkinStdLabel
       Left = 78
       Top = 60
@@ -180,7 +163,7 @@ object frmLocacao: TfrmLocacao
     end
     object bsSkinStdLabel15: TbsSkinStdLabel
       Left = 68
-      Top = 108
+      Top = 82
       Width = 46
       Height = 13
       EllipsType = bsetNone
@@ -247,13 +230,30 @@ object frmLocacao: TfrmLocacao
       SkinDataName = 'stdlabel'
       Caption = 'Bairro'
     end
+    object bsSkinStdLabel7: TbsSkinStdLabel
+      Left = 41
+      Top = 110
+      Width = 73
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Pre-Pagamento'
+    end
     object cmbNome_Funcionario: TbsSkinDBLookupComboBox
       Left = 207
-      Top = 103
+      Top = 82
       Width = 299
       Height = 20
       HintImageIndex = 0
-      TabOrder = 6
+      TabOrder = 5
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -274,12 +274,12 @@ object frmLocacao: TfrmLocacao
       OnChange = cmbNome_FuncionarioChange
     end
     object cmbNome_formaPagamento: TbsSkinDBLookupComboBox
-      Left = 207
-      Top = 79
-      Width = 299
+      Left = 198
+      Top = 106
+      Width = 308
       Height = 20
       HintImageIndex = 0
-      TabOrder = 4
+      TabOrder = 8
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -297,10 +297,11 @@ object frmLocacao: TfrmLocacao
       KeyField = 'codigo'
       ListField = 'Descricao;Codigo'
       ListSource = srcCadFormasPagamento
+      OnChange = cmbNome_formaPagamentoChange
     end
     object edtCod_Funcionario: TbsSkinEdit
       Left = 123
-      Top = 103
+      Top = 82
       Width = 80
       Height = 20
       DefaultColor = clWindow
@@ -322,7 +323,7 @@ object frmLocacao: TfrmLocacao
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -333,9 +334,9 @@ object frmLocacao: TfrmLocacao
       OnExit = edtCod_FuncionarioExit
     end
     object edtCod_FormaPagamento: TbsSkinEdit
-      Left = 123
-      Top = 79
-      Width = 80
+      Left = 3
+      Top = 33
+      Width = 22
       Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -357,6 +358,7 @@ object frmLocacao: TfrmLocacao
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -404,9 +406,9 @@ object frmLocacao: TfrmLocacao
       Left = 512
       Top = 1
       Width = 247
-      Height = 130
+      Height = 133
       HintImageIndex = 0
-      TabOrder = 10
+      TabOrder = 11
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'panel'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -501,6 +503,28 @@ object frmLocacao: TfrmLocacao
         Caption = 'Total da Loca'#231#227'o'
         ParentFont = False
       end
+      object bsSkinStdLabel14: TbsSkinStdLabel
+        Left = 25
+        Top = 90
+        Width = 134
+        Height = 20
+        EllipsType = bsetNone
+        UseSkinFont = False
+        UseSkinColor = False
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clNavy
+        DefaultFont.Height = -16
+        DefaultFont.Name = 'MS Sans Serif'
+        DefaultFont.Style = [fsBold]
+        SkinDataName = 'stdlabel'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Caption = 'Valor do Cau'#231#227'o'
+        ParentFont = False
+      end
       object edtTotPecas: TEditN
         Left = 159
         Top = 30
@@ -571,6 +595,41 @@ object frmLocacao: TfrmLocacao
         WidthOnFocus = 0
         TextHint = True
       end
+      object edtValorCaucao: TEditN
+        Left = 159
+        Top = 90
+        Width = 69
+        Height = 24
+        TabStop = False
+        Color = clInfoBk
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 2
+        Text = '0,00'
+        ColorOnFocus = clInfoBk
+        ColorOnNotFocus = clInfoBk
+        FontColorOnFocus = clRed
+        FontColorOnNotFocus = clBlack
+        FontColorOnOverWrite = clBlue
+        EditType = etFloat
+        EditKeyByTab = #9
+        EditAlign = etAlignRight
+        EditLengthAlign = 0
+        EditPrecision = 0
+        ValueInteger = 0
+        ValueDate = 39369.000000000000000000
+        ValueTime = 0.502512476851851900
+        TimeSeconds = False
+        FirstCharUpper = False
+        FirstCharUpList = ' ('
+        WidthOnFocus = 0
+        TextHint = True
+      end
     end
     object cmbNome_Cliente: TbsSkinDBLookupComboBox
       Left = 241
@@ -578,7 +637,7 @@ object frmLocacao: TfrmLocacao
       Width = 240
       Height = 20
       HintImageIndex = 0
-      TabOrder = 8
+      TabOrder = 9
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -599,12 +658,12 @@ object frmLocacao: TfrmLocacao
       OnChange = cmbNome_ClienteChange
     end
     object cmbCod_formaPagamento: TbsSkinDBLookupComboBox
-      Left = 209
-      Top = 77
+      Left = 3
+      Top = 31
       Width = 22
       Height = 20
       HintImageIndex = 0
-      TabOrder = 9
+      TabOrder = 10
       Visible = False
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
@@ -658,7 +717,7 @@ object frmLocacao: TfrmLocacao
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 12
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -668,12 +727,12 @@ object frmLocacao: TfrmLocacao
       RightImageDownIndex = -1
     end
     object cmbCod_Funcionario: TbsSkinDBLookupComboBox
-      Left = 209
-      Top = 101
+      Left = 467
+      Top = 82
       Width = 22
       Height = 20
       HintImageIndex = 0
-      TabOrder = 12
+      TabOrder = 13
       Visible = False
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
@@ -845,7 +904,7 @@ object frmLocacao: TfrmLocacao
       Width = 56
       Height = 20
       HintImageIndex = 0
-      TabOrder = 13
+      TabOrder = 14
       Visible = False
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
@@ -893,7 +952,7 @@ object frmLocacao: TfrmLocacao
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 14
+      TabOrder = 15
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -902,10 +961,43 @@ object frmLocacao: TfrmLocacao
       RightImageHotIndex = -1
       RightImageDownIndex = -1
     end
+    object edtPrePagamento: TEditN
+      Left = 123
+      Top = 105
+      Width = 69
+      Height = 24
+      Color = clInfoBk
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+      Text = '0,00'
+      ColorOnFocus = clInfoBk
+      ColorOnNotFocus = clInfoBk
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditType = etFloat
+      EditKeyByTab = #9
+      EditAlign = etAlignRight
+      EditLengthAlign = 0
+      EditPrecision = 0
+      ValueInteger = 0
+      ValueDate = 39369.000000000000000000
+      ValueTime = 0.502512476851851900
+      TimeSeconds = False
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
-    Top = 185
+    Top = 188
     Width = 760
     Height = 44
     AutoSize = True
@@ -1255,7 +1347,7 @@ object frmLocacao: TfrmLocacao
   end
   object pnlProdutos: TbsSkinPanel
     Left = 0
-    Top = 229
+    Top = 232
     Width = 760
     Height = 55
     HintImageIndex = 0
@@ -1677,9 +1769,9 @@ object frmLocacao: TfrmLocacao
   end
   object bsSkinScrollBar2: TbsSkinScrollBar
     Left = 741
-    Top = 284
+    Top = 287
     Width = 19
-    Height = 210
+    Height = 207
     HintImageIndex = 0
     TabOrder = 5
     SkinData = frmPrincipal.SkinPrincipal
@@ -1707,9 +1799,9 @@ object frmLocacao: TfrmLocacao
   end
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
-    Top = 284
+    Top = 287
     Width = 741
-    Height = 210
+    Height = 207
     HintImageIndex = 0
     TabOrder = 6
     SkinData = frmPrincipal.SkinPrincipal
@@ -1944,7 +2036,7 @@ object frmLocacao: TfrmLocacao
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
-        ExplicitLeft = 677
+        ExplicitLeft = 652
         ExplicitTop = 12
         ExplicitHeight = 40
       end
@@ -1977,7 +2069,7 @@ object frmLocacao: TfrmLocacao
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '&Nova &Venda'
+        Caption = 'Nova &Loca'#231#227'o'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
@@ -2529,8 +2621,8 @@ object frmLocacao: TfrmLocacao
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 472
-    Top = 167
+    Left = 544
+    Top = 231
   end
   object cdsTempPagamentos: TClientDataSet
     Active = True

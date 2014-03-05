@@ -1,17 +1,9 @@
 {
 
  Status
-        1 - Contratado
-        2 - Em producao
-        3 - Finalizado
-        4 - Entregue
-        5 - Cancelada
-
- Tag da venda
-
-    Tag = 4 : Finalizaçao de OS
-    Tag = 3 : Serviço
-    Tag = 0 : Vendas normais
+        0 - Locado
+        1 - Entregue
+        2 - Cancelado
 
 }
 
@@ -60,8 +52,6 @@ type
     Colum_Cod_Aluno: TcxGridDBColumn;
     Colum_Descricao: TcxGridDBColumn;
     Colum_Data_Venda: TcxGridDBColumn;
-    Colum_Vlr_Total: TcxGridDBColumn;
-    colum_Vlr_Desconto: TcxGridDBColumn;
     Colum_Operador: TcxGridDBColumn;
     cxGrid1Level2: TcxGridLevel;
     GrdItensVendas: TcxGridDBTableView;
@@ -70,7 +60,6 @@ type
     Colum_PcoVenda: TcxGridDBColumn;
     Colum_Quantidade: TcxGridDBColumn;
     Colum_VlrTotal: TcxGridDBColumn;
-    Colum_Desconto: TcxGridDBColumn;
     Colum_Complemento: TcxGridDBColumn;
     cmbTipoData: TbsSkinComboBox;
     edtPesquisa: TbsSkinEdit;
@@ -112,10 +101,6 @@ type
     bsSkinBevel3: TbsSkinBevel;
     bsSkinBevel4: TbsSkinBevel;
     btnFinalizar: TbsSkinSpeedButton;
-    btnEmproducao: TbsSkinSpeedButton;
-    btnEntregue: TbsSkinSpeedButton;
-    btnCupomFiscal: TbsSkinSpeedButton;
-    bsSkinBevel5: TbsSkinBevel;
     btnImpComprovante: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     btnCancelar: TbsSkinMenuSpeedButton;
@@ -130,8 +115,14 @@ type
     LucroBruto: TcxGridDBColumn;
     Item_LucroBruto: TcxGridDBColumn;
     LucroBrutoReal: TcxGridDBColumn;
-    btnEntregaVenda: TbsSkinSpeedButton;
     MenuDeControle: TcxGridPopupMenu;
+    Colum_TotalLocacao: TcxGridDBColumn;
+    Colum_DataLocacao: TcxGridDBColumn;
+    Colum_Total: TcxGridDBColumn;
+    colum_dias: TcxGridDBColumn;
+    sdtsPesqPrepagamento: TSimpleDataSet;
+    colum_DataDevolucao: TcxGridDBColumn;
+    Column_NomeStatus: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -143,9 +134,7 @@ type
     procedure cdsItensVendasBeforeOpen(DataSet: TDataSet);
     procedure edtPesquisaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure btnEmproducaoClick(Sender: TObject);
     procedure btnEntregueClick(Sender: TObject);
-    procedure btnCupomFiscalClick(Sender: TObject);
     procedure btnImpComprovanteClick(Sender: TObject);
     procedure BorderodeEntrega1Click(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
@@ -158,10 +147,11 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure MenuItem1Click(Sender: TObject);
-    procedure btnEntregaVendaClick(Sender: TObject);
+    procedure cdsItensVendasCalcFields(DataSet: TDataSet);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
+    function RetornarTotalVenda(lrSeqVenda: String) : Real;
     { Private declarations }
   public
     { Public declarations }
@@ -174,7 +164,7 @@ implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
-  uclassContaCorrente;
+  uclassContaCorrente, uFechaLocacao;
 
 {$R *.dfm}
 
@@ -210,10 +200,6 @@ begin
       qryVendas.ParamByName('parPesquisa').AsString := '%'+edtPesquisa.Text+'%'
    else if cmbTipoFiltro.ItemIndex <> 0 Then
       qryVendas.ParamByName('parPesquisa').AsString :=edtPesquisa.Text;
-
-   if frmconsLocacao.tag=3 then
-      qryVendas.ParamByName('parTipo_Venda').AsString :='S'
-   Else
       qryVendas.ParamByName('parTipo_Venda').AsString :='P';
 
    If cmbPeriodo.ItemIndex<>0 Then
@@ -230,7 +216,7 @@ begin
 
    qryItensVendas.Close;
    qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
-                              'Prod.Pco_Custo, Itens.* '+
+                              'Prod.Pco_Custo, coalesce(Itens.Status,0) as Status, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
                               'where Prod.Codigo=Itens.Cod_Produto AND Ven.Tipo_Venda=:parTipo_Venda  ';
 
@@ -247,11 +233,7 @@ begin
       qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ven.Controle=:parPesquisa ';
 
    qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
-
-   if frmconsLocacao.tag=3 then
-      qryItensVendas.ParamByName('parTipo_Venda').AsString :='S'
-   Else
-      qryItensVendas.ParamByName('parTipo_Venda').AsString :='P';
+   qryItensVendas.ParamByName('parTipo_Venda').AsString :='P';
 
    if cmbStatus.ItemIndex <> 0 Then
       qryItensVendas.ParamByName('parStatus').AsString  := IntToStr(cmbStatus.ItemIndex);
@@ -282,88 +264,6 @@ begin
 end;
 
 
-procedure TfrmConsLocacao.btnCupomFiscalClick(Sender: TObject);
-var liRetorno : Integer;
-    lsNumeroCupom : String;
-    liNumeroVenda : Integer;
-    lsNomeCliente : String;
-    lsCNPJCPF : String;
-    lsMensagem : String;
-begin
-
-   if Trim(cdsVendas.FieldByName('NumeroCupom').AsString)<>'' then
-   Begin
-      CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
-      Exit;
-   End;
-   lsMensagem := 'Obrigado e volte sempre';                                                          
-   {
-   if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
-   Begin
-      if not inputQuery('Nome do Cliente','Nome do Cliente',lsNomeCliente) Then
-         Exit;
-      if not inputQuery('CNPJ/CPF','CNPJ ou CPF',lsCNPJCPF) Then
-         Exit;
-      lsMensagem := 'Cliente:'+lsNomeCliente+#13+#10;
-      lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
-   End;
-    }
-   If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
-   Begin
-      liRetorno := Bematech_FI_AbreCupom( '');
-      If liRetorno <> 1 Then
-      Begin
-         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
-         Exit;
-      End;
-      lsNumeroCupom := IncDigito( '', ' ', 6, 0 );
-      liRetorno := Bematech_FI_NumeroCupom( lsNumeroCupom );
-
-      If liRetorno <> 1 Then
-      Begin
-         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
-         Exit;
-      End;
-
-      liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
-      while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liNumeroVenda )  and ( Not cdsItensVendas.Eof )  do
-      Begin
-
-          liRetorno := Bematech_FI_VendeItem( cdsItensVendas.fieldbyname('Cod_Produto').AsString,
-                                             Copy(cdsItensVendas.fieldbyname('Descricao').AsString, 1, 29 ),
-                                             'FF',
-                                             'F',
-                                             FormatFloat( '0000000', ( cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat * 1000 ) ),
-                                             2,
-                                             FormatFloat( '000', ( cdsItensVendas.fieldbyname('Pco_Venda').AsFloat * 100 ) ),
-                                             '$',
-                                             FormatFloat( '00000000', cdsItensVendas.fieldbyname('vlr_Desconto').AsFloat * 100 ) );
-        If liRetorno <> 1 Then
-        Begin
-           CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar imprimir o item "' + cdsItensVendas.fieldbyname('Cod_Produto').AsString+ '" no ECF!!!', ctErro, [ cbOK ], 0 );
-           Exit;
-        End;
-        cdsItensvendas.Next;
-      End;
-     Bematech_FI_FechaCupomResumido( 'Dinheiro',lsMensagem);
-   End
-   Else
-   Begin
-      CaixaMensagem( 'Item da Venda não Localizado ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;
-   if lsNumeroCupom<>'000000' then
-   Begin
-      QryModific.Close;
-      QryModific.sql.Text := 'Update T_vendas set NumeroCupom=:parNumeroCupom where seqvenda=:parSeqVenda ';
-      QryModific.ParamByName('parNumeroCupom').asString := lsNumeroCupom;
-      QryModific.ParamByName('parSeqVenda').asInteger   := liNumeroVenda;
-      QryModific.ExecSQL;
-   End;
-   btnselecionarClick(btnSelecionar);
-   cdsvendas.locate('seqvenda',liNumeroVenda,[]);
-End;
-
 procedure TfrmConsLocacao.btnFecharClick(Sender: TObject);
 begin
    Close;
@@ -373,98 +273,53 @@ procedure TfrmConsLocacao.btnFinalizarClick(Sender: TObject);
 var liSeqvenda : Integer;
     arqImpressora: TextFile;
     lilinha : Integer;
+    liDias : Integer;
 begin
-   if ( cdsVendas.FieldByName('Status').AsString <> '1') And ( cdsVendas.FieldByName('Status').AsString <> '2') Then
+
+   if ( cdsVendas.FieldByName('Status').AsString <> '0') Then
    Begin
-      CaixaMensagem( 'Pedido ja finalizado', ctAviso, [ cbOk ], 0 );
+      CaixaMensagem( 'Locação já finalizada ou cancelada', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
 
-   FrmVendas     := TfrmVendas.create(Self);
-   frmvendas.Tag := 4; // venda de serviços
-   FrmVendas.btnincluirClick(FrmVendas.btnincluir);
-   FrmVendas.edtcod_Cliente.Text        := cdsVendas.FieldByName('Cod_Cliente').AsString;
-   FrmVendas.edtcod_ClienteExit(FrmVendas.edtcod_Cliente);
-   FrmVendas.edtNome_Cliente.Text := cdsVendas.FieldByName('Nome_Cliente').AsString;
-   frmvendas.edtCod_FormaPagamento.Text := cdsVendas.FieldByName('Cod_FormaPagamento').AsString;
-   FrmVendas.edtcod_FormaPagamentoExit(FrmVendas.edtcod_FormaPagamento);
-   frmVendas.edtCod_Funcionario.Text    := cdsVendas.FieldByName('Cod_Funcionario').AsString;
-   FrmVendas.edtcod_FuncionarioExit(FrmVendas.edtcod_Funcionario);
-   FrmVendas.edtControle.text   := cdsVendas.FieldByName('Controle').AsString;
-   liSeqvenda := cdsvendas.fieldbyname('SeqVenda').ASInteger;
-   frmvendas.edtTotalVenda.Text    :=  formatfloat('0.00',cdsVendas.FieldByName('Vlr_Total').AsFloat+cdsVendas.FieldByName('Vlr_Desconto').AsFloat);
-   frmvendas.edtTotDesconto.Text   :=  formatfloat('0.00',cdsVendas.FieldByName('Vlr_Desconto').AsFloat);
-   frmvendas.edtTotalLiquido.Text  :=  formatfloat('0.00',StrtoFloat(frmvendas.edtTotalVenda.Text)-StrToFloat(frmvendas.edtTotDesconto.Text));
-   frmvendas.liSeqVendaAtu         :=  cdsVendas.FieldByName('SeqVenda').AsInteger;
+
    If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
    Begin
+      frmFechaLocacao := TfrmFechaLocacao.Create(Nil);
+      sdtsPesqPrepagamento.Close;
+      sdtsPesqPrepagamento.Params.Clear;
+      sdtsPesqPrepagamento.DataSet.CommandText := 'Select sum(Valor) as Total from t_Movcaixa '+
+                                                  'Where PrePagamento=:parPrePagamento and Seqvenda=:parSeqVenda ';
+      sdtsPesqPrepagamento.DataSet.ParamByName('parPrePagamento').AsString  := 'S';
+      sdtsPesqPrepagamento.DataSet.ParamByName('parSeqvenda').AsInteger     :=  cdsItensVendas.fieldbyname('SeqVenda').ASInteger;
+      sdtsPesqPrepagamento.Open;
+
+      liDias :=  RetornarNumeroDias(cdsItensVendas.fieldbyname('Data_Cad').AsDateTime,RetornarDataSistema);
+      frmFechaLocacao.edtData_Venda.Text  := FormatDateTime('dd/mm/yyyy', cdsItensVendas.fieldbyname('Data_Cad').AsDateTime);
+      frmFechaLocacao.edtNumeroVenda.Text := cdsItensVendas.fieldbyname('SeqVenda').AsString;
+      frmFechaLocacao.edtCodCliente.Text  :=  cdsVendas.fieldbyname('Cod_Cliente').AsString;
+      frmFechaLocacao.lblDataLocacao.caption :='Data da Locação '+frmFechaLocacao.edtData_Venda.Text;
+      frmFechaLocacao.edtPrePagamento.text := FormatFloat('0.00',sdtsPesqPrepagamento.fieldByName('Total').AsFloat);
+      liSeqvenda := cdsItensVendas.fieldbyname('SeqVenda').ASInteger;
       while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liSeqvenda ) and ( Not cdsItensVendas.Eof )  do
       Begin
-         FrmVendas.cdsItensVendasTmp.Append;
-         FrmVendas.cdsItensVendasTmp.FieldByName('Codigo').asInteger      := cdsItensVendas.fieldbyname('Cod_Produto').AsInteger;
-         FrmVendas.cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat    := cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat;
-         FrmVendas.cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := cdsItensVendas.fieldbyname('Pco_Venda').AsFloat;
-         FrmVendas.cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := cdsItensVendas.fieldbyname('vlr_Total').AsFloat;
-         FrmVendas.cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := cdsItensVendas.fieldbyname('vlr_Desconto').AsFloat;
-         FrmVendas.cdsItensVendasTmp.FieldByName('Descricao').asString    := cdsItensVendas.fieldbyname('Descricao').AsString;
-         FrmVendas.cdsItensVendasTmp.Post;
+         if cdsItensVendas.fieldbyname('Status').AsInteger<>1 then
+         begin
+            frmFechaLocacao.cdsItensVendasTmp.Append;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Codigo').asInteger    := cdsItensVendas.fieldbyname('Cod_Produto').AsInteger;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Descricao').asString  := cdsItensVendas.fieldbyname('Descricao').AsString;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Quantidade').asFloat  := cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Diaria').asFloat      := cdsItensVendas.fieldbyname('Pco_Venda').AsFloat;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Dias').asFloat        := liDias;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Total').asFloat       := lidias * (cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat * cdsItensVendas.fieldbyname('Pco_Venda').AsFloat);
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('Marcado').asString    := 'X';
+            frmFechaLocacao.cdsItensVendasTmp.Post;
+         end;
          cdsItensvendas.Next;
       End;
    End;
-   if checkUsarleitor.Checked then
-   begin
-      frmVendas.AtualizaTabelas;
-      frmVendas.PrepararFinalizacaoOS;
-      frmVendas.edtCod_TipoVenda.Visible := False;
-      frmVendas.btnokclick(frmVendas.btnOk);
-      frmVendas.Close;
-   end
-   else
-      frmVendas.Showmodal;
+   frmFechaLocacao.Showmodal;
    btnSelecionarClick(btnSelecionar);
-
-   {$REGION 'Imprime Etiquetas das O.S'}
-   IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'EmiteEtiqueta', 'NAO' )) = 'SIM' Then
-   Begin
-       sdtsPesqEtiqueta.Close;
-       sdtsPesqEtiqueta.dataSet.CommandText := 'Select SeqVenda From T_Vendas Where Etiqueta=:parEtiqueta';
-       sdtsPesqEtiqueta.dataSet.ParamByName('ParEtiqueta').AsInteger := 1;
-       sdtsPesqEtiqueta.open;
-       if sdtsPesqEtiqueta.RecordCount>=2 then
-       Begin
-          while not sdtsPesqEtiqueta.Eof do
-          Begin
-             lilinha := 10;
-             AssignFile( arqImpressora, 'LPT1' );
-             Rewrite(arqImpressora);
-             WriteLn(arqImpressora,'N');
-             WriteLn(arqImpressora,'D11');
-             WriteLn(arqImpressora,'S1');
-             WriteLn(arqImpressora,'R000,000');
-             WriteLn(arqImpressora,'Q120,23');
-
-             WriteLn(arqImpressora,'A60,'+IntToStr(liLinha)+',0,2,1,2,N,"'+'Artlab - O.S. No'+'"');
-             WriteLn(arqImpressora,'B60,'+IntToStr(liLinha+42)+',0,1,2,6,60,B,"'+sdtsPesqEtiqueta.FieldByName('SeqVenda').AsString+'"');
-
-             sdtsPesqEtiqueta.next;
-
-             WriteLn(arqImpressora,'A500,'+IntToStr(liLinha)+',0,2,1,2,N,"'+'Artlab - O.S. No'+'"');
-             WriteLn(arqImpressora,'B500,'+IntToStr(liLinha+42)+',0,1,2,6,60,B,"'+sdtsPesqEtiqueta.FieldByName('SeqVenda').AsString+'"');
-
-             WriteLn(arqImpressora,'P1');
-             WriteLn(arqImpressora,'N');
-             System.Close(arqImpressora );
-             sdtsPesqEtiqueta.next;
-          End;
-          qrymodific.Close;
-          qrymodific.SQL.text := 'update T_Vendas set Etiqueta=:parEtiqueta where Etiqueta=:parEtiqueta2 ';
-          qrymodific.ParamByName('ParEtiqueta').AsInteger := 0;
-          qrymodific.ParamByName('ParEtiqueta2').AsInteger := 1;
-          qrymodific.ExecSQL;
-       End;
-   End;
-   {$ENDREGION}
-
 
 end;
 
@@ -501,11 +356,37 @@ end;
 procedure TfrmConsLocacao.cdsItensVendasBeforeOpen(DataSet: TDataSet);
 var licont : integer;
 begin
+   CriarCalculado (DataSet,'TotalLocacao',ftFloat,0);
+   CriarCalculado (DataSet,'Dias',ftInteger,0);
+   CriarCalculado (DataSet,'Nome_Status',ftString,20);
+
    for liCont := 1 To DataSet.FieldCount Do
    begin
       if DataSet.Fields[ liCont - 1 ].DataType = ftFloat Then
          TFloatField( DataSet.Fields[ liCont - 1 ] ).DisplayFormat := '0.00';
    end;
+end;
+
+
+procedure TfrmConsLocacao.cdsItensVendasCalcFields(DataSet: TDataSet);
+begin
+
+   If cdsItensVendas.FieldByName('Status').AsString = '0' Then
+      cdsItensVendas.FieldByName('Nome_Status').AsString := 'Locado'
+   Else If cdsItensVendas.FieldByName('Status').AsString = '1' Then
+      cdsItensVendas.FieldByName('Nome_Status').AsString := 'Entregue'
+   Else If cdsItensVendas.FieldByName('Status').AsString = '2' Then
+      cdsItensVendas.FieldByName('Nome_Status').AsString := 'Cancelado'
+   Else
+      cdsItensVendas.FieldByName('Nome_Status').AsString := 'Não Informado';
+
+   if cdsItensVendas.fieldByName('Status').AsInteger<>1 then
+      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Cad').AsDateTime, now)
+   else
+      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Cad').AsDateTime,cdsItensVendas.fieldByName('DataDevolucao').AsDateTime);
+
+   cdsItensVendas.fieldByName('TotalLocacao').AsFloat := ( ( cdsItensVendas.fieldByName('Qtde_venda').AsFloat * cdsItensVendas.fieldByName('Pco_Venda').AsFloat ) *
+                                                             cdsItensVendas.fieldByName('Dias').AsInteger )
 end;
 
 procedure TfrmConsLocacao.cdsVendasBeforeOpen(DataSet: TDataSet);
@@ -515,6 +396,9 @@ begin
    CriarCalculado (DataSet,'Status_Pagamento',ftString,20);
    CriarCalculado (DataSet,'Status_Entrega',ftString,20);
    CriarCalculado (DataSet,'LucroBrutoReais',ftFloat,0);
+   CriarCalculado (DataSet,'TotalLocacao',ftFloat,0);
+   CriarCalculado (DataSet,'LucroBrutoReais',ftFloat,0);
+
    for liCont := 1 To DataSet.FieldCount Do
    begin
       if DataSet.Fields[ liCont - 1 ].DataType = ftFloat Then
@@ -524,18 +408,14 @@ end;
 
 procedure TfrmConsLocacao.cdsVendasCalcFields(DataSet: TDataSet);
 begin
-   If cdsVendas.FieldByName('Status').AsString = '1' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Contratado'
-   Else If cdsVendas.FieldByName('Status').AsString = '2' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Em Producao'
-   Else If cdsVendas.FieldByName('Status').AsString = '3' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Finalizado'
-   Else If cdsVendas.FieldByName('Status').AsString = '4' Then
+   If cdsVendas.FieldByName('Status').AsString = '0' Then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Locado'
+   Else If cdsVendas.FieldByName('Status').AsString = '1' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue'
-   Else If cdsVendas.FieldByName('Status').AsString = '5' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Cancelada'
+   Else If cdsVendas.FieldByName('Status').AsString = '2' Then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Cancelado'
    Else
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Venda Normal';
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Não Informado';
 
    if cdsVendas.FieldByName('ServicoPago').AsBoolean then
       cdsVendas.FieldByName('Status_Pagamento').AsString := 'Pagamento Total'
@@ -549,8 +429,31 @@ begin
 
    cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );  
 
+   cdsVendas.FieldByName('TotalLocacao').AsFloat := RetornarTotalVenda(cdsVendas.FieldByName('SeqVenda').AsString);
 
 end;
+
+
+function TfrmConsLocacao.RetornarTotalVenda( lrSeqVenda : String ) : Real;
+var Dados : TClientDataSet;
+    Total : Real;
+begin
+   Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad, coalesce(Status,0) as Status ,DataDevolucao from T_itensvendas '+
+                                    'Where SeqVenda='+lrSeqVenda ,Nil);
+   Total := 0;
+   while not Dados.Eof do
+   begin
+      if Dados.fieldByName('Status').AsInteger<>1 then
+         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Cad').AsDateTime,RetornarDataSistema)
+      else
+         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Cad').AsDateTime,Dados.FieldByName('DataDevolucao').AsDateTime);
+
+      Dados.Next;
+   end;
+   Result := Total;
+end;
+
+
 
 procedure TfrmConsLocacao.checkUsarleitorClick(Sender: TObject);
 begin
@@ -634,43 +537,26 @@ begin
 
    cmbPeriodoChange(cmbPeriodo);
 
-   btnEmproducao.Visible  := True;
-   btnEntregue.Visible    := True;
    cmbTipoFiltro.Enabled  := True;
    cmbStatus.Enabled      := True;
-   btnEntregaVenda.Visible := False;
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
-   Begin
-      btnCupomFiscal.Visible := False;
-      btnEmproducao.Visible  := False;
-      btnEntregue.Visible    := False;
-      btnEntregaVenda.Visible := True;
-      separador.Width        := separador.Width+( btnEntregue.Width * 4 );
-   End;
+   
 
-
-   frmConsLocacao.Caption  := 'Consulta e manutenção de Vendas  ';
-   pnlmensagem.Caption    := 'Consulta de vendas ';
+   frmConsLocacao.Caption := 'Consulta e manutenção de Locações ';
+   pnlmensagem.Caption    := 'Consulta de Locação ';
    pnlmensagem.color      := $00D5FBD6;
    cmbStatus.Visible      := False;
    lblsituacao.Visible    := False;
    cmbStatus.ItemIndex    := 0;
    btnFinalizar.Visible   := false;
-   btnCupomFiscal.Enabled := True;
-   //grdvendas.Columns[0].Visible := False;
-   //colum_NomeAnimal.Visible := False;
+   colum_NomeAnimal.Visible := False;
    IF frmConsLocacao.Tag = 3 Then
    Begin
-      frmConsLocacao.Caption := 'Consulta e manutenção de Serviços  ';
-      pnlmensagem.Caption   := 'Consulta de Serviços ';
       pnlmensagem.color     := clInfoBk;
-      //cmbStatus.ItemIndex   := 1;
       cmbStatus.Visible     := True;
       cmbStatus.Visible     := True;
       lblsituacao.Visible   := True;
       btnFinalizar.Visible   := True;
-      btnCupomFiscal.Enabled := false;
-      //grdvendas.Columns[0].Visible := True;
+      Colum_NomeStatus.Visible := True;
    End;
    btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    btnSelecionarClick(btnSelecionar);
@@ -1073,50 +959,6 @@ begin
          cdsVendas.Locate('SeqVenda',liSeqVenda, [] );
       End;
    End;
-end;
-
-procedure TfrmConsLocacao.btnEmproducaoClick(Sender: TObject);
-begin
-
-   if cdsVendas.FieldByName('Status').AsString='3' then
-   begin
-      CaixaMensagem( 'O Serviço já foi finalizado, Impossivel Colocar em Produção !', ctAviso, [ cbOK ], 0 );
-      exit;
-   end;
-
-   if cdsVendas.FieldByName('Status').AsString='5' then
-   begin
-      CaixaMensagem( 'O Serviço esta cancelado, Impossivel Colocar em Produção !', ctAviso, [ cbOK ], 0 );
-      exit;
-   end;
-
-   if cdsVendas.FieldByName('Status').AsString='2' then
-   Begin
-      if CaixaMensagem( 'O Serviço ja esta em produção. Deseja Retirar ???', ctConfirma, [ cbSimNao ], 0 )  Then
-      Begin
-         qryModific.SQL.Text := 'Update T_Vendas set Status=:parStatus Where seqvenda=:parSeqvenda ';
-         qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
-         qryModific.ParamByName('parStatus').AsString    := '1';
-         qryModific.ExecSQL;
-      End;
-   End
-   Else
-   Begin
-      if CaixaMensagem( 'O Serviço não esta em produção. Deseja colocar ???', ctConfirma, [ cbSimNao ], 0 )  Then
-      Begin
-         qryModific.SQL.Text := 'Update T_Vendas set Status=:parStatus Where seqvenda=:parSeqvenda ';
-         qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
-         qryModific.ParamByName('parStatus').AsString    := '2';
-         qryModific.ExecSQL;
-      End;
-   end;
-   btnselecionarclick(btnselecionar);
-end;
-
-procedure TfrmConsLocacao.btnEntregaVendaClick(Sender: TObject);
-begin
-  inherited;
-  MenuItem1Click(MenuItem1);
 end;
 
 procedure TfrmConsLocacao.btnEntregueClick(Sender: TObject);

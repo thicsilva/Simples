@@ -60,6 +60,8 @@ object frmConsLocacao: TfrmConsLocacao
       Height = 384
       Align = alClient
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = 6
       object GrdVendas: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         OnCustomDrawCell = GrdVendasCustomDrawCell
@@ -70,14 +72,12 @@ object frmConsLocacao: TfrmConsLocacao
           item
             Format = '0.00'
             Kind = skSum
-            Column = Colum_Vlr_Total
             DisplayText = 'Total agrupado'
             Sorted = True
           end
           item
             Format = '0.00'
             Kind = skSum
-            Column = colum_Vlr_Desconto
             DisplayText = 'Total Desconto'
           end
           item
@@ -90,13 +90,11 @@ object frmConsLocacao: TfrmConsLocacao
           item
             Format = '0.00'
             Kind = skSum
-            Column = Colum_Vlr_Total
             DisplayText = 'Valor Total'
           end
           item
             Format = '0.00'
             Kind = skSum
-            Column = colum_Vlr_Desconto
             DisplayText = 'Total Desconto'
           end
           item
@@ -117,13 +115,14 @@ object frmConsLocacao: TfrmConsLocacao
         Styles.GroupByBox = frmPrincipal.cxStyle4
         Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
         object Colum_Seqvenda: TcxGridDBColumn
-          Caption = 'Venda N'#186
+          Caption = 'Loca'#231#227'o N'#186
           DataBinding.FieldName = 'SeqVenda'
           Width = 55
         end
         object colum_Controle: TcxGridDBColumn
           Caption = 'N'#186' Controle'
           DataBinding.FieldName = 'controle'
+          Visible = False
         end
         object Colum_NomeStatus: TcxGridDBColumn
           Caption = 'Status'
@@ -136,37 +135,37 @@ object frmConsLocacao: TfrmConsLocacao
           Width = 50
         end
         object Colum_Descricao: TcxGridDBColumn
+          Caption = 'Nome Do Cliente'
           DataBinding.FieldName = 'Nome_Cliente'
           Width = 200
         end
         object colum_NomeAnimal: TcxGridDBColumn
           Caption = 'Nome do Animal'
           DataBinding.FieldName = 'NomeAnimal'
+          Visible = False
           Width = 110
         end
         object Colum_Data_Venda: TcxGridDBColumn
-          Caption = 'Data'
+          Caption = 'Data Loca'#231#227'o'
           DataBinding.FieldName = 'Data_Venda'
           Width = 120
         end
-        object colum_Vlr_Desconto: TcxGridDBColumn
-          Caption = 'Desconto'
-          DataBinding.FieldName = 'Vlr_Desconto'
-          Width = 65
-        end
-        object Colum_Vlr_Total: TcxGridDBColumn
-          Caption = 'Total'
-          DataBinding.FieldName = 'Vlr_Total'
-          Width = 65
+        object Colum_TotalLocacao: TcxGridDBColumn
+          AlternateCaption = 'TotalLocacao'
+          Caption = 'Total Ate Hoje'
+          DataBinding.FieldName = 'TotalLocacao'
+          Width = 101
         end
         object LucroBruto: TcxGridDBColumn
           Caption = 'Lucro Bruto %'
           DataBinding.FieldName = 'LucroBruto'
+          Visible = False
           Width = 85
         end
         object LucroBrutoReal: TcxGridDBColumn
           Caption = 'Lucro Bruto $'
           DataBinding.FieldName = 'LucroBrutoReais'
+          Visible = False
           Width = 85
         end
         object Colum_Operador: TcxGridDBColumn
@@ -186,11 +185,13 @@ object frmConsLocacao: TfrmConsLocacao
         object Column_Status_Pagamento: TcxGridDBColumn
           Caption = 'Situa'#231#227'o Pagamento'
           DataBinding.FieldName = 'Status_Pagamento'
+          Visible = False
           Width = 130
         end
         object Status_Entrega: TcxGridDBColumn
           Caption = 'Status Entrega'
           DataBinding.FieldName = 'Status_Entrega'
+          Visible = False
           Width = 120
         end
       end
@@ -210,6 +211,9 @@ object frmConsLocacao: TfrmConsLocacao
         OptionsData.Editing = False
         OptionsData.Inserting = False
         OptionsView.GroupByBox = False
+        object Column_NomeStatus: TcxGridDBColumn
+          DataBinding.FieldName = 'Nome_Status'
+        end
         object Colum_Codigo: TcxGridDBColumn
           Caption = 'Codigo'
           DataBinding.FieldName = 'Cod_Produto'
@@ -225,23 +229,40 @@ object frmConsLocacao: TfrmConsLocacao
           Width = 70
         end
         object Colum_PcoVenda: TcxGridDBColumn
-          Caption = 'Preco'
+          Caption = 'Valor Diaria'
           DataBinding.FieldName = 'Pco_Venda'
           Width = 70
         end
-        object Colum_Desconto: TcxGridDBColumn
-          Caption = 'Desconto'
-          DataBinding.FieldName = 'Vlr_Desconto'
-          Width = 70
+        object Colum_DataLocacao: TcxGridDBColumn
+          Caption = 'Previsao Entrega'
+          DataBinding.FieldName = 'DataPrevisaoEntrega'
+          Width = 100
+        end
+        object colum_DataDevolucao: TcxGridDBColumn
+          Caption = 'Data Devolucao'
+          DataBinding.FieldName = 'DataDevolucao'
+          Width = 80
         end
         object Colum_VlrTotal: TcxGridDBColumn
-          Caption = 'Total'
+          Caption = 'Total Previsto'
           DataBinding.FieldName = 'Vlr_Total'
+          Visible = False
           Width = 70
+        end
+        object colum_dias: TcxGridDBColumn
+          Caption = 'N'#186' Dias'
+          DataBinding.FieldName = 'Dias'
+          Width = 50
+        end
+        object Colum_Total: TcxGridDBColumn
+          Caption = 'Total Ate Hoje'
+          DataBinding.FieldName = 'TotalLocacao'
+          Width = 80
         end
         object Item_LucroBruto: TcxGridDBColumn
           Caption = 'Lucro Bruto'
           DataBinding.FieldName = 'LucroBruto'
+          Visible = False
           Width = 75
         end
         object Colum_Complemento: TcxGridDBColumn
@@ -404,9 +425,7 @@ object frmConsLocacao: TfrmConsLocacao
       Text = 'Todos'
       Items.Strings = (
         'Todos'
-        'Contratado'
-        'Em producao'
-        'Finalizado'
+        'Locado'
         'Entregue'
         'Cancelada')
       ItemIndex = 0
@@ -421,7 +440,7 @@ object frmConsLocacao: TfrmConsLocacao
       Style = bscbFixedStyle
     end
     object cmbTipoFiltro: TbsSkinComboBox
-      Left = 185
+      Left = 187
       Top = 42
       Width = 120
       Height = 20
@@ -961,7 +980,7 @@ object frmConsLocacao: TfrmConsLocacao
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 823
+        Left = 1081
         Top = 0
         Width = 70
         Height = 49
@@ -1003,18 +1022,16 @@ object frmConsLocacao: TfrmConsLocacao
       object separador: TbsSkinBevel
         Left = 100
         Top = 0
-        Width = 39
+        Width = 589
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 402
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 351
+        Left = 689
         Top = 0
         Width = 17
         Height = 49
@@ -1027,7 +1044,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 438
+        Left = 776
         Top = 0
         Width = 35
         Height = 49
@@ -1040,7 +1057,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object btnFinalizar: TbsSkinSpeedButton
-        Left = 368
+        Left = 706
         Top = 0
         Width = 70
         Height = 49
@@ -1075,141 +1092,11 @@ object frmConsLocacao: TfrmConsLocacao
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnFinalizarClick
-        ExplicitLeft = 123
-        ExplicitTop = 8
-        ExplicitHeight = 40
-      end
-      object btnEmproducao: TbsSkinSpeedButton
-        Left = 139
-        Top = 0
-        Width = 72
-        Height = 49
-        HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bigtoolbutton'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        CheckedMode = False
-        UseSkinSize = True
-        UseSkinFontColor = True
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        ImageIndex = 8
-        RepeatMode = False
-        RepeatInterval = 100
-        Transparent = True
-        Flat = True
-        AllowAllUp = False
-        Down = False
-        GroupIndex = 0
-        Caption = '&Em Produ'#231#227'o'
-        ShowCaption = True
-        NumGlyphs = 1
-        Align = alLeft
-        Spacing = 1
-        Layout = blGlyphTop
-        OnClick = btnEmproducaoClick
-        ExplicitLeft = 140
+        ExplicitLeft = 712
         ExplicitTop = 12
-      end
-      object btnEntregue: TbsSkinSpeedButton
-        Left = 211
-        Top = 0
-        Width = 70
-        Height = 49
-        HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bigtoolbutton'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        CheckedMode = False
-        UseSkinSize = True
-        UseSkinFontColor = True
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        ImageIndex = 8
-        RepeatMode = False
-        RepeatInterval = 100
-        Transparent = True
-        Flat = True
-        AllowAllUp = False
-        Down = False
-        GroupIndex = 0
-        Caption = '&Entregue '
-        ShowCaption = True
-        NumGlyphs = 1
-        Align = alLeft
-        Spacing = 1
-        Layout = blGlyphTop
-        OnClick = btnEntregueClick
-        ExplicitLeft = 189
-        ExplicitTop = 12
-      end
-      object btnCupomFiscal: TbsSkinSpeedButton
-        Left = 594
-        Top = 0
-        Width = 70
-        Height = 49
-        HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bigtoolbutton'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        CheckedMode = False
-        UseSkinSize = True
-        UseSkinFontColor = True
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        ImageIndex = 11
-        RepeatMode = False
-        RepeatInterval = 100
-        Transparent = True
-        Flat = True
-        AllowAllUp = False
-        Down = False
-        GroupIndex = 0
-        Caption = '&Cupom Fiscal'
-        ShowCaption = True
-        NumGlyphs = 1
-        Align = alLeft
-        Spacing = 1
-        Layout = blGlyphTop
-        OnClick = btnCupomFiscalClick
-        ExplicitLeft = 592
-        ExplicitTop = 12
-      end
-      object bsSkinBevel5: TbsSkinBevel
-        Left = 664
-        Top = 0
-        Width = 159
-        Height = 49
-        Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bevel'
-        DividerMode = True
-        ExplicitLeft = 594
-        ExplicitTop = -1
       end
       object btnImpComprovante: TbsSkinSpeedButton
-        Left = 473
+        Left = 811
         Top = 0
         Width = 70
         Height = 49
@@ -1249,17 +1136,15 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 543
+        Left = 881
         Top = 0
-        Width = 51
+        Width = 200
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 553
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitTop = -1
       end
       object btnCancelar: TbsSkinMenuSpeedButton
         Left = 0
@@ -1303,45 +1188,6 @@ object frmConsLocacao: TfrmConsLocacao
         TrackButtonMode = False
         ExplicitTop = 8
         ExplicitHeight = 40
-      end
-      object btnEntregaVenda: TbsSkinSpeedButton
-        Left = 281
-        Top = 0
-        Width = 70
-        Height = 49
-        HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bigtoolbutton'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        CheckedMode = False
-        UseSkinSize = True
-        UseSkinFontColor = True
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        ImageIndex = 8
-        RepeatMode = False
-        RepeatInterval = 100
-        Transparent = True
-        Flat = True
-        AllowAllUp = False
-        Down = False
-        GroupIndex = 0
-        Caption = '&Entregue '
-        ShowCaption = True
-        NumGlyphs = 1
-        Align = alLeft
-        Spacing = 1
-        Layout = blGlyphTop
-        OnClick = btnEntregaVendaClick
-        ExplicitLeft = 292
-        ExplicitTop = 12
       end
     end
   end
@@ -1616,6 +1462,7 @@ object frmConsLocacao: TfrmConsLocacao
     Params = <>
     ProviderName = 'dspItensVendas'
     BeforeOpen = cdsItensVendasBeforeOpen
+    OnCalcFields = cdsItensVendasCalcFields
     Left = 290
     Top = 363
   end
@@ -1986,11 +1833,6 @@ object frmConsLocacao: TfrmConsLocacao
           'Visible')
       end
       item
-        Component = Colum_Desconto
-        Properties.Strings = (
-          'Visible')
-      end
-      item
         Component = Colum_Descricao
         Properties.Strings = (
           'Visible')
@@ -2032,16 +1874,6 @@ object frmConsLocacao: TfrmConsLocacao
       end
       item
         Component = Colum_Seqvenda
-        Properties.Strings = (
-          'Visible')
-      end
-      item
-        Component = colum_Vlr_Desconto
-        Properties.Strings = (
-          'Visible')
-      end
-      item
-        Component = Colum_Vlr_Total
         Properties.Strings = (
           'Visible')
       end
@@ -2106,5 +1938,14 @@ object frmConsLocacao: TfrmConsLocacao
       Caption = 'Marcar como entregue'
       OnClick = MenuItem1Click
     end
+  end
+  object sdtsPesqPrepagamento: TSimpleDataSet
+    Aggregates = <>
+    Connection = frmPrincipal.dbxPrincipal
+    DataSet.MaxBlobSize = -1
+    DataSet.Params = <>
+    Params = <>
+    Left = 532
+    Top = 399
   end
 end

@@ -331,6 +331,7 @@ type
     procedure actSkinGridExecute(Sender: TObject);
     procedure actSkinDadosExecute(Sender: TObject);
     procedure actLocacaoExecute(Sender: TObject);
+    procedure actConsultaLocacaoExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -389,7 +390,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
-  uLocacao;
+  uLocacao, uConsLocacao;
 
 {$R *.dfm}
 
@@ -833,6 +834,13 @@ begin
    frmConsVendas := TfrmConsVendas.Create(Nil);
    frmconsvendas.tag := 3;
    frmConsVendas.showmodal;
+end;
+
+procedure TfrmPrincipal.actConsultaLocacaoExecute(Sender: TObject);
+begin
+   frmConsLocacao := TfrmConsLocacao.Create(Nil);
+   frmConsLocacao.tag := 3;
+   frmConsLocacao.showmodal;
 end;
 
 procedure TfrmPrincipal.ActConsultaVendaExecute(Sender: TObject);

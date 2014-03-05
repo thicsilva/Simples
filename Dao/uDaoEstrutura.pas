@@ -58,6 +58,8 @@ type TDaoEstrutura = class
     procedure Adicionar_Email_na_Tabela_Clientes;
     procedure Adicionar_BloqueioEstoque_na_Tabela_Produtos;
     procedure CriarTabela_CustosProduto;
+    procedure Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
+    procedure Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -416,6 +418,27 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'DataPrevisaoEntrega', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD DataPrevisaoEntrega DateTime';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'DataDevolucao', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD DataDevolucao DateTime';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
 procedure TDaoEstrutura.Adicionar_Entregue_na_Tabela_Vendas;
 begin
    if not ExisteCampo( 'T_Vendas', 'Entregue', FConexao.Conection ) then
@@ -597,6 +620,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
+  Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
   Adicionar_PrecoVendaExterna_na_Tabela_Produtos;
   Adicionar_Cod_Caixa_na_Tabela_CtasReceber;
   Adicionar_SetorId_na_Tabela_ItensVendas;
