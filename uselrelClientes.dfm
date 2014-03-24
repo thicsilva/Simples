@@ -31,6 +31,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -69,7 +70,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       Left = 169
       Top = 6
       Width = 66
-      Height = 18
+      Height = 20
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -91,6 +92,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -140,6 +142,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -245,7 +248,6 @@ object frmSelRelClientes: TfrmSelRelClientes
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = -6
-        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
@@ -290,6 +292,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -308,6 +311,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe o vendedor para o relarorio'
     Align = alClient
+    UseSkinSize = True
     object bsSkinStdLabel4: TbsSkinStdLabel
       Left = 5
       Top = 37
@@ -476,6 +480,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.cxSmallImages
       ImageIndex = 10
@@ -510,6 +515,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -528,6 +534,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     Spacing = 2
     Caption = 'Informe a Rota para o Relatorio'
     Align = alTop
+    UseSkinSize = True
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 28
       Top = 31
@@ -691,6 +698,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.cxSmallImages
       ImageIndex = 10
@@ -724,6 +732,7 @@ object frmSelRelClientes: TfrmSelRelClientes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    UseSkinSize = True
     CaptionImageIndex = -1
     NumGlyphs = 1
     Spacing = 2
@@ -759,8 +768,8 @@ object frmSelRelClientes: TfrmSelRelClientes
       Left = 22
       Top = 27
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -798,6 +807,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -809,8 +819,8 @@ object frmSelRelClientes: TfrmSelRelClientes
       Left = 154
       Top = 27
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -848,6 +858,7 @@ object frmSelRelClientes: TfrmSelRelClientes
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1

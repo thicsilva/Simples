@@ -146,12 +146,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmDelivery, frmDelivery);
-  Application.CreateForm(TfrmMapa, frmMapa);
-  Application.CreateForm(TfrmSelHora, frmSelHora);
-  Application.CreateForm(TfrmCapturaImagem, frmCapturaImagem);
-  Application.CreateForm(TfrmLocacao, frmLocacao);
-  Application.CreateForm(TfrmCadFornecedores, frmCadFornecedores);
   Frmlogin.ShowModal;
   Application.Run;
 end.

@@ -26,7 +26,7 @@ uses
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
   SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
-  uDaoCustoProduto, dateUtils;
+  uDaoCustoProduto, dateUtils, frxClass, frxDBSet, RpConDS, RpRave;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -69,7 +69,6 @@ type
     cdsItensVendasTMPCodigo: TIntegerField;
     cdsItensVendasTMPDescricao: TStringField;
     cdsItensVendasTMPPco_Venda: TFloatField;
-    cdsItensVendasTMPqtde_Venda: TFloatField;
     cdsItensVendasTMPvlr_Total: TFloatField;
     bsSkinScrollBar1: TbsSkinScrollBar;
     cdsItensVendasTMPComplemento: TStringField;
@@ -161,7 +160,7 @@ type
     cdsItensVendasTMPqtdeEmbalagem: TIntegerField;
     cdsItensVendasTMPseqVenda: TIntegerField;
     cdsItensVendasTMPSetorId: TIntegerField;
-    btnDesconto: TbsSkinSpeedButton;
+    btnContrato: TbsSkinSpeedButton;
     cdsItensVendasTMPPesoBruto: TFloatField;
     cdsItensVendasTMPPesoLiquido: TFloatField;
     cdsItensVendasTMPPrecoCusto: TFloatField;
@@ -178,6 +177,84 @@ type
     edtPrePagamento: TEditN;
     bsSkinStdLabel14: TbsSkinStdLabel;
     edtValorCaucao: TEditN;
+    frxContrato: TfrxReport;
+    frxDbEmpresa: TfrxDBDataset;
+    cdsEmpresa: TClientDataSet;
+    frxDBCliente: TfrxDBDataset;
+    dspEmpresa: TDataSetProvider;
+    qryEmpresa: TSQLQuery;
+    qryCliente: TSQLQuery;
+    dspCliente: TDataSetProvider;
+    cdsCliente: TClientDataSet;
+    frxDbItens: TfrxDBDataset;
+    cdsClienteCodigo: TIntegerField;
+    cdsClienteDescricao: TStringField;
+    cdsClienteCNPJCPF: TStringField;
+    cdsClienteEndereco: TStringField;
+    cdsClienteBairro: TStringField;
+    cdsClienteCidade: TStringField;
+    cdsClienteUF: TStringField;
+    cdsClienteTelefone: TStringField;
+    cdsClientecelular: TStringField;
+    cdsClienteOperador: TStringField;
+    cdsClientecod_emp: TStringField;
+    cdsClienteData_Cad: TSQLTimeStampField;
+    cdsClienteData_Atu: TSQLTimeStampField;
+    cdsClienteLimite_Credito: TFloatField;
+    cdsClienteStatus: TStringField;
+    cdsClienteativo: TStringField;
+    cdsClienteCod_Atividade: TIntegerField;
+    cdsClienteCep: TStringField;
+    cdsClienteCod_Rota: TIntegerField;
+    cdsClienteQtde_PedAberto: TIntegerField;
+    cdsClienterazao_Social: TStringField;
+    cdsClientePto_Referencia: TStringField;
+    cdsClienteFax: TStringField;
+    cdsClienteResponsavel: TStringField;
+    cdsClienteCod_Funcionario: TIntegerField;
+    cdsClientecontrato: TIntegerField;
+    cdsClienteInscricaoEstadual: TStringField;
+    cdsClienteSequenciaEntrega: TIntegerField;
+    cdsClienteEmail: TStringField;
+    cdsEmpresaID_Empresa: TIntegerField;
+    cdsEmpresaNome_Fantasia: TStringField;
+    cdsEmpresaCNPJCPF: TStringField;
+    cdsEmpresaEndereco: TStringField;
+    cdsEmpresaBairro: TStringField;
+    cdsEmpresaCidade: TStringField;
+    cdsEmpresaUF: TStringField;
+    cdsEmpresaTelefone: TStringField;
+    cdsEmpresacelular: TStringField;
+    cdsEmpresaOperador: TStringField;
+    cdsEmpresaData_Cad: TSQLTimeStampField;
+    cdsEmpresaData_Atu: TSQLTimeStampField;
+    cdsEmpresaLimite_Credito: TFloatField;
+    cdsEmpresaStatus: TStringField;
+    cdsEmpresaativo: TStringField;
+    cdsEmpresaCod_Atividade: TIntegerField;
+    cdsEmpresaCep: TStringField;
+    cdsEmpresaCod_Rota: TIntegerField;
+    cdsEmpresaQtde_PedAberto: TIntegerField;
+    cdsEmpresarazao_Social: TStringField;
+    cdsEmpresaPto_Referencia: TStringField;
+    cdsEmpresaFax: TStringField;
+    cdsEmpresaResponsavel: TStringField;
+    cdsEmpresacod_Funcionario: TIntegerField;
+    cdsEmpresaemail: TStringField;
+    cdsEmpresaDiretorGeral: TStringField;
+    cdsEmpresaDiretorEncino: TStringField;
+    cdsEmpresaDiretorDetran: TStringField;
+    cdsEmpresaLiberado: TBooleanField;
+    cdsEmpresaDiretorEnsino: TStringField;
+    cdsEmpresaNomeDiretor: TStringField;
+    cdsEmpresaHomePage: TStringField;
+    cdsEmpresaDiretor: TStringField;
+    cdsEmpresaLocal: TStringField;
+    cdsItensVendasTMPValor_Pagamento: TFloatField;
+    edtFormato: TMaskEdit;
+    cdsItensVendasTMPqtde_Venda: TIntegerField;
+    btnRecibo: TbsSkinSpeedButton;
+    cdsClienteEnderecoObra: TStringField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -211,6 +288,8 @@ type
     procedure btnAdicionarClick(Sender: TObject);
     procedure edtPrevisaoEntregaExit(Sender: TObject);
     procedure cmbNome_formaPagamentoChange(Sender: TObject);
+    procedure btnContratoClick(Sender: TObject);
+    procedure btnReciboClick(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -226,6 +305,7 @@ type
     function RetornarSelectProdutos: String;
     procedure AtaulizaLucroBruto;
     function RetornarDias : integer;
+    function FormatarCNPJ_CPF(lsCnpjCPf: String): String;
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
@@ -268,7 +348,8 @@ end;
 procedure tfrmLocacao.AtualizaTabelas();
 var precoDeVenda : string;
 Begin
-   precoDeVenda:= 'Pco_Venda';
+
+   precoDeVenda:= 'Pco_Venda,PrecoVendaExterna';
    if FrmLocacao.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
 
@@ -293,12 +374,13 @@ Begin
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
+
 End;
 
 Function TfrmLocacao.RetornarDias : Integer;
 var Dias : Integer;
 begin
-  Dias := DaysBetween(SoData(edtPrevisaoEntrega.Date), SoData(edtDataVenda.Date)) + 1;
+  Dias := DaysBetween(SoData(edtPrevisaoEntrega.Date), SoData(edtDataVenda.Date));
   if dias <= 0 then
     Dias := 1;
   Result := Dias;
@@ -336,6 +418,7 @@ Begin
    edtTotal.Text               := '0,00';
    edtVlr_Desconto.Text        := '0,00';
    edtTotalLiquido.Text        := '0,00';
+   edtValorCaucao.Text        := '0,00';
    edtCod_Produto.Text         := '';
    edtCnpjCpf.Text             := '';
    edtCod_Funcionario.Text     := '';
@@ -421,24 +504,7 @@ begin
    AtualizaTabelas();
    lblVencimento.Visible       := False;
    edtdata_Vencimento.Visible  := False;
-   If (FrmLocacao.tag = SERVICOS)  Then
-   Begin
-      FrmLocacao.Caption    := 'Cadastro e manuteção de vendas de serviços';
-      btnincluir.Caption   := '&Novo Serviço';
-   End
-   Else if (FrmLocacao.tag = OS_FINALIZADA ) then
-      PrepararFinalizacaoOS
-   Else if (FrmLocacao.tag = LANCAMENTO_MATERIAL ) then
-   Begin
-      FrmLocacao.Caption  := 'Inclusão de Material e Serviços executados ';
-      btnincluir.Caption := '&Nova Venda';
-   End
-   Else
-   Begin
-      FrmLocacao.Caption  := 'Cadastro e manuteção de vendas ';
-      btnincluir.Caption := '&Nova Venda';
-   End;
-
+   FrmLocacao.Caption          := 'Cadastro de novas locações';
    if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' ))) then
    begin
       lblVencimento.Visible       := True;
@@ -526,17 +592,20 @@ end;
 procedure TfrmLocacao.TotalizarVenda(lrTotalDesconto : Real);
 var TotalDesconto : Real;
     Total : Real;
+    TotalCaucao : Real;
     lrdiferenca : Real;
     qtdePecas   : Real;
 begin
    TotalDesconto := 0;
    Total         := 0;
    qtdePecas     := 0;
+   TotalCaucao   := 0;
    cdsItensVendasTmp.First;
    while not cdsItensVendasTmp.Eof do
    begin
       TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat );
       Total := Total + (cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat);
+      TotalCaucao := TotalCaucao +  cdsItensVendasTmp.FieldByname('Valor_Pagamento').AsFloat;
       qtdePecas := qtdePecas + (cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat);
       cdsItensVendasTmp.Next;
    end;
@@ -551,6 +620,8 @@ begin
 
    edtTotPecas.Text   := FormatFloat('0.00', qtdePecas);
    edtTotalLiquido.Text := FormatFloat('0.00', Total );
+   edtValorCaucao.Text := FormatFloat('0.00', TotalCaucao );
+
 end;
 
 procedure TfrmLocacao.EdtPco_VendaExit(Sender: TObject);
@@ -641,7 +712,7 @@ begin
    cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := StrToFloat (edtPco_Venda.Text);
    cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat    := StrToFloat (edtPco_Tabela.Text);
    cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := StrToFloat ( edtTotal.Text);
-   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := PrecoCusto;
+   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat;
    cdsItensVendasTmp.FieldByName('LucroBruto').asFloat    := Arredondar((( StrToFloat(edtPco_Venda.Text) - PrecoCusto )/StrToFloat(edtPco_Venda.Text))*100,4);
    cdsItensVendasTmp.FieldByName('MargemSecundaria').asFloat := cdsCadProdutos.fieldbyname('MargemSecundaria').asFloat;
    cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := StrToFloat ( edtVlr_Desconto.Text);
@@ -654,14 +725,16 @@ begin
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    cdsItensVendasTmp.FieldByName('Dias').asInteger         := RetornarDias;
    cdsItensVendasTmp.FieldByName('Previsao_Entrega').AsDateTime := SoData(edtPrevisaoEntrega.date);
+   cdsItensVendasTmp.FieldByName('Valor_Pagamento').AsFloat := (cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat*StrToFloat(edtQtde_Venda.Text));
 
    if FrmLocacao.Tag=VENDAS_EXTERNAS then
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
 
-   lrTotalVenda   := (lrTotalVenda +  StrToFloat(edtTotal.Text));
+   lrTotalVenda         := (lrTotalVenda +  StrToFloat(edtTotal.Text));
    edtTotalLiquido.Text := FormatFloat('0.00', Strtofloat( edtTotalLiquido.Text ) + lrTotalVenda);
-   edtTotPecas.Text := FormatFloat('0.00', StrToFloat (edtTotPecas.Text) + StrToFloat (edtQtde_Venda.Text));
+   edtValorCaucao.Text  := FormatFloat('0.00', Strtofloat( edtValorCaucao.Text ) + (cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat*StrToFloat(edtQtde_Venda.Text)));
+   edtTotPecas.Text     := FormatFloat('0.00', StrToFloat (edtTotPecas.Text) + StrToFloat (edtQtde_Venda.Text));
 
    edtCod_Produto.Text := '';
    cmbNome_Produto.keyvalue := null;
@@ -684,6 +757,85 @@ begin
    AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
+procedure TfrmLocacao.btnReciboClick(Sender: TObject);
+Var RvRecibo   : TRvProject;
+    edtMascara : TbsSkinEdit;
+    sdtsBuscaDados : TsimpleDataSet;
+    sdtsBuscaServico : TsimpleDataSet;
+    lsTelefone1 : String;
+    lsTelefone2 : String;
+    lscnpj      : String;
+    lsSeparador : String;
+    lrTotalPago : Double;
+    lrSaldoDevedor : Double;
+    lsPagamentos : String;
+    dados_Recibo : TRvDataSetConnection;
+    lstContrato : TStringList;
+begin
+   Try
+      sdtsBuscaDados := TsimpleDataSet.create(Application);
+      sdtsBuscaDados.Connection := gConexao.conection;
+      sdtsBuscaDados.DataSet.CommandText := ' Select * from Empresa ';
+      sdtsBuscaDados.Open;
+
+      dados_Recibo := TRvDataSetConnection.Create(Application);
+      dados_Recibo.Name :='Dados_Recibo';
+      dados_Recibo.dataSet := sdtsBuscaDados;
+      RvRecibo := TRvProject.Create(Application);
+      rvRecibo.ProjectFile :=gsPath+'Relatorios\recibo.rav';
+      rvRecibo.Open;
+
+      edtMascara := TbsSkinEdit.Create(Application);
+      edtMascara.EditMask := '##.###.###/####-##;0;_';
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('cnpjcpf').AsString;
+      lsCnpj := edtMascara.EditText;
+
+      edtMascara.EditMask :=' (##)####-####;0;_';
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('Telefone').AsString;
+      lsTelefone1 := edtMascara.EditText;
+
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('Fax').AsString;
+      lsTelefone2 := edtMascara.EditText;
+
+      rvRecibo.SetParam('Aluno01', cmbNome_Cliente.Text );
+      rvRecibo.SetParam('Numero', 'Nº '+ edtcod_Cliente.Text );
+      rvRecibo.SetParam('CPF2','C.P.F. '+edtCnpjCpf.Text );
+     { if Impobs then
+      begin
+         rvRecibo.SetParam('obs',' A LOCAÇÃO DO(S) VEÍCULO(S) É VÁLIDA PARA UTILIZAR O(S) MESMO(S) NO TESTE PRÁTICO COM DATA AGENDADA PELO CFC, '+
+                                ' NO CASO DO ALUNO SE ANTECIPAR E REALIZAR O TESTE  POR CONTA PRÓPRIA NO DETRAN/RN E/OU UTILIZAR VEÍCULO PARTICULAR, '+
+                              'O VALOR PAGO NÃO SERÁ RESTITUÍDO POR TRATAR-SE DE UMA RESERVA.');
+      end
+      else
+         rvRecibo.SetParam('obs',' ');  }
+      rvRecibo.SetParam('Empresa', sdtsBuscaDados.FieldByName('Razao_Social').AsString );
+      rvRecibo.SetParam('endereco',sdtsBuscaDados.FieldByName('Endereco').AsString+' '+
+                                   sdtsBuscaDados.FieldByName('Bairro').AsString+' '+
+                                   sdtsBuscaDados.FieldByName('Cidade').AsString+'-'+
+                                   sdtsBuscaDados.FieldByName('UF').AsString+' Cep '+sdtsBuscaDados.FieldByName('Cep').AsString );
+      rvRecibo.SetParam('CNPJ','C.N.P.J.: '+lsCnpj+' - Telefones '+lsTelefone1+' - '+lsTelefone2 );
+      rvRecibo.SetParam('email','E-MAIL.: '+sdtsBuscaDados.FieldByName('Email').AsString);
+
+      sdtsBuscaServico := TsimpleDataSet.create(Application);
+      sdtsBuscaServico.Connection := gConexao.conection;
+
+
+      rvRecibo.SetParam('Curso','Pagamento referente a locação de equipamento a '+sdtsBuscaDados.FieldByName('Nome_Fantasia').AsString);
+      rvRecibo.SetParam('Pago','VALOR PAGO..: R$ '+FormatFloat('0.00',StrTofloat(edtPrePagamento.Text)));
+      rvRecibo.SetParam('Pagamento','FORMA DE PAGAMENTO..: '+cmbNome_formaPagamento.text);
+      rvRecibo.SetParam('Data','Natal '+FormatDateTime('dd/mm/yyyy',now)+ ' Operador..:' +gsOperador);
+      rvRecibo.Execute;
+                 
+
+    Finally
+      FreeAndNil(RvRecibo);
+      FreeAndNil(edtMascara);
+      FreeAndNil(sdtsBuscaDados);
+      FreeAndNil(edtMascara);
+      FreeAndNil(dados_Recibo);
+   End;
+end;
+
 procedure  TfrmLocacao.AtaulizaLucroBruto;
 var PerLucroBruto : real;
     LucroBruto : Real;
@@ -734,7 +886,8 @@ Var liSeqvenda     : integer;
     DaoFuncionario: TdaoFuncionario;
     liCaixaFinalizado : Integer;
     lbServicoPago : Boolean;
-  lrCustoTotal: real;
+    lrCustoTotal: real;
+    ValorPromissoria : Real;
 begin
 
    {$REGION 'Criticas e Validação das Informações'}
@@ -801,7 +954,7 @@ begin
 
    lrVlr_DescProd := 0;
    if not frmPrincipal.dbxPrincipal.InTransaction then
-      trdNrTransacao := frmPrincipal.dbxPrincipal.BeginTransaction;
+      //trdNrTransacao := frmPrincipal.dbxPrincipal.BeginTransaction;
 
    {$REGION 'Gravando os Itens da Venda'}
 
@@ -860,7 +1013,7 @@ begin
          except
             on E: Exception do
             Begin
-               frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+               //frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
                CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
                Exit;
             End;
@@ -869,7 +1022,6 @@ begin
 {$ENDREGION}
 
       lrVlr_DescProd  := lrVlr_DescProd  + cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat;
-
       cdsItensVendasTMP.Next;
    End;
 
@@ -906,7 +1058,9 @@ begin
    cdsVenda.FieldByname('SeqVenda').Asinteger        := liSeqvenda;
    cdsVenda.FieldByname('Cod_Cliente').Asinteger     := StrToInt(cmbCod_Cliente.KeyValue);
    cdsVenda.FieldByname('Cod_Funcionario').Asinteger := StrToInt(cmbCod_Funcionario.KeyValue);
-   cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := StrToInt(cmbCod_formaPagamento.KeyValue);
+   cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := 1;
+   if cmbCod_formaPagamento.KeyValue <> null then
+      cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := StrToInt(cmbCod_formaPagamento.KeyValue);
    cdsVenda.FieldByname('Vlr_Total').AsFloat         := (StrToFloat( edtTotalLiquido.Text ));
    cdsVenda.FieldByname('CustoTotal').AsFloat        := lrCustoTotal;
    cdsVenda.FieldByname('LucroBruto').AsFloat        := ((( cdsVenda.FieldByname('Vlr_Total').AsFloat - lrCustoTotal ) / cdsVenda.FieldByname('Vlr_Total').AsFloat)*100);
@@ -947,20 +1101,20 @@ begin
 
    Try
       cdsVenda.ApplyUpdates(-1);
-   except
-      frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
-      CaixaMensagem( 'Não foi possivel gravar a venda', ctAviso, [ cbOk ], 0 );
+  except on E: Exception do
+  begin
+      //frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+      CaixaMensagem( 'Não foi possivel gravar a venda '+e.Message, ctAviso, [ cbOk ], 0 );
       Exit;
+  end;
    End;
-
-
 {$ENDREGION}
 
    {$REGION 'Item da Venda'}
 
    loItemVenda := TItemVenda.Create;
    loItemVenda.Operador := gsOperador;
-   loItemVenda.DataMovimento := gsdata_Mov;
+   loItemVenda.DataMovimento := edtDataVenda.Date;
    loItemVenda.CodigoEmpresa := StrTOInt(gsCod_Emp);
    loItemVenda.VendaID := liSeqvenda;
    DaoItemVenda := TdaoItemVenda.Create(gConexao);
@@ -1261,7 +1415,7 @@ begin
          except
             on E: Exception do
             Begin
-               frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
+               //frmPrincipal.dbxPrincipal.RollbackFreeAndNil( trdNrTransacao );
                CaixaMensagem( 'Um erro Aconteceu " '+E.Message+'"', ctErro, [ cbOk ], 0 );
                Exit;
             End;
@@ -1297,7 +1451,7 @@ begin
    End;
 {$ENDREGION}
 
-   frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
+   //frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
 
    {$REGION 'Impressao do comprovante de Venda'}
    IF ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda','0',gsOperador )) and
@@ -1358,19 +1512,18 @@ begin
    btnAdicionar.Enabled     := False;
    btnExcluir.Enabled       := False;
    btnAlterar.Enabled       := False;
-   btnDesconto.Enabled      := True;
    btnOk.Enabled            := True;
    pnlProdutos.Enabled      := True;
    pnlDadosClientes.Enabled := True;
    btnCadProdutos.Enabled   := True;
-   edtPrevisaoEntrega.Date  := now;
+   edtPrevisaoEntrega.Date  := gsdata_Mov+1;
 
    AtualizaTabelas;
    btnadicionarClick(btnadicionar);
 
    LimpaCampos();
 
-   edtDataVenda.Date        := gsdata_Mov+1;
+   edtDataVenda.Date        := gsdata_Mov;
    If ( FrmLocacao.tag <> OS_FINALIZADA ) then
    Begin
       Try
@@ -1453,6 +1606,23 @@ begin
 
 end;
 
+procedure TfrmLocacao.btnContratoClick(Sender: TObject);
+begin
+  cdsCliente.open;
+  cdsEmpresa.open;
+  cdsCliente.locate('Codigo', edtcod_Cliente.Text,[] );
+  frxContrato.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+  frxContrato.Variables['cnpjCliente']   := QuotedStr(edtCnpjCpf.Text);
+  frxContrato.Variables['TotalCaucao']   := QuotedStr( edtValorCaucao.Text );
+  frxContrato.Variables['TotalLocacao']  := QuotedStr( edtTotalLiquido.Text );
+  frxContrato.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
+  frxContrato.Variables['ExtensoData']  := QuotedStr( 'Ao(s) '+NumeroPorExtenso(22)+' dia(s) do mês de '+FormatDateTime('mmm',now)+
+                                                      ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
+  frxContrato.ShowReport(true);
+  cdsCliente.Close;
+  cdsEmpresa.Close;
+end;
+
 procedure TfrmLocacao.btnExcluirClick(Sender: TObject);
 begin
   IF cdsItensVendasTMP.IsEmpty Then
@@ -1464,6 +1634,7 @@ begin
    Begin
       edtTotPecas.Text      := FormatFloat('0.00',StrToFloat(edtTotPecas.Text) -  cdsItensVendasTMP.FieldByname('Qtde_Venda').AsFloat );
       edtTotalLiquido.Text  := FormatFloat('0.00',StrToFloat(edtTotalLiquido.Text) -  cdsItensVendasTMP.FieldByname('Vlr_total').asFloat);
+      edtValorCaucao.Text  := FormatFloat('0.00',StrToFloat(edtValorCaucao.Text) -  cdsItensVendasTMP.FieldByname('Valor_Pagamento').asFloat);
       cdsItensVendasTMP.Delete;
    End;
    VerLimite();
@@ -1493,6 +1664,14 @@ begin
       End;
    End;
 
+end;
+
+Function TfrmLocacao.FormatarCNPJ_CPF(lsCnpjCPf : String)  : String;
+begin
+   if Length( lsCnpjCPf ) <= 11 then
+      Result := MascaraCpF(lsCnpjCPf)
+   else
+      result := MascaraCNPJ(lsCnpjCPf)
 end;
 
 procedure TfrmLocacao.btnAlterarClick(Sender: TObject);
@@ -1632,9 +1811,9 @@ begin
    cmbnome_Cliente.Keyvalue  :=  CmbCod_Cliente.Keyvalue ;
    if Trim(cmbNome_Cliente.Text) <> '' Then
    Begin
-      edtCod_Cliente.text  :=  cmbCod_Cliente.Text;
-      edtCnpjCpf.Text      := Trim(cdsCadClientes.FieldByName('CnpjCpf').asString);
-      if Length( edtCNPJCPF.Text ) <= 11 then
+      edtCod_Cliente.text  := cmbCod_Cliente.Text;
+      edtCnpjCpf.Text      := FormatarCNPJ_CPF( Trim(cdsCadClientes.FieldByName('CnpjCpf').asString));
+     { if Length( edtCNPJCPF.Text ) <= 11 then
       begin
         lblCNPJCPF.Caption   := 'C.P.F.';
         edtCNPJCPF.EditMask := '###.###.###-##;0;_';
@@ -1643,7 +1822,7 @@ begin
       Begin
         lblCNPJCPF.Caption   := 'C.N.P.J.';
         edtCNPJCPF.EditMask  := '##.###.###/####-##;0;_';
-      End;
+      End;}
       sdtsConsultaCli.close;
       sdtsConsultaCli.Connection := frmPrincipal.dbxPrincipal;
       sdtsConsultaCli.DataSet.CommandText := 'Select Count(seqvenda) as Qtde, Sum(vlr_areceber) As Total From T_Ctasreceber '+
@@ -1737,7 +1916,7 @@ end;
 function TfrmLocacao.RetornarSelectProdutos : String;
 var precoDeVenda : string;
 Begin
-   precoDeVenda:= 'Pco_Venda';
+   precoDeVenda:= 'Pco_Venda,PrecoVendaExterna';
    if FrmLocacao.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
    Result :=  'Select BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';

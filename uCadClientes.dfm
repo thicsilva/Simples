@@ -3,7 +3,7 @@ object frmCadClientes: TfrmCadClientes
   Top = 167
   BorderIcons = []
   Caption = 'Cadastro e manute'#231#227'o de Clientes'
-  ClientHeight = 519
+  ClientHeight = 560
   ClientWidth = 845
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,8 +20,8 @@ object frmCadClientes: TfrmCadClientes
     Left = 0
     Top = 76
     Width = 845
-    Height = 443
-    ActivePage = bsSkinTabSheet9
+    Height = 484
+    ActivePage = Tab_Cadastro
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -254,7 +254,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 843
-        Height = 386
+        Height = 427
         Align = alClient
         TabOrder = 1
         object GridClintes: TcxGridDBTableView
@@ -379,7 +379,7 @@ object frmCadClientes: TfrmCadClientes
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 0
-        Top = 281
+        Top = 322
         Width = 843
         Height = 138
         HintImageIndex = 0
@@ -927,7 +927,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 136
         Top = 3
         Width = 524
-        Height = 272
+        Height = 302
         HintImageIndex = 0
         TabOrder = 1
         SkinData = frmPrincipal.SkinEntradaDados
@@ -1141,7 +1141,7 @@ object frmCadClientes: TfrmCadClientes
           SkinDataName = 'stdlabel'
           Caption = 'CNPJ/CPF'
         end
-        object bsSkinStdLabel16: TbsSkinStdLabel
+        object lblPontoReferencia: TbsSkinStdLabel
           Left = 40
           Top = 231
           Width = 71
@@ -1194,7 +1194,7 @@ object frmCadClientes: TfrmCadClientes
         end
         object bsSkinStdLabel24: TbsSkinStdLabel
           Left = 5
-          Top = 250
+          Top = 279
           Width = 106
           Height = 13
           EllipsType = bsetNone
@@ -1208,6 +1208,23 @@ object frmCadClientes: TfrmCadClientes
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
           Caption = 'Sequencia de Entrega'
+        end
+        object bsSkinStdLabel16: TbsSkinStdLabel
+          Left = 24
+          Top = 257
+          Width = 87
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Endere'#231'o da Obra'
         end
         object edtNome_Fantasia: TbsSkinEdit
           Left = 117
@@ -1673,7 +1690,7 @@ object frmCadClientes: TfrmCadClientes
         end
         object edtSequenciaEntrega: TbsSkinSpinEdit
           Left = 117
-          Top = 249
+          Top = 276
           Width = 53
           Height = 20
           HintImageIndex = 0
@@ -1695,6 +1712,39 @@ object frmCadClientes: TfrmCadClientes
           EditorEnabled = True
           MaxLength = 0
         end
+        object edtEnderecoObra: TbsSkinEdit
+          Left = 117
+          Top = 252
+          Width = 337
+          Height = 20
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          MaxLength = 50
+          ParentFont = False
+          TabOrder = 15
+          ButtonImageIndex = -1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
       end
     end
     object Tab_Ocorrencias: TbsSkinTabSheet
@@ -1703,7 +1753,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 64
         Width = 843
-        Height = 355
+        Height = 396
         Align = alClient
         TabOrder = 0
         object GridOcorrencias: TcxGridDBTableView
@@ -2158,7 +2208,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 44
         Width = 843
-        Height = 375
+        Height = 416
         Align = alClient
         TabOrder = 1
         object GridProdutosDescontos: TcxGridDBTableView
@@ -2210,7 +2260,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 0
         Width = 843
-        Height = 419
+        Height = 460
         Align = alClient
         TabOrder = 0
         object GrdVendas: TcxGridDBTableView
@@ -2378,12 +2428,12 @@ object frmCadClientes: TfrmCadClientes
       Caption = 'Recebido e a receber'
       DesignSize = (
         843
-        419)
+        460)
       object cxGrid4: TcxGrid
         Left = 0
         Top = 0
         Width = 843
-        Height = 419
+        Height = 460
         Align = alClient
         TabOrder = 0
         object GridCtasReceber: TcxGridDBTableView
@@ -2557,7 +2607,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 604
-        Top = 1
+        Top = 36
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -2808,7 +2858,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 33
         Width = 843
-        Height = 386
+        Height = 427
         Align = alClient
         TabOrder = 1
         object GridValidaCNPJCPF: TcxGridDBTableView
@@ -3267,7 +3317,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 41
         Width = 843
-        Height = 343
+        Height = 384
         Align = alClient
         TabOrder = 1
         object GrdDespesas: TcxGridDBTableView
@@ -3338,7 +3388,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object bsSkinPanel4: TbsSkinPanel
         Left = 0
-        Top = 384
+        Top = 425
         Width = 843
         Height = 35
         HintImageIndex = 0
@@ -3960,7 +4010,7 @@ object frmCadClientes: TfrmCadClientes
         Left = 0
         Top = 105
         Width = 843
-        Height = 314
+        Height = 355
         ActivePage = bsSkinTabSheet2
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -3995,7 +4045,7 @@ object frmCadClientes: TfrmCadClientes
             Left = 0
             Top = 0
             Width = 374
-            Height = 293
+            Height = 334
             Hint = 'Duplo cick para Alterar'
             Align = alClient
             TabOrder = 0
@@ -4058,7 +4108,7 @@ object frmCadClientes: TfrmCadClientes
             Left = 374
             Top = 0
             Width = 467
-            Height = 293
+            Height = 334
             HintImageIndex = 0
             TabOrder = 1
             SkinDataName = 'panel'
@@ -4451,7 +4501,7 @@ object frmCadClientes: TfrmCadClientes
               Left = 1
               Top = 65
               Width = 465
-              Height = 227
+              Height = 268
               HintImageIndex = 0
               TabOrder = 1
               SkinData = frmPrincipal.SkinPrincipal
@@ -4944,32 +4994,32 @@ object frmCadClientes: TfrmCadClientes
   end
   object dspCadClientes: TDataSetProvider
     DataSet = qryCadClientes
-    Left = 688
-    Top = 351
+    Left = 696
+    Top = 439
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadClientes'
-    Left = 688
-    Top = 407
+    Left = 696
+    Top = 495
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 688
-    Top = 379
+    Left = 696
+    Top = 467
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryvariavel
-    Left = 661
-    Top = 351
+    Left = 669
+    Top = 439
   end
   object qryvariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 660
-    Top = 323
+    Left = 668
+    Top = 411
   end
   object qryCadClientes: TSQLQuery
     MaxBlobSize = -1
@@ -4977,51 +5027,50 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 687
-    Top = 323
+    Left = 695
+    Top = 411
   end
   object cdsCadAtividades: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 716
-    Top = 407
+    Left = 724
+    Top = 495
   end
   object srcCadAtividades: TDataSource
     DataSet = cdsCadAtividades
-    Left = 716
-    Top = 379
+    Left = 724
+    Top = 467
   end
   object srcPesquisa: TDataSource
     DataSet = cdspesquisa
-    Left = 743
-    Top = 379
+    Left = 751
+    Top = 467
   end
   object sdtsOcorrencias: TSimpleDataSet
     Aggregates = <>
-    Connection = frmPrincipal.dbxPrincipal
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 277
-    Top = 339
+    Left = 285
+    Top = 427
   end
   object srcOcorrencias: TDataSource
     DataSet = sdtsOcorrencias
-    Left = 277
-    Top = 367
+    Left = 285
+    Top = 455
   end
   object cdsCadRotas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 557
-    Top = 339
+    Left = 565
+    Top = 427
   end
   object srcCadRotas: TDataSource
     DataSet = cdsCadRotas
-    Left = 558
-    Top = 367
+    Left = 566
+    Top = 455
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
@@ -5030,30 +5079,30 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsVendasBeforeOpen
     AfterOpen = cdsVendasAfterOpen
     OnCalcFields = cdsVendasCalcFields
-    Left = 502
-    Top = 339
+    Left = 510
+    Top = 427
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 474
-    Top = 339
+    Left = 482
+    Top = 427
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
-    Left = 474
-    Top = 367
+    Left = 482
+    Top = 455
   end
   object srcVendas: TDataSource
     DataSet = cdsVendas
-    Left = 502
-    Top = 367
+    Left = 510
+    Top = 455
   end
   object srcCtasReceber: TDataSource
     DataSet = cdsCtasReceber
-    Left = 530
-    Top = 367
+    Left = 538
+    Top = 455
   end
   object cdsCtasReceber: TClientDataSet
     Aggregates = <>
@@ -5062,8 +5111,8 @@ object frmCadClientes: TfrmCadClientes
     BeforeOpen = cdsCtasReceberBeforeOpen
     AfterOpen = cdsCtasReceberAfterOpen
     OnCalcFields = cdsCtasReceberCalcFields
-    Left = 530
-    Top = 339
+    Left = 538
+    Top = 427
   end
   object qryPesquisa: TSQLQuery
     MaxBlobSize = -1
@@ -5071,13 +5120,13 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'Select * from T_clientes where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 743
-    Top = 407
+    Left = 751
+    Top = 495
   end
   object dspPesquisa: TDataSetProvider
     DataSet = qryPesquisa
-    Left = 741
-    Top = 351
+    Left = 749
+    Top = 439
   end
   object cdspesquisa: TClientDataSet
     Aggregates = <>
@@ -5085,8 +5134,8 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspPesquisa'
     BeforeOpen = cdspesquisaBeforeOpen
     OnCalcFields = cdspesquisaCalcFields
-    Left = 741
-    Top = 323
+    Left = 749
+    Top = 411
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -5187,62 +5236,62 @@ object frmCadClientes: TfrmCadClientes
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 446
-    Top = 387
+    Left = 454
+    Top = 475
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
-    Left = 446
-    Top = 415
+    Left = 454
+    Top = 503
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 446
-    Top = 339
+    Left = 454
+    Top = 427
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 446
-    Top = 367
+    Left = 454
+    Top = 455
   end
   object srcCalientesDescontos: TDataSource
     DataSet = cdsClientesDescontos
-    Left = 418
-    Top = 367
+    Left = 426
+    Top = 455
   end
   object cdsClientesDescontos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientesDescontos'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 418
-    Top = 339
+    Left = 426
+    Top = 427
   end
   object dspClientesDescontos: TDataSetProvider
     DataSet = qryClientesDescontos
-    Left = 418
-    Top = 415
+    Left = 426
+    Top = 503
   end
   object qryClientesDescontos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 418
-    Top = 387
+    Left = 426
+    Top = 475
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadProdutos'
-    Left = 390
-    Top = 339
+    Left = 398
+    Top = 427
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 390
-    Top = 367
+    Left = 398
+    Top = 455
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
@@ -5255,8 +5304,8 @@ object frmCadClientes: TfrmCadClientes
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPesquisa'
-    Left = 645
-    Top = 339
+    Left = 653
+    Top = 427
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
     Left = 346
@@ -5303,15 +5352,15 @@ object frmCadClientes: TfrmCadClientes
   end
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
-    Left = 362
-    Top = 367
+    Left = 370
+    Top = 455
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 362
-    Top = 339
+    Left = 370
+    Top = 427
   end
   object qryValidaCPFCNPJ: TSQLQuery
     MaxBlobSize = -1
@@ -5319,26 +5368,26 @@ object frmCadClientes: TfrmCadClientes
     SQL.Strings = (
       'select * from T_validaCNPJCPF')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 334
-    Top = 411
+    Left = 342
+    Top = 499
   end
   object dspValidaCPFCNPJ: TDataSetProvider
     DataSet = qryValidaCPFCNPJ
-    Left = 334
-    Top = 383
+    Left = 342
+    Top = 471
   end
   object cdsValidaCPFCNPJ: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspValidaCPFCNPJ'
     BeforeOpen = cdsClientesDescontosBeforeOpen
-    Left = 334
-    Top = 339
+    Left = 342
+    Top = 427
   end
   object srcValidaCPFCNPJ: TDataSource
     DataSet = cdsValidaCPFCNPJ
-    Left = 334
-    Top = 367
+    Left = 342
+    Top = 455
   end
   object cdsContaCorrente: TClientDataSet
     Aggregates = <>
@@ -5346,21 +5395,21 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     BeforeOpen = cdsContaCorrenteBeforeOpen
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 585
-    Top = 339
+    Left = 593
+    Top = 427
   end
   object srcContaCorrente: TDataSource
     DataSet = cdsContaCorrente
-    Left = 586
-    Top = 367
+    Left = 594
+    Top = 455
   end
   object cdsTemp: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 305
-    Top = 339
+    Left = 313
+    Top = 427
   end
   object qryRelcliente: TSQLQuery
     MaxBlobSize = -1
@@ -5378,8 +5427,8 @@ object frmCadClientes: TfrmCadClientes
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRelCliente'
-    Left = 216
-    Top = 336
+    Left = 224
+    Top = 424
   end
   object PopupMenu1: TPopupMenu
     Left = 512
@@ -5391,8 +5440,8 @@ object frmCadClientes: TfrmCadClientes
   end
   object srcClienteAnimais: TDataSource
     DataSet = cdsClienteAnimais
-    Left = 249
-    Top = 367
+    Left = 257
+    Top = 455
   end
   object cdsClienteAnimais: TClientDataSet
     Aggregates = <>
@@ -5400,25 +5449,25 @@ object frmCadClientes: TfrmCadClientes
     ProviderName = 'dspVariavel'
     AfterScroll = cdsClienteAnimaisAfterScroll
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 249
-    Top = 339
+    Left = 257
+    Top = 427
   end
   object cdsEventosAnimais: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     OnCalcFields = cdsContaCorrenteCalcFields
-    Left = 221
-    Top = 339
+    Left = 229
+    Top = 427
   end
   object srcEventosAnimais: TDataSource
     DataSet = cdsEventosAnimais
-    Left = 221
-    Top = 367
+    Left = 229
+    Top = 455
   end
   object PopapAnimais: TPopupMenu
-    Left = 552
-    Top = 344
+    Left = 560
+    Top = 432
     object MenuItem1: TMenuItem
       Caption = 'Realizar Evento'
       OnClick = MenuItem1Click

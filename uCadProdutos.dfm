@@ -35,6 +35,7 @@ object frmCadProdutos: TfrmCadProdutos
     OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -70,6 +71,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -151,7 +153,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 134
           Top = 10
           Width = 224
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -171,6 +173,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -226,6 +229,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -357,6 +361,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -374,6 +379,7 @@ object frmCadProdutos: TfrmCadProdutos
         NumGlyphs = 1
         Spacing = 2
         Caption = 'Informe os dados para o cadastro de produtos'
+        UseSkinSize = True
         object bsSkinStdLabel1: TbsSkinStdLabel
           Left = 78
           Top = 63
@@ -583,7 +589,7 @@ object frmCadProdutos: TfrmCadProdutos
         end
         object lblPrecoVendaExterna: TbsSkinStdLabel
           Left = 208
-          Top = 140
+          Top = 139
           Width = 115
           Height = 13
           EllipsType = bsetNone
@@ -654,7 +660,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 120
           Top = 109
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -675,6 +681,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 50
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -686,7 +693,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 120
           Top = 58
           Width = 56
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -709,6 +716,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 9
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -720,7 +728,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 449
           Top = 26
           Width = 74
-          Height = 18
+          Height = 20
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -741,6 +749,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -897,7 +906,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 288
           Top = 61
           Width = 169
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -918,6 +927,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 13
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -929,7 +939,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 120
           Top = 161
           Width = 33
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -951,6 +961,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 3
           ParentFont = False
           TabOrder = 6
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1014,7 +1025,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 261
           Top = 256
           Width = 33
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1037,6 +1048,7 @@ object frmCadProdutos: TfrmCadProdutos
           ParentFont = False
           TabOrder = 15
           Visible = False
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1048,7 +1060,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 120
           Top = 137
           Width = 65
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1072,6 +1084,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1134,10 +1147,10 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 0
         end
         object edtPcoVendaExterna: TbsSkinNumericEdit
-          Left = 321
+          Left = 329
           Top = 137
           Width = 65
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1161,6 +1174,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1203,7 +1217,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 117
           Top = 85
           Width = 169
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1224,6 +1238,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 10
           ParentFont = False
           TabOrder = 17
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1235,7 +1250,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 117
           Top = 280
           Width = 84
-          Height = 18
+          Height = 20
           Text = '0,000'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1260,6 +1275,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 18
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1271,7 +1287,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 373
           Top = 280
           Width = 84
-          Height = 18
+          Height = 20
           Text = '0,000'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1296,6 +1312,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 19
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1351,6 +1368,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -1420,7 +1438,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 113
           Top = 34
           Width = 58
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1444,6 +1462,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1455,7 +1474,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 302
           Top = 34
           Width = 58
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1479,6 +1498,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1490,7 +1510,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 472
           Top = 34
           Width = 58
-          Height = 18
+          Height = 20
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -1515,6 +1535,7 @@ object frmCadProdutos: TfrmCadProdutos
           ParentFont = False
           TabOrder = 2
           Visible = False
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1550,6 +1571,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1615,7 +1637,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 76
           Top = 7
           Width = 64
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1635,6 +1657,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1660,6 +1683,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -1695,6 +1719,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -1782,6 +1807,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1826,7 +1852,7 @@ object frmCadProdutos: TfrmCadProdutos
         Left = 394
         Top = 30
         Width = 65
-        Height = 18
+        Height = 20
         Text = '0,00'
         Increment = 1.000000000000000000
         SupportUpDownKeys = False
@@ -1850,6 +1876,7 @@ object frmCadProdutos: TfrmCadProdutos
         Font.Style = []
         ParentFont = False
         TabOrder = 3
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -3917,6 +3944,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -3969,6 +3997,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -3991,8 +4020,8 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 3
           Top = 9
           Width = 95
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -4030,6 +4059,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 10
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -4041,8 +4071,8 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 129
           Top = 9
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -4080,6 +4110,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 10
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -4104,6 +4135,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 6
@@ -4374,6 +4406,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -4435,6 +4468,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        Transparent = False
         CheckedMode = False
         ImageList = frmPrincipal.Imagebutoes
         ImageIndex = 5
@@ -4470,6 +4504,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        Transparent = False
         CheckedMode = False
         ImageList = frmPrincipal.Imagebutoes
         ImageIndex = 4
@@ -4505,6 +4540,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -4555,6 +4591,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -4646,7 +4683,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 141
           Top = 9
           Width = 70
-          Height = 23
+          Height = 25
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -4670,6 +4707,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -4682,7 +4720,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 509
           Top = 13
           Width = 70
-          Height = 23
+          Height = 25
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -4707,6 +4745,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -4718,7 +4757,7 @@ object frmCadProdutos: TfrmCadProdutos
           Left = 290
           Top = 9
           Width = 70
-          Height = 23
+          Height = 25
           Text = '0,00'
           Increment = 1.000000000000000000
           SupportUpDownKeys = False
@@ -4742,6 +4781,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -4767,6 +4807,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 16
@@ -4802,6 +4843,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -4832,6 +4874,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -4923,7 +4966,7 @@ object frmCadProdutos: TfrmCadProdutos
             Left = 537
             Top = 12
             Width = 65
-            Height = 18
+            Height = 20
             Text = '0,00'
             Increment = 1.000000000000000000
             SupportUpDownKeys = False
@@ -4947,6 +4990,7 @@ object frmCadProdutos: TfrmCadProdutos
             Font.Style = []
             ParentFont = False
             TabOrder = 2
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -4958,7 +5002,7 @@ object frmCadProdutos: TfrmCadProdutos
             Left = 84
             Top = 13
             Width = 169
-            Height = 18
+            Height = 20
             DefaultColor = clWindow
             DefaultFont.Charset = DEFAULT_CHARSET
             DefaultFont.Color = clBlack
@@ -4978,6 +5022,7 @@ object frmCadProdutos: TfrmCadProdutos
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -5065,6 +5110,7 @@ object frmCadProdutos: TfrmCadProdutos
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = False
+            Transparent = False
             CheckedMode = False
             ImageList = frmPrincipal.Imagebutoes
             ImageIndex = 10
@@ -5099,6 +5145,7 @@ object frmCadProdutos: TfrmCadProdutos
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = False
+            Transparent = False
             CheckedMode = False
             ImageList = frmPrincipal.Imagebutoes
             ImageIndex = 9
@@ -5136,9 +5183,9 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Height = -16
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
+          ColSizingwithLine = False
           DrawGraphicFields = False
           UseColumnsFont = False
-          DefaultRowHeight = 23
           MouseWheelSupport = False
           SaveMultiSelection = False
           PickListBoxSkinDataName = 'listbox'
@@ -5188,6 +5235,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -5225,6 +5273,7 @@ object frmCadProdutos: TfrmCadProdutos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -5302,6 +5351,7 @@ object frmCadProdutos: TfrmCadProdutos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -6775,15 +6825,15 @@ object frmCadProdutos: TfrmCadProdutos
         HitTypes = []
         Index = 0
       end>
-    Left = 392
-    Top = 232
+    Left = 472
+    Top = 264
   end
   object OpenFigura: TOpenPictureDialog
-    Left = 332
-    Top = 241
+    Left = 340
+    Top = 257
   end
   object PopRelatorios: TbsSkinPopupMenu
-    Left = 392
+    Left = 504
     Top = 208
     object Etiquetas15X501: TMenuItem
       Caption = 'Etiquetas 15X50  - 2 Colunas'

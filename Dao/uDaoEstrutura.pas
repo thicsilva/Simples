@@ -60,6 +60,7 @@ type TDaoEstrutura = class
     procedure CriarTabela_CustosProduto;
     procedure Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
     procedure Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
+    procedure Adicionar_EnderecoObra_na_Tabela_Clientes;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -438,6 +439,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_EnderecoObra_na_Tabela_Clientes;
+begin
+   if not ExisteCampo( 'T_Clientes', 'EnderecoObra', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Clientes ADD EnderecoObra Varchar(200)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 procedure TDaoEstrutura.Adicionar_Entregue_na_Tabela_Vendas;
 begin
@@ -620,6 +631,7 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_EnderecoObra_na_Tabela_Clientes;
   Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
   Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
   Adicionar_PrecoVendaExterna_na_Tabela_Produtos;

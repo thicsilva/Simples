@@ -196,7 +196,7 @@ type
     edtTelefone: TbsSkinEdit;
     edtCelular: TbsSkinEdit;
     edtCnpjCpf: TbsSkinEdit;
-    bsSkinStdLabel16: TbsSkinStdLabel;
+    lblPontoReferencia: TbsSkinStdLabel;
     edtPto_Referencia: TbsSkinEdit;
     bsSkinPopupMenu1: TbsSkinPopupMenu;
     Clientes1: TMenuItem;
@@ -342,6 +342,8 @@ type
     btnImprimirAnimais: TbsSkinButton;
     bsSkinStdLabel23: TbsSkinStdLabel;
     edtEmail: TbsSkinEdit;
+    bsSkinStdLabel16: TbsSkinStdLabel;
+    edtEnderecoObra: TbsSkinEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -746,6 +748,7 @@ begin
    cdsCadClientes.FieldByName('Cod_Emp').AsString         := gsCod_Emp;
    cdsCadClientes.FieldByName('Qtde_PedAberto').AsInteger := StrToInt(edtNumeroPedAberto.Text);
    cdsCadClientes.FieldByName('Pto_referencia').AsString  := edtPto_Referencia.Text;
+   cdsCadClientes.FieldByName('EnderecoObra').AsString    := edtEnderecoObra.Text;
    cdsCadClientes.FieldByName('Email').AsString             := edtEmail.Text;
    cdsCadClientes.FieldByName('InscricaoEstadual').AsString := edtInscricaoEstadual.Text;
    cdsCadClientes.FieldByName('SequenciaEntrega').AsInteger := StrtoInt(edtSequenciaEntrega.Text);
@@ -934,6 +937,7 @@ begin
    EdtData_cad.text := FormatDateTime('dd/mm/yyyy',cdspesquisa.FieldByName('Data_Cad').AsDateTime);
    EdtNumeroPedAberto.Value   := cdspesquisa.FieldByName('Qtde_PedAberto').AsInteger;
    edtPto_Referencia.Text     := cdspesquisa.FieldByName('Pto_referencia').AsString;
+   edtEnderecoObra.Text       := cdspesquisa.FieldByName('EnderecoObra').AsString;
    edtInscricaoEstadual.Text  := cdspesquisa.FieldByName('InscricaoEstadual').AsString;
    edtEmail.Text              := cdspesquisa.FieldByName('Email').AsString;
 
@@ -1098,7 +1102,7 @@ begin
    cdsCadFuncionarios.Close;
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
    cdsCadFuncionarios.Open;
-
+  
    PagCadastro.ActivePageIndex:=0;
    piCod_Produto  := 0;
 

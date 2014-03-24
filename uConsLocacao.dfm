@@ -60,8 +60,6 @@ object frmConsLocacao: TfrmConsLocacao
       Height = 384
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 6
       object GrdVendas: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         OnCustomDrawCell = GrdVendasCustomDrawCell
@@ -980,7 +978,7 @@ object frmConsLocacao: TfrmConsLocacao
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 1081
+        Left = 875
         Top = 0
         Width = 70
         Height = 49
@@ -1020,18 +1018,17 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object separador: TbsSkinBevel
-        Left = 100
+        Left = 89
         Top = 0
-        Width = 589
+        Width = 560
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 689
+        Left = 649
         Top = 0
         Width = 17
         Height = 49
@@ -1044,7 +1041,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 776
+        Left = 736
         Top = 0
         Width = 35
         Height = 49
@@ -1057,7 +1054,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object btnFinalizar: TbsSkinSpeedButton
-        Left = 706
+        Left = 666
         Top = 0
         Width = 70
         Height = 49
@@ -1095,10 +1092,21 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitLeft = 712
         ExplicitTop = 12
       end
-      object btnImpComprovante: TbsSkinSpeedButton
-        Left = 811
+      object bsSkinBevel2: TbsSkinBevel
+        Left = 771
         Top = 0
-        Width = 70
+        Width = 104
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitLeft = 881
+      end
+      object bsSkinSpeedButton1: TbsSkinSpeedButton
+        Left = 0
+        Top = 0
+        Width = 89
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -1108,59 +1116,8 @@ object frmConsLocacao: TfrmConsLocacao
         DefaultFont.Height = 14
         DefaultFont.Name = 'Arial'
         DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
-        UseSkinFont = True
-        CheckedMode = False
-        UseSkinSize = True
-        UseSkinFontColor = True
-        WidthWithCaption = 0
-        WidthWithoutCaption = 0
-        ImageIndex = 6
-        RepeatMode = False
-        RepeatInterval = 100
-        Transparent = True
-        Flat = True
-        AllowAllUp = False
-        Down = False
-        GroupIndex = 0
-        Caption = 'Comprovante'
-        ShowCaption = True
-        NumGlyphs = 1
-        Align = alLeft
-        Spacing = 1
-        Layout = blGlyphTop
-        OnClick = btnImpComprovanteClick
-        ExplicitLeft = 532
-        ExplicitTop = 8
-        ExplicitHeight = 40
-      end
-      object bsSkinBevel2: TbsSkinBevel
-        Left = 881
-        Top = 0
-        Width = 200
-        Height = 49
-        Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bevel'
-        DividerMode = True
-        ExplicitTop = -1
-      end
-      object btnCancelar: TbsSkinMenuSpeedButton
-        Left = 0
-        Top = 0
-        Width = 100
-        Height = 49
-        HintImageIndex = 0
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bigtoolmenubutton'
-        DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
-        DefaultWidth = 0
-        DefaultHeight = 0
+        DefaultWidth = 70
+        DefaultHeight = 40
         UseSkinFont = True
         CheckedMode = False
         UseSkinSize = True
@@ -1175,19 +1132,13 @@ object frmConsLocacao: TfrmConsLocacao
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '  Devolu'#231#227'o'
+        Caption = '&Cancelar Loca'#231#227'o'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
-        Spacing = 1
-        NewStyle = False
-        TrackPosition = bstpRight
-        UseImagesMenuImage = False
-        UseImagesMenuCaption = False
-        SkinPopupMenu = bsSkinPopupMenu1
-        TrackButtonMode = False
-        ExplicitTop = 8
-        ExplicitHeight = 40
+        Spacing = 2
+        OnClick = bsSkinSpeedButton1Click
+        ExplicitLeft = 3
       end
     end
   end
@@ -1200,25 +1151,6 @@ object frmConsLocacao: TfrmConsLocacao
     DataSet = cdsVendas
     Left = 318
     Top = 391
-  end
-  object bsSkinPopupMenu1: TbsSkinPopupMenu
-    Left = 64
-    Top = 32
-    object BorderodeEntrega1: TMenuItem
-      Caption = 'Cancelar Pedido'
-      OnClick = BorderodeEntrega1Click
-    end
-    object Etiquetas1: TMenuItem
-      Caption = 'Devolu'#231#227'o Parcial'
-      OnClick = Etiquetas1Click
-    end
-    object N1: TMenuItem
-      Caption = '-'
-    end
-    object VisualizarDevolvidos1: TMenuItem
-      Caption = 'Visualizar Itens Devolvidos'
-      OnClick = VisualizarDevolvidos1Click
-    end
   end
   object ImpMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -1919,11 +1851,6 @@ object frmConsLocacao: TfrmConsLocacao
       end
       item
         Component = Status_Entrega
-        Properties.Strings = (
-          'Visible')
-      end
-      item
-        Component = VisualizarDevolvidos1
         Properties.Strings = (
           'Visible')
       end>

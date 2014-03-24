@@ -83,7 +83,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Flat = True
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 591
+        Left = 567
         Top = 0
         Width = 70
         Height = 40
@@ -170,17 +170,17 @@ object frmFechaLocacao: TfrmFechaLocacao
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = 9
+        ExplicitTop = 8
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 85
         Top = 0
-        Width = 506
+        Width = 482
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -5
       end
     end
   end

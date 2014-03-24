@@ -192,13 +192,13 @@ begin
 
    if StrToFloat(edtTotalTitulo.text)=0 then
    Begin
-      CaixaMensagem( 'O valor do(s) não pode ser igual a zero ', ctAviso, [ cbOk ], 0 );
+      CaixaMensagem( 'O valor da locação não pode ser igual a zero ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
 
-   if StrToFloat(edtVlr_Recebido.text)=0 then
+   if StrToFloat(edtSaldoDevedor.text)<>0 then
    Begin
-      if not CaixaMensagem( 'Deseja Continuar sem informar o recebimento ?', ctConfirma, [ cbSimNao ], 0 )  Then
+      if not CaixaMensagem( 'Ainda resta pagar '+edtSaldoDevedor.text, ctConfirma, [ cbSimNao ], 0 )  Then
          Exit;
    End;
 
@@ -377,6 +377,7 @@ begin
    {$ENDREGION}
 
    MarcarPrePagamentoComoUtilizado(StrToint(edtNumeroVenda.Text));
+
    frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
    CaixaMensagem( 'Finalização efetuada com sucesso', ctAviso, [ cbOk ], 0 );
    frmFechaLocacao.Tag := 1;

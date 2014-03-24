@@ -32,10 +32,7 @@ type
     panelconsulta: TbsSkinPanel;
     cmbStatus: TbsSkinComboBox;
     lblsituacao: TbsSkinStdLabel;
-    bsSkinPopupMenu1: TbsSkinPopupMenu;
-    BorderodeEntrega1: TMenuItem;
     ImpMatricial: TRDprint;
-    Etiquetas1: TMenuItem;
     dspRelatorio: TDataSetProvider;
     cdsRelatorio: TClientDataSet;
     dspVariavel: TDataSetProvider;
@@ -92,8 +89,6 @@ type
     GrdItensDevolvidos: TcxGridDBTableView;
     GrdItensDevolvidosColumn1: TcxGridDBColumn;
     GrdItensDevolvidosColumn2: TcxGridDBColumn;
-    N1: TMenuItem;
-    VisualizarDevolvidos1: TMenuItem;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
@@ -101,9 +96,7 @@ type
     bsSkinBevel3: TbsSkinBevel;
     bsSkinBevel4: TbsSkinBevel;
     btnFinalizar: TbsSkinSpeedButton;
-    btnImpComprovante: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
-    btnCancelar: TbsSkinMenuSpeedButton;
     Column_Status_Pagamento: TcxGridDBColumn;
     Print: TPrintDialog;
     checkUsarleitor: TbsSkinCheckRadioBox;
@@ -123,6 +116,7 @@ type
     sdtsPesqPrepagamento: TSimpleDataSet;
     colum_DataDevolucao: TcxGridDBColumn;
     Column_NomeStatus: TcxGridDBColumn;
+    bsSkinSpeedButton1: TbsSkinSpeedButton;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -136,7 +130,6 @@ type
       Shift: TShiftState);
     procedure btnEntregueClick(Sender: TObject);
     procedure btnImpComprovanteClick(Sender: TObject);
-    procedure BorderodeEntrega1Click(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
     procedure Etiquetas1Click(Sender: TObject);
     procedure VisualizarDevolvidos1Click(Sender: TObject);
@@ -148,6 +141,7 @@ type
       var ADone: Boolean);
     procedure MenuItem1Click(Sender: TObject);
     procedure cdsItensVendasCalcFields(DataSet: TDataSet);
+    procedure bsSkinSpeedButton1Click(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -294,8 +288,8 @@ begin
       sdtsPesqPrepagamento.DataSet.ParamByName('parSeqvenda').AsInteger     :=  cdsItensVendas.fieldbyname('SeqVenda').ASInteger;
       sdtsPesqPrepagamento.Open;
 
-      liDias :=  RetornarNumeroDias(cdsItensVendas.fieldbyname('Data_Cad').AsDateTime,RetornarDataSistema);
-      frmFechaLocacao.edtData_Venda.Text  := FormatDateTime('dd/mm/yyyy', cdsItensVendas.fieldbyname('Data_Cad').AsDateTime);
+      liDias :=  RetornarNumeroDias(cdsItensVendas.fieldbyname('Data_Mov').AsDateTime,RetornarDataSistema);
+      frmFechaLocacao.edtData_Venda.Text  := FormatDateTime('dd/mm/yyyy', cdsItensVendas.fieldbyname('Data_Mov').AsDateTime);
       frmFechaLocacao.edtNumeroVenda.Text := cdsItensVendas.fieldbyname('SeqVenda').AsString;
       frmFechaLocacao.edtCodCliente.Text  :=  cdsVendas.fieldbyname('Cod_Cliente').AsString;
       frmFechaLocacao.lblDataLocacao.caption :='Data da Locação '+frmFechaLocacao.edtData_Venda.Text;
@@ -381,9 +375,9 @@ begin
       cdsItensVendas.FieldByName('Nome_Status').AsString := 'Não Informado';
 
    if cdsItensVendas.fieldByName('Status').AsInteger<>1 then
-      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Cad').AsDateTime, now)
+      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Mov').AsDateTime, now)
    else
-      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Cad').AsDateTime,cdsItensVendas.fieldByName('DataDevolucao').AsDateTime);
+      cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Mov').AsDateTime,cdsItensVendas.fieldByName('DataDevolucao').AsDateTime);
 
    cdsItensVendas.fieldByName('TotalLocacao').AsFloat := ( ( cdsItensVendas.fieldByName('Qtde_venda').AsFloat * cdsItensVendas.fieldByName('Pco_Venda').AsFloat ) *
                                                              cdsItensVendas.fieldByName('Dias').AsInteger )
@@ -427,7 +421,7 @@ begin
    else
       cdsVendas.FieldByName('Status_Entrega').AsString := 'Pendente de Entrega';
 
-   cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );  
+   cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );
 
    cdsVendas.FieldByName('TotalLocacao').AsFloat := RetornarTotalVenda(cdsVendas.FieldByName('SeqVenda').AsString);
 
@@ -438,15 +432,15 @@ function TfrmConsLocacao.RetornarTotalVenda( lrSeqVenda : String ) : Real;
 var Dados : TClientDataSet;
     Total : Real;
 begin
-   Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad, coalesce(Status,0) as Status ,DataDevolucao from T_itensvendas '+
+   Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad,Data_Mov, coalesce(Status,0) as Status ,DataDevolucao from T_itensvendas '+
                                     'Where SeqVenda='+lrSeqVenda ,Nil);
    Total := 0;
    while not Dados.Eof do
    begin
       if Dados.fieldByName('Status').AsInteger<>1 then
-         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Cad').AsDateTime,RetornarDataSistema)
+         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,RetornarDataSistema)
       else
-         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Cad').AsDateTime,Dados.FieldByName('DataDevolucao').AsDateTime);
+         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,Dados.FieldByName('DataDevolucao').AsDateTime);
 
       Dados.Next;
    end;
@@ -520,9 +514,9 @@ end;
 
 procedure TfrmConsLocacao.VisualizarDevolvidos1Click(Sender: TObject);
 begin
-   frmConsItensDevolvidos := tfrmConsItensDevolvidos.Create(Self);
-   frmConsItensDevolvidos.piSeqVenda :=  cdsVendas.FieldByName('SeqVenda').AsInteger;
-   frmConsItensDevolvidos.ShowModal;
+   //frmConsItensDevolvidos := tfrmConsItensDevolvidos.Create(Self);
+   //frmConsItensDevolvidos.piSeqVenda :=  cdsVendas.FieldByName('SeqVenda').AsInteger;
+   //frmConsItensDevolvidos.ShowModal;
 end;
 
 procedure TfrmConsLocacao.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -539,7 +533,7 @@ begin
 
    cmbTipoFiltro.Enabled  := True;
    cmbStatus.Enabled      := True;
-   
+
 
    frmConsLocacao.Caption := 'Consulta e manutenção de Locações ';
    pnlmensagem.Caption    := 'Consulta de Locação ';
@@ -558,7 +552,7 @@ begin
       btnFinalizar.Visible   := True;
       Colum_NomeStatus.Visible := True;
    End;
-   btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
+   //btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
    btnSelecionarClick(btnSelecionar);
    if gbMaster then
       MenuDeControle.UseBuiltInPopupMenus := True;
@@ -594,7 +588,7 @@ begin
    cdsVendas.Locate('SeqVenda',VendaId,[]);
 end;
 
-procedure TfrmConsLocacao.BorderodeEntrega1Click(Sender: TObject);
+procedure TfrmConsLocacao.bsSkinSpeedButton1Click(Sender: TObject);
 var liSeqVenda     : Integer;
     liRomaneio     : Integer;
     trdNrTransacao : TTransactionDesc;
@@ -621,32 +615,20 @@ begin
 
 {$REGION 'Fazendo Criticas do Processo'}
 
-   {IF liRomaneio>0 Then
-   Begin
-      CaixaMensagem( 'Impossivel Cancelar venda com romaneio Emitido ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;}
-
    IF cdsVendas.IsEmpty Then
    Begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   if cdsVendas.FieldByName('Status').AsString = '5' Then
+   if cdsVendas.FieldByName('Status').AsString = '3' Then
    Begin
-      CaixaMensagem( 'A Venda ja Esta Cancelada ', ctAviso, [ cbOk ],0 );
+      CaixaMensagem( 'A locação ja Esta Cancelada ', ctAviso, [ cbOk ],0 );
       Exit
    End;
-   {
-   if cdsVendas.FieldByName('Status').AsString  '3' Then
-   Begin
-      CaixaMensagem( 'Venda ja finalizada ', ctAviso, [ cbOk ],0 );
-      Exit
-   End;
-    }
-   {$ENDREGION}
 
-   if CaixaMensagem( 'Deseja Efetuar o Cancelamento da Venda nº '+cdsVendas.FieldByName('SeqVenda').AsString, ctConfirma, [ cbSimNao ], 0 )  Then
+{$ENDREGION}
+
+   if CaixaMensagem( 'Deseja Efetuar o Cancelamento da Locação nº '+cdsVendas.FieldByName('SeqVenda').AsString, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
 
       if not frmPrincipal.dbxPrincipal.InTransaction then
@@ -656,35 +638,6 @@ begin
       end;
 
 {$REGION 'Desfazendo o Financeiro'}
-
-      QryVariavel.Close;
-      QryVariavel.Params.Clear;
-      QryVariavel.Sql.text := 'Select * from T_Ctasreceber Where SeqVenda=:parseqvenda ';
-      QryVariavel.paramByname('parSeqvenda').AsInteger  := cdsVendas.FieldByName('Seqvenda').AsInteger;
-
-      CdsVerifica.Close;
-      CdsVerifica.ProviderName := dspvariavel.Name;
-      CdsVerifica.Open;
-
-      while not CdsVerifica.Eof do
-      Begin
-          Try
-            qryModific.Close;
-            qryModific.SQL.Text := 'update T_Ctasreceber set Status=:parStatus,Operador=:parOperador, Tipo_Baixa=:parTipo_Baixa, '+
-                                   'Data_Atu=:parData_Atu '+
-                                   'where Documento=:parDocumento ';
-            qryModific.ParamByName('parDocumento').AsString            := CdsVerifica.FieldByname('Documento').AsString;
-            qryModific.ParamByName('parData_Atu').asSqlTimeStamp       := DateTimeToSQLTimeStamp(now);
-            qryModific.ParamByName('parOperador').AsString             := gsOperador;
-            qryModific.ParamByName('parStatus').AsInteger              := 2;
-            qryModific.ParamByName('parTipo_Baixa').AsString           := 'CA';
-            qryModific.ExecSQL;
-         Except
-            //frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
-            Exit;
-         End;
-         CdsVerifica.Next;
-      End;
 
       QryVariavel.Close;
       QryVariavel.Params.Clear;
@@ -716,33 +669,6 @@ begin
          qryModific.ExecSQL;
          CdsVerifica.Next;
       End;
-
-      QryVariavel.Close;
-      QryVariavel.Params.Clear;
-      QryVariavel.Sql.text := 'Select * from T_ContaCorrente Where Documento=:parseqvenda ';
-      QryVariavel.paramByname('parSeqvenda').AsInteger  := cdsVendas.FieldByName('Seqvenda').AsInteger;
-
-      CdsVerifica.Close;
-      CdsVerifica.ProviderName := dspvariavel.Name;
-      CdsVerifica.Open;
-
-      while not CdsVerifica.Eof do
-      Begin
-         DadosContaCorrente := TContaCorrente.Create;
-         GravaContaCorrente := TDaoContaCorrente.Create;
-         DadosContaCorrente.D_C         := 'C';
-         DadosContaCorrente.Valor       := CdsVerifica.FieldByname('Valor').AsFloat;
-         DadosContaCorrente.Cod_Cliente :=  CdsVerifica.FieldByname('Cod_cliente').AsInteger;
-         DadosContaCorrente.Historico   := 'Estorno do cancelamento da Venda nº '+IntToStr(liSeqvenda);
-         DadosContaCorrente.Documento   :=  99+cdsVendas.FieldByName('Seqvenda').AsInteger;
-         IF  not GravaContaCorrente.Atualizar(DadosContaCorrente) Then
-         Begin
-            CaixaMensagem( 'Não foi possivel lancar no conta corrente', ctAviso, [ cbOk ], 0 );
-            Exit;
-         End;
-         CdsVerifica.Next;
-      End;
-
  {$ENDREGION}
 
 {$REGION 'Devolucao de estoque (Cancelando os Itens)'}
@@ -751,8 +677,7 @@ begin
       Begin
          while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liNumeroVenda )  and ( Not cdsItensVendas.Eof )  do
          Begin
-
-            Try
+           Try
                qrymodific.Close;
                qrymodific.Params.Clear;
                qrymodific.SQL.Text :='Update T_Itensvendas set Qtde_Devolvida = ( Qtde_Devolvida + :parQtde_Devolvida ), '+
@@ -797,81 +722,7 @@ begin
                frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
                Exit;
             End;
-
-            if cdsItensVendas.FieldByName('Pco_Venda').asFloat > cdsItensVendas.FieldByName('Pco_Venda_Atual').Asfloat then
-            Begin
-               vlr_anterior := (cdsItensVendas.FieldByName('Pco_Venda').asFloat * cdsItensVendas.FieldByName('Qtde_Venda').asInteger ) ;
-               vlr_Atual    := (cdsItensVendas.FieldByName('Pco_Venda_Atual').Asfloat * cdsItensVendas.FieldByName('Qtde_Venda').asInteger ) ;
-
-               Try
-                  qrySaldos.Close;
-                  qrySaldos.Params.Clear;
-                  qrySaldos.Sql.Text :='Select * from T_saldos where 1=2';
-
-                  cdsSaldos.Close;
-                  cdsSaldos.ProviderName := dspSaldos.Name;
-                  cdsSaldos.Open;
-
-                  cdsSaldos.Append;
-                  cdsSaldos.FieldByName('Codigo').AsInteger      := StrToInt( Sequencia('Codigo',False,'T_Saldos',FrmPrincipal.dbxPrincipal,'',False,8 ) );
-                  cdsSaldos.FieldByName('Cod_emp').AsString      := GsCod_Emp;
-                  cdsSaldos.FieldByName('E_S').AsString          := 'S';
-                  cdsSaldos.FieldByName('Operador').AsString     := GsOperador;
-                  cdsSaldos.FieldByName('Cod_Produto').AsInteger := cdsItensVendas.FieldByName('Cod_Produto').asInteger;
-                  cdsSaldos.FieldByName('Pco_Venda').AsFloat     := (vlr_Anterior-vlr_Atual);
-                  cdsSaldos.FieldByName('Pco_Custo').AsFloat     := 0;
-                  cdsSaldos.FieldByName('Data_cad').AsDateTime   := Now;
-                  cdsSaldos.FieldByName('Data_Mov').AsDateTime   := GsData_Mov;
-                  cdsSaldos.FieldByName('Qtde').AsInteger        := 1;
-                  cdsSaldos.FieldByName('Historico').AsString    := 'Vendido a '+FormatFloat('0.00',cdsItensVendas.FieldByName('Pco_Venda').asFloat)+
-                                                                    ' Recebido '+FormatFloat('0.00',cdsItensVendas.FieldByName('Pco_Venda_Atual').asFloat);
-                  cdsSaldos.FieldByName('Tipo_Movimento').AsString := 'DEBITO DE DEVOLUCAO';
-                  cdsSaldos.Post;
-                  cdsSaldos.ApplyUpdates(-1);
-               except
-                  frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
-                  Exit;
-               End;
-            End;
-
-            if cdsItensVendas.FieldByName('Pco_Venda').asFloat < cdsItensVendas.FieldByName('Pco_Venda_Atual').Asfloat then
-            Begin
-
-               vlr_anterior := (cdsItensVendas.FieldByName('Pco_Venda').asFloat * cdsItensVendas.FieldByName('Qtde_Devolvida').asInteger ) ;
-               vlr_Atual    := (cdsItensVendas.FieldByName('Pco_Venda_Atual').Asfloat * cdsItensVendas.FieldByName('Qtde_Devolvida').asInteger ) ;
-
-               Try
-                  qrySaldos.Close;
-                  qrySaldos.Params.Clear;
-                  qrySaldos.Sql.Text :='Select * from T_saldos where 1=2';
-
-                  cdsSaldos.Close;
-                  cdsSaldos.ProviderName := dspSaldos.Name;
-                  cdsSaldos.Open;
-
-                  cdsSaldos.Append;
-                  cdsSaldos.FieldByName('Codigo').AsInteger      := StrToInt( Sequencia('Codigo',False,'T_Saldos',FrmPrincipal.dbxPrincipal,'',False,8 ) );
-                  cdsSaldos.FieldByName('Cod_emp').AsString      := GsCod_Emp;
-                  cdsSaldos.FieldByName('Operador').AsString     := GsOperador;
-                  cdsSaldos.FieldByName('E_S').AsString          := 'E';
-                  cdsSaldos.FieldByName('Cod_Produto').AsInteger := cdsItensVendas.FieldByName('Cod_Produto').asInteger;
-                  cdsSaldos.FieldByName('Pco_Venda').AsFloat     := (vlr_Atual-vlr_Anterior);
-                  cdsSaldos.FieldByName('Pco_Custo').AsFloat     := 0;
-                  cdsSaldos.FieldByName('Data_cad').AsDateTime   := Now;
-                  cdsSaldos.FieldByName('Data_Mov').AsDateTime   := GsData_Mov;
-                  cdsSaldos.FieldByName('Qtde').AsInteger        := 1;
-                  cdsSaldos.FieldByName('Historico').AsString    := 'Vendido a '+FormatFloat('0.00',cdsItensVendas.FieldByName('Pco_Venda').asFloat)+
-                                                                    ' Recebido '+FormatFloat('0.00',cdsItensVendas.FieldByName('Pco_Venda_Atual').asFloat);
-                  cdsSaldos.FieldByName('Tipo_Movimento').AsString := 'CREDITO DE DEVOLUCAO';
-                  cdsSaldos.Post;
-                  cdsSaldos.ApplyUpdates(-1);
-                  except
-                  frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
-                  Exit;
-               End;
-
-            End;
-            cdsItensVendas.Next;
+         cdsItensVendas.Next;
          End;
  {$ENDREGION}
 
@@ -1017,7 +868,7 @@ var
    liNumeroVenda   : Integer;
    liromaneio : Integer;
 begin
-   if not gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Devolucao Parcial',gbMaster) Then
+{   if not gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Devolucao Parcial',gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
@@ -1032,7 +883,7 @@ begin
       Exit
    End;}
 
-   frmDevolucaoVenda := TfrmDevolucaoVenda.create(Self);
+ {  frmDevolucaoVenda := TfrmDevolucaoVenda.create(Self);
    frmDevolucaoVenda.piSeqVenda := cdsVendas.FieldByName('Seqvenda').AsInteger;
    frmDevolucaoVenda.piRomaneioId := cdsVendas.FieldByName('RomaneioId').AsInteger;
    if not cdsVendas.FieldByName('SeqOS').IsNull then
@@ -1044,7 +895,7 @@ begin
    cdsVendas.Open;
 
    cdsVendas.Locate('SeqVenda',liNumeroVenda, [] );
-
+   }
 end;
 
 procedure TfrmConsLocacao.CarregaPropriedade;
