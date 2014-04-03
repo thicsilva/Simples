@@ -4,7 +4,7 @@ object frmFechaLocacao: TfrmFechaLocacao
   BorderIcons = []
   Caption = 'Fechamento de Loca'#231#227'o'
   ClientHeight = 491
-  ClientWidth = 759
+  ClientWidth = 806
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,7 +22,7 @@ object frmFechaLocacao: TfrmFechaLocacao
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 759
+    Width = 806
     Height = 44
     AutoSize = True
     Bands = <
@@ -30,15 +30,16 @@ object frmFechaLocacao: TfrmFechaLocacao
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 755
+        Width = 802
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
+    ExplicitWidth = 759
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 746
+      Width = 793
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -83,7 +84,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Flat = True
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 567
+        Left = 716
         Top = 0
         Width = 70
         Height = 40
@@ -175,7 +176,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       object bsSkinBevel2: TbsSkinBevel
         Left = 85
         Top = 0
-        Width = 482
+        Width = 631
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
@@ -187,7 +188,7 @@ object frmFechaLocacao: TfrmFechaLocacao
   object bsSkinGroupBox1: TbsSkinGroupBox
     Left = 0
     Top = 44
-    Width = 759
+    Width = 806
     Height = 195
     HintImageIndex = 0
     TabOrder = 1
@@ -221,6 +222,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     Caption = 'Informa'#231#245'es Dos Itens Locados'
     Align = alTop
     UseSkinSize = False
+    ExplicitWidth = 759
     object edtMascara: TbsSkinEdit
       Left = 316
       Top = 30
@@ -257,7 +259,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinPanel2: TbsSkinPanel
       Left = 1
       Top = 159
-      Width = 757
+      Width = 804
       Height = 35
       HintImageIndex = 0
       TabOrder = 1
@@ -289,6 +291,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Spacing = 2
       Caption = 'bsSkinPanel2'
       Align = alBottom
+      ExplicitWidth = 757
       object bsSkinStdLabel6: TbsSkinStdLabel
         Left = 277
         Top = 12
@@ -336,7 +339,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         ParentFont = False
       end
       object bsSkinStdLabel2: TbsSkinStdLabel
-        Left = 527
+        Left = 560
         Top = 12
         Width = 109
         Height = 16
@@ -447,7 +450,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         OnChange = edtDataDevolucaoChange
       end
       object edtPrePagamento: TbsSkinNumericEdit
-        Left = 642
+        Left = 675
         Top = 6
         Width = 103
         Height = 25
@@ -487,7 +490,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinDBGrid1: TbsSkinDBGrid
       Left = 1
       Top = 23
-      Width = 757
+      Width = 804
       Height = 136
       Hint = 'Duplo Click para desmarcar o produto'
       HintImageIndex = 0
@@ -559,7 +562,7 @@ object frmFechaLocacao: TfrmFechaLocacao
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 239
-    Width = 759
+    Width = 806
     Height = 44
     AutoSize = True
     Bands = <
@@ -567,16 +570,17 @@ object frmFechaLocacao: TfrmFechaLocacao
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 755
+        Width = 802
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
+    ExplicitWidth = 759
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 746
+      Width = 793
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -621,7 +625,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Flat = True
       Images = frmPrincipal.Imagebutoes
       object btnRemover: TbsSkinSpeedButton
-        Left = 591
+        Left = 719
         Top = 0
         Width = 70
         Height = 40
@@ -660,7 +664,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         ExplicitTop = 8
       end
       object btnAdicionar: TbsSkinSpeedButton
-        Left = 521
+        Left = 649
         Top = 0
         Width = 70
         Height = 40
@@ -701,24 +705,23 @@ object frmFechaLocacao: TfrmFechaLocacao
       object bsSkinBevel5: TbsSkinBevel
         Left = 0
         Top = 0
-        Width = 521
+        Width = 649
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -5
       end
     end
   end
   object bsSkinPanel1: TbsSkinPanel
     Left = 0
     Top = 283
-    Width = 759
+    Width = 806
     Height = 30
     HintImageIndex = 0
     TabOrder = 3
-    SkinData = frmPrincipal.SkinPrincipal
+    SkinData = frmPrincipal.SkinEntradaDados
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -746,6 +749,8 @@ object frmFechaLocacao: TfrmFechaLocacao
     NumGlyphs = 1
     Spacing = 2
     Align = alTop
+    ExplicitTop = 285
+    ExplicitWidth = 759
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 1
       Top = 6
@@ -764,9 +769,9 @@ object frmFechaLocacao: TfrmFechaLocacao
       Caption = 'Tipo de Pagamento'
     end
     object bsSkinStdLabel8: TbsSkinStdLabel
-      Left = 552
-      Top = 9
-      Width = 24
+      Left = 626
+      Top = 11
+      Width = 69
       Height = 13
       EllipsType = bsetNone
       UseSkinFont = True
@@ -776,9 +781,9 @@ object frmFechaLocacao: TfrmFechaLocacao
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.SkinPrincipal
+      SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'stdlabel'
-      Caption = 'Valor'
+      Caption = 'VARLO PAGO'
     end
     object edtcod_Pagamento: TbsSkinEdit
       Left = 100
@@ -822,7 +827,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Height = 20
       HintImageIndex = 0
       TabOrder = 1
-      SkinData = frmPrincipal.SkinPrincipal
+      SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -843,7 +848,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       OnExit = cmbNome_formaPagamentoExit
     end
     object edtPco_Venda: TbsSkinNumericEdit
-      Left = 593
+      Left = 701
       Top = 3
       Width = 79
       Height = 25
@@ -861,6 +866,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       DefaultWidth = 0
       DefaultHeight = 0
       ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'edit'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
@@ -882,7 +888,7 @@ object frmFechaLocacao: TfrmFechaLocacao
   object bsSkinStatusBar1: TbsSkinStatusBar
     Left = 0
     Top = 469
-    Width = 759
+    Width = 806
     Height = 22
     HintImageIndex = 0
     TabOrder = 4
@@ -916,6 +922,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     Caption = 'bsSkinStatusBar1'
     Align = alBottom
     SizeGrip = False
+    ExplicitWidth = 759
     object lblNome: TbsSkinStdLabel
       Left = 435
       Top = 3
@@ -974,7 +981,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       NumGlyphs = 1
     end
     object edtSaldoDevedor: TbsSkinEdit
-      Left = 641
+      Left = 688
       Top = 0
       Width = 118
       Height = 25
@@ -1053,11 +1060,11 @@ object frmFechaLocacao: TfrmFechaLocacao
   object dbgConsulta: TbsSkinDBGrid
     Left = 0
     Top = 313
-    Width = 759
+    Width = 806
     Height = 156
     HintImageIndex = 0
     TabOrder = 5
-    SkinData = frmPrincipal.SkinPrincipal
+    SkinData = frmPrincipal.SkinEntradaDados
     SkinDataName = 'grid'
     Transparent = False
     WallpaperStretch = False
@@ -1520,6 +1527,11 @@ object frmFechaLocacao: TfrmFechaLocacao
       item
         Name = 'Quantidade'
         DataType = ftFloat
+      end
+      item
+        Name = 'TipoCobranca'
+        DataType = ftString
+        Size = 20
       end>
     IndexDefs = <>
     Params = <>
@@ -1528,24 +1540,30 @@ object frmFechaLocacao: TfrmFechaLocacao
     Left = 208
     Top = 88
     Data = {
-      B20000009619E0BD010000001800000008000000000003000000B200074D6172
+      D30000009619E0BD010000001800000009000000000003000000D300074D6172
       6361646F010049000000010005574944544802000200010006436F6469676F04
       000100000000000944657363726963616F010049000000010005574944544802
       0002006400095175617469646164650800040000000000064469617269610800
       0400000000000444696173040001000000000005546F74616C08000400000000
-      000A5175616E74696461646508000400000000000000}
+      000A5175616E74696461646508000400000000000C5469706F436F6272616E63
+      6101004900000001000557494454480200020014000000}
     object cdsItensVendasTmpMarcado: TStringField
       DisplayLabel = 'M'
-      DisplayWidth = 3
+      DisplayWidth = 4
       FieldName = 'Marcado'
       Size = 1
     end
+    object cdsItensVendasTmpTipoCobranca: TStringField
+      DisplayLabel = 'Tipo'
+      DisplayWidth = 7
+      FieldName = 'TipoCobranca'
+    end
     object cdsItensVendasTmpCodigo: TIntegerField
-      DisplayWidth = 10
+      DisplayWidth = 6
       FieldName = 'Codigo'
     end
     object cdsItensVendasTmpDescricao: TStringField
-      DisplayWidth = 33
+      DisplayWidth = 41
       FieldName = 'Descricao'
       Size = 100
     end
@@ -1554,7 +1572,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       FieldName = 'Quantidade'
     end
     object cdsItensVendasTmpDiaria: TFloatField
-      DisplayWidth = 10
+      DisplayWidth = 6
       FieldName = 'Diaria'
     end
     object cdsItensVendasTmpDias: TIntegerField
@@ -1562,7 +1580,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       FieldName = 'Dias'
     end
     object cdsItensVendasTmpTotal: TFloatField
-      DisplayWidth = 7
+      DisplayWidth = 10
       FieldName = 'Total'
     end
   end

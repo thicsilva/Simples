@@ -52,11 +52,11 @@ begin
                              '( Cod_Produto,Qtde_Venda,Pco_Venda,vlr_Desconto, '+
                              '  vlr_Total,Operador,Data_Cad,Data_Mov,Complemento,'+
                              '  Cod_emp,SeqVenda,Perc_Comis, SetorId,PesoBruto,PesoLiquido,'+
-                             '  MargemSecundaria,PrecoCusto,Pco_Tabela,LucroBruto,DataPrevisaoEntrega ) Values '+
+                             '  MargemSecundaria,PrecoCusto,Pco_Tabela,LucroBruto,DataPrevisaoEntrega,TipoCobranca ) Values '+
                              '(:parCod_Produto,:parQtde_Venda,:parPco_Venda,:parvlr_Desconto, '+
                              ' :parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,:parComplemento,'+
                              ' :parCod_emp,:parSeqVenda,:parPerc_Comis, :parSetorId, :parPesoBruto,:parPesoLiquido,'+
-                             ' :parMargemSecundaria,:parPrecoCusto,:parPco_Tabela,:parLucroBruto,:parDataPrevisaoEntrega)';
+                             ' :parMargemSecundaria,:parPrecoCusto,:parPco_Tabela,:parLucroBruto,:parDataPrevisaoEntrega, :parTipoCobranca )';
 
    FQueryModific.Prepared := True;
    ItensVendas.first;
@@ -94,6 +94,8 @@ begin
       FQueryModific.ParamByName('parPrecoCusto').asFloat      := ItensVendas.FieldByName('PrecoCusto').AsFloat;
       FQueryModific.ParamByName('parLucroBruto').asFloat      := ItensVendas.FieldByName('LucroBruto').AsFloat;
       FQueryModific.ParamByName('parPco_Tabela').asFloat      := ItensVendas.FieldByName('Pco_Tabela').AsFloat;
+      FQueryModific.ParamByName('parTipoCobranca').asString   := ItensVendas.FieldByName('TipoCalculo').AsString;
+
       FQueryModific.ParamByName('parDataPrevisaoEntrega').AsSQLTimeStamp := DatetimeToSqltimeStamp(ItensVendas.FieldByName('Previsao_Entrega').AsDateTime);
 
       FQueryModific.ExecSql;

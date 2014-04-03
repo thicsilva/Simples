@@ -117,6 +117,7 @@ type
     colum_DataDevolucao: TcxGridDBColumn;
     Column_NomeStatus: TcxGridDBColumn;
     bsSkinSpeedButton1: TbsSkinSpeedButton;
+    Colum_TipoCobranca: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -270,7 +271,7 @@ var liSeqvenda : Integer;
     liDias : Integer;
 begin
 
-   if ( cdsVendas.FieldByName('Status').AsString <> '0') Then
+   if ( cdsVendas.FieldByName('Status').AsString <> '1') Then
    Begin
       CaixaMensagem( 'Locação já finalizada ou cancelada', ctAviso, [ cbOk ], 0 );
       Exit;
@@ -305,6 +306,7 @@ begin
             frmFechaLocacao.cdsItensVendasTmp.FieldByName('Quantidade').asFloat  := cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat;
             frmFechaLocacao.cdsItensVendasTmp.FieldByName('Diaria').asFloat      := cdsItensVendas.fieldbyname('Pco_Venda').AsFloat;
             frmFechaLocacao.cdsItensVendasTmp.FieldByName('Dias').asFloat        := liDias;
+            frmFechaLocacao.cdsItensVendasTmp.FieldByName('TipoCobranca').asString := cdsItensVendas.fieldbyname('TipoCobranca').AsString;
             frmFechaLocacao.cdsItensVendasTmp.FieldByName('Total').asFloat       := lidias * (cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat * cdsItensVendas.fieldbyname('Pco_Venda').AsFloat);
             frmFechaLocacao.cdsItensVendasTmp.FieldByName('Marcado').asString    := 'X';
             frmFechaLocacao.cdsItensVendasTmp.Post;
@@ -379,8 +381,18 @@ begin
    else
       cdsItensVendas.fieldByName('Dias').AsInteger := RetornarNumeroDias(cdsItensVendas.fieldByName('Data_Mov').AsDateTime,cdsItensVendas.fieldByName('DataDevolucao').AsDateTime);
 
-   cdsItensVendas.fieldByName('TotalLocacao').AsFloat := ( ( cdsItensVendas.fieldByName('Qtde_venda').AsFloat * cdsItensVendas.fieldByName('Pco_Venda').AsFloat ) *
-                                                             cdsItensVendas.fieldByName('Dias').AsInteger )
+   if AnsiSameText( cdsItensVendas.fieldByName('TipoCobranca').AsString,'diario') then
+   begin
+      cdsItensVendas.fieldByName('TotalLocacao').AsFloat := ( ( cdsItensVendas.fieldByName('Qtde_venda').AsFloat * cdsItensVendas.fieldByName('Pco_Venda').AsFloat ) *
+                                                                cdsItensVendas.fieldByName('Dias').AsInteger )
+
+   end;
+
+   if AnsiSameText( cdsItensVendas.fieldByName('TipoCobranca').AsString,'mensal') then
+   begin
+      cdsItensVendas.fieldByName('TotalLocacao').AsFloat :=  ( cdsItensVendas.fieldByName('Qtde_venda').AsFloat * cdsItensVendas.fieldByName('Pco_Venda').AsFloat )
+
+   end;
 end;
 
 procedure TfrmConsLocacao.cdsVendasBeforeOpen(DataSet: TDataSet);
@@ -402,11 +414,11 @@ end;
 
 procedure TfrmConsLocacao.cdsVendasCalcFields(DataSet: TDataSet);
 begin
-   If cdsVendas.FieldByName('Status').AsString = '0' Then
+   If cdsVendas.FieldByName('Status').AsString = '1' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Locado'
-   Else If cdsVendas.FieldByName('Status').AsString = '1' Then
-      cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue'
    Else If cdsVendas.FieldByName('Status').AsString = '2' Then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue'
+   Else If cdsVendas.FieldByName('Status').AsString = '3' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Cancelado'
    Else
       cdsVendas.FieldByName('Nome_Status').AsString := 'Não Informado';
@@ -432,16 +444,26 @@ function TfrmConsLocacao.RetornarTotalVenda( lrSeqVenda : String ) : Real;
 var Dados : TClientDataSet;
     Total : Real;
 begin
-   Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad,Data_Mov, coalesce(Status,0) as Status ,DataDevolucao from T_itensvendas '+
+   Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad,Data_Mov, coalesce(Status,0) as Status, '+
+                                    '       DataDevolucao, TipoCobranca  from T_itensvendas '+
                                     'Where SeqVenda='+lrSeqVenda ,Nil);
    Total := 0;
    while not Dados.Eof do
    begin
       if Dados.fieldByName('Status').AsInteger<>1 then
-         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,RetornarDataSistema)
+      begin
+         if AnsiSameText( Dados.fieldByName('TipoCobranca').AsString,'diario') then
+            Total :=  Total + ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,RetornarDataSistema)
+         else
+            Total :=  Total + ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat );
+      end
       else
-         Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,Dados.FieldByName('DataDevolucao').AsDateTime);
-
+      begin
+         if AnsiSameText( Dados.fieldByName('TipoCobranca').AsString,'diario') then
+            Total :=  Total +  ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat ) * RetornarNumeroDias(Dados.FieldByName('Data_Mov').AsDateTime,Dados.FieldByName('DataDevolucao').AsDateTime)
+         else
+            Total :=  Total + ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat );
+      end;
       Dados.Next;
    end;
    Result := Total;

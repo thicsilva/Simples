@@ -226,6 +226,8 @@ type
     bsSkinStdLabel23: TbsSkinStdLabel;
     edtMargemSecundaria: TbsSkinNumericEdit;
     chkBloquiaEstoqueNegativo: TbsSkinCheckRadioBox;
+    lblValorMensal: TbsSkinStdLabel;
+    edtValorMensal: TbsSkinNumericEdit;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -314,7 +316,8 @@ Procedure TfrmCadProdutos.limpaCasmpos();
 Begin
    EdtCodigo.Text     :='';
    EdtDescricao.Text  :='';
-   edtPco_Venda.Text  :='';
+   edtPco_Venda.Text  :='0';
+   edtValorMensal.Text :='0';
    cmbCod_CentroCusto.KeyValue  := null;
    cmbNome_CentroCusto.KeyValue := null;
    cmbCod_Grupo.KeyValue  := null;
@@ -557,6 +560,7 @@ begin
    cdsCadProdutos.FieldByName('Descricao').AsString        := edtDescricao.Text;
    cdsCadProdutos.FieldByName('Operador').AsString         := gsOperador;
    cdsCadProdutos.FieldByName('Pco_Venda').AsFloat         := StrToFloat( edtPco_Venda.Text );
+   cdsCadProdutos.FieldByName('ValorMes').AsFloat          := StrToFloat( edtValorMensal.Text );
    cdsCadProdutos.FieldByName('Cod_Operacao').AsString     := '0100'; //cmbNome_CentroCusto.KeyValue;
    cdsCadProdutos.FieldByName('Cod_Emp').AsString          := gsCod_Emp;
    cdsCadProdutos.FieldByName('Cod_Barras').AsString       := edtCod_barras.Text;
@@ -754,12 +758,16 @@ procedure TfrmCadProdutos.AjustarTela;
 begin
    lblPrecoVendaExterna.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
    edtPcoVendaExterna.Visible   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
+   lblValorMensal.Visible       := False;
+   edtValorMensal.Visible       := False;
    if HeLocacao then
    begin
       lblPrecoVendaExterna.Visible := True;
       edtPcoVendaExterna.Visible   := True;
       lblPrecoVendaExterna.Caption := 'Preço Calção';
-      lblPrevoVenda.Caption        := 'Preço Locação';
+      lblPrevoVenda.Caption        := 'Preço Da Diaria';
+      lblValorMensal.Visible       := true;
+      edtValorMensal.Visible       := true;
    end;
 end;
 
@@ -920,6 +928,7 @@ begin
    edtDescricao.Text           := cdsCadProdutos.FieldByName('Descricao').AsString;
    edtCaminhoImagem.text       := cdsCadProdutos.FieldByName('Caminho_Imagem').AsString;
    edtPco_Venda.Text           := FormatFloat('0.00',cdsCadProdutos.FieldByName('Pco_Venda').AsFloat);
+   edtValorMensal.Text         := FormatFloat('0.00',cdsCadProdutos.FieldByName('ValorMes').AsFloat);
    edtPcoVendaExterna.Text     := FormatFloat('0.00',cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat);
    cmbCod_CentroCusto.KeyValue := cdsCadProdutos.FieldByName('Cod_Operacao').AsString;
    cmbCod_CentroCustoChange(cmbCod_CentroCusto);

@@ -61,6 +61,9 @@ type TDaoEstrutura = class
     procedure Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;
     procedure Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
     procedure Adicionar_EnderecoObra_na_Tabela_Clientes;
+    procedure Adicionar_ValorMes_na_Tabela_Produtos;
+    procedure Adicionar_TipoCobranca_na_Tabela_ItensVendas;
+
 
   public
     Constructor Create(Conexao : TConexao);
@@ -439,6 +442,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_TipoCobranca_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'TipoCobranca', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD TipoCobranca Varchar(10)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_EnderecoObra_na_Tabela_Clientes;
 begin
    if not ExisteCampo( 'T_Clientes', 'EnderecoObra', FConexao.Conection ) then
@@ -448,6 +461,17 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_ValorMes_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'ValorMes', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD ValorMes Float';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 
 procedure TDaoEstrutura.Adicionar_Entregue_na_Tabela_Vendas;
@@ -631,6 +655,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_TipoCobranca_na_Tabela_ItensVendas;
+  Adicionar_ValorMes_na_Tabela_Produtos;
   Adicionar_EnderecoObra_na_Tabela_Clientes;
   Adicionar_Data_Devolucao_na_Tabela_ItensVendas;
   Adicionar_Data_Previsao_entrega_na_Tabela_ItensVendas;

@@ -209,6 +209,10 @@ object frmConsLocacao: TfrmConsLocacao
         OptionsData.Editing = False
         OptionsData.Inserting = False
         OptionsView.GroupByBox = False
+        object Colum_TipoCobranca: TcxGridDBColumn
+          DataBinding.FieldName = 'TipoCobranca'
+          Width = 70
+        end
         object Column_NomeStatus: TcxGridDBColumn
           DataBinding.FieldName = 'Nome_Status'
         end
@@ -832,7 +836,7 @@ object frmConsLocacao: TfrmConsLocacao
     end
     object btnSelecionar: TbsSkinButton
       Left = 621
-      Top = 7
+      Top = 6
       Width = 125
       Height = 28
       HintImageIndex = 0
@@ -925,7 +929,7 @@ object frmConsLocacao: TfrmConsLocacao
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 1183
+        Width = 1181
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -978,7 +982,7 @@ object frmConsLocacao: TfrmConsLocacao
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 875
+        Left = 856
         Top = 0
         Width = 70
         Height = 49
@@ -1018,7 +1022,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object separador: TbsSkinBevel
-        Left = 89
+        Left = 70
         Top = 0
         Width = 560
         Height = 49
@@ -1026,9 +1030,11 @@ object frmConsLocacao: TfrmConsLocacao
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 89
+        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 649
+        Left = 630
         Top = 0
         Width = 17
         Height = 49
@@ -1041,7 +1047,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 736
+        Left = 717
         Top = 0
         Width = 35
         Height = 49
@@ -1054,7 +1060,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object btnFinalizar: TbsSkinSpeedButton
-        Left = 666
+        Left = 647
         Top = 0
         Width = 70
         Height = 49
@@ -1093,7 +1099,7 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 771
+        Left = 752
         Top = 0
         Width = 104
         Height = 49
@@ -1102,11 +1108,12 @@ object frmConsLocacao: TfrmConsLocacao
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 881
+        ExplicitTop = -1
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 0
         Top = 0
-        Width = 89
+        Width = 70
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -1139,6 +1146,8 @@ object frmConsLocacao: TfrmConsLocacao
         Spacing = 2
         OnClick = bsSkinSpeedButton1Click
         ExplicitLeft = 3
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
     end
   end

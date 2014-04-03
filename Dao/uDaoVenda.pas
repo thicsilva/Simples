@@ -131,7 +131,7 @@ end;
 procedure TDaoVenda.MarcarComoEntregue(IDVenda: Integer);
 begin
    FqryModific.Close;
-   FqryModific.SQL.Text :='UpDate T_vendas set Entregue=1, Data_entrega=:parData_entrega where SeqVenda=:parSeqvenda';
+   FqryModific.SQL.Text :='UpDate T_vendas set status=2, Entregue=1, Data_entrega=:parData_entrega where SeqVenda=:parSeqvenda';
    FqryModific.ParamByName('parSeqVenda').AsInteger := IDVenda;
    FqryModific.ParamByName('parData_entrega').AsSQLTimeStamp := DateTimeToSqlTimeStamp(now);
    FqryModific.ExecSql;

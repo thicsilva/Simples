@@ -90,6 +90,7 @@ type
     qryItensDevolucoes: TSQLQuery;
     dspItensDevolucoes: TDataSetProvider;
     cdsItensDevolucoes: TClientDataSet;
+    cdsItensVendasTmpTipoCobranca: TStringField;
     procedure edtcod_PagamentoExit(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
@@ -508,7 +509,11 @@ begin
      begin
         cdsItensVendasTmp.Edit;
         cdsItensVendasTmp.FieldByName('Dias').AsInteger  := RetornarNumeroDias(StrtoDate(edtData_Venda.Text),edtDataDevolucao.Date );
-        cdsItensVendasTmp.FieldByName('Total').AsFloat := (cdsItensVendasTmp.FieldByName('Quantidade').AsFloat * cdsItensVendasTmp.FieldByName('Diaria').AsFloat) *  cdsItensVendasTmp.FieldByName('Dias').AsInteger;
+        if AnsiSameText( cdsItensVendasTmp.fieldByName('TipoCobranca').AsString,'diario') then
+           cdsItensVendasTmp.FieldByName('Total').AsFloat := (cdsItensVendasTmp.FieldByName('Quantidade').AsFloat * cdsItensVendasTmp.FieldByName('Diaria').AsFloat) *  cdsItensVendasTmp.FieldByName('Dias').AsInteger
+        else
+           cdsItensVendasTmp.FieldByName('Total').AsFloat := (cdsItensVendasTmp.FieldByName('Quantidade').AsFloat * cdsItensVendasTmp.FieldByName('Diaria').AsFloat);
+                                          
         Total := Total + cdsItensVendasTmp.FieldByName('Total').AsFloat;
         cdsItensVendasTmp.Post;
      end;
