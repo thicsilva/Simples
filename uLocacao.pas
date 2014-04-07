@@ -811,6 +811,11 @@ Var RvRecibo   : TRvProject;
     lsVirgula : String;
 begin
    Try
+
+      cdsCliente.open;
+      cdsEmpresa.open;
+      cdsCliente.locate('Codigo', edtcod_Cliente.Text,[] );
+
       sdtsBuscaDados := TsimpleDataSet.create(Application);
       sdtsBuscaDados.Connection := gConexao.conection;
       sdtsBuscaDados.DataSet.CommandText := ' Select * from Empresa ';
@@ -857,17 +862,17 @@ begin
         lsVirgula := ',';
         cdsItensVendasTMP.Next;
       end;
-      
+
 
       rvRecibo.SetParam('obs','          Recebemos de '+cmbNome_Cliente.text+' CPF/CNPJ '+edtCnpjCpf.Text + ' a importância de R$ '+edtPrePagamento.text+'( '+
                         valorPorExtenso(StrToFloat(edtPrePagamento.text))+' ) '+'referente ao pagamento da locação de '+lsProdutos+' durante o '+
                         'periodo de '+edtDataVenda.Text+' a '+FormatDateTime('dd/mm/yyyy',cdsItensVendasTMP.fieldByName('Previsao_Entrega').AsDateTime)+' '+
                         'pelo que firmo e dou plena quitação' );
-                        
+
       rvRecibo.SetParam('Valor','R$ '+FormatFloat('0.00',StrTofloat(edtPrePagamento.Text)));
       rvRecibo.SetParam('Data','Natal '+FormatDateTime('dd',now)+' de '+FormatDateTime('mmmm',now)+' de '+FormatDateTime('yyyy',now));
       rvRecibo.Execute;
-                 
+
 
     Finally
       FreeAndNil(RvRecibo);
@@ -1658,6 +1663,7 @@ begin
   frxContrato.ShowReport(true);
   cdsCliente.Close;
   cdsEmpresa.Close;
+  btnokClick(btnok);
 end;
 
 procedure TfrmLocacao.btnExcluirClick(Sender: TObject);

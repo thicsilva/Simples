@@ -32,6 +32,7 @@ object frmParametros: TfrmParametros
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -57,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -68,6 +69,7 @@ object frmParametros: TfrmParametros
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -154,6 +156,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -209,6 +212,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -328,6 +332,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -383,6 +388,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -631,7 +637,7 @@ object frmParametros: TfrmParametros
         Left = 241
         Top = 118
         Width = 57
-        Height = 18
+        Height = 20
         Text = '0,00'
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -653,6 +659,7 @@ object frmParametros: TfrmParametros
         Font.Style = []
         ParentFont = False
         TabOrder = 18
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -766,6 +773,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -783,7 +791,7 @@ object frmParametros: TfrmParametros
         Left = 527
         Top = 279
         Width = 98
-        Height = 18
+        Height = 20
         Text = 'edtSenha'
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -805,6 +813,7 @@ object frmParametros: TfrmParametros
         ParentFont = False
         TabOrder = 1
         Visible = False
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -830,6 +839,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -915,7 +925,7 @@ object frmParametros: TfrmParametros
           Left = 133
           Top = 61
           Width = 121
-          Height = 18
+          Height = 20
           Text = 'edtHostName'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -936,6 +946,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -947,7 +958,7 @@ object frmParametros: TfrmParametros
           Left = 133
           Top = 85
           Width = 121
-          Height = 18
+          Height = 20
           Text = 'bsSkinEdit1'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -968,6 +979,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -979,7 +991,7 @@ object frmParametros: TfrmParametros
           Left = 133
           Top = 109
           Width = 121
-          Height = 18
+          Height = 20
           Text = 'bsSkinEdit1'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1000,6 +1012,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1011,7 +1024,7 @@ object frmParametros: TfrmParametros
           Left = 133
           Top = 133
           Width = 121
-          Height = 18
+          Height = 20
           Text = 'edtSenha'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1032,6 +1045,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1058,6 +1072,7 @@ object frmParametros: TfrmParametros
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -1075,6 +1090,7 @@ object frmParametros: TfrmParametros
           NumGlyphs = 1
           Spacing = 2
           Caption = 'Selecione o tipo de empresa'
+          UseSkinSize = True
           ButtonSkinDataName = 'radiobox'
           ButtonDefaultFont.Charset = DEFAULT_CHARSET
           ButtonDefaultFont.Color = clWindowText
@@ -1167,6 +1183,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1284,6 +1301,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1339,6 +1357,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1356,7 +1375,7 @@ object frmParametros: TfrmParametros
         Left = 91
         Top = 166
         Width = 66
-        Height = 18
+        Height = 20
         Text = '0,00'
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -1378,6 +1397,7 @@ object frmParametros: TfrmParametros
         Font.Style = []
         ParentFont = False
         TabOrder = 8
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -1402,6 +1422,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1419,7 +1440,7 @@ object frmParametros: TfrmParametros
         Left = 91
         Top = 194
         Width = 66
-        Height = 18
+        Height = 20
         Text = '0,00'
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -1441,6 +1462,7 @@ object frmParametros: TfrmParametros
         Font.Style = []
         ParentFont = False
         TabOrder = 10
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -1573,6 +1595,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1749,6 +1772,8 @@ object frmParametros: TfrmParametros
         ParentFont = False
         ScrollBars = ssBoth
         TabOrder = 9
+        Transparent = False
+        WallpaperStretch = False
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
         DefaultFont.Height = 14
@@ -1775,6 +1800,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -1837,6 +1863,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1854,6 +1881,7 @@ object frmParametros: TfrmParametros
         NumGlyphs = 1
         Spacing = 2
         Caption = 'Custo dos Produtos'
+        UseSkinSize = True
         object bsSkinLabel9: TbsSkinLabel
           Left = 16
           Top = 36
@@ -1871,6 +1899,7 @@ object frmParametros: TfrmParametros
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           ShadowEffect = False
           ShadowColor = clBlack
           ShadowOffset = 0
@@ -1901,6 +1930,7 @@ object frmParametros: TfrmParametros
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           ShadowEffect = False
           ShadowColor = clBlack
           ShadowOffset = 0
@@ -1918,7 +1948,7 @@ object frmParametros: TfrmParametros
           Left = 127
           Top = 71
           Width = 66
-          Height = 18
+          Height = 20
           Text = '0,00'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1940,6 +1970,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1951,7 +1982,7 @@ object frmParametros: TfrmParametros
           Left = 127
           Top = 36
           Width = 66
-          Height = 18
+          Height = 20
           Text = '0,00'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1973,6 +2004,7 @@ object frmParametros: TfrmParametros
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1985,7 +2017,7 @@ object frmParametros: TfrmParametros
         Left = 223
         Top = 182
         Width = 66
-        Height = 18
+        Height = 20
         Text = '0,00'
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2007,6 +2039,7 @@ object frmParametros: TfrmParametros
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -2031,6 +2064,7 @@ object frmParametros: TfrmParametros
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        Transparent = False
         ShadowEffect = False
         ShadowColor = clBlack
         ShadowOffset = 0
@@ -2143,6 +2177,7 @@ object frmParametros: TfrmParametros
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -2264,6 +2299,8 @@ object frmParametros: TfrmParametros
     end
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -2281,6 +2318,8 @@ object frmParametros: TfrmParametros
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False
