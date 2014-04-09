@@ -26,7 +26,7 @@ uses
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
   SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
-  uDaoCustoProduto;
+  uDaoCustoProduto, frxClass, frxDBSet;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -183,6 +183,47 @@ type
     cdsItensVendasTMPMargemSecundaria: TFloatField;
     cdsItensVendasTMPLucroBruto: TFloatField;
     PanelStatus: TbsSkinStatusPanel;
+    frxVenda: TfrxReport;
+    frxDbItens: TfrxDBDataset;
+    frxDBCliente: TfrxDBDataset;
+    frxDbEmpresa: TfrxDBDataset;
+    cdsEmpresa: TClientDataSet;
+    cdsEmpresaID_Empresa: TIntegerField;
+    cdsEmpresaNome_Fantasia: TStringField;
+    cdsEmpresaCNPJCPF: TStringField;
+    cdsEmpresaEndereco: TStringField;
+    cdsEmpresaBairro: TStringField;
+    cdsEmpresaCidade: TStringField;
+    cdsEmpresaUF: TStringField;
+    cdsEmpresaTelefone: TStringField;
+    cdsEmpresacelular: TStringField;
+    cdsEmpresaOperador: TStringField;
+    cdsEmpresaData_Cad: TSQLTimeStampField;
+    cdsEmpresaData_Atu: TSQLTimeStampField;
+    cdsEmpresaLimite_Credito: TFloatField;
+    cdsEmpresaStatus: TStringField;
+    cdsEmpresaativo: TStringField;
+    cdsEmpresaCod_Atividade: TIntegerField;
+    cdsEmpresaCep: TStringField;
+    cdsEmpresaCod_Rota: TIntegerField;
+    cdsEmpresaQtde_PedAberto: TIntegerField;
+    cdsEmpresarazao_Social: TStringField;
+    cdsEmpresaPto_Referencia: TStringField;
+    cdsEmpresaFax: TStringField;
+    cdsEmpresaResponsavel: TStringField;
+    cdsEmpresacod_Funcionario: TIntegerField;
+    cdsEmpresaemail: TStringField;
+    cdsEmpresaDiretorGeral: TStringField;
+    cdsEmpresaDiretorEncino: TStringField;
+    cdsEmpresaDiretorDetran: TStringField;
+    cdsEmpresaLiberado: TBooleanField;
+    cdsEmpresaDiretorEnsino: TStringField;
+    cdsEmpresaNomeDiretor: TStringField;
+    cdsEmpresaHomePage: TStringField;
+    cdsEmpresaDiretor: TStringField;
+    cdsEmpresaLocal: TStringField;
+    cdsItensVendasTMPTipoCalculo: TStringField;
+    cdsItensVendasTMPPrevisao_Entrega: TDateField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -236,6 +277,8 @@ type
      procedure TotalizarVenda(lrTotalDesconto: Real);
     function RetornarSelectProdutos: String;
     procedure AtaulizaLucroBruto;
+    function FormatarCNPJ_CPF(lsCnpjCPf: String): String;
+    procedure PedidoPersonalizado(NumeroVenda: String);
     { Private declarations }
   public
      liSeqVendaAtu : Integer;
@@ -377,8 +420,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select status, Codigo,Descricao,cnpjcpf,Contrato,'+
-                           'Qtde_PedAberto,Limite_Credito,Cod_Rota from T_Clientes '+
+   qryVariavel.SQL.text :='Select * from T_Clientes '+
                            'where ativo=:parAtivo order by Descricao ';
    qryVariavel.ParamByName('parativo').AsString := 'S';
 
@@ -1419,19 +1461,25 @@ begin
       ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteServico','0',gsOperador )) and
        (frmVendas.Tag=SERVICOS) )  Then
    Begin
-
-      DaoVenda := TDaoVenda.Create(gConexao);
-      loVenda  := DaoVenda.CarregarVenda(cdsVenda);
-      DaoFuncionario    := TDaoFuncionario.Create(gConexao);
-      lovenda.Funcionario := Daofuncionario.Buscar(cdsVenda.FieldByName('Cod_Funcionario').AsInteger);
-      lovenda.Empresa := gEmpresa;
-      loVenda.VendaID := 1;
-      loVenda.Imprimir(cdsVenda,cdsItensVendasTMP,
-                       gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
-                       StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0')));
-      FreeAndNil(DaoVenda);
-      FreeAndNil(lovenda);
+      if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
+         PedidoPersonalizado(IntToStr(liSeqvenda))
+      else
+      begin
+         DaoVenda := TDaoVenda.Create(gConexao);
+         loVenda  := DaoVenda.CarregarVenda(cdsVenda);
+         DaoFuncionario    := TDaoFuncionario.Create(gConexao);
+         lovenda.Funcionario := Daofuncionario.Buscar(cdsVenda.FieldByName('Cod_Funcionario').AsInteger);
+         lovenda.Empresa := gEmpresa;
+         loVenda.VendaID := 1;
+         loVenda.Imprimir(cdsVenda,cdsItensVendasTMP,
+                          gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
+                          StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0')));
+         FreeAndNil(DaoVenda);
+         FreeAndNil(lovenda);
+      end;
    End;
+{$ENDREGION}
+
    DaoVenda := TDaoVenda.Create(gConexao);
    if Formatfloat('0.00',liTotalLiquido)<>FormatFloat('0.00',StrTofloat(edtTotalLiquido.Text)) then
       DaoVenda.MarcarComoNaoServicoPago(liSeqvenda);
@@ -1440,7 +1488,6 @@ begin
       DaoVenda.MarcarComoServicoPago(liSeqvenda);
    FreeAndNil(DaoVenda);
 
-{$ENDREGION}
 
    {$REGION 'Mensagem Final ao Usuario'}
 
@@ -1615,7 +1662,6 @@ end;
 
 procedure TfrmVendas.btnDescontoClick(Sender: TObject);
 begin
-
    FrmDescontoVenda := TFrmDescontoVenda.Create(self);
    FrmDescontoVenda.edtTotalVenda.text := edtTotalVenda.Text;
    FrmDescontoVenda.edtTotalLiquido.text := edtTotalVenda.Text;
@@ -1625,8 +1671,8 @@ begin
       AtualizaDesconto(FrmDescontoVenda.pPercDesconto);
       TotalizarVenda(FrmDescontoVenda.pTotalDesconto);
    end;
-
 end;
+
 
 procedure TfrmVendas.btnExcluirClick(Sender: TObject);
 begin
@@ -1978,5 +2024,29 @@ begin
       End;
    End;
 end;
+
+Function TfrmVendas.FormatarCNPJ_CPF(lsCnpjCPf : String)  : String;
+begin
+   if Length( lsCnpjCPf ) <= 11 then
+      Result := MascaraCpF(lsCnpjCPf)
+   else
+      result := MascaraCNPJ(lsCnpjCPf)
+end;
+
+procedure  TfrmVendas.PedidoPersonalizado(NumeroVenda : String);
+begin
+
+  cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+
+  frxVenda.Variables['CNPJEmpresa']    := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+  frxVenda.Variables['cnpjCliente']    := QuotedStr(edtCnpjCpf.Text);
+  frxVenda.Variables['TotalLocacao']   := QuotedStr( edtTotalLiquido.Text );
+  frxVenda.Variables['NumeroVenda']    := QuotedStr( NumeroVenda );
+  frxVenda.Variables['FormaPagamento'] := QuotedStr( cmbNome_formaPagamento.text );
+
+  frxVenda.ShowReport(true);
+  cdsEmpresa.Close;
+end;
+
 
 end.

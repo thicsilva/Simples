@@ -89,21 +89,21 @@ object frmParametros: TfrmParametros
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = '1 -Parametros Gerais'
       object Label5: TLabel
-        Left = 12
-        Top = 246
+        Left = 19
+        Top = 244
         Width = 113
         Height = 14
         Caption = 'Estoque Venda Externa'
       end
       object Label3: TLabel
-        Left = 11
+        Left = 35
         Top = 270
         Width = 97
         Height = 14
         Caption = 'Caixa Venda Balc'#227'o'
       end
       object Label4: TLabel
-        Left = 11
+        Left = 31
         Top = 296
         Width = 101
         Height = 14
@@ -495,7 +495,7 @@ object frmParametros: TfrmParametros
       end
       object chkData_Automatica: TbsSkinCheckRadioBox
         Left = 313
-        Top = 168
+        Top = 166
         Width = 224
         Height = 25
         HintImageIndex = 0
@@ -554,8 +554,8 @@ object frmParametros: TfrmParametros
         Caption = 'Cadastra Cliente sem CPF'
       end
       object chkVendaSemControle: TbsSkinCheckRadioBox
-        Left = 300
-        Top = 178
+        Left = 313
+        Top = 187
         Width = 297
         Height = 25
         HintImageIndex = 0
@@ -698,8 +698,8 @@ object frmParametros: TfrmParametros
         Caption = 'Trabalha com Venda Externa'
       end
       object cmbEstoqueVendaExterna: TbsSkinDBLookupComboBox
-        Left = 138
-        Top = 240
+        Left = 139
+        Top = 238
         Width = 199
         Height = 20
         HintImageIndex = 0
@@ -1580,9 +1580,9 @@ object frmParametros: TfrmParametros
         MaxLength = 0
       end
       object bsSkinLabel7: TbsSkinLabel
-        Left = 18
-        Top = 207
-        Width = 108
+        Left = 4
+        Top = 190
+        Width = 94
         Height = 21
         HintImageIndex = 0
         TabOrder = 4
@@ -1610,8 +1610,8 @@ object frmParametros: TfrmParametros
         AutoSize = False
       end
       object cmbTipoImpressora: TbsSkinComboBox
-        Left = 129
-        Top = 204
+        Left = 7
+        Top = 206
         Width = 143
         Height = 20
         HintImageIndex = 0
@@ -1657,7 +1657,8 @@ object frmParametros: TfrmParametros
           'Epson LX-300'
           'Bematech - Termica'
           'Grafico 80 Colunas'
-          '80 Colunas Modelo 01')
+          '80 Colunas Modelo 01'
+          'Personalizado')
         ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
@@ -2354,53 +2355,53 @@ object frmParametros: TfrmParametros
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 369
-    Top = 320
+    Left = 441
+    Top = 296
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 413
-    Top = 370
+    Left = 485
+    Top = 346
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 477
-    Top = 373
+    Left = 549
+    Top = 349
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 469
-    Top = 342
+    Left = 541
+    Top = 318
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 469
-    Top = 314
+    Left = 541
+    Top = 290
   end
   object srcCadCaixa: TDataSource
     DataSet = cdsCadCaixa
-    Left = 441
-    Top = 342
+    Left = 513
+    Top = 318
   end
   object cdsCadCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 441
-    Top = 314
+    Left = 513
+    Top = 290
   end
   object srcSetoresEstoque: TDataSource
     DataSet = cdsSetoresEstoque
-    Left = 413
-    Top = 342
+    Left = 485
+    Top = 318
   end
   object cdsSetoresEstoque: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 413
-    Top = 314
+    Left = 485
+    Top = 290
   end
 end

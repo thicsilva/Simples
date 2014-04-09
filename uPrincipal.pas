@@ -594,11 +594,13 @@ begin
    MenuPrincipal.ActiveTab := dxRibCadastro;
    RibonAtendimentoCliente.Visible := false;
 
-   actServicos.Visible      := False;
-   actconsServicos.Visible  := False;
-   RibonFiscal.Visible      := False;
-   tabLocacao.Visible       := False;
+   actconsServicos.Visible    := False;
+   RibonFiscal.Visible        := False;
+   tabLocacao.Visible         := False;
    tabControleEntrega.Visible := False;
+   TabVendasProdutos.Visible  := True;
+   actServicos.Visible        := False;
+
    If (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1')  or (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='2')  Then
    Begin
        actServicos.Visible      := True;
@@ -614,7 +616,7 @@ begin
    end;
    if HeLocacao then
    begin
-     TabVendasProdutos.Visible := False;
+     TabVendasProdutos.Visible := False;   
      TabServicos.Visible := False;
      tabLocacao.Visible := true;
    end;
