@@ -118,6 +118,7 @@ type
     Column_NomeStatus: TcxGridDBColumn;
     bsSkinSpeedButton1: TbsSkinSpeedButton;
     Colum_TipoCobranca: TcxGridDBColumn;
+    ColumnDataVencimento: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -146,7 +147,7 @@ type
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
-    function RetornarTotalVenda(lrSeqVenda: String) : Real;
+    function RetornarTotalVenda(var DataDevolucao : TDatetime; lrSeqVenda: String) : Real;
     { Private declarations }
   public
     { Public declarations }
@@ -404,6 +405,8 @@ begin
    CriarCalculado (DataSet,'LucroBrutoReais',ftFloat,0);
    CriarCalculado (DataSet,'TotalLocacao',ftFloat,0);
    CriarCalculado (DataSet,'LucroBrutoReais',ftFloat,0);
+   CriarCalculado (DataSet,'Data_Vencimento',ftDate,0);
+
 
    for liCont := 1 To DataSet.FieldCount Do
    begin
@@ -413,6 +416,7 @@ begin
 end;
 
 procedure TfrmConsLocacao.cdsVendasCalcFields(DataSet: TDataSet);
+var DataVencimento : TDateTime;
 begin
    If cdsVendas.FieldByName('Status').AsString = '1' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Locado'
@@ -435,19 +439,25 @@ begin
 
    cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );
 
-   cdsVendas.FieldByName('TotalLocacao').AsFloat := RetornarTotalVenda(cdsVendas.FieldByName('SeqVenda').AsString);
+   cdsVendas.FieldByName('TotalLocacao').AsFloat := RetornarTotalVenda(DataVencimento,cdsVendas.FieldByName('SeqVenda').AsString);
+   cdsVendas.FieldByName('Data_Vencimento').AsFloat := DataVencimento;
+   if ( DataVencimento<now )  and ( cdsVendas.FieldByName('Status').AsString = '1' ) then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Vencido'
+
 
 end;
 
 
-function TfrmConsLocacao.RetornarTotalVenda( lrSeqVenda : String ) : Real;
+function TfrmConsLocacao.RetornarTotalVenda( var DataDevolucao : TDatetime;  lrSeqVenda : String ) : Real;
 var Dados : TClientDataSet;
     Total : Real;
+    MaiorData : TDateTime;
 begin
    Dados := gConexao.BuscarDadosSQL('Select Qtde_Venda, Pco_venda, Data_Cad,Data_Mov, coalesce(Status,0) as Status, '+
-                                    '       DataDevolucao, TipoCobranca  from T_itensvendas '+
+                                    '       DataDevolucao, DataPrevisaoEntrega, TipoCobranca  from T_itensvendas '+
                                     'Where SeqVenda='+lrSeqVenda ,Nil);
    Total := 0;
+   MaiorData := Dados.FieldByName('DataPrevisaoEntrega').AsDateTime;
    while not Dados.Eof do
    begin
       if Dados.fieldByName('Status').AsInteger<>1 then
@@ -464,8 +474,12 @@ begin
          else
             Total :=  Total + ( Dados.FieldByName('Qtde_Venda').AsFloat * Dados.FieldByName('Pco_venda').AsFloat );
       end;
+      if MaiorData<Dados.FieldByName('DataPrevisaoEntrega').AsDateTime then
+         MaiorData := Dados.FieldByName('DataPrevisaoEntrega').AsDateTime;
+
       Dados.Next;
    end;
+   DataDevolucao := MaiorData;
    Result := Total;
 end;
 
@@ -584,9 +598,9 @@ procedure TfrmConsLocacao.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView
   ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
   var ADone: Boolean);
 begin
-  IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Cancelada' Then
+  IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Vencido' Then
      acanvas.Font.color := clred
-  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Finalizado' Then
+  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Entregue' Then
      acanvas.Font.color := clGreen;
 end;
 

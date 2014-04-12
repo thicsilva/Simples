@@ -148,6 +148,11 @@ object frmConsLocacao: TfrmConsLocacao
           DataBinding.FieldName = 'Data_Venda'
           Width = 120
         end
+        object ColumnDataVencimento: TcxGridDBColumn
+          Caption = 'Data Devolu'#231#227'o'
+          DataBinding.FieldName = 'Data_Vencimento'
+          Width = 100
+        end
         object Colum_TotalLocacao: TcxGridDBColumn
           AlternateCaption = 'TotalLocacao'
           Caption = 'Total Ate Hoje'
@@ -929,7 +934,7 @@ object frmConsLocacao: TfrmConsLocacao
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 1181
+        Width = 1183
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal

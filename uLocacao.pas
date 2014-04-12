@@ -260,6 +260,7 @@ type
     Tipo: TbsSkinStdLabel;
     cmbTipoCobranca: TComboBox;
     cdsItensLocacaoTMPTipoCalculo: TStringField;
+    ReciboSegundaVia: TfrxReport;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -1649,6 +1650,7 @@ begin
   cdsCliente.open;
   cdsEmpresa.open;
   cdsCliente.locate('Codigo', edtcod_Cliente.Text,[] );
+
   frxContrato.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
   frxContrato.Variables['cnpjCliente']   := QuotedStr(edtCnpjCpf.Text);
   frxContrato.Variables['TotalCaucao']   := QuotedStr( edtValorCaucao.Text );
@@ -1657,6 +1659,17 @@ begin
   frxContrato.Variables['ExtensoData']  := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
                                                       ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
   frxContrato.ShowReport(true);
+
+  ReciboSegundaVia.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+  ReciboSegundaVia.Variables['cnpjCliente']   := QuotedStr(edtCnpjCpf.Text);
+  ReciboSegundaVia.Variables['TotalCaucao']   := QuotedStr( edtValorCaucao.Text );
+  ReciboSegundaVia.Variables['TotalLocacao']  := QuotedStr( edtTotalLiquido.Text );
+  ReciboSegundaVia.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
+  ReciboSegundaVia.Variables['ExtensoData']  := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
+                                                      ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
+  ReciboSegundaVia.ShowReport(true);
+
+
   cdsCliente.Close;
   cdsEmpresa.Close;
   btnokClick(btnok);
