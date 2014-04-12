@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 484
-    ActivePage = Tab_Cadastro
+    ActivePage = tab_Historico
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -2607,7 +2607,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 604
-        Top = 36
+        Top = 34
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
