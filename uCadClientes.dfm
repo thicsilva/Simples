@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 845
     Height = 484
-    ActivePage = tab_Historico
+    ActivePage = bsSkinTabSheet7
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -2607,7 +2607,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 604
-        Top = 34
+        Top = 30
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -5431,8 +5431,8 @@ object frmCadClientes: TfrmCadClientes
     Top = 424
   end
   object PopupMenu1: TPopupMenu
-    Left = 512
-    Top = 192
+    Left = 664
+    Top = 240
     object Configurar1: TMenuItem
       Caption = 'Configurar'
       OnClick = Configurar1Click

@@ -58,11 +58,14 @@ var lstConfig : TStringList;
     licont : integer;
 begin
    lstConfig := TStringList.Create;
-   lstConfig.LoadFromFile(gsPath+'\Config\TabShet'+psFormulario+'.config');
-   for liCont := 0 to ( frmConfigTabSheet.chkConfiguracao.Items.Count - 1 ) do
+   if FileExists(gsPath+'\Config\TabShet'+psFormulario+'.config') then
    begin
-     if lstConfig.IndexOf(chkConfiguracao.items[liCont]) >= 0 then
-        chkConfiguracao.Checked[liCont]:= true
+      lstConfig.LoadFromFile(gsPath+'\Config\TabShet'+psFormulario+'.config');
+      for liCont := 0 to ( frmConfigTabSheet.chkConfiguracao.Items.Count - 1 ) do
+      begin
+         if lstConfig.IndexOf(chkConfiguracao.items[liCont]) >= 0 then
+            chkConfiguracao.Checked[liCont]:= true
+      end;
    end;
 end;
 

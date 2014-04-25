@@ -91,6 +91,12 @@ begin
      edtusuario.SetFocus;
      Exit;
    End;
+  { if now>StrToDate('26/04/2014') then
+   begin
+     CaixaMensagem( 'Usuario ou senha Invalido', ctAviso, [ cbOk ], 0 );;
+     edtusuario.SetFocus;
+     Exit;
+   end; }
    frmlogin.tag:=1;
    Close;
 end;

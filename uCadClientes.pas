@@ -428,7 +428,7 @@ type
    pitipoRel           : Integer;
    pdSaldoConta        : Double;
    pAnimalId : integer;
-    procedure DesabilitarTabSheets;
+    //procedure DesabilitarTabSheets;
     procedure MostrarAnimaisCliente;
     procedure LimpaAnimal;
    { Private declarations }
@@ -1102,7 +1102,7 @@ begin
    cdsCadFuncionarios.Close;
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
    cdsCadFuncionarios.Open;
-  
+
    PagCadastro.ActivePageIndex:=0;
    piCod_Produto  := 0;
 
@@ -1115,24 +1115,8 @@ begin
 
   InitFonts();
 
-  DesabilitarTabSheets;
+  DesabilitarTabSheets(self);
 
-end;
-procedure TfrmCadClientes.DesabilitarTabSheets;
-var lstConfig : TStringList;
-    licont : integer;
-begin
-   if FileExists(gsPath+'\Config\TabShetFrmCadClientes.config') then
-   begin
-      lstConfig := TStringList.Create;
-      lstConfig.LoadFromFile(gsPath+'\Config\TabShetFrmCadClientes.config');
-      for liCont := 0 to Self.ComponentCount - 1 do
-      begin
-         if self.Components[liCont] is Tbsskintabsheet then
-           (self.Components[liCont] as Tbsskintabsheet).TabVisible := ( lstConfig.IndexOf((self.Components[liCont] as Tbsskintabsheet).Caption) >= 0 )
-      end;
-      FreeAndnil(lstConfig);
-   end;
 end;
 
 procedure TfrmCadClientes.cdsClienteAnimaisAfterScroll(DataSet: TDataSet);

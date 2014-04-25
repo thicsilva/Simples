@@ -1745,6 +1745,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1763,7 +1764,7 @@ object frmLogin: TfrmLogin
     Spacing = 2
     Caption = 'Informe Usuario e Senha'
     Align = alTop
-    ExplicitTop = 127
+    UseSkinSize = True
     object bsSkinStdLabel10: TbsSkinStdLabel
       Left = 69
       Top = 36
@@ -1802,7 +1803,7 @@ object frmLogin: TfrmLogin
       Left = 111
       Top = 31
       Width = 129
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -1823,6 +1824,7 @@ object frmLogin: TfrmLogin
       MaxLength = 50
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1870,6 +1872,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    Transparent = False
     CheckedMode = False
     ImageList = frmPrincipal.Imagebutoes
     ImageIndex = 14
@@ -1905,6 +1908,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    Transparent = False
     CheckedMode = False
     ImageList = frmPrincipal.Imagebutoes
     ImageIndex = 4
@@ -1940,6 +1944,7 @@ object frmLogin: TfrmLogin
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1961,6 +1966,8 @@ object frmLogin: TfrmLogin
     SizeGrip = False
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1978,6 +1985,8 @@ object frmLogin: TfrmLogin
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False
@@ -3402,6 +3411,10 @@ object frmLogin: TfrmLogin
       A0346C}
   end
   object skinOffice: TbsSkinData
+    DlgTreeViewDrawSkin = True
+    DlgTreeViewItemSkinDataName = 'listbox'
+    DlgListViewDrawSkin = True
+    DlgListViewItemSkinDataName = 'listbox'
     SkinnableForm = True
     AnimationForAllWindows = False
     EnableSkinEffects = True
@@ -3415,6 +3428,10 @@ object frmLogin: TfrmLogin
     Top = 60
   end
   object Skindata: TbsSkinData
+    DlgTreeViewDrawSkin = True
+    DlgTreeViewItemSkinDataName = 'listbox'
+    DlgListViewDrawSkin = True
+    DlgListViewItemSkinDataName = 'listbox'
     SkinnableForm = True
     AnimationForAllWindows = False
     EnableSkinEffects = True

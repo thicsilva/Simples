@@ -107,6 +107,7 @@ object frmConfigTabSheet: TfrmConfigTabSheet
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -137,9 +138,9 @@ object frmConfigTabSheet: TfrmConfigTabSheet
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 364
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -173,7 +174,6 @@ object frmConfigTabSheet: TfrmConfigTabSheet
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0

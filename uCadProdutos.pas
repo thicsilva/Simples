@@ -228,6 +228,8 @@ type
     chkBloquiaEstoqueNegativo: TbsSkinCheckRadioBox;
     lblValorMensal: TbsSkinStdLabel;
     edtValorMensal: TbsSkinNumericEdit;
+    PopupMenu1: TPopupMenu;
+    Configurar1: TMenuItem;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -268,6 +270,7 @@ type
     procedure btnRemoverAnimalClick(Sender: TObject);
     procedure edtCustoProdutoExit(Sender: TObject);
     procedure bsSkinButton1Click(Sender: TObject);
+    procedure Configurar1Click(Sender: TObject);
   private
      pvQualBotao  : String;
      vlr_VendaAnt : Double;
@@ -292,7 +295,8 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uEstoqueManutencao, uInventario, uselRelEtiquetas,
-  uTransferenciaEntreSetores,uDaoCustoProduto,uClassCustoProduto;
+  uTransferenciaEntreSetores,uDaoCustoProduto,uClassCustoProduto, 
+  uConfigTabSheet;
 
 {$R *.dfm}
 //
@@ -1131,6 +1135,8 @@ begin
 
    piCod_Produto := 0;
 
+  DesabilitarTabSheets(self);
+
 end;
 
 procedure TfrmCadProdutos.btnPesquisaClick(Sender: TObject);
@@ -1229,6 +1235,22 @@ end;
 procedure TfrmCadProdutos.cmbPeriodoChange(Sender: TObject);
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+end;
+
+procedure TfrmCadProdutos.Configurar1Click(Sender: TObject);
+var licont : integer;
+begin
+   frmConfigTabSheet :=  TfrmConfigTabSheet.Create(Self);
+   frmConfigTabSheet.psFormulario := 'FrmCadProdutos';
+   frmConfigTabSheet.chkConfiguracao.Columns := 3;
+   frmConfigTabSheet.chkConfiguracao.Refresh;
+   for liCont := 0 to Self.ComponentCount - 1 do
+   begin
+      if self.Components[liCont] is Tbsskintabsheet then
+         frmConfigTabSheet.chkConfiguracao.Items.add((self.Components[liCont] as Tbsskintabsheet).Caption );
+   end;
+   frmConfigTabSheet.showModal;
+
 end;
 
 procedure TfrmCadProdutos.ConsultadeAvarias1Click(Sender: TObject);
