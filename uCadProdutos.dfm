@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 787
     Height = 460
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -52,12 +52,8 @@ object frmCadProdutos: TfrmCadProdutos
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = -80
-    ExplicitTop = 69
-    ExplicitWidth = 863
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitWidth = 861
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -94,7 +90,7 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
-        ExplicitWidth = 861
+        PopupMenu = PopupMenu1
         object cmbPesquisa: TbsSkinComboBox
           Left = 8
           Top = 10
@@ -261,7 +257,6 @@ object frmCadProdutos: TfrmCadProdutos
         Height = 395
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 861
         object GridProdutos: TcxGridDBTableView
           OnDblClick = GridProdutosDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -350,7 +345,6 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitWidth = 861
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 66
         Top = 3
@@ -1608,7 +1602,6 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object pagFichaTecnica: TbsSkinTabSheet
       Caption = 'Ficha Tecnica'
-      ExplicitWidth = 861
       object Label2: TLabel
         Left = 328
         Top = 120
@@ -1652,7 +1645,6 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPanel2'
         Align = alTop
-        ExplicitWidth = 861
         object bsSkinStdLabel10: TbsSkinStdLabel
           Left = 3
           Top = 10
@@ -1809,7 +1801,6 @@ object frmCadProdutos: TfrmCadProdutos
         Height = 380
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 861
         object GridFichaTecinica: TcxGridDBTableView
           OnDblClick = GridProdutosDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -1889,7 +1880,6 @@ object frmCadProdutos: TfrmCadProdutos
         NumGlyphs = 1
         Spacing = 2
         Align = alTop
-        ExplicitWidth = 861
         object lblNomeProdutoFicha: TbsSkinStdLabel
           Left = 7
           Top = 2
@@ -1952,7 +1942,6 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object bsSkinTabSheet4: TbsSkinTabSheet
       Caption = 'Movimento'
-      ExplicitWidth = 861
       object bsSkinLinkImage1: TbsSkinLinkImage
         Left = 0
         Top = 61
@@ -4029,7 +4018,6 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPaintPanel1'
         Align = alTop
-        ExplicitWidth = 861
         object lblTurma: TbsSkinStdLabel
           Left = 104
           Top = 14
@@ -4392,7 +4380,6 @@ object frmCadProdutos: TfrmCadProdutos
         Height = 375
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 861
         object gridMovimento: TcxGridDBTableView
           OnDblClick = GridProdutosDblClick
           Navigator.Buttons.CustomButtons = <>
@@ -4493,7 +4480,6 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPaintPanel1'
         Align = alTop
-        ExplicitWidth = 861
         object lblNomeProduto: TbsSkinStdLabel
           Left = 7
           Top = 2
@@ -4520,7 +4506,6 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object tabfoto: TbsSkinTabSheet
       Caption = 'Foto do Produto'
-      ExplicitWidth = 861
       object btnLocalizaImagem: TbsSkinButton
         Left = 581
         Top = 19
@@ -4645,7 +4630,6 @@ object frmCadProdutos: TfrmCadProdutos
     end
     object pagCustos: TbsSkinTabSheet
       Caption = 'Custo do Produto'
-      ExplicitWidth = 861
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 23
@@ -4681,7 +4665,6 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPanel3'
         Align = alTop
-        ExplicitWidth = 861
         object bsSkinStdLabel16: TbsSkinStdLabel
           Left = 17
           Top = 14
@@ -4930,7 +4913,6 @@ object frmCadProdutos: TfrmCadProdutos
         Sizeable = False
         Align = alTop
         Caption = 'Composi'#231#227'o do Custo do Produto'
-        ExplicitWidth = 861
         object bsSkinPanel4: TbsSkinPanel
           Left = 1
           Top = 21
@@ -4966,7 +4948,6 @@ object frmCadProdutos: TfrmCadProdutos
           Spacing = 2
           Caption = 'bsSkinPanel4'
           Align = alTop
-          ExplicitWidth = 859
           object bsSkinStdLabel18: TbsSkinStdLabel
             Left = 7
             Top = 12
@@ -5328,7 +5309,6 @@ object frmCadProdutos: TfrmCadProdutos
           Spacing = 2
           Caption = 'bsSkinPanel5'
           Align = alBottom
-          ExplicitWidth = 859
         end
       end
       object pnlDescProduto2: TbsSkinPaintPanel
@@ -5367,7 +5347,6 @@ object frmCadProdutos: TfrmCadProdutos
         Spacing = 2
         Caption = 'bsSkinPaintPanel1'
         Align = alTop
-        ExplicitWidth = 861
         object lblNomeProdutoFicha2: TbsSkinStdLabel
           Left = 7
           Top = 2
@@ -5410,7 +5389,6 @@ object frmCadProdutos: TfrmCadProdutos
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitWidth = 863
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -7007,5 +6985,13 @@ object frmCadProdutos: TfrmCadProdutos
     DataSet = cdsCustoProduto
     Left = 640
     Top = 128
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 376
+    Top = 176
+    object Configurar1: TMenuItem
+      Caption = 'Configurar'
+      OnClick = Configurar1Click
+    end
   end
 end

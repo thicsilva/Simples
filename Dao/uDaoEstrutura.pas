@@ -63,6 +63,7 @@ type TDaoEstrutura = class
     procedure Adicionar_EnderecoObra_na_Tabela_Clientes;
     procedure Adicionar_ValorMes_na_Tabela_Produtos;
     procedure Adicionar_TipoCobranca_na_Tabela_ItensVendas;
+    procedure Adicionar_Campos_na_Tabela_Empresa;
 
 
   public
@@ -655,6 +656,7 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_Campos_na_Tabela_Empresa;
   Adicionar_TipoCobranca_na_Tabela_ItensVendas;
   Adicionar_ValorMes_na_Tabela_Produtos;
   Adicionar_EnderecoObra_na_Tabela_Clientes;
@@ -875,6 +877,26 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_Campos_na_Tabela_Empresa;
+begin
+   if not ExisteCampo( 'Empresa', 'CodMunicipio', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE Empresa ADD CodMunicipio Varchar(7)';
+      FQryAjustes.ExecSQL;
+   end;
+
+   if not ExisteCampo( 'Empresa', 'InscricaoEstadual', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE Empresa ADD InscricaoEstadual Varchar(20)';
+      FQryAjustes.ExecSQL;
+   end;
+
+
+end;
+
 
 
 end.

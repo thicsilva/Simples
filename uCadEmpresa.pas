@@ -52,6 +52,10 @@ type
     bsSkinStdLabel11: TbsSkinStdLabel;
     bsSkinStdLabel12: TbsSkinStdLabel;
     edtLocal: TbsSkinEdit;
+    bsSkinStdLabel13: TbsSkinStdLabel;
+    InscEst: TbsSkinEdit;
+    bsSkinStdLabel15: TbsSkinStdLabel;
+    edtCodMunicipio: TbsSkinEdit;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -96,6 +100,9 @@ begin
    edtDiretorEnsino.Text :=  cdsCadEmpresas.FieldByName('Diretor').AsString;
    edtDiretorGeral.Text  :=  cdsCadEmpresas.FieldByName('NomeDiretor').AsString;
    edtLocal.Text         :=  cdsCadEmpresas.FieldByName('Local').AsString;
+   edtCodMunicipio.Text  :=  cdsCadEmpresas.FieldByName('CodMunicipio').AsString;
+   InscEst.Text          :=  cdsCadEmpresas.FieldByName('InscricaoEstadual').AsString;
+
 
 end;
 
@@ -125,8 +132,8 @@ procedure TfrmcadEmpresa.btnokClick(Sender: TObject);
 begin
    QryCadEmpresas.Close;
    QryCadEmpresas.SQL.Text :='Update Empresa set  Nome_Fantasia=:parNome_Fantasia,  Razao_Social=:parRazao_Social, Fax=:parFax, Email=:parEmail, '+
-                             '                       Endereco=:parEndereco, Cidade=:parCidade, Bairro=:parBairro, local=:parLocal, ' +
-                             '                       Cep=:parCep, uf=:parUf, Telefone=:parTelefone, CNPJCPF=:parCNPJCPF, ' +
+                             '                       Endereco=:parEndereco, Cidade=:parCidade, Bairro=:parBairro, local=:parLocal, InscricaoEstadual=:parInscricaoEstadual,' +
+                             '                       Cep=:parCep, uf=:parUf, Telefone=:parTelefone, CNPJCPF=:parCNPJCPF, CodMunicipio=:parCodMunicipio, ' +
                              '                       HomePage=:parHomePage, Diretor=:parDiretor, NomeDiretor=:parNomeDiretor ';
 
    QryCadEmpresas.ParamByName('parNome_Fantasia').AsString := edtNome_Fantasia.Text;
@@ -144,6 +151,8 @@ begin
    QryCadEmpresas.ParamByName('parDiretor').AsString       := edtDiretorEnsino.Text;
    QryCadEmpresas.ParamByName('parNomeDiretor').AsString   := edtDiretorGeral.Text;
    QryCadEmpresas.ParamByName('parLocal').AsString         := edtLocal.Text;
+   QryCadEmpresas.ParamByName('parCodMunicipio').AsString     := edtCodMunicipio.Text;
+   QryCadEmpresas.ParamByName('parInscricaoEstadual').AsString:= InscEst.Text;
    QryCadEmpresas.ExecSQL;
 
    AtualizaEmp;

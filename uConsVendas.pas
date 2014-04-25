@@ -30,7 +30,7 @@ uses
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
   uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, ACBrNFe;
 
 type
   TfrmConsVendas = class(TFormBase)
@@ -114,7 +114,7 @@ type
     btnFinalizar: TbsSkinSpeedButton;
     btnEmproducao: TbsSkinSpeedButton;
     btnEntregue: TbsSkinSpeedButton;
-    btnCupomFiscal: TbsSkinSpeedButton;
+    btnNFE: TbsSkinSpeedButton;
     bsSkinBevel5: TbsSkinBevel;
     btnImpComprovante: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
@@ -132,6 +132,8 @@ type
     LucroBrutoReal: TcxGridDBColumn;
     btnEntregaVenda: TbsSkinSpeedButton;
     MenuDeControle: TcxGridPopupMenu;
+    btnCupomFiscal: TbsSkinSpeedButton;
+    ACBrNFe1: TACBrNFe;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -145,7 +147,6 @@ type
       Shift: TShiftState);
     procedure btnEmproducaoClick(Sender: TObject);
     procedure btnEntregueClick(Sender: TObject);
-    procedure btnCupomFiscalClick(Sender: TObject);
     procedure btnImpComprovanteClick(Sender: TObject);
     procedure BorderodeEntrega1Click(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
@@ -159,6 +160,8 @@ type
       var ADone: Boolean);
     procedure MenuItem1Click(Sender: TObject);
     procedure btnEntregaVendaClick(Sender: TObject);
+    procedure btnCupomFiscalClick(Sender: TObject);
+    procedure btnNFEClick(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -282,88 +285,6 @@ begin
 end;
 
 
-procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
-var liRetorno : Integer;
-    lsNumeroCupom : String;
-    liNumeroVenda : Integer;
-    lsNomeCliente : String;
-    lsCNPJCPF : String;
-    lsMensagem : String;
-begin
-
-   if Trim(cdsVendas.FieldByName('NumeroCupom').AsString)<>'' then
-   Begin
-      CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
-      Exit;
-   End;
-   lsMensagem := 'Obrigado e volte sempre';                                                          
-   {
-   if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
-   Begin
-      if not inputQuery('Nome do Cliente','Nome do Cliente',lsNomeCliente) Then
-         Exit;
-      if not inputQuery('CNPJ/CPF','CNPJ ou CPF',lsCNPJCPF) Then
-         Exit;
-      lsMensagem := 'Cliente:'+lsNomeCliente+#13+#10;
-      lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
-   End;
-    }
-   If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
-   Begin
-      liRetorno := Bematech_FI_AbreCupom( '');
-      If liRetorno <> 1 Then
-      Begin
-         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
-         Exit;
-      End;
-      lsNumeroCupom := IncDigito( '', ' ', 6, 0 );
-      liRetorno := Bematech_FI_NumeroCupom( lsNumeroCupom );
-
-      If liRetorno <> 1 Then
-      Begin
-         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
-         Exit;
-      End;
-
-      liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
-      while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liNumeroVenda )  and ( Not cdsItensVendas.Eof )  do
-      Begin
-
-          liRetorno := Bematech_FI_VendeItem( cdsItensVendas.fieldbyname('Cod_Produto').AsString,
-                                             Copy(cdsItensVendas.fieldbyname('Descricao').AsString, 1, 29 ),
-                                             'FF',
-                                             'F',
-                                             FormatFloat( '0000000', ( cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat * 1000 ) ),
-                                             2,
-                                             FormatFloat( '000', ( cdsItensVendas.fieldbyname('Pco_Venda').AsFloat * 100 ) ),
-                                             '$',
-                                             FormatFloat( '00000000', cdsItensVendas.fieldbyname('vlr_Desconto').AsFloat * 100 ) );
-        If liRetorno <> 1 Then
-        Begin
-           CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar imprimir o item "' + cdsItensVendas.fieldbyname('Cod_Produto').AsString+ '" no ECF!!!', ctErro, [ cbOK ], 0 );
-           Exit;
-        End;
-        cdsItensvendas.Next;
-      End;
-     Bematech_FI_FechaCupomResumido( 'Dinheiro',lsMensagem);
-   End
-   Else
-   Begin
-      CaixaMensagem( 'Item da Venda não Localizado ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;
-   if lsNumeroCupom<>'000000' then
-   Begin
-      QryModific.Close;
-      QryModific.sql.Text := 'Update T_vendas set NumeroCupom=:parNumeroCupom where seqvenda=:parSeqVenda ';
-      QryModific.ParamByName('parNumeroCupom').asString := lsNumeroCupom;
-      QryModific.ParamByName('parSeqVenda').asInteger   := liNumeroVenda;
-      QryModific.ExecSQL;
-   End;
-   btnselecionarClick(btnSelecionar);
-   cdsvendas.locate('seqvenda',liNumeroVenda,[]);
-End;
-
 procedure TfrmConsVendas.btnFecharClick(Sender: TObject);
 begin
    Close;
@@ -485,6 +406,47 @@ begin
    FreeAndNil(DaoVenda);
    FreeAndNil(lovenda);
    FreeAndNil(DaoItemVenda);
+end;
+
+procedure TfrmConsVendas.btnNFEClick(Sender: TObject);
+var
+ vAux, vNumLote : String;
+begin
+  {
+  ACBrNFe1.NotasFiscais.Clear;
+
+  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
+  GerarNFe(vAux);
+
+  ACBrNFe1.Enviar(vNumLote,True);
+
+  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
+  memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
+  LoadXML(MemoResp, WBResposta);
+
+ MemoDados.Lines.Add('');
+ MemoDados.Lines.Add('Envio NFe');
+ MemoDados.Lines.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
+ MemoDados.Lines.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
+ MemoDados.Lines.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
+ MemoDados.Lines.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
+ MemoDados.Lines.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
+ MemoDados.Lines.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
+ MemoDados.Lines.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
+ MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
+ MemoDados.Lines.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
+// MemoDados.Lines.Add('cStat: '+ ACBrNFe1.WebServices.Retorno.NFeRetorno;
+
+{ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].tpAmb
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].verAplic
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].dhRecbto
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].digVal
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].cStat
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].xMotivo }
+
+ // ACBrNFe1.NotasFiscais.Clear;
 end;
 
 procedure TfrmConsVendas.cdsItensVendasAfterOpen(DataSet: TDataSet);
@@ -1075,6 +1037,87 @@ begin
    End;
 end;
 
+procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
+var liRetorno : Integer;
+    lsNumeroCupom : String;
+    liNumeroVenda : Integer;
+    lsNomeCliente : String;
+    lsCNPJCPF : String;
+    lsMensagem : String;
+begin
+   if Trim(cdsVendas.FieldByName('NumeroCupom').AsString)<>'' then
+   Begin
+      CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   lsMensagem := 'Obrigado e volte sempre';
+   {
+   if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      if not inputQuery('Nome do Cliente','Nome do Cliente',lsNomeCliente) Then
+         Exit;
+      if not inputQuery('CNPJ/CPF','CNPJ ou CPF',lsCNPJCPF) Then
+         Exit;
+      lsMensagem := 'Cliente:'+lsNomeCliente+#13+#10;
+      lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
+   End;
+    }
+   If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
+   Begin
+      liRetorno := Bematech_FI_AbreCupom( '');
+      If liRetorno <> 1 Then
+      Begin
+         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
+         Exit;
+      End;
+      lsNumeroCupom := IncDigito( '', ' ', 6, 0 );
+      liRetorno := Bematech_FI_NumeroCupom( lsNumeroCupom );
+
+      If liRetorno <> 1 Then
+      Begin
+         CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar abrir o cupom "' +  '" no ECF!!!', ctErro, [ cbOK ], 0 );
+         Exit;
+      End;
+
+      liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
+      while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liNumeroVenda )  and ( Not cdsItensVendas.Eof )  do
+      Begin
+
+          liRetorno := Bematech_FI_VendeItem( cdsItensVendas.fieldbyname('Cod_Produto').AsString,
+                                             Copy(cdsItensVendas.fieldbyname('Descricao').AsString, 1, 29 ),
+                                             'FF',
+                                             'F',
+                                             FormatFloat( '0000000', ( cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat * 1000 ) ),
+                                             2,
+                                             FormatFloat( '000', ( cdsItensVendas.fieldbyname('Pco_Venda').AsFloat * 100 ) ),
+                                             '$',
+                                             FormatFloat( '00000000', cdsItensVendas.fieldbyname('vlr_Desconto').AsFloat * 100 ) );
+        If liRetorno <> 1 Then
+        Begin
+           CaixaMensagem( 'Erro "' + IntToStr( liRetorno ) + '" ao tentar imprimir o item "' + cdsItensVendas.fieldbyname('Cod_Produto').AsString+ '" no ECF!!!', ctErro, [ cbOK ], 0 );
+           Exit;
+        End;
+        cdsItensvendas.Next;
+      End;
+     Bematech_FI_FechaCupomResumido( 'Dinheiro',lsMensagem);
+   End
+   Else
+   Begin
+      CaixaMensagem( 'Item da Venda não Localizado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+   if lsNumeroCupom<>'000000' then
+   Begin
+      QryModific.Close;
+      QryModific.sql.Text := 'Update T_vendas set NumeroCupom=:parNumeroCupom where seqvenda=:parSeqVenda ';
+      QryModific.ParamByName('parNumeroCupom').asString := lsNumeroCupom;
+      QryModific.ParamByName('parSeqVenda').asInteger   := liNumeroVenda;
+      QryModific.ExecSQL;
+   End;
+   btnselecionarClick(btnSelecionar);
+   cdsvendas.locate('seqvenda',liNumeroVenda,[]);
+end;
+
 procedure TfrmConsVendas.btnEmproducaoClick(Sender: TObject);
 begin
 
@@ -1207,8 +1250,506 @@ end;
 
 procedure TfrmConsVendas.CarregaPropriedade;
 begin
+end;
+ {
+procedure TfrmConsVendas.GerarNFe(NumNFe : String);
+begin
+  with ACBrNFe1.NotasFiscais.Add.NFe do
+   begin
+     Ide.cNF       := StrToInt(NumNFe); //Caso não seja preenchido será gerado um número aleatório pelo componente
+     Ide.natOp     := 'VENDA PRODUCAO DO ESTAB.';
+     Ide.indPag    := ipVista;
+     Ide.modelo    := 55;
+     Ide.serie     := 1;
+     Ide.nNF       := StrToInt(NumNFe);
+     Ide.dEmi      := Date;
+     Ide.dSaiEnt   := Date;
+     Ide.hSaiEnt   := Now;
+     Ide.tpNF      := tnSaida;
+     Ide.tpEmis    := teNormal;
+     Ide.tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
+     Ide.verProc   := '1.0.0.0'; //Versão do seu sistema
+     Ide.cUF       := NotaUtil.UFtoCUF(edtEmitUF.Text);
+     Ide.cMunFG    := StrToInt(edtEmitCodCidade.Text);
+     Ide.finNFe    := fnNormal;
+     if  Assigned( ACBrNFe1.DANFE ) then
+        Ide.tpImp     := ACBrNFe1.DANFE.TipoDANFE;
+
+//     Ide.dhCont := date;
+//     Ide.xJust  := 'Justificativa Contingencia';
+
+//Para NFe referenciada use os campos abaixo
+{     with Ide.NFref.Add do
+      begin
+        refNFe       := ''; //NFe Eletronica
+
+        RefNF.cUF    := 0;  // |
+        RefNF.AAMM   := ''; // |
+        RefNF.CNPJ   := ''; // |
+        RefNF.modelo := 1;  // |- NFe Modelo 1/1A
+        RefNF.serie  := 1;  // |
+        RefNF.nNF    := 0;  // |
+
+        RefNFP.cUF     := 0;  // |
+        RefNFP.AAMM    := ''; // |
+        RefNFP.CNPJCPF := ''; // |
+        RefNFP.IE      := ''; // |- NF produtor Rural
+        RefNFP.modelo  := ''; // |
+        RefNFP.serie   := 1;  // |
+        RefNFP.nNF     := 0;  // |
+
+        RefECF.modelo  := ECFModRef2B; // |
+        RefECF.nECF    := '';          // |- Cupom Fiscal
+        RefECF.nCOO    := '';          // |
+      end;
+}{
+      Emit.CNPJCPF           := edtEmitCNPJ.Text;
+      Emit.IE                := edtEmitIE.Text;
+      Emit.xNome             := edtEmitRazao.Text;
+      Emit.xFant             := edtEmitFantasia.Text;
+
+      Emit.EnderEmit.fone    := edtEmitFone.Text;
+      Emit.EnderEmit.CEP     := StrToInt(edtEmitCEP.Text);
+      Emit.EnderEmit.xLgr    := edtEmitLogradouro.Text;
+      Emit.EnderEmit.nro     := edtEmitNumero.Text;
+      Emit.EnderEmit.xCpl    := edtEmitComp.Text;
+      Emit.EnderEmit.xBairro := edtEmitBairro.Text;
+      Emit.EnderEmit.cMun    := StrToInt(edtEmitCodCidade.Text);
+      Emit.EnderEmit.xMun    := edtEmitCidade.Text;
+      Emit.EnderEmit.UF      := edtEmitUF.Text;
+      Emit.enderEmit.cPais   := 1058;
+      Emit.enderEmit.xPais   := 'BRASIL';
+
+      Emit.IEST              := '';
+      Emit.IM                := '2648800'; // Preencher no caso de existir serviços na nota
+      Emit.CNAE              := '6201500'; // Verifique na cidade do emissor da NFe se é permitido
+                                    // a inclusão de serviços na NFe
+      Emit.CRT               := crtRegimeNormal;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
+
+//Para NFe Avulsa preencha os campos abaixo
+{      Avulsa.CNPJ    := '';
+      Avulsa.xOrgao  := '';
+      Avulsa.matr    := '';
+      Avulsa.xAgente := '';
+      Avulsa.fone    := '';
+      Avulsa.UF      := '';
+      Avulsa.nDAR    := '';
+      Avulsa.dEmi    := now;
+      Avulsa.vDAR    := 0;
+      Avulsa.repEmi  := '';
+      Avulsa.dPag    := now;             }
+
+  {    Dest.CNPJCPF           := '05481336000137';
+      Dest.IE                := '687138770110';
+      Dest.ISUF              := '';
+      Dest.xNome             := 'D.J. COM. E LOCAÇÃO DE SOFTWARES LTDA - ME';
+
+      Dest.EnderDest.Fone    := '1532599600';
+      Dest.EnderDest.CEP     := 18270170;
+      Dest.EnderDest.xLgr    := 'Rua Coronel Aureliano de Camargo';
+      Dest.EnderDest.nro     := '973';
+      Dest.EnderDest.xCpl    := '';
+      Dest.EnderDest.xBairro := 'Centro';
+      Dest.EnderDest.cMun    := 3554003;
+      Dest.EnderDest.xMun    := 'Tatuí';
+      Dest.EnderDest.UF      := 'SP';
+      Dest.EnderDest.cPais   := 1058;
+      Dest.EnderDest.xPais   := 'BRASIL';
+
+//Use os campos abaixo para informar o endereço de retirada quando for diferente do Remetente/Destinatário
+{      Retirada.CNPJCPF := '';
+      Retirada.xLgr    := '';
+      Retirada.nro     := '';
+      Retirada.xCpl    := '';
+      Retirada.xBairro := '';
+      Retirada.cMun    := 0;
+      Retirada.xMun    := '';
+      Retirada.UF      := '';}
+
+//Use os campos abaixo para informar o endereço de entrega quando for diferente do Remetente/Destinatário
+{      Entrega.CNPJCPF := '';
+      Entrega.xLgr    := '';
+      Entrega.nro     := '';
+      Entrega.xCpl    := '';
+      Entrega.xBairro := '';
+      Entrega.cMun    := 0;
+      Entrega.xMun    := '';
+      Entrega.UF      := '';}
+ {
+//Adicionando Produtos
+      with Det.Add do
+       begin
+         Prod.nItem    := 1; // Número sequencial, para cada item deve ser incrementado
+         Prod.cProd    := '123456';
+         Prod.cEAN     := '7896523206646';
+         Prod.xProd    := 'Descrição do Produto';
+         Prod.NCM      := '94051010'; // Tabela NCM disponível em  http://www.receita.fazenda.gov.br/Aliquotas/DownloadArqTIPI.htm
+         Prod.EXTIPI   := '';
+         Prod.CFOP     := '5101';
+         Prod.uCom     := 'UN';
+         Prod.qCom     := 1 ;
+         Prod.vUnCom   := 100;
+         Prod.vProd    := 100 ;
+
+         Prod.cEANTrib  := '7896523206646';
+         Prod.uTrib     := 'UN';
+         Prod.qTrib     := 1;
+         Prod.vUnTrib   := 100;
+
+         Prod.vOutro    := 0;
+         Prod.vFrete    := 0;
+         Prod.vSeg      := 0;
+         Prod.vDesc     := 0;
+
+         infAdProd      := 'Informação Adicional do Produto';
+
+//Declaração de Importação. Pode ser adicionada várias através do comando Prod.DI.Add
+{         with Prod.DI.Add do
+          begin
+            nDi         := '';
+            dDi         := now;
+            xLocDesemb  := '';
+            UFDesemb    := '';
+            dDesemb     := now;
+            cExportador := '';
+
+            with adi.Add do
+             begin
+               nAdicao     := 1;
+               nSeqAdi     := 1;
+               cFabricante := '';
+               vDescDI     := 0;
+             end;
+          end;
+}
+//Campos para venda de veículos novos
+{         with Prod.veicProd do
+          begin
+            tpOP    := toVendaConcessionaria;
+            chassi  := '';
+            cCor    := '';
+            xCor    := '';
+            pot     := '';
+            Cilin   := '';
+            pesoL   := '';
+            pesoB   := '';
+            nSerie  := '';
+            tpComb  := '';
+            nMotor  := '';
+            CMT     := '';
+            dist    := '';
+            RENAVAM := '';
+            anoMod  := 0;
+            anoFab  := 0;
+            tpPint  := '';
+            tpVeic  := 0;
+            espVeic := 0;
+            VIN     := '';
+            condVeic := cvAcabado;
+            cMod    := '';
+          end;
+}
+//Campos específicos para venda de medicamentos
+{         with Prod.med.Add do
+          begin
+            nLote := '';
+            qLote := 0 ;
+            dFab  := now ;
+            dVal  := now ;
+            vPMC  := 0 ;
+          end;  }
+//Campos específicos para venda de armamento
+{         with Prod.arma.Add do
+          begin
+            nSerie := 0;
+            tpArma := taUsoPermitido ;
+            nCano  := 0 ;
+            descr  := '' ;
+          end;      }
+//Campos específicos para venda de combustível(distribuidoras)
+{         with Prod.comb do
+          begin
+            cProdANP := 0;
+            CODIF    := '';
+            qTemp    := 0;
+            UFcons   := '';
+
+            CIDE.qBCprod   := 0 ;
+            CIDE.vAliqProd := 0 ;
+            CIDE.vCIDE     := 0 ;
+
+            ICMS.vBCICMS   := 0 ;
+            ICMS.vICMS     := 0 ;
+            ICMS.vBCICMSST := 0 ;
+            ICMS.vICMSST   := 0 ;
+
+            ICMSInter.vBCICMSSTDest := 0 ;
+            ICMSInter.vICMSSTDest   := 0 ;
+
+            ICMSCons.vBCICMSSTCons := 0 ;
+            ICMSCons.vICMSSTCons   := 0 ;
+            ICMSCons.UFcons        := '' ;
+          end;}
+
+ {        with Imposto do
+          begin
+            // lei da transparencia nos impostos
+            vTotTrib := 0;
+
+            with ICMS do
+             begin
+               CST          := cst00;
+               ICMS.orig    := oeNacional;
+               ICMS.modBC   := dbiValorOperacao;
+               ICMS.vBC     := 100;
+               ICMS.pICMS   := 18;
+               ICMS.vICMS   := 18;
+               ICMS.modBCST := dbisMargemValorAgregado;
+               ICMS.pMVAST  := 0;
+               ICMS.pRedBCST:= 0;
+               ICMS.vBCST   := 0;
+               ICMS.pICMSST := 0;
+               ICMS.vICMSST := 0;
+               ICMS.pRedBC  := 0;
+             end;
+
+            with IPI do
+             begin
+               CST      := ipi99 ;
+               clEnq    := '999';
+               CNPJProd := '';
+               cSelo    := '';
+               qSelo    := 0;
+               cEnq     := '';
+
+               vBC    := 100;
+               qUnid  := 0;
+               vUnid  := 0;
+               pIPI   := 5;
+               vIPI   := 5;
+             end;         }
+{
+            with II do
+             begin
+               vBc      := 0;
+               vDespAdu := 0;
+               vII      := 0;
+               vIOF     := 0;
+             end;
+
+            with PIS do
+             begin
+               CST      := pis99;
+               PIS.vBC  := 0;
+               PIS.pPIS := 0;
+               PIS.vPIS := 0;
+
+               PIS.qBCProd   := 0;
+               PIS.vAliqProd := 0;
+               PIS.vPIS      := 0;
+             end;
+
+            with PISST do
+             begin
+               vBc       := 0;
+               pPis      := 0;
+               qBCProd   := 0;
+               vAliqProd := 0;
+               vPIS      := 0;
+             end;
+
+            with COFINS do
+             begin
+               CST            := cof99;
+               COFINS.vBC     := 0;
+               COFINS.pCOFINS := 0;
+               COFINS.vCOFINS := 0;
+
+               COFINS.qBCProd   := 0;
+               COFINS.vAliqProd := 0;
+             end;
+
+            with COFINSST do
+             begin
+               vBC       := 0;
+               pCOFINS   := 0;
+               qBCProd   := 0;
+               vAliqProd := 0;
+               vCOFINS   := 0;
+             end;
+}
+//Grupo para serviços
+{            with ISSQN do
+             begin
+               vBC       := 0;
+               vAliq     := 0;
+               vISSQN    := 0;
+               cMunFG    := 0;
+               cListServ := 1402; // Preencha este campo usando a tabela disponível
+                               // em http://www.planalto.gov.br/Ccivil_03/LEIS/LCP/Lcp116.htm
+             end;}
+      {    end;
+       end ;         }
+
+//Adicionando Serviços
+    {  with Det.Add do
+       begin
+         Prod.nItem    := 1; // Número sequencial, para cada item deve ser incrementado
+         Prod.cProd    := '123457';
+         Prod.cEAN     := '';
+         Prod.xProd    := 'Descrição do Serviço';
+         Prod.NCM      := '99';
+         Prod.EXTIPI   := '';
+         Prod.CFOP     := '5933';
+         Prod.uCom     := 'UN';
+         Prod.qCom     := 1 ;
+         Prod.vUnCom   := 100;
+         Prod.vProd    := 100 ;
+
+         Prod.cEANTrib  := '';
+         Prod.uTrib     := 'UN';
+         Prod.qTrib     := 1;
+         Prod.vUnTrib   := 100;
+
+         Prod.vFrete    := 0;
+         Prod.vSeg      := 0;
+         Prod.vDesc     := 0;
+
+         infAdProd      := 'Informação Adicional do Serviço';
+
+//Grupo para serviços
+            with Imposto.ISSQN do
+             begin
+               cSitTrib  := ISSQNcSitTribNORMAL;
+               vBC       := 100;
+               vAliq     := 2;
+               vISSQN    := 2;
+               cMunFG    := 3554003;
+               cListServ := '1402'; // Preencha este campo usando a tabela disponível
+                               // em http://www.planalto.gov.br/Ccivil_03/LEIS/LCP/Lcp116.htm
+             end;
+       end ;
+
+      Total.ICMSTot.vBC     := 0;
+      Total.ICMSTot.vICMS   := 0;
+      Total.ICMSTot.vBCST   := 0;
+      Total.ICMSTot.vST     := 0;
+      Total.ICMSTot.vProd   := 0;
+      Total.ICMSTot.vFrete  := 0;
+      Total.ICMSTot.vSeg    := 0;
+      Total.ICMSTot.vDesc   := 0;
+      Total.ICMSTot.vII     := 0;
+      Total.ICMSTot.vIPI    := 0;
+      Total.ICMSTot.vPIS    := 0;
+      Total.ICMSTot.vCOFINS := 0;
+      Total.ICMSTot.vOutro  := 0;
+      Total.ICMSTot.vNF     := 100;
+
+      // lei da transparencia de impostos
+      Total.ICMSTot.vTotTrib := 0;
+
+      Total.ISSQNtot.vServ   := 100;
+      Total.ISSQNTot.vBC     := 100;
+      Total.ISSQNTot.vISS    := 2;
+      Total.ISSQNTot.vPIS    := 0;
+      Total.ISSQNTot.vCOFINS := 0;
+
+{      Total.retTrib.vRetPIS    := 0;
+      Total.retTrib.vRetCOFINS := 0;
+      Total.retTrib.vRetCSLL   := 0;
+      Total.retTrib.vBCIRRF    := 0;
+      Total.retTrib.vIRRF      := 0;
+      Total.retTrib.vBCRetPrev := 0;
+      Total.retTrib.vRetPrev   := 0;}
+
+   {   Transp.modFrete := mfContaEmitente;
+      Transp.Transporta.CNPJCPF  := '';
+      Transp.Transporta.xNome    := '';
+      Transp.Transporta.IE       := '';
+      Transp.Transporta.xEnder   := '';
+      Transp.Transporta.xMun     := '';
+      Transp.Transporta.UF       := '';
+
+{      Transp.retTransp.vServ    := 0;
+      Transp.retTransp.vBCRet   := 0;
+      Transp.retTransp.pICMSRet := 0;
+      Transp.retTransp.vICMSRet := 0;
+      Transp.retTransp.CFOP     := '';
+      Transp.retTransp.cMunFG   := 0;         }
+
+    {  Transp.veicTransp.placa := '';
+      Transp.veicTransp.UF    := '';
+      Transp.veicTransp.RNTC  := '';
+//Dados do Reboque
+{      with Transp.Reboque.Add do
+       begin
+         placa := '';
+         UF    := '';
+         RNTC  := '';
+       end;}
+
+     { with Transp.Vol.Add do
+       begin
+         qVol  := 1;
+         esp   := 'Especie';
+         marca := 'Marca';
+         nVol  := 'Numero';
+         pesoL := 100;
+         pesoB := 110;
+
+         //Lacres do volume. Pode ser adicionado vários
+         //Lacres.Add.nLacre := '';
+       end;
+
+      Cobr.Fat.nFat  := 'Numero da Fatura';
+      Cobr.Fat.vOrig := 100 ;
+      Cobr.Fat.vDesc := 0 ;
+      Cobr.Fat.vLiq  := 100 ;
+
+      with Cobr.Dup.Add do
+       begin
+         nDup  := '1234';
+         dVenc := now+10;
+         vDup  := 50;
+       end;
+
+      with Cobr.Dup.Add do
+       begin
+         nDup  := '1235';
+         dVenc := now+10;
+         vDup  := 50;
+       end;
 
 
+      InfAdic.infCpl     :=  '';
+      InfAdic.infAdFisco :=  '';
+
+      with InfAdic.obsCont.Add do
+       begin
+         xCampo := 'ObsCont';
+         xTexto := 'Texto';
+       end;
+
+      with InfAdic.obsFisco.Add do
+       begin
+         xCampo := 'ObsFisco';
+         xTexto := 'Texto';
+       end;
+//Processo referenciado
+{     with InfAdic.procRef.Add do
+       begin
+         nProc := '';
+         indProc := ipSEFAZ;
+       end;                 }
+
+      {exporta.UFembarq   := '';;
+      exporta.xLocEmbarq := '';
+
+      compra.xNEmp := '';
+      compra.xPed  := '';
+      compra.xCont := '';
+   end;
 end;
 
+       }
 end.

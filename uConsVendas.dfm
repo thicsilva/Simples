@@ -34,6 +34,7 @@ object frmConsVendas: TfrmConsVendas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -304,6 +305,7 @@ object frmConsVendas: TfrmConsVendas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -483,8 +485,8 @@ object frmConsVendas: TfrmConsVendas
       Left = 187
       Top = 13
       Width = 88
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -522,6 +524,7 @@ object frmConsVendas: TfrmConsVendas
       MaxLength = 10
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -533,8 +536,8 @@ object frmConsVendas: TfrmConsVendas
       Left = 325
       Top = 13
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -572,6 +575,7 @@ object frmConsVendas: TfrmConsVendas
       MaxLength = 10
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -642,7 +646,7 @@ object frmConsVendas: TfrmConsVendas
       Left = 313
       Top = 42
       Width = 291
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -662,6 +666,7 @@ object frmConsVendas: TfrmConsVendas
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -825,6 +830,7 @@ object frmConsVendas: TfrmConsVendas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 5
@@ -925,6 +931,7 @@ object frmConsVendas: TfrmConsVendas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -954,7 +961,7 @@ object frmConsVendas: TfrmConsVendas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 823
+        Left = 833
         Top = 0
         Width = 70
         Height = 49
@@ -1150,8 +1157,8 @@ object frmConsVendas: TfrmConsVendas
         ExplicitLeft = 189
         ExplicitTop = 12
       end
-      object btnCupomFiscal: TbsSkinSpeedButton
-        Left = 594
+      object btnNFE: TbsSkinSpeedButton
+        Left = 664
         Top = 0
         Width = 70
         Height = 49
@@ -1171,7 +1178,7 @@ object frmConsVendas: TfrmConsVendas
         UseSkinFontColor = True
         WidthWithCaption = 0
         WidthWithoutCaption = 0
-        ImageIndex = 11
+        ImageIndex = 19
         RepeatMode = False
         RepeatInterval = 100
         Transparent = True
@@ -1179,26 +1186,25 @@ object frmConsVendas: TfrmConsVendas
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '&Cupom Fiscal'
+        Caption = '&NF-e'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
-        OnClick = btnCupomFiscalClick
-        ExplicitLeft = 592
+        OnClick = btnNFEClick
+        ExplicitLeft = 588
         ExplicitTop = 12
       end
       object bsSkinBevel5: TbsSkinBevel
-        Left = 664
+        Left = 734
         Top = 0
-        Width = 159
+        Width = 99
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 594
         ExplicitTop = -1
       end
       object btnImpComprovante: TbsSkinSpeedButton
@@ -1334,6 +1340,45 @@ object frmConsVendas: TfrmConsVendas
         Layout = blGlyphTop
         OnClick = btnEntregaVendaClick
         ExplicitLeft = 292
+        ExplicitTop = 12
+      end
+      object btnCupomFiscal: TbsSkinSpeedButton
+        Left = 594
+        Top = 0
+        Width = 70
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 11
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = '&Cupom Fiscal'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        Layout = blGlyphTop
+        OnClick = btnCupomFiscalClick
+        ExplicitLeft = 588
         ExplicitTop = 12
       end
     end
@@ -2099,5 +2144,16 @@ object frmConsVendas: TfrmConsVendas
       Caption = 'Marcar como entregue'
       OnClick = MenuItem1Click
     end
+  end
+  object ACBrNFe1: TACBrNFe
+    Configuracoes.Geral.PathSalvar = 'E:\Program Files (x86)\CodeGear\RAD Studio\5.0\bin\'
+    Configuracoes.Geral.ExibirErroSchema = True
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.IntervaloTentativas = 0
+    Configuracoes.WebServices.AjustaAguardaConsultaRet = False
+    Left = 720
+    Top = 224
   end
 end
