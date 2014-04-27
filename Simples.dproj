@@ -285,6 +285,9 @@
     <DCCReference Include="uselDatas.pas">
       <Form>frmSelDatas</Form>
     </DCCReference>
+    <DCCReference Include="uselEndereco.pas">
+      <Form>frmselEndereco</Form>
+    </DCCReference>
     <DCCReference Include="uSelHora.pas">
       <Form>frmSelHora</Form>
     </DCCReference>

@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 787
     Height = 460
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -5371,6 +5371,81 @@ object frmCadProdutos: TfrmCadProdutos
         end
       end
     end
+    object bsSkinTabSheet3: TbsSkinTabSheet
+      Caption = 'Loca'#231#245'es'
+      object bsSkinDBGrid2: TbsSkinDBGrid
+        Left = 0
+        Top = 35
+        Width = 785
+        Height = 401
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinDataName = 'grid'
+        Transparent = False
+        WallpaperStretch = False
+        UseSkinFont = True
+        UseSkinCellHeight = True
+        GridLineColor = clWindowText
+        DefaultCellHeight = 20
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBtnText
+        Font.Height = -16
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ColSizingwithLine = False
+        DrawGraphicFields = False
+        UseColumnsFont = False
+        MouseWheelSupport = False
+        SaveMultiSelection = False
+        PickListBoxSkinDataName = 'listbox'
+        PickListBoxCaptionMode = False
+        Align = alClient
+        DataSource = sercProdutosLocados
+        ParentFont = False
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clBtnText
+        TitleFont.Height = 14
+        TitleFont.Name = 'Arial'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Descricao'
+            Title.Caption = 'Nome do Cliente'
+            Width = 292
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Qtde_venda'
+            Title.Caption = 'Quantidade'
+            Width = 72
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Valor'
+            Title.Caption = 'Valor Locado'
+            Width = 108
+            Visible = True
+          end>
+      end
+      object pnlDescProduto3: TPanel
+        Left = 0
+        Top = 0
+        Width = 785
+        Height = 35
+        Align = alTop
+        Caption = 'pnlDescProduto3'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -19
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+      end
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
@@ -5390,8 +5465,8 @@ object frmCadProdutos: TfrmCadProdutos
     SkinBevel = True
     TabOrder = 1
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 9
-      Top = 0
+      Left = 8
+      Top = -1
       Width = 774
       Height = 49
       HintImageIndex = 0
@@ -5795,7 +5870,7 @@ object frmCadProdutos: TfrmCadProdutos
   object dspvariavel: TDataSetProvider
     DataSet = qryVariavel
     Left = 717
-    Top = 158
+    Top = 167
   end
   object cdsMovEstoque: TClientDataSet
     Aggregates = <>
@@ -5901,8 +5976,8 @@ object frmCadProdutos: TfrmCadProdutos
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 589
-    Top = 209
+    Left = 437
+    Top = 177
   end
   object cdsMateriaPrima: TClientDataSet
     Aggregates = <>
@@ -5979,7 +6054,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 347
   end
   object popEstoque: TbsSkinPopupMenu
-    Left = 624
+    Left = 556
     Top = 120
     object LanarAvarias1: TMenuItem
       Caption = 'Lan'#231'ar Avarias'
@@ -6870,8 +6945,8 @@ object frmCadProdutos: TfrmCadProdutos
       end>
     StorageName = 'cxPropertiesStore1'
     StorageType = stStream
-    Left = 568
-    Top = 192
+    Left = 408
+    Top = 176
   end
   object cxGridPopupMenu1: TcxGridPopupMenu
     Grid = cxGrid1
@@ -6880,16 +6955,24 @@ object frmCadProdutos: TfrmCadProdutos
         HitTypes = []
         Index = 0
       end>
-    Left = 624
-    Top = 312
+    Left = 552
+    Top = 240
   end
   object OpenFigura: TOpenPictureDialog
-    Left = 604
-    Top = 153
+    Filter = 
+      'All (*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.em' +
+      'f;*.wmf)|*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;' +
+      '*.emf;*.wmf|All graphics (*.tif;*.gif;*.bmp)|*.tif;*.gif;*.bmp|P' +
+      'NG graphics from DevExpress (*.png)|*.png|GIF Image (*.gif)|*.gi' +
+      'f|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|*.jpeg|' +
+      'Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|Enhanced Metafiles (*.' +
+      'emf)|*.emf|Metafiles (*.wmf)|*.wmf'
+    Left = 428
+    Top = 305
   end
   object PopRelatorios: TbsSkinPopupMenu
-    Left = 656
-    Top = 128
+    Left = 528
+    Top = 120
     object Etiquetas15X501: TMenuItem
       Caption = 'Etiquetas 15X50  - 2 Colunas'
       OnClick = Etiquetas15X501Click
@@ -6952,8 +7035,8 @@ object frmCadProdutos: TfrmCadProdutos
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 640
-    Top = 96
+    Left = 496
+    Top = 228
     Data = {
       8F0000009619E0BD0100000018000000060000000000030000008F0009446573
       63726963616F0100490000000100055749445448020002003200045469706F04
@@ -6983,8 +7066,8 @@ object frmCadProdutos: TfrmCadProdutos
   end
   object srcCustoProduto: TDataSource
     DataSet = cdsCustoProduto
-    Left = 640
-    Top = 128
+    Left = 496
+    Top = 200
   end
   object PopupMenu1: TPopupMenu
     Left = 376
@@ -6993,5 +7076,17 @@ object frmCadProdutos: TfrmCadProdutos
       Caption = 'Configurar'
       OnClick = Configurar1Click
     end
+  end
+  object cdsProdutosLocados: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 132
+    Top = 195
+  end
+  object sercProdutosLocados: TDataSource
+    DataSet = cdsProdutosLocados
+    Left = 132
+    Top = 223
   end
 end

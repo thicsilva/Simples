@@ -230,6 +230,11 @@ type
     edtValorMensal: TbsSkinNumericEdit;
     PopupMenu1: TPopupMenu;
     Configurar1: TMenuItem;
+    bsSkinTabSheet3: TbsSkinTabSheet;
+    bsSkinDBGrid2: TbsSkinDBGrid;
+    cdsProdutosLocados: TClientDataSet;
+    sercProdutosLocados: TDataSource;
+    pnlDescProduto3: TPanel;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -282,6 +287,7 @@ type
     procedure Atualizacusto;
     function RetornaCMV: Real;
     procedure AducionarCustos(prPrecoSugerido : real; prTipo : Integer);
+    procedure AtualizaLocacoes;
     { Private declarations }
   public
      piCod_Produto : Integer;
@@ -381,7 +387,22 @@ begin
          edtMargem.text := Formatfloat( '0.00', cdsCadProdutos.FieldByName('Margem').AsFloat);
          AtualizaCusto;
       end;
+      6:
+      begin
+         pnlDescProduto3.Caption := upperCase( inczero( cdsCadProdutos.FieldByName('Codigo').AsString,5)+' - '+cdsCadProdutos.FieldByName('Descricao').AsString);
+         pnlDescProduto3.Update;
+         AtualizaLocacoes;
+      end;
    end;
+end;
+procedure TfrmCadProdutos.AtualizaLocacoes;
+var PrecoSugerido : Real;
+begin
+   cdsProdutosLocados.data := gConexao.BuscarDadosSQL('select cli.Descricao, itens.Qtde_Venda, itens.pco_Venda as Valor from T_ItensVendas itens '+
+                           '    inner join T_Vendas ven on Ven.SeqVenda=itens.seqvenda '+
+                           '    inner join T_Clientes Cli on Cli.codigo=Ven.Cod_Cliente '+
+                           '    Where Itens.Cod_Produto='+QuotedStr(cdsCadProdutos.FieldByName('Codigo').AsString),nil).Data;
+
 end;
 procedure TfrmCadProdutos.Atualizacusto;
 var PrecoSugerido : Real;

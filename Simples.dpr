@@ -137,7 +137,8 @@ uses
   uLocacao in 'uLocacao.pas' {frmLocacao},
   uCadFornecedores in '..\Compartilhados\uCadFornecedores.pas' {frmCadFornecedores},
   uConsLocacao in 'uConsLocacao.pas' {frmConsLocacao},
-  uFechaLocacao in 'uFechaLocacao.pas' {frmFechaLocacao};
+  uFechaLocacao in 'uFechaLocacao.pas' {frmFechaLocacao},
+  uselEndereco in 'uselEndereco.pas' {frmselEndereco};
 
 {$R *.res}
 
@@ -146,6 +147,7 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmselEndereco, frmselEndereco);
   Frmlogin.ShowModal;
   Application.Run;
 end.
