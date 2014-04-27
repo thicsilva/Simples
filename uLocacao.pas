@@ -153,7 +153,6 @@ type
     btnincluir: TbsSkinSpeedButton;
     BtnCancela: TbsSkinSpeedButton;
     bsSkinBevel1: TbsSkinBevel;
-    btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel5: TbsSkinBevel;
     cdsItensLocacaoTMPUnidade: TStringField;
@@ -334,7 +333,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
-  uselAnimal, uDescontoVenda, uDelivery;
+  uselAnimal, uDescontoVenda, uDelivery, uselEndereco;
 
 {$R *.dfm}
 procedure TfrmLocacao.AtualizaDesconto(lrPercDesconto: Real);
@@ -406,12 +405,12 @@ Begin
    Begin
       CaixaMensagem( 'O cliente ultrapassou o limite de credito ', ctAviso, [ cbOk ], 0 );
       if Copy(Trim(cdsCadFormasPagamento.FieldByName('Descricao').AsString),1,7)<>'A VISTA' then
-         btnok.Enabled          :=False;
-      edtTotalLiquido.Color := clred;
+         btnContrato.Enabled := False;
+      edtTotalLiquido.Color  := clred;
    End
    Else
    Begin
-      btnok.Enabled         := True;
+      btnContrato.Enabled   := True;
       edtTotalLiquido.Color := clInfoBk;
    End;
 End;
@@ -615,7 +614,6 @@ end;
 procedure TfrmLocacao.PrepararFinalizacaoOS;
 begin
   FrmLocacao.Caption := 'Finalização de Serviço';
-  btnok.Caption := '&Finalizar';
   liTotalLiquido := StrtoFloat(edtTotalLiquido.Text);
   pnlDadosClientes.Enabled := True;
   cmbNome_formaPagamento.Enabled := True;
@@ -1544,13 +1542,12 @@ end;
 
 procedure TfrmLocacao.btnincluirClick(Sender: TObject);
 begin
-   btnok.Enabled            := True;
+   btnContrato.Enabled            := True;
    BtnCancela.Enabled       := True;
    btnincluir.Enabled       := False;
    btnAdicionar.Enabled     := False;
    btnExcluir.Enabled       := False;
    btnAlterar.Enabled       := False;
-   btnOk.Enabled            := True;
    pnlProdutos.Enabled      := True;
    pnlDadosClientes.Enabled := True;
    btnCadProdutos.Enabled   := True;
@@ -1592,7 +1589,7 @@ begin
    cdsItensLocacaoTMP.EmptyDataSet;
    btnCadProdutos.Enabled   := False;
 
-   btnok.Enabled         := False;
+   btnContrato.Enabled         := False;
    BtnCancela.Enabled    := False;
    btnincluir.Enabled    := True;
 
@@ -1646,33 +1643,41 @@ begin
 end;
 
 procedure TfrmLocacao.btnContratoClick(Sender: TObject);
+var lsendereco : String;
 begin
+  frmSelEndereco := TfrmSelEndereco.Create(Self);
+  frmSelEndereco.edtEnderecoObra.text := cdsCliente.FieldByName('EnderecoObra').AsString;
+  frmSelEndereco.ShowModal;
+  lsendereco := frmSelEndereco.edtEnderecoObra.text;
+
   cdsCliente.open;
   cdsEmpresa.open;
   cdsCliente.locate('Codigo', edtcod_Cliente.Text,[] );
 
+  frxContrato.Variables['EnderecoObra']  := QuotedStr( lsendereco );
   frxContrato.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
   frxContrato.Variables['cnpjCliente']   := QuotedStr(edtCnpjCpf.Text);
   frxContrato.Variables['TotalCaucao']   := QuotedStr( edtValorCaucao.Text );
   frxContrato.Variables['TotalLocacao']  := QuotedStr( edtTotalLiquido.Text );
   frxContrato.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
-  frxContrato.Variables['ExtensoData']  := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
+  frxContrato.Variables['ExtensoData']   := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
                                                       ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
   frxContrato.ShowReport(true);
 
+  ReciboSegundaVia.Variables['EnderecoObra']  := QuotedStr( lsendereco );
   ReciboSegundaVia.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
   ReciboSegundaVia.Variables['cnpjCliente']   := QuotedStr(edtCnpjCpf.Text);
   ReciboSegundaVia.Variables['TotalCaucao']   := QuotedStr( edtValorCaucao.Text );
   ReciboSegundaVia.Variables['TotalLocacao']  := QuotedStr( edtTotalLiquido.Text );
   ReciboSegundaVia.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
-  ReciboSegundaVia.Variables['ExtensoData']  := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
+  ReciboSegundaVia.Variables['ExtensoData']   := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
                                                       ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
   ReciboSegundaVia.ShowReport(true);
 
 
   cdsCliente.Close;
   cdsEmpresa.Close;
-  btnokClick(btnok);
+  btnokClick(sender);
 end;
 
 procedure TfrmLocacao.btnExcluirClick(Sender: TObject);
@@ -1740,7 +1745,6 @@ begin
    EdtPco_Venda.Text   := FormatFloat('0.00',cdsItensLocacaoTMP.FieldByName('pco_Venda').AsFloat);
    pvrvlr_TotalAnt     := cdsItensLocacaoTMP.FieldByName('Vlr_Total').AsFloat;
 
-   btnOk.Enabled            := True;
    btnCancelar.Enabled      := True;
    btnExcluir.Enabled       := True;
    btnAdicionar.Enabled     := False;
