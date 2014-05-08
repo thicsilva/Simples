@@ -50,8 +50,6 @@ type
     GridProdutosColumn1: TcxGridDBColumn;
     GridProdutosColumn2: TcxGridDBColumn;
     GridProdutosColumn3: TcxGridDBColumn;
-    srcCadGrupos: TDataSource;
-    cdsCadGrupos: TClientDataSet;
     cdsCadCtosCusto: TClientDataSet;
     qryVariavel: TSQLQuery;
     dspvariavel: TDataSetProvider;
@@ -235,6 +233,10 @@ type
     cdsProdutosLocados: TClientDataSet;
     sercProdutosLocados: TDataSource;
     pnlDescProduto3: TPanel;
+    lblGradeProduto: TbsSkinStdLabel;
+    cmbNome_grade: TbsSkinDBLookupComboBox;
+    srcGrande: TDataSource;
+    srcGrupo: TDataSource;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -288,6 +290,7 @@ type
     function RetornaCMV: Real;
     procedure AducionarCustos(prPrecoSugerido : real; prTipo : Integer);
     procedure AtualizaLocacoes;
+    procedure AjustarAmbiente;
     { Private declarations }
   public
      piCod_Produto : Integer;
@@ -301,7 +304,7 @@ var
 implementation
 
 uses uPrincipal,ufuncoes, uEstoqueManutencao, uInventario, uselRelEtiquetas,
-  uTransferenciaEntreSetores,uDaoCustoProduto,uClassCustoProduto, 
+  uTransferenciaEntreSetores,uDaoCustoProduto,uClassCustoProduto,uDaoGrade,
   uConfigTabSheet;
 
 {$R *.dfm}
@@ -613,6 +616,7 @@ begin
    cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat := StrTofloat(edtComissaoSecundaria.Text);
    cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat   := StrTofloat(edtMargemSecundaria.Text);
    cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean := chkBloquiaEstoqueNegativo.Checked;
+   cdsCadProdutos.FieldByName('GradeId').AsInteger := cmbNome_grade.KeyValue;
 
    cdsCadProdutos.Post;
 
@@ -766,6 +770,7 @@ procedure TfrmCadProdutos.CarregarFrabricante;
 begin
    if frmPrincipal.btnCadFabricante.VisibleForUser then
    begin
+
      qryVariavel.Close;
      qryVariavel.Params.clear;
      qryVariavel.SQL.Text := 'Select * from T_Fabricantes ';
@@ -775,16 +780,32 @@ begin
      cdsCadFabricantes.Open;
 
    end;
-   cmbNome_Fabricante.Visible := frmPrincipal.btnCadFabricante.VisibleForUser;
-   lblCadFabricante.Visible   := frmPrincipal.btnCadFabricante.VisibleForUser;
 end;
 
 procedure TfrmCadProdutos.AjustarTela;
 begin
+   PagCadastro.ActivePageIndex:=0;
+
    lblPrecoVendaExterna.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
    edtPcoVendaExterna.Visible   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[GERAL]', 'VendaExterna', 'NAO' )));
    lblValorMensal.Visible       := False;
    edtValorMensal.Visible       := False;
+   cmbNome_Fabricante.Visible   := frmPrincipal.btnCadFabricante.VisibleForUser;
+   lblCadFabricante.Visible     := frmPrincipal.btnCadFabricante.VisibleForUser;
+   lblGradeProduto.Visible      := frmPrincipal.btnGradeProduto.VisibleForUser;
+   cmbNome_grade.Visible        := frmPrincipal.btnGradeProduto.VisibleForUser;
+
+   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
+   Begin
+      lblComissao.Visible      := True;
+      edtComissao.Visible      := True;
+      chkMetroQuadrado.Visible := True;
+   End;
+
+   chkMetroQuadrado.Visible   := True;
+   LanarAvarias1.Visible      := False;
+   ConsultadeAvarias1.Visible := False;
+
    if HeLocacao then
    begin
       lblPrecoVendaExterna.Visible := True;
@@ -794,6 +815,7 @@ begin
       lblValorMensal.Visible       := true;
       edtValorMensal.Visible       := true;
    end;
+   
 end;
 
 procedure TfrmCadProdutos.AjustarValordoEstoque1Click(Sender: TObject);
@@ -975,6 +997,7 @@ begin
    edtComissaoSecundaria.Text := Formatfloat('0.00', cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat);
    edtMargemSecundaria.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat);
    chkBloquiaEstoqueNegativo.Checked := cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean;
+   cmbNome_grade.KeyValue := StrToIntDef( cdsCadProdutos.FieldByName('GradeID').AsString,0 );
 
    BtnIncluir.Enabled := False;
    BtnAlterar.Enabled := False;
@@ -1084,10 +1107,10 @@ end;
 
 procedure TfrmCadProdutos.FormShow(Sender: TObject);
 begin
-   inherited;
-   PagCadastro.ActivePageIndex:=0;
 
    AjustarTela;
+
+   CarregarFrabricante;
 
    qryVariavel.Close;
    qryVariavel.Params.clear;
@@ -1100,16 +1123,6 @@ begin
    cdsCadCtosCusto.Close;
    cdsCadCtosCusto.ProviderName := dspVariavel.name;
    cdsCadCtosCusto.Open;
-
-   qryVariavel.Close;
-   qryVariavel.Params.clear;
-   qryVariavel.SQL.Text := 'Select * from T_Grupos ';
-
-   cdsCadGrupos.close;
-   cdsCadGrupos.ProviderName := dspVariavel.Name;
-   cdsCadGrupos.Open;
-
-   CarregarFrabricante;
 
    qryMateriaPrima.Close;
    qryMateriaPrima.Params.clear;
@@ -1127,29 +1140,19 @@ begin
    cdsCadProdutos.ProviderName := dspCadProdutos.Name;
    cdsCadProdutos.Open;
 
-   // --> Controle de tipo de sistema
-   lblComissao.Visible        := True;
-   edtComissao.Visible        := True;
-   chkMetroQuadrado.Visible   := True;
-   tabfoto.Enabled            := False;
-   LanarAvarias1.Visible      := False;
-   ConsultadeAvarias1.Visible := False;
+   qryVariavel.Close;
+   qryVariavel.Params.Clear;
+   qryVariavel.SQL.text := 'Select * From Setores ';
 
-  qryVariavel.Close;
-  qryVariavel.Params.Clear;
-  qryVariavel.SQL.text := 'Select * From Setores ';
-  cdsSetores.Close;
-  cdsSetores.ProviderName := dspVariavel.Name;
-  cdsSetores.Open;
+   cdsSetores.Close;
+   cdsSetores.ProviderName := dspVariavel.Name;
+   cdsSetores.Open;
 
+   srcGrupo.DataSet  := gConexao.BuscarDadosSQL('select * from T_Grupos' ,nil);
+   srcGrupo.DataSet  := gConexao.BuscarDadosSQL('select * from T_Grupos' ,nil);
+   srcGrande.DataSet := gConexao.BuscarDadosSQL('select ID as Codigo, Descricao from Grade' ,nil);
 
-   If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') = '0' Then
-   Begin
-      lblComissao.Visible      := True;
-      edtComissao.Visible      := True;
-      chkMetroQuadrado.Visible := True;
-   End;
-
+   AjustarAmbiente;
    // --> Controle de tipo de sistema
 
    cmbPeriodoChange(cmbPeriodo);
@@ -1158,6 +1161,10 @@ begin
 
   DesabilitarTabSheets(self);
 
+end;
+
+procedure TfrmCadProdutos.AjustarAmbiente;
+begin
 end;
 
 procedure TfrmCadProdutos.btnPesquisaClick(Sender: TObject);

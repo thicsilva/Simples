@@ -138,7 +138,12 @@ uses
   uCadFornecedores in '..\Compartilhados\uCadFornecedores.pas' {frmCadFornecedores},
   uConsLocacao in 'uConsLocacao.pas' {frmConsLocacao},
   uFechaLocacao in 'uFechaLocacao.pas' {frmFechaLocacao},
-  uselEndereco in 'uselEndereco.pas' {frmselEndereco};
+  uselEndereco in 'uselEndereco.pas' {frmselEndereco},
+  uClassGrade in 'Modelos\uClassGrade.pas',
+  uClassItemGrade in 'Modelos\uClassItemGrade.pas',
+  uCadGrade in 'uCadGrade.pas' {frmCadGrade},
+  uDaoGrade in 'Dao\uDaoGrade.pas',
+  UdtmVendas in 'Data Module\UdtmVendas.pas' {dtmVendas: TDataModule};
 
 {$R *.res}
 
@@ -148,6 +153,8 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmselEndereco, frmselEndereco);
+  Application.CreateForm(TfrmCadGrade, frmCadGrade);
+  Application.CreateForm(TdtmVendas, dtmVendas);
   Frmlogin.ShowModal;
   Application.Run;
 end.

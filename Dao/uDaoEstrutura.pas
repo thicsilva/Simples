@@ -64,6 +64,8 @@ type TDaoEstrutura = class
     procedure Adicionar_ValorMes_na_Tabela_Produtos;
     procedure Adicionar_TipoCobranca_na_Tabela_ItensVendas;
     procedure Adicionar_Campos_na_Tabela_Empresa;
+    procedure CriarTabela_TabelasGrade;
+    procedure Adicionar_GradeID_na_Tabela_Produto;
 
 
   public
@@ -453,6 +455,16 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_GradeID_na_Tabela_Produto;
+begin
+   if not ExisteCampo( 'T_Produtos', 'GradeID', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD GradeID Integer';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_EnderecoObra_na_Tabela_Clientes;
 begin
    if not ExisteCampo( 'T_Clientes', 'EnderecoObra', FConexao.Conection ) then
@@ -656,6 +668,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_GradeID_na_Tabela_Produto;
+  CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_Empresa;
   Adicionar_TipoCobranca_na_Tabela_ItensVendas;
   Adicionar_ValorMes_na_Tabela_Produtos;
@@ -860,6 +874,27 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+procedure TDaoEstrutura.CriarTabela_TabelasGrade;
+begin
+   if not ExisteTabela( 'Grade', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := ' CREATE TABLE Grade ( ID int IDENTITY(1,1) NOT NULL, '+
+                              '                     	Descricao varchar(50))';
+      FQryAjustes.ExecSQL;
+   end;
+   if not ExisteTabela( 'ItensGrade', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := ' CREATE TABLE ItensGrade( ID int IDENTITY(1,1) NOT NULL, '+
+                              '                    	GradeId Integer, '+
+                              '                    	Tamanho varchar(10))';
+      FQryAjustes.ExecSQL;
+   end;
+
+end;
+
+
 procedure TDaoEstrutura.CriarTabela_CustosProduto;
 begin
    if not ExisteTabela( 'CustosProduto', FConexao.Conection ) then

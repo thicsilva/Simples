@@ -265,6 +265,8 @@ type
     TabEntradas: TdxBar;
     dxBarButton37: TdxBarButton;
     dxBarLargeButton27: TdxBarLargeButton;
+    actCadGrade: TAction;
+    btnGradeProduto: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -332,6 +334,7 @@ type
     procedure actSkinDadosExecute(Sender: TObject);
     procedure actLocacaoExecute(Sender: TObject);
     procedure actConsultaLocacaoExecute(Sender: TObject);
+    procedure actCadGradeExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -390,7 +393,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
-  uLocacao, uConsLocacao;
+  uLocacao, uConsLocacao, uCadGrade;
 
 {$R *.dfm}
 
@@ -590,25 +593,28 @@ end;
 
 procedure TfrmPrincipal.ConfiguraAmbiente;
 begin
-
    MenuPrincipal.ActiveTab := dxRibCadastro;
    RibonAtendimentoCliente.Visible := false;
 
-   actconsServicos.Visible    := False;
    RibonFiscal.Visible        := False;
    tabLocacao.Visible         := False;
    tabControleEntrega.Visible := False;
    TabVendasProdutos.Visible  := True;
-   actServicos.Visible        := False;
+   actAtendimento.Visible      := False;
+   ImagemFundoPet.visible      := False;
 
    If (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1')  or (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='2')  Then
    Begin
-       actServicos.Visible      := True;
-       actconsServicos.Visible  := True;
-       RibonAtendimentoCliente.Visible  := False;
+      actServicos.Visible      := True;
+      actconsServicos.Visible  := True;
+      RibonAtendimentoCliente.Visible := False;
    End;
-   actAtendimento.Visible      := False;
-   ImagemFundoPet.visible      := False;
+   if HeServicos then
+   begin
+      TabServicos.Visible             := True;
+      TabVendasProdutos.Visible       := False;
+      RibonAtendimentoCliente.Visible := False;
+   end;
    if PetShop then
    begin
       actAtendimento.Visible      := True;
@@ -616,12 +622,10 @@ begin
    end;
    if HeLocacao then
    begin
-     TabVendasProdutos.Visible := False;   
-     TabServicos.Visible := False;
-     tabLocacao.Visible := true;
+      TabVendasProdutos.Visible := False;
+      TabServicos.Visible := False;
+      TabLocacao.Visible := true;
    end;
-
-
 end;
 
 procedure TfrmPrincipal.DefinirDataSistema;
@@ -729,6 +733,12 @@ begin
    End;
    frmCadFuncionarios := TfrmCadFuncionarios.create(Self);
    frmCadFuncionarios.showModal;
+end;
+
+procedure TfrmPrincipal.actCadGradeExecute(Sender: TObject);
+begin
+   frmCadGrade := tfrmCadGrade.create(Self);
+   frmCadGrade.showmodal;
 end;
 
 procedure TfrmPrincipal.actCadGruposExecute(Sender: TObject);

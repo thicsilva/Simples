@@ -26,7 +26,9 @@ uses
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, ComCtrls, bsSkinTabs, ExtCtrls,
   ToolWin, BusinessSkinForm, Buttons, bsdbctrls, EditNew, FMTBcd, SqlExpr,
   SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
-  uDaoCustoProduto, frxClass, frxDBSet;
+  uDaoCustoProduto, frxClass, frxDBSet, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,udtmVendas,
+  dxSkinsDefaultPainters, cxImage, dblookup, DBCtrls;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -72,7 +74,6 @@ type
     cdsItensVendasTMPPco_Venda: TFloatField;
     cdsItensVendasTMPqtde_Venda: TFloatField;
     cdsItensVendasTMPvlr_Total: TFloatField;
-    bsSkinScrollBar1: TbsSkinScrollBar;
     cdsItensVendasTMPComplemento: TStringField;
     dspVenda: TDataSetProvider;
     cdsVenda: TClientDataSet;
@@ -100,12 +101,10 @@ type
     edtControle: TbsSkinEdit;
     lblCNPJCPF: TbsSkinStdLabel;
     edtCnpjCpf: TbsSkinEdit;
-    bsSkinScrollBar2: TbsSkinScrollBar;
     qryVenda: TSQLQuery;
     qryItensVendas: TSQLQuery;
     qryModific: TSQLQuery;
     QryVariavel: TSQLQuery;
-    dbgConsulta: TbsSkinDBGrid;
     cdsCadFormasPagamento: TClientDataSet;
     srcCadFormasPagamento: TDataSource;
     bsSkinStdLabel15: TbsSkinStdLabel;
@@ -224,6 +223,34 @@ type
     cdsEmpresaLocal: TStringField;
     cdsItensVendasTMPTipoCalculo: TStringField;
     cdsItensVendasTMPPrevisao_Entrega: TDateField;
+    PagVendas: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    dbgConsulta: TbsSkinDBGrid;
+    bsSkinScrollBar2: TbsSkinScrollBar;
+    bsSkinScrollBar1: TbsSkinScrollBar;
+    gridTamanho: TbsSkinDBGrid;
+    bsSkinButton1: TbsSkinButton;
+    btnRemover: TbsSkinButton;
+    Panel1: TPanel;
+    cxImage1: TcxImage;
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    bsSkinLabel1: TbsSkinLabel;
+    bsSkinLabel2: TbsSkinLabel;
+    bsSkinLabel4: TbsSkinLabel;
+    bsSkinLabel3: TbsSkinLabel;
+    cmbTamanhos: TbsSkinDBLookupComboBox;
+    edtQtdeTamanho: TbsSkinEdit;
+    bsSkinLabel5: TbsSkinLabel;
+    pnlProduto: TPanel;
+    cdsItensVendasTMPGradeID: TIntegerField;
+    cdsItensTamanhos: TClientDataSet;
+    srcItemTamanho: TDataSource;
+    DBLookupComboBox1: TDBLookupComboBox;
+    cdsItensTamanhosID: TIntegerField;
+    cdsItensTamanhosTamanho: TStringField;
+    cdsItensTamanhosQtde: TIntegerField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -263,6 +290,7 @@ type
     procedure cmbNome_TipoVendaExit(Sender: TObject);
     procedure btnDescontoClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
+    procedure PagVendasChange(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -481,6 +509,7 @@ end;
 procedure TfrmVendas.FormShow(Sender: TObject);
 begin
    AtualizaTabelas();
+   PagVendas.ActivePageIndex   := 0;
    lblControle.Visible         := True;
    edtControle.Visible         := True;
    lblVencimento.Visible       := False;
@@ -783,6 +812,7 @@ begin
    cdsItensVendasTmp.FieldByName('PesoBruto').asFloat      := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoBruto').AsFloat;
    cdsItensVendasTmp.FieldByName('PesoLiquido').asFloat    := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoLiquido').AsFloat;
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
+   cdsItensVendasTmp.FieldByName('GradeID').asInteger      := cdsCadProdutos.fieldbyname('GradeID').AsInteger;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
    if frmVendas.Tag=VENDAS_EXTERNAS then
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
@@ -1983,7 +2013,7 @@ Begin
    precoDeVenda:= 'Pco_Venda';
    if frmVendas.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
-   Result :=  'Select BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+   Result :=  'Select GradeId,BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
 end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin
@@ -2031,6 +2061,15 @@ begin
       Result := MascaraCpF(lsCnpjCPf)
    else
       result := MascaraCNPJ(lsCnpjCPf)
+end;
+
+procedure TfrmVendas.PagVendasChange(Sender: TObject);
+begin
+   if StrTointDef(cdsItensVendasTmp.FieldByName('GradeID').AsString,0)<>0 then
+   begin
+      pnlProduto.Caption             := cdsItensVendasTmp.FieldByName('Codigo').AsString+' - '+cdsItensVendasTmp.FieldByName('Descricao').AsString;
+      dtmVendas.srcTamanhos.Dataset  := gConexao.BuscarDadosSQL('select * from ItensGrade where GradeId='+cdsItensVendasTmp.FieldByName('GradeID').AsString,nil);
+   end;
 end;
 
 procedure  TfrmVendas.PedidoPersonalizado(NumeroVenda : String);

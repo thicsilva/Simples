@@ -3,8 +3,8 @@ object frmVendas: TfrmVendas
   Top = 129
   BorderIcons = []
   Caption = 'Pedidos de Venda'
-  ClientHeight = 534
-  ClientWidth = 760
+  ClientHeight = 587
+  ClientWidth = 781
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object frmVendas: TfrmVendas
   object pnlDadosClientes: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 760
+    Width = 781
     Height = 155
     HintImageIndex = 0
     TabOrder = 0
@@ -418,7 +418,7 @@ object frmVendas: TfrmVendas
       OnExit = edtcod_ClienteExit
     end
     object bsSkinPanel3: TbsSkinPanel
-      Left = 525
+      Left = 546
       Top = 1
       Width = 234
       Height = 153
@@ -1149,7 +1149,7 @@ object frmVendas: TfrmVendas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 208
-    Width = 760
+    Width = 781
     Height = 44
     AutoSize = True
     Bands = <
@@ -1157,7 +1157,7 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 756
+        Width = 777
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -1166,7 +1166,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 747
+      Width = 768
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1499,7 +1499,7 @@ object frmVendas: TfrmVendas
   object pnlProdutos: TbsSkinPanel
     Left = 0
     Top = 252
-    Width = 760
+    Width = 781
     Height = 55
     HintImageIndex = 0
     TabOrder = 2
@@ -1895,38 +1895,9 @@ object frmVendas: TfrmVendas
       Style = bscbFixedStyle
     end
   end
-  object bsSkinScrollBar1: TbsSkinScrollBar
-    Left = 0
-    Top = 494
-    Width = 760
-    Height = 19
-    HintImageIndex = 0
-    TabOrder = 3
-    SkinDataName = 'hscrollbar'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = 14
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    DefaultWidth = 0
-    DefaultHeight = 19
-    UseSkinFont = True
-    Both = True
-    BothMarkerWidth = 19
-    BothSkinDataName = 'bothhscrollbar'
-    CanFocused = False
-    Align = alBottom
-    Kind = sbHorizontal
-    PageSize = 0
-    Min = 0
-    Max = 127
-    Position = 0
-    SmallChange = 63
-    LargeChange = 63
-  end
   object edtVlr_Desconto: TbsSkinEdit
-    Left = 445
-    Top = 314
+    Left = 485
+    Top = 426
     Width = 45
     Height = 20
     Text = '0,00'
@@ -1948,7 +1919,7 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     ButtonImageIndex = -1
     LeftImageIndex = -1
@@ -1958,81 +1929,9 @@ object frmVendas: TfrmVendas
     RightImageHotIndex = -1
     RightImageDownIndex = -1
   end
-  object bsSkinScrollBar2: TbsSkinScrollBar
-    Left = 741
-    Top = 307
-    Width = 19
-    Height = 187
-    HintImageIndex = 0
-    TabOrder = 5
-    SkinData = frmPrincipal.SkinPrincipal
-    SkinDataName = 'vscrollbar'
-    DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = 14
-    DefaultFont.Name = 'Arial'
-    DefaultFont.Style = []
-    DefaultWidth = 19
-    DefaultHeight = 0
-    UseSkinFont = True
-    Both = False
-    BothMarkerWidth = 19
-    BothSkinDataName = 'bothhscrollbar'
-    CanFocused = False
-    Align = alRight
-    Kind = sbVertical
-    PageSize = 1
-    Min = 1
-    Max = 0
-    Position = 1
-    SmallChange = 1
-    LargeChange = 1
-  end
-  object dbgConsulta: TbsSkinDBGrid
-    Left = 0
-    Top = 307
-    Width = 741
-    Height = 187
-    HintImageIndex = 0
-    TabOrder = 6
-    SkinData = frmPrincipal.SkinPrincipal
-    SkinDataName = 'grid'
-    Transparent = False
-    WallpaperStretch = False
-    UseSkinFont = True
-    UseSkinCellHeight = True
-    HScrollBar = bsSkinScrollBar1
-    VScrollBar = bsSkinScrollBar2
-    GridLineColor = clWindowText
-    DefaultCellHeight = 20
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ColSizingwithLine = False
-    DrawGraphicFields = False
-    UseColumnsFont = False
-    DefaultRowHeight = 20
-    MouseWheelSupport = False
-    SaveMultiSelection = False
-    PickListBoxSkinDataName = 'listbox'
-    PickListBoxCaptionMode = False
-    Align = alClient
-    DataSource = srcItensVendasTMP
-    ParentFont = False
-    ParentShowHint = False
-    ReadOnly = True
-    ShowHint = True
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clNavy
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = [fsBold]
-  end
   object edtLimite_Credito: TEditN
-    Left = 198
-    Top = 400
+    Left = 358
+    Top = 312
     Width = 69
     Height = 24
     TabStop = False
@@ -2044,7 +1943,7 @@ object frmVendas: TfrmVendas
     Font.Style = [fsBold]
     ParentFont = False
     ReadOnly = True
-    TabOrder = 7
+    TabOrder = 4
     Text = '0,00'
     Visible = False
     ColorOnFocus = clInactiveBorder
@@ -2067,8 +1966,8 @@ object frmVendas: TfrmVendas
     TextHint = True
   end
   object edtPco_Tabela: TbsSkinEdit
-    Left = 642
-    Top = 330
+    Left = 682
+    Top = 442
     Width = 66
     Height = 20
     Text = '0,00'
@@ -2090,7 +1989,7 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 5
     Visible = False
     ButtonImageIndex = -1
     LeftImageIndex = -1
@@ -2102,8 +2001,8 @@ object frmVendas: TfrmVendas
     OnExit = EdtPco_VendaExit
   end
   object memoMensagem: TbsSkinMemo
-    Left = 421
-    Top = 382
+    Left = 461
+    Top = 494
     Width = 185
     Height = 89
     Color = clInactiveBorder
@@ -2114,7 +2013,7 @@ object frmVendas: TfrmVendas
     Font.Style = []
     ParentFont = False
     ScrollBars = ssBoth
-    TabOrder = 9
+    TabOrder = 6
     Visible = False
     Transparent = False
     WallpaperStretch = False
@@ -2131,7 +2030,7 @@ object frmVendas: TfrmVendas
   object bsSkinCoolBar3: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 760
+    Width = 781
     Height = 53
     AutoSize = True
     Bands = <
@@ -2139,16 +2038,16 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar3
         ImageIndex = -1
         MinHeight = 49
-        Width = 756
+        Width = 777
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
-    TabOrder = 10
+    TabOrder = 7
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 747
+      Width = 768
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -2431,11 +2330,11 @@ object frmVendas: TfrmVendas
   end
   object PanelStatus: TbsSkinStatusPanel
     Left = 0
-    Top = 513
-    Width = 760
+    Top = 566
+    Width = 781
     Height = 21
     HintImageIndex = 0
-    TabOrder = 11
+    TabOrder = 8
     SkinData = frmPrincipal.SkinEntradaDados
     SkinDataName = 'statuspanel'
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -2463,51 +2362,586 @@ object frmVendas: TfrmVendas
     ImageIndex = -1
     NumGlyphs = 1
   end
+  object PagVendas: TPageControl
+    Left = 0
+    Top = 307
+    Width = 781
+    Height = 259
+    ActivePage = TabSheet2
+    Align = alClient
+    TabOrder = 9
+    OnChange = PagVendasChange
+    object TabSheet1: TTabSheet
+      Caption = 'Vendas'
+      object dbgConsulta: TbsSkinDBGrid
+        Left = 0
+        Top = 0
+        Width = 754
+        Height = 212
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'grid'
+        Transparent = False
+        WallpaperStretch = False
+        UseSkinFont = True
+        UseSkinCellHeight = True
+        GridLineColor = clWindowText
+        DefaultCellHeight = 20
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ColSizingwithLine = False
+        DrawGraphicFields = False
+        UseColumnsFont = False
+        DefaultRowHeight = 20
+        MouseWheelSupport = False
+        SaveMultiSelection = False
+        PickListBoxSkinDataName = 'listbox'
+        PickListBoxCaptionMode = False
+        Align = alClient
+        DataSource = srcItensVendasTMP
+        ParentFont = False
+        ParentShowHint = False
+        ReadOnly = True
+        ShowHint = True
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clNavy
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = [fsBold]
+      end
+      object bsSkinScrollBar2: TbsSkinScrollBar
+        Left = 754
+        Top = 0
+        Width = 19
+        Height = 212
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'vscrollbar'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 19
+        DefaultHeight = 0
+        UseSkinFont = True
+        Both = False
+        BothMarkerWidth = 19
+        BothSkinDataName = 'bothhscrollbar'
+        CanFocused = False
+        Align = alRight
+        Kind = sbVertical
+        PageSize = 1
+        Min = 1
+        Max = 0
+        Position = 1
+        SmallChange = 1
+        LargeChange = 1
+      end
+      object bsSkinScrollBar1: TbsSkinScrollBar
+        Left = 0
+        Top = 212
+        Width = 773
+        Height = 19
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'hscrollbar'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 19
+        UseSkinFont = True
+        Both = True
+        BothMarkerWidth = 19
+        BothSkinDataName = 'bothhscrollbar'
+        CanFocused = False
+        Align = alBottom
+        Kind = sbHorizontal
+        PageSize = 0
+        Min = 0
+        Max = 127
+        Position = 0
+        SmallChange = 63
+        LargeChange = 63
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Adicionar Grade'
+      ImageIndex = 1
+      object gridTamanho: TbsSkinDBGrid
+        Left = 233
+        Top = 23
+        Width = 167
+        Height = 208
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinDataName = 'grid'
+        Transparent = False
+        WallpaperStretch = False
+        UseSkinFont = True
+        UseSkinCellHeight = True
+        GridLineColor = clWindowText
+        DefaultCellHeight = 20
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBtnText
+        Font.Height = -16
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ColSizingwithLine = False
+        DrawGraphicFields = False
+        UseColumnsFont = False
+        MouseWheelSupport = False
+        SaveMultiSelection = False
+        PickListBoxSkinDataName = 'listbox'
+        PickListBoxCaptionMode = False
+        Align = alRight
+        DataSource = srcItemTamanho
+        ParentFont = False
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clBtnText
+        TitleFont.Height = 14
+        TitleFont.Name = 'Arial'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Tamanho'
+            Title.Caption = 'Tamanhos'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clBtnText
+            Title.Font.Height = -13
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = []
+            Width = 86
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Qtde.'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clBtnText
+            Title.Font.Height = -15
+            Title.Font.Name = 'Arial'
+            Title.Font.Style = []
+            Visible = True
+          end>
+      end
+      object bsSkinButton1: TbsSkinButton
+        Left = 3
+        Top = 143
+        Width = 220
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 1
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'button'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        Transparent = False
+        CheckedMode = False
+        ImageList = frmPrincipal.Imagebutoes
+        ImageIndex = 10
+        AlwaysShowLayeredFrame = False
+        UseSkinSize = False
+        UseSkinFontColor = True
+        RepeatMode = False
+        RepeatInterval = 100
+        AllowAllUp = False
+        TabStop = True
+        CanFocused = True
+        Down = False
+        GroupIndex = 0
+        Caption = '    &Adicionar'
+        NumGlyphs = 1
+        Spacing = 1
+      end
+      object btnRemover: TbsSkinButton
+        Left = 3
+        Top = 174
+        Width = 220
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'button'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        Transparent = False
+        CheckedMode = False
+        ImageList = frmPrincipal.Imagebutoes
+        ImageIndex = 9
+        AlwaysShowLayeredFrame = False
+        UseSkinSize = False
+        UseSkinFontColor = True
+        RepeatMode = False
+        RepeatInterval = 100
+        AllowAllUp = False
+        TabStop = True
+        CanFocused = True
+        Down = False
+        GroupIndex = 0
+        Caption = '    &Remover'
+        NumGlyphs = 1
+        Spacing = 1
+      end
+      object Panel1: TPanel
+        Left = 400
+        Top = 23
+        Width = 373
+        Height = 208
+        Align = alRight
+        Caption = 'Panel1'
+        TabOrder = 3
+        object cxImage1: TcxImage
+          Left = 1
+          Top = 33
+          Align = alClient
+          TabOrder = 0
+          Height = 174
+          Width = 371
+        end
+        object Panel2: TPanel
+          Left = 1
+          Top = 1
+          Width = 371
+          Height = 32
+          Align = alTop
+          BevelOuter = bvLowered
+          TabOrder = 1
+          object SpeedButton1: TSpeedButton
+            Left = 248
+            Top = 4
+            Width = 113
+            Height = 22
+            Caption = 'Incluir Imagem'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object bsSkinLabel1: TbsSkinLabel
+            Left = 7
+            Top = 5
+            Width = 58
+            Height = 21
+            HintImageIndex = 0
+            TabOrder = 0
+            SkinData = frmPrincipal.SkinEntradaDados
+            SkinDataName = 'label'
+            DefaultFont.Charset = DEFAULT_CHARSET
+            DefaultFont.Color = clWindowText
+            DefaultFont.Height = 13
+            DefaultFont.Name = 'Tahoma'
+            DefaultFont.Style = []
+            DefaultWidth = 0
+            DefaultHeight = 0
+            UseSkinFont = True
+            Transparent = False
+            ShadowEffect = False
+            ShadowColor = clBlack
+            ShadowOffset = 0
+            ShadowSize = 3
+            ReflectionEffect = False
+            ReflectionOffset = -5
+            EllipsType = bsetNoneEllips
+            UseSkinSize = True
+            UseSkinFontColor = True
+            BorderStyle = bvFrame
+            Caption = 'J'#225' Incluido'
+            AutoSize = False
+          end
+          object bsSkinLabel2: TbsSkinLabel
+            Left = 128
+            Top = 5
+            Width = 58
+            Height = 21
+            HintImageIndex = 0
+            TabOrder = 1
+            SkinData = frmPrincipal.SkinEntradaDados
+            SkinDataName = 'label'
+            DefaultFont.Charset = DEFAULT_CHARSET
+            DefaultFont.Color = clWindowText
+            DefaultFont.Height = 13
+            DefaultFont.Name = 'Tahoma'
+            DefaultFont.Style = []
+            DefaultWidth = 0
+            DefaultHeight = 0
+            UseSkinFont = True
+            Transparent = False
+            ShadowEffect = False
+            ShadowColor = clBlack
+            ShadowOffset = 0
+            ShadowSize = 3
+            ReflectionEffect = False
+            ReflectionOffset = -5
+            EllipsType = bsetNoneEllips
+            UseSkinSize = True
+            UseSkinFontColor = True
+            BorderStyle = bvFrame
+            Caption = 'Restante'
+            AutoSize = False
+          end
+          object bsSkinLabel4: TbsSkinLabel
+            Left = 184
+            Top = 5
+            Width = 58
+            Height = 21
+            HintImageIndex = 0
+            TabOrder = 2
+            SkinData = frmPrincipal.SkinPrincipal
+            SkinDataName = 'label'
+            DefaultFont.Charset = DEFAULT_CHARSET
+            DefaultFont.Color = clRed
+            DefaultFont.Height = -13
+            DefaultFont.Name = 'Tahoma'
+            DefaultFont.Style = [fsBold]
+            DefaultWidth = 0
+            DefaultHeight = 0
+            UseSkinFont = False
+            Transparent = False
+            ShadowEffect = False
+            ShadowColor = clBlack
+            ShadowOffset = 0
+            ShadowSize = 3
+            ReflectionEffect = False
+            ReflectionOffset = -5
+            EllipsType = bsetNoneEllips
+            UseSkinSize = True
+            UseSkinFontColor = False
+            BorderStyle = bvFrame
+            Alignment = taRightJustify
+            Caption = '0,00'
+            AutoSize = False
+          end
+          object bsSkinLabel3: TbsSkinLabel
+            Left = 64
+            Top = 5
+            Width = 58
+            Height = 21
+            HintImageIndex = 0
+            TabOrder = 3
+            SkinData = frmPrincipal.SkinPrincipal
+            SkinDataName = 'label'
+            DefaultFont.Charset = DEFAULT_CHARSET
+            DefaultFont.Color = clRed
+            DefaultFont.Height = -13
+            DefaultFont.Name = 'Tahoma'
+            DefaultFont.Style = [fsBold]
+            DefaultWidth = 0
+            DefaultHeight = 0
+            UseSkinFont = False
+            Transparent = False
+            ShadowEffect = False
+            ShadowColor = clBlack
+            ShadowOffset = 0
+            ShadowSize = 3
+            ReflectionEffect = False
+            ReflectionOffset = -5
+            EllipsType = bsetNoneEllips
+            UseSkinSize = True
+            UseSkinFontColor = False
+            BorderStyle = bvFrame
+            Alignment = taRightJustify
+            Caption = '0,00'
+            AutoSize = False
+          end
+        end
+      end
+      object cmbTamanhos: TbsSkinDBLookupComboBox
+        Left = 3
+        Top = 435
+        Width = 174
+        Height = 20
+        HintImageIndex = 0
+        TabOrder = 4
+        SkinDataName = 'combobox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = -21
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = [fsBold]
+        DefaultWidth = 0
+        DefaultHeight = 20
+        UseSkinFont = False
+        DefaultColor = clWindow
+        ListBoxDefaultItemHeight = 20
+        ListBoxUseSkinFont = False
+        ListBoxUseSkinItemHeight = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -20
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        KeyField = 'ID'
+        ListField = 'Tamanho'
+        ListSource = dtmVendas.srcTamanhos
+        ParentFont = False
+      end
+      object edtQtdeTamanho: TbsSkinEdit
+        Left = 173
+        Top = 63
+        Width = 54
+        Height = 29
+        Text = '0'
+        DefaultColor = clWindow
+        DefaultFont.Charset = ANSI_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = -19
+        DefaultFont.Name = 'Arial Narrow'
+        DefaultFont.Style = [fsBold]
+        UseSkinFont = False
+        DefaultWidth = 0
+        DefaultHeight = 0
+        ButtonMode = False
+        SkinDataName = 'edit'
+        Alignment = taRightJustify
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
+      end
+      object bsSkinLabel5: TbsSkinLabel
+        Left = 3
+        Top = 29
+        Width = 224
+        Height = 28
+        HintImageIndex = 0
+        TabOrder = 6
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = -16
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = [fsBold]
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        Transparent = False
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = False
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Selecione o Tamanho'
+        AutoSize = False
+      end
+      object pnlProduto: TPanel
+        Left = 0
+        Top = 0
+        Width = 773
+        Height = 23
+        Align = alTop
+        BevelOuter = bvLowered
+        Caption = 'pnlProduto'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 7
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 3
+        Top = 63
+        Width = 145
+        Height = 32
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        KeyField = 'id'
+        ListField = 'Tamanho'
+        ListSource = dtmVendas.srcTamanhos
+        ParentFont = False
+        TabOrder = 8
+      end
+    end
+  end
   object dspItensVendas: TDataSetProvider
     DataSet = qryItensVendas
-    Left = 305
-    Top = 332
+    Left = 465
+    Top = 244
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 49
-    Top = 299
+    Left = 209
+    Top = 211
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 49
-    Top = 327
+    Left = 209
+    Top = 239
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
-    Left = 277
-    Top = 333
+    Left = 437
+    Top = 245
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 78
-    Top = 299
+    Left = 238
+    Top = 211
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 78
-    Top = 327
+    Left = 238
+    Top = 239
   end
   object cdsItensVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
-    Left = 306
-    Top = 360
+    Left = 466
+    Top = 272
   end
   object srcItensVendas: TDataSource
     DataSet = cdsItensVendas
-    Left = 306
-    Top = 389
+    Left = 466
+    Top = 301
   end
   object cdsItensVendasTMP: TClientDataSet
     Active = True
@@ -2596,15 +3030,19 @@ object frmVendas: TfrmVendas
       item
         Name = 'Previsao_Entrega'
         DataType = ftDate
+      end
+      item
+        Name = 'GradeID'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
     BeforeOpen = cdsItensVendasTMPBeforeOpen
-    Left = 107
-    Top = 300
+    Left = 267
+    Top = 212
     Data = {
-      CA0100009619E0BD010000001800000014000000000003000000CA0106436F64
+      DA0100009619E0BD010000001800000015000000000003000000DA0106436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
@@ -2618,38 +3056,39 @@ object frmVendas: TfrmVendas
       00040000000000104D617267656D536563756E64617269610800040000000000
       0A4C7563726F427275746F08000400000000000B5469706F43616C63756C6F01
       0049000000010005574944544802000200140010507265766973616F5F456E74
-      7265676104000600000000000000}
+      726567610400060000000000074772616465494404000100000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
-      DisplayWidth = 8
+      DisplayWidth = 7
       FieldName = 'Codigo'
     end
     object cdsItensVendasTMPDescricao: TStringField
-      DisplayWidth = 37
+      DisplayWidth = 33
       FieldName = 'Descricao'
       Size = 50
     end
     object cdsItensVendasTMPUnidade: TStringField
+      DisplayWidth = 7
       FieldName = 'Unidade'
       Size = 3
     end
     object cdsItensVendasTMPqtde_Venda: TFloatField
       DisplayLabel = 'Quantidade.'
-      DisplayWidth = 11
+      DisplayWidth = 10
       FieldName = 'qtde_Venda'
     end
     object cdsItensVendasTMPPco_Venda: TFloatField
       DisplayLabel = 'Pco. Venda'
-      DisplayWidth = 11
+      DisplayWidth = 10
       FieldName = 'Pco_Venda'
     end
     object cdsItensVendasTMPvlr_Desconto: TFloatField
       DisplayLabel = 'Desconto'
-      DisplayWidth = 11
+      DisplayWidth = 10
       FieldName = 'vlr_Desconto'
     end
     object cdsItensVendasTMPvlr_Total: TFloatField
       DisplayLabel = 'Vlr. Total'
-      DisplayWidth = 11
+      DisplayWidth = 10
       FieldName = 'vlr_Total'
     end
     object cdsItensVendasTMPComplemento: TStringField
@@ -2686,6 +3125,7 @@ object frmVendas: TfrmVendas
       Visible = False
     end
     object cdsItensVendasTMPPrecoCusto: TFloatField
+      DisplayWidth = 9
       FieldName = 'PrecoCusto'
     end
     object cdsItensVendasTMPMargemSecundaria: TFloatField
@@ -2694,6 +3134,7 @@ object frmVendas: TfrmVendas
     end
     object cdsItensVendasTMPLucroBruto: TFloatField
       DisplayLabel = 'Lucro Bruto %'
+      DisplayWidth = 10
       FieldName = 'LucroBruto'
     end
     object cdsItensVendasTMPTipoCalculo: TStringField
@@ -2704,104 +3145,107 @@ object frmVendas: TfrmVendas
       FieldName = 'Previsao_Entrega'
       Visible = False
     end
+    object cdsItensVendasTMPGradeID: TIntegerField
+      FieldName = 'GradeID'
+    end
   end
   object srcItensVendasTMP: TDataSource
     DataSet = cdsItensVendasTMP
-    Left = 107
-    Top = 328
+    Left = 267
+    Top = 240
   end
   object dspVenda: TDataSetProvider
     DataSet = qryVenda
-    Left = 334
-    Top = 332
+    Left = 494
+    Top = 244
   end
   object cdsVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVenda'
-    Left = 334
-    Top = 360
+    Left = 494
+    Top = 272
   end
   object srcVenda: TDataSource
     DataSet = cdsVenda
-    Left = 334
-    Top = 389
+    Left = 494
+    Top = 301
   end
   object qryVenda: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 334
-    Top = 305
+    Left = 494
+    Top = 217
   end
   object qryItensVendas: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 305
-    Top = 305
+    Left = 465
+    Top = 217
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 362
-    Top = 304
+    Left = 522
+    Top = 216
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 277
-    Top = 306
+    Left = 437
+    Top = 218
   end
   object cdsCadFormasPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 21
-    Top = 299
+    Left = 181
+    Top = 211
   end
   object srcCadFormasPagamento: TDataSource
     DataSet = cdsCadFormasPagamento
-    Left = 21
-    Top = 327
+    Left = 181
+    Top = 239
   end
   object srcCadFuncionarios: TDataSource
     DataSet = cdsCadFuncionarios
-    Left = 135
-    Top = 328
+    Left = 295
+    Top = 240
   end
   object qryPagamento: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 419
-    Top = 304
+    Left = 459
+    Top = 416
   end
   object dspPagamento: TDataSetProvider
     DataSet = qryPagamento
-    Left = 419
-    Top = 332
+    Left = 459
+    Top = 444
   end
   object cdsPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPagamento'
-    Left = 419
-    Top = 358
+    Left = 459
+    Top = 470
   end
   object srcPagamento: TDataSource
     DataSet = cdsPagamento
-    Left = 419
-    Top = 386
+    Left = 459
+    Top = 498
   end
   object cdsCadFuncionarios: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 133
-    Top = 299
+    Left = 293
+    Top = 211
   end
   object sdtsConsultaCli: TSimpleDataSet
     Aggregates = <>
@@ -2816,8 +3260,8 @@ object frmVendas: TfrmVendas
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 160
-    Top = 298
+    Left = 320
+    Top = 210
     Data = {
       610000009619E0BD010000001800000003000000000003000000610006436F64
       69676F0100490000000100055749445448020002000300094465736372696361
@@ -2844,8 +3288,8 @@ object frmVendas: TfrmVendas
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 524
-    Top = 367
+    Left = 564
+    Top = 479
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -2938,8 +3382,8 @@ object frmVendas: TfrmVendas
     FonteTamanhoPadrao = S10cpp
     FonteEstiloPadrao = []
     Orientacao = poPortrait
-    Left = 600
-    Top = 336
+    Left = 640
+    Top = 448
   end
   object sdtsPesqDescCli: TSimpleDataSet
     Aggregates = <>
@@ -2947,44 +3391,44 @@ object frmVendas: TfrmVendas
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 552
-    Top = 367
+    Left = 592
+    Top = 479
   end
   object qryItensMateriaPrima: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 447
-    Top = 303
+    Left = 487
+    Top = 415
   end
   object dspItensMateriaPrima: TDataSetProvider
     DataSet = qryItensMateriaPrima
-    Left = 448
-    Top = 331
+    Left = 488
+    Top = 443
   end
   object cdsItensMateriaPrima: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensMateriaPrima'
-    Left = 448
-    Top = 359
+    Left = 488
+    Top = 471
   end
   object srcItensMateriaPrima: TDataSource
     DataSet = cdsItensMateriaPrima
-    Left = 448
-    Top = 387
+    Left = 488
+    Top = 499
   end
   object srcCadFichaTecnica: TDataSource
     DataSet = cdsCadFichaTecnica
-    Left = 188
-    Top = 326
+    Left = 348
+    Top = 238
   end
   object cdsCadFichaTecnica: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 188
-    Top = 298
+    Left = 348
+    Top = 210
   end
   object sdtsVerSaldos: TSimpleDataSet
     Aggregates = <>
@@ -2992,51 +3436,51 @@ object frmVendas: TfrmVendas
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 580
-    Top = 367
+    Left = 620
+    Top = 479
   end
   object cdsRotas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 216
-    Top = 298
+    Left = 376
+    Top = 210
   end
   object srcRotas: TDataSource
     DataSet = cdsRotas
-    Left = 216
-    Top = 326
+    Left = 376
+    Top = 238
   end
   object cdsSaldos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSaldos'
-    Left = 641
-    Top = 411
+    Left = 681
+    Top = 523
   end
   object dspSaldos: TDataSetProvider
     DataSet = qrySaldos
-    Left = 641
-    Top = 383
+    Left = 681
+    Top = 495
   end
   object qrySaldos: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 641
-    Top = 355
+    Left = 681
+    Top = 467
   end
   object cdsTipoVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 245
-    Top = 299
+    Left = 405
+    Top = 211
   end
   object srcTipoVenda: TDataSource
     DataSet = cdsTipoVenda
-    Left = 245
-    Top = 327
+    Left = 405
+    Top = 239
   end
   object frxVenda: TfrxReport
     Version = '4.9.105'
@@ -4127,5 +4571,31 @@ object frmVendas: TfrmVendas
       FieldName = 'Local'
       Size = 100
     end
+  end
+  object cdsItensTamanhos: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 584
+    Top = 400
+    Data = {
+      4E0000009619E0BD0100000018000000030000000000030000004E0002494404
+      000100000000000754616D616E686F0100490000000100055749445448020002
+      000F00045174646504000100000000000000}
+    object cdsItensTamanhosID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsItensTamanhosTamanho: TStringField
+      FieldName = 'Tamanho'
+      Size = 15
+    end
+    object cdsItensTamanhosQtde: TIntegerField
+      FieldName = 'Qtde'
+    end
+  end
+  object srcItemTamanho: TDataSource
+    DataSet = cdsItensTamanhos
+    Left = 616
+    Top = 400
   end
 end

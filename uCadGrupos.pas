@@ -9,7 +9,9 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
-  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, dxSkinsCore;
+  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, dxSkinsCore,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmCadGrupos = class(TFormBase)
@@ -226,7 +228,6 @@ begin
          End;
       end;
    End;
-
 end;
 
 procedure TfrmCadGrupos.btnFecharClick(Sender: TObject);
