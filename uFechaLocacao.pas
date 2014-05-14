@@ -18,7 +18,7 @@ type
     bsSkinBevel1: TbsSkinBevel;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
-    bsSkinGroupBox1: TbsSkinGroupBox;
+    pnlFechaLocacao: TbsSkinGroupBox;
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
     btnRemover: TbsSkinSpeedButton;
@@ -62,12 +62,8 @@ type
     edtNumeroVenda: TbsSkinEdit;
     edtPco_Venda: TbsSkinNumericEdit;
     sdtsBuscaEmpresa: TSimpleDataSet;
-    RvRecibo: TRvProject;
-    Dados_Recibo: TRvDataSetConnection;
     edtMascara: TbsSkinEdit;
     edtData_Venda: TbsSkinEdit;
-    RvRenderPDF1: TRvRenderPDF;
-    RvSystem1: TRvSystem;
     bsSkinPanel2: TbsSkinPanel;
     bsSkinDBGrid1: TbsSkinDBGrid;
     bsSkinStdLabel6: TbsSkinStdLabel;
@@ -91,6 +87,43 @@ type
     dspItensDevolucoes: TDataSetProvider;
     cdsItensDevolucoes: TClientDataSet;
     cdsItensVendasTmpTipoCobranca: TStringField;
+    cdsEmpresa: TClientDataSet;
+    cdsEmpresaID_Empresa: TIntegerField;
+    cdsEmpresaNome_Fantasia: TStringField;
+    cdsEmpresaCNPJCPF: TStringField;
+    cdsEmpresaEndereco: TStringField;
+    cdsEmpresaBairro: TStringField;
+    cdsEmpresaCidade: TStringField;
+    cdsEmpresaUF: TStringField;
+    cdsEmpresaTelefone: TStringField;
+    cdsEmpresacelular: TStringField;
+    cdsEmpresaOperador: TStringField;
+    cdsEmpresaData_Cad: TSQLTimeStampField;
+    cdsEmpresaData_Atu: TSQLTimeStampField;
+    cdsEmpresaLimite_Credito: TFloatField;
+    cdsEmpresaStatus: TStringField;
+    cdsEmpresaativo: TStringField;
+    cdsEmpresaCod_Atividade: TIntegerField;
+    cdsEmpresaCep: TStringField;
+    cdsEmpresaCod_Rota: TIntegerField;
+    cdsEmpresaQtde_PedAberto: TIntegerField;
+    cdsEmpresarazao_Social: TStringField;
+    cdsEmpresaPto_Referencia: TStringField;
+    cdsEmpresaFax: TStringField;
+    cdsEmpresaResponsavel: TStringField;
+    cdsEmpresacod_Funcionario: TIntegerField;
+    cdsEmpresaemail: TStringField;
+    cdsEmpresaDiretorGeral: TStringField;
+    cdsEmpresaDiretorEncino: TStringField;
+    cdsEmpresaDiretorDetran: TStringField;
+    cdsEmpresaLiberado: TBooleanField;
+    cdsEmpresaDiretorEnsino: TStringField;
+    cdsEmpresaNomeDiretor: TStringField;
+    cdsEmpresaHomePage: TStringField;
+    cdsEmpresaDiretor: TStringField;
+    cdsEmpresaLocal: TStringField;
+    dspEmpresa: TDataSetProvider;
+    qryEmpresa: TSQLQuery;
     procedure edtcod_PagamentoExit(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
@@ -110,8 +143,12 @@ type
     procedure AtualizaSaldoDevedor;
     procedure DevolverItem(VendaID : Integer; DadosItens: TClientDataSet);
     procedure MarcarPrePagamentoComoUtilizado(VendaId: Integer);
+    procedure ImprimirRecibo;
     { Private declarations }
   public
+    pnomeCliente : string;
+    pcnpj : string;
+    pCodigoCliEnte : String;
     { Public declarations }
   end;
 
@@ -380,6 +417,7 @@ begin
    MarcarPrePagamentoComoUtilizado(StrToint(edtNumeroVenda.Text));
 
    frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
+   ImprimirRecibo;
    CaixaMensagem( 'Finalização efetuada com sucesso', ctAviso, [ cbOk ], 0 );
    frmFechaLocacao.Tag := 1;
    Close;
@@ -389,6 +427,93 @@ begin
    qryModific.Close;
    qryModific.SQL.Text := 'Update T_movCaixa set PrePagamento='+QuotedStr('N')+' where SeqVenda='+intToStr(VendaId);
    qryModific.ExecSQL;
+end;
+
+procedure TfrmFechaLocacao.ImprimirRecibo;
+Var RvRecibo   : TRvProject;
+    edtMascara : TbsSkinEdit;
+    sdtsBuscaDados : TsimpleDataSet;
+    sdtsBuscaServico : TsimpleDataSet;
+    lsTelefone1 : String;
+    lsTelefone2 : String;
+    lscnpj      : String;
+    lsSeparador : String;
+    dados_Recibo : TRvDataSetConnection;
+    lsProdutos : String;
+    lsVirgula : String;
+begin
+    Try
+
+      cdsEmpresa.Open;
+
+      sdtsBuscaDados := TsimpleDataSet.create(Application);
+      sdtsBuscaDados.Connection := gConexao.conection;
+      sdtsBuscaDados.DataSet.CommandText := ' Select * from Empresa ';
+      sdtsBuscaDados.Open;
+
+      dados_Recibo := TRvDataSetConnection.Create(Application);
+      dados_Recibo.Name :='Dados_Recibo';
+      dados_Recibo.dataSet := sdtsBuscaDados;
+      RvRecibo := TRvProject.Create(Application);
+      rvRecibo.ProjectFile :=gsPath+'Relatorios\recibo.rav';
+      rvRecibo.Open;
+
+      edtMascara := TbsSkinEdit.Create(Application);
+      edtMascara.EditMask := '##.###.###/####-##;0;_';
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('cnpjcpf').AsString;
+      lsCnpj := edtMascara.EditText;
+
+      edtMascara.EditMask :=' (##)####-####;0;_';
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('Telefone').AsString;
+      lsTelefone1 := edtMascara.EditText;
+
+      edtMascara.Text :=  sdtsBuscaDados.FieldByName('Fax').AsString;
+      lsTelefone2 := edtMascara.EditText;
+
+      rvRecibo.SetParam('Aluno01', pNomeCliente );
+      rvRecibo.SetParam('Numero', 'Nº '+ pcodigoCliente );
+      rvRecibo.SetParam('CPF2','C.P.F. '+pCnpj );
+
+
+      rvRecibo.SetParam('Empresa', sdtsBuscaDados.FieldByName('Nome_Fantasia').AsString );
+      rvRecibo.SetParam('endereco',sdtsBuscaDados.FieldByName('Endereco').AsString+' '+
+                                   sdtsBuscaDados.FieldByName('Bairro').AsString+' '+
+                                   sdtsBuscaDados.FieldByName('Cidade').AsString+'-'+
+                                   sdtsBuscaDados.FieldByName('UF').AsString+' Cep '+sdtsBuscaDados.FieldByName('Cep').AsString );
+      rvRecibo.SetParam('CNPJ','C.N.P.J.: '+lsCnpj+' - Telefones '+lsTelefone1+' - '+lsTelefone2 );
+      rvRecibo.SetParam('email','E-MAIL.: '+sdtsBuscaDados.FieldByName('Email').AsString);
+
+      sdtsBuscaServico := TsimpleDataSet.create(Application);
+      sdtsBuscaServico.Connection := gConexao.conection;
+      cdsItensVendasTmp.first;
+      while not cdsItensVendasTmp.Eof do
+      begin
+        if cdsItensVendasTmp.fieldByname('Marcado').AsString='X' then
+        Begin
+          lsProdutos := lsProdutos+lsVirgula+cdsItensVendasTmp.fieldByname('Descricao').AsString;
+          lsVirgula := ',';
+        End;
+        cdsItensVendasTmp.Next;
+      end;
+
+
+      rvRecibo.SetParam('obs','          Recebemos de '+pNomeCliente+' CPF/CNPJ '+pCnpj + ' a importância de R$ '+edtVlr_Recebido.text+'( '+
+                        valorPorExtenso(StrToFloat(edtVlr_Recebido.text))+' ) '+'referente ao pagamento da locação de '+lsProdutos+' durante o '+
+                        'periodo de '+edtData_Venda.Text+' a '+edtDataDevolucao.text+' '+
+                        'pelo que firmo e dou plena quitação' );
+
+      rvRecibo.SetParam('Valor','R$ '+FormatFloat('0.00',StrTofloat(edtVlr_Recebido.Text)));
+      rvRecibo.SetParam('Data','Natal '+FormatDateTime('dd',now)+' de '+FormatDateTime('mmmm',now)+' de '+FormatDateTime('yyyy',now));
+      rvRecibo.Execute;
+
+
+    Finally
+      FreeAndNil(RvRecibo);
+      FreeAndNil(edtMascara);
+      FreeAndNil(sdtsBuscaDados);
+      FreeAndNil(edtMascara);
+      FreeAndNil(dados_Recibo);
+   End;
 end;
 
 procedure TfrmFechaLocacao.btnRemoverClick(Sender: TObject);

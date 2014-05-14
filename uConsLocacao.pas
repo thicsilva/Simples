@@ -119,6 +119,7 @@ type
     bsSkinSpeedButton1: TbsSkinSpeedButton;
     Colum_TipoCobranca: TcxGridDBColumn;
     ColumnDataVencimento: TcxGridDBColumn;
+    bsSkinSpeedButton2: TbsSkinSpeedButton;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -144,6 +145,7 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure cdsItensVendasCalcFields(DataSet: TDataSet);
     procedure bsSkinSpeedButton1Click(Sender: TObject);
+    procedure bsSkinSpeedButton2Click(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
@@ -272,7 +274,7 @@ var liSeqvenda : Integer;
     liDias : Integer;
 begin
 
-   if ( cdsVendas.FieldByName('Status').AsString <> '1') Then
+   if ( cdsVendas.FieldByName('Status').AsString <> '1') and ( cdsVendas.FieldByName('Status').AsString <> '4') Then
    Begin
       CaixaMensagem( 'Locação já finalizada ou cancelada', ctAviso, [ cbOk ], 0 );
       Exit;
@@ -296,6 +298,10 @@ begin
       frmFechaLocacao.edtCodCliente.Text  :=  cdsVendas.fieldbyname('Cod_Cliente').AsString;
       frmFechaLocacao.lblDataLocacao.caption :='Data da Locação '+frmFechaLocacao.edtData_Venda.Text;
       frmFechaLocacao.edtPrePagamento.text := FormatFloat('0.00',sdtsPesqPrepagamento.fieldByName('Total').AsFloat);
+      frmFechaLocacao.pNomeCliente := cdsVendas.fieldbyname('Descricao').AsString;
+      frmFechaLocacao.pcnpj:= cdsVendas.fieldbyname('cnpjcpf').AsString;
+      frmFechaLocacao.pCodigoCliente := cdsVendas.fieldbyname('Cod_Cliente').AsString;
+      frmFechaLocacao.pnlFechaLocacao.Caption := cdsVendas.fieldbyname('Cod_Cliente').AsString+' -'+cdsVendas.fieldbyname('Descricao').AsString;
       liSeqvenda := cdsItensVendas.fieldbyname('SeqVenda').ASInteger;
       while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liSeqvenda ) and ( Not cdsItensVendas.Eof )  do
       Begin
@@ -424,6 +430,8 @@ begin
       cdsVendas.FieldByName('Nome_Status').AsString := 'Entregue'
    Else If cdsVendas.FieldByName('Status').AsString = '3' Then
       cdsVendas.FieldByName('Nome_Status').AsString := 'Cancelado'
+   Else If cdsVendas.FieldByName('Status').AsString = '4' Then
+      cdsVendas.FieldByName('Nome_Status').AsString := 'Sem Prazo'
    Else
       cdsVendas.FieldByName('Nome_Status').AsString := 'Não Informado';
 
@@ -601,7 +609,9 @@ begin
   IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Vencido' Then
      acanvas.Font.color := clred
   else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Entregue' Then
-     acanvas.Font.color := clGreen;
+     acanvas.Font.color := clGreen
+  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Sem Prazo' Then
+     acanvas.Font.color := clBlue;
 end;
 
 procedure TfrmConsLocacao.MenuItem1Click(Sender: TObject);
@@ -846,6 +856,18 @@ begin
          cdsVendas.Locate('SeqVenda',liSeqVenda, [] );
       End;
    End;
+end;
+
+procedure TfrmConsLocacao.bsSkinSpeedButton2Click(Sender: TObject);
+begin
+   if CaixaMensagem( 'Confirma que esta locação esta sem prazo definido ???', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      qryModific.SQL.Text := 'Update T_Vendas set Status=:parStatus Where seqvenda=:parSeqvenda ';
+      qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
+      qryModific.ParamByName('parStatus').AsString    := '4';
+      qryModific.ExecSQL;
+   End;
+   btnselecionarclick(btnselecionar);
 end;
 
 procedure TfrmConsLocacao.btnEntregueClick(Sender: TObject);

@@ -401,10 +401,10 @@ end;
 procedure TfrmCadProdutos.AtualizaLocacoes;
 var PrecoSugerido : Real;
 begin
-   cdsProdutosLocados.data := gConexao.BuscarDadosSQL('select cli.Descricao, itens.Qtde_Venda, itens.pco_Venda as Valor from T_ItensVendas itens '+
+   cdsProdutosLocados.data := gConexao.BuscarDadosSQL('select cli.Descricao,   Itens.DataPrevisaoEntrega, itens.Qtde_Venda, itens.pco_Venda as Valor from T_ItensVendas itens '+
                            '    inner join T_Vendas ven on Ven.SeqVenda=itens.seqvenda '+
                            '    inner join T_Clientes Cli on Cli.codigo=Ven.Cod_Cliente '+
-                           '    Where Itens.Cod_Produto='+QuotedStr(cdsCadProdutos.FieldByName('Codigo').AsString),nil).Data;
+                           '    Where Itens.Cod_Produto='+QuotedStr(cdsCadProdutos.FieldByName('Codigo').AsString)+' and DataDevolucao IS Null' ,nil).Data;
 
 end;
 procedure TfrmCadProdutos.Atualizacusto;

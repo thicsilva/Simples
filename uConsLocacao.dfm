@@ -987,7 +987,7 @@ object frmConsLocacao: TfrmConsLocacao
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 856
+        Left = 889
         Top = 0
         Width = 70
         Height = 49
@@ -1029,17 +1029,17 @@ object frmConsLocacao: TfrmConsLocacao
       object separador: TbsSkinBevel
         Left = 70
         Top = 0
-        Width = 560
+        Width = 302
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 89
+        ExplicitLeft = 328
         ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
-        Left = 630
+        Left = 648
         Top = 0
         Width = 17
         Height = 49
@@ -1052,20 +1052,18 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitHeight = 40
       end
       object bsSkinBevel4: TbsSkinBevel
-        Left = 717
+        Left = 735
         Top = 0
-        Width = 35
+        Width = 154
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 227
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitTop = -1
       end
       object btnFinalizar: TbsSkinSpeedButton
-        Left = 647
+        Left = 665
         Top = 0
         Width = 70
         Height = 49
@@ -1104,15 +1102,15 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 752
+        Left = 439
         Top = 0
-        Width = 104
+        Width = 209
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 881
+        ExplicitLeft = 433
         ExplicitTop = -1
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
@@ -1153,6 +1151,44 @@ object frmConsLocacao: TfrmConsLocacao
         ExplicitLeft = 3
         ExplicitTop = 12
         ExplicitHeight = 40
+      end
+      object bsSkinSpeedButton2: TbsSkinSpeedButton
+        Left = 372
+        Top = 0
+        Width = 67
+        Height = 49
+        HintImageIndex = 0
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 13
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 11
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = False
+        Flat = False
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = 'Sem Prezo'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 1
+        OnClick = bsSkinSpeedButton2Click
+        ExplicitLeft = 357
+        ExplicitTop = 12
       end
     end
   end

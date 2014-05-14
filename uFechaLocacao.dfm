@@ -35,7 +35,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 759
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -182,10 +181,11 @@ object frmFechaLocacao: TfrmFechaLocacao
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -5
       end
     end
   end
-  object bsSkinGroupBox1: TbsSkinGroupBox
+  object pnlFechaLocacao: TbsSkinGroupBox
     Left = 0
     Top = 44
     Width = 806
@@ -195,8 +195,8 @@ object frmFechaLocacao: TfrmFechaLocacao
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'groupbox'
     DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
-    DefaultFont.Height = -15
+    DefaultFont.Color = clNavy
+    DefaultFont.Height = -16
     DefaultFont.Name = 'Arial'
     DefaultFont.Style = [fsBold]
     DefaultWidth = 0
@@ -211,7 +211,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     AutoEnabledControls = True
     CheckedMode = False
     Checked = False
-    DefaultAlignment = taCenter
+    DefaultAlignment = taLeftJustify
     DefaultCaptionHeight = 22
     BorderStyle = bvFrame
     CaptionMode = True
@@ -222,7 +222,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     Caption = 'Informa'#231#245'es Dos Itens Locados'
     Align = alTop
     UseSkinSize = False
-    ExplicitWidth = 759
     object edtMascara: TbsSkinEdit
       Left = 316
       Top = 30
@@ -291,7 +290,6 @@ object frmFechaLocacao: TfrmFechaLocacao
       Spacing = 2
       Caption = 'bsSkinPanel2'
       Align = alBottom
-      ExplicitWidth = 757
       object bsSkinStdLabel6: TbsSkinStdLabel
         Left = 277
         Top = 12
@@ -529,7 +527,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       OnDblClick = bsSkinDBGrid1DblClick
     end
     object lblDataLocacao: TbsSkinLabel
-      Left = 520
+      Left = 600
       Top = 0
       Width = 205
       Height = 22
@@ -576,7 +574,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 2
-    ExplicitWidth = 759
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -711,6 +708,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -5
       end
     end
   end
@@ -749,8 +747,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     NumGlyphs = 1
     Spacing = 2
     Align = alTop
-    ExplicitTop = 285
-    ExplicitWidth = 759
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 1
       Top = 6
@@ -922,7 +918,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     Caption = 'bsSkinStatusBar1'
     Align = alBottom
     SizeGrip = False
-    ExplicitWidth = 759
     object lblNome: TbsSkinStdLabel
       Left = 435
       Top = 3
@@ -1451,45 +1446,6 @@ object frmFechaLocacao: TfrmFechaLocacao
     Left = 112
     Top = 296
   end
-  object RvRecibo: TRvProject
-    Engine = RvSystem1
-    Left = 160
-    Top = 296
-  end
-  object Dados_Recibo: TRvDataSetConnection
-    RuntimeVisibility = rtDeveloper
-    DataSet = sdtsBuscaEmpresa
-    Left = 160
-    Top = 324
-  end
-  object RvRenderPDF1: TRvRenderPDF
-    DisplayName = 'Adobe Acrobat (PDF)'
-    FileExtension = '*.pdf'
-    EmbedFonts = False
-    ImageQuality = 90
-    MetafileDPI = 300
-    FontEncoding = feWinAnsiEncoding
-    DocInfo.Creator = 'Rave Reports (http://www.nevrona.com/rave)'
-    DocInfo.Producer = 'Nevrona Designs'
-    BufferDocument = True
-    DisableHyperlinks = False
-    Left = 112
-    Top = 336
-  end
-  object RvSystem1: TRvSystem
-    TitleSetup = 'Output Options'
-    TitleStatus = 'Report Status'
-    TitlePreview = 'Report Preview'
-    SystemFiler.StatusFormat = 'Generating page %p'
-    SystemPreview.ZoomFactor = 100.000000000000000000
-    SystemPrinter.ScaleX = 100.000000000000000000
-    SystemPrinter.ScaleY = 100.000000000000000000
-    SystemPrinter.StatusFormat = 'Printing page %p'
-    SystemPrinter.Title = 'Rave Report'
-    SystemPrinter.UnitsFactor = 1.000000000000000000
-    Left = 160
-    Top = 360
-  end
   object cdsItensVendasTmp: TClientDataSet
     Active = True
     Aggregates = <>
@@ -1607,5 +1563,163 @@ object frmFechaLocacao: TfrmFechaLocacao
     ProviderName = 'dspItensDevolucoes'
     Left = 561
     Top = 376
+  end
+  object cdsEmpresa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEmpresa'
+    Left = 440
+    Top = 112
+    object cdsEmpresaID_Empresa: TIntegerField
+      FieldName = 'ID_Empresa'
+      Required = True
+    end
+    object cdsEmpresaNome_Fantasia: TStringField
+      FieldName = 'Nome_Fantasia'
+      Required = True
+      Size = 50
+    end
+    object cdsEmpresaCNPJCPF: TStringField
+      FieldName = 'CNPJCPF'
+      FixedChar = True
+      Size = 14
+    end
+    object cdsEmpresaEndereco: TStringField
+      FieldName = 'Endereco'
+      Size = 50
+    end
+    object cdsEmpresaBairro: TStringField
+      FieldName = 'Bairro'
+      Size = 30
+    end
+    object cdsEmpresaCidade: TStringField
+      FieldName = 'Cidade'
+      Size = 30
+    end
+    object cdsEmpresaUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsEmpresaTelefone: TStringField
+      FieldName = 'Telefone'
+      FixedChar = True
+      Size = 13
+    end
+    object cdsEmpresacelular: TStringField
+      FieldName = 'celular'
+      FixedChar = True
+      Size = 13
+    end
+    object cdsEmpresaOperador: TStringField
+      FieldName = 'Operador'
+      Size = 30
+    end
+    object cdsEmpresaData_Cad: TSQLTimeStampField
+      FieldName = 'Data_Cad'
+    end
+    object cdsEmpresaData_Atu: TSQLTimeStampField
+      FieldName = 'Data_Atu'
+    end
+    object cdsEmpresaLimite_Credito: TFloatField
+      FieldName = 'Limite_Credito'
+    end
+    object cdsEmpresaStatus: TStringField
+      FieldName = 'Status'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsEmpresaativo: TStringField
+      FieldName = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsEmpresaCod_Atividade: TIntegerField
+      FieldName = 'Cod_Atividade'
+    end
+    object cdsEmpresaCep: TStringField
+      FieldName = 'Cep'
+      FixedChar = True
+      Size = 9
+    end
+    object cdsEmpresaCod_Rota: TIntegerField
+      FieldName = 'Cod_Rota'
+    end
+    object cdsEmpresaQtde_PedAberto: TIntegerField
+      FieldName = 'Qtde_PedAberto'
+    end
+    object cdsEmpresarazao_Social: TStringField
+      FieldName = 'razao_Social'
+      Size = 50
+    end
+    object cdsEmpresaPto_Referencia: TStringField
+      FieldName = 'Pto_Referencia'
+      Size = 50
+    end
+    object cdsEmpresaFax: TStringField
+      FieldName = 'Fax'
+      FixedChar = True
+      Size = 13
+    end
+    object cdsEmpresaResponsavel: TStringField
+      FieldName = 'Responsavel'
+      Size = 50
+    end
+    object cdsEmpresacod_Funcionario: TIntegerField
+      FieldName = 'cod_Funcionario'
+    end
+    object cdsEmpresaemail: TStringField
+      FieldName = 'email'
+      Size = 50
+    end
+    object cdsEmpresaDiretorGeral: TStringField
+      FieldName = 'DiretorGeral'
+      Size = 50
+    end
+    object cdsEmpresaDiretorEncino: TStringField
+      FieldName = 'DiretorEncino'
+      Size = 50
+    end
+    object cdsEmpresaDiretorDetran: TStringField
+      FieldName = 'DiretorDetran'
+      Size = 50
+    end
+    object cdsEmpresaLiberado: TBooleanField
+      FieldName = 'Liberado'
+    end
+    object cdsEmpresaDiretorEnsino: TStringField
+      FieldName = 'DiretorEnsino'
+      Size = 50
+    end
+    object cdsEmpresaNomeDiretor: TStringField
+      FieldName = 'NomeDiretor'
+      Size = 50
+    end
+    object cdsEmpresaHomePage: TStringField
+      FieldName = 'HomePage'
+      Size = 100
+    end
+    object cdsEmpresaDiretor: TStringField
+      FieldName = 'Diretor'
+      Size = 50
+    end
+    object cdsEmpresaLocal: TStringField
+      FieldName = 'Local'
+      Size = 100
+    end
+  end
+  object dspEmpresa: TDataSetProvider
+    DataSet = qryEmpresa
+    Left = 441
+    Top = 79
+  end
+  object qryEmpresa: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'Select * from Empresa')
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 441
+    Top = 51
   end
 end
