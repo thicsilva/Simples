@@ -66,7 +66,7 @@ type TDaoEstrutura = class
     procedure Adicionar_Campos_na_Tabela_Empresa;
     procedure CriarTabela_TabelasGrade;
     procedure Adicionar_GradeID_na_Tabela_Produto;
-
+    procedure Adicionar_Campos_na_Tabela_ItensGrade;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -465,6 +465,21 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Campos_na_Tabela_ItensGrade;
+begin
+   if not ExisteCampo( 'ItensGrade', 'CaminhoImagemFrente', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE ItensGrade ADD CaminhoImagemFrente Varchar(200)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE ItensGrade ADD CaminhoImagemVerso Varchar(200)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
 procedure TDaoEstrutura.Adicionar_EnderecoObra_na_Tabela_Clientes;
 begin
    if not ExisteCampo( 'T_Clientes', 'EnderecoObra', FConexao.Conection ) then
@@ -668,6 +683,7 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_Campos_na_Tabela_ItensGrade;
   Adicionar_GradeID_na_Tabela_Produto;
   CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_Empresa;

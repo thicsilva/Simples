@@ -41,12 +41,15 @@ begin
    FConexao.Conection.ExecuteDirect('Insert into Grade (Descricao) Values ('+QuotedStr(NomeGrade)+')');
    liGradeId := RetornarGradeId(NomeGrade);
    cdsItensGrade.First;
-   fsqlModific.Sql.Text := 'Insert into ItensGrade (GradeId,Tamanho) values (:parGradeId,:parTamanho) ';
+   fsqlModific.Sql.Text := 'Insert into ItensGrade (GradeId,Tamanho,CaminhoImagemFrente,CaminhoImagemVerso) values '+
+                           '                       (:parGradeId,:parTamanho,:parCaminhoImagemFrente,:parCaminhoImagemVerso) ';
    while not cdsItensGrade.Eof do
    begin
      fsqlModific.close;
      fsqlModific.ParamByName('parGradeId').AsInteger := liGradeId;
      fsqlModific.ParamByName('parTamanho').AsString  := cdsItensGrade.FieldByName('Tamanho').AsString;
+     fsqlModific.ParamByName('parCaminhoImagemFrente').AsString  := cdsItensGrade.FieldByName('CaminhoImagemFrente').AsString;
+     fsqlModific.ParamByName('parCaminhoImagemVerso').AsString  := cdsItensGrade.FieldByName('CaminhoImagemVerso').AsString;
      fsqlModific.ExecSQL;
      cdsItensGrade.Next;
    end;

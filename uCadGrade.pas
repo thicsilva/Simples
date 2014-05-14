@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, bsSkinCtrls, ToolWin, ComCtrls, DB, DBClient, StdCtrls,
   bsSkinGrids, bsDBGrids, Mask, bsSkinBoxCtrls, bsSkinTabs, SimpleDS, 
-  uDaoGrade;
+  uDaoGrade, ExtDlgs;
 
 type
   TfrmCadGrade = class(TForm)
@@ -34,21 +34,34 @@ type
     Panel2: TPanel;
     gridTamanho: TbsSkinDBGrid;
     Panel3: TPanel;
-    bsSkinDBGrid3: TbsSkinDBGrid;
     edtTamanho: TbsSkinEdit;
     bsSkinStdLabel1: TbsSkinStdLabel;
     edtDescricao: TbsSkinEdit;
     bsSkinStdLabel5: TbsSkinStdLabel;
     btnAdicionar: TbsSkinButton;
     btnRemover: TbsSkinButton;
-    cdsTamanho: TClientDataSet;
     srcTamanho: TDataSource;
-    cdsTamanhoTamanho: TStringField;
-    cdsTamanhoID: TIntegerField;
     srcPesquisa: TDataSource;
     sdtsPesquisa: TSimpleDataSet;
     cdsItensTamanhos: TClientDataSet;
     srcItensTamanhos: TDataSource;
+    cdsTamanho: TClientDataSet;
+    cdsTamanhoTamanho: TStringField;
+    cdsTamanhoID: TIntegerField;
+    Panel4: TPanel;
+    bsSkinDBGrid3: TbsSkinDBGrid;
+    Panel5: TPanel;
+    imageFrente: TImage;
+    imageVerso: TImage;
+    Panel6: TPanel;
+    btnImagemVerso: TbsSkinButton;
+    btnImagemFrente: TbsSkinButton;
+    cdsTamanhoCaminhoImagemFrente: TStringField;
+    cdsTamanhoCaminhoImagemVerso: TStringField;
+    Imagem: TOpenPictureDialog;
+    Panel7: TPanel;
+    imagem_01: TImage;
+    imagem_02: TImage;
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -60,6 +73,10 @@ type
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure sdtsPesquisaAfterScroll(DataSet: TDataSet);
+    procedure btnImagemVersoClick(Sender: TObject);
+    procedure btnImagemFrenteClick(Sender: TObject);
+    procedure cdsItensTamanhosAfterScroll(DataSet: TDataSet);
+    procedure cdsTamanhoAfterScroll(DataSet: TDataSet);
   private
     pvQualBotao : String;
     { Private declarations }
@@ -115,7 +132,9 @@ begin
    BtnExcluir.Enabled := True;
    BtnOk.Enabled      := False;
    BtnCancela.Enabled := False;
-
+   cdsTamanho.EmptyDataSet;
+   edtDescricao.Text := '';
+   edtTamanho.Text := '';
    PagCadastro.ActivePageIndex:=0;
    btnPesquisarClick(Sender);
 end;
@@ -145,6 +164,28 @@ end;
 procedure TfrmCadGrade.btnFecharClick(Sender: TObject);
 begin
    Close;
+end;
+
+procedure TfrmCadGrade.btnImagemFrenteClick(Sender: TObject);
+begin
+   if Imagem.Execute then
+   begin
+      imageFrente.Picture.LoadFromFile(Imagem.FileName);
+      cdsTamanho.Edit;
+      cdsTamanho.FieldByName('CaminhoImagemFrente').AsString := Imagem.FileName;
+      cdsTamanho.post;
+   end;
+end;
+
+procedure TfrmCadGrade.btnImagemVersoClick(Sender: TObject);
+begin
+   if Imagem.Execute then
+   begin
+      imageVerso.Picture.LoadFromFile(Imagem.FileName);
+      cdsTamanho.Edit;
+      cdsTamanho.FieldByName('CaminhoImagemVerso').AsString := Imagem.FileName;
+      cdsTamanho.post;
+   end;
 end;
 
 procedure TfrmCadGrade.btnincluirClick(Sender: TObject);
@@ -203,6 +244,32 @@ procedure TfrmCadGrade.btnRemoverClick(Sender: TObject);
 begin
    if CaixaMensagem( 'Deseja Exclir o Produto '+cdsTamanho.FieldByname('Tamanho').asString, ctConfirma, [ cbSimNao ], 0 )  Then
       cdsTamanho.Delete;
+end;
+
+procedure TfrmCadGrade.cdsItensTamanhosAfterScroll(DataSet: TDataSet);
+begin
+   if FileExists(cdsItensTamanhos.FieldByName('CaminhoImagemFrente').AsString) then
+      imagem_01.Picture.LoadFromFile(cdsItensTamanhos.FieldByName('CaminhoImagemFrente').AsString)
+   else
+      imagem_01.Picture.ASSIGN(NIL);
+
+   if FileExists(cdsItensTamanhos.FieldByName('CaminhoImagemFrente').AsString) then
+      imagem_02.Picture.LoadFromFile(cdsItensTamanhos.FieldByName('CaminhoImagemVerso').AsString)
+   else
+      imagem_02.Picture.ASSIGN(NIL);
+end;
+
+procedure TfrmCadGrade.cdsTamanhoAfterScroll(DataSet: TDataSet);
+begin
+   if FileExists(cdsTamanho.FieldByName('CaminhoImagemFrente').AsString) then
+      imageFrente.Picture.LoadFromFile(cdsTamanho.FieldByName('CaminhoImagemFrente').AsString)
+   else
+      imageFrente.Picture.ASSIGN(NIL);
+
+   if FileExists(cdsTamanho.FieldByName('CaminhoImagemVerso').AsString) then
+      imageVerso.Picture.LoadFromFile(cdsTamanho.FieldByName('CaminhoImagemVerso').AsString)
+    else
+      imageVerso.Picture.ASSIGN(NIL);
 end;
 
 procedure TfrmCadGrade.FormShow(Sender: TObject);

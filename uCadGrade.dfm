@@ -2,8 +2,8 @@ object frmCadGrade: TfrmCadGrade
   Left = 0
   Top = 0
   Caption = 'Cadastro de Grade de produto'
-  ClientHeight = 343
-  ClientWidth = 659
+  ClientHeight = 400
+  ClientWidth = 1155
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object frmCadGrade: TfrmCadGrade
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 659
-    Height = 290
+    Width = 1155
+    Height = 347
     ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -54,16 +54,15 @@ object frmCadGrade: TfrmCadGrade
       object Panel2: TPanel
         Left = 377
         Top = 33
-        Width = 280
-        Height = 233
+        Width = 776
+        Height = 290
         Align = alClient
-        Caption = 'Panel2'
         TabOrder = 3
         object gridTamanho: TbsSkinDBGrid
           Left = 1
           Top = 25
-          Width = 278
-          Height = 207
+          Width = 333
+          Height = 264
           HintImageIndex = 0
           TabOrder = 0
           SkinDataName = 'grid'
@@ -103,14 +102,14 @@ object frmCadGrade: TfrmCadGrade
               Title.Font.Height = -16
               Title.Font.Name = 'Arial'
               Title.Font.Style = []
-              Width = 253
+              Width = 318
               Visible = True
             end>
         end
         object Panel3: TPanel
           Left = 1
           Top = 1
-          Width = 278
+          Width = 774
           Height = 24
           Align = alTop
           Caption = 'Lista de tamanhos da grade'
@@ -122,11 +121,42 @@ object frmCadGrade: TfrmCadGrade
           ParentFont = False
           TabOrder = 1
         end
+        object Panel7: TPanel
+          Left = 334
+          Top = 25
+          Width = 441
+          Height = 264
+          Align = alRight
+          TabOrder = 2
+          object imagem_01: TImage
+            Left = 1
+            Top = 1
+            Width = 218
+            Height = 262
+            Align = alLeft
+            Proportional = True
+            Stretch = True
+            ExplicitLeft = -5
+            ExplicitTop = 6
+          end
+          object imagem_02: TImage
+            Left = 219
+            Top = 1
+            Width = 217
+            Height = 262
+            Align = alLeft
+            Proportional = True
+            Stretch = True
+            ExplicitLeft = 225
+            ExplicitTop = 46
+            ExplicitHeight = 279
+          end
+        end
       end
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 657
+        Width = 1153
         Height = 33
         HintImageIndex = 0
         TabOrder = 0
@@ -219,7 +249,7 @@ object frmCadGrade: TfrmCadGrade
         object EdtPesquisa: TbsSkinEdit
           Left = 136
           Top = 9
-          Width = 203
+          Width = 288
           Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -249,8 +279,8 @@ object frmCadGrade: TfrmCadGrade
           RightImageDownIndex = -1
         end
         object chkPesqTodoTexto: TbsSkinCheckRadioBox
-          Left = 344
-          Top = 6
+          Left = 430
+          Top = 8
           Width = 150
           Height = 25
           HintImageIndex = 0
@@ -279,8 +309,8 @@ object frmCadGrade: TfrmCadGrade
           Caption = 'Pesquisa em todo texo'
         end
         object btnPesquisar: TbsSkinButton
-          Left = 519
-          Top = 4
+          Left = 586
+          Top = 5
           Width = 125
           Height = 25
           HintImageIndex = 0
@@ -319,7 +349,7 @@ object frmCadGrade: TfrmCadGrade
         Left = 361
         Top = 33
         Width = 16
-        Height = 233
+        Height = 290
         Align = alLeft
         TabOrder = 1
       end
@@ -327,7 +357,7 @@ object frmCadGrade: TfrmCadGrade
         Left = 0
         Top = 33
         Width = 361
-        Height = 233
+        Height = 290
         HintImageIndex = 0
         TabOrder = 2
         SkinDataName = 'grid'
@@ -402,58 +432,15 @@ object frmCadGrade: TfrmCadGrade
         SkinDataName = 'stdlabel'
         Caption = 'Descricao da Grade'
       end
-      object bsSkinDBGrid3: TbsSkinDBGrid
-        Left = 312
-        Top = 0
-        Width = 345
-        Height = 266
-        HintImageIndex = 0
-        TabOrder = 0
-        SkinDataName = 'grid'
-        Transparent = False
-        WallpaperStretch = False
-        UseSkinFont = True
-        UseSkinCellHeight = True
-        GridLineColor = clWindowText
-        DefaultCellHeight = 20
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBtnText
-        Font.Height = -16
-        Font.Name = 'Arial Narrow'
-        Font.Style = [fsBold]
-        ColSizingwithLine = False
-        DrawGraphicFields = False
-        UseColumnsFont = False
-        MouseWheelSupport = False
-        SaveMultiSelection = False
-        PickListBoxSkinDataName = 'listbox'
-        PickListBoxCaptionMode = False
-        Align = alRight
-        DataSource = srcTamanho
-        ParentFont = False
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clBtnText
-        TitleFont.Height = -19
-        TitleFont.Name = 'Arial Narrow'
-        TitleFont.Style = [fsBold]
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'Tamanho'
-            Title.Caption = 'Tamanhos'
-            Width = 280
-            Visible = True
-          end>
-      end
       object edtTamanho: TbsSkinEdit
         Left = 8
         Top = 67
-        Width = 148
-        Height = 30
+        Width = 353
+        Height = 28
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
-        DefaultFont.Height = -21
+        DefaultFont.Height = -19
         DefaultFont.Name = 'Arial'
         DefaultFont.Style = []
         UseSkinFont = False
@@ -464,12 +451,12 @@ object frmCadGrade: TfrmCadGrade
         SkinDataName = 'edit'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -21
+        Font.Height = -19
         Font.Name = 'Arial'
         Font.Style = []
         CharCase = ecUpperCase
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
@@ -481,27 +468,27 @@ object frmCadGrade: TfrmCadGrade
       object edtDescricao: TbsSkinEdit
         Left = 8
         Top = 22
-        Width = 228
-        Height = 20
+        Width = 353
+        Height = 26
         DefaultColor = clWindow
-        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Charset = ANSI_CHARSET
         DefaultFont.Color = clBlack
-        DefaultFont.Height = 14
-        DefaultFont.Name = 'Arial'
-        DefaultFont.Style = []
+        DefaultFont.Height = -16
+        DefaultFont.Name = 'Arial Narrow'
+        DefaultFont.Style = [fsBold]
         UseSkinFont = True
         DefaultWidth = 0
         DefaultHeight = 0
         ButtonMode = False
         SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'edit'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
-        Font.Height = 14
-        Font.Name = 'Arial'
-        Font.Style = []
+        Font.Height = -16
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 1
         ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
@@ -516,7 +503,7 @@ object frmCadGrade: TfrmCadGrade
         Width = 289
         Height = 25
         HintImageIndex = 0
-        TabOrder = 3
+        TabOrder = 2
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'button'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -552,7 +539,7 @@ object frmCadGrade: TfrmCadGrade
         Width = 289
         Height = 25
         HintImageIndex = 0
-        TabOrder = 4
+        TabOrder = 3
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'button'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -582,12 +569,176 @@ object frmCadGrade: TfrmCadGrade
         Spacing = 1
         OnClick = btnRemoverClick
       end
+      object Panel4: TPanel
+        Left = 367
+        Top = 0
+        Width = 786
+        Height = 323
+        Align = alRight
+        TabOrder = 4
+        object bsSkinDBGrid3: TbsSkinDBGrid
+          Left = 1
+          Top = 1
+          Width = 345
+          Height = 321
+          HintImageIndex = 0
+          TabOrder = 0
+          SkinDataName = 'grid'
+          Transparent = False
+          WallpaperStretch = False
+          UseSkinFont = True
+          UseSkinCellHeight = True
+          GridLineColor = clWindowText
+          DefaultCellHeight = 20
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBtnText
+          Font.Height = -16
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ColSizingwithLine = False
+          DrawGraphicFields = False
+          UseColumnsFont = False
+          MouseWheelSupport = False
+          SaveMultiSelection = False
+          PickListBoxSkinDataName = 'listbox'
+          PickListBoxCaptionMode = False
+          Align = alLeft
+          DataSource = srcTamanho
+          ParentFont = False
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clBtnText
+          TitleFont.Height = -19
+          TitleFont.Name = 'Arial Narrow'
+          TitleFont.Style = [fsBold]
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'Tamanho'
+              Title.Caption = 'Tamanhos'
+              Width = 317
+              Visible = True
+            end>
+        end
+        object Panel5: TPanel
+          Left = 344
+          Top = 1
+          Width = 441
+          Height = 321
+          Align = alRight
+          TabOrder = 1
+          object imageFrente: TImage
+            Left = 1
+            Top = 41
+            Width = 218
+            Height = 279
+            Align = alLeft
+            Proportional = True
+            Stretch = True
+            ExplicitLeft = 8
+            ExplicitTop = 32
+            ExplicitHeight = 294
+          end
+          object imageVerso: TImage
+            Left = 219
+            Top = 41
+            Width = 217
+            Height = 279
+            Align = alLeft
+            Proportional = True
+            Stretch = True
+            ExplicitLeft = 225
+            ExplicitTop = 46
+          end
+          object Panel6: TPanel
+            Left = 1
+            Top = 1
+            Width = 439
+            Height = 40
+            Align = alTop
+            TabOrder = 0
+            object btnImagemVerso: TbsSkinButton
+              Left = 218
+              Top = 1
+              Width = 217
+              Height = 38
+              HintImageIndex = 0
+              TabOrder = 0
+              SkinData = frmPrincipal.SkinPrincipal
+              SkinDataName = 'button'
+              DefaultFont.Charset = ANSI_CHARSET
+              DefaultFont.Color = clWindowText
+              DefaultFont.Height = -16
+              DefaultFont.Name = 'Arial Narrow'
+              DefaultFont.Style = [fsBold]
+              DefaultWidth = 0
+              DefaultHeight = 0
+              UseSkinFont = False
+              Transparent = False
+              CheckedMode = False
+              ImageList = frmPrincipal.Imagebutoes
+              ImageIndex = 18
+              AlwaysShowLayeredFrame = False
+              UseSkinSize = False
+              UseSkinFontColor = False
+              RepeatMode = False
+              RepeatInterval = 100
+              AllowAllUp = False
+              TabStop = True
+              CanFocused = True
+              Down = False
+              GroupIndex = 0
+              Caption = '    &Adicionar Verso'
+              NumGlyphs = 1
+              Spacing = 1
+              Align = alLeft
+              OnClick = btnImagemVersoClick
+            end
+            object btnImagemFrente: TbsSkinButton
+              Left = 1
+              Top = 1
+              Width = 217
+              Height = 38
+              HintImageIndex = 0
+              TabOrder = 1
+              SkinData = frmPrincipal.SkinPrincipal
+              SkinDataName = 'button'
+              DefaultFont.Charset = ANSI_CHARSET
+              DefaultFont.Color = clWindowText
+              DefaultFont.Height = -16
+              DefaultFont.Name = 'Arial Narrow'
+              DefaultFont.Style = [fsBold]
+              DefaultWidth = 0
+              DefaultHeight = 0
+              UseSkinFont = False
+              Transparent = False
+              CheckedMode = False
+              ImageList = frmPrincipal.Imagebutoes
+              ImageIndex = 18
+              AlwaysShowLayeredFrame = False
+              UseSkinSize = False
+              UseSkinFontColor = False
+              RepeatMode = False
+              RepeatInterval = 100
+              AllowAllUp = False
+              TabStop = True
+              CanFocused = True
+              Down = False
+              GroupIndex = 0
+              Caption = '    &Adicionar Frente'
+              NumGlyphs = 1
+              Spacing = 1
+              Align = alLeft
+              OnClick = btnImagemFrenteClick
+            end
+          end
+        end
+      end
     end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 659
+    Width = 1155
     Height = 53
     AutoSize = True
     Bands = <
@@ -595,7 +746,7 @@ object frmCadGrade: TfrmCadGrade
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 655
+        Width = 1151
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -604,7 +755,7 @@ object frmCadGrade: TfrmCadGrade
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 646
+      Width = 1142
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -893,8 +1044,7 @@ object frmCadGrade: TfrmCadGrade
         Layout = blGlyphTop
         Enabled = False
         OnClick = btnokClick
-        ExplicitLeft = 407
-        ExplicitTop = 12
+        ExplicitLeft = 279
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 413
@@ -921,23 +1071,6 @@ object frmCadGrade: TfrmCadGrade
       end
     end
   end
-  object cdsTamanho: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    Left = 72
-    Top = 168
-    Data = {
-      410000009619E0BD01000000180000000200000000000300000041000754616D
-      616E686F01004900000001000557494454480200020014000249440400010000
-      0000000000}
-    object cdsTamanhoTamanho: TStringField
-      FieldName = 'Tamanho'
-    end
-    object cdsTamanhoID: TIntegerField
-      FieldName = 'ID'
-    end
-  end
   object srcTamanho: TDataSource
     DataSet = cdsTamanho
     Left = 72
@@ -961,12 +1094,70 @@ object frmCadGrade: TfrmCadGrade
   object cdsItensTamanhos: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 208
+    AfterScroll = cdsItensTamanhosAfterScroll
+    Left = 96
     Top = 168
   end
   object srcItensTamanhos: TDataSource
     DataSet = cdsItensTamanhos
-    Left = 208
-    Top = 192
+    Left = 98
+    Top = 196
+  end
+  object cdsTamanho: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Tamanho'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CaminhoImagemFrente'
+        DataType = ftString
+        Size = 200
+      end
+      item
+        Name = 'CaminhoImagemVerso'
+        DataType = ftString
+        Size = 200
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    AfterScroll = cdsTamanhoAfterScroll
+    Left = 72
+    Top = 168
+    Data = {
+      900000009619E0BD01000000180000000400000000000300000090000754616D
+      616E686F01004900000001000557494454480200020032000249440400010000
+      0000001343616D696E686F496D6167656D4672656E7465010049000000010005
+      574944544802000200C8001243616D696E686F496D6167656D566572736F0100
+      49000000010005574944544802000200C8000000}
+    object cdsTamanhoTamanho: TStringField
+      FieldName = 'Tamanho'
+      Size = 50
+    end
+    object cdsTamanhoID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsTamanhoCaminhoImagemFrente: TStringField
+      FieldName = 'CaminhoImagemFrente'
+      Visible = False
+      Size = 200
+    end
+    object cdsTamanhoCaminhoImagemVerso: TStringField
+      FieldName = 'CaminhoImagemVerso'
+      Visible = False
+      Size = 200
+    end
+  end
+  object Imagem: TOpenPictureDialog
+    Left = 96
+    Top = 104
   end
 end
