@@ -400,7 +400,7 @@ object frmCadGrade: TfrmCadGrade
       Caption = 'Cadastro'
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 8
-        Top = 48
+        Top = 51
         Width = 45
         Height = 13
         EllipsType = bsetNone
@@ -417,7 +417,7 @@ object frmCadGrade: TfrmCadGrade
       end
       object bsSkinStdLabel5: TbsSkinStdLabel
         Left = 8
-        Top = 3
+        Top = 7
         Width = 95
         Height = 13
         EllipsType = bsetNone
@@ -499,8 +499,8 @@ object frmCadGrade: TfrmCadGrade
       end
       object btnAdicionar: TbsSkinButton
         Left = 8
-        Top = 108
-        Width = 289
+        Top = 107
+        Width = 353
         Height = 25
         HintImageIndex = 0
         TabOrder = 2
@@ -536,7 +536,7 @@ object frmCadGrade: TfrmCadGrade
       object btnRemover: TbsSkinButton
         Left = 8
         Top = 138
-        Width = 289
+        Width = 353
         Height = 25
         HintImageIndex = 0
         TabOrder = 3
@@ -1045,6 +1045,7 @@ object frmCadGrade: TfrmCadGrade
         Enabled = False
         OnClick = btnokClick
         ExplicitLeft = 279
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 413

@@ -79,6 +79,8 @@ type
     procedure cdsTamanhoAfterScroll(DataSet: TDataSet);
   private
     pvQualBotao : String;
+    pGradeId : Integer;
+    procedure carregarItensDaGrade;
     { Private declarations }
   public
     { Public declarations }
@@ -120,9 +122,23 @@ begin
    BtnOk.Enabled      :=True;
    BtnCancela.Enabled :=True;
    PagCadastro.ActivePageIndex:=1;
-
+   pGradeId := sdtsPesquisa.FieldByName('ID').AsInteger;
+   carregarItensDaGrade;
    edtDescricao.SetFocus;
-
+end;
+procedure TfrmCadGrade.carregarItensDaGrade;
+begin
+   cdsItensTamanhos.First;
+   while not cdsItensTamanhos.Eof do
+   begin
+      cdsTamanho.Append;
+      cdsTamanho.FieldByName('Tamanho').AsString := cdsItensTamanhos.FieldByName('Tamanho').AsString;
+      cdsTamanho.FieldByName('ID').AsInteger := cdsItensTamanhos.FieldByName('id').AsInteger;
+      cdsTamanho.FieldByName('CaminhoImagemFrente').AsString := cdsItensTamanhos.FieldByName('CaminhoImagemFrente').AsString;
+      cdsTamanho.FieldByName('CaminhoImagemVerso').AsString := cdsItensTamanhos.FieldByName('CaminhoImagemVerso').AsString;
+      cdsTamanho.post;
+      cdsItensTamanhos.next;
+   end;
 end;
 
 procedure TfrmCadGrade.BtnCancelaClick(Sender: TObject);
@@ -191,6 +207,7 @@ end;
 procedure TfrmCadGrade.btnincluirClick(Sender: TObject);
 begin
    pvQualBotao := 'INCLUIR';
+   pGradeId := 0;
 
    BtnIncluir.Enabled := False;
    BtnAlterar.Enabled := False;
@@ -216,12 +233,16 @@ begin
       Exit;
    end;
    DaoGrade := TDaoGrade.Create(gConexao);
-   if DaoGrade.RetornarGradeId(edtDescricao.Text)>0 then
+   if pGradeId=0 then
    begin
-      CaixaMensagem( 'Já hexiste uma grade com este nome ', ctAviso, [ cbOk ], 0 );
-      Exit;
+       if DaoGrade.RetornarGradeId(edtDescricao.Text)>0 then
+       begin
+          CaixaMensagem( 'Já hexiste uma grade com este nome ', ctAviso, [ cbOk ], 0 );
+          Exit;
+       end;
    end;
-   DaoGrade.NovaGrade(edtDescricao.Text,cdsTamanho);
+   DaoGrade.ApagarGrade(pGradeId);
+   DaoGrade.NovaGrade(edtDescricao.Text,cdsTamanho,pGradeId);
    BtnCancelaClick(Sender);
 end;                                                   
 
@@ -275,6 +296,7 @@ end;
 procedure TfrmCadGrade.FormShow(Sender: TObject);
 begin
   pagCadastro.ActivePageIndex := 0;
+  pGradeId := 0;
   btnPesquisarClick(Sender);
 end;
 

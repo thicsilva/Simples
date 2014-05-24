@@ -143,7 +143,8 @@ uses
   uClassItemGrade in 'Modelos\uClassItemGrade.pas',
   uCadGrade in 'uCadGrade.pas' {frmCadGrade},
   uDaoGrade in 'Dao\uDaoGrade.pas',
-  UdtmVendas in 'Data Module\UdtmVendas.pas' {dtmVendas: TDataModule};
+  UdtmVendas in 'Data Module\UdtmVendas.pas' {dtmVendas: TDataModule},
+  uDtmCadastro in 'Data Module\uDtmCadastro.pas' {dtmCadastro: TDataModule};
 
 {$R *.res}
 
@@ -155,6 +156,7 @@ begin
   Application.CreateForm(TfrmselEndereco, frmselEndereco);
   Application.CreateForm(TfrmCadGrade, frmCadGrade);
   Application.CreateForm(TdtmVendas, dtmVendas);
+  Application.CreateForm(TdtmCadastro, dtmCadastro);
   Frmlogin.ShowModal;
   Application.Run;
 end.

@@ -81,6 +81,10 @@
     <DCCReference Include="Dao\uDaoRota.pas" />
     <DCCReference Include="Dao\uDaoSaldo.pas" />
     <DCCReference Include="Dao\uDaoVenda.pas" />
+    <DCCReference Include="Data Module\uDtmCadastro.pas">
+      <Form>dtmCadastro</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
     <DCCReference Include="Data Module\UdtmVendas.pas">
       <Form>dtmVendas</Form>
       <DesignClass>TDataModule</DesignClass>

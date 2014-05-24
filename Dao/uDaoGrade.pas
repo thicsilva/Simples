@@ -12,7 +12,8 @@ type TDaoGrade = class
       fsqlModific : TSqlQuery;
   public
      Constructor Create(Conexao : TConexao);
-     procedure NovaGrade(NomeGrade : String; cdsItensGrade : TclientDataSet);
+     procedure NovaGrade(NomeGrade : String; cdsItensGrade : TclientDataSet; GradeID : Integer );
+     procedure ApagarGrade(Gradeid : Integer);
      function RetornarGradeId(NomeGrade : String) : Integer;
      function BuscarTodos : tClientDataSet;
 
@@ -22,6 +23,11 @@ end;
 implementation
 
 { TDaoGrade }
+
+procedure TDaoGrade.ApagarGrade(Gradeid: Integer);
+begin
+   FConexao.Conection.ExecuteDirect('Delete from ItensGrade where GradeId=('+QuotedStr(IntToStr(Gradeid))+')');
+end;
 
 function TDaoGrade.BuscarTodos : tClientDataSet;
 begin
@@ -35,10 +41,14 @@ begin
    fsqlModific.SQLConnection := fConexao.Conection;
 end;
 
-procedure TDaoGrade.NovaGrade(NomeGrade: String; cdsItensGrade: TclientDataSet);
+procedure TDaoGrade.NovaGrade(NomeGrade: String; cdsItensGrade: TclientDataSet; GradeID : Integer);
 var liGradeId : Integer;
 begin
-   FConexao.Conection.ExecuteDirect('Insert into Grade (Descricao) Values ('+QuotedStr(NomeGrade)+')');
+  if GradeID<>0 then
+    FConexao.Conection.ExecuteDirect('Update Grade set Descricao='+QuotedStr(NomeGrade)+' where ID='+IntToStr(GradeId))
+  else
+    FConexao.Conection.ExecuteDirect('Insert into Grade (Descricao) Values ('+QuotedStr(NomeGrade)+')');
+
    liGradeId := RetornarGradeId(NomeGrade);
    cdsItensGrade.First;
    fsqlModific.Sql.Text := 'Insert into ItensGrade (GradeId,Tamanho,CaminhoImagemFrente,CaminhoImagemVerso) values '+
