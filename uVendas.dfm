@@ -1166,7 +1166,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 768
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -2092,9 +2092,9 @@ object frmVendas: TfrmVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 646
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -2128,7 +2128,6 @@ object frmVendas: TfrmVendas
         OnClick = btnFecharClick
         ExplicitLeft = 677
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0
@@ -2373,6 +2372,10 @@ object frmVendas: TfrmVendas
     OnChange = PagVendasChange
     object TabSheet1: TTabSheet
       Caption = 'Vendas'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgConsulta: TbsSkinDBGrid
         Left = 0
         Top = 0
@@ -2476,6 +2479,10 @@ object frmVendas: TfrmVendas
     object TabSheet2: TTabSheet
       Caption = 'Adicionar Grade'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gridTamanho: TbsSkinDBGrid
         Left = 233
         Top = 23

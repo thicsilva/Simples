@@ -305,7 +305,6 @@ type
      procedure TotalizarVenda(lrTotalDesconto: Real);
     function RetornarSelectProdutos: String;
     procedure AtaulizaLucroBruto;
-    function FormatarCNPJ_CPF(lsCnpjCPf: String): String;
     procedure PedidoPersonalizado(NumeroVenda: String);
     { Private declarations }
   public
@@ -2053,14 +2052,6 @@ begin
          end;
       End;
    End;
-end;
-
-Function TfrmVendas.FormatarCNPJ_CPF(lsCnpjCPf : String)  : String;
-begin
-   if Length( lsCnpjCPf ) <= 11 then
-      Result := MascaraCpF(lsCnpjCPf)
-   else
-      result := MascaraCNPJ(lsCnpjCPf)
 end;
 
 procedure TfrmVendas.PagVendasChange(Sender: TObject);

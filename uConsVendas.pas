@@ -30,7 +30,7 @@ uses
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
   uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, ACBrNFe;
+  dxSkinscxPCPainter, ACBrNFe, frxClass, frxDBSet;
 
 type
   TfrmConsVendas = class(TFormBase)
@@ -134,6 +134,10 @@ type
     MenuDeControle: TcxGridPopupMenu;
     btnCupomFiscal: TbsSkinSpeedButton;
     ACBrNFe1: TACBrNFe;
+    frxDbItens: TfrxDBDataset;
+    frxDBCliente: TfrxDBDataset;
+    frxDbEmpresa: TfrxDBDataset;
+    frxVenda: TfrxReport;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -162,9 +166,11 @@ type
     procedure btnEntregaVendaClick(Sender: TObject);
     procedure btnCupomFiscalClick(Sender: TObject);
     procedure btnNFEClick(Sender: TObject);
+    procedure cdsVendasAfterScroll(DataSet: TDataSet);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
+    procedure PedidoPersonalizado(NumeroVenda: String);
     { Private declarations }
   public
     { Public declarations }
@@ -177,7 +183,7 @@ implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
-  uclassContaCorrente;
+  uclassContaCorrente, uDtmCadastro;
 
 {$R *.dfm}
 
@@ -229,44 +235,17 @@ begin
    cdsVendas.ProviderName := dspvendas.name;
    cdsVendas.Open;
 
-   //-------------------------------------itens vendas ----------------------------------------------
 
    qryItensVendas.Close;
    qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
                               'Prod.Pco_Custo, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
-                              'where Prod.Codigo=Itens.Cod_Produto AND Ven.Tipo_Venda=:parTipo_Venda  ';
+                              'where Prod.Codigo=Itens.Cod_Produto  ';
 
-   if cmbStatus.ItemIndex <> 0 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.Status=:parStatus ';
-
-   If cmbPeriodo.ItemIndex<>0 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ( Ven.Data_Venda>=:parData_PagamentoIni And Ven.Data_Venda<=:parData_PagamentoFim ) ';
-
-
-   if cmbTipoFiltro.ItemIndex = 2 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.SeqVenda=:parPesquisa ';
-   if cmbTipoFiltro.ItemIndex = 3 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ven.Controle=:parPesquisa ';
-
+  // qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.SeqVenda=:parSeqVenda ';
    qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
 
-   if frmconsvendas.tag=3 then
-      qryItensVendas.ParamByName('parTipo_Venda').AsString :='S'
-   Else
-      qryItensVendas.ParamByName('parTipo_Venda').AsString :='P';
-
-   if cmbStatus.ItemIndex <> 0 Then
-      qryItensVendas.ParamByName('parStatus').AsString  := IntToStr(cmbStatus.ItemIndex);
-
-   if (cmbTipoFiltro.ItemIndex = 2) or (cmbTipoFiltro.ItemIndex = 3) Then
-      qryItensVendas.ParamByName('parPesquisa').AsString :=edtPesquisa.Text;
-
-   If cmbPeriodo.ItemIndex<>0 Then
-   Begin
-      qryItensVendas.ParamByName('parData_PagamentoIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
-      qryItensVendas.ParamByName('parData_PagamentoFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-   End;
+   //qryItensVendas.ParamByName('parSeqVenda').AsString := cdsVendas.FieldByName('SeqVenda').AsString;
 
    cdsItensVendas.close;
    cdsItensVendas.ProviderName := dspItensVendas.name;
@@ -274,13 +253,13 @@ begin
 
    //-------------------------------------itens Devolucoes ----------------------------------------------
 
-   qryItensDevolucoes.Close;
+  { qryItensDevolucoes.Close;
    qryItensDevolucoes.Params.Clear;
    qryItensDevolucoes.SQL.Text := 'Select * from T_ItensDevolucoes ';
 
    cdsItensDevolucoes.close;
    cdsItensDevolucoes.ProviderName := dspItensVendas.name;
-   cdsItensDevolucoes.open;
+   cdsItensDevolucoes.open;}
 
 end;
 
@@ -395,18 +374,40 @@ var
     DaoVenda: TDaoVenda;
     DaoItemVenda : TDaoItemVenda;
 begin
-   DaoVenda := TDaoVenda.Create(gConexao);
-   loVenda  := DaoVenda.CarregarVenda(cdsVendas);
-   loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
-   lovenda.Empresa := gEmpresa;
-   DaoItemVenda := TDaoItemVenda.Create(gConexao);
-   loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
-                    gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
-                    StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
-   FreeAndNil(DaoVenda);
-   FreeAndNil(lovenda);
-   FreeAndNil(DaoItemVenda);
+   if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
+      PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString)
+   else
+   begin
+     DaoVenda := TDaoVenda.Create(gConexao);
+     loVenda  := DaoVenda.CarregarVenda(cdsVendas);
+     loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
+     lovenda.Empresa := gEmpresa;
+     DaoItemVenda := TDaoItemVenda.Create(gConexao);
+     loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
+                      gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
+                      StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
+     FreeAndNil(DaoVenda);
+     FreeAndNil(lovenda);
+     FreeAndNil(DaoItemVenda);
+   end;
 end;
+
+procedure  TfrmConsVendas.PedidoPersonalizado(NumeroVenda : String);
+begin
+   dtmCadastro.cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+   dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil).Data;
+   frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+
+   frxVenda.Variables['CNPJEmpresa']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+   frxVenda.Variables['cnpjCliente']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsClientes.fieldByname('cnpjcpf').AsString ));
+   frxVenda.Variables['TotalLocacao']   := QuotedStr( Formatfloat('0.00',cdsVendas.FieldByName('vlr_Total').AsFloat ));
+   frxVenda.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
+   frxVenda.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
+   frxVenda.ShowReport(true);
+end;
+
 
 procedure TfrmConsVendas.btnNFEClick(Sender: TObject);
 var
@@ -470,6 +471,25 @@ begin
    end;
 end;
 
+procedure TfrmConsVendas.cdsVendasAfterScroll(DataSet: TDataSet);
+begin
+{   qryItensVendas.Close;
+   qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
+                              'Prod.Pco_Custo, Itens.* '+
+                              'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
+                              'where Prod.Codigo=Itens.Cod_Produto  ';
+
+   qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.SeqVenda=:parSeqVenda ';
+   qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
+
+   qryItensVendas.ParamByName('parSeqVenda').AsString := cdsVendas.FieldByName('SeqVenda').AsString;
+
+   cdsItensVendas.close;
+   cdsItensVendas.ProviderName := dspItensVendas.name;
+   cdsItensVendas.open; }
+
+end;
+
 procedure TfrmConsVendas.cdsVendasBeforeOpen(DataSet: TDataSet);
 var licont : Integer ;
 begin
@@ -509,7 +529,7 @@ begin
    else
       cdsVendas.FieldByName('Status_Entrega').AsString := 'Pendente de Entrega';
 
-   cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );  
+   cdsVendas.FieldByName('LucroBrutoReais').AsFloat :=   ( cdsVendas.FieldByName('vlr_total').AsFloat-cdsVendas.FieldByName('CustoTotal').AsFloat );
 
 
 end;
