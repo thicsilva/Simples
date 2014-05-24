@@ -46,6 +46,7 @@ object frmInventario: TfrmInventario
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -281,6 +282,7 @@ object frmInventario: TfrmInventario
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -306,7 +308,7 @@ object frmInventario: TfrmInventario
         Align = alClient
         TabOrder = 0
         object GridDBInventario: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -367,6 +369,7 @@ object frmInventario: TfrmInventario
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -401,6 +404,7 @@ object frmInventario: TfrmInventario
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -480,7 +484,7 @@ object frmInventario: TfrmInventario
           Left = 134
           Top = 11
           Width = 499
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -499,6 +503,7 @@ object frmInventario: TfrmInventario
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -511,7 +516,7 @@ object frmInventario: TfrmInventario
         Left = 415
         Top = 124
         Width = 59
-        Height = 18
+        Height = 20
         Text = '0,00'
         DefaultColor = clScrollBar
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -533,6 +538,7 @@ object frmInventario: TfrmInventario
         ParentFont = False
         TabOrder = 2
         Visible = False
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -559,6 +565,7 @@ object frmInventario: TfrmInventario
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -594,9 +601,9 @@ object frmInventario: TfrmInventario
           Caption = 'Produto'
         end
         object bsSkinStdLabel8: TbsSkinStdLabel
-          Left = 295
+          Left = 461
           Top = 16
-          Width = 55
+          Width = 32
           Height = 13
           EllipsType = bsetNone
           UseSkinFont = True
@@ -607,13 +614,13 @@ object frmInventario: TfrmInventario
           DefaultFont.Name = 'MS Sans Serif'
           DefaultFont.Style = []
           SkinDataName = 'stdlabel'
-          Caption = 'Quantidade'
+          Caption = 'Quant.'
         end
         object edtProd_inv: TbsSkinEdit
           Left = 46
           Top = 13
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -632,6 +639,7 @@ object frmInventario: TfrmInventario
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -643,7 +651,7 @@ object frmInventario: TfrmInventario
         object cmbNome_ProdutoInv: TbsSkinDBLookupComboBox
           Left = 113
           Top = 13
-          Width = 176
+          Width = 342
           Height = 20
           HintImageIndex = 0
           TabOrder = 1
@@ -666,10 +674,10 @@ object frmInventario: TfrmInventario
           OnChange = cmbNome_ProdutoInvChange
         end
         object edtQtde_inv: TbsSkinEdit
-          Left = 356
+          Left = 499
           Top = 13
           Width = 57
-          Height = 18
+          Height = 20
           Text = '0'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -690,6 +698,7 @@ object frmInventario: TfrmInventario
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -698,7 +707,7 @@ object frmInventario: TfrmInventario
           RightImageDownIndex = -1
         end
         object bsSkinButton1: TbsSkinButton
-          Left = 545
+          Left = 675
           Top = 6
           Width = 107
           Height = 28
@@ -713,6 +722,7 @@ object frmInventario: TfrmInventario
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -732,7 +742,7 @@ object frmInventario: TfrmInventario
           OnClick = bsSkinButton1Click
         end
         object bsSkinButton3: TbsSkinButton
-          Left = 432
+          Left = 562
           Top = 6
           Width = 107
           Height = 28
@@ -747,6 +757,7 @@ object frmInventario: TfrmInventario
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -774,7 +785,7 @@ object frmInventario: TfrmInventario
         Align = alClient
         TabOrder = 1
         object cxGridDBTableView1: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcTempItensInventario
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -854,6 +865,7 @@ object frmInventario: TfrmInventario
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -888,7 +900,7 @@ object frmInventario: TfrmInventario
           Left = 48
           Top = 29
           Width = 473
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -907,6 +919,7 @@ object frmInventario: TfrmInventario
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

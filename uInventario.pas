@@ -9,7 +9,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, bsdbctrls, StdCtrls, Mask, bsSkinBoxCtrls, ComCtrls, bsSkinTabs,uFormBase,
   ExtCtrls, ToolWin, Menus, bsSkinMenus, FMTBcd, Provider, SqlExpr, DBClient,
-  RDprint, dxSkinsCore;
+  RDprint, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmInventario = class(TFormBase)
