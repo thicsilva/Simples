@@ -1662,6 +1662,7 @@ begin
   frxContrato.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
   frxContrato.Variables['ExtensoData']   := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
                                                       ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
+  frxContrato.Variables['SeqVenda']      :=  Sequencia('SeqVenda',False,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8);
   frxContrato.ShowReport(true);
 
   ReciboSegundaVia.Variables['EnderecoObra']  := QuotedStr( lsendereco );
@@ -1672,6 +1673,8 @@ begin
   ReciboSegundaVia.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat(edtValorCaucao.Text)));
   ReciboSegundaVia.Variables['ExtensoData']   := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
                                                       ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
+  ReciboSegundaVia.Variables['SeqVenda']      :=  Sequencia('SeqVenda',False,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8);
+
   ReciboSegundaVia.ShowReport(true);
 
 

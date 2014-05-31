@@ -326,7 +326,7 @@ object frmConsLocacao: TfrmConsLocacao
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
-    DefaultFont.Color = clWindowText
+    DefaultFont.Color = clBlack
     DefaultFont.Height = 14
     DefaultFont.Name = 'Arial'
     DefaultFont.Style = []
@@ -434,8 +434,9 @@ object frmConsLocacao: TfrmConsLocacao
         'Todos'
         'Locado'
         'Entregue'
-        'Cancelada')
-      ItemIndex = 0
+        'Cancelada'
+        'Sem Prazo')
+      ItemIndex = -1
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -1474,16 +1475,8 @@ object frmConsLocacao: TfrmConsLocacao
     Left = 262
     Top = 335
   end
-  object cdsItensDevolucoes: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspItensVendas'
-    BeforeOpen = cdsItensVendasBeforeOpen
-    Left = 262
-    Top = 363
-  end
   object srcItensDevolucoes: TDataSource
-    DataSet = cdsItensDevolucoes
+    DataSet = cdsItensDev
     Left = 262
     Top = 391
   end
@@ -1924,5 +1917,12 @@ object frmConsLocacao: TfrmConsLocacao
     Params = <>
     Left = 532
     Top = 399
+  end
+  object cdsItensDev: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DspItensDevolucoes'
+    Left = 168
+    Top = 248
   end
 end

@@ -75,7 +75,6 @@ type
     grdDevolucoes: TcxGridDBTableView;
     qryItensDevolucoes: TSQLQuery;
     DspItensDevolucoes: TDataSetProvider;
-    cdsItensDevolucoes: TClientDataSet;
     srcItensDevolucoes: TDataSource;
     grdDevolucoesColumn1: TcxGridDBColumn;
     CdsVerifica: TClientDataSet;
@@ -120,6 +119,7 @@ type
     Colum_TipoCobranca: TcxGridDBColumn;
     ColumnDataVencimento: TcxGridDBColumn;
     bsSkinSpeedButton2: TbsSkinSpeedButton;
+    cdsItensDev: TClientDataSet;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -178,6 +178,8 @@ begin
                         'Left join ClienteAnimais Animal on Animal.AnimalId=Ven.AnimalId '+
                         'where  Tipo_Venda=:parTipo_Venda ';
 
+   if cmbStatus.ItemIndex = 0 Then
+      qryVendas.SQL.Text := qryVendas.SQL.Text + ' AND Ven.Status<>:parStatus and Ven.Status<>:parStatus1';
    if cmbStatus.ItemIndex <> 0 Then
       qryVendas.SQL.Text := qryVendas.SQL.Text + ' AND Ven.Status=:parStatus ';
    if cmbTipoFiltro.ItemIndex = 1 Then
@@ -191,7 +193,11 @@ begin
    If cmbPeriodo.ItemIndex<>0 Then
       qryVendas.SQL.Text := qryVendas.SQL.Text + ' AND ( Ven.Data_Venda>=:parData_PagamentoIni And Ven.Data_Venda<=:parData_PagamentoFim ) ';
 
-
+   if cmbStatus.ItemIndex = 0 Then
+   begin
+      qryVendas.ParamByName('parStatus').AsString   := '2';
+      qryVendas.ParamByName('parStatus1').AsString  := '3';
+   end;
    if cmbStatus.ItemIndex <> 0 Then
       qryVendas.ParamByName('parStatus').AsString  := IntToStr(cmbStatus.ItemIndex);
    if cmbTipoFiltro.ItemIndex = 1 Then
@@ -216,35 +222,9 @@ begin
    qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
                               'Prod.Pco_Custo, coalesce(Itens.Status,0) as Status, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
-                              'where Prod.Codigo=Itens.Cod_Produto AND Ven.Tipo_Venda=:parTipo_Venda  ';
-
-   if cmbStatus.ItemIndex <> 0 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.Status=:parStatus ';
-
-   If cmbPeriodo.ItemIndex<>0 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ( Ven.Data_Venda>=:parData_PagamentoIni And Ven.Data_Venda<=:parData_PagamentoFim ) ';
-
-
-   if cmbTipoFiltro.ItemIndex = 2 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.SeqVenda=:parPesquisa ';
-   if cmbTipoFiltro.ItemIndex = 3 Then
-      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ven.Controle=:parPesquisa ';
+                              'where Prod.Codigo=Itens.Cod_Produto  ';
 
    qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
-   qryItensVendas.ParamByName('parTipo_Venda').AsString :='P';
-
-   if cmbStatus.ItemIndex <> 0 Then
-      qryItensVendas.ParamByName('parStatus').AsString  := IntToStr(cmbStatus.ItemIndex);
-
-   if (cmbTipoFiltro.ItemIndex = 2) or (cmbTipoFiltro.ItemIndex = 3) Then
-      qryItensVendas.ParamByName('parPesquisa').AsString :=edtPesquisa.Text;
-
-   If cmbPeriodo.ItemIndex<>0 Then
-   Begin
-      qryItensVendas.ParamByName('parData_PagamentoIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
-      qryItensVendas.ParamByName('parData_PagamentoFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-   End;
-
    cdsItensVendas.close;
    cdsItensVendas.ProviderName := dspItensVendas.name;
    cdsItensVendas.open;
@@ -255,9 +235,9 @@ begin
    qryItensDevolucoes.Params.Clear;
    qryItensDevolucoes.SQL.Text := 'Select * from T_ItensDevolucoes ';
 
-   cdsItensDevolucoes.close;
-   cdsItensDevolucoes.ProviderName := dspItensVendas.name;
-   cdsItensDevolucoes.open;
+   cdsItensDev.close;
+   cdsItensDev.ProviderName := dspItensVendas.name;
+   cdsItensDev.open;
 
 end;
 
@@ -607,7 +587,9 @@ procedure TfrmConsLocacao.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView
   var ADone: Boolean);
 begin
   IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Vencido' Then
-     acanvas.Font.color := clred
+     acanvas.Font.color := clRed
+  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Cancelado' Then
+     acanvas.Font.color := clPurple
   else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Entregue' Then
      acanvas.Font.color := clGreen
   else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Sem Prazo' Then
@@ -745,25 +727,25 @@ begin
             qryItensDevolucoes.Close;
             qryItensDevolucoes.SQL.Text :='Select * from T_ItensDevolucoes where 1=2';
 
-            cdsItensDevolucoes.Close;
-            cdsItensDevolucoes.ProviderName := dspItensDevolucoes.Name;
-            cdsItensDevolucoes.Open;
+            cdsItensDev.Close;
+            cdsItensDev.ProviderName := dspItensDevolucoes.Name;
+            cdsItensDev.Open;
 
             Try
-               cdsItensDevolucoes.Append;
-               cdsItensDevolucoes.FieldByName('Cod_Produto').asInteger      := cdsItensVendas.FieldByName('Cod_Produto').asInteger;
-               cdsItensDevolucoes.FieldByName('SeqVenda').asInteger         := liNumeroVenda;
-               cdsItensDevolucoes.FieldByName('Qtde_Devolvida').asFloat     := cdsItensVendas.FieldByName('Qtde_Venda').asInteger;
-               cdsItensDevolucoes.FieldByName('Pco_Venda').asFloat          := cdsItensVendas.FieldByName('Pco_Venda').asFloat;
-               cdsItensDevolucoes.FieldByName('Pco_Custo').asFloat          := cdsItensVendas.FieldByName('Pco_Custo').Asfloat;
-               cdsItensDevolucoes.FieldByName('Data_Cad').asDateTime        := now;
-               cdsItensDevolucoes.FieldByName('SetorId').asFloat            := cdsItensVendas.FieldByName('SetorId').Asfloat;
-               cdsItensDevolucoes.FieldByName('Data_Devolucao').asDateTime  := gsData_mov;
-               cdsItensDevolucoes.FieldByname('Operador').AsString          := gsOperador;
-               cdsItensDevolucoes.FieldByname('Cod_Emp').AsString           := gsCod_Emp;
-               cdsItensDevolucoes.FieldByName('Data_Mov').asDateTime        := gsdata_Mov;
-               cdsItensDevolucoes.Post;
-               cdsItensDevolucoes.ApplyUpdates(-1);
+               cdsItensDev.Append;
+               cdsItensDev.FieldByName('Cod_Produto').asInteger      := cdsItensVendas.FieldByName('Cod_Produto').asInteger;
+               cdsItensDev.FieldByName('SeqVenda').asInteger         := liNumeroVenda;
+               cdsItensDev.FieldByName('Qtde_Devolvida').asFloat     := cdsItensVendas.FieldByName('Qtde_Venda').asInteger;
+               cdsItensDev.FieldByName('Pco_Venda').asFloat          := cdsItensVendas.FieldByName('Pco_Venda').asFloat;
+               cdsItensDev.FieldByName('Pco_Custo').asFloat          := cdsItensVendas.FieldByName('Pco_Custo').Asfloat;
+               cdsItensDev.FieldByName('Data_Cad').asDateTime        := now;
+               cdsItensDev.FieldByName('SetorId').asFloat            := cdsItensVendas.FieldByName('SetorId').Asfloat;
+               cdsItensDev.FieldByName('Data_Devolucao').asDateTime  := gsData_mov;
+               cdsItensDev.FieldByname('Operador').AsString          := gsOperador;
+               cdsItensDev.FieldByname('Cod_Emp').AsString           := gsCod_Emp;
+               cdsItensDev.FieldByName('Data_Mov').asDateTime        := gsdata_Mov;
+               cdsItensDev.Post;
+               cdsItensDev.ApplyUpdates(-1);
             except
                frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
                Exit;
@@ -781,8 +763,8 @@ begin
                                    'Operador=:parOperador, Data_Atu=:parData_Atu, PagouSinal=:parPagouSinal '+
                                    'where Seqvenda=:parseqvenda ';
             qryModific.ParamByName('parSeqVenda').AsInteger      := liNumeroVenda;
-            qryModific.ParamByName('parStatus').AsString         := '5';
-            qryModific.ParamByName('parPagouSinal').AsInteger        := 1;
+            qryModific.ParamByName('parStatus').AsString         := '3';
+            qryModific.ParamByName('parPagouSinal').AsInteger    := 1;
             qryModific.ParamByName('parControle').AsString       := '';
             qryModific.ParamByName('parOperador').AsString       := gsOperador;
             qryModific.ParamByName('parData_Atu').AsSQLTimeStamp := StrToSqlTimeStamp(formatdateTime('dd/mm/yyyy', GsData_mov)+' 00:00:00');

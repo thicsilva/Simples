@@ -1166,7 +1166,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 768
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -2092,9 +2092,9 @@ object frmVendas: TfrmVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 646
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -2128,6 +2128,7 @@ object frmVendas: TfrmVendas
         OnClick = btnFecharClick
         ExplicitLeft = 677
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0
@@ -2372,10 +2373,6 @@ object frmVendas: TfrmVendas
     OnChange = PagVendasChange
     object TabSheet1: TTabSheet
       Caption = 'Vendas'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgConsulta: TbsSkinDBGrid
         Left = 0
         Top = 0
@@ -2442,7 +2439,7 @@ object frmVendas: TfrmVendas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 1
+        Position = 0
         SmallChange = 1
         LargeChange = 1
       end
@@ -2479,10 +2476,8 @@ object frmVendas: TfrmVendas
     object TabSheet2: TTabSheet
       Caption = 'Adicionar Grade'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitLeft = -97
+      ExplicitTop = -30
       object gridTamanho: TbsSkinDBGrid
         Left = 233
         Top = 23
@@ -2532,12 +2527,13 @@ object frmVendas: TfrmVendas
           end
           item
             Expanded = False
-            FieldName = 'Qtde.'
+            FieldName = 'Qtde'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clBtnText
             Title.Font.Height = -15
             Title.Font.Name = 'Arial'
             Title.Font.Style = []
+            Width = 68
             Visible = True
           end>
       end
@@ -2575,6 +2571,7 @@ object frmVendas: TfrmVendas
         Caption = '    &Adicionar'
         NumGlyphs = 1
         Spacing = 1
+        OnClick = bsSkinButton1Click
       end
       object btnRemover: TbsSkinButton
         Left = 3
@@ -2610,6 +2607,7 @@ object frmVendas: TfrmVendas
         Caption = '    &Remover'
         NumGlyphs = 1
         Spacing = 1
+        OnClick = btnRemoverClick
       end
       object Panel1: TPanel
         Left = 400
@@ -2635,19 +2633,6 @@ object frmVendas: TfrmVendas
           Align = alTop
           BevelOuter = bvLowered
           TabOrder = 1
-          object SpeedButton1: TSpeedButton
-            Left = 248
-            Top = 4
-            Width = 113
-            Height = 22
-            Caption = 'Incluir Imagem'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object bsSkinLabel1: TbsSkinLabel
             Left = 7
             Top = 5
@@ -2680,7 +2665,7 @@ object frmVendas: TfrmVendas
             AutoSize = False
           end
           object bsSkinLabel2: TbsSkinLabel
-            Left = 128
+            Left = 208
             Top = 5
             Width = 58
             Height = 21
@@ -2710,10 +2695,10 @@ object frmVendas: TfrmVendas
             Caption = 'Restante'
             AutoSize = False
           end
-          object bsSkinLabel4: TbsSkinLabel
-            Left = 184
+          object lblRestante: TbsSkinLabel
+            Left = 264
             Top = 5
-            Width = 58
+            Width = 97
             Height = 21
             HintImageIndex = 0
             TabOrder = 2
@@ -2742,10 +2727,10 @@ object frmVendas: TfrmVendas
             Caption = '0,00'
             AutoSize = False
           end
-          object bsSkinLabel3: TbsSkinLabel
+          object lbltotalIncluido: TbsSkinLabel
             Left = 64
             Top = 5
-            Width = 58
+            Width = 97
             Height = 21
             HintImageIndex = 0
             TabOrder = 3
@@ -2807,9 +2792,9 @@ object frmVendas: TfrmVendas
         ParentFont = False
       end
       object edtQtdeTamanho: TbsSkinEdit
-        Left = 173
-        Top = 63
-        Width = 54
+        Left = 133
+        Top = 100
+        Width = 94
         Height = 29
         Text = '0'
         DefaultColor = clWindow
@@ -2886,10 +2871,10 @@ object frmVendas: TfrmVendas
         ParentFont = False
         TabOrder = 7
       end
-      object DBLookupComboBox1: TDBLookupComboBox
+      object cmdNomeTamanho: TDBLookupComboBox
         Left = 3
         Top = 63
-        Width = 145
+        Width = 224
         Height = 32
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -2901,6 +2886,37 @@ object frmVendas: TfrmVendas
         ListSource = dtmVendas.srcTamanhos
         ParentFont = False
         TabOrder = 8
+      end
+      object bsSkinLabel6: TbsSkinLabel
+        Left = 3
+        Top = 101
+        Width = 110
+        Height = 28
+        HintImageIndex = 0
+        TabOrder = 9
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = -16
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = [fsBold]
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        Transparent = False
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = False
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Quantidade'
+        AutoSize = False
       end
     end
   end
@@ -4582,13 +4598,35 @@ object frmVendas: TfrmVendas
   object cdsItensTamanhos: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Tamanho'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'Qtde'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IdProduto'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 584
     Top = 400
     Data = {
-      4E0000009619E0BD0100000018000000030000000000030000004E0002494404
+      6C0000009619E0BD0100000018000000040000000000030000006C0002494404
       000100000000000754616D616E686F0100490000000100055749445448020002
-      000F00045174646504000100000000000000}
+      000F000451746465040001000000000009496450726F6475746F010049000000
+      01000557494454480200020014000000}
     object cdsItensTamanhosID: TIntegerField
       FieldName = 'ID'
     end
@@ -4598,6 +4636,10 @@ object frmVendas: TfrmVendas
     end
     object cdsItensTamanhosQtde: TIntegerField
       FieldName = 'Qtde'
+    end
+    object cdsItensTamanhosIdProduto: TStringField
+      FieldName = 'IdProduto'
+      Visible = False
     end
   end
   object srcItemTamanho: TDataSource

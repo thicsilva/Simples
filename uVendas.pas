@@ -235,11 +235,10 @@ type
     Panel1: TPanel;
     cxImage1: TcxImage;
     Panel2: TPanel;
-    SpeedButton1: TSpeedButton;
     bsSkinLabel1: TbsSkinLabel;
     bsSkinLabel2: TbsSkinLabel;
-    bsSkinLabel4: TbsSkinLabel;
-    bsSkinLabel3: TbsSkinLabel;
+    lblRestante: TbsSkinLabel;
+    lbltotalIncluido: TbsSkinLabel;
     cmbTamanhos: TbsSkinDBLookupComboBox;
     edtQtdeTamanho: TbsSkinEdit;
     bsSkinLabel5: TbsSkinLabel;
@@ -247,10 +246,12 @@ type
     cdsItensVendasTMPGradeID: TIntegerField;
     cdsItensTamanhos: TClientDataSet;
     srcItemTamanho: TDataSource;
-    DBLookupComboBox1: TDBLookupComboBox;
+    cmdNomeTamanho: TDBLookupComboBox;
     cdsItensTamanhosID: TIntegerField;
     cdsItensTamanhosTamanho: TStringField;
     cdsItensTamanhosQtde: TIntegerField;
+    bsSkinLabel6: TbsSkinLabel;
+    cdsItensTamanhosIdProduto: TStringField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -291,6 +292,8 @@ type
     procedure btnDescontoClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure PagVendasChange(Sender: TObject);
+    procedure bsSkinButton1Click(Sender: TObject);
+    procedure btnRemoverClick(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -306,14 +309,16 @@ type
     function RetornarSelectProdutos: String;
     procedure AtaulizaLucroBruto;
     procedure PedidoPersonalizado(NumeroVenda: String);
+    function TotalDigitado(IdProduto: String): Real;
     { Private declarations }
   public
-     liSeqVendaAtu : Integer;
-     liSeqOs       : Integer;
-     liCaixa       : Integer;
+     liSeqVendaAtu  : Integer;
+     liSeqOs        : Integer;
+     liCaixa        : Integer;
      liTotalLiquido : Real;
-     pAtendimento : Boolean;
-     pliCliente : Integer;
+     pAtendimento   : Boolean;
+     pliCliente     : Integer;
+     qtdeTotal      : Integer;
      procedure PrepararFinalizacaoOS;
      procedure AtualizaTabelas();
     { Public declarations }
@@ -843,6 +848,12 @@ begin
    AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
+procedure TfrmVendas.btnRemoverClick(Sender: TObject);
+begin
+   if CaixaMensagem( 'Deseja Excluir o Item '+cdsItensTamanhos.FieldByname('Tamanho').asString, ctConfirma, [ cbSimNao ], 0 )  Then
+      cdsItensTamanhos.Delete;
+end;
+
 procedure  TfrmVendas.AtaulizaLucroBruto;
 var PerLucroBruto : real;
     LucroBruto : Real;
@@ -1722,6 +1733,34 @@ begin
    AtaulizaLucroBruto;
 end;
 
+function TfrmVendas.TotalDigitado(IdProduto : String) : Real ;
+var Total : Real;
+begin
+   Total := 0;
+   cdsItensTamanhos.First;
+   while not cdsItensTamanhos.eof do
+   begin
+     if IdProduto=cdsItensTamanhos.fieldByName('idProduto').AsString then
+        Total := Total + cdsItensTamanhos.fieldByName('Qtde').Asfloat;
+     cdsItensTamanhos.next;
+   end;
+   Result := Total;
+end;
+
+procedure TfrmVendas.bsSkinButton1Click(Sender: TObject);
+begin
+   if not cdsItensTamanhos.Locate('Tamanho',cmdNomeTamanho.Text,[]) then
+   begin
+     cdsItensTamanhos.append;
+     cdsItensTamanhos.FieldByName('Tamanho').AsString := cmdNomeTamanho.Text;
+     cdsItensTamanhos.FieldByName('Qtde').AsInteger   := StrToInt(edtQtdeTamanho.Text);
+     cdsItensTamanhos.FieldByName('IdProduto').AsString := cdsItensVendasTmp.FieldByName('Codigo').AsString;
+     cdsItensTamanhos.Post;
+   end
+   else
+      CaixaMensagem( 'Este Tamanho já foi adicionado ', ctAviso, [ cbOk ], 0 );
+end;
+
 procedure TfrmVendas.btnAdicionarClick(Sender: TObject);
 begin
 
@@ -2060,6 +2099,20 @@ begin
    begin
       pnlProduto.Caption             := cdsItensVendasTmp.FieldByName('Codigo').AsString+' - '+cdsItensVendasTmp.FieldByName('Descricao').AsString;
       dtmVendas.srcTamanhos.Dataset  := gConexao.BuscarDadosSQL('select * from ItensGrade where GradeId='+cdsItensVendasTmp.FieldByName('GradeID').AsString,nil);
+   end;
+   if PagVendas.ActivePageIndex=0 then
+      cdsItensTamanhos.SaveToFile(gspath+'Dados\GradeTamanho.xml', dfXML)
+   else
+   begin
+      if FileExists(gspath+'Dados\GradeTamanho.xml') then
+      begin
+        cdsItensTamanhos.LoadFromFile(gspath+'Dados\GradeTamanho.xml');
+        cdsItensTamanhos.Filtered := False;
+        cdsItensTamanhos.Filter := 'IdProduto='+cdsItensVendasTmp.FieldByName('Codigo').AsString;
+        cdsItensTamanhos.Filtered := True;
+        lbltotalIncluido.Caption:= FormatFloat('0.00', TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString));
+        lblRestante.Caption := FormatFloat('0.00', (cdsItensVendasTmp.FieldByName('qtde_Venda').AsFloat - TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString)));
+      end;
    end;
 end;
 

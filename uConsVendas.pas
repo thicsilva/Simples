@@ -242,11 +242,7 @@ begin
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
                               'where Prod.Codigo=Itens.Cod_Produto  ';
 
-  // qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND Ven.SeqVenda=:parSeqVenda ';
    qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
-
-   //qryItensVendas.ParamByName('parSeqVenda').AsString := cdsVendas.FieldByName('SeqVenda').AsString;
-
    cdsItensVendas.close;
    cdsItensVendas.ProviderName := dspItensVendas.name;
    cdsItensVendas.open;
