@@ -2182,7 +2182,7 @@ object frmConsVendas: TfrmConsVendas
       'MargemSecundaria=MargemSecundaria'
       'LucroBruto=LucroBruto'
       'Valor_Pagamento=Valor_Pagamento')
-    DataSet = cdsItensVendas
+    DataSet = cdsItensVendasCP
     BCDToCurrency = False
     Left = 102
     Top = 217
@@ -3100,5 +3100,24 @@ object frmConsVendas: TfrmConsVendas
         end
       end
     end
+  end
+  object cdsItensVendasCP: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspItensVendaCp'
+    Left = 816
+    Top = 260
+  end
+  object qryItensVendasCp: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 816
+    Top = 204
+  end
+  object dspItensVendasCp: TDataSetProvider
+    DataSet = qryItensVendasCp
+    Left = 816
+    Top = 232
   end
 end

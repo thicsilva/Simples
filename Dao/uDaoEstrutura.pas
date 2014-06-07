@@ -683,9 +683,9 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_ItensGrade;
   Adicionar_GradeID_na_Tabela_Produto;
-  CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_Empresa;
   Adicionar_TipoCobranca_na_Tabela_ItensVendas;
   Adicionar_ValorMes_na_Tabela_Produtos;
@@ -899,6 +899,7 @@ begin
                               '                     	Descricao varchar(50))';
       FQryAjustes.ExecSQL;
    end;
+
    if not ExisteTabela( 'ItensGrade', FConexao.Conection ) then
    begin
       FQryAjustes.Close;

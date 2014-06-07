@@ -153,10 +153,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmselEndereco, frmselEndereco);
-  Application.CreateForm(TfrmCadGrade, frmCadGrade);
-  Application.CreateForm(TdtmVendas, dtmVendas);
-  Application.CreateForm(TdtmCadastro, dtmCadastro);
   Frmlogin.ShowModal;
   Application.Run;
 end.

@@ -2439,7 +2439,7 @@ object frmVendas: TfrmVendas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 0
+        Position = 1
         SmallChange = 1
         LargeChange = 1
       end
@@ -2476,8 +2476,6 @@ object frmVendas: TfrmVendas
     object TabSheet2: TTabSheet
       Caption = 'Adicionar Grade'
       ImageIndex = 1
-      ExplicitLeft = -97
-      ExplicitTop = -30
       object gridTamanho: TbsSkinDBGrid
         Left = 233
         Top = 23

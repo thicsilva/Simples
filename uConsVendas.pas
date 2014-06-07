@@ -138,6 +138,9 @@ type
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
     frxVenda: TfrxReport;
+    cdsItensVendasCP: TClientDataSet;
+    qryItensVendasCp: TSQLQuery;
+    dspItensVendasCp: TDataSetProvider;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -171,6 +174,7 @@ type
     pvilinha  : integer;
     procedure CarregaPropriedade;
     procedure PedidoPersonalizado(NumeroVenda: String);
+    procedure RecuperarItensVendas(seqVenda: String);
     { Private declarations }
   public
     { Public declarations }
@@ -371,14 +375,17 @@ var
     DaoItemVenda : TDaoItemVenda;
 begin
    if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
-      PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString)
+   begin
+      RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
+      PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString);
+   end
    else
    begin
      DaoVenda := TDaoVenda.Create(gConexao);
      loVenda  := DaoVenda.CarregarVenda(cdsVendas);
      loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
      lovenda.Empresa := gEmpresa;
-     DaoItemVenda := TDaoItemVenda.Create(gConexao);
+     DaoItemVenda    := TDaoItemVenda.Create(gConexao);
      loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
                       gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
                       StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
@@ -469,7 +476,7 @@ end;
 
 procedure TfrmConsVendas.cdsVendasAfterScroll(DataSet: TDataSet);
 begin
-{   qryItensVendas.Close;
+{  qryItensVendas.Close;
    qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
                               'Prod.Pco_Custo, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
@@ -484,6 +491,24 @@ begin
    cdsItensVendas.ProviderName := dspItensVendas.name;
    cdsItensVendas.open; }
 
+end;
+
+procedure TfrmConsVendas.RecuperarItensVendas(seqVenda : String);
+begin
+   qryItensVendasCp.Close;
+   qryItensVendasCp.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
+                              'Prod.Pco_Custo, Itens.* '+
+                              'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
+                              'where Prod.Codigo=Itens.Cod_Produto  ';
+
+   qryItensVendasCp.SQL.Text := qryItensVendasCp.SQL.Text + ' AND Ven.SeqVenda=:parSeqVenda ';
+   qryItensVendasCp.SQL.Text := qryItensVendasCp.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
+
+   qryItensVendasCp.ParamByName('parSeqVenda').AsString := seqVenda;
+
+   cdsItensVendasCp.close;
+   cdsItensVendasCp.ProviderName := dspItensVendasCp.name;
+   cdsItensVendasCp.open;
 end;
 
 procedure TfrmConsVendas.cdsVendasBeforeOpen(DataSet: TDataSet);

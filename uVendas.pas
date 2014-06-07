@@ -1920,6 +1920,12 @@ begin
    cmbnome_Cliente.Keyvalue  :=  CmbCod_Cliente.Keyvalue ;
    if Trim(cmbNome_Cliente.Text) <> '' Then
    Begin
+      if trim(cdsCadClientes.FieldByName('Endereco').asString)=EmptyStr then
+      begin
+         CaixaMensagem( 'O cliente Esta com o endereço desatualizado ', ctAviso, [ cbOk ], 0 );
+         edtcod_Cliente.SetFocus;
+      end;
+
       edtCod_Cliente.text  :=  cmbCod_Cliente.Text;
       edtCnpjCpf.Text      := Trim(cdsCadClientes.FieldByName('CnpjCpf').asString);
       cmbRota.KeyValue      := cdsCadClientes.FieldByName('Cod_Rota').asString;
