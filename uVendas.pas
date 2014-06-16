@@ -233,7 +233,6 @@ type
     bsSkinButton1: TbsSkinButton;
     btnRemover: TbsSkinButton;
     Panel1: TPanel;
-    cxImage1: TcxImage;
     Panel2: TPanel;
     bsSkinLabel1: TbsSkinLabel;
     bsSkinLabel2: TbsSkinLabel;
@@ -252,6 +251,10 @@ type
     cdsItensTamanhosQtde: TIntegerField;
     bsSkinLabel6: TbsSkinLabel;
     cdsItensTamanhosIdProduto: TStringField;
+    Panel3: TPanel;
+    imgFrente: TcxImage;
+    imgVerso: TcxImage;
+    cdsItensTamanhosItenGradeID: TIntegerField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -310,6 +313,7 @@ type
     procedure AtaulizaLucroBruto;
     procedure PedidoPersonalizado(NumeroVenda: String);
     function TotalDigitado(IdProduto: String): Real;
+    procedure AtualizaValores;
     { Private declarations }
   public
      liSeqVendaAtu  : Integer;
@@ -331,7 +335,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
-  uselAnimal, uDescontoVenda, uDelivery;
+  uselAnimal, uDescontoVenda, uDelivery, uDaoItensVendaGrade;
 
 {$R *.dfm}
 procedure TfrmVendas.AtualizaDesconto(lrPercDesconto: Real);
@@ -518,6 +522,7 @@ begin
    edtControle.Visible         := True;
    lblVencimento.Visible       := False;
    edtdata_Vencimento.Visible  := False;
+   dtmVendas := TdtmVendas.Create(Self);
    If (frmVendas.tag = SERVICOS)  Then
    Begin
       frmVendas.Caption    := 'Cadastro e manuteção de vendas de serviços';
@@ -851,7 +856,10 @@ end;
 procedure TfrmVendas.btnRemoverClick(Sender: TObject);
 begin
    if CaixaMensagem( 'Deseja Excluir o Item '+cdsItensTamanhos.FieldByname('Tamanho').asString, ctConfirma, [ cbSimNao ], 0 )  Then
+   begin
       cdsItensTamanhos.Delete;
+      AtualizaValores;
+   end;
 end;
 
 procedure  TfrmVendas.AtaulizaLucroBruto;
@@ -902,9 +910,10 @@ Var liSeqvenda     : integer;
     loItemVenda : TItemVenda;
     DaoItemVenda : TDaoItemVenda;
     DaoFuncionario: TdaoFuncionario;
+    loItensVendaGrade : TDaoItensVendaGrade;
     liCaixaFinalizado : Integer;
     lbServicoPago : Boolean;
-  lrCustoTotal: real;
+    lrCustoTotal: real;
 begin
 
    {$REGION 'Criticas e Validação das Informações'}
@@ -1491,8 +1500,17 @@ begin
       qryModific.ParamByName('parSeqOs').AsInteger := liseqOs ;
       qryModific.ExecSQL;
    End;
-{$ENDREGION}
+   {$ENDREGION}
 
+   {$REGION 'Inserir itens da grade '}
+   if not cdsItensTamanhos.IsEmpty then
+   Begin
+    loItensVendaGrade := TDaoItensVendaGrade.Create(gConexao);
+    loItensVendaGrade.InserirItens(cdsItensTamanhos,liSeqvenda);
+    cdsItensTamanhos.EmptyDataSet;
+   End;
+
+   {$ENDREGION}
    frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
 
    {$REGION 'Impressao do comprovante de Venda'}
@@ -1564,7 +1582,7 @@ begin
    pnlProdutos.Enabled      := True;
    pnlDadosClientes.Enabled := True;
    btnCadProdutos.Enabled   := True;
-
+   PagVendas.ActivePageIndex := 0;
    AtualizaTabelas;
    btnadicionarClick(btnadicionar);
 
@@ -1603,6 +1621,7 @@ begin
    btnok.Enabled         := False;
    BtnCancela.Enabled    := False;
    btnincluir.Enabled    := True;
+   PagVendas.ActivePageIndex := 0;
 
    LimpaCampos();
    if (frmVendas.tag = 4) or (frmVendas.tag = 5) then
@@ -1749,13 +1768,22 @@ end;
 
 procedure TfrmVendas.bsSkinButton1Click(Sender: TObject);
 begin
+
+   if StrToFloat(edtQtdeTamanho.Text)>StrToFloat(lblRestante.Caption) then
+   begin
+      CaixaMensagem( 'Não existe produto disponivel para esta quantidade ', ctAviso, [ cbOk ], 0 );
+      exit;
+   end;
+
    if not cdsItensTamanhos.Locate('Tamanho',cmdNomeTamanho.Text,[]) then
    begin
      cdsItensTamanhos.append;
-     cdsItensTamanhos.FieldByName('Tamanho').AsString := cmdNomeTamanho.Text;
-     cdsItensTamanhos.FieldByName('Qtde').AsInteger   := StrToInt(edtQtdeTamanho.Text);
-     cdsItensTamanhos.FieldByName('IdProduto').AsString := cdsItensVendasTmp.FieldByName('Codigo').AsString;
+     cdsItensTamanhos.FieldByName('Tamanho').AsString     := cmdNomeTamanho.Text;
+     cdsItensTamanhos.FieldByName('Qtde').AsInteger       := StrToInt(edtQtdeTamanho.Text);
+     cdsItensTamanhos.FieldByName('IdProduto').AsString   := cdsItensVendasTmp.FieldByName('Codigo').AsString;
+     cdsItensTamanhos.FieldByName('ItenGradeId').AsInteger:= dtmVendas.srcTamanhos.dataset.FieldByName('Id').AsInteger;
      cdsItensTamanhos.Post;
+     AtualizaValores;
    end
    else
       CaixaMensagem( 'Este Tamanho já foi adicionado ', ctAviso, [ cbOk ], 0 );
@@ -2116,12 +2144,16 @@ begin
         cdsItensTamanhos.Filtered := False;
         cdsItensTamanhos.Filter := 'IdProduto='+cdsItensVendasTmp.FieldByName('Codigo').AsString;
         cdsItensTamanhos.Filtered := True;
-        lbltotalIncluido.Caption:= FormatFloat('0.00', TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString));
-        lblRestante.Caption := FormatFloat('0.00', (cdsItensVendasTmp.FieldByName('qtde_Venda').AsFloat - TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString)));
       end;
    end;
+   AtualizaValores;
+   cmdNomeTamanho.SetFocus;
 end;
-
+procedure TfrmVendas.AtualizaValores;
+Begin
+   lbltotalIncluido.Caption:= FormatFloat('0.00', TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString));
+   lblRestante.Caption := FormatFloat('0.00', (cdsItensVendasTmp.FieldByName('qtde_Venda').AsFloat - TotalDigitado(cdsItensVendasTmp.FieldByName('Codigo').AsString)));
+End;
 procedure  TfrmVendas.PedidoPersonalizado(NumeroVenda : String);
 begin
 

@@ -67,6 +67,7 @@ type TDaoEstrutura = class
     procedure CriarTabela_TabelasGrade;
     procedure Adicionar_GradeID_na_Tabela_Produto;
     procedure Adicionar_Campos_na_Tabela_ItensGrade;
+    procedure CriarTabela_ItenVendaGrade;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -683,6 +684,7 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  CriarTabela_ItenVendaGrade;
   CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_ItensGrade;
   Adicionar_GradeID_na_Tabela_Produto;
@@ -890,6 +892,24 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.CriarTabela_ItenVendaGrade;
+begin
+   if not ExisteTabela( 'ItensVendaGrade', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := ' CREATE TABLE ItensVendaGrade ( ID int IDENTITY(1,1) NOT NULL, '+
+                    	        '                               ProdutoId int,  '+
+							                '                               ItenGradeId int, '+
+                              '                               VendaId int, '+
+							                '                               QtdeSolicitada Float,'+
+							                '                               QtdeProduzida Float )';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+
+
 procedure TDaoEstrutura.CriarTabela_TabelasGrade;
 begin
    if not ExisteTabela( 'Grade', FConexao.Conection ) then
@@ -908,7 +928,6 @@ begin
                               '                    	Tamanho varchar(10))';
       FQryAjustes.ExecSQL;
    end;
-
 end;
 
 

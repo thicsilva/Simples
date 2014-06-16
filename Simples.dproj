@@ -75,6 +75,7 @@
     <DCCReference Include="Dao\uDaoGrade.pas" />
     <DCCReference Include="Dao\uDaoItemEntrada.pas" />
     <DCCReference Include="Dao\uDaoItemVenda.pas" />
+    <DCCReference Include="Dao\uDaoItensVendaGrade.pas" />
     <DCCReference Include="Dao\uDaoPerfil.pas" />
     <DCCReference Include="Dao\uDaoPlanoDeConta.pas" />
     <DCCReference Include="Dao\uDaoRomaneio.pas" />
@@ -228,6 +229,9 @@
     </DCCReference>
     <DCCReference Include="ufechaOS.pas">
       <Form>frmFechaOs</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmFinalizaServico.pas">
+      <Form>frmFinalizaServico</Form>
     </DCCReference>
     <DCCReference Include="uFuncoesMP4000.pas" />
     <DCCReference Include="uInventario.pas">

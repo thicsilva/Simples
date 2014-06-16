@@ -144,7 +144,9 @@ uses
   uCadGrade in 'uCadGrade.pas' {frmCadGrade},
   uDaoGrade in 'Dao\uDaoGrade.pas',
   UdtmVendas in 'Data Module\UdtmVendas.pas' {dtmVendas: TDataModule},
-  uDtmCadastro in 'Data Module\uDtmCadastro.pas' {dtmCadastro: TDataModule};
+  uDtmCadastro in 'Data Module\uDtmCadastro.pas' {dtmCadastro: TDataModule},
+  uDaoItensVendaGrade in 'Dao\uDaoItensVendaGrade.pas',
+  ufrmFinalizaServico in 'ufrmFinalizaServico.pas' {frmFinalizaServico};
 
 {$R *.res}
 
@@ -153,6 +155,7 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmFinalizaServico, frmFinalizaServico);
   Frmlogin.ShowModal;
   Application.Run;
 end.

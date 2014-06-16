@@ -4,7 +4,7 @@ object frmVendas: TfrmVendas
   BorderIcons = []
   Caption = 'Pedidos de Venda'
   ClientHeight = 587
-  ClientWidth = 781
+  ClientWidth = 822
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object frmVendas: TfrmVendas
   object pnlDadosClientes: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 781
+    Width = 822
     Height = 155
     HintImageIndex = 0
     TabOrder = 0
@@ -418,7 +418,7 @@ object frmVendas: TfrmVendas
       OnExit = edtcod_ClienteExit
     end
     object bsSkinPanel3: TbsSkinPanel
-      Left = 546
+      Left = 587
       Top = 1
       Width = 234
       Height = 153
@@ -1149,7 +1149,7 @@ object frmVendas: TfrmVendas
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 208
-    Width = 781
+    Width = 822
     Height = 44
     AutoSize = True
     Bands = <
@@ -1157,7 +1157,7 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 40
-        Width = 777
+        Width = 818
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -1166,7 +1166,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 768
+      Width = 809
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1499,7 +1499,7 @@ object frmVendas: TfrmVendas
   object pnlProdutos: TbsSkinPanel
     Left = 0
     Top = 252
-    Width = 781
+    Width = 822
     Height = 55
     HintImageIndex = 0
     TabOrder = 2
@@ -2030,7 +2030,7 @@ object frmVendas: TfrmVendas
   object bsSkinCoolBar3: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 781
+    Width = 822
     Height = 53
     AutoSize = True
     Bands = <
@@ -2038,7 +2038,7 @@ object frmVendas: TfrmVendas
         Control = bsSkinToolBar3
         ImageIndex = -1
         MinHeight = 49
-        Width = 777
+        Width = 818
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -2047,7 +2047,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 768
+      Width = 809
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -2260,7 +2260,7 @@ object frmVendas: TfrmVendas
         Layout = blGlyphTop
         Enabled = False
         OnClick = btnokClick
-        ExplicitLeft = 507
+        ExplicitLeft = 502
         ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
@@ -2331,7 +2331,7 @@ object frmVendas: TfrmVendas
   object PanelStatus: TbsSkinStatusPanel
     Left = 0
     Top = 566
-    Width = 781
+    Width = 822
     Height = 21
     HintImageIndex = 0
     TabOrder = 8
@@ -2365,7 +2365,7 @@ object frmVendas: TfrmVendas
   object PagVendas: TPageControl
     Left = 0
     Top = 307
-    Width = 781
+    Width = 822
     Height = 259
     ActivePage = TabSheet2
     Align = alClient
@@ -2376,7 +2376,7 @@ object frmVendas: TfrmVendas
       object dbgConsulta: TbsSkinDBGrid
         Left = 0
         Top = 0
-        Width = 754
+        Width = 795
         Height = 212
         HintImageIndex = 0
         TabOrder = 0
@@ -2414,7 +2414,7 @@ object frmVendas: TfrmVendas
         TitleFont.Style = [fsBold]
       end
       object bsSkinScrollBar2: TbsSkinScrollBar
-        Left = 754
+        Left = 795
         Top = 0
         Width = 19
         Height = 212
@@ -2446,7 +2446,7 @@ object frmVendas: TfrmVendas
       object bsSkinScrollBar1: TbsSkinScrollBar
         Left = 0
         Top = 212
-        Width = 773
+        Width = 814
         Height = 19
         HintImageIndex = 0
         TabOrder = 2
@@ -2479,10 +2479,10 @@ object frmVendas: TfrmVendas
       object gridTamanho: TbsSkinDBGrid
         Left = 233
         Top = 23
-        Width = 167
+        Width = 208
         Height = 208
         HintImageIndex = 0
-        TabOrder = 0
+        TabOrder = 3
         SkinDataName = 'grid'
         Transparent = False
         WallpaperStretch = False
@@ -2520,7 +2520,7 @@ object frmVendas: TfrmVendas
             Title.Font.Height = -13
             Title.Font.Name = 'Arial'
             Title.Font.Style = []
-            Width = 86
+            Width = 127
             Visible = True
           end
           item
@@ -2536,12 +2536,12 @@ object frmVendas: TfrmVendas
           end>
       end
       object bsSkinButton1: TbsSkinButton
-        Left = 3
+        Left = 7
         Top = 143
         Width = 220
         Height = 25
         HintImageIndex = 0
-        TabOrder = 1
+        TabOrder = 2
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'button'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2577,7 +2577,7 @@ object frmVendas: TfrmVendas
         Width = 220
         Height = 25
         HintImageIndex = 0
-        TabOrder = 2
+        TabOrder = 4
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'button'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2608,21 +2608,12 @@ object frmVendas: TfrmVendas
         OnClick = btnRemoverClick
       end
       object Panel1: TPanel
-        Left = 400
+        Left = 441
         Top = 23
         Width = 373
         Height = 208
         Align = alRight
-        Caption = 'Panel1'
-        TabOrder = 3
-        object cxImage1: TcxImage
-          Left = 1
-          Top = 33
-          Align = alClient
-          TabOrder = 0
-          Height = 174
-          Width = 371
-        end
+        TabOrder = 5
         object Panel2: TPanel
           Left = 1
           Top = 1
@@ -2630,7 +2621,7 @@ object frmVendas: TfrmVendas
           Height = 32
           Align = alTop
           BevelOuter = bvLowered
-          TabOrder = 1
+          TabOrder = 0
           object bsSkinLabel1: TbsSkinLabel
             Left = 7
             Top = 5
@@ -2758,6 +2749,31 @@ object frmVendas: TfrmVendas
             AutoSize = False
           end
         end
+        object Panel3: TPanel
+          Left = 1
+          Top = 33
+          Width = 185
+          Height = 174
+          Align = alLeft
+          Caption = 'Panel3'
+          TabOrder = 1
+          object imgFrente: TcxImage
+            Left = 1
+            Top = 1
+            Align = alClient
+            TabOrder = 0
+            Height = 172
+            Width = 183
+          end
+        end
+        object imgVerso: TcxImage
+          Left = 192
+          Top = 33
+          Align = alRight
+          TabOrder = 2
+          Height = 174
+          Width = 180
+        end
       end
       object cmbTamanhos: TbsSkinDBLookupComboBox
         Left = 3
@@ -2765,7 +2781,7 @@ object frmVendas: TfrmVendas
         Width = 174
         Height = 20
         HintImageIndex = 0
-        TabOrder = 4
+        TabOrder = 6
         SkinDataName = 'combobox'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -2813,7 +2829,7 @@ object frmVendas: TfrmVendas
         Font.Name = 'Arial Narrow'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 5
+        TabOrder = 1
         ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
@@ -2828,7 +2844,7 @@ object frmVendas: TfrmVendas
         Width = 224
         Height = 28
         HintImageIndex = 0
-        TabOrder = 6
+        TabOrder = 7
         SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'label'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2856,7 +2872,7 @@ object frmVendas: TfrmVendas
       object pnlProduto: TPanel
         Left = 0
         Top = 0
-        Width = 773
+        Width = 814
         Height = 23
         Align = alTop
         BevelOuter = bvLowered
@@ -2867,7 +2883,7 @@ object frmVendas: TfrmVendas
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object cmdNomeTamanho: TDBLookupComboBox
         Left = 3
@@ -2883,7 +2899,7 @@ object frmVendas: TfrmVendas
         ListField = 'Tamanho'
         ListSource = dtmVendas.srcTamanhos
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 0
       end
       object bsSkinLabel6: TbsSkinLabel
         Left = 3
@@ -4614,6 +4630,10 @@ object frmVendas: TfrmVendas
         Name = 'IdProduto'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'ItenGradeID'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -4621,10 +4641,11 @@ object frmVendas: TfrmVendas
     Left = 584
     Top = 400
     Data = {
-      6C0000009619E0BD0100000018000000040000000000030000006C0002494404
+      800000009619E0BD010000001800000005000000000003000000800002494404
       000100000000000754616D616E686F0100490000000100055749445448020002
       000F000451746465040001000000000009496450726F6475746F010049000000
-      01000557494454480200020014000000}
+      01000557494454480200020014000B4974656E47726164654944040001000000
+      00000000}
     object cdsItensTamanhosID: TIntegerField
       FieldName = 'ID'
     end
@@ -4638,6 +4659,9 @@ object frmVendas: TfrmVendas
     object cdsItensTamanhosIdProduto: TStringField
       FieldName = 'IdProduto'
       Visible = False
+    end
+    object cdsItensTamanhosItenGradeID: TIntegerField
+      FieldName = 'ItenGradeID'
     end
   end
   object srcItemTamanho: TDataSource
