@@ -44,24 +44,36 @@ end;
 procedure TDaoGrade.NovaGrade(NomeGrade: String; cdsItensGrade: TclientDataSet; GradeID : Integer);
 var liGradeId : Integer;
 begin
-  if GradeID<>0 then
-    FConexao.Conection.ExecuteDirect('Update Grade set Descricao='+QuotedStr(NomeGrade)+' where ID='+IntToStr(GradeId))
-  else
-    FConexao.Conection.ExecuteDirect('Insert into Grade (Descricao) Values ('+QuotedStr(NomeGrade)+')');
+   if GradeID<>0 then
+      FConexao.Conection.ExecuteDirect('Update Grade set Descricao='+QuotedStr(NomeGrade)+' where ID='+IntToStr(GradeId))
+   else
+      FConexao.Conection.ExecuteDirect('Insert into Grade (Descricao) Values ('+QuotedStr(NomeGrade)+')');
 
    liGradeId := RetornarGradeId(NomeGrade);
-   cdsItensGrade.First;
-   fsqlModific.Sql.Text := 'Insert into ItensGrade (GradeId,Tamanho,CaminhoImagemFrente,CaminhoImagemVerso) values '+
-                           '                       (:parGradeId,:parTamanho,:parCaminhoImagemFrente,:parCaminhoImagemVerso) ';
+
    while not cdsItensGrade.Eof do
    begin
-     fsqlModific.close;
-     fsqlModific.ParamByName('parGradeId').AsInteger := liGradeId;
-     fsqlModific.ParamByName('parTamanho').AsString  := cdsItensGrade.FieldByName('Tamanho').AsString;
-     fsqlModific.ParamByName('parCaminhoImagemFrente').AsString  := cdsItensGrade.FieldByName('CaminhoImagemFrente').AsString;
-     fsqlModific.ParamByName('parCaminhoImagemVerso').AsString  := cdsItensGrade.FieldByName('CaminhoImagemVerso').AsString;
-     fsqlModific.ExecSQL;
-     cdsItensGrade.Next;
+      if cdsItensGrade.FieldByName('Id').AsString='0' then
+      begin
+         fsqlModific.Close;
+         fsqlModific.Sql.Text := 'Insert into ItensGrade (GradeId,Tamanho,CaminhoImagemFrente,CaminhoImagemVerso) values '+
+                                 '                       (:parGradeId,:parTamanho,:parCaminhoImagemFrente,:parCaminhoImagemVerso) ';
+         fsqlModific.close;
+         fsqlModific.ParamByName('parGradeId').AsInteger := liGradeId;
+      end
+      else
+      Begin
+         fsqlModific.Close;
+         fsqlModific.Sql.Text := 'update ItensGrade set Tamanho=:parTamanho,CaminhoImagemFrente=:parCaminhoImagemFrente, '+
+                                 '                      CaminhoImagemVerso=:parCaminhoImagemVerso where Id=:parId ';
+         fsqlModific.close;
+         fsqlModific.ParamByName('parId').AsInteger := cdsItensGrade.FieldByName('Id').AsInteger;
+      End;
+      fsqlModific.ParamByName('parTamanho').AsString  := cdsItensGrade.FieldByName('Tamanho').AsString;
+      fsqlModific.ParamByName('parCaminhoImagemFrente').AsString  := cdsItensGrade.FieldByName('CaminhoImagemFrente').AsString;
+      fsqlModific.ParamByName('parCaminhoImagemVerso').AsString  := cdsItensGrade.FieldByName('CaminhoImagemVerso').AsString;
+      fsqlModific.ExecSQL;
+      cdsItensGrade.Next;
    end;
 end;
 

@@ -187,7 +187,7 @@ implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
-  uclassContaCorrente, uDtmCadastro;
+  uclassContaCorrente, uDtmCadastro, ufrmFinalizaServico;
 
 {$R *.dfm}
 
@@ -1194,7 +1194,10 @@ begin
          qryModific.ExecSQL;
       End;
    end;
-   btnselecionarclick(btnselecionar);
+   frmFinalizaServico := TfrmFinalizaServico.Create(Nil);
+   frmFinalizaServico.pIdSeqVenda := cdsVendas.FieldByName('SeqVenda').AsString;
+   frmFinalizaServico.ShowModal;
+   //btnselecionarclick(btnselecionar);
 end;
 
 procedure TfrmConsVendas.btnEntregaVendaClick(Sender: TObject);

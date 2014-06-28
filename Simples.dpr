@@ -155,7 +155,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmFinalizaServico, frmFinalizaServico);
   Frmlogin.ShowModal;
   Application.Run;
 end.

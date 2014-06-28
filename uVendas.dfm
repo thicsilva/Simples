@@ -2439,7 +2439,7 @@ object frmVendas: TfrmVendas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 1
+        Position = 0
         SmallChange = 1
         LargeChange = 1
       end
@@ -2572,7 +2572,7 @@ object frmVendas: TfrmVendas
         OnClick = bsSkinButton1Click
       end
       object btnRemover: TbsSkinButton
-        Left = 3
+        Left = 7
         Top = 174
         Width = 220
         Height = 25

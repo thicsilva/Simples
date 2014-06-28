@@ -20,7 +20,7 @@ object frmCadGrade: TfrmCadGrade
     Top = 53
     Width = 1155
     Height = 347
-    ActivePage = bsSkinTabSheet1
+    ActivePage = srcTamanhos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -49,6 +49,8 @@ object frmCadGrade: TfrmCadGrade
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitLeft = -32
+    ExplicitTop = 21
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object Panel2: TPanel

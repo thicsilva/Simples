@@ -1508,6 +1508,7 @@ begin
     loItensVendaGrade := TDaoItensVendaGrade.Create(gConexao);
     loItensVendaGrade.InserirItens(cdsItensTamanhos,liSeqvenda);
     cdsItensTamanhos.EmptyDataSet;
+    cdsItensTamanhos.SaveToFile(gspath+'Dados\GradeTamanho.xml', dfXML)
    End;
 
    {$ENDREGION}
@@ -2145,9 +2146,9 @@ begin
         cdsItensTamanhos.Filter := 'IdProduto='+cdsItensVendasTmp.FieldByName('Codigo').AsString;
         cdsItensTamanhos.Filtered := True;
       end;
+      cmdNomeTamanho.SetFocus;
    end;
    AtualizaValores;
-   cmdNomeTamanho.SetFocus;
 end;
 procedure TfrmVendas.AtualizaValores;
 Begin

@@ -99,7 +99,7 @@ procedure TfrmCadGrade.btnAdicionarClick(Sender: TObject);
 begin
    cdsTamanho.Append;
    cdsTamanho.FieldByName('Tamanho').AsString := edtTamanho.text;
-   cdsTamanho.FieldByName('ID').AsInteger := cdsTamanho.RecordCount+1;
+   cdsTamanho.FieldByName('ID').AsInteger     := 0;
    cdsTamanho.post;
    edtTamanho.text:=''
 end;
@@ -241,7 +241,6 @@ begin
           Exit;
        end;
    end;
-   DaoGrade.ApagarGrade(pGradeId);
    DaoGrade.NovaGrade(edtDescricao.Text,cdsTamanho,pGradeId);
    BtnCancelaClick(Sender);
 end;                                                   

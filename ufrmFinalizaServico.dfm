@@ -2,8 +2,8 @@ object frmFinalizaServico: TfrmFinalizaServico
   Left = 0
   Top = 0
   Caption = 'Finalizar servi'#231'o '
-  ClientHeight = 400
-  ClientWidth = 767
+  ClientHeight = 479
+  ClientWidth = 845
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,12 +11,14 @@ object frmFinalizaServico: TfrmFinalizaServico
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 767
+    Width = 845
     Height = 53
     AutoSize = True
     Bands = <
@@ -24,16 +26,17 @@ object frmFinalizaServico: TfrmFinalizaServico
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 763
+        Width = 841
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
+    ExplicitWidth = 828
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 754
+      Width = 832
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -77,7 +80,7 @@ object frmFinalizaServico: TfrmFinalizaServico
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 370
+        Left = 724
         Top = 0
         Width = 70
         Height = 49
@@ -115,7 +118,30 @@ object frmFinalizaServico: TfrmFinalizaServico
         ExplicitTop = 12
         ExplicitHeight = 40
       end
-      object btnincluir: TbsSkinSpeedButton
+      object bsSkinBevel1: TbsSkinBevel
+        Left = 723
+        Top = 0
+        Width = 1
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitLeft = 477
+        ExplicitTop = -1
+      end
+      object bsSkinBevel2: TbsSkinBevel
+        Left = 70
+        Top = 0
+        Width = 653
+        Height = 49
+        Align = alLeft
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bevel'
+        DividerMode = True
+        ExplicitLeft = 76
+      end
+      object btnConcluir: TbsSkinSpeedButton
         Left = 0
         Top = 0
         Width = 70
@@ -136,7 +162,7 @@ object frmFinalizaServico: TfrmFinalizaServico
         UseSkinFontColor = True
         WidthWithCaption = 0
         WidthWithoutCaption = 0
-        ImageIndex = 6
+        ImageIndex = 3
         RepeatMode = False
         RepeatInterval = 100
         Transparent = True
@@ -144,7 +170,7 @@ object frmFinalizaServico: TfrmFinalizaServico
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '&Imprimir'
+        Caption = '&Finalizar Servi'#231'o'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
@@ -153,155 +179,128 @@ object frmFinalizaServico: TfrmFinalizaServico
         ExplicitLeft = 64
         ExplicitTop = 12
       end
-      object bsSkinBevel1: TbsSkinBevel
-        Left = 369
-        Top = 0
-        Width = 1
-        Height = 49
-        Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bevel'
-        DividerMode = True
-        ExplicitLeft = 477
-        ExplicitTop = -1
-      end
-      object bsSkinBevel2: TbsSkinBevel
-        Left = 70
-        Top = 0
-        Width = 299
-        Height = 49
-        Align = alLeft
-        SkinData = frmPrincipal.SkinPrincipal
-        SkinDataName = 'bevel'
-        DividerMode = True
-        ExplicitTop = -1
-      end
     end
   end
   object Panel4: TPanel
     Left = 0
     Top = 53
-    Width = 767
-    Height = 347
+    Width = 845
+    Height = 426
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 1
+    ExplicitLeft = 24
+    ExplicitTop = 101
     object Panel1: TPanel
-      Left = 393
+      Left = 456
       Top = 1
-      Width = 373
-      Height = 345
+      Width = 388
+      Height = 424
       Align = alRight
       TabOrder = 0
       object Panel2: TPanel
         Left = 1
         Top = 1
-        Width = 371
+        Width = 386
         Height = 32
         Align = alTop
         BevelOuter = bvLowered
         TabOrder = 0
-        object bsSkinLabel1: TbsSkinLabel
-          Left = 7
-          Top = 5
-          Width = 58
-          Height = 21
-          HintImageIndex = 0
-          TabOrder = 0
-          SkinData = frmPrincipal.SkinEntradaDados
-          SkinDataName = 'label'
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = 13
-          DefaultFont.Name = 'Tahoma'
-          DefaultFont.Style = []
-          DefaultWidth = 0
-          DefaultHeight = 0
-          UseSkinFont = True
-          Transparent = False
-          ShadowEffect = False
-          ShadowColor = clBlack
-          ShadowOffset = 0
-          ShadowSize = 3
-          ReflectionEffect = False
-          ReflectionOffset = -5
-          EllipsType = bsetNoneEllips
-          UseSkinSize = True
-          UseSkinFontColor = True
-          BorderStyle = bvFrame
-          Caption = 'J'#225' Incluido'
-          AutoSize = False
-        end
-        object bsSkinLabel2: TbsSkinLabel
-          Left = 208
-          Top = 5
-          Width = 58
-          Height = 21
-          HintImageIndex = 0
-          TabOrder = 1
-          SkinData = frmPrincipal.SkinEntradaDados
-          SkinDataName = 'label'
-          DefaultFont.Charset = DEFAULT_CHARSET
-          DefaultFont.Color = clWindowText
-          DefaultFont.Height = 13
-          DefaultFont.Name = 'Tahoma'
-          DefaultFont.Style = []
-          DefaultWidth = 0
-          DefaultHeight = 0
-          UseSkinFont = True
-          Transparent = False
-          ShadowEffect = False
-          ShadowColor = clBlack
-          ShadowOffset = 0
-          ShadowSize = 3
-          ReflectionEffect = False
-          ReflectionOffset = -5
-          EllipsType = bsetNoneEllips
-          UseSkinSize = True
-          UseSkinFontColor = True
-          BorderStyle = bvFrame
-          Caption = 'Restante'
-          AutoSize = False
-        end
+        ExplicitWidth = 371
       end
-      object Panel3: TPanel
-        Left = 1
-        Top = 33
-        Width = 185
-        Height = 311
-        Align = alLeft
-        Caption = 'Panel3'
+      object imageVerso: TcxImage
+        Left = 6
+        Top = 259
         TabOrder = 1
-        object imgFrente: TcxImage
-          Left = 2
-          Top = 40
-          TabOrder = 0
-          Height = 163
-          Width = 183
-        end
+        Height = 163
+        Width = 371
       end
-      object imgVerso: TcxImage
-        Left = 192
-        Top = 73
+      object imageFrente: TcxImage
+        Left = 5
+        Top = 66
         TabOrder = 2
         Height = 163
-        Width = 180
+        Width = 372
+      end
+      object bsSkinLabel1: TbsSkinLabel
+        Left = 5
+        Top = 39
+        Width = 372
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 13
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        Transparent = False
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Frente da etiqueta'
+        AutoSize = False
+      end
+      object bsSkinLabel2: TbsSkinLabel
+        Left = 6
+        Top = 235
+        Width = 371
+        Height = 21
+        HintImageIndex = 0
+        TabOrder = 4
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'label'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 13
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        Transparent = False
+        ShadowEffect = False
+        ShadowColor = clBlack
+        ShadowOffset = 0
+        ShadowSize = 3
+        ReflectionEffect = False
+        ReflectionOffset = -5
+        EllipsType = bsetNoneEllips
+        UseSkinSize = True
+        UseSkinFontColor = True
+        BorderStyle = bvFrame
+        Caption = 'Verso da etiqueta'
+        AutoSize = False
       end
     end
     object TPanel
       Left = 1
       Top = 1
-      Width = 392
-      Height = 345
+      Width = 455
+      Height = 424
       Align = alClient
       TabOrder = 1
+      ExplicitWidth = 453
       object pnlteste: TPanel
         Left = 1
-        Top = 126
-        Width = 390
+        Top = 124
+        Width = 453
         Height = 35
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 451
         object bsSkinButton1: TbsSkinButton
           Left = 259
           Top = 4
@@ -336,12 +335,13 @@ object frmFinalizaServico: TfrmFinalizaServico
           Caption = '    &Atualizar'
           NumGlyphs = 1
           Spacing = 1
+          OnClick = bsSkinButton1Click
         end
         object edtQtdeTamanho: TbsSkinEdit
           Left = 161
           Top = 4
           Width = 94
-          Height = 28
+          Height = 29
           Text = '0'
           DefaultColor = clWindow
           DefaultFont.Charset = ANSI_CHARSET
@@ -404,9 +404,9 @@ object frmFinalizaServico: TfrmFinalizaServico
       end
       object gridTamanho: TbsSkinDBGrid
         Left = 1
-        Top = 161
-        Width = 390
-        Height = 183
+        Top = 159
+        Width = 453
+        Height = 264
         HintImageIndex = 0
         TabOrder = 1
         SkinDataName = 'grid'
@@ -424,12 +424,12 @@ object frmFinalizaServico: TfrmFinalizaServico
         ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
-        DefaultRowHeight = 23
         MouseWheelSupport = False
         SaveMultiSelection = False
         PickListBoxSkinDataName = 'listbox'
         PickListBoxCaptionMode = False
         Align = alClient
+        DataSource = srcTmpTamanhos
         ParentFont = False
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clBtnText
@@ -477,8 +477,8 @@ object frmFinalizaServico: TfrmFinalizaServico
       object dbGridItensGrade: TbsSkinDBGrid
         Left = 1
         Top = 1
-        Width = 390
-        Height = 125
+        Width = 453
+        Height = 123
         HintImageIndex = 0
         TabOrder = 2
         SkinDataName = 'grid'
@@ -496,12 +496,12 @@ object frmFinalizaServico: TfrmFinalizaServico
         ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
-        DefaultRowHeight = 23
         MouseWheelSupport = False
         SaveMultiSelection = False
         PickListBoxSkinDataName = 'listbox'
         PickListBoxCaptionMode = False
         Align = alTop
+        DataSource = srcItensServico
         ParentFont = False
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clBtnText
@@ -527,5 +527,42 @@ object frmFinalizaServico: TfrmFinalizaServico
           end>
       end
     end
+  end
+  object cdsTmpItensServico: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    AfterScroll = cdsTmpItensServicoAfterScroll
+    Left = 506
+    Top = 131
+    Data = {
+      530000009619E0BD010000001800000002000000000003000000530006436F64
+      69676F0100490000000100055749445448020002000A00094465736372696361
+      6F01004900000001000557494454480200020096000000}
+    object cdsTmpItensServicoCodigo: TStringField
+      FieldName = 'Codigo'
+      Size = 10
+    end
+    object cdsTmpItensServicoDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 150
+    end
+  end
+  object srcItensServico: TDataSource
+    DataSet = cdsTmpItensServico
+    Left = 506
+    Top = 159
+  end
+  object cdsTmpTamanhos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    AfterScroll = cdsTmpTamanhosAfterScroll
+    Left = 536
+    Top = 132
+  end
+  object srcTmpTamanhos: TDataSource
+    DataSet = cdsTmpTamanhos
+    Left = 536
+    Top = 160
   end
 end
