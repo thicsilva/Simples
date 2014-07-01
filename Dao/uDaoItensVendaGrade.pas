@@ -19,6 +19,8 @@ end;
 
 implementation
 
+uses uFuncoes;
+
 
 { TDaoItensVendaGrade }
 
@@ -32,12 +34,21 @@ begin
    begin
       FQueryModific.Close;
       FQueryModific.SQLConnection := Fconexao.Conection;
-     // FQueryModific.Sql.Text := 'update ItensVendas set Qtde_Venda = :parQtde_Venda '+
-     //                           'where VendaId='+IntToStr(IdVenda)+' and ProdutoId='+IntToStr(ProdutoId)+' and ItenGradeId='+IntToStr(ItenGradeId);
-     // FQueryModific.ParamByName('parQtdeProduzida').AsFloat := QtdeProduzida;
+      FQueryModific.Sql.Text := 'update T_ItensVendas set Qtde_Venda =:parQtde_Venda, vlr_Total= (Qtde_venda*pco_Venda) '+
+                                'where SeqVenda='+IntToStr(VendaID)+' and Cod_Produto='+QuotedStr(incZero(Data.FieldByname('ProdutoID').AsString,5));
+      FQueryModific.ParamByName('parQtde_Venda').AsFloat := Data.FieldByName('Total').AsFloat;
       FQueryModific.ExecSql;
-
+      data.Next
    end;
+
+   Data := FConexao.BuscarDadosSQL('select Sum(vlr_total) as Total from T_ItensVendas where SeqVenda='+IntToStr(VendaId),Nil);
+
+   FQueryModific.Close;
+   FQueryModific.Sql.Text := 'update T_Vendas set vlr_total=:parVlr_total where SeqVenda='+IntToStr(VendaID);
+   FQueryModific.ParamByName('parVlr_total').AsFloat := Data.FieldByName('Total').AsFloat;
+   FQueryModific.ExecSql;
+
+
 end;
 
 procedure TDaoItensVendaGrade.AtualizaQtdeProduzida(ItenGradeId, IdVenda, ProdutoId: Integer; QtdeProduzida : Real);

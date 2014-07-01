@@ -32,7 +32,6 @@ object frmFinalizaServico: TfrmFinalizaServico
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 828
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -140,6 +139,7 @@ object frmFinalizaServico: TfrmFinalizaServico
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 76
+        ExplicitTop = -1
       end
       object btnConcluir: TbsSkinSpeedButton
         Left = 0
@@ -170,12 +170,13 @@ object frmFinalizaServico: TfrmFinalizaServico
         AllowAllUp = False
         Down = False
         GroupIndex = 0
-        Caption = '&Finalizar Servi'#231'o'
+        Caption = '&Finalizar'
         ShowCaption = True
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
+        OnClick = btnConcluirClick
         ExplicitLeft = 64
         ExplicitTop = 12
       end
@@ -189,8 +190,6 @@ object frmFinalizaServico: TfrmFinalizaServico
     Align = alClient
     Caption = 'Panel4'
     TabOrder = 1
-    ExplicitLeft = 24
-    ExplicitTop = 101
     object Panel1: TPanel
       Left = 456
       Top = 1
@@ -206,7 +205,6 @@ object frmFinalizaServico: TfrmFinalizaServico
         Align = alTop
         BevelOuter = bvLowered
         TabOrder = 0
-        ExplicitWidth = 371
       end
       object imageVerso: TcxImage
         Left = 6
@@ -292,7 +290,6 @@ object frmFinalizaServico: TfrmFinalizaServico
       Height = 424
       Align = alClient
       TabOrder = 1
-      ExplicitWidth = 453
       object pnlteste: TPanel
         Left = 1
         Top = 124
@@ -300,7 +297,6 @@ object frmFinalizaServico: TfrmFinalizaServico
         Height = 35
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 451
         object bsSkinButton1: TbsSkinButton
           Left = 259
           Top = 4

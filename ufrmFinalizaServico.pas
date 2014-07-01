@@ -40,6 +40,7 @@ type
     procedure cdsTmpItensServicoAfterScroll(DataSet: TDataSet);
     procedure cdsTmpTamanhosAfterScroll(DataSet: TDataSet);
     procedure bsSkinButton1Click(Sender: TObject);
+    procedure btnConcluirClick(Sender: TObject);
   private
     procedure AtualizaListaDaGrade(ProdutoID: String);
     { Private declarations }
@@ -68,6 +69,12 @@ begin
                                         strToFloat(edtQtdeTamanho.text));
    AtualizaListaDaGrade(cdsTmpItensServico.FieldByName('Codigo').AsString);
    cdsTmpTamanhos.Locate('itenGradeId',itenGradeId,[]);
+end;
+
+procedure TfrmFinalizaServico.btnConcluirClick(Sender: TObject);
+begin
+   frmFinalizaServico.Tag := 1;
+   Close;
 end;
 
 procedure TfrmFinalizaServico.cdsTmpItensServicoAfterScroll(DataSet: TDataSet);
@@ -113,7 +120,7 @@ begin
       cdsTmpItensServico.Post;
       Dados.Next;
    end;
-
+   cdsTmpItensServico.First;
 end;
 
 end.

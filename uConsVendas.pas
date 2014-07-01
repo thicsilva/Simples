@@ -187,7 +187,7 @@ implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
-  uclassContaCorrente, uDtmCadastro, ufrmFinalizaServico;
+  uclassContaCorrente, uDtmCadastro, ufrmFinalizaServico, uDaoItensVendaGrade;
 
 {$R *.dfm}
 
@@ -661,7 +661,6 @@ begin
    btnFinalizar.Visible   := false;
    btnCupomFiscal.Enabled := True;
    //grdvendas.Columns[0].Visible := False;
-   //colum_NomeAnimal.Visible := False;
    IF frmconsvendas.Tag = 3 Then
    Begin
       frmConsVendas.Caption := 'Consulta e manutenção de Serviços  ';
@@ -673,6 +672,7 @@ begin
       lblsituacao.Visible   := True;
       btnFinalizar.Visible   := True;
       btnCupomFiscal.Enabled := false;
+      colum_NomeAnimal.Visible := False;
       //grdvendas.Columns[0].Visible := True;
    End;
    btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
@@ -1160,8 +1160,8 @@ begin
 end;
 
 procedure TfrmConsVendas.btnEmproducaoClick(Sender: TObject);
+var loDaoItensGrade : TDaoItensVendaGrade;
 begin
-
    if cdsVendas.FieldByName('Status').AsString='3' then
    begin
       CaixaMensagem( 'O Serviço já foi finalizado, Impossivel Colocar em Produção !', ctAviso, [ cbOK ], 0 );
@@ -1197,6 +1197,11 @@ begin
    frmFinalizaServico := TfrmFinalizaServico.Create(Nil);
    frmFinalizaServico.pIdSeqVenda := cdsVendas.FieldByName('SeqVenda').AsString;
    frmFinalizaServico.ShowModal;
+
+   loDaoItensGrade := TDaoItensVendaGrade.Create(gConexao);
+   loDaoItensGrade.AtualizaQtdeProduto(StrToInt(cdsVendas.FieldByName('SeqVenda').AsString));
+   freeAndNil(loDaoItensGrade);
+
    //btnselecionarclick(btnselecionar);
 end;
 
