@@ -1,9 +1,14 @@
 object dtmVendas: TdtmVendas
   OldCreateOrder = False
-  Height = 106
-  Width = 171
+  Height = 121
+  Width = 203
   object srcTamanhos: TDataSource
-    Left = 40
-    Top = 16
+    Left = 24
+  end
+  object cdsItensVendasTamhos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 112
+    Top = 56
   end
 end

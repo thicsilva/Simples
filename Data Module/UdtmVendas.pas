@@ -3,11 +3,12 @@ unit UdtmVendas;
 interface
 
 uses
-  SysUtils, Classes, DB;
+  SysUtils, Classes, DB, DBClient;
 
 type
   TdtmVendas = class(TDataModule)
     srcTamanhos: TDataSource;
+    cdsItensVendasTamhos: TClientDataSet;
   private
     { Private declarations }
   public
