@@ -141,8 +141,8 @@ type
     cdsItensVendasCP: TClientDataSet;
     qryItensVendasCp: TSQLQuery;
     dspItensVendasCp: TDataSetProvider;
-    frmVendaPersonalizada02: TfrxReport;
-    dbItensGrade: TfrxDBDataset;
+    frxVendaPersonalizada02: TfrxReport;
+    frmDbItensGrade: TfrxDBDataset;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -178,6 +178,7 @@ type
     procedure PedidoPersonalizado(NumeroVenda: String);
     procedure RecuperarItensVendas(seqVenda: String);
     procedure CarregarItemParaImpressao(SeqVenda : String);
+    procedure PedidoPersonalizado02(NumeroVenda: String);
     { Private declarations }
   public
     { Public declarations }
@@ -386,7 +387,7 @@ begin
    else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=6 then
    begin
       CarregarItemParaImpressao(cdsVendas.FieldByName('SeqVenda').AsString);
-      PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString);
+      PedidoPersonalizado02(cdsVendas.FieldByName('SeqVenda').AsString);
    end
    else
    begin
@@ -419,6 +420,23 @@ begin
    frxVendaPersonalizada01.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
    frxVendaPersonalizada01.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
    frxVendaPersonalizada01.ShowReport(true);
+
+end;
+procedure  TfrmConsVendas.PedidoPersonalizado02(NumeroVenda : String);
+begin
+   dtmCadastro := TdtmCadastro.create(Nil);
+   dtmCadastro.cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+   dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil).Data;
+   frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+
+   frxVendaPersonalizada02.Variables['CNPJEmpresa']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+   frxVendaPersonalizada02.Variables['cnpjCliente']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsClientes.fieldByname('cnpjcpf').AsString ));
+   frxVendaPersonalizada02.Variables['TotalLocacao']   := QuotedStr( Formatfloat('0.00',cdsVendas.FieldByName('vlr_Total').AsFloat ));
+   frxVendaPersonalizada02.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
+   frxVendaPersonalizada02.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
+   frxVendaPersonalizada02.ShowReport(true);
 
 end;
 
@@ -525,9 +543,9 @@ procedure TfrmConsVendas.CarregarItemParaImpressao(SeqVenda : String);
 begin
    qryItensVendasCp.Close;
    qryItensVendasCp.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
-                              'Prod.Pco_Custo, Itens.* '+
-                              'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
-                              'where Prod.Codigo=Itens.Cod_Produto  ';
+                                'Prod.Pco_Custo, Itens.* '+
+                                'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
+                                'where Prod.Codigo=Itens.Cod_Produto  ';
 
    qryItensVendasCp.SQL.Text := qryItensVendasCp.SQL.Text + ' AND Ven.SeqVenda=:parSeqVenda ';
    qryItensVendasCp.SQL.Text := qryItensVendasCp.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
@@ -539,11 +557,10 @@ begin
    cdsItensVendasCp.open;
 
    dtmVendas := TdtmVendas.create(Nil);
-   dtmVendas.cdsItensVendasTamhos := gconexao.BuscarDadosSQL('select ProdutoID,ItenGradeID, Grade.Tamanho,QtdeProduzida '+
-                                                             ' from ItensVendaGrade ItemGrade '+
-                                                             'left join ItensGrade grade on Grade.id=Itemgrade.ItenGradeId',Nil).Data;
-   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
-
+   dtmVendas.cdsItensVendasTamhos.Data := gconexao.BuscarDadosSQL('select ProdutoID,ItenGradeID, Grade.Tamanho,QtdeProduzida '+
+                                                                  'from ItensVendaGrade ItemGrade '+
+                                                                  'left join ItensGrade grade on Grade.id=Itemgrade.ItenGradeId where VendaId='+seqVenda,Nil).Data;
+   frmDbItensGrade.DataSet := dtmVendas.cdsItensVendasTamhos
 end;
 
 procedure TfrmConsVendas.cdsVendasBeforeOpen(DataSet: TDataSet);

@@ -103,6 +103,8 @@ type
     edtSenha: TbsSkinMaskEdit;
     rdgTipoSistema: TbsSkinRadioGroup;
     chkExibeVencimento: TbsSkinCheckRadioBox;
+    Label6: TLabel;
+    edtDecimais: TbsSkinSpinEdit;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -288,6 +290,7 @@ procedure TfrmParametros.GravarParametrosVendas;
 begin
    gParametros.Gravar( '', '[VENDA]', 'NaoMostraTipoDePagamento',RetornaSimouNao(chkNaoMostraTipoDePagamento.Checked),gsOperador );
    gParametros.Gravar( '', '[VENDA]', 'ExibeVencimento',RetornaSimouNao(chkExibeVencimento.Checked),gsOperador );
+   gParametros.Gravar( '', '[VENDA]', 'CasasDecimais',edtDecimais.Value,GsOperador);
 end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
@@ -303,6 +306,7 @@ procedure TfrmParametros.RecuperarParametrosVendas;
 begin
    chkNaoMostraTipoDePagamento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' )));
    chkExibeVencimento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' )));
+   edtDecimais.Value := gParametros.Ler( '', '[VENDA]', 'CasasDecimais', '2' );
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;

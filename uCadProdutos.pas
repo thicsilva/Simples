@@ -974,8 +974,8 @@ begin
    edtcodigoFornecedor.Text    := cdsCadProdutos.FieldByName('CodigoFornecedor').AsString;
    edtDescricao.Text           := cdsCadProdutos.FieldByName('Descricao').AsString;
    edtCaminhoImagem.text       := cdsCadProdutos.FieldByName('Caminho_Imagem').AsString;
-   edtPco_Venda.Text           := FormatFloat('0.00',cdsCadProdutos.FieldByName('Pco_Venda').AsFloat);
-   edtValorMensal.Text         := FormatFloat('0.00',cdsCadProdutos.FieldByName('ValorMes').AsFloat);
+   edtPco_Venda.Text           := FormatFloat(RetornarMascaraDoValor(IntToStr(edtPco_Venda.Decimal)),cdsCadProdutos.FieldByName('Pco_Venda').AsFloat);
+   edtValorMensal.Text         := FormatFloat(RetornarMascaraDoValor(IntToStr(edtPco_Venda.Decimal)),cdsCadProdutos.FieldByName('ValorMes').AsFloat);
    edtPcoVendaExterna.Text     := FormatFloat('0.00',cdsCadProdutos.FieldByName('PrecoVendaExterna').AsFloat);
    cmbCod_CentroCusto.KeyValue := cdsCadProdutos.FieldByName('Cod_Operacao').AsString;
    cmbCod_CentroCustoChange(cmbCod_CentroCusto);
@@ -1011,6 +1011,7 @@ begin
    edtDescricao.SetFocus;
 
 end;
+
 
 procedure TfrmCadProdutos.btnexcluirClick(Sender: TObject);
 begin
@@ -1158,8 +1159,8 @@ begin
    cmbPeriodoChange(cmbPeriodo);
 
    piCod_Produto := 0;
-
-  DesabilitarTabSheets(self);
+   edtPco_Venda.Decimal := StrToInt(gParametros.Ler( '', '[VENDA]', 'CasasDecimais', '2' ));
+   DesabilitarTabSheets(self);
 
 end;
 

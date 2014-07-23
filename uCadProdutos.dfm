@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 787
     Height = 460
-    ActivePage = bsSkinTabSheet3
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1102,6 +1102,7 @@ object frmCadProdutos: TfrmCadProdutos
           SupportUpDownKeys = False
           Alignment = taRightJustify
           UseSkinFont = True
+          Decimal = 6
           ValueType = vtFloat
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack

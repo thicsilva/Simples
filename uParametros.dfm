@@ -58,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = bsSkinTabSheet3
+    ActivePage = Vendas
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1658,7 +1658,8 @@ object frmParametros: TfrmParametros
           'Bematech - Termica'
           'Grafico 80 Colunas'
           '80 Colunas Modelo 01'
-          'Personalizado')
+          'Personalizado(Natal Linhas)'
+          'Personalizado(Eti Marcas)')
         ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
@@ -2082,6 +2083,13 @@ object frmParametros: TfrmParametros
     end
     object Vendas: TbsSkinTabSheet
       Caption = 'Vendas'
+      object Label6: TLabel
+        Left = 19
+        Top = 57
+        Width = 178
+        Height = 14
+        Caption = 'Numero de casas decimais da venda'
+      end
       object chkNaoMostraTipoDePagamento: TbsSkinCheckRadioBox
         Left = 11
         Top = 4
@@ -2141,6 +2149,30 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Exibe primeiro vencimento na venda'
+      end
+      object edtDecimais: TbsSkinSpinEdit
+        Left = 203
+        Top = 51
+        Width = 54
+        Height = 20
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'spinedit'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        DefaultColor = clWindow
+        UseSkinSize = True
+        ValueType = vtInteger
+        Value = 2.000000000000000000
+        Increment = 1.000000000000000000
+        EditorEnabled = True
+        MaxLength = 0
       end
     end
   end

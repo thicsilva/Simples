@@ -908,7 +908,7 @@ object frmConsVendas: TfrmConsVendas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 1181
+        Width = 1183
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -1619,6 +1619,12 @@ object frmConsVendas: TfrmConsVendas
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
+    SQL.Strings = (
+      'select ProdutoID,ItenGradeID, Grade.Tamanho,QtdeProduzida '
+      ' from ItensVendaGrade ItemGrade '
+      
+        '     left join ItensGrade grade on Grade.id=Itemgrade.ItenGradeI' +
+        'd')
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 401
     Top = 307
@@ -3120,7 +3126,7 @@ object frmConsVendas: TfrmConsVendas
     Left = 816
     Top = 232
   end
-  object frmVendaPersonalizada02: TfrxReport
+  object frxVendaPersonalizada02: TfrxReport
     Version = '4.9.105'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -3129,7 +3135,7 @@ object frmConsVendas: TfrmConsVendas
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41706.281067442100000000
-    ReportOptions.LastChange = 41737.871914560200000000
+    ReportOptions.LastChange = 41835.875113148150000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3149,6 +3155,10 @@ object frmConsVendas: TfrmConsVendas
       item
         DataSet = frxDbItens
         DataSetName = 'dbSetItens'
+      end
+      item
+        DataSet = frmDbItensGrade
+        DataSetName = 'dbSetItensGrade'
       end>
     Variables = <
       item
@@ -3193,6 +3203,8 @@ object frmConsVendas: TfrmConsVendas
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Duplex = dmSimplex
+      VGuides.Strings = (
+        '98,26778')
       object ReportTitle1: TfrxReportTitle
         Height = 113.944960000000000000
         Top = 18.897650000000000000
@@ -3577,16 +3589,41 @@ object frmConsVendas: TfrmConsVendas
         end
       end
       object MasterData1: TfrxMasterData
-        Height = 23.267470000000000000
+        Height = 21.047000000000000000
         Top = 366.614410000000000000
         Width = 718.110700000000000000
         DataSet = frxDbItens
         DataSetName = 'dbSetItens'
         RowCount = 0
+        object Line2: TfrxLineView
+          Left = 2.000000000000000000
+          Top = 21.015460000000000000
+          Width = 714.000000000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Memo5: TfrxMemoView
+          Left = 2.000000000000000000
+          Top = 1.015460000000000000
+          Width = 45.354360000000000000
+          Height = 18.897637800000000000
+          ShowHint = False
+          DataSet = frxDbItens
+          DataSetName = 'dbSetItens'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[dbSetItens."Codigo"]')
+          ParentFont = False
+        end
         object dbSetItensDescricao: TfrxMemoView
-          Left = 59.574803150000000000
-          Top = 1.369820000000000000
-          Width = 340.393700790000000000
+          Left = 48.236213150000000000
+          Top = 2.149350000000000000
+          Width = 374.409470790000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDbItens
@@ -3600,29 +3637,36 @@ object frmConsVendas: TfrmConsVendas
             '[dbSetItens."Descricao"]')
           ParentFont = False
         end
-        object dbSetItensvlr_Total: TfrxMemoView
-          Left = 652.000000000000000000
-          Top = 0.369820000000000000
-          Width = 56.692950000000000000
-          Height = 18.897637800000000000
+        object dbSetItensqtde_Venda: TfrxMemoView
+          Left = 424.897650000000000000
+          Top = 2.015460000000000000
+          Width = 70.267780000000000000
+          Height = 18.897650000000000000
           ShowHint = False
+          DataField = 'qtde_Venda'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2f'
           DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
           HAlign = haRight
           Memo.UTF8 = (
-            '[dbSetItens."vlr_Total"]')
-          ParentFont = False
+            '[dbSetItens."qtde_Venda"]')
+        end
+        object dbSetItensUnidade: TfrxMemoView
+          Left = 495.338590000000000000
+          Top = 2.385590000000000000
+          Width = 42.456710000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'Unidade'
+          DataSet = frxDbItens
+          DataSetName = 'dbSetItens'
+          Memo.UTF8 = (
+            '[dbSetItens."Unidade"]')
         end
         object dbSetItensPco_tabela: TfrxMemoView
-          Left = 557.000000000000000000
-          Top = 0.369820000000000000
+          Left = 538.102350000000000000
+          Top = 2.149350000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3640,57 +3684,25 @@ object frmConsVendas: TfrmConsVendas
             '[dbSetItens."Pco_Venda"]')
           ParentFont = False
         end
-        object Line2: TfrxLineView
-          Left = 2.000000000000000000
-          Top = 21.015460000000000000
-          Width = 714.000000000000000000
-          ShowHint = False
-          Frame.Typ = [ftTop]
-        end
-        object Memo5: TfrxMemoView
-          Left = 2.000000000000000000
-          Top = 1.015460000000000000
-          Width = 56.692950000000000000
+        object dbSetItensvlr_Total: TfrxMemoView
+          Left = 617.984230000000000000
+          Top = 2.369820000000000000
+          Width = 94.488250000000000000
           Height = 18.897637800000000000
           ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          HAlign = haCenter
-          Memo.UTF8 = (
-            '[dbSetItens."Codigo"]')
-          ParentFont = False
-        end
-        object dbSetItensqtde_Venda: TfrxMemoView
-          Left = 406.000000000000000000
-          Top = 1.015460000000000000
-          Width = 58.929190000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'qtde_Venda'
-          DataSet = frxDbItens
-          DataSetName = 'dbSetItens'
-          DisplayFormat.FormatStr = '%2.2f'
-          DisplayFormat.Kind = fkNumeric
           HAlign = haRight
           Memo.UTF8 = (
-            '[dbSetItens."qtde_Venda"]')
-        end
-        object dbSetItensUnidade: TfrxMemoView
-          Left = 484.000000000000000000
-          Top = 0.385590000000000000
-          Width = 38.677180000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          DataField = 'Unidade'
-          DataSet = frxDbItens
-          DataSetName = 'dbSetItens'
-          Memo.UTF8 = (
-            '[dbSetItens."Unidade"]')
+            '[dbSetItens."vlr_Total"]')
+          ParentFont = False
         end
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -3698,30 +3710,108 @@ object frmConsVendas: TfrmConsVendas
         Top = 283.464750000000000000
         Width = 718.110700000000000000
         object Memo4: TfrxMemoView
-          Left = -1.220472440000000000
-          Top = 3.165120000000000000
-          Width = 714.149660000000000000
+          Left = 3.779530000000000000
+          Width = 45.354360000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          Color = 14211288
-          Font.Charset = ANSI_CHARSET
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
+          Font.Name = 'Arial'
+          Font.Style = []
           Frame.Typ = [ftLeft, ftTop, ftBottom]
           Memo.UTF8 = (
-            
-              'Codigo    Descricao                                             ' +
-              '                                              Quantidade        ' +
-              '         Unid                 Vlr. unitario         Vlr. Total')
+            'Codigo')
           ParentFont = False
-          VAlign = vaCenter
+        end
+        object Memo8: TfrxMemoView
+          Left = 49.133890000000000000
+          Width = 374.173470000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop, ftBottom]
+          Memo.UTF8 = (
+            'Descri'#195#167#195#163'o')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 423.307360000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop, ftBottom]
+          Memo.UTF8 = (
+            'Quantidade')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 491.338900000000000000
+          Width = 45.354360000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            'Und.')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 536.693260000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop, ftBottom]
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Valor Unit.')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 616.063390000000000000
+          Width = 98.267780000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Color = cl3DLight
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftTop, ftBottom]
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Valor Total.')
+          ParentFont = False
         end
       end
       object Footer1: TfrxFooter
         Height = 121.677180000000000000
-        Top = 411.968770000000000000
+        Top = 453.543600000000000000
         Width = 718.110700000000000000
         object Line1: TfrxLineView
           Left = 1.000000000000000000
@@ -3793,34 +3883,82 @@ object frmConsVendas: TfrmConsVendas
             'Vendedor.: [Vendedor]')
         end
       end
+      object DetailData1: TfrxDetailData
+        Height = 20.456710000000000000
+        Top = 411.968770000000000000
+        Width = 718.110700000000000000
+        DataSet = frmDbItensGrade
+        DataSetName = 'dbSetItensGrade'
+        RowCount = 10
+        object dbSetItensGradeTamanho: TfrxMemoView
+          Left = 83.149660000000000000
+          Top = 1.559060000000000000
+          Width = 162.519790000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'Tamanho'
+          DataSet = frmDbItensGrade
+          DataSetName = 'dbSetItensGrade'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[dbSetItensGrade."Tamanho"]')
+          ParentFont = False
+        end
+        object dbSetItensGradeQtdeProduzida: TfrxMemoView
+          Left = 245.669450000000000000
+          Top = 1.559060000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'QtdeProduzida'
+          DataSet = frmDbItensGrade
+          DataSetName = 'dbSetItensGrade'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            '[dbSetItensGrade."QtdeProduzida"]')
+          ParentFont = False
+        end
+        object dbSetItensGradeItenGradeID: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 1.559060000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'ItenGradeID'
+          DataSet = frmDbItensGrade
+          DataSetName = 'dbSetItensGrade'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[dbSetItensGrade."ItenGradeID"]')
+          ParentFont = False
+        end
+      end
     end
   end
-  object dbItensGrade: TfrxDBDataset
-    UserName = 'dbSetItens'
+  object frmDbItensGrade: TfrxDBDataset
+    UserName = 'dbSetItensGrade'
     CloseDataSource = False
     FieldAliases.Strings = (
-      'Codigo=Codigo'
-      'Descricao=Descricao'
-      'Unidade=Unidade'
-      'qtde_Venda=qtde_Venda'
-      'Pco_Venda=Pco_Venda'
-      'Previsao_Entrega=Previsao_Entrega'
-      'Dias=Dias'
-      'vlr_Desconto=vlr_Desconto'
-      'vlr_Total=vlr_Total'
-      'Complemento=Complemento'
-      'Pco_tabela=Pco_tabela'
-      'perc_Comis=perc_Comis'
-      'qtdeEmbalagem=qtdeEmbalagem'
-      'seqVenda=seqVenda'
-      'SetorId=SetorId'
-      'PesoBruto=PesoBruto'
-      'PesoLiquido=PesoLiquido'
-      'PrecoCusto=PrecoCusto'
-      'MargemSecundaria=MargemSecundaria'
-      'LucroBruto=LucroBruto'
-      'Valor_Pagamento=Valor_Pagamento')
-    DataSet = cdsItensVendasCP
+      'ProdutoID=ProdutoID'
+      'ItenGradeID=ItenGradeID'
+      'Tamanho=Tamanho'
+      'QtdeProduzida=QtdeProduzida')
     BCDToCurrency = False
     Left = 73
     Top = 217

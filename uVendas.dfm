@@ -2367,7 +2367,7 @@ object frmVendas: TfrmVendas
     Top = 307
     Width = 822
     Height = 259
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 9
     OnChange = PagVendasChange

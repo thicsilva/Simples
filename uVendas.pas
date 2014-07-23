@@ -423,7 +423,7 @@ Begin
    edtcod_Cliente.Text         := '';
    edtTotalVenda.Text          := '0,00';
    edtQtde_Venda.Text          := '0';
-   edtPco_Venda.Text           := '0,00';
+   edtPco_Venda.Text           := FormatFloat(RetornarMascaraDoValor(IntToStr(edtPco_Venda.Decimal)),0);
    edtPco_Tabela.Text          := '0,00';
    edtTotal.Text               := '0,00';
    edtDesconto.Text            := '0,00';
