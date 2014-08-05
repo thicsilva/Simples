@@ -32,6 +32,7 @@ object frmSelRelVendas: TfrmSelRelVendas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -173,6 +174,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 8
@@ -195,8 +197,8 @@ object frmSelRelVendas: TfrmSelRelVendas
       Left = 18
       Top = 14
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -233,6 +235,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -244,8 +247,8 @@ object frmSelRelVendas: TfrmSelRelVendas
       Left = 158
       Top = 14
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -282,6 +285,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       MaxLength = 10
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -472,7 +476,7 @@ object frmSelRelVendas: TfrmSelRelVendas
     Align = alClient
     TabOrder = 1
     object GridRelatorio: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -549,6 +553,7 @@ object frmSelRelVendas: TfrmSelRelVendas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -603,6 +608,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -862,6 +868,8 @@ object frmSelRelVendas: TfrmSelRelVendas
     Top = 131
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -879,6 +887,8 @@ object frmSelRelVendas: TfrmSelRelVendas
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

@@ -9,7 +9,8 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, ExtCtrls, ToolWin, ComCtrls,
   FMTBcd, DBClient, Provider, SqlExpr,SqlTimSt, RDprint, BusinessSkinForm,
-  dxSkinsCore;
+  dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmSelRelVendas = class(TForm)
@@ -171,7 +172,7 @@ begin
    IF cmbStatus.ItemIndex <> 0 Then
      lsWhere := ' Ven.Status=:parstatus AND ';
 
-   lsWhere := lsWhere + ' Forma.SomaVenda<>'+QuotedStr('T')+' AND ';
+   lsWhere := lsWhere + ' Forma.SomaVenda<>'+QuotedStr('1')+' AND ';
    qryRelatorio.Close;
    qryRelatorio.SQL.Text := 'Select Gru.Descricao as Grupo, Itens.Cod_Produto, Prod.Descricao, sum(Itens.Qtde_Venda)as Qtde_Total, '+
                             ' Sum(Itens.vlr_Total) as vlr_Total '+
