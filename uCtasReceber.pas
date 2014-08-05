@@ -19,7 +19,8 @@ uses
   cxControls, cxGridCustomView, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGrid, FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore,
   cxGridCustomPopupMenu, cxGridPopupMenu,uformBase, dxSkinsCore, cxLookAndFeels,
-  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter;
+  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter, frxClass,
+  frxDBSet;
 
 type
   TfrmCtasReceber = class(TFormBase)
@@ -137,6 +138,10 @@ type
     cmbTipoData: TbsSkinComboBox;
     alterarVencimentoeTipodePagamento1: TMenuItem;
     Nome_FormaPagamento: TcxGridDBColumn;
+    frxReport1: TfrxReport;
+    frxDBCliente: TfrxDBDataset;
+    frxDbEmpresa: TfrxDBDataset;
+    DuplicataMercantil1: TMenuItem;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -175,6 +180,7 @@ type
     procedure GridCtasReceberCustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
+    procedure DuplicataMercantil1Click(Sender: TObject);
 
   private
    pvQualBotao : String;
@@ -193,7 +199,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uBaixaTipo_01_Brinde, uBaixaNormal,
   uselRelContasReceber, DaoSupervisor,DaoRemessa,
-  uAlteraVencimento_TipoPagamento;
+  uAlteraVencimento_TipoPagamento, uDtmCadastro;
 
 procedure TfrmCtasReceber.LimpaCampos();
 Begin
@@ -677,6 +683,16 @@ end;
 procedure TfrmCtasReceber.cmbPeriodoChange(Sender: TObject);
 begin
    ListaPeriodo2( TbsSkinDateEdit( dtpData_Ini ), TbsSkinDateEdit( dtpData_Fim ), cmbperiodo.ItemIndex,gsData_Mov );
+end;
+
+procedure TfrmCtasReceber.DuplicataMercantil1Click(Sender: TObject);
+begin
+   dtmCadastro := TdtmCadastro.create(Nil);
+   dtmCadastro.cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+   dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr('00001'),Nil).Data;
+   frxDBCliente.DataSet := dtmCadastro.cdsClientes;
 end;
 
 procedure TfrmCtasReceber.edtCod_FornecedorExit(Sender: TObject);
