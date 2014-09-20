@@ -267,6 +267,8 @@ type
     dxBarLargeButton27: TdxBarLargeButton;
     actCadGrade: TAction;
     btnGradeProduto: TdxBarButton;
+    actRelLocacoes: TAction;
+    dxBarButton38: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -335,6 +337,7 @@ type
     procedure actLocacaoExecute(Sender: TObject);
     procedure actConsultaLocacaoExecute(Sender: TObject);
     procedure actCadGradeExecute(Sender: TObject);
+    procedure actRelLocacoesExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -922,6 +925,18 @@ begin
    frmControleRepasse.showmodal;
 end;
 
+procedure TfrmPrincipal.actRelLocacoesExecute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmSelRelVendas := TfrmSelRelVendas.create(Self);
+   frmSelRelVendas.Tag := 2;
+   frmSelRelVendas.showmodal;
+end;
+
 procedure TfrmPrincipal.actRemessaExecute(Sender: TObject);
 begin
   {if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -980,7 +995,6 @@ end;
 
 procedure TfrmPrincipal.actSelRelVendasExecute(Sender: TObject);
 begin
-
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
@@ -988,7 +1002,6 @@ begin
    End;
    frmSelRelVendas := TfrmSelRelVendas.create(Self);
    frmSelRelVendas.showmodal;
-  
 end;
 
 procedure TfrmPrincipal.actSequenciasExecute(Sender: TObject);

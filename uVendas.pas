@@ -366,7 +366,7 @@ Begin
    qryVariavel.Params.Clear;
    qryVariavel.SQL.text :=RetornarSelectProdutos+' '+
                           'From T_Produtos '+
-                          'where tipo_Produto=:parTipo_Produto ';
+                          'where tipo_Produto=:parTipo_Produto and Ativo=1';
 
    If (frmVendas.tag = 5) or ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendeServico', 'NAO' )) = 'SIM') Then
       qryVariavel.SQL.add(' OR tipo_Produto=:parTipo_Produto2 ');
@@ -2068,7 +2068,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text := RetornarSelectProdutos+' From T_Produtos order by Descricao ';;
+   qryVariavel.SQL.text := RetornarSelectProdutos+' From T_Produtos where Ativo=1 order by Descricao ';
 
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;

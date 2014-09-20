@@ -65,6 +65,7 @@ type
   public
     { Public declarations }
   end;
+  const RELATORIO_DE_LOCACAO = 2;
 
 var
   frmSelRelVendas: TfrmSelRelVendas;
@@ -169,8 +170,10 @@ var lsWhere : String;
 begin
    lsWhere := '';
    lsSelect := 'inner join T_FormasPagamento Forma on Forma.Codigo=Ven.Cod_FormaPagamento';
+   if Tag = RELATORIO_DE_LOCACAO then
+ //     lsWhere := ' Ven.Status=:parstatus AND ';
    IF cmbStatus.ItemIndex <> 0 Then
-     lsWhere := ' Ven.Status=:parstatus AND ';
+   //  lsWhere := ' Ven.Status=:parstatus AND ';
 
    lsWhere := lsWhere + ' Forma.SomaVenda<>'+QuotedStr('1')+' AND ';
    qryRelatorio.Close;
@@ -190,8 +193,13 @@ begin
 
    qryRelatorio.ParamByName('parData_VendaIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
    qryRelatorio.ParamByName('parData_VendaFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-   IF cmbStatus.ItemIndex <> 0 Then
-      qryRelatorio.ParamByName('parStatus').AsString   := IntToStr(cmbStatus.ItemIndex);
+   if Tag = RELATORIO_DE_LOCACAO then
+   //   qryRelatorio.ParamByName('parStatus').AsString := IntToStr(cmbStatus.ItemIndex+1)
+   else
+   begin
+      IF cmbStatus.ItemIndex <> 0 Then
+         qryRelatorio.ParamByName('parStatus').AsString   := IntToStr(cmbStatus.ItemIndex);
+   end;
 
    If cmbTipoRel.ItemIndex = 0 Then
       qryRelatorio.ParamByName('parTipo_Venda').AsString          := 'P'
@@ -274,6 +282,14 @@ end;
 procedure TfrmSelRelVendas.FormShow(Sender: TObject);
 begin
    cmbVenctoChange(cmbVencto);
+   if tag=RELATORIO_DE_LOCACAO then
+   begin
+      caption := 'Relatório de locações';
+      cmbStatus.Items.Clear;
+      cmbStatus.Items.ADD('Locados');
+      cmbStatus.Items.ADD('Entregue');
+      cmbStatus.ItemIndex := 1;
+   end;
 end;
 
 procedure TfrmSelRelVendas.impMatricialNewPage(Sender: TObject;

@@ -36,7 +36,7 @@ object frmEntradas: TfrmEntradas
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 692
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -50,6 +50,7 @@ object frmEntradas: TfrmEntradas
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -330,6 +331,7 @@ object frmEntradas: TfrmEntradas
     OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -348,6 +350,10 @@ object frmEntradas: TfrmEntradas
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -365,6 +371,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -478,7 +485,7 @@ object frmEntradas: TfrmEntradas
           Left = 136
           Top = 9
           Width = 216
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -498,6 +505,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -552,6 +560,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -574,8 +583,8 @@ object frmEntradas: TfrmEntradas
           Left = 136
           Top = 32
           Width = 95
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -613,6 +622,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -624,8 +634,8 @@ object frmEntradas: TfrmEntradas
           Left = 263
           Top = 32
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -663,6 +673,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -813,11 +824,12 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 62
         Width = 703
-        Height = 406
+        Height = 408
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 406
         object GrdCompras: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcConsEntradas
           DataController.DetailKeyFieldNames = 'seqEntrada'
           DataController.KeyFieldNames = 'seqEntrada'
@@ -907,7 +919,7 @@ object frmEntradas: TfrmEntradas
           end
         end
         object GrdItensCompras: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcconsItensEntradas
           DataController.DetailKeyFieldNames = 'seqEntrada'
           DataController.Filter.Active = True
@@ -957,6 +969,10 @@ object frmEntradas: TfrmEntradas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manuten'#231#227'o'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -974,6 +990,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1213,7 +1230,7 @@ object frmEntradas: TfrmEntradas
           Left = 107
           Top = 88
           Width = 182
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1234,6 +1251,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 100
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1246,7 +1264,7 @@ object frmEntradas: TfrmEntradas
           Left = 107
           Top = 30
           Width = 61
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1267,6 +1285,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1305,7 +1324,7 @@ object frmEntradas: TfrmEntradas
           Left = 408
           Top = 4
           Width = 74
-          Height = 18
+          Height = 20
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1325,6 +1344,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 6
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1336,7 +1356,7 @@ object frmEntradas: TfrmEntradas
           Left = 9
           Top = 4
           Width = 40
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1359,6 +1379,7 @@ object frmEntradas: TfrmEntradas
           ParentFont = False
           TabOrder = 7
           Visible = False
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1370,7 +1391,7 @@ object frmEntradas: TfrmEntradas
           Left = 107
           Top = 61
           Width = 61
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1390,6 +1411,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1402,8 +1424,8 @@ object frmEntradas: TfrmEntradas
           Left = 390
           Top = 57
           Width = 93
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -1441,6 +1463,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1452,7 +1475,7 @@ object frmEntradas: TfrmEntradas
           Left = 228
           Top = 61
           Width = 61
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1473,6 +1496,7 @@ object frmEntradas: TfrmEntradas
           Enabled = False
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1498,6 +1522,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -1517,6 +1542,7 @@ object frmEntradas: TfrmEntradas
           Spacing = 2
           Caption = '  Resumo da Entrada'
           Align = alRight
+          UseSkinSize = True
           object bsSkinStdLabel5: TbsSkinStdLabel
             Left = 17
             Top = 39
@@ -1572,7 +1598,7 @@ object frmEntradas: TfrmEntradas
             Left = 110
             Top = 34
             Width = 72
-            Height = 18
+            Height = 20
             TabStop = False
             Text = '0,00'
             DefaultColor = clWindow
@@ -1598,6 +1624,7 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 0
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -1609,7 +1636,7 @@ object frmEntradas: TfrmEntradas
             Left = 110
             Top = 59
             Width = 72
-            Height = 18
+            Height = 20
             TabStop = False
             Text = '0'
             DefaultColor = clWindow
@@ -1635,6 +1662,7 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 1
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -1646,7 +1674,7 @@ object frmEntradas: TfrmEntradas
             Left = 110
             Top = 83
             Width = 72
-            Height = 18
+            Height = 20
             TabStop = False
             Text = '0,00'
             DefaultColor = clWindow
@@ -1672,6 +1700,7 @@ object frmEntradas: TfrmEntradas
             ParentBiDiMode = False
             ParentFont = False
             TabOrder = 2
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -1710,7 +1739,7 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 208
         Width = 684
-        Height = 260
+        Height = 262
         HintImageIndex = 0
         TabOrder = 1
         SkinData = frmPrincipal.SkinPrincipal
@@ -1722,6 +1751,7 @@ object frmEntradas: TfrmEntradas
         VScrollBar = bsSkinScrollBar1
         GridLineColor = clWindowText
         DefaultCellHeight = 20
+        ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
         DefaultRowHeight = 18
@@ -1755,6 +1785,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1862,7 +1893,7 @@ object frmEntradas: TfrmEntradas
           Left = 10
           Top = 24
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1882,6 +1913,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1920,7 +1952,7 @@ object frmEntradas: TfrmEntradas
           Left = 323
           Top = 24
           Width = 57
-          Height = 18
+          Height = 20
           Text = '0'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1942,6 +1974,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1953,7 +1986,7 @@ object frmEntradas: TfrmEntradas
           Left = 446
           Top = 24
           Width = 57
-          Height = 18
+          Height = 20
           Text = '0,00'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1975,6 +2008,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1987,7 +2021,7 @@ object frmEntradas: TfrmEntradas
           Left = 580
           Top = 22
           Width = 57
-          Height = 20
+          Height = 22
           Text = '0,00'
           DefaultColor = clInfoBk
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -2010,6 +2044,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2023,9 +2058,10 @@ object frmEntradas: TfrmEntradas
         Left = 684
         Top = 208
         Width = 19
-        Height = 260
+        Height = 262
         HintImageIndex = 0
         TabOrder = 3
+        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'vscrollbar'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2045,9 +2081,10 @@ object frmEntradas: TfrmEntradas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 1
+        Position = 0
         SmallChange = 1
         LargeChange = 1
+        ExplicitHeight = 260
       end
       object bsSkinCoolBar2: TbsSkinCoolBar
         Left = 0
@@ -2069,7 +2106,7 @@ object frmEntradas: TfrmEntradas
         object bsSkinToolBar2: TbsSkinToolBar
           Left = 9
           Top = 0
-          Width = 690
+          Width = 70
           Height = 40
           HintImageIndex = 0
           TabOrder = 0
@@ -2083,6 +2120,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 70
           DefaultHeight = 40
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -2231,6 +2269,10 @@ object frmEntradas: TfrmEntradas
     end
     object tabCtasPagar: TbsSkinTabSheet
       Caption = 'Contas a Pagar'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinGroupBox2: TbsSkinGroupBox
         Left = 84
         Top = 53
@@ -2248,6 +2290,7 @@ object frmEntradas: TfrmEntradas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -2266,6 +2309,7 @@ object frmEntradas: TfrmEntradas
         NumGlyphs = 1
         Spacing = 2
         Caption = 'Lancamento do Contas a Pagar'
+        UseSkinSize = True
         object bsSkinStdLabel12: TbsSkinStdLabel
           Left = 323
           Top = 5
@@ -2465,6 +2509,7 @@ object frmEntradas: TfrmEntradas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -2483,6 +2528,7 @@ object frmEntradas: TfrmEntradas
           Spacing = 2
           Caption = 'Tipo de Vencimento'
           OnClick = rdgTipoVencimentoClick
+          UseSkinSize = True
           ButtonSkinDataName = 'radiobox'
           ButtonDefaultFont.Charset = DEFAULT_CHARSET
           ButtonDefaultFont.Color = clWindowText
@@ -2547,8 +2593,8 @@ object frmEntradas: TfrmEntradas
           Left = 102
           Top = 109
           Width = 91
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -2586,6 +2632,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2597,7 +2644,7 @@ object frmEntradas: TfrmEntradas
           Left = 104
           Top = 87
           Width = 325
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -2618,6 +2665,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 50
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2682,8 +2730,8 @@ object frmEntradas: TfrmEntradas
           Left = 338
           Top = 109
           Width = 91
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -2721,6 +2769,7 @@ object frmEntradas: TfrmEntradas
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2732,7 +2781,7 @@ object frmEntradas: TfrmEntradas
           Left = 101
           Top = 63
           Width = 64
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -2753,6 +2802,7 @@ object frmEntradas: TfrmEntradas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2765,7 +2815,7 @@ object frmEntradas: TfrmEntradas
           Left = 405
           Top = 2
           Width = 74
-          Height = 18
+          Height = 20
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -2786,6 +2836,7 @@ object frmEntradas: TfrmEntradas
           ParentFont = False
           TabOrder = 10
           Visible = False
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -2797,7 +2848,7 @@ object frmEntradas: TfrmEntradas
           Left = 351
           Top = 242
           Width = 78
-          Height = 23
+          Height = 25
           TabStop = False
           Text = '0,00'
           DefaultColor = clWindow
@@ -2823,6 +2874,7 @@ object frmEntradas: TfrmEntradas
           ParentBiDiMode = False
           ParentFont = False
           TabOrder = 8
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

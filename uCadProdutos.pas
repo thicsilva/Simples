@@ -237,6 +237,7 @@ type
     cmbNome_grade: TbsSkinDBLookupComboBox;
     srcGrande: TDataSource;
     srcGrupo: TDataSource;
+    chkAtivo: TbsSkinCheckRadioBox;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -616,6 +617,7 @@ begin
    cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat := StrTofloat(edtComissaoSecundaria.Text);
    cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat   := StrTofloat(edtMargemSecundaria.Text);
    cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean := chkBloquiaEstoqueNegativo.Checked;
+   cdsCadProdutos.FieldByName('Ativo').AsBoolean            := chkAtivo.Checked;
    cdsCadProdutos.FieldByName('GradeId').AsInteger := cmbNome_grade.KeyValue;
 
    cdsCadProdutos.Post;
@@ -997,6 +999,7 @@ begin
    edtComissaoSecundaria.Text := Formatfloat('0.00', cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat);
    edtMargemSecundaria.Text := Formatfloat('0.000', cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat);
    chkBloquiaEstoqueNegativo.Checked := cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean;
+   chkAtivo.Checked := cdsCadProdutos.FieldByName('Ativo').AsBoolean;
    cmbNome_grade.KeyValue := StrToIntDef( cdsCadProdutos.FieldByName('GradeID').AsString,0 );
 
    BtnIncluir.Enabled := False;

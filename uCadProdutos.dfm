@@ -347,7 +347,7 @@ object frmCadProdutos: TfrmCadProdutos
       Caption = 'Cadastro'
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 104
-        Top = 15
+        Top = 3
         Width = 536
         Height = 351
         HintImageIndex = 0
@@ -1448,10 +1448,40 @@ object frmCadProdutos: TfrmCadProdutos
           ListField = 'descricao'
           ListSource = srcGrande
         end
+        object chkAtivo: TbsSkinCheckRadioBox
+          Left = 400
+          Top = 318
+          Width = 59
+          Height = 21
+          HintImageIndex = 0
+          TabOrder = 23
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'checkbox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          WordWrap = False
+          AllowGrayed = False
+          State = cbUnchecked
+          ImageIndex = 0
+          Flat = True
+          UseSkinFontColor = True
+          TabStop = True
+          CanFocused = True
+          Radio = False
+          Checked = False
+          GroupIndex = 0
+          Caption = 'Ativo'
+        end
       end
       object bsSkinExPanel3: TbsSkinExPanel
         Left = 104
-        Top = 372
+        Top = 353
         Width = 536
         Height = 49
         HintImageIndex = 0

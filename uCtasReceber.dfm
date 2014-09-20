@@ -3196,7 +3196,7 @@ object frmCtasReceber: TfrmCtasReceber
     Left = 117
     Top = 327
   end
-  object frxReport1: TfrxReport
+  object frxDuplicataMErcantil: TfrxReport
     Version = '4.9.105'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -3205,7 +3205,7 @@ object frmCtasReceber: TfrmCtasReceber
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41842.964457743100000000
-    ReportOptions.LastChange = 41842.964457743100000000
+    ReportOptions.LastChange = 41857.597552094910000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3237,9 +3237,11 @@ object frmCtasReceber: TfrmCtasReceber
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object MasterData1: TfrxMasterData
-        Height = 487.559370000000000000
+        Height = 510.236550000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
+        DataSet = frxDBCliente
+        DataSetName = 'dbSetCliente'
         RowCount = 0
         object Memo2: TfrxMemoView
           Left = 181.417440000000000000
@@ -3389,27 +3391,11 @@ object frmCtasReceber: TfrmCtasReceber
           ShowHint = False
         end
         object Shape6: TfrxShapeView
-          Left = 120.944960000000000000
+          Left = 117.165430000000000000
           Top = 207.874150000000000000
-          Width = 589.606680000000000000
-          Height = 245.669450000000000000
+          Width = 593.386210000000000000
+          Height = 177.637910000000000000
           ShowHint = False
-        end
-        object Memo8: TfrxMemoView
-          Left = 120.944960000000000000
-          Top = 423.307360000000000000
-          Width = 589.606680000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Typ = [ftLeft, ftRight, ftTop]
-          Memo.UTF8 = (
-            'Reconhe'#195#167'o que pagarei')
-          ParentFont = False
         end
         object Memo9: TfrxMemoView
           Left = 7.559060000000000000
@@ -3425,7 +3411,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '0,00')
+            '132,00')
           ParentFont = False
         end
         object Memo10: TfrxMemoView
@@ -3442,7 +3428,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '123456')
+            '1200092-001')
           ParentFont = False
         end
         object Memo11: TfrxMemoView
@@ -3476,7 +3462,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '0,00')
+            '132,00')
           ParentFont = False
         end
         object Memo13: TfrxMemoView
@@ -3493,11 +3479,11 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '12343234567')
+            '1200092-001')
           ParentFont = False
         end
         object Memo14: TfrxMemoView
-          Left = 120.944960000000000000
+          Left = 117.165430000000000000
           Top = 385.512060000000000000
           Width = 192.756030000000000000
           Height = 22.677180000000000000
@@ -3512,40 +3498,8 @@ object frmCtasReceber: TfrmCtasReceber
             'DATA DO ACEITE')
           ParentFont = False
         end
-        object Memo15: TfrxMemoView
-          Left = 313.700990000000000000
-          Top = 385.512060000000000000
-          Width = 396.850650000000000000
-          Height = 22.677180000000000000
-          ShowHint = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop]
-          Memo.UTF8 = (
-            'ASS DO SACADO')
-          ParentFont = False
-        end
-        object Memo16: TfrxMemoView
-          Left = 120.944960000000000000
-          Top = 351.496290000000000000
-          Width = 589.606680000000000000
-          Height = 37.795300000000000000
-          ShowHint = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop]
-          Memo.UTF8 = (
-            'Reconhe'#195#167'o(emos) que pagarei ')
-          ParentFont = False
-        end
         object Memo17: TfrxMemoView
-          Left = 120.944960000000000000
+          Left = 118.944960000000000000
           Top = 328.819110000000000000
           Width = 109.606370000000000000
           Height = 22.677180000000000000
@@ -3573,7 +3527,7 @@ object frmCtasReceber: TfrmCtasReceber
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop]
           Memo.UTF8 = (
-            'escreve o valor aqui')
+            'Cento e trinta dois reais')
           ParentFont = False
         end
         object Memo19: TfrxMemoView
@@ -3607,7 +3561,7 @@ object frmCtasReceber: TfrmCtasReceber
           Font.Style = [fsBold]
           HAlign = haCenter
           Memo.UTF8 = (
-            'CNPJ.: [CNPJEmpresa]')
+            'CNPJ.: [dbSetEmpresa."CNPJCPF"]')
           ParentFont = False
         end
         object dbSetEmpresaEndereco: TfrxMemoView
@@ -3623,6 +3577,7 @@ object frmCtasReceber: TfrmCtasReceber
           Font.Height = -12
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
+          HAlign = haCenter
           Memo.UTF8 = (
             
               '[dbSetEmpresa."Endereco"] [dbSetEmpresa."Bairro"]  CEP.:[dbSetEm' +
@@ -3672,7 +3627,7 @@ object frmCtasReceber: TfrmCtasReceber
           Font.Name = 'Arial'
           Font.Style = []
           Memo.UTF8 = (
-            'Cond. Espec')
+            'Cond. Espec.:')
           ParentFont = False
         end
         object Memo23: TfrxMemoView
@@ -3713,7 +3668,7 @@ object frmCtasReceber: TfrmCtasReceber
           Left = 123.283550000000000000
           Top = 229.953000000000000000
           Width = 587.449290000000000000
-          Height = 34.795300000000000000
+          Height = 15.897650000000000000
           ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
@@ -3725,15 +3680,25 @@ object frmCtasReceber: TfrmCtasReceber
           Memo.UTF8 = (
             
               'Endere'#195#167'o.: [dbSetCliente."Endereco"] [dbSetCliente."Bairro"] [d' +
-              'bSetCliente."Cidade"]-[dbSetCliente."UF"] CEP.:[dbSetCliente."CE' +
-              'P"]')
+              'bSetCliente."Cidade"]-[dbSetCliente."UF"] ')
           ParentFont = False
         end
-        object dbSetClienteCNPJCPF: TfrxMemoView
-          Left = 123.165430000000000000
-          Top = 269.756030000000000000
-          Width = 553.385900000000000000
+        object dbSetClienteTelefone: TfrxMemoView
+          Left = 124.724490000000000000
+          Top = 249.448980000000000000
+          Width = 325.039580000000000000
           Height = 18.897650000000000000
+          ShowHint = False
+          DataSet = frxDBCliente
+          DataSetName = 'dbSetCliente'
+          Memo.UTF8 = (
+            'CEP.:[dbSetCliente."CEP"] Telefone.: [dbSetCliente."Telefone"]')
+        end
+        object Memo24: TfrxMemoView
+          Left = 124.724490000000000000
+          Top = 275.905690000000000000
+          Width = 587.449290000000000000
+          Height = 15.897650000000000000
           ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
@@ -3743,7 +3708,76 @@ object frmCtasReceber: TfrmCtasReceber
           Font.Name = 'Arial'
           Font.Style = []
           Memo.UTF8 = (
-            'CNPJ/CPF.: [CNPJCliente] ')
+            
+              'Endere'#195#167'o.: [dbSetCliente."Endereco"] [dbSetCliente."Bairro"] [d' +
+              'bSetCliente."Cidade"]-[dbSetCliente."UF"] ')
+          ParentFont = False
+        end
+        object Memo25: TfrxMemoView
+          Left = 126.165430000000000000
+          Top = 295.401670000000000000
+          Width = 325.039580000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataSet = frxDBCliente
+          DataSetName = 'dbSetCliente'
+          Memo.UTF8 = (
+            'CEP.:[dbSetCliente."CEP"] Telefone.: [dbSetCliente."Telefone"]')
+        end
+        object Memo15: TfrxMemoView
+          Left = 309.921460000000000000
+          Top = 385.512060000000000000
+          Width = 400.630180000000000000
+          Height = 22.677180000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop]
+          Memo.UTF8 = (
+            'ASS DO SACADO')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 120.944960000000000000
+          Top = 351.496290000000000000
+          Width = 589.606680000000000000
+          Height = 34.015770000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop]
+          HAlign = haBlock
+          HideZeros = True
+          Memo.UTF8 = (
+            
+              'Reconhe'#195#167'o(emos) a exatid'#195#163'o desta duplicata de venda mercantila' +
+              ' importancia acima, que pagarei(remos) a [dbSetEmpresa."Nome_Fan' +
+              'tasia"] ou a sua ordemna pra'#195#167'a e vencimentos indicados ')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 117.165430000000000000
+          Top = 407.968770000000000000
+          Width = 593.386210000000000000
+          Height = 49.133890000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haBlock
+          Memo.UTF8 = (
+            'Na falta de oagamento no vencimento ser'#195#163'o cobrados'
+            ' - Juros de mora de acordo com alegisla'#195#167#195#163'o'
+            ' - Despesas Bancarias')
           ParentFont = False
         end
       end

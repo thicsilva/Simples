@@ -33,6 +33,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -105,6 +106,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 8
@@ -127,8 +129,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       Left = 8
       Top = 8
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -166,6 +168,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -177,8 +180,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       Left = 135
       Top = 8
       Width = 114
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -216,6 +219,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       MaxLength = 10
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -479,7 +483,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Align = alClient
     TabOrder = 1
     object ViewClientes: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -563,7 +567,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       end
     end
     object ViewProdutos: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -633,7 +637,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       end
     end
     object ViewSupervisor: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -702,6 +706,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -736,6 +741,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       TabOrder = 0
       MouseWheelSupport = False
       TabExtededDraw = False
+      ButtonTabSkinDataName = 'resizetoolbutton'
       TabsOffset = 0
       TabSpacing = 1
       TextInHorizontal = False
@@ -941,6 +947,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.cxSmallImages
           ImageIndex = 10
@@ -1054,6 +1061,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1310,6 +1318,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Top = 280
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1327,6 +1337,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

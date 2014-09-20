@@ -1186,16 +1186,21 @@ end;
 procedure TfrmCadClientes.cdsCtasReceberCalcFields(DataSet: TDataSet);
 var lrDias : real;
 begin
+   cdsCtasReceber.FieldByName('Nome_Status').AsString := 'A pagar';
+
+   if (cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime < gsData_Mov)  then
+      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Vencido';
+
    If cdsCtasReceber.FieldByName('Status').AsString = '1' Then
       cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Pago'
    Else if cdsCtasReceber.FieldByName('Status').AsString = '2' then
-      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Cancelado'
-   Else
-      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'A pagar';
+      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Cancelado';
 
    if (cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime > gsData_Mov) and
       (cdsCtasReceber.FieldByName('Status').AsString = '0')  Then
       cdsCtasReceber.FieldByName('Nome_Status').AsString := 'A Vencer';
+
+
       if cdsCtasReceber.FieldByName('Data_Pagamento').IsNull then
         lrDias := gsData_Mov - cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime
       Else
@@ -1982,13 +1987,13 @@ procedure TfrmCadClientes.GridCtasReceberCustomDrawCell(
   AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 begin
 
-  IF aviewinfo.GridRecord.Values[colum_status.Index]='A Receber' Then
+  IF aviewinfo.GridRecord.Values[colum_status.Index]='Vencido' Then
      acanvas.Font.color := clred
   Else if aviewinfo.GridRecord.Values[colum_status.Index]='Pago' Then
      acanvas.Font.color := clGreen
   Else if aviewinfo.GridRecord.Values[colum_status.Index]='Cancelado'  Then
      acanvas.Font.color := clBlue;
-  IF aviewinfo.GridRecord.Values[colum_status.Index]='A Receber' Then
+  IF aviewinfo.GridRecord.Values[colum_status.Index]='Vencido' Then
   begin
      IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>60 Then
      Begin

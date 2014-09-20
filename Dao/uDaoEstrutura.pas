@@ -2,7 +2,7 @@ unit uDaoEstrutura;
 
 interface
 
-uses uClassConexao, SqlExpr,SysUtils, SimpleDS,Classes;
+uses uClassConexao, SqlExpr,SysUtils, SimpleDS, Classes,uFuncoes;
 
 type TDaoEstrutura = class
   private
@@ -68,6 +68,9 @@ type TDaoEstrutura = class
     procedure Adicionar_GradeID_na_Tabela_Produto;
     procedure Adicionar_Campos_na_Tabela_ItensGrade;
     procedure CriarTabela_ItenVendaGrade;
+    procedure Adicionar_Dias_na_Tabela_ItensVendas;
+    procedure Corrigir_Campo_Dias;
+    procedure Adicionar_Ativo_na_Tabela_Produtos;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -147,6 +150,21 @@ begin
       FQryAjustes.Close;
       FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD BloqueiaNegativo bit';
       FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_Ativo_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'Ativo', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD Ativo bit';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Update T_Produtos Set Ativo=1';
+      FQryAjustes.ExecSQL;
+
    end;
 end;
 
@@ -446,6 +464,18 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Dias_na_Tabela_ItensVendas;
+begin
+   if not ExisteCampo( 'T_ItensVendas', 'Dias', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD Dias int';
+      FQryAjustes.ExecSQL;
+      Corrigir_Campo_Dias;
+   end;
+end;
+
+
 procedure TDaoEstrutura.Adicionar_TipoCobranca_na_Tabela_ItensVendas;
 begin
    if not ExisteCampo( 'T_ItensVendas', 'TipoCobranca', FConexao.Conection ) then
@@ -528,6 +558,28 @@ begin
       FQryAjustes.SQL.Text := 'ALTER TABLE Romaneios ADD Status char(1) ';
       FQryAjustes.ExecSQL;
    end;
+end;
+
+procedure TDaoEstrutura.Corrigir_Campo_Dias;
+var lsdtsTemp: TSimpleDataSet;
+    liDias : Integer;
+begin
+   lsdtsTemp                     := TSimpleDataSet.Create( nil );
+   lsdtsTemp.Connection          := FConexao.Conection;
+   lsdtsTemp.DataSet.CommandText := 'SELECT Data_mov,DataDevolucao,Cod_Produto,Seqvenda FROM T_itensvendas '+
+                                    'WHERE DataDevolucao is not null';
+   lsdtsTemp.Open;
+
+   while not lsdtsTemp.Eof do
+   begin
+      lidias := RetornarNumeroDias(lsdtsTemp.fieldByName('Data_Mov').AsDateTime,lsdtsTemp.fieldByName('DataDevolucao').AsDateTime);
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Update T_ItensVendas set Dias='+IntTostr(liDias)+',vlr_total=(Qtde_Venda*pco_Venda)*'+IntTostr(liDias)+' where SeqVenda='+lsdtsTemp.fieldByName('SeqVenda').AsString+' and '+
+                              ' Cod_Produto='+lsdtsTemp.fieldByName('Cod_Produto').AsString;
+      FQryAjustes.ExecSQL;
+      lsdtsTemp.next
+   end;
+
 end;
 
 procedure TDaoEstrutura.CrateTabela_AventoAnimais;
@@ -684,6 +736,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_Ativo_na_Tabela_Produtos;
+  Adicionar_Dias_na_Tabela_ItensVendas;
   CriarTabela_ItenVendaGrade;
   CriarTabela_TabelasGrade;
   Adicionar_Campos_na_Tabela_ItensGrade;

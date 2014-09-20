@@ -9,7 +9,9 @@ uses
   DBClient, ADODB, Provider, EditNew, BusinessSkinForm, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,uFormBase,
-  cxControls, cxGridCustomView, cxGrid, FMTBcd, SqlExpr, SqlTimSt;
+  cxControls, cxGridCustomView, cxGrid, FMTBcd, SqlExpr, SqlTimSt,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmEntradas = class(TFormBase)

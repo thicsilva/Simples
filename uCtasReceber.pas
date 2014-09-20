@@ -138,7 +138,7 @@ type
     cmbTipoData: TbsSkinComboBox;
     alterarVencimentoeTipodePagamento1: TMenuItem;
     Nome_FormaPagamento: TcxGridDBColumn;
-    frxReport1: TfrxReport;
+    frxDuplicataMErcantil: TfrxReport;
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
     DuplicataMercantil1: TMenuItem;
@@ -690,9 +690,9 @@ begin
    dtmCadastro := TdtmCadastro.create(Nil);
    dtmCadastro.cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
    frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
-
    dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr('00001'),Nil).Data;
    frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+   frxDuplicataMErcantil.ShowReport(true);
 end;
 
 procedure TfrmCtasReceber.edtCod_FornecedorExit(Sender: TObject);

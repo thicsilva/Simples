@@ -9,7 +9,9 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, ExtCtrls, ToolWin, ComCtrls,
   FMTBcd, DBClient, Provider, SqlExpr,SqlTimSt, RDprint, BusinessSkinForm,
-  bsdbctrls, Menus, bsSkinMenus, bsSkinTabs, SimpleDS, dxSkinsCore;
+  bsdbctrls, Menus, bsSkinMenus, bsSkinTabs, SimpleDS, dxSkinsCore,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmselrelVendasVendedor = class(TForm)

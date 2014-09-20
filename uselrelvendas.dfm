@@ -300,7 +300,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       Height = 21
       Style = csDropDownList
       DropDownCount = 30
-      ItemHeight = 13
+      ItemHeight = 0
       ItemIndex = 0
       TabOrder = 5
       TabStop = False
