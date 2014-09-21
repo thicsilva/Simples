@@ -91,8 +91,9 @@ begin
       CaixaMensagem( 'Selecione os dados para impressao ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-
    GstituloRel  :='Relatorio de Vendas Por Grupo de '+cmbTipoRel.Text;
+   if tag = RELATORIO_DE_LOCACAO then
+      GstituloRel:='Relatorio de Produtos Locados de '+cmbTipoRel.Text;
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
@@ -132,6 +133,11 @@ begin
       End;
       impmatricial.Imp(pvilinha,001,IncZero(cdsrelatorio.FieldByName('Cod_Produto').AsString,5)+' '+cdsrelatorio.FieldByName('Descricao').AsString );
       impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
+
+      if tag = RELATORIO_DE_LOCACAO then
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsrelatorio.fieldByname('Dias').asfloat),[]);
+
+      impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
       impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',cdsrelatorio.fieldByname('Pco_Medio').asfloat),[]);
       impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
 
@@ -167,18 +173,20 @@ end;
 procedure TfrmSelRelVendas.btnPesquisarClick(Sender: TObject);
 var lsWhere : String;
     lsSelect : String;
+    lsValorTotal : String;
 begin
+
+   lsValorTotal := ' Sum(Itens.vlr_Total) as vlr_Total ';
+   if Tag = RELATORIO_DE_LOCACAO then
+      lsValorTotal := ' sum( (Itens.Qtde_Venda*Itens.Pco_venda) * Coalesce(Itens.dias,1)) as  Vlr_Total ' ;
+
    lsWhere := '';
    lsSelect := 'inner join T_FormasPagamento Forma on Forma.Codigo=Ven.Cod_FormaPagamento';
-   if Tag = RELATORIO_DE_LOCACAO then
- //     lsWhere := ' Ven.Status=:parstatus AND ';
-   IF cmbStatus.ItemIndex <> 0 Then
-   //  lsWhere := ' Ven.Status=:parstatus AND ';
 
    lsWhere := lsWhere + ' Forma.SomaVenda<>'+QuotedStr('1')+' AND ';
    qryRelatorio.Close;
-   qryRelatorio.SQL.Text := 'Select Gru.Descricao as Grupo, Itens.Cod_Produto, Prod.Descricao, sum(Itens.Qtde_Venda)as Qtde_Total, '+
-                            ' Sum(Itens.vlr_Total) as vlr_Total '+
+   qryRelatorio.SQL.Text := 'Select Gru.Descricao as Grupo, Itens.Cod_Produto, Prod.Descricao, sum(Coalesce(Itens.dias,1)) as Dias, sum(Itens.Qtde_Venda) as Qtde_Total, '+
+                            lsValorTotal+
                             'From t_Vendas Ven '+
                             'inner join T_itensVendas Itens on '+
                             '      Itens.Seqvenda=Ven.seqvenda '+
@@ -193,9 +201,7 @@ begin
 
    qryRelatorio.ParamByName('parData_VendaIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
    qryRelatorio.ParamByName('parData_VendaFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-   if Tag = RELATORIO_DE_LOCACAO then
-   //   qryRelatorio.ParamByName('parStatus').AsString := IntToStr(cmbStatus.ItemIndex+1)
-   else
+   if Tag <> RELATORIO_DE_LOCACAO then
    begin
       IF cmbStatus.ItemIndex <> 0 Then
          qryRelatorio.ParamByName('parStatus').AsString   := IntToStr(cmbStatus.ItemIndex);
@@ -209,13 +215,12 @@ begin
    cdsRelatorio.Close;
    cdsRelatorio.ProviderName := dspRelatorio.Name;
    cdsRelatorio.Open;
+
    if cdsRelatorio.IsEmpty then
    Begin
       CaixaMensagem( 'Nenhuma Informação foi Selecionada ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
-
-
 end;
 
 procedure TfrmSelRelVendas.cdsRelatorioAfterOpen(DataSet: TDataSet);
@@ -234,10 +239,14 @@ begin
 end;
 
 procedure TfrmSelRelVendas.cdsRelatorioCalcFields(DataSet: TDataSet);
+var Dias : Real;
 begin
+   Dias := 0;
+   if Tag = RELATORIO_DE_LOCACAO then
+      Dias := cdsRelatorio.FieldByName('Dias').Asfloat;
    cdsRelatorio.FieldByName('Pco_Medio').AsFloat  := 0;
    if cdsRelatorio.FieldByName('Qtde_total').Asfloat > 0 then
-     cdsRelatorio.FieldByName('Pco_Medio').AsFloat :=  ( cdsRelatorio.FieldByName('vlr_total').Asfloat/cdsRelatorio.FieldByName('Qtde_total').Asfloat );
+      cdsRelatorio.FieldByName('Pco_Medio').AsFloat :=  ( cdsRelatorio.FieldByName('vlr_total').Asfloat/ ( cdsRelatorio.FieldByName('Qtde_total').Asfloat * Dias ) );
 end;
 
 procedure TfrmSelRelVendas.cmbVenctoChange(Sender: TObject);
@@ -297,7 +306,11 @@ procedure TfrmSelRelVendas.impMatricialNewPage(Sender: TObject;
 begin
    ConfiguraRel( Name, True, TRdPrint( Sender ), 1 );
    pviLinha := 06;
-   TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                    Qtde  Vlr.Medio    Total ');
+   if Tag = RELATORIO_DE_LOCACAO then
+      TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                           Dias    Qtde  Vlr.Medio    Total ')
+   else
+      TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                    Qtde  Vlr.Medio    Total ');
+
    pviLinha:=Pvilinha+1;
    TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
    pviLinha:=Pvilinha+1;

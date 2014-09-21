@@ -399,7 +399,8 @@ begin
     begin
        if cdsItensVendasTmp.FieldByName('Marcado').AsString='X' then
        begin
-          loDaoItemVenda.MarcarComoRecebido(cdsItensVendasTmp.FieldByName('Codigo').AsInteger,StrToInt(edtNumeroVenda.Text), edtDataDevolucao.Date);
+          loDaoItemVenda.MarcarComoRecebido(cdsItensVendasTmp.FieldByName('Codigo').AsInteger,StrToInt(edtNumeroVenda.Text), edtDataDevolucao.Date,
+                                            cdsItensVendasTmp.FieldByName('Dias').AsInteger );
           DevolverItem(StrToInt(edtNumeroVenda.Text), cdsItensVendasTmp);
           QtdeItensDevolvidos := QtdeItensDevolvidos + 1;
        end;

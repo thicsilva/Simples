@@ -14,7 +14,7 @@ type TDaoItemVenda = class
     Constructor Create(Conexao : TConexao);
     procedure Inserir(ItensVendas : TClientDataSet; ItemVenda : TItemVenda);
     function Buscar(SeqVenda : Integer) : TClientDataSet;
-    procedure MarcarComoRecebido(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime );
+    procedure MarcarComoRecebido(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime; Dias : Integer );
     property Connection : TSqlConnection read FConnection write SetConnection;
 end;
 
@@ -103,9 +103,9 @@ begin
    End;
 end;
 
-procedure TDaoItemVenda.MarcarComoRecebido(ProdutoId, VendaID: Integer; DataDevolucao : TDateTime);
+procedure TDaoItemVenda.MarcarComoRecebido(ProdutoId, VendaID: Integer; DataDevolucao : TDateTime; Dias : Integer);
 begin
-   fConexao.Conection.ExecuteDirect('update T_ItensVendas set status=1, DataDevolucao='+ QuotedStr(FormatDateTime('dd/mm/yyyy', DataDevolucao ))+' where Cod_Produto='+IntTostr(ProdutoId)+' and SeqVenda='+IntTostr(VendaId));
+   fConexao.Conection.ExecuteDirect('update T_ItensVendas set Dias='+IntTostr(Dias)+', status=1, DataDevolucao='+ QuotedStr(FormatDateTime('dd/mm/yyyy', DataDevolucao ))+' where Cod_Produto='+IntTostr(ProdutoId)+' and SeqVenda='+IntTostr(VendaId));
 end;
 
 procedure TDaoItemVenda.SetConnection(const Value: TSqlConnection);

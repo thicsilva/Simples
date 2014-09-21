@@ -300,7 +300,7 @@ object frmSelRelVendas: TfrmSelRelVendas
       Height = 21
       Style = csDropDownList
       DropDownCount = 30
-      ItemHeight = 0
+      ItemHeight = 13
       ItemIndex = 0
       TabOrder = 5
       TabStop = False
@@ -769,7 +769,7 @@ object frmSelRelVendas: TfrmSelRelVendas
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
-    Left = 242
+    Left = 250
     Top = 215
   end
   object impMatricial: TRDprint

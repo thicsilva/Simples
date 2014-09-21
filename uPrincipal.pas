@@ -204,7 +204,7 @@ type
     actPlanilhaRecebimento: TAction;
     dxBarLargeButton21: TdxBarLargeButton;
     dbxPrincipal: TSQLConnection;
-    MenuManegerBar3: TdxBar;
+    tabRelatoriosVendas: TdxBar;
     dxBarButton22: TdxBarButton;
     actCurva_abc_Produto: TAction;
     actCurva_abc_Cliente: TAction;
@@ -269,6 +269,7 @@ type
     btnGradeProduto: TdxBarButton;
     actRelLocacoes: TAction;
     dxBarButton38: TdxBarButton;
+    TabRelatorioLocacao: TdxBar;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -349,6 +350,7 @@ type
     procedure CarregarEmpresa;
     procedure AtualizarPainelAReceber;
     procedure AtualizarPainelAPagar;
+    procedure EscolheRelatorios;
     { Private declarations }
   public
     { Public declarations }
@@ -544,6 +546,21 @@ begin
 
    AtualizarPainelAPagar;
 
+   EscolheRelatorios;
+
+end;
+procedure TfrmPrincipal.EscolheRelatorios;
+begin
+   if HeLocacao then
+   begin
+      tabRelatoriosVendas.Visible := False;
+      TabRelatorioLocacao.Visible := True;
+   end
+   else
+   begin
+      tabRelatoriosVendas.Visible := True;
+      TabRelatorioLocacao.Visible := False;
+   end;
 end;
 
 procedure TfrmPrincipal.AtualizarPainelAReceber;
