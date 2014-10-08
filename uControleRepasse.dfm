@@ -33,6 +33,7 @@ object frmControleRepasse: TfrmControleRepasse
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -84,6 +85,7 @@ object frmControleRepasse: TfrmControleRepasse
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 8
@@ -106,8 +108,8 @@ object frmControleRepasse: TfrmControleRepasse
       Left = 153
       Top = 12
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -145,6 +147,7 @@ object frmControleRepasse: TfrmControleRepasse
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -319,8 +322,8 @@ object frmControleRepasse: TfrmControleRepasse
       Left = 9
       Top = 13
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -358,6 +361,7 @@ object frmControleRepasse: TfrmControleRepasse
       MaxLength = 10
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -380,7 +384,7 @@ object frmControleRepasse: TfrmControleRepasse
     ParentFont = False
     TabOrder = 1
     object GridRelatorio: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRepasse
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -506,6 +510,7 @@ object frmControleRepasse: TfrmControleRepasse
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -536,9 +541,9 @@ object frmControleRepasse: TfrmControleRepasse
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 847
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -572,7 +577,6 @@ object frmControleRepasse: TfrmControleRepasse
         OnClick = btnFecharClick
         ExplicitLeft = 811
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnImprimir: TbsSkinSpeedButton
         Left = 0
@@ -976,6 +980,8 @@ object frmControleRepasse: TfrmControleRepasse
     Top = 149
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -993,6 +999,8 @@ object frmControleRepasse: TfrmControleRepasse
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

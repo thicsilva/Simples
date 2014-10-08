@@ -281,14 +281,20 @@ object frmCadProdutos: TfrmCadProdutos
           object Column_Nome_TipoProduto: TcxGridDBColumn
             Caption = 'Tipo Cadastro'
             DataBinding.FieldName = 'Nome_TipoProduto'
+            Visible = False
             Width = 95
           end
           object GridProdutosCodigo: TcxGridDBColumn
             DataBinding.FieldName = 'Codigo'
             Width = 50
           end
+          object GridProdutosColumn5: TcxGridDBColumn
+            Caption = 'Cod. Barra'
+            DataBinding.FieldName = 'Cod_Barras'
+            Width = 85
+          end
           object Column_CodigoFornecedor: TcxGridDBColumn
-            Caption = 'Cod. Fornecedor'
+            Caption = 'Cod. Proprio'
             DataBinding.FieldName = 'CodigoFornecedor'
             Width = 95
           end
@@ -555,7 +561,7 @@ object frmCadProdutos: TfrmCadProdutos
           Visible = False
         end
         object lblCadFabricante: TbsSkinStdLabel
-          Left = 63
+          Left = 64
           Top = 275
           Width = 50
           Height = 13
@@ -572,7 +578,7 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Fabricante'
         end
         object bsSkinStdLabel13: TbsSkinStdLabel
-          Left = 160
+          Left = 325
           Top = 182
           Width = 84
           Height = 13
@@ -589,7 +595,7 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Qtde. Embalagem'
         end
         object lblPrecoVendaExterna: TbsSkinStdLabel
-          Left = 196
+          Left = 292
           Top = 132
           Width = 115
           Height = 13
@@ -607,9 +613,9 @@ object frmCadProdutos: TfrmCadProdutos
           Caption = 'Preco de venda Externa'
         end
         object bsSkinStdLabel12: TbsSkinStdLabel
-          Left = 60
-          Top = 84
-          Width = 54
+          Left = 45
+          Top = 86
+          Width = 69
           Height = 13
           EllipsType = bsetNone
           UseSkinFont = True
@@ -621,12 +627,12 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultFont.Style = []
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
-          Caption = 'Fornecedor'
+          Caption = 'Codigo Proprio'
         end
         object bsSkinStdLabel14: TbsSkinStdLabel
-          Left = 56
+          Left = 62
           Top = 296
-          Width = 55
+          Width = 52
           Height = 13
           EllipsType = bsetNone
           UseSkinFont = True
@@ -638,7 +644,7 @@ object frmCadProdutos: TfrmCadProdutos
           DefaultFont.Style = []
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'stdlabel'
-          Caption = 'Peso Bruno'
+          Caption = 'Peso Bruto'
         end
         object bsSkinStdLabel15: TbsSkinStdLabel
           Left = 306
@@ -692,10 +698,27 @@ object frmCadProdutos: TfrmCadProdutos
           SkinDataName = 'stdlabel'
           Caption = 'Grade'
         end
+        object bsSkinStdLabel2: TbsSkinStdLabel
+          Left = 325
+          Top = 156
+          Width = 81
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'stdlabel'
+          Caption = 'Garantia em Dias'
+        end
         object edtDescricao: TbsSkinEdit
           Left = 123
           Top = 105
-          Width = 337
+          Width = 358
           Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -716,7 +739,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           MaxLength = 50
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 5
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -794,12 +817,12 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object cmbNome_CentroCusto: TbsSkinDBLookupComboBox
-          Left = 188
+          Left = 192
           Top = 201
-          Width = 271
+          Width = 289
           Height = 20
           HintImageIndex = 0
-          TabOrder = 15
+          TabOrder = 17
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -826,7 +849,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 63
           Height = 20
           HintImageIndex = 0
-          TabOrder = 14
+          TabOrder = 16
           Visible = False
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
@@ -848,12 +871,12 @@ object frmCadProdutos: TfrmCadProdutos
           OnChange = cmbCod_CentroCustoChange
         end
         object cmbTipoProduto: TbsSkinComboBox
-          Left = 122
+          Left = 123
           Top = 246
-          Width = 337
+          Width = 358
           Height = 20
           HintImageIndex = 0
-          TabOrder = 11
+          TabOrder = 13
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -913,7 +936,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 179
           Height = 21
           HintImageIndex = 0
-          TabOrder = 13
+          TabOrder = 15
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -941,7 +964,7 @@ object frmCadProdutos: TfrmCadProdutos
         object edtCod_barras: TbsSkinEdit
           Left = 288
           Top = 58
-          Width = 169
+          Width = 193
           Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -996,7 +1019,7 @@ object frmCadProdutos: TfrmCadProdutos
           CharCase = ecUpperCase
           MaxLength = 3
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 9
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1008,10 +1031,10 @@ object frmCadProdutos: TfrmCadProdutos
         object cmbCod_Grupo: TbsSkinDBLookupComboBox
           Left = 122
           Top = 224
-          Width = 63
+          Width = 65
           Height = 20
           HintImageIndex = 0
-          TabOrder = 9
+          TabOrder = 11
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1032,12 +1055,12 @@ object frmCadProdutos: TfrmCadProdutos
           OnChange = cmbCod_GrupoChange
         end
         object cmbNome_Grupo: TbsSkinDBLookupComboBox
-          Left = 188
+          Left = 192
           Top = 224
-          Width = 271
+          Width = 289
           Height = 20
           HintImageIndex = 0
-          TabOrder = 10
+          TabOrder = 12
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1060,7 +1083,7 @@ object frmCadProdutos: TfrmCadProdutos
         object edtAliquota_ECF: TbsSkinEdit
           Left = 446
           Top = 81
-          Width = 33
+          Width = 35
           Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1082,7 +1105,7 @@ object frmCadProdutos: TfrmCadProdutos
           CharCase = ecUpperCase
           MaxLength = 3
           ParentFont = False
-          TabOrder = 16
+          TabOrder = 4
           Visible = False
           ButtonImageIndex = -1
           LeftImageIndex = -1
@@ -1120,7 +1143,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 6
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1135,7 +1158,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 105
           Height = 20
           HintImageIndex = 0
-          TabOrder = 12
+          TabOrder = 14
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1156,12 +1179,12 @@ object frmCadProdutos: TfrmCadProdutos
           OnChange = cmbNome_CentroCustoChange
         end
         object QtdeEmbalagem: TbsSkinSpinEdit
-          Left = 250
+          Left = 415
           Top = 177
           Width = 66
           Height = 20
           HintImageIndex = 0
-          TabOrder = 8
+          TabOrder = 10
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'spinedit'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1184,7 +1207,7 @@ object frmCadProdutos: TfrmCadProdutos
           MaxLength = 0
         end
         object edtPcoVendaExterna: TbsSkinNumericEdit
-          Left = 320
+          Left = 416
           Top = 129
           Width = 65
           Height = 20
@@ -1210,7 +1233,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 7
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1225,7 +1248,7 @@ object frmCadProdutos: TfrmCadProdutos
           Width = 139
           Height = 21
           HintImageIndex = 0
-          TabOrder = 17
+          TabOrder = 18
           SkinData = frmPrincipal.SkinEntradaDados
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1274,7 +1297,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Style = []
           MaxLength = 10
           ParentFont = False
-          TabOrder = 18
+          TabOrder = 3
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1323,7 +1346,7 @@ object frmCadProdutos: TfrmCadProdutos
         object edtPesoLiquido: TbsSkinNumericEdit
           Left = 375
           Top = 292
-          Width = 84
+          Width = 106
           Height = 20
           Text = '0,000'
           Increment = 1.000000000000000000
@@ -1358,8 +1381,8 @@ object frmCadProdutos: TfrmCadProdutos
           RightImageDownIndex = -1
         end
         object chkBloquiaEstoqueNegativo: TbsSkinCheckRadioBox
-          Left = 14
-          Top = 327
+          Left = 25
+          Top = 318
           Width = 243
           Height = 21
           HintImageIndex = 0
@@ -1414,7 +1437,7 @@ object frmCadProdutos: TfrmCadProdutos
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 8
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -1426,7 +1449,7 @@ object frmCadProdutos: TfrmCadProdutos
         object cmbNome_grade: TbsSkinDBLookupComboBox
           Left = 268
           Top = 269
-          Width = 191
+          Width = 213
           Height = 20
           HintImageIndex = 0
           TabOrder = 22
@@ -1449,7 +1472,7 @@ object frmCadProdutos: TfrmCadProdutos
           ListSource = srcGrande
         end
         object chkAtivo: TbsSkinCheckRadioBox
-          Left = 400
+          Left = 422
           Top = 318
           Width = 59
           Height = 21
@@ -1467,19 +1490,45 @@ object frmCadProdutos: TfrmCadProdutos
           UseSkinFont = True
           WordWrap = False
           AllowGrayed = False
-          State = cbUnchecked
+          State = cbChecked
           ImageIndex = 0
           Flat = True
           UseSkinFontColor = True
           TabStop = True
           CanFocused = True
           Radio = False
-          Checked = False
+          Checked = True
           GroupIndex = 0
           Caption = 'Ativo'
         end
+        object edtGarantia: TbsSkinSpinEdit
+          Left = 415
+          Top = 151
+          Width = 66
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 24
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'spinedit'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          DefaultColor = clWindow
+          UseSkinSize = True
+          ValueType = vtInteger
+          Decimal = 0
+          MaxValue = 20000.000000000000000000
+          Increment = 1.000000000000000000
+          EditorEnabled = True
+          MaxLength = 0
+        end
       end
-      object bsSkinExPanel3: TbsSkinExPanel
+      object pnlComissao: TbsSkinExPanel
         Left = 104
         Top = 353
         Width = 536
@@ -6298,6 +6347,11 @@ object frmCadProdutos: TfrmCadProdutos
           'Width')
       end
       item
+        Component = cxGrid1Level1
+        Properties.Strings = (
+          'GridView')
+      end
+      item
         Component = GridFichaTecinicaColumn1
         Properties.Strings = (
           'AlternateCaption'
@@ -6672,38 +6726,33 @@ object frmCadProdutos: TfrmCadProdutos
           'Width')
       end
       item
-        Component = GridProdutosCod_Emp
+        Component = GridProdutos
         Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
+          'BackgroundBitmaps'
+          'DataController'
+          'DateTimeHandling'
+          'DragMode'
           'FakeComponentLink1'
           'FakeComponentLink2'
           'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
+          'FilterBox'
+          'Filtering'
+          'FilterRow'
+          'Images'
           'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
+          'Navigator'
+          'NavigatorButtons'
+          'NewItemRow'
+          'OptionsBehavior'
+          'OptionsCustomize'
+          'OptionsData'
+          'OptionsSelection'
+          'OptionsView'
+          'PopupMenu'
+          'Preview'
           'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
+          'Synchronization'
+          'Tag')
       end
       item
         Component = GridProdutosCodigo
@@ -6724,6 +6773,8 @@ object frmCadProdutos: TfrmCadProdutos
           'HeaderGlyph'
           'HeaderGlyphAlignmentHorz'
           'HeaderGlyphAlignmentVert'
+          'HeaderHint'
+          'HeaderImageIndex'
           'MinWidth'
           'Name'
           'Options'
@@ -6740,7 +6791,7 @@ object frmCadProdutos: TfrmCadProdutos
           'Width')
       end
       item
-        Component = GridProdutosColumn1
+        Component = GridProdutosCod_Emp
         Properties.Strings = (
           'AlternateCaption'
           'BestFitMaxWidth'
@@ -6758,244 +6809,8 @@ object frmCadProdutos: TfrmCadProdutos
           'HeaderGlyph'
           'HeaderGlyphAlignmentHorz'
           'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosColumn2
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosColumn3
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosColumn4
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosData_Atu
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosData_cad
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosDescricao
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
-          'MinWidth'
-          'Name'
-          'Options'
-          'Properties'
-          'PropertiesClassName'
-          'RepositoryItem'
-          'SortIndex'
-          'SortOrder'
-          'Styles'
-          'Summary'
-          'Tag'
-          'Visible'
-          'VisibleForCustomization'
-          'Width')
-      end
-      item
-        Component = GridProdutosOperador
-        Properties.Strings = (
-          'AlternateCaption'
-          'BestFitMaxWidth'
-          'Caption'
-          'DataBinding'
-          'DateTimeGrouping'
-          'FakeComponentLink1'
-          'FakeComponentLink2'
-          'FakeComponentLink3'
-          'FooterAlignmentHorz'
-          'GroupIndex'
-          'GroupSummaryAlignment'
-          'HeaderAlignmentHorz'
-          'HeaderAlignmentVert'
-          'HeaderGlyph'
-          'HeaderGlyphAlignmentHorz'
-          'HeaderGlyphAlignmentVert'
+          'HeaderHint'
+          'HeaderImageIndex'
           'MinWidth'
           'Name'
           'Options'
@@ -7027,6 +6842,14 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 240
   end
   object OpenFigura: TOpenPictureDialog
+    Filter = 
+      'All (*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.em' +
+      'f;*.wmf)|*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;' +
+      '*.emf;*.wmf|All graphics (*.tif;*.gif;*.bmp)|*.tif;*.gif;*.bmp|P' +
+      'NG graphics from DevExpress (*.png)|*.png|GIF Image (*.gif)|*.gi' +
+      'f|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|*.jpeg|' +
+      'Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|Enhanced Metafiles (*.' +
+      'emf)|*.emf|Metafiles (*.wmf)|*.wmf'
     Left = 428
     Top = 305
   end
@@ -7150,11 +6973,11 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 223
   end
   object srcGrande: TDataSource
-    Left = 648
-    Top = 448
+    Left = 568
+    Top = 320
   end
   object srcGrupo: TDataSource
-    Left = 680
-    Top = 448
+    Left = 536
+    Top = 320
   end
 end

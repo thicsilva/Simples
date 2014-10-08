@@ -68,9 +68,10 @@ begin
    cdspagamentoinformado.close;
    cdspagamentoinformado.ProviderName := dspdspPagamentoInformado.name;
    cdspagamentoinformado.Open;
-   cdsTempPagamentos.First;
 
    DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
+
+   cdsTempPagamentos.First;
    valor := 0;
    while  not cdsTempPagamentos.Eof do
    Begin
@@ -83,7 +84,8 @@ begin
       Exit;
    end;
 
-   while  not cdsTempPagamentos.Eof do
+   cdsTempPagamentos.First;
+   while not cdsTempPagamentos.Eof do
    Begin
       if cdsTempPagamentos.fieldbyname('Valor').AsFloat <> 0 then
       Begin
@@ -101,6 +103,7 @@ begin
       cdsTempPagamentos.Next;
    End;
    cdspagamentoinformado.ApplyUpdates(-1);
+
    FreeAndNil(DaoCaixaMovimento);
    frmFechaCaixa.tag:=1;
    close;

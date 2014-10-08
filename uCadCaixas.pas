@@ -8,7 +8,9 @@ uses
   cxEdit, DB, cxDBData, StdCtrls, bsSkinCtrls, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, Mask, bsSkinBoxCtrls, ComCtrls,
-  bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SimpleDS, DBClient, Provider, SqlExpr;
+  bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SimpleDS, DBClient, Provider, SqlExpr,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmCadCaixas = class(TForm)

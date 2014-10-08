@@ -11,7 +11,8 @@ uses
   cxData, cxDataStorage, cxEdit, cxDBData, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridCustomPopupMenu,
   cxGridPopupMenu, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, FMTBcd, SqlExpr,sqlTimSt, dxSkinsCore;
+  cxGrid, FMTBcd, SqlExpr,sqlTimSt, dxSkinsCore, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCtasPagar = class(TForm)

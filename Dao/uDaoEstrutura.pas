@@ -71,6 +71,9 @@ type TDaoEstrutura = class
     procedure Adicionar_Dias_na_Tabela_ItensVendas;
     procedure Corrigir_Campo_Dias;
     procedure Adicionar_Ativo_na_Tabela_Produtos;
+    procedure Adicionar_Placa_na_Tabela_Produtos;
+    procedure Adicionar_NumeroSerie_na_Tabela_Vendas;
+    procedure Adicionar_Garantia_na_Tabela_Produtos;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -122,6 +125,25 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_NumeroSerie_na_Tabela_Vendas;
+begin
+   if not ExisteCampo( 'T_Vendas', 'NumeroSerie', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD NumeroSerie Varchar(50)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Descricao Varchar(200)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Defeito Varchar(200)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 procedure TDaoEstrutura.Adicionar_PesoLiquido_na_Tabela_ItensVendas;
 begin
    if not ExisteCampo( 'T_ItensVendas', 'PesoLiquido', FConexao.Conection ) then
@@ -142,6 +164,21 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.Adicionar_Garantia_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Produtos', 'Garantia', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD Garantia Int';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Update T_Produtos set Garantia=0 ';
+      FQryAjustes.ExecSQL;
+
+   end;
+end;
+
 
 procedure TDaoEstrutura.Adicionar_BloqueioEstoque_na_Tabela_Produtos;
 begin
@@ -149,6 +186,20 @@ begin
    begin
       FQryAjustes.Close;
       FQryAjustes.SQL.Text := 'ALTER TABLE T_Produtos ADD BloqueiaNegativo bit';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_Placa_na_Tabela_Produtos;
+begin
+   if not ExisteCampo( 'T_Clientes', 'Placa', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Clientes ADD Placa varchar(8)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_Clientes ADD DescricaoVeiculo varchar(50)';
       FQryAjustes.ExecSQL;
    end;
 end;
@@ -736,6 +787,9 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_Garantia_na_Tabela_Produtos;
+  Adicionar_NumeroSerie_na_Tabela_Vendas;
+  Adicionar_Placa_na_Tabela_Produtos;
   Adicionar_Ativo_na_Tabela_Produtos;
   Adicionar_Dias_na_Tabela_ItensVendas;
   CriarTabela_ItenVendaGrade;

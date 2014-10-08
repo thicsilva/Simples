@@ -36,7 +36,7 @@ object frmCtasPagar: TfrmCtasPagar
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 715
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -50,6 +50,7 @@ object frmCtasPagar: TfrmCtasPagar
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -444,6 +445,7 @@ object frmCtasPagar: TfrmCtasPagar
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -462,16 +464,21 @@ object frmCtasPagar: TfrmCtasPagar
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 707
-        Height = 247
+        Height = 249
         Align = alClient
         PopupMenu = bsSkinPopupMenu1
         TabOrder = 2
+        ExplicitHeight = 247
         object gridCtasPagar: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -559,6 +566,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -720,7 +728,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 175
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -739,6 +747,7 @@ object frmCtasPagar: TfrmCtasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -780,8 +789,8 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 101
           Top = 41
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -818,6 +827,7 @@ object frmCtasPagar: TfrmCtasPagar
           MaxLength = 10
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -829,8 +839,8 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 220
           Top = 41
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -867,6 +877,7 @@ object frmCtasPagar: TfrmCtasPagar
           MaxLength = 10
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1006,7 +1017,7 @@ object frmCtasPagar: TfrmCtasPagar
         Left = 707
         Top = 72
         Width = 19
-        Height = 247
+        Height = 249
         HintImageIndex = 0
         TabOrder = 1
         Visible = False
@@ -1031,10 +1042,15 @@ object frmCtasPagar: TfrmCtasPagar
         Position = 0
         SmallChange = 127
         LargeChange = 127
+        ExplicitHeight = 247
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 110
         Top = 17
@@ -1052,6 +1068,7 @@ object frmCtasPagar: TfrmCtasPagar
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -1243,7 +1260,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 141
           Top = 102
           Width = 329
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1264,6 +1281,7 @@ object frmCtasPagar: TfrmCtasPagar
           MaxLength = 75
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1275,7 +1293,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 94
           Top = 26
           Width = 74
-          Height = 18
+          Height = 20
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1295,6 +1313,7 @@ object frmCtasPagar: TfrmCtasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1306,7 +1325,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 141
           Top = 54
           Width = 45
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1327,6 +1346,7 @@ object frmCtasPagar: TfrmCtasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1365,8 +1385,8 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 142
           Top = 126
           Width = 91
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -1404,6 +1424,7 @@ object frmCtasPagar: TfrmCtasPagar
           MaxLength = 10
           ParentFont = False
           TabOrder = 5
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1415,8 +1436,8 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 379
           Top = 125
           Width = 91
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -1454,6 +1475,7 @@ object frmCtasPagar: TfrmCtasPagar
           MaxLength = 10
           ParentFont = False
           TabOrder = 6
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1478,6 +1500,7 @@ object frmCtasPagar: TfrmCtasPagar
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -1496,6 +1519,7 @@ object frmCtasPagar: TfrmCtasPagar
           Spacing = 2
           Caption = 'Tipo de Vencimento'
           OnClick = rdgTipoVencimentoClick
+          UseSkinSize = True
           ButtonSkinDataName = 'radiobox'
           ButtonDefaultFont.Charset = DEFAULT_CHARSET
           ButtonDefaultFont.Color = clWindowText
@@ -1645,7 +1669,7 @@ object frmCtasPagar: TfrmCtasPagar
           Left = 141
           Top = 78
           Width = 45
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1666,6 +1690,7 @@ object frmCtasPagar: TfrmCtasPagar
           Font.Style = []
           ParentFont = False
           TabOrder = 13
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1693,6 +1718,7 @@ object frmCtasPagar: TfrmCtasPagar
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1724,6 +1750,8 @@ object frmCtasPagar: TfrmCtasPagar
     Top = 166
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1741,6 +1769,8 @@ object frmCtasPagar: TfrmCtasPagar
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

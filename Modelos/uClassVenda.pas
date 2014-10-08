@@ -2,9 +2,8 @@ unit uClassVenda;
 
 interface
 
-uses RDprint,DBClient,SysUtils,Classes,uClassConexao,
-     uClassEmpresa,uClassFuncionario,uClassFormaPagamento,uClassCliente,
-  Graphics;
+uses RDprint,DBClient,SysUtils,Classes,uClassConexao,uClassEmpresa,uClassFuncionario,
+     uClassFormaPagamento,uClassCliente,Graphics;
 
 type TVenda = class
   Private
@@ -23,6 +22,15 @@ type TVenda = class
     FRomaneioId: Integer;
     FEntregue: Boolean;
     FVencimentos: TStringList;
+    FControle: String;
+    FTipoVenda: Integer;
+    FEmpresaId: Integer;
+    FDescricaoProduto: String;
+    FSerie: String;
+    FOperador: String;
+    FDefeito: String;
+    FDataMovimento: TDateTime;
+    FStatus: String;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -43,6 +51,15 @@ type TVenda = class
     procedure SetEntregue(const Value: Boolean);
     procedure SetVencimentos(const Value: TStringList);
     function RetornarPosicaoCentral(liTamanhoString,TamanhoLinha : Integer) : integer;
+    procedure SetControle(const Value: String);
+    procedure SetTipoVenda(const Value: Integer);
+    procedure SetDataMovimento(const Value: TDateTime);
+    procedure SetDefeito(const Value: String);
+    procedure SetDescricaoProduto(const Value: String);
+    procedure SetEmpresaId(const Value: Integer);
+    procedure SetOperador(const Value: String);
+    procedure SetSerie(const Value: String);
+    procedure SetStatus(const Value: String);
 
   public
      Constructor Create(Conexao : TConexao);
@@ -62,7 +79,15 @@ type TVenda = class
      property FormaPagamento : TFormaPagamento read FFormaPagamento write SetFormaPagamento;
      property Cliente : TCliente read FCliente write SetCliente;
      property Vencimentos : TStringList read FVencimentos write SetVencimentos;
-
+     property TipoVenda : Integer read FTipoVenda write SetTipoVenda;
+     property Controle : String read FControle write SetControle;
+     property Operador : String read FOperador write SetOperador;
+     property DataMovimento : TDateTime read FDataMovimento write SetDataMovimento;
+     property EmpresaId : Integer read FEmpresaId write SetEmpresaId;
+     property Serie : String read FSerie write SetSerie;
+     property DescricaoProduto : String read FDescricaoProduto write SetDescricaoProduto;
+     property Defeito : String read FDefeito write SetDefeito;
+     property Status : String read FStatus write SetStatus;
 end;
 
 implementation
@@ -103,6 +128,11 @@ constructor TVenda.Create(Conexao : TConexao);
 begin
    Fconexao := Conexao;
    Empresa := TEmpresa.Create;
+   Funcionario := TFuncionario.Create;
+   FormaPagamento := TFormapagamento.Create;
+
+   self.Funcionario := Funcionario;
+   self.FormaPagamento := FormaPagamento;
    Self.NumeroVias := 1;
    self.ValorPendendente := 0;
    self.VendaID := 0;
@@ -674,14 +704,39 @@ begin
   FCliente := Value;
 end;
 
+procedure TVenda.SetControle(const Value: String);
+begin
+  FControle := Value;
+end;
+
+procedure TVenda.SetDataMovimento(const Value: TDateTime);
+begin
+  FDataMovimento := Value;
+end;
+
 procedure TVenda.SetData_Venda(const Value: TDateTime);
 begin
   FData_Venda := Value;
 end;
 
+procedure TVenda.SetDefeito(const Value: String);
+begin
+  FDefeito := Value;
+end;
+
+procedure TVenda.SetDescricaoProduto(const Value: String);
+begin
+  FDescricaoProduto := Value;
+end;
+
 procedure TVenda.SetEmpresa(const Value: TEmpresa);
 begin
   FEmpresa := Value;
+end;
+
+procedure TVenda.SetEmpresaId(const Value: Integer);
+begin
+  FEmpresaId := Value;
 end;
 
 procedure TVenda.SetEntregue(const Value: Boolean);
@@ -704,6 +759,11 @@ begin
   FNumerovias := Value;
 end;
 
+procedure TVenda.SetOperador(const Value: String);
+begin
+  FOperador := Value;
+end;
+
 procedure TVenda.SetPeso_total(const Value: Real);
 begin
   FPeso_total := Value;
@@ -712,6 +772,21 @@ end;
 procedure TVenda.SetRomaneioId(const Value: Integer);
 begin
   FRomaneioId := Value;
+end;
+
+procedure TVenda.SetSerie(const Value: String);
+begin
+  FSerie := Value;
+end;
+
+procedure TVenda.SetStatus(const Value: String);
+begin
+  FStatus := Value;
+end;
+
+procedure TVenda.SetTipoVenda(const Value: Integer);
+begin
+  FTipoVenda := Value;
 end;
 
 procedure TVenda.SetValorPendendente(const Value: Real);

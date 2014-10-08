@@ -8,7 +8,8 @@ uses
   cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
   bsSkinCtrls, ExtCtrls, ToolWin, ComCtrls, StdCtrls, Mask, bsSkinBoxCtrls,
-  bsSkinTabs, DBClient,uFormBase, RDprint, bsdbctrls;
+  bsSkinTabs, DBClient,uFormBase, RDprint, bsdbctrls, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmRomaneioDeEntrega = class(TFormBase)

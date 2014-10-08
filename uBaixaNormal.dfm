@@ -38,7 +38,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 664
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -52,6 +52,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -212,6 +213,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -230,6 +232,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     Spacing = 2
     Caption = 'Informa'#231#245'es do Titulo'
     Align = alTop
+    UseSkinSize = True
     object bsSkinStdLabel2: TbsSkinStdLabel
       Left = 27
       Top = 62
@@ -406,7 +409,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 271
       Top = 55
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'emissao'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -428,6 +431,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 10
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -439,7 +443,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 65
       Top = 59
       Width = 272
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -460,6 +464,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -471,7 +476,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 547
       Top = 59
       Width = 101
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -492,6 +497,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -503,7 +509,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 64
       Top = 31
       Width = 89
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -524,6 +530,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -569,7 +576,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 234
       Top = 31
       Width = 73
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -589,6 +596,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -600,7 +608,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 89
       Top = 54
       Width = 43
-      Height = 18
+      Height = 20
       Text = 'Venda'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -622,6 +630,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 5
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -633,8 +642,8 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 117
       Top = 88
       Width = 100
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -672,6 +681,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       MaxLength = 10
       ParentFont = False
       TabOrder = 6
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -684,7 +694,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 137
       Top = 55
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'cliente'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -706,6 +716,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 7
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -717,7 +728,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 181
       Top = 55
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'pagamento'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -739,6 +750,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 8
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -750,7 +762,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 225
       Top = 55
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'emissao'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -772,6 +784,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 9
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -783,7 +796,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 545
       Top = 89
       Width = 61
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -807,6 +820,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 11
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -877,7 +891,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 282
       Top = 55
       Width = 40
-      Height = 18
+      Height = 20
       Text = '0'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -899,6 +913,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       ParentFont = False
       TabOrder = 13
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -910,7 +925,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 259
       Top = 88
       Width = 61
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -934,6 +949,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 14
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -946,7 +962,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 373
       Top = 88
       Width = 61
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -970,6 +986,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 15
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -982,7 +999,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 422
       Top = 59
       Width = 61
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -1007,6 +1024,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 16
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1032,6 +1050,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1050,6 +1069,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     Spacing = 2
     Caption = 'Informe os Valores Recebidos'
     Align = alClient
+    UseSkinSize = True
     object bsSkinCoolBar2: TbsSkinCoolBar
       Left = 1
       Top = 23
@@ -1069,7 +1089,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       object bsSkinToolBar2: TbsSkinToolBar
         Left = 9
         Top = 0
-        Width = 662
+        Width = 70
         Height = 40
         HintImageIndex = 0
         TabOrder = 0
@@ -1083,6 +1103,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1247,6 +1268,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
+      ColSizingwithLine = False
       DrawGraphicFields = False
       UseColumnsFont = False
       MouseWheelSupport = False
@@ -1282,6 +1304,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1369,7 +1392,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Left = 100
         Top = 6
         Width = 98
-        Height = 18
+        Height = 20
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
@@ -1390,6 +1413,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -1428,7 +1452,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Left = 490
         Top = 5
         Width = 87
-        Height = 22
+        Height = 19
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = clInfoBk
@@ -1481,6 +1505,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1517,6 +1542,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -1537,7 +1563,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 130
       Top = 0
       Width = 130
-      Height = 23
+      Height = 25
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1560,6 +1586,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1585,6 +1612,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -1605,7 +1633,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Left = 547
       Top = 0
       Width = 130
-      Height = 23
+      Height = 25
       Text = 'edtTotalReceber'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1628,6 +1656,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1655,6 +1684,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    UseSkinSize = True
     CaptionImageIndex = -1
     NumGlyphs = 1
     Spacing = 2
@@ -1677,23 +1707,23 @@ object frmBaixaNormal: TfrmBaixaNormal
       Align = alClient
       TabOrder = 0
       object GridCtasClientes: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
-        NavigatorButtons.First.Visible = True
-        NavigatorButtons.PriorPage.Visible = True
-        NavigatorButtons.Prior.Visible = True
-        NavigatorButtons.Next.Visible = True
-        NavigatorButtons.NextPage.Visible = True
-        NavigatorButtons.Last.Visible = True
-        NavigatorButtons.Insert.Visible = True
-        NavigatorButtons.Append.Visible = False
-        NavigatorButtons.Delete.Visible = True
-        NavigatorButtons.Edit.Visible = True
-        NavigatorButtons.Post.Visible = True
-        NavigatorButtons.Cancel.Visible = True
-        NavigatorButtons.Refresh.Visible = True
-        NavigatorButtons.SaveBookmark.Visible = True
-        NavigatorButtons.GotoBookmark.Visible = True
-        NavigatorButtons.Filter.Visible = True
+        Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.First.Visible = True
+        Navigator.Buttons.PriorPage.Visible = True
+        Navigator.Buttons.Prior.Visible = True
+        Navigator.Buttons.Next.Visible = True
+        Navigator.Buttons.NextPage.Visible = True
+        Navigator.Buttons.Last.Visible = True
+        Navigator.Buttons.Insert.Visible = True
+        Navigator.Buttons.Append.Visible = False
+        Navigator.Buttons.Delete.Visible = True
+        Navigator.Buttons.Edit.Visible = True
+        Navigator.Buttons.Post.Visible = True
+        Navigator.Buttons.Cancel.Visible = True
+        Navigator.Buttons.Refresh.Visible = True
+        Navigator.Buttons.SaveBookmark.Visible = True
+        Navigator.Buttons.GotoBookmark.Visible = True
+        Navigator.Buttons.Filter.Visible = True
         OnCellDblClick = GridCtasClientesCellDblClick
         DataController.DataSource = srcPesquisa
         DataController.Summary.DefaultGroupSummaryItems = <
@@ -1858,6 +1888,8 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1875,6 +1907,8 @@ object frmBaixaNormal: TfrmBaixaNormal
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

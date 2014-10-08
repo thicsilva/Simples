@@ -50,6 +50,7 @@ object frmCadsetores: TfrmCadsetores
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -80,9 +81,9 @@ object frmCadsetores: TfrmCadsetores
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 537
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -116,7 +117,6 @@ object frmCadsetores: TfrmCadsetores
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -336,6 +336,7 @@ object frmCadsetores: TfrmCadsetores
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 210
@@ -369,6 +370,7 @@ object frmCadsetores: TfrmCadsetores
     OnChange = PagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -385,10 +387,12 @@ object frmCadsetores: TfrmCadsetores
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitWidth = 624
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 622
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -406,6 +410,7 @@ object frmCadsetores: TfrmCadsetores
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -486,7 +491,7 @@ object frmCadsetores: TfrmCadsetores
           Left = 136
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -506,6 +511,7 @@ object frmCadsetores: TfrmCadsetores
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -561,6 +567,7 @@ object frmCadsetores: TfrmCadsetores
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -584,12 +591,13 @@ object frmCadsetores: TfrmCadsetores
         Left = 0
         Top = 33
         Width = 628
-        Height = 289
+        Height = 291
         Align = alClient
         TabOrder = 1
         ExplicitWidth = 622
+        ExplicitHeight = 289
         object GridConsulta: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -642,7 +650,10 @@ object frmCadsetores: TfrmCadsetores
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 622
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 101
         Top = 120
@@ -698,7 +709,7 @@ object frmCadsetores: TfrmCadsetores
         Left = 140
         Top = 141
         Width = 431
-        Height = 18
+        Height = 20
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
@@ -718,6 +729,7 @@ object frmCadsetores: TfrmCadsetores
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -729,7 +741,7 @@ object frmCadsetores: TfrmCadsetores
         Left = 142
         Top = 117
         Width = 56
-        Height = 18
+        Height = 20
         Text = '0001'
         DefaultColor = clScrollBar
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -751,6 +763,7 @@ object frmCadsetores: TfrmCadsetores
         MaxLength = 9
         ParentFont = False
         TabOrder = 0
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -762,7 +775,7 @@ object frmCadsetores: TfrmCadsetores
         Left = 497
         Top = 62
         Width = 74
-        Height = 18
+        Height = 20
         TabStop = False
         DefaultColor = clScrollBar
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -783,6 +796,7 @@ object frmCadsetores: TfrmCadsetores
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -793,12 +807,15 @@ object frmCadsetores: TfrmCadsetores
     end
     object bsSkinTabSheet3: TbsSkinTabSheet
       Caption = 'Consulta de Saldos'
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 622
+      ExplicitHeight = 0
       object bsSkinDBGrid1: TbsSkinDBGrid
         Left = 0
         Top = 62
         Width = 628
-        Height = 260
+        Height = 262
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -814,6 +831,7 @@ object frmCadsetores: TfrmCadsetores
         Font.Height = -15
         Font.Name = 'Arial Black'
         Font.Style = [fsBold]
+        ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
         DefaultRowHeight = 26
@@ -889,6 +907,7 @@ object frmCadsetores: TfrmCadsetores
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -972,7 +991,7 @@ object frmCadsetores: TfrmCadsetores
           Left = 134
           Top = 9
           Width = 467
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -991,6 +1010,7 @@ object frmCadsetores: TfrmCadsetores
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

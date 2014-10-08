@@ -9,7 +9,8 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, Mask, bsSkinBoxCtrls, ComCtrls,
   bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SimpleDS, DBClient, Provider, SqlExpr,
-  bsSkinGrids, bsDBGrids;
+  bsSkinGrids, bsDBGrids, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCadSetores = class(TForm)

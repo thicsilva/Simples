@@ -30,6 +30,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
     TabOrder = 0
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -69,6 +70,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -149,7 +151,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Left = 136
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -169,6 +171,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -224,6 +227,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -253,7 +257,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         ExplicitWidth = 630
         ExplicitHeight = 194
         object GridAtividades: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -326,6 +330,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -394,7 +399,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Left = 68
           Top = 61
           Width = 56
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -416,6 +421,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           MaxLength = 9
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -427,7 +433,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Left = 68
           Top = 93
           Width = 337
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -447,6 +453,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -458,7 +465,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Left = 330
           Top = 30
           Width = 74
-          Height = 18
+          Height = 20
           TabStop = False
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -479,6 +486,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -526,6 +534,7 @@ object frmCadtipoVenda: TfrmCadtipoVenda
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False

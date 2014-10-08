@@ -10,7 +10,8 @@ uses
   cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, FMTBcd, SqlExpr,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
-  bsdbctrls, SimpleDS, dxSkinsCore;
+  bsdbctrls, SimpleDS, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCadFuncionarios = class(TForm)

@@ -9,7 +9,8 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, FMTBcd, DBClient, Provider, SqlExpr, SqlTimSt, RDprint, bsdbctrls,
-  bsSkinTabs, dxSkinsCore;
+  bsSkinTabs, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmSelRelDevolucoes = class(TForm)

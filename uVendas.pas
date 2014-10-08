@@ -125,7 +125,6 @@ type
     sdtsConsultaCli: TSimpleDataSet;
     btnAlterar: TbsSkinSpeedButton;
     bsSkinBevel7: TbsSkinBevel;
-    btnOkProd: TbsSkinSpeedButton;
     btnCancelar: TbsSkinSpeedButton;
     edtLimite_Credito: TEditN;
     cdsTempPagamentos: TClientDataSet;
@@ -255,6 +254,9 @@ type
     imgFrente: TcxImage;
     imgVerso: TcxImage;
     cdsItensTamanhosItenGradeID: TIntegerField;
+    frxVendaPersonalizada03: TfrxReport;
+    cdsItensVendasTMPTipoProduto: TStringField;
+    btnOkProd: TbsSkinSpeedButton;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -314,6 +316,7 @@ type
     procedure PedidoPersonalizado(NumeroVenda: String);
     function TotalDigitado(IdProduto: String): Real;
     procedure AtualizaValores;
+    procedure PedidoPersonalizado03(NumeroVenda: String);
     { Private declarations }
   public
      liSeqVendaAtu  : Integer;
@@ -335,7 +338,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
-  uselAnimal, uDescontoVenda, uDelivery, uDaoItensVendaGrade;
+  uselAnimal, uDescontoVenda, uDelivery, uDaoItensVendaGrade, uDaoProduto;
 
 {$R *.dfm}
 procedure TfrmVendas.AtualizaDesconto(lrPercDesconto: Real);
@@ -366,19 +369,7 @@ Begin
    qryVariavel.Params.Clear;
    qryVariavel.SQL.text :=RetornarSelectProdutos+' '+
                           'From T_Produtos '+
-                          'where tipo_Produto=:parTipo_Produto and Ativo=1';
-
-   If (frmVendas.tag = 5) or ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendeServico', 'NAO' )) = 'SIM') Then
-      qryVariavel.SQL.add(' OR tipo_Produto=:parTipo_Produto2 ');
-   qryVariavel.SQL.add(' Order by Descricao  ');
-
-   If (frmVendas.tag = 3) or (frmVendas.tag = 4) Then
-      qryVariavel.ParamByName('parTipo_Produto').AsString := '1'
-   Else
-      qryVariavel.ParamByName('parTipo_Produto').AsString := '0';
-   If (frmVendas.tag = 5) or ( Uppercase( gParametros.Ler( '', '[CADASTRO]', 'VendeServico', 'NAO' )) = 'SIM') Then
-      qryVariavel.ParamByName('parTipo_Produto2').AsString := '1';
-
+                          'where  Ativo=1 Order by Descricao ';
    cdsCadProdutos.Close;
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
@@ -452,17 +443,10 @@ begin
 end;
 
 procedure TfrmVendas.FormCreate(Sender: TObject);
+var DaoCliente : TDaoCliente;
 begin
-
-   qryVariavel.Close;
-   qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select * from T_Clientes '+
-                           'where ativo=:parAtivo order by Descricao ';
-   qryVariavel.ParamByName('parativo').AsString := 'S';
-
-   cdsCadClientes.Close;
-   cdsCadClientes.ProviderName := dspVariavel.Name;
-   cdsCadClientes.Open;
+   DaoCliente := TDaoCliente.Create(gConexao);
+   cdsCadClientes.Data := DaoCliente.BuscarTodos.Data;
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
@@ -579,15 +563,28 @@ begin
 end;
 
 procedure TfrmVendas.edtCod_ProdutoExit(Sender: TObject);
+var DaoProDuto : TDaoProduto;
+    lsCodigo : String;
 begin
    if Trim(edtCod_produto.text) <> '' Then
    Begin
+      DaoProDuto := TDaoProduto.Create(gConexao);
+      lsCodigo := DaoProduto.RetornarCodigoProduto(edtCod_Produto.Text);
+      if lsCodigo <> '0' then
+         edtCod_produto.text := lsCodigo
+      else
+      begin
+         lsCodigo := DaoProduto.BuscaCodigoProCodigoProprio(edtCod_Produto.Text);
+         if lsCodigo <> '0' then
+            edtCod_produto.text := lsCodigo
+      end;
       cmbNome_Produto.KeyValue :=  edtCod_Produto.Text;
       if trim(cmbNome_Produto.text) = '' Then
       Begin
          CaixaMensagem( 'Produto não encontrado ', ctAviso, [ cbOk ], 0 );
          edtCod_Produto.Setfocus;
       End;
+      edtQtde_Venda.Text := '1';
    End;
 end;
 
@@ -800,29 +797,35 @@ begin
    lrDiferenca     := 0;
    PrecoCusto           := DaoCustoPtoduto.CustoMercadoriaVendida(StrToInt(edtCod_Produto.Text));
    lrDiferenca          := StrToFloat(edtPco_Tabela.Text) - StrToFloat(edtPco_Venda.Text);
+
    if StrToFloat(edtPco_Tabela.Text)>0 then
       lrPerc_Desconto := Arredondar( ( lrDiferenca / StrToFloat(edtPco_Tabela.Text) * 100),2);
    cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat := cdsCadProdutos.fieldbyname('Perc_Comissao').asFloat;
    if lrPerc_Desconto > StrTofloat( gParametros.Ler( '', '[ADMINISTRATIVO]', 'DescontoMaximo', '0' ))then
       cdsItensVendasTmp.FieldByName('Perc_Comis').asFloat := cdsCadProdutos.fieldbyname('ComissaoSecundaria').asFloat;
 
-   cdsItensVendasTmp.FieldByName('Codigo').asInteger      := StrToInt(edtCod_Produto.Text);
-   cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat    := StrToFloat (edtQtde_Venda.Text);
-   cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := StrToFloat (edtPco_Venda.Text);
-   cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat    := StrToFloat (edtPco_Tabela.Text);
-   cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := StrToFloat ( edtTotal.Text);
-   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat    := PrecoCusto;
-   cdsItensVendasTmp.FieldByName('LucroBruto').asFloat    := Arredondar((( StrToFloat(edtPco_Venda.Text) - PrecoCusto )/StrToFloat(edtPco_Venda.Text))*100,4);
+   cdsItensVendasTmp.FieldByName('Codigo').asInteger         := StrToInt(edtCod_Produto.Text);
+   cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat       := StrToFloat (edtQtde_Venda.Text);
+   cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat        := StrToFloat (edtPco_Venda.Text);
+   cdsItensVendasTmp.FieldByName('Pco_Tabela').asFloat       := StrToFloat (edtPco_Tabela.Text);
+   cdsItensVendasTmp.FieldByName('vlr_Total').asFloat        := StrToFloat ( edtTotal.Text);
+   cdsItensVendasTmp.FieldByName('PrecoCusto').asFloat       := PrecoCusto;
+   cdsItensVendasTmp.FieldByName('LucroBruto').asFloat       := Arredondar((( StrToFloat(edtPco_Venda.Text) - PrecoCusto )/StrToFloat(edtPco_Venda.Text))*100,4);
    cdsItensVendasTmp.FieldByName('MargemSecundaria').asFloat := cdsCadProdutos.fieldbyname('MargemSecundaria').asFloat;
-   cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := StrToFloat ( edtVlr_Desconto.Text);
-   cdsItensVendasTmp.FieldByName('Descricao').asString    := cmbNome_Produto.Text;
-   cdsItensVendasTmp.FieldByName('Unidade').asString      := cdsCadProdutos.FieldByName('Unid').AsString;
-   cdsItensVendasTmp.FieldByName('QtdeEmbalagem').asString := cdsCadProdutos.FieldByName('QtdeEmbalagem').AsString;
-   cdsItensVendasTmp.FieldByName('PesoBruto').asFloat      := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoBruto').AsFloat;
-   cdsItensVendasTmp.FieldByName('PesoLiquido').asFloat    := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoLiquido').AsFloat;
-   cdsItensVendasTmp.FieldByName('SeqVenda').asInteger     := 1;
-   cdsItensVendasTmp.FieldByName('GradeID').asInteger      := cdsCadProdutos.fieldbyname('GradeID').AsInteger;
-   cdsItensVendasTmp.FieldByName('SetorId').asInteger      := 1;
+   cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat     := StrToFloat ( edtVlr_Desconto.Text);
+   cdsItensVendasTmp.FieldByName('Descricao').asString       := cmbNome_Produto.Text;
+   cdsItensVendasTmp.FieldByName('Unidade').asString         := cdsCadProdutos.FieldByName('Unid').AsString;
+   cdsItensVendasTmp.FieldByName('TipoProduto').asString     := cdsCadProdutos.FieldByName('TipoProduto').AsString;
+   cdsItensVendasTmp.FieldByName('QtdeEmbalagem').asString   := cdsCadProdutos.FieldByName('QtdeEmbalagem').AsString;
+   cdsItensVendasTmp.FieldByName('PesoBruto').asFloat        := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoBruto').AsFloat;
+   cdsItensVendasTmp.FieldByName('PesoLiquido').asFloat      := StrToFloat(edtQtde_Venda.Text) * cdsCadProdutos.FieldByName('PesoLiquido').AsFloat;
+   cdsItensVendasTmp.FieldByName('SeqVenda').asInteger       := 1;
+   cdsItensVendasTmp.FieldByName('GradeID').asInteger        := cdsCadProdutos.fieldbyname('GradeID').AsInteger;
+   cdsItensVendasTmp.FieldByName('SetorId').asInteger        := 1;
+   if cdsCadProdutos.FieldByName('Garantia').AsInteger > 0 then
+      cdsItensVendasTmp.FieldByName('Complemento').asString:=' Garantia de '+cdsCadProdutos.fieldbyname('Garantia').AsString+' Dias';
+
+
    if frmVendas.Tag=VENDAS_EXTERNAS then
       cdsItensVendasTmp.FieldByName('SetorId').asInteger   := gParametros.Ler( '', '[GERAL]', 'EstoqueVendaExterna', '1' );
    cdsItensVendasTmp.Post;
@@ -1522,6 +1525,9 @@ begin
    Begin
       if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
          PedidoPersonalizado(IntToStr(liSeqvenda))
+      else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=7 then
+         PedidoPersonalizado03(IntToStr(liSeqvenda))
+
       else
       begin
          DaoVenda := TDaoVenda.Create(gConexao);
@@ -1605,7 +1611,20 @@ begin
       edtcod_Cliente.text := intToStr(pliCliente);
       edtcod_ClienteExit(edtcod_Cliente);
    end;
+   if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'EstiloPDV', 'NAO' ))) then
+   begin
+      edtcod_Cliente.Text := '1';
+      edtcod_ClienteExit(edtcod_Cliente);
+      edtCod_FormaPagamento.Text := '1';
+      edtCod_FormaPagamentoExit(edtCod_FormaPagamento);
+      edtCod_Funcionario.Text := '1';
+      edtCod_FuncionarioExit(edtCod_Funcionario);
+      Try
+        edtCod_Produto.SetFocus;
+      except
+      End;
 
+   end;
 
 end;
 
@@ -1858,7 +1877,7 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select status, Codigo,Descricao,cnpjcpf,Cod_Rota,Contrato,'+
+   qryVariavel.SQL.text :='Select Placa, DescricaoVeiculo, status, Codigo,Descricao,cnpjcpf,Cod_Rota,Contrato,'+
                            'Qtde_PedAberto,Limite_Credito from T_Clientes '+
                            'where ativo=:parAtivo order by Descricao ';
    qryVariavel.ParamByName('parativo').AsString := 'S';
@@ -2086,7 +2105,8 @@ Begin
    precoDeVenda:= 'Pco_Venda';
    if frmVendas.tag = VENDAS_EXTERNAS then
       precoDeVenda:= 'PrecoVendaExterna as Pco_Venda';
-   Result :=  'Select GradeId,BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
+   Result :=  'Select case Tipo_Produto when 0 then '+QuotedStr('Produto')+' else '+QuotedStr('Serviço')+' end As TipoProduto, '+
+              '       Garantia,GradeId,BloqueiaNegativo,ComissaoSecundaria,MargemSecundaria,Pco_Custo,PesoBruto,PesoLiquido,Cod_Barras,Unid,Codigo,Descricao,'+precoDeVenda+',Saldo,Tipo_Produto,M2,MetroLinear,Perc_Comissao,QtdeEmbalagem ';
 end;
 procedure TfrmVendas.edtCod_FormaPagamentoExit(Sender: TObject);
 begin
@@ -2170,5 +2190,19 @@ begin
   cdsEmpresa.Close;
 end;
 
+procedure  TfrmVendas.PedidoPersonalizado03(NumeroVenda : String);
+begin
+
+  cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+
+  frxVendaPersonalizada03.Variables['CNPJEmpresa']            := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+  frxVendaPersonalizada03.Variables['cnpjCliente']            := QuotedStr(edtCnpjCpf.Text);
+  frxVendaPersonalizada03.Variables['TotalLocacao']   := QuotedStr( edtTotalLiquido.Text );
+  frxVendaPersonalizada03.Variables['NumeroVenda']            := QuotedStr( NumeroVenda );
+  frxVendaPersonalizada03.Variables['FormaPagamento'] := QuotedStr( cmbNome_formaPagamento.text );
+
+  frxVendaPersonalizada03.ShowReport(true);
+  cdsEmpresa.Close;
+end;
 
 end.

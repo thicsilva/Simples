@@ -11,7 +11,7 @@ const METRO_QUADRADO = 2;
       METRO_LINEAR = 3;
 type
 
-  TfrmCalMQuadrado = class(TFormbase)
+  TfrmCalMQuadrado = class(TFormBase)
     bsSkinCoolBar1: TbsSkinCoolBar;
     bsSkinToolBar1: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;

@@ -48,6 +48,7 @@ object frmFechaCaixa: TfrmFechaCaixa
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -191,6 +192,7 @@ object frmFechaCaixa: TfrmFechaCaixa
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -229,6 +231,7 @@ object frmFechaCaixa: TfrmFechaCaixa
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ColSizingwithLine = False
     DrawGraphicFields = False
     UseColumnsFont = False
     MouseWheelSupport = False
@@ -262,6 +265,7 @@ object frmFechaCaixa: TfrmFechaCaixa
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -335,6 +339,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     Top = 133
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -352,6 +358,8 @@ object frmFechaCaixa: TfrmFechaCaixa
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

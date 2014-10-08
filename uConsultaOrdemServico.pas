@@ -11,7 +11,8 @@ uses
   cxGrid, FMTBcd, DBClient, Provider, SqlExpr,SqlTimSt, BusinessSkinForm,
   cxPropertiesStore, bsSkinTabs, bsdbctrls, bsSkinGrids, bsDBGrids, RpRave,
   RpBase, RpSystem, RpDefine, RpCon, RpConDS, Menus, bsSkinMenus, RpRender,
-  RpRenderPDF, RDprint;
+  RpRenderPDF, RDprint, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmConsultaOrdemServico = class(TForm)
@@ -105,10 +106,6 @@ type
     Column_Operador: TcxGridDBColumn;
     Column_Data_cad: TcxGridDBColumn;
     Column_Ocorrencia: TcxGridDBColumn;
-    RvDataItens: TRvDataSetConnection;
-    dscOrdemServico: TRvDataSetConnection;
-    SystemOrdemServico: TRvSystem;
-    rvOrdemServico: TRvProject;
     cdsOrdemServicoDescricao: TStringField;
     cdsOrdemServicoBairro: TStringField;
     cdsOrdemServicoTelefone: TStringField;
@@ -147,7 +144,6 @@ type
     cdsMaterialUtilizadoTotal_Item: TFloatField;
     bsSkinPopupMenu1: TbsSkinPopupMenu;
     EnviarParaExcel1: TMenuItem;
-    RvRenderPDF1: TRvRenderPDF;
     Colum_Nome_Obra: TcxGridDBColumn;
     cdsOrdemServicoNome_Obra: TStringField;
     cdsOrdemServicoPto_Referencia: TStringField;

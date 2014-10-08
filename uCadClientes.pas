@@ -344,6 +344,11 @@ type
     edtEmail: TbsSkinEdit;
     bsSkinStdLabel16: TbsSkinStdLabel;
     edtEnderecoObra: TbsSkinEdit;
+    panelVeiculo: TbsSkinExPanel;
+    bsSkinStdLabel25: TbsSkinStdLabel;
+    bsSkinStdLabel26: TbsSkinStdLabel;
+    EdtPlacaVeiculo: TbsSkinEdit;
+    edtDescricaoVeiculo: TbsSkinEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -752,6 +757,8 @@ begin
    cdsCadClientes.FieldByName('Email').AsString             := edtEmail.Text;
    cdsCadClientes.FieldByName('InscricaoEstadual').AsString := edtInscricaoEstadual.Text;
    cdsCadClientes.FieldByName('SequenciaEntrega').AsInteger := StrtoInt(edtSequenciaEntrega.Text);
+   cdsCadClientes.FieldByName('Placa').AsString             := edtPlacaVeiculo.text;
+   cdsCadClientes.FieldByName('DescricaoVeiculo').AsString  := edtDescricaoVeiculo.text;
    cdsCadClientes.Post;
 
    If cdsCadClientes.ChangeCount > 0  Then // se houve mudancas
@@ -940,6 +947,8 @@ begin
    edtEnderecoObra.Text       := cdspesquisa.FieldByName('EnderecoObra').AsString;
    edtInscricaoEstadual.Text  := cdspesquisa.FieldByName('InscricaoEstadual').AsString;
    edtEmail.Text              := cdspesquisa.FieldByName('Email').AsString;
+   edtPlacaVeiculo.text       := cdspesquisa.FieldByName('Placa').AsString;
+   edtDescricaoVeiculo.text   := cdspesquisa.FieldByName('DescricaoVeiculo').AsString;
 
    BtnIncluir.Enabled :=False;
    BtnAlterar.Enabled :=False;
@@ -1112,6 +1121,8 @@ begin
    for i:=0 to 1 do
      for j:=0 to 5 do
        FCustomDrawingStyle[i, j] := cdsGradient;
+
+  panelVeiculo.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'ControlaComissao', 'NAO' )));
 
   InitFonts();
 

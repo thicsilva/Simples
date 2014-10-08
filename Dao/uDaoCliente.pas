@@ -9,12 +9,15 @@ type TDaoCliente = class
    private
      FConexao : TConexao;
      FQryModific : TSqlQuery;
+     function CarregarDadosCliente( Dados: TClientDataSet ) : TCliente;
    public
      Constructor Create( conexao : TConexao);
-     function Buscar(ClienteId : Integer) : TCliente;
-     function Excluir(ClienteId : Integer) : Boolean;
      procedure AtualizarSequencia(ClienteId,SequenciaEntrega: Integer);
-     function SaldoDevedor(ClienteId: Integer; Data : TDateTime): real;
+     function Buscar(ClienteId : Integer) : TCliente;
+     function BuscarCNPJ(CNPJ : String) : TCliente;
+     function Excluir(ClienteId : Integer) : Boolean;
+     function SaldoDevedor(ClienteId: Integer; Data : TDateTime) : real;
+     Function BuscarTodos : TClientDataSet;
 end;
 
 
@@ -33,42 +36,45 @@ begin
 end;
 
 function TDaoCliente.Buscar(ClienteId: Integer): TCliente;
-var Cliente : TCliente;
-    Parametros : TStringList;
-    DaoRota : TDaoRota;
+var Parametros : TStringList;
     Dados : TClientDataSet;
 begin
-  DaoRota := TDaoRota.Create(FConexao);
-  Cliente := TCliente.Create;
+   Parametros := TStringList.Create;
+   Parametros.ADD(IntToStr(ClienteId));
+   Try
+      Dados := FConexao.BuscarDadosSQL('Select * from T_clientes where Codigo=:parcodigo',Parametros);
+      Result  := CarregarDadosCliente(Dados);
+   Finally
+     FreeandNil(Dados);
+     FreeandNil(Parametros);
+   End;
+end;
+
+function TDaoCliente.BuscarCNPJ(CNPJ: String): TCliente;
+var Parametros : TStringList;
+    Dados : TClientDataSet;
+begin
   Parametros := TStringList.Create;
-  Parametros.ADD(IntToStr(ClienteId));
+  Parametros.ADD(CNPJ);
   Try
-     Dados := FConexao.BuscarDadosSQL('Select * from T_clientes where Codigo=:parcodigo',Parametros);
-     Cliente.Id         := Dados.FieldByName('Codigo').AsInteger;
-     Cliente.CPF        := Dados.FieldByName('CNPJCPF').AsString;
-     Cliente.Descricao  := Dados.FieldByName('Descricao').AsString;
-     Cliente.Endereco.bairro := Dados.FieldByName('Bairro').AsString;
-     Cliente.Endereco.cidade := Dados.FieldByName('cidade').AsString;
-     Cliente.Endereco.uf      := Dados.FieldByName('UF').AsString;
-     Cliente.Endereco.logradouro := Dados.FieldByName('endereco').AsString;
-     Cliente.Endereco.PontoReferencia := Dados.FieldByName('Pto_Referencia').AsString;
-     Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
-     Cliente.InscricaoEstadual := Dados.FieldByName('InscricaoEstadual').AsString;
-     Cliente.Sequencia := Dados.FieldByName('Sequenciaentrega').AsString;
-     Cliente.Rota := DaoRota.BuscarPorId(Dados.FieldByName('Cod_rota').AsInteger);
-     Result := Cliente;
+     Dados   := FConexao.BuscarDadosSQL('Select * from T_clientes where CNPJCPF=:parCNPJCPF',Parametros);
+     Result  := CarregarDadosCliente(Dados);
   Finally
     FreeandNil(Dados);
     FreeandNil(Parametros);
-    FreeAndNil(DaoRota);
   End;
+end;
 
+function TDaoCliente.BuscarTodos: TClientDataSet;
+begin
+   Result := Fconexao.BuscarDadosSQL('Select * from T_Clientes where ativo='+QuotedStr('S')+' order by Descricao ',Nil);
 end;
 
 constructor TDaoCliente.Create(conexao: TConexao);
 begin
   Fconexao := conexao;
   FQryModific := TSqlQuery.Create(nil);
+  FQryModific.SQLConnection := Fconexao.Conection;
 end;
 
 function TDaoCliente.Excluir(ClienteId: Integer): Boolean;
@@ -91,6 +97,32 @@ begin
    Result    := lcdsDados.FieldByName('Total').AsFloat;
    FreeAndNil(lstParametros);
    FreeAndnil(lcdsDados);
+end;
+
+function TDaoCliente.CarregarDadosCliente( Dados: TClientDataSet ) : TCliente;
+var Cliente : TCliente;
+    DaoRota : TDaoRota;
+begin
+  DaoRota := TDaoRota.Create(FConexao);
+  Cliente := TCliente.Create;
+  try
+     Cliente.Id := Dados.FieldByName('Codigo').AsInteger;
+     Cliente.CPF := Dados.FieldByName('CNPJCPF').AsString;
+     Cliente.Descricao := Dados.FieldByName('Descricao').AsString;
+     Cliente.Endereco.bairro := Dados.FieldByName('Bairro').AsString;
+     Cliente.Endereco.cidade := Dados.FieldByName('cidade').AsString;
+     Cliente.Endereco.uf := Dados.FieldByName('UF').AsString;
+     Cliente.Endereco.logradouro := Dados.FieldByName('endereco').AsString;
+     Cliente.Endereco.PontoReferencia := Dados.FieldByName('Pto_Referencia').AsString;
+     Cliente.Telefones := Dados.FieldByName('Telefone').AsString;
+     Cliente.InscricaoEstadual := Dados.FieldByName('InscricaoEstadual').AsString;
+     Cliente.Sequencia := Dados.FieldByName('Sequenciaentrega').AsString;
+     Cliente.Rota := DaoRota.BuscarPorId(Dados.FieldByName('Cod_rota').AsInteger);
+     Result := Cliente;
+  finally
+     FreeAndNil(DaoRota);
+
+  end;
 end;
 
 end.

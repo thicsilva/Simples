@@ -9,7 +9,8 @@ uses
   DBClient, Provider, SqlExpr, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxGridLevel, cxClasses, cxControls, cxGridCustomView,
   cxGrid, StdCtrls, Mask, bsSkinBoxCtrls,SqlTimSt, EditNew, RDprint, bsdbctrls,
-  BusinessSkinForm, dxSkinsCore;
+  BusinessSkinForm, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmControleRepasse = class(TForm)

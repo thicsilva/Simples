@@ -9,7 +9,8 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, Mask, bsSkinBoxCtrls, ComCtrls,
   bsSkinTabs, ExtCtrls, ToolWin,UformBase, FMTBcd, SqlExpr, Provider, DBClient,
-  SimpleDS, dxSkinsCore;
+  SimpleDS, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCadtipoVenda = class(TFormBase)

@@ -31,6 +31,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -85,8 +86,8 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       Left = 24
       Top = 8
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -123,6 +124,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -134,8 +136,8 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       Left = 158
       Top = 8
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -172,6 +174,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -195,6 +198,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 8
@@ -470,6 +474,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -487,6 +492,10 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Escolha o Filtro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 81
         Top = 12
@@ -666,6 +675,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        Transparent = False
         CheckedMode = False
         ImageList = frmPrincipal.cxSmallImages
         ImageIndex = 10
@@ -750,7 +760,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
     Align = alClient
     TabOrder = 2
     object ViewClientes: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -830,7 +840,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       end
     end
     object ViewProdutos: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -900,7 +910,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       end
     end
     object ViewSupervisor: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -987,6 +997,7 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1017,9 +1028,9 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 579
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1053,7 +1064,6 @@ object frmSelRelDevolucoes: TfrmSelRelDevolucoes
         OnClick = btnFecharClick
         ExplicitLeft = 487
         ExplicitTop = 8
-        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 0

@@ -34,6 +34,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -70,6 +72,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -251,8 +255,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       Left = 186
       Top = 6
       Width = 88
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -270,6 +274,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -288,13 +294,20 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       MaxLength = 10
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object dtpData_Fim: TbsSkinDateEdit
       Left = 318
       Top = 6
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -312,6 +325,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -330,6 +345,13 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       MaxLength = 10
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object cmbTipoData: TbsSkinComboBox
       Left = 64
@@ -394,7 +416,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       Left = 312
       Top = 34
       Width = 281
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -414,6 +436,13 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object cmbPeriodo: TbsSkinComboBox
       Left = 413
@@ -570,8 +599,11 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 5
+      AlwaysShowLayeredFrame = False
       UseSkinSize = False
       UseSkinFontColor = True
       RepeatMode = False
@@ -607,7 +639,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 1013
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -621,6 +653,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -665,6 +699,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -703,6 +738,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -763,6 +799,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -801,6 +838,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -851,6 +889,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -889,6 +928,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -938,6 +978,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -976,6 +1017,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -1015,6 +1057,13 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     ParentFont = False
     TabOrder = 3
     OnChange = bsSkinPageControl1Change
+    MouseWheelSupport = False
+    TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
+    TabsOffset = 0
+    TabSpacing = 1
+    TextInHorizontal = False
+    TabsInCenter = False
     FreeOnClose = False
     ShowCloseButtons = False
     TabsBGTransparent = False
@@ -1029,6 +1078,10 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta e Manuten'#231#227'o'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gridOS: TcxGrid
         Left = 0
         Top = 0
@@ -1037,7 +1090,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         Align = alClient
         TabOrder = 0
         object GrdVendas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcOrdemServico
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -1152,7 +1205,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           end
         end
         object GrdItensVendas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DetailKeyFieldNames = 'Seqvenda'
           DataController.Filter.Active = True
           DataController.KeyFieldNames = 'seqvenda'
@@ -1208,11 +1261,15 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Historico da O.S.'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Splitter1: TSplitter
         Left = 632
         Top = 0
         Width = 4
-        Height = 374
+        Height = 373
         Align = alRight
         ExplicitLeft = 631
         ExplicitHeight = 375
@@ -1221,7 +1278,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         Left = 0
         Top = 0
         Width = 632
-        Height = 374
+        Height = 373
         HintImageIndex = 0
         TabOrder = 1
         SkinDataName = 'panel'
@@ -1233,6 +1290,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -1250,11 +1309,12 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         Spacing = 2
         Caption = 'bsSkinPanel2'
         Align = alClient
+        ExplicitHeight = 374
         object bsSkinExPanel3: TbsSkinExPanel
           Left = 610
           Top = 26
           Width = 21
-          Height = 347
+          Height = 346
           HintImageIndex = 0
           TabOrder = 0
           SkinData = frmPrincipal.SkinPrincipal
@@ -1267,6 +1327,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          UseSkinSize = True
           CaptionImageList = frmPrincipal.cxSmallImages
           CaptionImageIndex = 18
           NumGlyphs = 1
@@ -1282,6 +1343,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           Sizeable = False
           Align = alRight
           Caption = ' Historico'
+          ExplicitHeight = 347
           object MemoHistorico: TMemo
             Left = 1
             Top = 21
@@ -1299,11 +1361,12 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           Left = 1
           Top = 26
           Width = 609
-          Height = 347
+          Height = 346
           Align = alClient
           TabOrder = 1
+          ExplicitHeight = 347
           object cxGrid2DBTableView1: TcxGridDBTableView
-            NavigatorButtons.ConfirmDelete = False
+            Navigator.Buttons.CustomButtons = <>
             DataController.DataSource = srcHistoricoOS
             DataController.Summary.DefaultGroupSummaryItems = <>
             DataController.Summary.FooterSummaryItems = <>
@@ -1354,6 +1417,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          EmptyDrawing = False
+          RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
           CaptionImageIndex = -1
@@ -1377,7 +1442,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         Left = 636
         Top = 0
         Width = 388
-        Height = 374
+        Height = 373
         HintImageIndex = 0
         TabOrder = 0
         SkinDataName = 'panel'
@@ -1389,6 +1454,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -1406,6 +1473,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alRight
+        ExplicitHeight = 374
         object panelExecultado: TbsSkinExPanel
           Left = 1
           Top = 22
@@ -1423,6 +1491,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          UseSkinSize = True
           CaptionImageList = frmPrincipal.cxSmallImages
           CaptionImageIndex = 42
           NumGlyphs = 1
@@ -1482,6 +1551,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          UseSkinSize = True
           CaptionImageList = frmPrincipal.cxSmallImages
           CaptionImageIndex = 42
           NumGlyphs = 1
@@ -1516,6 +1586,8 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
             TabOrder = 0
             Visible = False
             WantTabs = True
+            Transparent = False
+            WallpaperStretch = False
             DefaultFont.Charset = DEFAULT_CHARSET
             DefaultFont.Color = clBlack
             DefaultFont.Height = 14
@@ -1544,6 +1616,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          UseSkinSize = True
           CaptionImageList = frmPrincipal.cxSmallImages
           CaptionImageIndex = 42
           NumGlyphs = 1
@@ -1567,7 +1640,7 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
             Align = alClient
             TabOrder = 0
             object gridMaterial: TcxGridDBTableView
-              NavigatorButtons.ConfirmDelete = False
+              Navigator.Buttons.CustomButtons = <>
               DataController.DataSource = srcMaterialUtilizado
               DataController.Summary.DefaultGroupSummaryItems = <
                 item
@@ -1860,6 +1933,13 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     end
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -1872,13 +1952,14 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False
     AlphaBlendAnimation = False
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200
@@ -1990,62 +2071,12 @@ object frmConsultaOrdemServico: TfrmConsultaOrdemServico
     Left = 388
     Top = 223
   end
-  object RvDataItens: TRvDataSetConnection
-    LocalFilter = False
-    RuntimeVisibility = rtDeveloper
-    DataSet = cdsMaterialUtilizado
-    Left = 156
-    Top = 332
-  end
-  object dscOrdemServico: TRvDataSetConnection
-    LocalFilter = False
-    RuntimeVisibility = rtDeveloper
-    DataSet = cdsOrdemServico
-    Left = 128
-    Top = 332
-  end
-  object SystemOrdemServico: TRvSystem
-    TitleSetup = 'Output Options'
-    TitleStatus = 'Report Status'
-    TitlePreview = 'Report Preview'
-    SystemFiler.StatusFormat = 'Gerando p'#225'gina %p'
-    SystemPreview.FormState = wsMaximized
-    SystemPreview.ZoomFactor = 100.000000000000000000
-    SystemPrinter.ScaleX = 100.000000000000000000
-    SystemPrinter.ScaleY = 100.000000000000000000
-    SystemPrinter.StatusFormat = 'Imprimindo P'#225'gina %p'
-    SystemPrinter.Title = 'ReportPrinter Report'
-    SystemPrinter.Units = unCM
-    SystemPrinter.UnitsFactor = 2.540000000000000000
-    Left = 101
-    Top = 332
-  end
-  object rvOrdemServico: TRvProject
-    Engine = SystemOrdemServico
-    ProjectFile = 'D:\Pessoal\Producao\Simples\Relatorios\Relatorio.rav'
-    Left = 73
-    Top = 332
-  end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
     Left = 216
     Top = 224
     object EnviarParaExcel1: TMenuItem
       Caption = 'Enviar Para Excel'
     end
-  end
-  object RvRenderPDF1: TRvRenderPDF
-    DisplayName = 'Adobe Acrobat (PDF)'
-    FileExtension = '*.pdf'
-    EmbedFonts = False
-    ImageQuality = 90
-    MetafileDPI = 300
-    FontEncoding = feWinAnsiEncoding
-    DocInfo.Creator = 'Rave Reports (http://www.nevrona.com/rave)'
-    DocInfo.Producer = 'Nevrona Designs'
-    BufferDocument = True
-    DisableHyperlinks = False
-    Left = 185
-    Top = 332
   end
   object cdsFuncionarios: TClientDataSet
     Aggregates = <>

@@ -143,6 +143,10 @@ type
     dspItensVendasCp: TDataSetProvider;
     frxVendaPersonalizada02: TfrxReport;
     frmDbItensGrade: TfrxDBDataset;
+    SQLQuery1: TSQLQuery;
+    DataSetProvider1: TDataSetProvider;
+    ClientDataSet1: TClientDataSet;
+    frxVendaPersonalizada03: TfrxReport;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -179,6 +183,8 @@ type
     procedure RecuperarItensVendas(seqVenda: String);
     procedure CarregarItemParaImpressao(SeqVenda : String);
     procedure PedidoPersonalizado02(NumeroVenda: String);
+    procedure PedidoPersonalizado03(NumeroVenda: String);
+    procedure PrepararGarantia;
     { Private declarations }
   public
     { Public declarations }
@@ -389,6 +395,12 @@ begin
       CarregarItemParaImpressao(cdsVendas.FieldByName('SeqVenda').AsString);
       PedidoPersonalizado02(cdsVendas.FieldByName('SeqVenda').AsString);
    end
+   else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=7 then
+   begin
+      RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
+      PrepararGarantia;
+      PedidoPersonalizado03(cdsVendas.FieldByName('SeqVenda').AsString);
+   end
    else
    begin
      DaoVenda := TDaoVenda.Create(gConexao);
@@ -404,6 +416,10 @@ begin
      FreeAndNil(DaoItemVenda);
    end;
 end;
+procedure TfrmConsVendas.PrepararGarantia;
+Begin
+
+End;
 
 procedure  TfrmConsVendas.PedidoPersonalizado(NumeroVenda : String);
 begin
@@ -437,6 +453,24 @@ begin
    frxVendaPersonalizada02.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
    frxVendaPersonalizada02.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
    frxVendaPersonalizada02.ShowReport(true);
+
+end;
+
+procedure  TfrmConsVendas.PedidoPersonalizado03(NumeroVenda : String);
+begin
+   dtmCadastro := TdtmCadastro.create(Nil);
+   dtmCadastro.cdsEmpresa.Data := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+   dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil).Data;
+   frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+
+   frxVendaPersonalizada03.Variables['CNPJEmpresa']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+   frxVendaPersonalizada03.Variables['cnpjCliente']    := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsClientes.fieldByname('cnpjcpf').AsString ));
+   frxVendaPersonalizada03.Variables['TotalLocacao']   := QuotedStr( Formatfloat('0.00',cdsVendas.FieldByName('vlr_Total').AsFloat ));
+   frxVendaPersonalizada03.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
+   frxVendaPersonalizada03.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
+   frxVendaPersonalizada03.ShowReport(true);
 
 end;
 
@@ -525,7 +559,9 @@ end;
 procedure TfrmConsVendas.RecuperarItensVendas(seqVenda : String);
 begin
    qryItensVendasCp.Close;
-   qryItensVendasCp.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
+   qryItensVendasCp.SQL.Text := 'Select  case prod.Tipo_Produto when 0 then '+QuotedStr('Produto')+' else '+QuotedStr('Serviço')+' end As TipoProduto, '+
+                                '        Case Prod.Garantia when 0 then '+QuotedStr(' ') + ' else '+QuotedStr('Garantia de')+'+ cast(Prod.Garantia as char(3)) +'+QuotedStr(' Dias')+' end as Complemento, '+
+                                '       Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
                               'Prod.Pco_Custo, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
                               'where Prod.Codigo=Itens.Cod_Produto  ';
@@ -731,6 +767,7 @@ begin
    btnSelecionarClick(btnSelecionar);
    if gbMaster then
       MenuDeControle.UseBuiltInPopupMenus := True;
+   btnCupomFiscal.Visible :=  False;   
 end;
 
 procedure TfrmConsVendas.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
@@ -1246,13 +1283,16 @@ begin
          qryModific.ExecSQL;
       End;
    end;
-   frmFinalizaServico := TfrmFinalizaServico.Create(Nil);
-   frmFinalizaServico.pIdSeqVenda := cdsVendas.FieldByName('SeqVenda').AsString;
-   frmFinalizaServico.ShowModal;
+   if True then
+   begin
+      frmFinalizaServico := TfrmFinalizaServico.Create(Nil);
+      frmFinalizaServico.pIdSeqVenda := cdsVendas.FieldByName('SeqVenda').AsString;
+      frmFinalizaServico.ShowModal;
 
-   loDaoItensGrade := TDaoItensVendaGrade.Create(gConexao);
-   loDaoItensGrade.AtualizaQtdeProduto(StrToInt(cdsVendas.FieldByName('SeqVenda').AsString));
-   freeAndNil(loDaoItensGrade);
+      loDaoItensGrade := TDaoItensVendaGrade.Create(gConexao);
+      loDaoItensGrade.AtualizaQtdeProduto(StrToInt(cdsVendas.FieldByName('SeqVenda').AsString));
+      freeAndNil(loDaoItensGrade);
+   end;
 
    //btnselecionarclick(btnselecionar);
 end;

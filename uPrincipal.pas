@@ -270,6 +270,8 @@ type
     actRelLocacoes: TAction;
     dxBarButton38: TdxBarButton;
     TabRelatorioLocacao: TdxBar;
+    ActAberturaOs: TAction;
+    dxBarButton39: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -339,6 +341,7 @@ type
     procedure actConsultaLocacaoExecute(Sender: TObject);
     procedure actCadGradeExecute(Sender: TObject);
     procedure actRelLocacoesExecute(Sender: TObject);
+    procedure ActAberturaOsExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -398,7 +401,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
-  uLocacao, uConsLocacao, uCadGrade;
+  uLocacao, uConsLocacao, uCadGrade, uAberturaOS;
 
 {$R *.dfm}
 
@@ -476,6 +479,12 @@ procedure TfrmPrincipal.acrRecebimentoRomaneioExecute(Sender: TObject);
 begin
    frmRecebimentoRomaneio := TfrmRecebimentoRomaneio.Create(Self);
    frmRecebimentoRomaneio.ShowModal
+end;
+
+procedure TfrmPrincipal.ActAberturaOsExecute(Sender: TObject);
+begin
+   frmAberturaOs := TfrmAberturaOs.create(Self);
+   frmAberturaOs.showmodal;
 end;
 
 procedure TfrmPrincipal.actAbreOsExecute(Sender: TObject);
@@ -632,7 +641,7 @@ begin
    if HeServicos then
    begin
       TabServicos.Visible             := True;
-      TabVendasProdutos.Visible       := False;
+      TabVendasProdutos.Visible       := True;
       RibonAtendimentoCliente.Visible := False;
    end;
    if PetShop then
@@ -650,6 +659,7 @@ end;
 
 procedure TfrmPrincipal.DefinirDataSistema;
 begin
+
   sdtsSequencia.Close;
   sdtsSequencia.DataSet.CommandText := 'SELECT * FROM T_Sequencias where Tipo_sequencia=:parTipo_Sequencia';
   sdtsSequencia.DataSet.ParamByName('parTipo_Sequencia').AsString := 'Data_Mov';

@@ -87,6 +87,7 @@ object frmMovCaixa: TfrmMovCaixa
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -534,6 +535,7 @@ object frmMovCaixa: TfrmMovCaixa
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -560,7 +562,7 @@ object frmMovCaixa: TfrmMovCaixa
         Align = alClient
         TabOrder = 0
         object GrdDespesas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GrdDespesasCustomDrawCell
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
@@ -653,6 +655,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -794,8 +797,8 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 151
           Top = 26
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -833,6 +836,7 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -844,8 +848,8 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 24
           Top = 26
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -883,6 +887,7 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1083,6 +1088,7 @@ object frmMovCaixa: TfrmMovCaixa
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -1219,8 +1225,8 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 122
           Top = 37
           Width = 86
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -1258,6 +1264,7 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1328,7 +1335,7 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 122
           Top = 165
           Width = 103
-          Height = 22
+          Height = 24
           Text = '0,00'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1353,6 +1360,7 @@ object frmMovCaixa: TfrmMovCaixa
           ParentCtl3D = False
           ParentFont = False
           TabOrder = 8
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1364,7 +1372,7 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 122
           Top = 139
           Width = 301
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1386,6 +1394,7 @@ object frmMovCaixa: TfrmMovCaixa
           MaxLength = 100
           ParentFont = False
           TabOrder = 7
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1501,7 +1510,7 @@ object frmMovCaixa: TfrmMovCaixa
           Left = 122
           Top = 193
           Width = 79
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1522,6 +1531,7 @@ object frmMovCaixa: TfrmMovCaixa
           Font.Style = []
           ParentFont = False
           TabOrder = 9
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1

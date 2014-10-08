@@ -105,6 +105,9 @@ type
     chkExibeVencimento: TbsSkinCheckRadioBox;
     Label6: TLabel;
     edtDecimais: TbsSkinSpinEdit;
+    chkControlaComissao: TbsSkinCheckRadioBox;
+    chkTrabalhaComVeiculo: TbsSkinCheckRadioBox;
+    chkEstiloPDV: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -253,6 +256,9 @@ begin
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DespesasFixas', edtDespesasFixas.Text ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'DescontoMaximo', edtDescontoMaximo.Text ,gsOperador );
    gParametros.Gravar( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno',RetornaSimouNao(chkNaoMostrarExtorno.Checked),gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa',RetornaSimouNao(chkMarcaOsNoCaixa.Checked),gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'ControlaComissao',RetornaSimouNao(chkControlaComissao.Checked),gsOperador );
+   gParametros.Gravar( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo',RetornaSimouNao(chkTrabalhaComVeiculo.Checked),gsOperador );
 end;
 
 procedure TfrmParametros.GravarParametrosContaAReceber;
@@ -291,21 +297,27 @@ begin
    gParametros.Gravar( '', '[VENDA]', 'NaoMostraTipoDePagamento',RetornaSimouNao(chkNaoMostraTipoDePagamento.Checked),gsOperador );
    gParametros.Gravar( '', '[VENDA]', 'ExibeVencimento',RetornaSimouNao(chkExibeVencimento.Checked),gsOperador );
    gParametros.Gravar( '', '[VENDA]', 'CasasDecimais',edtDecimais.Value,GsOperador);
+   gParametros.Gravar( '', '[VENDA]', 'EstiloPDV',RetornaSimouNao(chkEstiloPDV.Checked),gsOperador );
+
 end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
 begin
    chkNaoMostrarExtorno.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' )));
-   chkMarcaOsNoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
-   edtDespesaVariaveis.Text   := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
-   edtDespesasFixas.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );
-   edtDescontoMaximo.Text     := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DescontoMaximo', '0' );
+   chkMarcaOsNoCaixa.Checked     := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
+   chkControlaComissao.Checked   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'ControlaComissao', 'NAO' )));
+   chkTrabalhaComVeiculo.Checked   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
+
+   edtDespesaVariaveis.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
+   edtDespesasFixas.Text         := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );
+   edtDescontoMaximo.Text        := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DescontoMaximo', '0' );
 end;
 
 procedure TfrmParametros.RecuperarParametrosVendas;
 begin
    chkNaoMostraTipoDePagamento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'NaoMostraTipoDePagamento', 'NAO' )));
    chkExibeVencimento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' )));
+   chkEstiloPDV.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'EstiloPDV', 'NAO' )));
    edtDecimais.Value := gParametros.Ler( '', '[VENDA]', 'CasasDecimais', '2' );
 end;
 

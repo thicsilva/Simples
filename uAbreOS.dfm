@@ -36,7 +36,7 @@ object frmabreos: Tfrmabreos
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 652
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -50,6 +50,8 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -94,6 +96,7 @@ object frmabreos: Tfrmabreos
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -132,6 +135,7 @@ object frmabreos: Tfrmabreos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -192,6 +196,7 @@ object frmabreos: Tfrmabreos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -231,6 +236,7 @@ object frmabreos: Tfrmabreos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -283,6 +289,8 @@ object frmabreos: Tfrmabreos
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -317,6 +325,8 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -334,6 +344,7 @@ object frmabreos: Tfrmabreos
       Spacing = 2
       Caption = 'Informa'#231#245'es Adicionais'
       Align = alTop
+      UseSkinSize = True
       object bsSkinStdLabel3: TbsSkinStdLabel
         Left = 12
         Top = 33
@@ -505,6 +516,8 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -541,6 +554,7 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      UseSkinSize = True
       CaptionImageIndex = -1
       NumGlyphs = 1
       Spacing = 2
@@ -571,6 +585,8 @@ object frmabreos: Tfrmabreos
         ParentFont = False
         ScrollBars = ssBoth
         TabOrder = 0
+        Transparent = False
+        WallpaperStretch = False
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
         DefaultFont.Height = 14
@@ -599,6 +615,7 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      UseSkinSize = True
       CaptionImageIndex = -1
       NumGlyphs = 1
       Spacing = 2
@@ -729,7 +746,7 @@ object frmabreos: Tfrmabreos
         Left = 93
         Top = 32
         Width = 91
-        Height = 18
+        Height = 20
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
@@ -750,13 +767,20 @@ object frmabreos: Tfrmabreos
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
         OnExit = edtCod_ClienteExit
       end
       object edtCNPJCPF: TbsSkinEdit
         Left = 486
         Top = 32
         Width = 112
-        Height = 18
+        Height = 20
         TabStop = False
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -779,12 +803,19 @@ object frmabreos: Tfrmabreos
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
       end
       object edtPtoReferencia: TbsSkinEdit
         Left = 93
         Top = 57
         Width = 505
-        Height = 18
+        Height = 20
         TabStop = False
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -806,6 +837,13 @@ object frmabreos: Tfrmabreos
         MaxLength = 50
         ParentFont = False
         TabOrder = 3
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
       end
       object cmbCNPJCPF: TbsSkinDBLookupComboBox
         Left = 598
@@ -927,7 +965,7 @@ object frmabreos: Tfrmabreos
         Left = 93
         Top = 107
         Width = 505
-        Height = 18
+        Height = 20
         TabStop = False
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -949,6 +987,13 @@ object frmabreos: Tfrmabreos
         MaxLength = 50
         ParentFont = False
         TabOrder = 5
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
       end
     end
     object pnlConsultaClinete: TbsSkinExPanel
@@ -968,6 +1013,7 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      UseSkinSize = True
       CaptionImageList = frmPrincipal.imageMenu24x24
       CaptionImageIndex = 4
       NumGlyphs = 1
@@ -1002,6 +1048,8 @@ object frmabreos: Tfrmabreos
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
+        RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
         CaptionImageIndex = -1
@@ -1040,6 +1088,7 @@ object frmabreos: Tfrmabreos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          CheckedMode = False
           ImageList = frmPrincipal.cxSmallImages
           UseSkinSize = True
           UseSkinFontColor = True
@@ -1159,7 +1208,7 @@ object frmabreos: Tfrmabreos
           Left = 135
           Top = 8
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1180,6 +1229,13 @@ object frmabreos: Tfrmabreos
           Anchors = [akLeft, akTop, akRight]
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
           OnKeyDown = EdtPesquisaKeyDown
           ExplicitWidth = 210
         end
@@ -1232,8 +1288,11 @@ object frmabreos: Tfrmabreos
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
+          CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
+          AlwaysShowLayeredFrame = False
           UseSkinSize = False
           UseSkinFontColor = False
           RepeatMode = False
@@ -1258,7 +1317,7 @@ object frmabreos: Tfrmabreos
         TabOrder = 1
         object GridClintes: TcxGridDBTableView
           OnDblClick = GridClintesDblClick
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -1385,6 +1444,8 @@ object frmabreos: Tfrmabreos
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -1420,6 +1481,13 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetEllips
       UseSkinSize = False
       UseSkinFontColor = False
@@ -1431,7 +1499,7 @@ object frmabreos: Tfrmabreos
       Left = 549
       Top = 6
       Width = 108
-      Height = 22
+      Height = 24
       TabStop = False
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1453,6 +1521,13 @@ object frmabreos: Tfrmabreos
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
     object bsSkinLabel2: TbsSkinLabel
       Left = 12
@@ -1471,6 +1546,13 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetEllips
       UseSkinSize = False
       UseSkinFontColor = False
@@ -1558,6 +1640,13 @@ object frmabreos: Tfrmabreos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
+      ShadowEffect = False
+      ShadowColor = clBlack
+      ShadowOffset = 0
+      ShadowSize = 3
+      ReflectionEffect = False
+      ReflectionOffset = -5
       EllipsType = bsetEllips
       UseSkinSize = False
       UseSkinFontColor = False
@@ -1569,7 +1658,7 @@ object frmabreos: Tfrmabreos
       Left = 310
       Top = 6
       Width = 108
-      Height = 22
+      Height = 24
       TabStop = False
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -1590,9 +1679,23 @@ object frmabreos: Tfrmabreos
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
+    QuickButtons = <>
+    QuickButtonsShowHint = False
+    QuickButtonsShowDivider = True
+    ClientInActiveEffect = False
+    ClientInActiveEffectType = bsieSemiTransparent
     DisableSystemMenu = False
     AlwaysResize = False
     PositionInMonitor = bspDefault
@@ -1605,13 +1708,14 @@ object frmabreos: Tfrmabreos
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False
     AlphaBlendAnimation = False
     AlphaBlendValue = 200
     ShowObjectHint = False
-    UseDefaultObjectHint = True
     MenusAlphaBlend = False
     MenusAlphaBlendAnimation = False
     MenusAlphaBlendValue = 200

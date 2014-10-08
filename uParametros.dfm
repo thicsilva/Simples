@@ -58,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = Vendas
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1659,7 +1659,8 @@ object frmParametros: TfrmParametros
           'Grafico 80 Colunas'
           '80 Colunas Modelo 01'
           'Personalizado(Natal Linhas)'
-          'Personalizado(Eti Marcas)')
+          'Personalizado(Eti Marcas)'
+          'Personalizado(Casa Do Radiado)')
         ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
@@ -1820,8 +1821,8 @@ object frmParametros: TfrmParametros
     object bsSkinTabSheet4: TbsSkinTabSheet
       Caption = 'Administrativo'
       object chkMarcaOsNoCaixa: TbsSkinCheckRadioBox
-        Left = 4
-        Top = 5
+        Left = 223
+        Top = 38
         Width = 357
         Height = 25
         HintImageIndex = 0
@@ -2080,12 +2081,72 @@ object frmParametros: TfrmParametros
         Caption = 'Desconto maximo para comiss'#227'o'
         AutoSize = False
       end
+      object chkControlaComissao: TbsSkinCheckRadioBox
+        Left = 223
+        Top = 58
+        Width = 210
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 4
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Trabalha com controlde de comiss'#227'o'
+      end
+      object chkTrabalhaComVeiculo: TbsSkinCheckRadioBox
+        Left = 223
+        Top = 78
+        Width = 250
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 5
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Trabalha com controle de servico por veiculo'
+      end
     end
     object Vendas: TbsSkinTabSheet
       Caption = 'Vendas'
       object Label6: TLabel
-        Left = 19
-        Top = 57
+        Left = 12
+        Top = 113
         Width = 178
         Height = 14
         Caption = 'Numero de casas decimais da venda'
@@ -2121,7 +2182,7 @@ object frmParametros: TfrmParametros
         Caption = 'N'#227'o mostra tipo  de venda'
       end
       object chkExibeVencimento: TbsSkinCheckRadioBox
-        Left = 12
+        Left = 11
         Top = 26
         Width = 205
         Height = 25
@@ -2151,8 +2212,8 @@ object frmParametros: TfrmParametros
         Caption = 'Exibe primeiro vencimento na venda'
       end
       object edtDecimais: TbsSkinSpinEdit
-        Left = 203
-        Top = 51
+        Left = 196
+        Top = 107
         Width = 54
         Height = 20
         HintImageIndex = 0
@@ -2173,6 +2234,36 @@ object frmParametros: TfrmParametros
         Increment = 1.000000000000000000
         EditorEnabled = True
         MaxLength = 0
+      end
+      object chkEstiloPDV: TbsSkinCheckRadioBox
+        Left = 11
+        Top = 47
+        Width = 134
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 3
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'Venda Estilo PDV'
       end
     end
   end

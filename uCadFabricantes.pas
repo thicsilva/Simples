@@ -9,7 +9,8 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
-  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase;
+  FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,UformBase, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmCadFabricantes = class(TFormBase)

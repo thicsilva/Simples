@@ -216,7 +216,7 @@ type
     edtMargem: TbsSkinNumericEdit;
     bsSkinButton1: TbsSkinButton;
     cdsCustoProdutoIDCusto: TIntegerField;
-    bsSkinExPanel3: TbsSkinExPanel;
+    pnlComissao: TbsSkinExPanel;
     lblComissao: TbsSkinStdLabel;
     edtComissao: TbsSkinNumericEdit;
     bsSkinStdLabel22: TbsSkinStdLabel;
@@ -238,6 +238,9 @@ type
     srcGrande: TDataSource;
     srcGrupo: TDataSource;
     chkAtivo: TbsSkinCheckRadioBox;
+    GridProdutosColumn5: TcxGridDBColumn;
+    bsSkinStdLabel2: TbsSkinStdLabel;
+    edtGarantia: TbsSkinSpinEdit;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -330,6 +333,8 @@ Procedure TfrmCadProdutos.limpaCasmpos();
 Begin
    EdtCodigo.Text     :='';
    EdtDescricao.Text  :='';
+   edtGarantia.text := '0';
+   EdtCodigoFornecedor.Text := '';
    edtPco_Venda.Text  :='0';
    edtValorMensal.Text :='0';
    cmbCod_CentroCusto.KeyValue  := null;
@@ -617,9 +622,12 @@ begin
    cdsCadProdutos.FieldByName('ComissaoSecundaria').AsFloat := StrTofloat(edtComissaoSecundaria.Text);
    cdsCadProdutos.FieldByName('MargemSecundaria').AsFloat   := StrTofloat(edtMargemSecundaria.Text);
    cdsCadProdutos.FieldByName('BloqueiaNegativo').AsBoolean := chkBloquiaEstoqueNegativo.Checked;
+   cdsCadProdutos.FieldByName('Garantia').AsInteger         := StrTointDef(edtGarantia.text,0);
    cdsCadProdutos.FieldByName('Ativo').AsBoolean            := chkAtivo.Checked;
-   cdsCadProdutos.FieldByName('GradeId').AsInteger := cmbNome_grade.KeyValue;
-
+   if cmbNome_grade.Visible then
+      cdsCadProdutos.FieldByName('GradeId').AsInteger  := cmbNome_grade.KeyValue
+   else
+      cdsCadProdutos.FieldByName('GradeId').AsInteger  := 1;
    cdsCadProdutos.Post;
 
    If cdsCadProdutos.ChangeCount > 0  Then // se houve mudancas
@@ -817,7 +825,8 @@ begin
       lblValorMensal.Visible       := true;
       edtValorMensal.Visible       := true;
    end;
-   
+   pnlComissao.Visible  :=  RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
+
 end;
 
 procedure TfrmCadProdutos.AjustarValordoEstoque1Click(Sender: TObject);
@@ -900,7 +909,7 @@ begin
      cdsDados.Next;
    end;
    }
-   Result := arredondar( ValorFinal / ((100-PercentualTotal)/100),2 ) ; 
+   Result := arredondar( ValorFinal / ((100-PercentualTotal)/100),2 ) ;
 end;
 
 function TfrmCadProdutos.RetornaCMV : Real;
@@ -974,6 +983,7 @@ begin
 
    edtcodigo.Text              := incZero( IntToStr(cdsCadProdutos.FieldByName('Codigo').AsInteger),6);
    edtcodigoFornecedor.Text    := cdsCadProdutos.FieldByName('CodigoFornecedor').AsString;
+   edtGarantia.Text            := cdsCadProdutos.FieldByName('Garantia').AsString;
    edtDescricao.Text           := cdsCadProdutos.FieldByName('Descricao').AsString;
    edtCaminhoImagem.text       := cdsCadProdutos.FieldByName('Caminho_Imagem').AsString;
    edtPco_Venda.Text           := FormatFloat(RetornarMascaraDoValor(IntToStr(edtPco_Venda.Decimal)),cdsCadProdutos.FieldByName('Pco_Venda').AsFloat);
@@ -1209,8 +1219,14 @@ Begin
 end;
 
 procedure TfrmCadProdutos.cdsCadProdutosBeforeOpen(DataSet: TDataSet);
+var liCont : Integer;
 begin
    CriarCalculado(DataSet,'Nome_TipoProduto',ftString,30);
+   for liCont := 1 To DataSet.FieldCount Do
+   begin
+      if DataSet.Fields[ liCont - 1 ].DataType = ftFloat Then
+         TFloatField( DataSet.Fields[ liCont - 1 ] ).DisplayFormat := '0.00';
+   end;
 end;
 
 procedure TfrmCadProdutos.cdsCadProdutosCalcFields(DataSet: TDataSet);

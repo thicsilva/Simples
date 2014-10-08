@@ -10,10 +10,11 @@ uses
   cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, FMTBcd, SimpleDS,
   DBClient, Provider, SqlExpr, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls,UFormBase,
-  cxGridCustomView, cxGrid, dxSkinsCore;
+  cxGridCustomView, cxGrid, dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
-  TfrmCadOperacoes = class(TFormbase)
+  TfrmCadOperacoes = class(TFormBase)
     PagCadastro: TbsSkinPageControl;
     bsSkinTabSheet1: TbsSkinTabSheet;
     bsSkinTabSheet2: TbsSkinTabSheet;

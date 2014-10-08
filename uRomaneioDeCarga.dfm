@@ -49,6 +49,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -79,9 +80,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 669
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -115,7 +116,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         OnClick = btnFecharClick
         ExplicitLeft = 635
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 285
@@ -181,9 +181,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 405
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -216,7 +216,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         OnClick = btnCancelarClick
         ExplicitLeft = 359
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 475
@@ -232,9 +231,9 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
       end
       object bsSkinSpeedButton1: TbsSkinSpeedButton
         Left = 215
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'resizebutton'
@@ -266,7 +265,6 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Spacing = 2
         OnClick = bsSkinSpeedButton1Click
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
     end
   end
@@ -287,6 +285,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     OnChange = pagGeralChange
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -304,15 +303,20 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     SkinDataName = 'tab'
     object PagNovoRomaneio: TbsSkinTabSheet
       Caption = 'Inclus'#227'o de Romaneio'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 81
         Width = 809
-        Height = 285
+        Height = 284
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 285
         object GrdVendas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcVendasRomaneio
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -393,7 +397,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           end
         end
         object GrdItensVendas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DetailKeyFieldNames = 'Seqvenda'
           DataController.Filter.Active = True
           DataController.KeyFieldNames = 'seqvenda'
@@ -443,7 +447,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           end
         end
         object grdDevolucoes: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DetailKeyFieldNames = 'seqvenda'
           DataController.KeyFieldNames = 'seqvenda'
           DataController.MasterKeyFieldNames = 'seqvenda'
@@ -456,7 +460,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           end
         end
         object GrdItensDevolvidos: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DetailKeyFieldNames = 'SeqVenda'
           DataController.KeyFieldNames = 'SeqVenda'
           DataController.MasterKeyFieldNames = 'SeqVenda'
@@ -491,6 +495,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -522,6 +527,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           ShadowEffect = False
           ShadowColor = clBlack
           ShadowOffset = 0
@@ -539,7 +545,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Left = 127
           Top = 27
           Width = 91
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -559,6 +565,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -583,6 +590,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -618,6 +626,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -640,7 +649,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Left = 127
           Top = 51
           Width = 91
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -661,6 +670,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           Font.Style = []
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -712,6 +722,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          Transparent = False
           ShadowEffect = False
           ShadowColor = clBlack
           ShadowOffset = 0
@@ -729,6 +740,10 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
     end
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta Romaneio'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid2: TcxGrid
         Left = 0
         Top = 29
@@ -737,7 +752,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         Align = alClient
         TabOrder = 0
         object GridRomaneio: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GridRomaneioCustomDrawCell
           DataController.DataSource = srcRomaneios
           DataController.Summary.DefaultGroupSummaryItems = <
@@ -816,6 +831,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -851,6 +867,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 6
@@ -886,6 +903,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 6
@@ -921,6 +939,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 4
@@ -956,6 +975,7 @@ object frmRomaneioDeEntrega: TfrmRomaneioDeEntrega
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 6

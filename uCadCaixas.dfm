@@ -48,6 +48,7 @@ object frmCadCaixas: TfrmCadCaixas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -78,9 +79,9 @@ object frmCadCaixas: TfrmCadCaixas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -114,7 +115,6 @@ object frmCadCaixas: TfrmCadCaixas
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -368,6 +368,7 @@ object frmCadCaixas: TfrmCadCaixas
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -386,6 +387,10 @@ object frmCadCaixas: TfrmCadCaixas
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -403,6 +408,7 @@ object frmCadCaixas: TfrmCadCaixas
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -482,7 +488,7 @@ object frmCadCaixas: TfrmCadCaixas
           Left = 136
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -502,6 +508,7 @@ object frmCadCaixas: TfrmCadCaixas
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -557,6 +564,7 @@ object frmCadCaixas: TfrmCadCaixas
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -580,11 +588,12 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 0
         Top = 33
         Width = 633
-        Height = 190
+        Height = 192
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 190
         object GridConsulta: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -637,6 +646,10 @@ object frmCadCaixas: TfrmCadCaixas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -692,7 +705,7 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 149
         Top = 101
         Width = 337
-        Height = 18
+        Height = 20
         DefaultColor = clWindow
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clBlack
@@ -712,6 +725,7 @@ object frmCadCaixas: TfrmCadCaixas
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -723,7 +737,7 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 149
         Top = 77
         Width = 56
-        Height = 18
+        Height = 20
         Text = '0001'
         DefaultColor = clScrollBar
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -745,6 +759,7 @@ object frmCadCaixas: TfrmCadCaixas
         MaxLength = 9
         ParentFont = False
         TabOrder = 0
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1
@@ -756,7 +771,7 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 504
         Top = 22
         Width = 74
-        Height = 18
+        Height = 20
         TabStop = False
         DefaultColor = clScrollBar
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -777,6 +792,7 @@ object frmCadCaixas: TfrmCadCaixas
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        ButtonImageIndex = -1
         LeftImageIndex = -1
         LeftImageHotIndex = -1
         LeftImageDownIndex = -1

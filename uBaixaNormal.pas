@@ -9,7 +9,8 @@ uses
   Provider, DBClient, bsdbctrls, bsSkinGrids, bsDBGrids, cxStyles, cxCustomData,
   cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGrid, uDaoCaixaMovimento;
+  cxControls, cxGridCustomView, cxGrid, uDaoCaixaMovimento, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmBaixaNormal = class(TForm)

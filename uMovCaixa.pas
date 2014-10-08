@@ -9,7 +9,9 @@ uses
   EditNew, cxGridLevel, cxGridCustomTableView, cxGridTableView,SqlTimst,UformBase,
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, ComCtrls,
   bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SqlExpr, BusinessSkinForm, DBClient,
-  Provider, RDprint, SimpleDS, cxContainer, cxCheckBox, cxDBEdit;
+  Provider, RDprint, SimpleDS, cxContainer, cxCheckBox, cxDBEdit,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 const FECHAMENTO = 0;
       RELATORIO = 1;
@@ -265,6 +267,7 @@ begin
       frmFechaCaixa.showModal;
       if frmfechacaixa.Tag=1 then
       Begin
+
          RelatorioDeCaixaModelo02(FECHAMENTO);
 
          DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
@@ -296,6 +299,7 @@ begin
             frmPrincipal.StatusBar.Panels[0].Text := 'Data do Movimento .: '+qryModific.ParamByName( 'parSequencia' ).AsString;
             qryModific.ExecSQL;
           end;
+
       end;
    end;
 end;
@@ -636,8 +640,26 @@ begin
    cdsRelatorio.close;
    cdsRelatorio.ProviderName := dspVariavel.name;
    cdsRelatorio.Open;
+   if prTipo<>RELATORIO then
+   Begin
+      DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
+      sdtsTempPagInformado := TsimpleDataSet.Create(self);
+      sdtsTempPagInformado.Connection := frmprincipal.dbxPrincipal;
+      sdtsTempPagInformado.dataSet.CommandText := 'Select Pag.*, forma.Descricao from t_PagamentosInformados Pag '+
+                                                  'left join t_formaspagamento forma on forma.Codigo=pag.Cod_formapagamento '+
+                                                  'where data_mov=:parData_Mov and Cod_Caixa=:parCod_Caixa and Turno=:parTurno ' ;
+      sdtsTempPagInformado.dataSet.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
+      sdtsTempPagInformado.dataSet.ParamByName('parCod_Caixa').AsInteger := cmbCaixa.KeyValue;
+      sdtsTempPagInformado.dataSet.ParamByName('parTurno').AsInteger     := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
+      sdtsTempPagInformado.open;
+   End;
+
 
    impmatricial.Imp(pvilinha,001,'Resumo por Tipo de Pagamento' );
+   pvilinha := pviLinha + 1;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+   pvilinha := pviLinha + 1;      //123456789.123456789.123456789.123456789.
+   ImpMatricial.imp(pvilinha,001,'                 Total   Infor.   Difere.');
    pvilinha := pviLinha + 1;
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
    pvilinha := pviLinha + 1;
@@ -650,7 +672,10 @@ begin
       if liCod_TipoPagamento <> cdsrelatorio.FieldByName('Codigo').AsInteger then
       begin
          ImpMatricial.imp(pvilinha,001,lsNomePagamento);
-         impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrTotal ),[]);
+         impmatricial.ImpD(pvilinha,021,FormatFloat(',0.00',lrTotal ),[]);
+         sdtsTempPagInformado.Locate('Descricao',lsNomePagamento,[]);
+         impmatricial.ImpD(pvilinha,032,FormatFloat(',0.00', sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
+         impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00', lrTotal - sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
          pvilinha := pviLinha + 1;
          liCod_TipoPagamento := cdsrelatorio.FieldByName('Codigo').AsInteger;
          lsNomePagamento := cdsrelatorio.FieldByName('Descricao').AsString;
@@ -665,13 +690,16 @@ begin
    if lrTotal>0 then
    begin
       ImpMatricial.imp(pvilinha,001,lsNomePagamento);
-      impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',lrTotal ),[]);
+      impmatricial.ImpD(pvilinha,021,FormatFloat(',0.00',lrTotal ),[]);
+      sdtsTempPagInformado.Locate('Descricao',lsNomePagamento,[]);
+      impmatricial.ImpD(pvilinha,032,FormatFloat(',0.00', sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
+      impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00', lrTotal - sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
    end;
    pvilinha := pviLinha + 1;
    ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
    pvilinha := pviLinha + 1;
 
-   if prTipo<>RELATORIO then
+  { if prTipo<>RELATORIO then
    Begin
       DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
       sdtsTempPagInformado := TsimpleDataSet.Create(self);
@@ -690,12 +718,14 @@ begin
          impmatricial.Imp(pvilinha,001, sdtsTempPagInformado.FieldByName('Descricao').AsString );
          impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00',sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat ),[]);
          sdtsTempPagInformado.Next;
+          pvilinha := pviLinha + 1;
+
       End;
       FreeAndNil(DaoCaixaMovimento);
       pvilinha := pviLinha + 1;
       ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
       pvilinha := pviLinha + 1;
-   End;
+   End;   }
    pviLinha:=Pvilinha+3;
    ImpMatricial.imp (pvilinha,001,'.');
    ImpMatricial.TamanhoQteLinhas := pviLinha;

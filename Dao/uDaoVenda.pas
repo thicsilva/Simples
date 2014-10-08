@@ -2,9 +2,8 @@ unit uDaoVenda;
 
 interface
 
-uses DBClient,Classes,uClassConexao,uClassVenda,uDaoCliente,
-     uDaoFuncionario,uDaoFormaPagamento,SqltimSt,
-     SqlExpr,SysUtils;
+uses DBClient,Classes,uClassConexao,uClassVenda,uDaoCliente,Forms,
+     uDaoFuncionario,uDaoFormaPagamento,SqltimSt,SysUtils,SqlExpr, Provider;
 
 type TDaoVenda = class
    private
@@ -13,11 +12,14 @@ type TDaoVenda = class
      FParametros : TStringList;
    public
      constructor Create(conexao : TConexao );
+
      function RetonarVendasSemSinalPago : TclientDataSet;
      function CarregarVenda(DadosVendas : TClientDataSet) : TVenda;
      function TemVenda(ClienteId : Integer) : Boolean;
      function Buscar(VendaId : Integer) : TVenda;
      function PesoTotal(IDVenda : Integer) : Real;
+     function RetornarVencimentos(VendaId : Integer) : TStringList;
+
      procedure MarcarComoEntregue(IDVenda : Integer);
      Procedure MarcarComoPagouSinal(IDVenda : Integer);
      Procedure MarcarComoNaoPagouSinal(IDVenda : Integer);
@@ -27,7 +29,7 @@ type TDaoVenda = class
      procedure CancelarRomaneio(RomaneiId : Integer);
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
-     function RetornarVencimentos(VendaId : Integer) : TStringList;
+     procedure Incluir( Venda : TVenda );
 end;
 
 
@@ -91,9 +93,66 @@ end;
 constructor TDaoVenda.Create(conexao: TConexao);
 begin
   FConexao := conexao;
-  FqryModific  := TSqlQuery.Create(Nil);
+  FqryModific  := TSqlQuery.Create(Application);
   FqryModific.SQLConnection := FConexao.Conection;
   FParametros := TStringList.Create;
+end;
+
+procedure TDaoVenda.Incluir( Venda : TVenda );
+var cdsVenda : TClientDataSet;
+    dspVenda : TDataSetProvider;
+begin
+
+   dspVenda              := TDataSetProvider.Create(Application);
+   dspVenda.Name         := 'pvrVenda';
+   dspVenda.DataSet      := FqryModific;
+
+   FqryModific.Close;
+   FqryModific.SQLConnection := FConexao.Conection;
+   FqryModific.SQL.Text      := 'Select * from T_Vendas Where 1=2 ';
+
+   cdsVenda := TClientDataSet.Create(Application);
+   cdsVenda.ProviderName := dspVenda.Name;
+   cdsVenda.Open;
+
+   cdsVenda.Append;
+   cdsVenda.FieldByname('SeqVenda').Asinteger           := Venda.VendaID;
+   cdsVenda.FieldByname('Cod_Cliente').Asinteger        := Venda.Cliente.Id;
+   cdsVenda.FieldByname('Cod_Funcionario').Asinteger    := Venda.Funcionario.IdFuncionario;
+   cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := Venda.FormaPagamento.Id;
+   cdsVenda.FieldByName('Nome_Cliente').asString        := Venda.Cliente.Descricao;
+   cdsVenda.FieldByname('Vlr_Total').AsFloat            := 0;
+   cdsVenda.FieldByname('CustoTotal').AsFloat           := 0;
+   cdsVenda.FieldByname('LucroBruto').AsFloat           := 0;
+   cdsVenda.FieldByname('Vlr_Desconto').AsFloat         := 0;
+   cdsVenda.FieldByname('Status').AsString              := 'N';
+   cdsVenda.FieldByname('Operador').AsString            := Venda.Operador;
+   cdsVenda.FieldByname('Cod_Emp').AsString             := IntToStr(Venda.Empresa.IdEmpresa);
+   cdsVenda.FieldByName('Data_Mov').asDateTime          := Venda.DataMovimento;
+   cdsVenda.FieldByName('Data_venda').asDateTime        := Venda.Data_Venda;
+   cdsVenda.FieldByName('Data_Cad').asDateTime          := now;
+   cdsVenda.FieldByname('Vlr_DescProd').AsFloat         := 0;
+   cdsVenda.FieldByname('Controle').AsString            := Venda.Controle;
+   cdsVenda.FieldByname('Tipo_Venda').AsString          := 'P';
+   cdsVenda.FieldByname('SeqOs').AsInteger              := 0;
+   cdsVenda.FieldByname('Etiqueta').AsInteger           := 1;
+   cdsVenda.FieldByName('Cod_TipoVenda').AsInteger      := Venda.TipoVenda;
+   cdsVenda.FieldByname('Tipo_Venda').AsString          := 'S';
+   cdsVenda.FieldByname('Status').AsString              := '1';
+   cdsVenda.FieldByname('PagouSinal').AsBoolean         := False;
+   cdsVenda.FieldByName('Cod_caixa').asInteger          := 1;
+   cdsVenda.FieldByname('AnimalID').AsInteger           := 0;
+   cdsVenda.FieldByname('Tipo_Venda').AsString          := 'S';
+   cdsVenda.FieldByname('NumeroSerie').AsString         := Venda.Serie;
+   cdsVenda.FieldByname('Descricao').AsString           := Venda.DescricaoProduto;
+   cdsVenda.FieldByname('Defeito').AsString             := Venda.Defeito;
+   cdsVenda.Post;
+   Try
+      cdsVenda.ApplyUpdates(-1);
+   except
+      Exit;
+   End;
+   FreeAndNil(dspVenda);
 end;
 
 procedure TDaoVenda.MarcarComoPagouSinal(IDVenda: Integer);

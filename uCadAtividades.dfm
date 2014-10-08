@@ -32,6 +32,7 @@ object frmCadAtividades: TfrmCadAtividades
     TabOrder = 0
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -50,6 +51,10 @@ object frmCadAtividades: TfrmCadAtividades
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -67,6 +72,7 @@ object frmCadAtividades: TfrmCadAtividades
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -146,7 +152,7 @@ object frmCadAtividades: TfrmCadAtividades
           Left = 136
           Top = 9
           Width = 203
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -166,6 +172,7 @@ object frmCadAtividades: TfrmCadAtividades
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -221,6 +228,7 @@ object frmCadAtividades: TfrmCadAtividades
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -244,11 +252,12 @@ object frmCadAtividades: TfrmCadAtividades
         Left = 0
         Top = 33
         Width = 619
-        Height = 182
+        Height = 184
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 182
         object GridAtividades: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
           DataController.Summary.DefaultGroupSummaryItems = <
             item
@@ -301,6 +310,10 @@ object frmCadAtividades: TfrmCadAtividades
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 65
         Top = 46
@@ -318,6 +331,7 @@ object frmCadAtividades: TfrmCadAtividades
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -386,7 +400,7 @@ object frmCadAtividades: TfrmCadAtividades
           Left = 72
           Top = 42
           Width = 56
-          Height = 18
+          Height = 20
           Text = '0001'
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -409,6 +423,7 @@ object frmCadAtividades: TfrmCadAtividades
           MaxLength = 9
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -420,7 +435,7 @@ object frmCadAtividades: TfrmCadAtividades
           Left = 72
           Top = 66
           Width = 381
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -440,6 +455,7 @@ object frmCadAtividades: TfrmCadAtividades
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -451,7 +467,7 @@ object frmCadAtividades: TfrmCadAtividades
           Left = 379
           Top = 32
           Width = 74
-          Height = 18
+          Height = 20
           TabStop = False
           DefaultColor = clScrollBar
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -473,6 +489,7 @@ object frmCadAtividades: TfrmCadAtividades
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -517,6 +534,7 @@ object frmCadAtividades: TfrmCadAtividades
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -547,9 +565,9 @@ object frmCadAtividades: TfrmCadAtividades
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -583,7 +601,6 @@ object frmCadAtividades: TfrmCadAtividades
         OnClick = btnFecharClick
         ExplicitLeft = 542
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

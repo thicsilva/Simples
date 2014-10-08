@@ -146,7 +146,9 @@ uses
   UdtmVendas in 'Data Module\UdtmVendas.pas' {dtmVendas: TDataModule},
   uDtmCadastro in 'Data Module\uDtmCadastro.pas' {dtmCadastro: TDataModule},
   uDaoItensVendaGrade in 'Dao\uDaoItensVendaGrade.pas',
-  ufrmFinalizaServico in 'ufrmFinalizaServico.pas' {frmFinalizaServico};
+  ufrmFinalizaServico in 'ufrmFinalizaServico.pas' {frmFinalizaServico},
+  uAberturaOS in 'uAberturaOS.pas' {frmAberturaOs},
+  uDaoProduto in 'Dao\uDaoProduto.pas';
 
 {$R *.res}
 
@@ -155,6 +157,7 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
+  Application.CreateForm(TfrmAberturaOs, frmAberturaOs);
   Frmlogin.ShowModal;
   Application.Run;
 end.

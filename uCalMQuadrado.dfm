@@ -34,7 +34,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 336
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -48,6 +48,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -186,6 +187,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    UseSkinSize = True
     CaptionImageIndex = -1
     NumGlyphs = 1
     Spacing = 2
@@ -408,7 +410,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 87
       Top = 34
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -432,6 +434,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -444,7 +447,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 235
       Top = 34
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -468,6 +471,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -480,7 +484,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 235
       Top = 74
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -504,6 +508,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -516,7 +521,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 87
       Top = 114
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -541,6 +546,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -553,7 +559,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 235
       Top = 114
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -579,6 +585,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 5
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -591,7 +598,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Left = 87
       Top = 74
       Width = 65
-      Height = 18
+      Height = 20
       Text = '0,00'
       Increment = 1.000000000000000000
       SupportUpDownKeys = False
@@ -615,6 +622,7 @@ object frmCalMQuadrado: TfrmCalMQuadrado
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
