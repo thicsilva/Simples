@@ -51,10 +51,6 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -247,10 +243,9 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         Left = 0
         Top = 33
         Width = 603
-        Height = 269
+        Height = 267
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 267
         object GridClintes: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -345,10 +340,6 @@ object frmCadFuncionarios: TfrmCadFuncionarios
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinExPanel2: TbsSkinExPanel
         Left = 24
         Top = 30
@@ -476,7 +467,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Caption = 'Cep'
         end
         object bsSkinStdLabel7: TbsSkinStdLabel
-          Left = 260
+          Left = 176
           Top = 147
           Width = 14
           Height = 13
@@ -571,6 +562,22 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           SkinDataName = 'stdlabel'
           Caption = 'Data Cadastro'
         end
+        object bsSkinStdLabel11: TbsSkinStdLabel
+          Left = 241
+          Top = 147
+          Width = 36
+          Height = 13
+          EllipsType = bsetNone
+          UseSkinFont = True
+          UseSkinColor = True
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = -11
+          DefaultFont.Name = 'MS Sans Serif'
+          DefaultFont.Style = []
+          SkinDataName = 'stdlabel'
+          Caption = 'Funcao'
+        end
         object edtDescricao: TbsSkinEdit
           Left = 82
           Top = 60
@@ -593,7 +600,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 0
+          TabOrder = 1
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -627,7 +634,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Style = []
           MaxLength = 9
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 10
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -658,7 +665,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 3
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -690,7 +697,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Style = []
           MaxLength = 9
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 5
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -721,7 +728,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 2
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -752,7 +759,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 4
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -762,7 +769,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           RightImageDownIndex = -1
         end
         object edtUf: TbsSkinEdit
-          Left = 281
+          Left = 202
           Top = 142
           Width = 25
           Height = 20
@@ -816,7 +823,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Style = []
           MaxLength = 13
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 8
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -848,7 +855,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Style = []
           MaxLength = 13
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 9
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -880,7 +887,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Style = []
           MaxLength = 14
           ParentFont = False
-          TabOrder = 9
+          TabOrder = 0
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -895,7 +902,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Width = 233
           Height = 20
           HintImageIndex = 0
-          TabOrder = 10
+          TabOrder = 11
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -920,7 +927,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Width = 57
           Height = 20
           HintImageIndex = 0
-          TabOrder = 11
+          TabOrder = 12
           SkinDataName = 'combobox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -963,7 +970,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
-          TabOrder = 12
+          TabOrder = 13
           ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
@@ -978,7 +985,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Width = 49
           Height = 18
           HintImageIndex = 0
-          TabOrder = 13
+          TabOrder = 14
           SkinDataName = 'checkbox'
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clWindowText
@@ -1000,6 +1007,37 @@ object frmCadFuncionarios: TfrmCadFuncionarios
           Checked = False
           GroupIndex = 0
           Caption = 'Ativo'
+        end
+        object edtFuncao: TbsSkinEdit
+          Left = 281
+          Top = 142
+          Width = 137
+          Height = 20
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 7
+          ButtonImageIndex = -1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
         end
       end
     end
@@ -1106,9 +1144,9 @@ object frmCadFuncionarios: TfrmCadFuncionarios
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 497
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1142,6 +1180,7 @@ object frmCadFuncionarios: TfrmCadFuncionarios
         OnClick = btnFecharClick
         ExplicitLeft = 518
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140

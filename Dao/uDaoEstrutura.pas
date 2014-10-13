@@ -74,6 +74,8 @@ type TDaoEstrutura = class
     procedure Adicionar_Placa_na_Tabela_Produtos;
     procedure Adicionar_NumeroSerie_na_Tabela_Vendas;
     procedure Adicionar_Garantia_na_Tabela_Produtos;
+    procedure Adicionar_Funcao_na_Tabela_Funcionarios;
+    procedure Adicionar_FuncionarioId_na_Tabela_ItenVendas;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -356,6 +358,26 @@ begin
     begin
        FQryAjustes.Close;
        FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD PrecoCusto float';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_FuncionarioId_na_Tabela_ItenVendas;
+begin
+    if not ExisteCampo( 'T_ItensVendas', 'FuncionarioId', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_ItensVendas ADD FuncionarioId integer';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
+procedure TDaoEstrutura.Adicionar_Funcao_na_Tabela_Funcionarios;
+begin
+    if not ExisteCampo( 'T_Funcionarios', 'Funcao', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Funcionarios ADD Funcao Varchar(40)';
        FQryAjustes.ExecSQL;
     end;
 end;
@@ -787,6 +809,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_FuncionarioId_na_Tabela_ItenVendas;
+  Adicionar_Funcao_na_Tabela_Funcionarios;
   Adicionar_Garantia_na_Tabela_Produtos;
   Adicionar_NumeroSerie_na_Tabela_Vendas;
   Adicionar_Placa_na_Tabela_Produtos;

@@ -108,6 +108,7 @@ type
     chkControlaComissao: TbsSkinCheckRadioBox;
     chkTrabalhaComVeiculo: TbsSkinCheckRadioBox;
     chkEstiloPDV: TbsSkinCheckRadioBox;
+    chkControleComissaoServico: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -298,6 +299,8 @@ begin
    gParametros.Gravar( '', '[VENDA]', 'ExibeVencimento',RetornaSimouNao(chkExibeVencimento.Checked),gsOperador );
    gParametros.Gravar( '', '[VENDA]', 'CasasDecimais',edtDecimais.Value,GsOperador);
    gParametros.Gravar( '', '[VENDA]', 'EstiloPDV',RetornaSimouNao(chkEstiloPDV.Checked),gsOperador );
+   gParametros.Gravar( '', '[VENDA]', 'ControleComissaoServico',RetornaSimouNao(chkControleComissaoServico.Checked),gsOperador );
+
 
 end;
 
@@ -319,6 +322,7 @@ begin
    chkExibeVencimento.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ExibeVencimento', 'NAO' )));
    chkEstiloPDV.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'EstiloPDV', 'NAO' )));
    edtDecimais.Value := gParametros.Ler( '', '[VENDA]', 'CasasDecimais', '2' );
+   chkControleComissaoServico.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ControleComissaoServico', 'NAO' )));
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;

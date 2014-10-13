@@ -132,6 +132,9 @@
     <DCCReference Include="uBaixaTipo_01_Brinde.pas">
       <Form>frmBaixaBrinde</Form>
     </DCCReference>
+    <DCCReference Include="uCadastroRapidoCliente.pas">
+      <Form>frmCadastroClienteSimplificado</Form>
+    </DCCReference>
     <DCCReference Include="uCadAtividades.pas">
       <Form>frmCadAtividades</Form>
     </DCCReference>
@@ -309,6 +312,9 @@
     </DCCReference>
     <DCCReference Include="uselEndereco.pas">
       <Form>frmselEndereco</Form>
+    </DCCReference>
+    <DCCReference Include="uselFuncionario.pas">
+      <Form>frmSelFuncionario</Form>
     </DCCReference>
     <DCCReference Include="uSelHora.pas">
       <Form>frmSelHora</Form>

@@ -16,12 +16,14 @@ type TDaoCliente = class
      function Buscar(ClienteId : Integer) : TCliente;
      function BuscarCNPJ(CNPJ : String) : TCliente;
      function Excluir(ClienteId : Integer) : Boolean;
+     procedure Incluir(Cliente : TCliente);
      function SaldoDevedor(ClienteId: Integer; Data : TDateTime) : real;
      Function BuscarTodos : TClientDataSet;
 end;
 
-
 implementation
+
+uses ufuncoes;
 
 { TDaoCliente }
 
@@ -83,6 +85,30 @@ begin
    FQryModific.SQLConnection := Fconexao.Conection;
    FQryModific.SQL.Text := 'Delete from T_Clientes where Codigo=:parId ';
    FQryModific.ParamByName('parId').AsInteger := ClienteId;
+   FQryModific.ExecSQL;
+end;
+
+procedure TDaoCliente.Incluir(Cliente: TCliente);
+begin
+   FQryModific.Close;
+   FQryModific.SQLConnection := Fconexao.Conection;
+   FQryModific.SQL.Text := 'insert into T_clientes ( Codigo, Descricao,Telefone,CNPJCPF,Placa, DescricaoVeiculo,Ativo,'+
+                           '                         Cod_Atividade,Cod_Rota,Cod_Funcionario,Limite_Credito,Qtde_PedAberto, Status ) Values '+
+                           '                       ( :parCodigo, :parDescricao,:parTelefone,:parCNPJCPF,:parPlaca, :parDescricaoVeiculo,:parAtivo, '+
+                           '                         :parCod_Atividade, :parCod_Rota, :parCod_Funcionario, :parLimite_Credito, :parQtde_PedAberto, :parStatus ) ';
+   FQryModific.ParamByName('parCodigo').AsString     := Sequencia('Codigo',False,'T_Clientes',fConexao.Conection,'',False,5);
+   FQryModific.ParamByName('parDescricao').AsString  := Cliente.Descricao;
+   FQryModific.ParamByName('parTelefone').AsString   := Cliente.Telefones;
+   FQryModific.ParamByName('parCNPJCPF').AsString    := Cliente.CPF;
+   FQryModific.ParamByName('parAtivo').AsString      := 'S';
+   FQryModific.ParamByName('parCod_Atividade').AsInteger   := Cliente.AtividadeId;
+   FQryModific.ParamByName('parCod_Rota').AsInteger        := Cliente.RotaId;
+   FQryModific.ParamByName('parCod_Funcionario').AsInteger := Cliente.FuncionarioId;
+   FQryModific.ParamByName('parLimite_Credito').AsFloat    := 500;
+   FQryModific.ParamByName('parQtde_PedAberto').AsFloat    := 999;
+   FQryModific.ParamByName('parPlaca').AsString            := Cliente.Placa;
+   FQryModific.ParamByName('parStatus').AsInteger          := 0;
+   FQryModific.ParamByName('parDescricaoVeiculo').AsString := Cliente.DescricaoVeiculo;
    FQryModific.ExecSQL;
 end;
 

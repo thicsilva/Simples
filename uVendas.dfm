@@ -82,6 +82,7 @@ object frmVendas: TfrmVendas
       Transparent = False
       Flat = False
       AllowAllUp = False
+      PopupMenu = MenuCliente
       ShowHint = True
       ParentShowHint = False
       Down = False
@@ -1148,7 +1149,7 @@ object frmVendas: TfrmVendas
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
-    Top = 263
+    Top = 208
     Width = 822
     Height = 44
     AutoSize = True
@@ -1163,8 +1164,7 @@ object frmVendas: TfrmVendas
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = -8
-    ExplicitTop = 239
+    ExplicitTop = 263
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -1250,6 +1250,7 @@ object frmVendas: TfrmVendas
         Enabled = False
         OnClick = btnExcluirClick
         ExplicitLeft = 447
+        ExplicitTop = 8
       end
       object btnAdicionar: TbsSkinSpeedButton
         Left = 0
@@ -1413,6 +1414,7 @@ object frmVendas: TfrmVendas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -5
       end
       object btnCancelar: TbsSkinSpeedButton
         Left = 518
@@ -1492,12 +1494,13 @@ object frmVendas: TfrmVendas
         Enabled = False
         OnClick = btnOkProdClick
         ExplicitLeft = 679
+        ExplicitTop = 8
       end
     end
   end
   object pnlProdutos: TbsSkinPanel
     Left = 0
-    Top = 208
+    Top = 252
     Width = 822
     Height = 55
     HintImageIndex = 0
@@ -1532,8 +1535,7 @@ object frmVendas: TfrmVendas
     Caption = 'bsSkinPanel1'
     Align = alTop
     Enabled = False
-    ExplicitLeft = -8
-    ExplicitTop = 184
+    ExplicitTop = 281
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 10
       Top = 7
@@ -2273,6 +2275,7 @@ object frmVendas: TfrmVendas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
       object bsSkinBevel5: TbsSkinBevel
         Left = 300
@@ -2371,8 +2374,6 @@ object frmVendas: TfrmVendas
     Align = alClient
     TabOrder = 9
     OnChange = PagVendasChange
-    ExplicitLeft = -8
-    ExplicitTop = 283
     object TabSheet1: TTabSheet
       Caption = 'Vendas'
       object dbgConsulta: TbsSkinDBGrid
@@ -2424,7 +2425,6 @@ object frmVendas: TfrmVendas
         Height = 212
         HintImageIndex = 0
         TabOrder = 1
-        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'vscrollbar'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2441,10 +2441,10 @@ object frmVendas: TfrmVendas
         CanFocused = False
         Align = alRight
         Kind = sbVertical
-        PageSize = 0
-        Min = 0
-        Max = 127
-        Position = 0
+        PageSize = 1
+        Min = 1
+        Max = 0
+        Position = 1
         SmallChange = 63
         LargeChange = 63
       end
@@ -2464,7 +2464,7 @@ object frmVendas: TfrmVendas
         DefaultWidth = 0
         DefaultHeight = 19
         UseSkinFont = True
-        Both = False
+        Both = True
         BothMarkerWidth = 19
         BothSkinDataName = 'bothhscrollbar'
         CanFocused = False
@@ -2474,8 +2474,8 @@ object frmVendas: TfrmVendas
         Min = 0
         Max = 127
         Position = 0
-        SmallChange = 63
-        LargeChange = 63
+        SmallChange = 42
+        LargeChange = 42
       end
     end
     object TabSheet2: TTabSheet
@@ -3081,6 +3081,10 @@ object frmVendas: TfrmVendas
         Name = 'TipoProduto'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'FuncionarioId'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -3089,7 +3093,7 @@ object frmVendas: TfrmVendas
     Left = 267
     Top = 212
     Data = {
-      FA0100009619E0BD010000001800000016000000000003000000FA0106436F64
+      100200009619E0BD010000001800000017000000000003000000100206436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
       4454480200020032000A717464655F56656E646108000400000000000950636F
       5F56656E6461080004000000000009766C725F546F74616C0800040000000000
@@ -3104,7 +3108,8 @@ object frmVendas: TfrmVendas
       0A4C7563726F427275746F08000400000000000B5469706F43616C63756C6F01
       0049000000010005574944544802000200140010507265766973616F5F456E74
       726567610400060000000000074772616465494404000100000000000B546970
-      6F50726F6475746F01004900000001000557494454480200020014000000}
+      6F50726F6475746F01004900000001000557494454480200020014000D46756E
+      63696F6E6172696F496404000100000000000000}
     object cdsItensVendasTMPCodigo: TIntegerField
       DisplayWidth = 7
       FieldName = 'Codigo'
@@ -3200,6 +3205,9 @@ object frmVendas: TfrmVendas
       FieldName = 'Complemento'
       Size = 50
     end
+    object cdsItensVendasTMPFuncionarioId: TIntegerField
+      FieldName = 'FuncionarioId'
+    end
   end
   object srcItensVendasTMP: TDataSource
     DataSet = cdsItensVendasTMP
@@ -3234,8 +3242,8 @@ object frmVendas: TfrmVendas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 473
-    Top = 257
+    Left = 465
+    Top = 249
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
@@ -5464,6 +5472,18 @@ object frmVendas: TfrmVendas
             '[dbSetItens."qtde_Venda"]')
         end
       end
+    end
+  end
+  object MenuCliente: TPopupMenu
+    Left = 528
+    Top = 96
+    object CadastrodeCliente1: TMenuItem
+      Caption = 'Cadastro de Cliente'
+      OnClick = CadastrodeCliente1Click
+    end
+    object NovoClienen1: TMenuItem
+      Caption = 'Novo Cliente'
+      OnClick = NovoClienen1Click
     end
   end
 end

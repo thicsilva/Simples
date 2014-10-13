@@ -28,7 +28,7 @@ uses
   SimpleDS, sqltimst, RDprint,uFormBase, uClassVenda,uClassItemvenda,uDaoItemVenda,
   uDaoCustoProduto, frxClass, frxDBSet, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,udtmVendas,
-  dxSkinsDefaultPainters, cxImage, dblookup, DBCtrls;
+  dxSkinsDefaultPainters, cxImage, dblookup, DBCtrls, Menus;
 const
     SERVICOS = 3;
     VENDAS_EXTERNAS = 2;
@@ -257,6 +257,10 @@ type
     frxVendaPersonalizada03: TfrxReport;
     cdsItensVendasTMPTipoProduto: TStringField;
     btnOkProd: TbsSkinSpeedButton;
+    MenuCliente: TPopupMenu;
+    NovoClienen1: TMenuItem;
+    CadastrodeCliente1: TMenuItem;
+    cdsItensVendasTMPFuncionarioId: TIntegerField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -270,7 +274,6 @@ type
     procedure cdsItensVendasTMPAfterOpen(DataSet: TDataSet);
     procedure edtDescontoExit(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure btnCadAlunosClick(Sender: TObject);
     procedure edtcod_ClienteExit(Sender: TObject);
     procedure cmbNome_ClienteChange(Sender: TObject);
     procedure cmbCod_ClienteChange(Sender: TObject);
@@ -299,6 +302,9 @@ type
     procedure PagVendasChange(Sender: TObject);
     procedure bsSkinButton1Click(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
+    procedure CadastrodeCliente1Click(Sender: TObject);
+    procedure btnCadAlunosClick(Sender: TObject);
+    procedure NovoClienen1Click(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -317,6 +323,8 @@ type
     function TotalDigitado(IdProduto: String): Real;
     procedure AtualizaValores;
     procedure PedidoPersonalizado03(NumeroVenda: String);
+    procedure AtualizarDadosClientes;
+    function RetornarMecanico: Integer;
     { Private declarations }
   public
      liSeqVendaAtu  : Integer;
@@ -338,7 +346,8 @@ implementation
 
 uses uPrincipal,ufuncoes, uCadClientes, uCadProdutos, uBaixaNormal, DBXCommon, uClassContaCorrente,uClassDaoContaCorrente,
   uCalMQuadrado, DaoRemessa, uDaoVenda, uDaoFuncionario, uDaoClienteAnimal,uDaoCliente,
-  uselAnimal, uDescontoVenda, uDelivery, uDaoItensVendaGrade, uDaoProduto;
+  uselAnimal, uDescontoVenda, uDelivery, uDaoItensVendaGrade, uDaoProduto,
+  uCadastroRapidoCliente, uselFuncionario;
 
 {$R *.dfm}
 procedure TfrmVendas.AtualizaDesconto(lrPercDesconto: Real);
@@ -374,6 +383,17 @@ Begin
    cdsCadProdutos.ProviderName := dspVariavel.Name;
    cdsCadProdutos.Open;
 End;
+
+procedure TfrmVendas.AtualizarDadosClientes;
+begin
+  qryVariavel.Close;
+  qryVariavel.Params.Clear;
+  qryVariavel.SQL.text := 'Select * from T_Clientes where ativo=:parAtivo order by Descricao ';
+  qryVariavel.ParamByName('parativo').AsString := 'S';
+  cdsCadClientes.Close;
+  cdsCadClientes.ProviderName := dspVariavel.Name;
+  cdsCadClientes.Open;
+end;
 
 procedure TfrmVendas.VerificarSaldoDevedor(ClienteID : Integer);
 var DaoCliente : TDaocliente;
@@ -463,8 +483,9 @@ begin
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select Codigo,Descricao,Cod_Supervisor from T_Funcionarios where ativo=:parAtivo order by Descricao ';
+   qryVariavel.SQL.text :='Select Codigo,Descricao,Cod_Supervisor from T_Funcionarios where ativo=:parAtivo and Funcao<>:parfuncao order by Descricao ';
    qryVariavel.ParamByName('parAtivo').AsString := 'S';
+   qryVariavel.ParamByName('parFuncao').AsString := 'Mecanico';
 
    cdsCadFuncionarios.Close;
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
@@ -769,6 +790,7 @@ var DaoCustoPtoduto : TdaoCustoProduto;
     PrecoCusto : Real;
     lrPerc_Desconto : Real;
     lrDiferenca :Real;
+  liFuncionarioId: Integer;
 begin
    DaoCustoPtoduto := TdaoCustoProduto.Create(gConexao);
    if strtofloat(Edttotal.text ) <=0 Then
@@ -786,6 +808,14 @@ begin
          Exit;
       End;
    End;
+
+   if ( cdsCadProdutos.fieldbyname('Tipo_Produto').asInteger = 1 ) then
+   begin
+      liFuncionarioId := 0;
+      if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ControleComissaoServico', 'NAO' ))) then
+         liFuncionarioId := RetornarMecanico;
+   end;
+
    If pvQualBotao = 'Incluir' Then
       cdsItensVendasTmp.Append
    Else
@@ -822,6 +852,8 @@ begin
    cdsItensVendasTmp.FieldByName('SeqVenda').asInteger       := 1;
    cdsItensVendasTmp.FieldByName('GradeID').asInteger        := cdsCadProdutos.fieldbyname('GradeID').AsInteger;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger        := 1;
+   cdsItensVendasTmp.FieldByName('FuncionarioId').asInteger  := liFuncionarioId;
+
    if cdsCadProdutos.FieldByName('Garantia').AsInteger > 0 then
       cdsItensVendasTmp.FieldByName('Complemento').asString:=' Garantia de '+cdsCadProdutos.fieldbyname('Garantia').AsString+' Dias';
 
@@ -856,6 +888,19 @@ begin
    AtaulizaLucroBruto;
    btnadicionarClick(btnadicionar);
 end;
+function TfrmVendas.RetornarMecanico : Integer;
+var Dados : TClientDataSet;
+begin
+    Result := 0;
+    Dados := gConexao.BuscarDadosSQL('Select Codigo,Descricao From T_Funcionarios where Funcao='+QuotedStr('Mecanico'),Nil);
+    if not Dados.IsEmpty then
+    begin
+       frmSelFuncionario := TfrmSelFuncionario.Create(Self);
+       frmSelFuncionario.srcMecanico.DataSet := Dados;
+       frmSelFuncionario.ShowModal;
+       Result := frmSelFuncionario.cmbNome_Funcionario.KeyValue;
+    end;
+end;
 procedure TfrmVendas.btnRemoverClick(Sender: TObject);
 begin
    if CaixaMensagem( 'Deseja Excluir o Item '+cdsItensTamanhos.FieldByname('Tamanho').asString, ctConfirma, [ cbSimNao ], 0 )  Then
@@ -863,6 +908,32 @@ begin
       cdsItensTamanhos.Delete;
       AtualizaValores;
    end;
+end;
+
+procedure TfrmVendas.CadastrodeCliente1Click(Sender: TObject);
+begin
+   if PetShop then
+   begin
+      frmDelivery := TFrmDelivery.Create(Self);
+      frmDelivery.ShowModal;
+      Exit;
+   end;
+   frmCadClientes := TfrmCadClientes.Create(Nil);
+   frmCadClientes.Tag := 5;
+   frmCadClientes.showmodal;
+
+   edtcod_Cliente.Text := '';
+   edtcod_ClienteExit(edtcod_Cliente);
+
+    AtualizarDadosClientes;
+
+   if frmCadClientes.piCod_Produto<> 0 Then
+   begin
+      edtCod_Cliente.Text := intToStr(frmCadClientes.piCod_Produto);
+      edtCod_ClienteExit(edtCod_Produto);
+   End;
+   edtcod_Cliente.SetFocus;
+
 end;
 
 procedure  TfrmVendas.AtaulizaLucroBruto;
@@ -1860,40 +1931,6 @@ begin
 
 end;
 
-procedure TfrmVendas.btnCadAlunosClick(Sender: TObject);
-begin
-   if PetShop then
-   begin
-      frmDelivery := TFrmDelivery.Create(Self);
-      frmDelivery.ShowModal;
-      Exit;
-   end;
-   frmCadClientes := TfrmCadClientes.Create(Nil);
-   frmCadClientes.Tag := 5;
-   frmCadClientes.showmodal;
-
-   edtcod_Cliente.Text := '';
-   edtcod_ClienteExit(edtcod_Cliente);
-
-   qryVariavel.Close;
-   qryVariavel.Params.Clear;
-   qryVariavel.SQL.text :='Select Placa, DescricaoVeiculo, status, Codigo,Descricao,cnpjcpf,Cod_Rota,Contrato,'+
-                           'Qtde_PedAberto,Limite_Credito from T_Clientes '+
-                           'where ativo=:parAtivo order by Descricao ';
-   qryVariavel.ParamByName('parativo').AsString := 'S';
-
-   cdsCadClientes.Close;
-   cdsCadClientes.ProviderName := dspVariavel.Name;
-   cdsCadClientes.Open;
-
-   if frmCadClientes.piCod_Produto<> 0 Then
-   begin
-      edtCod_Cliente.Text := intToStr(frmCadClientes.piCod_Produto);
-      edtCod_ClienteExit(edtCod_Produto);
-   End;
-   edtcod_Cliente.SetFocus;
-end;
-
 procedure TfrmVendas.edtcod_ClienteExit(Sender: TObject);
 begin
    if Trim(edtCod_Cliente.text)<> '' Then
@@ -1945,6 +1982,23 @@ begin
          BtnCancelaClick(BtnCancela);
       FreeandNil(frmSelAnimal);
    end;
+end;
+
+procedure TfrmVendas.NovoClienen1Click(Sender: TObject);
+begin
+  inherited;
+  frmCadastroClienteSimplificado := TfrmCadastroClienteSimplificado.Create(Self);
+  frmCadastroClienteSimplificado.showModal;
+
+  AtualizarDadosClientes;
+
+  if StrtoIntDef(frmCadastroClienteSimplificado.ClienteId,0) <> 0 Then
+  begin
+     edtCod_Cliente.Text := frmCadastroClienteSimplificado.ClienteId;
+     edtCod_ClienteExit(edtCod_Cliente);
+  End;
+  edtcod_Cliente.SetFocus;
+  FreeAndNil(frmCadastroClienteSimplificado);
 end;
 
 procedure TfrmVendas.cmbNome_ClienteChange(Sender: TObject);
@@ -2077,6 +2131,11 @@ begin
       edtCod_Cliente.SetFocus;
       exit;
    end;
+end;
+
+procedure TfrmVendas.btnCadAlunosClick(Sender: TObject);
+begin
+    TbsSkinSpeedButton( Sender ).PopupMenu.Popup( TbsSkinSpeedButton( Sender ).ClientOrigin.X, TbsSkinSpeedButton( Sender ).ClientOrigin.Y + TbsSkinSpeedButton( Sender ).Height );
 end;
 
 procedure TfrmVendas.btnCadProdutosClick(Sender: TObject);

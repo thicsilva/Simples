@@ -87,6 +87,8 @@ type
     bsSkinBevel1: TbsSkinBevel;
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
+    bsSkinStdLabel11: TbsSkinStdLabel;
+    edtFuncao: TbsSkinEdit;
     procedure EdtPesquisaChange(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -121,6 +123,7 @@ Begin
    EdtCep.Text       := '';
    EdtUf.Text        := '';
    EdtCelular.Text   := '';
+   edtfuncao.Text    := '';
    edtTelefone.text  := '';
    cmbCod_Supervisor.KeyValue  := null;
    cmbNome_Supervisor.KeyValue := null;
@@ -208,7 +211,7 @@ begin
       cdsCadFuncionarios.FieldByName('Ativo').AsString      := 'N';
    cdsCadFuncionarios.FieldByName('Operador').AsString      := GsOperador;
    cdsCadFuncionarios.FieldByName('Cod_Emp').AsString       := gsCod_Emp;
-
+   cdsCadFuncionarios.FieldByName('Funcao').AsString        := edtfuncao.Text;
    cdsCadFuncionarios.Post;
 
    If cdsCadFuncionarios.ChangeCount > 0  Then // se houve mudancas
@@ -250,7 +253,9 @@ begin
    edtCnpjCpf.Text            := sdtsPesquisa.FieldByName('CNPJCPF').AsString;
    EdtTelefone.Text           := sdtsPesquisa.FieldByName('Telefone').AsString;
    EdtCelular.Text            := sdtsPesquisa.FieldByName('Celular').AsString;
-   chkAtivo.Checked    := True;
+   edtFuncao.Text             := sdtsPesquisa.FieldByName('Funcao').AsString;
+   chkAtivo.Checked           := True;
+
    if sdtsPesquisa.FieldByName('Ativo').AsString = 'N' Then
       chkAtivo.Checked := False;
    cmbCod_Supervisor.KeyValue  := sdtsPesquisa.FieldByName('Cod_Supervisor').AsInteger;

@@ -148,7 +148,9 @@ uses
   uDaoItensVendaGrade in 'Dao\uDaoItensVendaGrade.pas',
   ufrmFinalizaServico in 'ufrmFinalizaServico.pas' {frmFinalizaServico},
   uAberturaOS in 'uAberturaOS.pas' {frmAberturaOs},
-  uDaoProduto in 'Dao\uDaoProduto.pas';
+  uDaoProduto in 'Dao\uDaoProduto.pas',
+  uCadastroRapidoCliente in 'uCadastroRapidoCliente.pas' {frmCadastroClienteSimplificado},
+  uselFuncionario in 'uselFuncionario.pas' {frmSelFuncionario};
 
 {$R *.res}
 
@@ -158,6 +160,8 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmAberturaOs, frmAberturaOs);
+  Application.CreateForm(TfrmCadastroClienteSimplificado, frmCadastroClienteSimplificado);
+  Application.CreateForm(TfrmSelFuncionario, frmSelFuncionario);
   Frmlogin.ShowModal;
   Application.Run;
 end.
