@@ -692,6 +692,9 @@ begin
    frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
    dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr('00001'),Nil).Data;
    frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+   frxDuplicataMErcantil.Variables['Valor']       := QuotedStr(FormatFloat('0.00',cdsPesquisa.fieldByName('vlr_Areceber').AsFloat) );
+   frxDuplicataMErcantil.Variables['Documento']   := QuotedStr(cdsPesquisa.fieldByName('Documento').AsString );
+   frxDuplicataMErcantil.Variables['Vencimento']  := QuotedStr( FormatDateTime('dd/mm/yyyy',cdsPesquisa.fieldByName('Data_Vencimento').AsDateTime ));
    frxDuplicataMErcantil.ShowReport(true);
 end;
 
@@ -785,7 +788,7 @@ begin
    except
    end;
 
-   
+
 end;
 
 procedure TfrmCtasReceber.EdtPesquisaKeyDown(Sender: TObject; var Key: Word;

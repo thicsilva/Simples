@@ -3205,7 +3205,7 @@ object frmCtasReceber: TfrmCtasReceber
     PrintOptions.Printer = 'Padr'#227'o'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41842.964457743100000000
-    ReportOptions.LastChange = 41857.597552094910000000
+    ReportOptions.LastChange = 41857.597552094900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3222,7 +3222,23 @@ object frmCtasReceber: TfrmCtasReceber
         DataSet = frxDbEmpresa
         DataSetName = 'dbSetEmpresa'
       end>
-    Variables = <>
+    Variables = <
+      item
+        Name = ' Financeiro'
+        Value = Null
+      end
+      item
+        Name = 'Valor'
+        Value = ' '
+      end
+      item
+        Name = 'Vencimento'
+        Value = ' '
+      end
+      item
+        Name = 'Documento'
+        Value = ' '
+      end>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
@@ -3397,23 +3413,6 @@ object frmCtasReceber: TfrmCtasReceber
           Height = 177.637910000000000000
           ShowHint = False
         end
-        object Memo9: TfrxMemoView
-          Left = 7.559060000000000000
-          Top = 120.944960000000000000
-          Width = 86.929133860000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8 = (
-            '132,00')
-          ParentFont = False
-        end
         object Memo10: TfrxMemoView
           Left = 93.826840000000000000
           Top = 120.944960000000000000
@@ -3428,24 +3427,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '1200092-001')
-          ParentFont = False
-        end
-        object Memo11: TfrxMemoView
-          Left = 355.275820000000000000
-          Top = 120.944960000000000000
-          Width = 188.976500000000000000
-          Height = 18.897650000000000000
-          ShowHint = False
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
-          HAlign = haCenter
-          Memo.UTF8 = (
-            '28/07/2014')
+            '[Documento]')
           ParentFont = False
         end
         object Memo12: TfrxMemoView
@@ -3462,7 +3444,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '132,00')
+            '[Valor]')
           ParentFont = False
         end
         object Memo13: TfrxMemoView
@@ -3479,7 +3461,7 @@ object frmCtasReceber: TfrmCtasReceber
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
           HAlign = haCenter
           Memo.UTF8 = (
-            '1200092-001')
+            '[Documento]')
           ParentFont = False
         end
         object Memo14: TfrxMemoView
@@ -3499,9 +3481,9 @@ object frmCtasReceber: TfrmCtasReceber
           ParentFont = False
         end
         object Memo17: TfrxMemoView
-          Left = 118.944960000000000000
+          Left = 116.944960000000000000
           Top = 328.819110000000000000
-          Width = 109.606370000000000000
+          Width = 113.385900000000000000
           Height = 22.677180000000000000
           ShowHint = False
           Font.Charset = ANSI_CHARSET
@@ -3548,7 +3530,7 @@ object frmCtasReceber: TfrmCtasReceber
         end
         object dbSetEmpresaCNPJCPF: TfrxMemoView
           Left = 181.417440000000000000
-          Top = 46.795300000000000000
+          Top = 54.354360000000000000
           Width = 527.165740000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3566,7 +3548,7 @@ object frmCtasReceber: TfrmCtasReceber
         end
         object dbSetEmpresaEndereco: TfrxMemoView
           Left = 181.417440000000000000
-          Top = 18.897650000000000000
+          Top = 23.456710000000000000
           Width = 528.945270000000000000
           Height = 16.779530000000000000
           ShowHint = False
@@ -3586,7 +3568,7 @@ object frmCtasReceber: TfrmCtasReceber
         end
         object Memo20: TfrxMemoView
           Left = 181.417440000000000000
-          Top = 34.015770000000000000
+          Top = 37.015770000000000000
           Width = 529.134200000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -3632,7 +3614,7 @@ object frmCtasReceber: TfrmCtasReceber
         end
         object Memo23: TfrxMemoView
           Left = 544.252320000000000000
-          Top = 83.149660000000000000
+          Top = 90.149660000000000000
           Width = 166.299320000000000000
           Height = 41.574830000000000000
           ShowHint = False
@@ -3741,9 +3723,9 @@ object frmCtasReceber: TfrmCtasReceber
           ParentFont = False
         end
         object Memo8: TfrxMemoView
-          Left = 120.944960000000000000
+          Left = 117.165430000000000000
           Top = 351.496290000000000000
-          Width = 589.606680000000000000
+          Width = 593.386210000000000000
           Height = 34.015770000000000000
           ShowHint = False
           Font.Charset = ANSI_CHARSET
@@ -3778,6 +3760,40 @@ object frmCtasReceber: TfrmCtasReceber
             'Na falta de oagamento no vencimento ser'#195#163'o cobrados'
             ' - Juros de mora de acordo com alegisla'#195#167#195#163'o'
             ' - Despesas Bancarias')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 120.944960000000000000
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[Valor]')
+          ParentFont = False
+        end
+        object Vencimento: TfrxMemoView
+          Left = 355.275820000000000000
+          Top = 120.944960000000000000
+          Width = 188.976500000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftBottom]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[Vencimento]')
           ParentFont = False
         end
       end
