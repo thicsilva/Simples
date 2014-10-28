@@ -36,7 +36,7 @@ object frmabreos: Tfrmabreos
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 652
       Height = 40
       HintImageIndex = 0
       TabOrder = 0

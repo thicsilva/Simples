@@ -31,6 +31,7 @@ type TVenda = class
     FDefeito: String;
     FDataMovimento: TDateTime;
     FStatus: String;
+    FOSID: Integer;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -60,6 +61,7 @@ type TVenda = class
     procedure SetOperador(const Value: String);
     procedure SetSerie(const Value: String);
     procedure SetStatus(const Value: String);
+    procedure SetOSID(const Value: Integer);
 
   public
      Constructor Create(Conexao : TConexao);
@@ -88,6 +90,7 @@ type TVenda = class
      property DescricaoProduto : String read FDescricaoProduto write SetDescricaoProduto;
      property Defeito : String read FDefeito write SetDefeito;
      property Status : String read FStatus write SetStatus;
+     property OSID : Integer read FOSID write SetOSID;
 end;
 
 implementation
@@ -762,6 +765,11 @@ end;
 procedure TVenda.SetOperador(const Value: String);
 begin
   FOperador := Value;
+end;
+
+procedure TVenda.SetOSID(const Value: Integer);
+begin
+  FOSID := Value;
 end;
 
 procedure TVenda.SetPeso_total(const Value: Real);

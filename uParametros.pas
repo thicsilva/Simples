@@ -306,10 +306,10 @@ end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
 begin
-   chkNaoMostrarExtorno.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' )));
-   chkMarcaOsNoCaixa.Checked     := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
-   chkControlaComissao.Checked   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'ControlaComissao', 'NAO' )));
-   chkTrabalhaComVeiculo.Checked   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
+   chkNaoMostrarExtorno.Checked   := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' )));
+   chkMarcaOsNoCaixa.Checked      := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'MarcaOsNoCaixa', 'NAO' )));
+   chkControlaComissao.Checked    := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'ControlaComissao', 'NAO' )));
+   chkTrabalhaComVeiculo.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
 
    edtDespesaVariaveis.Text      := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasVariaveis', '0' );
    edtDespesasFixas.Text         := gParametros.Ler( '', '[ADMINISTRATIVO]', 'DespesasFixas', '0' );

@@ -36,7 +36,7 @@ object frmEntradas: TfrmEntradas
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 692
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -318,7 +318,7 @@ object frmEntradas: TfrmEntradas
     Top = 44
     Width = 705
     Height = 492
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -350,10 +350,6 @@ object frmEntradas: TfrmEntradas
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -824,10 +820,9 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 62
         Width = 703
-        Height = 408
+        Height = 406
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 406
         object GrdCompras: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcConsEntradas
@@ -969,10 +964,6 @@ object frmEntradas: TfrmEntradas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manuten'#231#227'o'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel3: TbsSkinPanel
         Left = 0
         Top = 0
@@ -1739,7 +1730,7 @@ object frmEntradas: TfrmEntradas
         Left = 0
         Top = 208
         Width = 684
-        Height = 262
+        Height = 260
         HintImageIndex = 0
         TabOrder = 1
         SkinData = frmPrincipal.SkinPrincipal
@@ -2058,10 +2049,9 @@ object frmEntradas: TfrmEntradas
         Left = 684
         Top = 208
         Width = 19
-        Height = 262
+        Height = 260
         HintImageIndex = 0
         TabOrder = 3
-        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'vscrollbar'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2081,10 +2071,9 @@ object frmEntradas: TfrmEntradas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 0
+        Position = 1
         SmallChange = 1
         LargeChange = 1
-        ExplicitHeight = 260
       end
       object bsSkinCoolBar2: TbsSkinCoolBar
         Left = 0
@@ -2106,7 +2095,7 @@ object frmEntradas: TfrmEntradas
         object bsSkinToolBar2: TbsSkinToolBar
           Left = 9
           Top = 0
-          Width = 70
+          Width = 690
           Height = 40
           HintImageIndex = 0
           TabOrder = 0
@@ -2269,10 +2258,6 @@ object frmEntradas: TfrmEntradas
     end
     object tabCtasPagar: TbsSkinTabSheet
       Caption = 'Contas a Pagar'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinGroupBox2: TbsSkinGroupBox
         Left = 84
         Top = 53

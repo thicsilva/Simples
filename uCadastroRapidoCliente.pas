@@ -26,11 +26,12 @@ type
     btnNovoCliente: TbsSkinButton;
     StatusBar1: TStatusBar;
     EdtPlacaVeiculo: TbsSkinEdit;
-    bsSkinStdLabel25: TbsSkinStdLabel;
-    bsSkinStdLabel26: TbsSkinStdLabel;
+    lblPlaca: TbsSkinStdLabel;
+    lblDescricaoVeiculo: TbsSkinStdLabel;
     edtDescricaoVeiculo: TbsSkinEdit;
     procedure btnNovoClienteClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,7 +58,7 @@ begin
       exit;
    end;
 
-   if trim(edtPlacaVeiculo.Text)= EmptyStr then
+   if (trim(edtPlacaVeiculo.Text)= EmptyStr) and (edtPlacaVeiculo.visible) then
    begin
       CaixaMensagem( 'A Placa não pode ser vazia', ctInforma, [ cbOK ], 0 );
       exit;
@@ -85,6 +86,16 @@ end;
 procedure TfrmCadastroClienteSimplificado.btnokClick(Sender: TObject);
 begin
    btnNovoClienteClick(btnNovoCliente);
+end;
+
+procedure TfrmCadastroClienteSimplificado.FormShow(Sender: TObject);
+begin
+   edtDescricaoVeiculo.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
+   edtPlacaVeiculo.Visible     := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
+   lblPlaca.Visible := edtPlacaVeiculo.Visible;
+   lblDescricaoVeiculo.Visible := edtDescricaoVeiculo.Visible;
+
+
 end;
 
 end.

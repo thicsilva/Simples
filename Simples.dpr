@@ -150,7 +150,8 @@ uses
   uAberturaOS in 'uAberturaOS.pas' {frmAberturaOs},
   uDaoProduto in 'Dao\uDaoProduto.pas',
   uCadastroRapidoCliente in 'uCadastroRapidoCliente.pas' {frmCadastroClienteSimplificado},
-  uselFuncionario in 'uselFuncionario.pas' {frmSelFuncionario};
+  uselFuncionario in 'uselFuncionario.pas' {frmSelFuncionario},
+  uDtmComprovanteVenda in 'Data Module\uDtmComprovanteVenda.pas' {DtmComprovante: TDataModule};
 
 {$R *.res}
 
@@ -162,6 +163,7 @@ begin
   Application.CreateForm(TfrmAberturaOs, frmAberturaOs);
   Application.CreateForm(TfrmCadastroClienteSimplificado, frmCadastroClienteSimplificado);
   Application.CreateForm(TfrmSelFuncionario, frmSelFuncionario);
+  Application.CreateForm(TDtmComprovante, DtmComprovante);
   Frmlogin.ShowModal;
   Application.Run;
 end.

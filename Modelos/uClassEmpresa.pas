@@ -16,6 +16,10 @@ type TEmpresa = class
     FRazao_social: String;
     FNome_Fantasia: String;
     FTelefone: String;
+    FInscricaoEstadual: String;
+    FUf: String;
+    FUfId: integer;
+    FMunicipioId: Integer;
     procedure SetIdEmpresa(const Value: Integer);
     procedure SetEmail(const Value: string);
     procedure SetEndereco(const Value: TEndereco);
@@ -26,6 +30,10 @@ type TEmpresa = class
     procedure SetNome_Fantasia(const Value: String);
     procedure SetRazao_social(const Value: String);
     procedure SetTelefone(const Value: String);
+    procedure SetInscricaoEstadual(const Value: String);
+    procedure SetUf(const Value: String);
+    procedure SetUfId(const Value: integer);
+    procedure SetMunicipioId(const Value: Integer);
   published
   public
     Constructor Create;
@@ -39,6 +47,9 @@ type TEmpresa = class
     property Razao_social : String read FRazao_social write SetRazao_social;
     property Fax : String read FFax write SetFax;
     property Telefone : String read FTelefone write SetTelefone;
+    property MunicipioId : Integer read FMunicipioId write SetMunicipioId;
+    property UfId : integer read FUfId write SetUfId;
+    property InscricaoEstadual : String read FInscricaoEstadual write SetInscricaoEstadual;
 end;
 
 implementation
@@ -49,6 +60,7 @@ constructor TEmpresa.Create;
 begin
    Fendereco := TEndereco.Create;
 end;
+
 
 procedure TEmpresa.SetCNPJ(const Value: String);
 begin
@@ -75,6 +87,16 @@ begin
   FIdEmpresa := Value;
 end;
 
+procedure TEmpresa.SetInscricaoEstadual(const Value: String);
+begin
+  FInscricaoEstadual := Value;
+end;
+
+procedure TEmpresa.SetMunicipioId(const Value: Integer);
+begin
+  FMunicipioId := Value;
+end;
+
 procedure TEmpresa.SetNome_Fantasia(const Value: String);
 begin
   FNome_Fantasia := Value;
@@ -98,6 +120,16 @@ end;
 procedure TEmpresa.SetTelefones(const Value: String);
 begin
   FTelefones := Value;
+end;
+
+procedure TEmpresa.SetUf(const Value: String);
+begin
+  FUf := Value;
+end;
+
+procedure TEmpresa.SetUfId(const Value: integer);
+begin
+  FUfId := Value;
 end;
 
 end.

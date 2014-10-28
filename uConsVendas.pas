@@ -27,8 +27,8 @@ uses
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
-  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
-  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
+  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase,
+  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,pcnConversao,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
   dxSkinscxPCPainter, ACBrNFe, frxClass, frxDBSet;
 
@@ -56,9 +56,9 @@ type
     cxGrid1Level1: TcxGridLevel;
     cxGrid1: TcxGrid;
     Colum_Seqvenda: TcxGridDBColumn;
-    Colum_NomeStatus: TcxGridDBColumn;
-    Colum_Cod_Aluno: TcxGridDBColumn;
-    Colum_Descricao: TcxGridDBColumn;
+    Column_NomeStatus: TcxGridDBColumn;
+    Column_ClienteId: TcxGridDBColumn;
+    Colum_Nome_Cliente: TcxGridDBColumn;
     Colum_Data_Venda: TcxGridDBColumn;
     Colum_Vlr_Total: TcxGridDBColumn;
     colum_Vlr_Desconto: TcxGridDBColumn;
@@ -114,7 +114,7 @@ type
     btnFinalizar: TbsSkinSpeedButton;
     btnEmproducao: TbsSkinSpeedButton;
     btnEntregue: TbsSkinSpeedButton;
-    btnNFE: TbsSkinSpeedButton;
+    edtmanutencao: TbsSkinSpeedButton;
     bsSkinBevel5: TbsSkinBevel;
     btnImpComprovante: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
@@ -146,6 +146,11 @@ type
     SQLQuery1: TSQLQuery;
     DataSetProvider1: TDataSetProvider;
     ClientDataSet1: TClientDataSet;
+    bsSkinSpeedButton1: TbsSkinSpeedButton;
+    Column_NumeroOS: TcxGridDBColumn;
+    colum_Defeito: TcxGridDBColumn;
+    Column_Produto: TcxGridDBColumn;
+    Column_Placa: TcxGridDBColumn;
     frxVendaPersonalizada03: TfrxReport;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -174,17 +179,19 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure btnEntregaVendaClick(Sender: TObject);
     procedure btnCupomFiscalClick(Sender: TObject);
-    procedure btnNFEClick(Sender: TObject);
+    procedure edtmanutencaoClick(Sender: TObject);
     procedure cdsVendasAfterScroll(DataSet: TDataSet);
+    procedure bsSkinSpeedButton1Click(Sender: TObject);
   private
-    pvilinha  : integer;
-    procedure CarregaPropriedade;
     procedure PedidoPersonalizado(NumeroVenda: String);
     procedure RecuperarItensVendas(seqVenda: String);
     procedure CarregarItemParaImpressao(SeqVenda : String);
     procedure PedidoPersonalizado02(NumeroVenda: String);
     procedure PedidoPersonalizado03(NumeroVenda: String);
     procedure PrepararGarantia;
+    procedure AjustaDBGridVendas;
+    Function ServisosDaOS(VendaId : String) : String;
+    procedure GerarNFe(NumNFe: String);
     { Private declarations }
   public
     { Public declarations }
@@ -198,7 +205,7 @@ implementation
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
   uclassContaCorrente, uDtmCadastro, ufrmFinalizaServico, uDaoItensVendaGrade,
-  UdtmVendas;
+  UdtmVendas, uDtmComprovanteVenda;
 
 {$R *.dfm}
 
@@ -206,7 +213,7 @@ procedure TfrmConsVendas.btnSelecionarClick(Sender: TObject);
 begin
    qryVendas.Close;
    qryVendas.Params.Clear;
-   qryVendas.SQL.Text :='Select Animal.NomeAnimal,Cli.Descricao, cli.cnpjcpf, fun.Descricao as Vendedor, Ven.*  From  T_Vendas Ven '+
+   qryVendas.SQL.Text :='Select Animal.NomeAnimal,cli.Placa,Cli.Descricao as Nome_Cliente, cli.cnpjcpf, fun.Descricao as Vendedor, Ven.*  From  T_Vendas Ven '+
                         'Left Join T_Clientes Cli On  '+
                         '     Cli.Codigo=Ven.Cod_Cliente '+
                         'Left Join T_Funcionarios Fun On '+
@@ -385,35 +392,68 @@ var
     DaoVenda: TDaoVenda;
     DaoItemVenda : TDaoItemVenda;
 begin
-   if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
-   begin
-      RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
-      PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString);
-   end
-   else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=6 then
-   begin
-      CarregarItemParaImpressao(cdsVendas.FieldByName('SeqVenda').AsString);
-      PedidoPersonalizado02(cdsVendas.FieldByName('SeqVenda').AsString);
-   end
-   else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=7 then
-   begin
-      RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
-      PrepararGarantia;
-      PedidoPersonalizado03(cdsVendas.FieldByName('SeqVenda').AsString);
-   end
+   if ( cdsVendas.FieldByName('Status').AsString <> '1') And ( cdsVendas.FieldByName('Status').AsString <> '2') Then
+   Begin
+     if (HeAssistencia) and (frmConsVendas.Tag=3) then
+     begin
+        DtmComprovante := TDtmComprovante.create(Nil);
+        dtmCadastro    := TdtmCadastro.create(Nil);
+
+        dtmCadastro.cdsEmpresa.Data  := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+        dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil).Data;
+
+
+        DtmComprovante.frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+        DtmComprovante.frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+        DtmComprovante.frxOrdemServico.Variables['CNPJEmpresa']      := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+        DtmComprovante.frxOrdemServico.Variables['NumeroVenda']      := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString);
+        DtmComprovante.frxOrdemServico.Variables['FormaPagamento']   := QuotedStr( cdsVendas.FieldByName('Descricao').AsString );
+        DtmComprovante.frxOrdemServico.Variables['Vendedor']         := QuotedStr( cdsVendas.FieldByName('Defeito').AsString );
+        DtmComprovante.frxOrdemServico.Variables['Servicos']         := QuotedStr( ServisosDaOS(cdsVendas.FieldByName('SeqVenda').AsString) );
+        DtmComprovante.frxOrdemServico.Variables['TotalLocacao']     := QuotedStr( Formatfloat('0.00',cdsVendas.FieldByName('vlr_Total').AsFloat ));
+
+        DtmComprovante.frxOrdemServico.ShowReport(true);
+        FreeAndNil(DtmComprovante);
+        FreeAndNil(dtmCadastro);
+        Exit;
+     end;
+
+     if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=5 then
+     begin
+        RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
+        PedidoPersonalizado(cdsVendas.FieldByName('SeqVenda').AsString);
+     end
+     else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=6 then
+     begin
+        CarregarItemParaImpressao(cdsVendas.FieldByName('SeqVenda').AsString);
+        PedidoPersonalizado02(cdsVendas.FieldByName('SeqVenda').AsString);
+     end
+     else if StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0'))=7 then
+     begin
+        RecuperarItensVendas(cdsVendas.FieldByName('SeqVenda').AsString);
+        PrepararGarantia;
+        PedidoPersonalizado03(cdsVendas.FieldByName('SeqVenda').AsString);
+     end
+     else
+     begin
+       DaoVenda := TDaoVenda.Create(gConexao);
+       loVenda  := DaoVenda.CarregarVenda(cdsVendas);
+       loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
+       lovenda.Empresa := gEmpresa;
+       DaoItemVenda    := TDaoItemVenda.Create(gConexao);
+       loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
+                        gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
+                        StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
+       FreeAndNil(DaoVenda);
+       FreeAndNil(lovenda);
+       FreeAndNil(DaoItemVenda);
+     end;
+   End
    else
    begin
-     DaoVenda := TDaoVenda.Create(gConexao);
-     loVenda  := DaoVenda.CarregarVenda(cdsVendas);
-     loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
-     lovenda.Empresa := gEmpresa;
-     DaoItemVenda    := TDaoItemVenda.Create(gConexao);
-     loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
-                      gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
-                      StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
-     FreeAndNil(DaoVenda);
-     FreeAndNil(lovenda);
-     FreeAndNil(DaoItemVenda);
+      CaixaMensagem( 'Ordem de serviço não finalizada', ctAviso, [ cbOk ], 0 );
+      Exit;
    end;
 end;
 procedure TfrmConsVendas.PrepararGarantia;
@@ -470,50 +510,57 @@ begin
    frxVendaPersonalizada03.Variables['TotalLocacao']   := QuotedStr( Formatfloat('0.00',cdsVendas.FieldByName('vlr_Total').AsFloat ));
    frxVendaPersonalizada03.Variables['NumeroVenda']    := QuotedStr( cdsVendas.FieldByName('SeqVenda').AsString );
    frxVendaPersonalizada03.Variables['FormaPagamento'] := QuotedStr( 'Dinheiro' );
+   frxVendaPersonalizada03.Variables['Observacao']     := QuotedStr( cdsVendas.FieldByName('Obs').AsString );
    frxVendaPersonalizada03.ShowReport(true);
-
+   FreeAndNil(dtmCadastro);
 end;
 
 
-procedure TfrmConsVendas.btnNFEClick(Sender: TObject);
-var
- vAux, vNumLote : String;
+procedure TfrmConsVendas.edtmanutencaoClick(Sender: TObject);
+var liseqvenda : Integer;
 begin
-  {
-  ACBrNFe1.NotasFiscais.Clear;
-
-  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
-  GerarNFe(vAux);
-
-  ACBrNFe1.Enviar(vNumLote,True);
-
-  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
-  memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
-  LoadXML(MemoResp, WBResposta);
-
- MemoDados.Lines.Add('');
- MemoDados.Lines.Add('Envio NFe');
- MemoDados.Lines.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
- MemoDados.Lines.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
- MemoDados.Lines.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
- MemoDados.Lines.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
- MemoDados.Lines.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
- MemoDados.Lines.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
- MemoDados.Lines.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
- MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
- MemoDados.Lines.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
-// MemoDados.Lines.Add('cStat: '+ ACBrNFe1.WebServices.Retorno.NFeRetorno;
-
-{ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].tpAmb
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].verAplic
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].dhRecbto
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].digVal
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].cStat
- ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].xMotivo }
-
- // ACBrNFe1.NotasFiscais.Clear;
+   FrmVendas     := TfrmVendas.create(Self);
+   frmvendas.Tag := 7; // venda de serviços
+   FrmVendas.btnincluirClick(FrmVendas.btnincluir);
+   FrmVendas.edtcod_Cliente.Text        := cdsVendas.FieldByName('Cod_Cliente').AsString;
+   FrmVendas.edtcod_ClienteExit(FrmVendas.edtcod_Cliente);
+   FrmVendas.edtNome_Cliente.Text := cdsVendas.FieldByName('Nome_Cliente').AsString;
+   frmvendas.edtCod_FormaPagamento.Text := cdsVendas.FieldByName('Cod_FormaPagamento').AsString;
+   FrmVendas.edtcod_FormaPagamentoExit(FrmVendas.edtcod_FormaPagamento);
+   frmVendas.edtCod_Funcionario.Text    := cdsVendas.FieldByName('Cod_Funcionario').AsString;
+   FrmVendas.edtcod_FuncionarioExit(FrmVendas.edtcod_Funcionario);
+   FrmVendas.edtControle.text   := cdsVendas.FieldByName('Controle').AsString;
+   liSeqvenda := cdsvendas.fieldbyname('SeqVenda').ASInteger;
+   frmvendas.edtTotalVenda.Text    :=  formatfloat('0.00',cdsVendas.FieldByName('Vlr_Total').AsFloat+cdsVendas.FieldByName('Vlr_Desconto').AsFloat);
+   frmvendas.edtTotDesconto.Text   :=  formatfloat('0.00',cdsVendas.FieldByName('Vlr_Desconto').AsFloat);
+   frmvendas.edtTotalLiquido.Text  :=  formatfloat('0.00',StrtoFloat(frmvendas.edtTotalVenda.Text)-StrToFloat(frmvendas.edtTotDesconto.Text));
+   frmvendas.liSeqVendaAtu         :=  cdsVendas.FieldByName('SeqVenda').AsInteger;
+   If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
+   Begin
+      while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liSeqvenda ) and ( Not cdsItensVendas.Eof )  do
+      Begin
+         FrmVendas.cdsItensVendasTmp.Append;
+         FrmVendas.cdsItensVendasTmp.FieldByName('Codigo').asInteger      := cdsItensVendas.fieldbyname('Cod_Produto').AsInteger;
+         FrmVendas.cdsItensVendasTmp.FieldByName('Qtde_Venda').asFloat    := cdsItensVendas.fieldbyname('Qtde_Venda').AsFloat;
+         FrmVendas.cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat     := cdsItensVendas.fieldbyname('Pco_Venda').AsFloat;
+         FrmVendas.cdsItensVendasTmp.FieldByName('vlr_Total').asFloat     := cdsItensVendas.fieldbyname('vlr_Total').AsFloat;
+         FrmVendas.cdsItensVendasTmp.FieldByName('vlr_Desconto').asFloat  := cdsItensVendas.fieldbyname('vlr_Desconto').AsFloat;
+         FrmVendas.cdsItensVendasTmp.FieldByName('Descricao').asString    := cdsItensVendas.fieldbyname('Descricao').AsString;
+         FrmVendas.cdsItensVendasTmp.Post;
+         cdsItensvendas.Next;
+      End;
+   End;
+   if checkUsarleitor.Checked then
+   begin
+      frmVendas.AtualizaTabelas;
+      frmVendas.PrepararFinalizacaoOS;
+      frmVendas.edtCod_TipoVenda.Visible := False;
+      frmVendas.btnokclick(frmVendas.btnOk);
+      frmVendas.Close;
+   end
+   else
+      frmVendas.Showmodal;
+   btnSelecionarClick(btnSelecionar);   
 end;
 
 procedure TfrmConsVendas.cdsItensVendasAfterOpen(DataSet: TDataSet);
@@ -575,6 +622,26 @@ begin
    cdsItensVendasCp.ProviderName := dspItensVendasCp.name;
    cdsItensVendasCp.open;
 end;
+function TfrmConsVendas.ServisosDaOS(VendaId: String): String;
+begin
+   Result := '';
+   qryItensVendasCp.Close;
+   qryItensVendasCp.SQL.Text := 'Select  Prod.Descricao '+
+                                'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
+                                'where Prod.Codigo=Itens.Cod_Produto  AND Ven.SeqVenda=:parSeqVenda And '+
+                                '      Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
+   qryItensVendasCp.ParamByName('parSeqVenda').AsString := VendaId;
+
+   cdsItensVendasCp.close;
+   cdsItensVendasCp.ProviderName := dspItensVendasCp.name;
+   cdsItensVendasCp.open;
+   while not cdsItensVendasCp.eof do
+   begin
+      Result := Result + cdsItensVendasCp.FieldByName('Descricao').AsString+' ';
+      cdsItensVendasCp.Next;
+   end;
+end;
+
 procedure TfrmConsVendas.CarregarItemParaImpressao(SeqVenda : String);
 begin
    qryItensVendasCp.Close;
@@ -767,16 +834,38 @@ begin
    btnSelecionarClick(btnSelecionar);
    if gbMaster then
       MenuDeControle.UseBuiltInPopupMenus := True;
-   btnCupomFiscal.Visible :=  False;   
+   btnCupomFiscal.Visible :=  False;
+
+   AjustaDBGridVendas;
+
+end;
+
+procedure TfrmConsVendas.AjustaDBGridVendas;
+begin
+   if HeAssistencia then    // Trabalha com assistencia tecnica de Produtos
+   Begin
+      Column_NomeStatus.Visible := True;
+      Colum_Defeito.Visible     := True;
+      Column_Produto.Visible    := True;
+      colum_Vlr_Desconto.Visible := False;
+   End;
+   if HeAutomotivo then    // Trabalha com assistencia tecnica de Produtos
+   Begin
+      Column_NomeStatus.Visible := True;
+      Column_Placa.Visible := True;
+      colum_Defeito.Visible := True;
+      colum_Vlr_Desconto.Visible := False;
+   End;
+
 end;
 
 procedure TfrmConsVendas.GrdVendasCustomDrawCell(Sender: TcxCustomGridTableView;
   ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
   var ADone: Boolean);
 begin
-  IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Cancelada' Then
+  IF aviewinfo.GridRecord.Values[Column_NomeStatus.Index]='Cancelada' Then
      acanvas.Font.color := clred
-  else IF aviewinfo.GridRecord.Values[Colum_NomeStatus.Index]='Finalizado' Then
+  else IF aviewinfo.GridRecord.Values[Column_NomeStatus.Index]='Finalizado' Then
      acanvas.Font.color := clGreen;
 end;
 
@@ -821,17 +910,10 @@ begin
 
    liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
    liSeqVenda     := cdsVendas.FieldByName('SeqVenda').AsInteger;
-   liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;
 
    {$ENDREGION}
 
 {$REGION 'Fazendo Criticas do Processo'}
-
-   {IF liRomaneio>0 Then
-   Begin
-      CaixaMensagem( 'Impossivel Cancelar venda com romaneio Emitido ', ctAviso, [ cbOk ], 0 );
-      Exit
-   End;}
 
    IF cdsVendas.IsEmpty Then
    Begin
@@ -1167,20 +1249,71 @@ begin
    End;
 end;
 
+procedure TfrmConsVendas.bsSkinSpeedButton1Click(Sender: TObject);
+var vAux, vNumLote : String;
+    lstLog : TStringList;
+begin
+
+   //btnTudoClick(btnTudo);
+   //cdsOrdemServico.locate('SeqOs',liSeqOs,[]);
+
+  lstLog := TStringList.Create;
+
+  ACBrNFe1.NotasFiscais.Clear;
+
+  ACBrNFe1.Configuracoes.Geral.ModeloDF := moNFe;
+
+  GerarNFe(vAux);
+
+  ACBrNFe1.Enviar(vNumLote,True);
+
+//  MemoResp.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetWS);
+ // memoRespWS.Lines.Text := UTF8Encode(ACBrNFe1.WebServices.Retorno.RetornoWS);
+ // LoadXML(MemoResp, WBResposta);
+
+  lstLog.Add('');
+  lstLog.Add('Envio NFe');
+  lstLog.Add('tpAmb: '+ TpAmbToStr(ACBrNFe1.WebServices.Retorno.TpAmb));
+  lstLog.Add('verAplic: '+ ACBrNFe1.WebServices.Retorno.verAplic);
+  lstLog.Add('cStat: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cStat));
+  lstLog.Add('cUF: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cUF));
+  lstLog.Add('xMotivo: '+ ACBrNFe1.WebServices.Retorno.xMotivo);
+  lstLog.Add('cMsg: '+ IntToStr(ACBrNFe1.WebServices.Retorno.cMsg));
+  lstLog.Add('xMsg: '+ ACBrNFe1.WebServices.Retorno.xMsg);
+  lstLog.Add('Recibo: '+ ACBrNFe1.WebServices.Retorno.Recibo);
+  lstLog.Add('Protocolo: '+ ACBrNFe1.WebServices.Retorno.Protocolo);
+
+  // MemoDados.Lines.Add('cStat: '+ ACBrNFe1.WebServices.Retorno.NFeRetorno;
+
+{ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].tpAmb
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].verAplic
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].dhRecbto
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].digVal
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].cStat
+ ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].xMotivo }
+
+ // ACBrNFe1.NotasFiscais.Clear;
+
+end;
+
 procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
 var liRetorno : Integer;
     lsNumeroCupom : String;
     liNumeroVenda : Integer;
-    lsNomeCliente : String;
-    lsCNPJCPF : String;
+    //lsNomeCliente : String;
+    //lsCNPJCPF : String;
     lsMensagem : String;
 begin
+
    if Trim(cdsVendas.FieldByName('NumeroCupom').AsString)<>'' then
    Begin
       CaixaMensagem( 'Esta venda ja teve cupom Emitido ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
    lsMensagem := 'Obrigado e volte sempre';
+
    {
    if CaixaMensagem( 'Deseja informar o nome do Cliente ', ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
@@ -1192,6 +1325,7 @@ begin
       lsMensagem := lsMensagem +' CNPJ/CPF: '+lsCNPJCPF;
    End;
     }
+
    If cdsItensVendas.locate('Seqvenda',cdsVendas.FieldByName('SeqVenda').Asinteger, []) Then
    Begin
       liRetorno := Bematech_FI_AbreCupom( '');
@@ -1304,9 +1438,6 @@ begin
 end;
 
 procedure TfrmConsVendas.btnEntregueClick(Sender: TObject);
-var Parametros : TStringList;
-    DaoVenda   : TDaoVenda;
-    Venda      : Tvenda;
 begin
    if not cdsVendas.FieldByName('ServicoPago').AsBoolean then
    begin
@@ -1357,7 +1488,7 @@ end;
 procedure TfrmConsVendas.Etiquetas1Click(Sender: TObject);
 var
    liNumeroVenda   : Integer;
-   liromaneio : Integer;
+   //liromaneio : Integer;
 begin
    if not gsPerfilacesso.VerificaAcesso('Movimento','Vendas','Devolucao Parcial',gbMaster) Then
    Begin
@@ -1366,7 +1497,7 @@ begin
    End;
 
    liNumeroVenda  := cdsVendas.Fieldbyname('seqvenda').asInteger;
-   liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;
+   //liRomaneio     := cdsVendas.FieldByName('RomaneioId').AsInteger;
 
    {IF liRomaneio>0 Then
    Begin
@@ -1389,13 +1520,13 @@ begin
 
 end;
 
-procedure TfrmConsVendas.CarregaPropriedade;
-begin
-end;
- {
 procedure TfrmConsVendas.GerarNFe(NumNFe : String);
+var cdsCliente : TClientDataSet;
 begin
-  with ACBrNFe1.NotasFiscais.Add.NFe do
+
+ {$REGION 'Cabecalho da Nota'}
+
+   with ACBrNFe1.NotasFiscais.Add.NFe do
    begin
      Ide.cNF       := StrToInt(NumNFe); //Caso não seja preenchido será gerado um número aleatório pelo componente
      Ide.natOp     := 'VENDA PRODUCAO DO ESTAB.';
@@ -1410,20 +1541,20 @@ begin
      Ide.tpEmis    := teNormal;
      Ide.tpAmb     := taHomologacao;  //Lembre-se de trocar esta variável quando for para ambiente de produção
      Ide.verProc   := '1.0.0.0'; //Versão do seu sistema
-     Ide.cUF       := NotaUtil.UFtoCUF(edtEmitUF.Text);
-     Ide.cMunFG    := StrToInt(edtEmitCodCidade.Text);
+     Ide.cUF       := gEmpresa.ufId;
+     Ide.cMunFG    := gempresa.MunicipioId;
      Ide.finNFe    := fnNormal;
      if  Assigned( ACBrNFe1.DANFE ) then
         Ide.tpImp     := ACBrNFe1.DANFE.TipoDANFE;
+ {$ENDREGION}
 
 //     Ide.dhCont := date;
 //     Ide.xJust  := 'Justificativa Contingencia';
 
 //Para NFe referenciada use os campos abaixo
-{     with Ide.NFref.Add do
-      begin
+ {   with Ide.NFref.Add do
+    begin
         refNFe       := ''; //NFe Eletronica
-
         RefNF.cUF    := 0;  // |
         RefNF.AAMM   := ''; // |
         RefNF.CNPJ   := ''; // |
@@ -1443,28 +1574,29 @@ begin
         RefECF.nECF    := '';          // |- Cupom Fiscal
         RefECF.nCOO    := '';          // |
       end;
-}{
-      Emit.CNPJCPF           := edtEmitCNPJ.Text;
-      Emit.IE                := edtEmitIE.Text;
-      Emit.xNome             := edtEmitRazao.Text;
-      Emit.xFant             := edtEmitFantasia.Text;
+}
 
-      Emit.EnderEmit.fone    := edtEmitFone.Text;
-      Emit.EnderEmit.CEP     := StrToInt(edtEmitCEP.Text);
-      Emit.EnderEmit.xLgr    := edtEmitLogradouro.Text;
-      Emit.EnderEmit.nro     := edtEmitNumero.Text;
-      Emit.EnderEmit.xCpl    := edtEmitComp.Text;
-      Emit.EnderEmit.xBairro := edtEmitBairro.Text;
-      Emit.EnderEmit.cMun    := StrToInt(edtEmitCodCidade.Text);
-      Emit.EnderEmit.xMun    := edtEmitCidade.Text;
-      Emit.EnderEmit.UF      := edtEmitUF.Text;
+      Emit.CNPJCPF           := gEmpresa.CNPJ;
+      Emit.IE                := gEmpresa.InscricaoEstadual;
+      Emit.xNome             := gEmpresa.Razao_social;
+      Emit.xFant             := gEmpresa.Nome_Fantasia;
+
+      Emit.EnderEmit.fone    := gEmpresa.Telefones;
+      Emit.EnderEmit.CEP     := StrtoInt(gEmpresa.endereco.cep);
+      Emit.EnderEmit.xLgr    := gEmpresa.Endereco.logradouro;
+      Emit.EnderEmit.nro     := gEmpresa.Endereco.numero;
+      Emit.EnderEmit.xCpl    := '';
+      Emit.EnderEmit.xBairro := gEmpresa.Endereco.bairro;
+      Emit.EnderEmit.cMun    := gEmpresa.MunicipioId;
+      Emit.EnderEmit.xMun    := gEmpresa.Endereco.cidade;
+      Emit.EnderEmit.UF      := gEmpresa.Endereco.uf;
       Emit.enderEmit.cPais   := 1058;
       Emit.enderEmit.xPais   := 'BRASIL';
 
       Emit.IEST              := '';
-      Emit.IM                := '2648800'; // Preencher no caso de existir serviços na nota
-      Emit.CNAE              := '6201500'; // Verifique na cidade do emissor da NFe se é permitido
-                                    // a inclusão de serviços na NFe
+      Emit.IM                := ''; // Preencher no caso de existir serviços na nota
+      Emit.CNAE              := ''; // Verifique na cidade do emissor da NFe se é permitido
+                                   // a inclusão de serviços na NFe
       Emit.CRT               := crtRegimeNormal;// (1-crtSimplesNacional, 2-crtSimplesExcessoReceita, 3-crtRegimeNormal)
 
 //Para NFe Avulsa preencha os campos abaixo
@@ -1480,20 +1612,23 @@ begin
       Avulsa.repEmi  := '';
       Avulsa.dPag    := now;             }
 
-  {    Dest.CNPJCPF           := '05481336000137';
-      Dest.IE                := '687138770110';
-      Dest.ISUF              := '';
-      Dest.xNome             := 'D.J. COM. E LOCAÇÃO DE SOFTWARES LTDA - ME';
 
-      Dest.EnderDest.Fone    := '1532599600';
-      Dest.EnderDest.CEP     := 18270170;
-      Dest.EnderDest.xLgr    := 'Rua Coronel Aureliano de Camargo';
-      Dest.EnderDest.nro     := '973';
+      cdsCliente := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil);
+
+      Dest.CNPJCPF           := cdsCliente.FieldByName('cnpjcpf').AsString;
+      Dest.IE                := cdsCliente.FieldByName('IscricaoEstadual').AsString;
+      Dest.ISUF              := '';
+      Dest.xNome             := cdsCliente.FieldByName('Razao_Social').AsString;
+
+      Dest.EnderDest.Fone    := cdsCliente.FieldByName('Telefone').AsString;
+      Dest.EnderDest.CEP     := cdsCliente.FieldByName('Cep').AsInteger;
+      Dest.EnderDest.xLgr    := cdsCliente.FieldByName('Endereco').AsString;
+      Dest.EnderDest.nro     := cdsCliente.FieldByName('Numero').AsString;
       Dest.EnderDest.xCpl    := '';
-      Dest.EnderDest.xBairro := 'Centro';
-      Dest.EnderDest.cMun    := 3554003;
-      Dest.EnderDest.xMun    := 'Tatuí';
-      Dest.EnderDest.UF      := 'SP';
+      Dest.EnderDest.xBairro := cdsCliente.FieldByName('Bairro').AsString;
+      Dest.EnderDest.cMun    := cdsCliente.FieldByName('MunicipioId').AsInteger;
+      Dest.EnderDest.xMun    := cdsCliente.FieldByName('Cidade').AsString;
+      Dest.EnderDest.UF      := cdsCliente.FieldByName('Uf').AsString;
       Dest.EnderDest.cPais   := 1058;
       Dest.EnderDest.xPais   := 'BRASIL';
 
@@ -1516,7 +1651,7 @@ begin
       Entrega.cMun    := 0;
       Entrega.xMun    := '';
       Entrega.UF      := '';}
- {
+
 //Adicionando Produtos
       with Det.Add do
        begin
@@ -1632,7 +1767,7 @@ begin
             ICMSCons.UFcons        := '' ;
           end;}
 
- {        with Imposto do
+          with Imposto do
           begin
             // lei da transparencia nos impostos
             vTotTrib := 0;
@@ -1668,8 +1803,8 @@ begin
                vUnid  := 0;
                pIPI   := 5;
                vIPI   := 5;
-             end;         }
-{
+             end;         
+
             with II do
              begin
                vBc      := 0;
@@ -1718,7 +1853,7 @@ begin
                vAliqProd := 0;
                vCOFINS   := 0;
              end;
-}
+
 //Grupo para serviços
 {            with ISSQN do
              begin
@@ -1729,8 +1864,8 @@ begin
                cListServ := 1402; // Preencha este campo usando a tabela disponível
                                // em http://www.planalto.gov.br/Ccivil_03/LEIS/LCP/Lcp116.htm
              end;}
-      {    end;
-       end ;         }
+          end;
+       end;
 
 //Adicionando Serviços
     {  with Det.Add do
@@ -1829,7 +1964,7 @@ begin
          RNTC  := '';
        end;}
 
-     { with Transp.Vol.Add do
+      with Transp.Vol.Add do
        begin
          qVol  := 1;
          esp   := 'Especie';
@@ -1883,7 +2018,7 @@ begin
          indProc := ipSEFAZ;
        end;                 }
 
-      {exporta.UFembarq   := '';;
+      exporta.UFembarq   := '';;
       exporta.xLocEmbarq := '';
 
       compra.xNEmp := '';
@@ -1892,5 +2027,5 @@ begin
    end;
 end;
 
-       }
+
 end.

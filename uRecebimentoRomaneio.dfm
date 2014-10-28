@@ -47,6 +47,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -77,9 +78,9 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 711
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -113,7 +114,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         OnClick = btnFecharClick
         ExplicitLeft = 764
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
@@ -394,6 +394,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -417,6 +418,10 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Top = 1
       Width = 829
       Height = 309
+      DrawSkin = False
+      DrawSkinLines = False
+      ItemSkinDataName = 'listbox'
+      CheckSkinDataName = 'checkbox'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
       DefaultFont.Height = 14
@@ -486,6 +491,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -521,6 +527,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -538,7 +545,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Left = 189
       Top = 9
       Width = 91
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -558,6 +565,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -582,6 +590,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 17
@@ -617,6 +626,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 18

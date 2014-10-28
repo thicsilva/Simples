@@ -36,7 +36,7 @@ object frmCtasPagar: TfrmCtasPagar
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 715
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -464,19 +464,14 @@ object frmCtasPagar: TfrmCtasPagar
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 72
         Width = 707
-        Height = 249
+        Height = 247
         Align = alClient
         PopupMenu = bsSkinPopupMenu1
         TabOrder = 2
-        ExplicitHeight = 247
         object gridCtasPagar: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -1017,7 +1012,7 @@ object frmCtasPagar: TfrmCtasPagar
         Left = 707
         Top = 72
         Width = 19
-        Height = 249
+        Height = 247
         HintImageIndex = 0
         TabOrder = 1
         Visible = False
@@ -1042,15 +1037,10 @@ object frmCtasPagar: TfrmCtasPagar
         Position = 0
         SmallChange = 127
         LargeChange = 127
-        ExplicitHeight = 247
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 110
         Top = 17

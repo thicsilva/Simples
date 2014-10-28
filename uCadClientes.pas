@@ -1122,7 +1122,7 @@ begin
      for j:=0 to 5 do
        FCustomDrawingStyle[i, j] := cdsGradient;
 
-  panelVeiculo.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'ControlaComissao', 'NAO' )));
+  panelVeiculo.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
 
   InitFonts();
 

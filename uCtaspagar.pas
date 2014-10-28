@@ -675,8 +675,8 @@ begin
    cdsRelatorio := gConexao.BuscarDadosSQL(lsWhere, lstParametros);
 
 
-   gsTituloRel  := 'Relatorio de contas a pagar ';
-   gsperiodoRel := '';
+   gsTituloRel  := 'Relatorio de contas a pagar '+cmbTipoFiltro.Text;
+   gsperiodoRel := 'de '+dtpData_Ini.Text+' a '+dtpData_Fim.Text;
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
@@ -733,9 +733,9 @@ procedure TfrmCtasPagar.ImpMatricialNewPage(Sender: TObject;
   Pagina: Integer);
 begin
    ConfiguraRel( Name, True, TRdPrint( Sender ), Pagina );
-   pviLinha := 06;
+   pviLinha := 07;
    pviLinha:=Pvilinha+1;
-   TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao Vencimento  Nr.Parcela          Historico                    Total  ');
+   TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                              Vencimento  Nr.Parcela          Historico                    Total  ');
    pviLinha:=Pvilinha+1;
    TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',135,0));
    pviLinha:=Pvilinha+1;

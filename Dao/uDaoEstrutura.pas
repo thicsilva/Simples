@@ -76,6 +76,7 @@ type TDaoEstrutura = class
     procedure Adicionar_Garantia_na_Tabela_Produtos;
     procedure Adicionar_Funcao_na_Tabela_Funcionarios;
     procedure Adicionar_FuncionarioId_na_Tabela_ItenVendas;
+    procedure Adicionar_Obs_na_Tabela_Vendas;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -361,6 +362,17 @@ begin
        FQryAjustes.ExecSQL;
     end;
 end;
+
+procedure TDaoEstrutura.Adicionar_Obs_na_Tabela_Vendas;
+begin
+    if not ExisteCampo( 'T_Vendas', 'Obs', FConexao.Conection ) then
+    begin
+       FQryAjustes.Close;
+       FQryAjustes.SQL.Text := 'ALTER TABLE T_Vendas ADD Obs varchar(200)';
+       FQryAjustes.ExecSQL;
+    end;
+end;
+
 
 procedure TDaoEstrutura.Adicionar_FuncionarioId_na_Tabela_ItenVendas;
 begin
@@ -809,6 +821,8 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+
+  Adicionar_Obs_na_Tabela_Vendas;
   Adicionar_FuncionarioId_na_Tabela_ItenVendas;
   Adicionar_Funcao_na_Tabela_Funcionarios;
   Adicionar_Garantia_na_Tabela_Produtos;

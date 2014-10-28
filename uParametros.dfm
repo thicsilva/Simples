@@ -58,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = Vendas
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1056,10 +1056,10 @@ object frmParametros: TfrmParametros
           BorderStyle = bsNone
         end
         object rdgTipoSistema: TbsSkinRadioGroup
-          Left = 268
-          Top = 59
+          Left = 276
+          Top = 25
           Width = 150
-          Height = 110
+          Height = 156
           HintImageIndex = 0
           TabOrder = 4
           SkinData = frmPrincipal.SkinPrincipal
@@ -1101,7 +1101,9 @@ object frmParametros: TfrmParametros
             'Distribui'#231#227'o de Revenda'
             'Comercio e Servi'#231'o'
             'Pet Shop'
-            'Loca'#231#227'o')
+            'Loca'#231#227'o'
+            'Assistencia Tecnica'
+            'Servi'#231'os Automotivos')
         end
       end
     end

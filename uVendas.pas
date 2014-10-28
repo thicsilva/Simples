@@ -36,9 +36,11 @@ const
     OS_FINALIZADA = 4;
     LANCAMENTO_MATERIAL = 5;
     ATENDIMENTO = 6;
+    MANUTENCAO_OS = 7;
 type
   TfrmVendas = class(TFormBase)
     dspItensVendas: TDataSetProvider;
+
     cdsCadClientes: TClientDataSet;
     srcCadClientes: TDataSource;
     dspVariavel: TDataSetProvider;
@@ -224,7 +226,7 @@ type
     cdsItensVendasTMPPrevisao_Entrega: TDateField;
     PagVendas: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    TabGrade: TTabSheet;
     dbgConsulta: TbsSkinDBGrid;
     bsSkinScrollBar2: TbsSkinScrollBar;
     bsSkinScrollBar1: TbsSkinScrollBar;
@@ -261,6 +263,8 @@ type
     NovoClienen1: TMenuItem;
     CadastrodeCliente1: TMenuItem;
     cdsItensVendasTMPFuncionarioId: TIntegerField;
+    TabSheet3: TTabSheet;
+    MemoObs: TMemo;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -277,7 +281,7 @@ type
     procedure edtcod_ClienteExit(Sender: TObject);
     procedure cmbNome_ClienteChange(Sender: TObject);
     procedure cmbCod_ClienteChange(Sender: TObject);
-    procedure limpacampos();
+    procedure limpacampos;
     procedure cmbCod_formaPagamentoChange(Sender: TObject);
     procedure cmbNome_formaPagamentoChange(Sender: TObject);
     procedure cmbCod_FuncionarioChange(Sender: TObject);
@@ -456,6 +460,7 @@ Begin
    edtLimite_Credito.Text          := '0,00';
    cmbNome_Cliente.KeyValue        := Null;
    edtNome_Cliente.text            := '';
+   MemoObs.Text                    := ''; 
 End;
 procedure TfrmVendas.btnFecharClick(Sender: TObject);
 begin
@@ -528,6 +533,7 @@ begin
    lblVencimento.Visible       := False;
    edtdata_Vencimento.Visible  := False;
    dtmVendas := TdtmVendas.Create(Self);
+   TabGrade.TabVisible := False;
    If (frmVendas.tag = SERVICOS)  Then
    Begin
       frmVendas.Caption    := 'Cadastro e manuteção de vendas de serviços';
@@ -535,8 +541,11 @@ begin
       lblControle.Visible  := True;
       edtControle.Visible  := True;
    End
-   Else if (frmVendas.tag = OS_FINALIZADA ) then
-      PrepararFinalizacaoOS
+   Else if (frmVendas.tag = OS_FINALIZADA ) OR (frmVendas.tag = MANUTENCAO_OS ) then
+   begin
+      PrepararFinalizacaoOS;
+      frmVendas.Caption  := 'Inclusão de Material e Serviços executados ';
+   end
    Else if (frmVendas.tag = LANCAMENTO_MATERIAL ) then
    Begin
       frmVendas.Caption  := 'Inclusão de Material e Serviços executados ';
@@ -579,6 +588,13 @@ begin
    pAnimalId := 0;
    btnAdicionar.Enabled   := False;
    btnCadProdutos.Enabled := False;
+
+   if (frmVendas.tag = MANUTENCAO_OS ) then
+   begin
+      btnok.Caption := '&Salvar';
+      btnincluir.Visible := False;
+   end;
+
    if pAtendimento then
       btnincluirClick(btnincluir);
 end;
@@ -1079,7 +1095,7 @@ begin
    qryItensVendas.Close;
    qryItensVendas.SQL.Text :='Select * from T_ItensVendas where 1=2';
 
-   If frmVendas.tag = 4 then
+   If (frmVendas.tag = 4) or  (frmVendas.tag = 7) then
    Begin
       qryModific.Close;
       qryModific.SQL.Text :='Delete from T_ItensVendas Where SeqVenda=:parSeqVenda ';
@@ -1173,7 +1189,7 @@ begin
    qryVenda.Params.Clear;
    qryVenda.SQL.Text :='Select * from T_Vendas where 1=2';
 
-   If frmVendas.tag = 4 then
+   If (frmVendas.tag = 4) or (frmVendas.tag = 7)  then
    Begin
       qryVenda.Close;
       qryVenda.SQL.Text :='Select * from T_Vendas Where SeqVenda=:parSeqVenda ';
@@ -1188,7 +1204,7 @@ begin
    If frmVendas.tag = OS_FINALIZADA then
       liCaixaFinalizado := cdsVenda.FieldByname('Cod_Caixa').Asinteger;
 
-   If frmVendas.tag = 4 then
+   If (frmVendas.tag = 4) or (frmVendas.tag = 7)  then
       cdsVenda.Edit
    else
       cdsVenda.Append;
@@ -1221,7 +1237,7 @@ begin
    if edtCod_TipoVenda.Visible then
       cdsVenda.FieldByName('Cod_TipoVenda').AsInteger   := Strtoint(edtCod_TipoVenda.text);
 
-   If frmVendas.tag = SERVICOS then
+   If (frmVendas.tag = SERVICOS) OR (frmVendas.tag=MANUTENCAO_OS ) then
    Begin
       cdsVenda.FieldByname('Tipo_Venda').AsString    := 'S';
       cdsVenda.FieldByname('Status').AsString        := '1';
@@ -1229,13 +1245,15 @@ begin
       cdsVenda.FieldByName('Cod_caixa').asInteger    := 1;
       if licaixa<>0 then
          cdsVenda.FieldByname('Cod_Caixa').AsInteger := licaixa;
-  End;
+   End;
+ 
    If frmVendas.tag = OS_FINALIZADA then
    Begin
       cdsVenda.FieldByname('Tipo_Venda').AsString    := 'S';
       cdsVenda.FieldByname('Status').AsString        := '3';
    End;
    cdsVenda.FieldByname('AnimalID').AsInteger        := pAnimalId;
+   cdsVenda.FieldByname('Obs').AsString             := memoObs.text;
    cdsVenda.Post;
 
    Try
@@ -1586,6 +1604,7 @@ begin
    End;
 
    {$ENDREGION}
+
    frmPrincipal.dbxPrincipal.CommitFreeAndNil( trdNrTransacao );
 
    {$REGION 'Impressao do comprovante de Venda'}
@@ -1624,7 +1643,6 @@ begin
       DaoVenda.MarcarComoServicoPago(liSeqvenda);
    FreeAndNil(DaoVenda);
 
-
    {$REGION 'Mensagem Final ao Usuario'}
 
    If frmVendas.tag = SERVICOS then
@@ -1634,6 +1652,8 @@ begin
       CaixaMensagem( 'Serviço Finalizado', ctAviso, [ cbOk ], 0 );
       Close;
    End
+   else if (frmVendas.tag = MANUTENCAO_OS ) then
+     CaixaMensagem( 'Serviço Salvo '+IntToStr(liSeqvenda), ctAviso, [ cbOk ], 0 )
    Else
      CaixaMensagem( 'Venda Numero  '+IntToStr(liSeqvenda), ctAviso, [ cbOk ], 0 );
 
@@ -1715,7 +1735,7 @@ begin
    PagVendas.ActivePageIndex := 0;
 
    LimpaCampos();
-   if (frmVendas.tag = 4) or (frmVendas.tag = 5) then
+   if (frmVendas.tag = 4) or (frmVendas.tag = 5)or (frmVendas.tag = 7) then
       Close;
 
 end;
@@ -2209,25 +2229,28 @@ end;
 
 procedure TfrmVendas.PagVendasChange(Sender: TObject);
 begin
-   if StrTointDef(cdsItensVendasTmp.FieldByName('GradeID').AsString,0)<>0 then
+   if pagvendas.ActivePageIndex=1 then
    begin
-      pnlProduto.Caption             := cdsItensVendasTmp.FieldByName('Codigo').AsString+' - '+cdsItensVendasTmp.FieldByName('Descricao').AsString;
-      dtmVendas.srcTamanhos.Dataset  := gConexao.BuscarDadosSQL('select * from ItensGrade where GradeId='+cdsItensVendasTmp.FieldByName('GradeID').AsString,nil);
-   end;
-   if PagVendas.ActivePageIndex=0 then
-      cdsItensTamanhos.SaveToFile(gspath+'Dados\GradeTamanho.xml', dfXML)
-   else
-   begin
-      if FileExists(gspath+'Dados\GradeTamanho.xml') then
+      if StrTointDef(cdsItensVendasTmp.FieldByName('GradeID').AsString,0)<>0 then
       begin
-        cdsItensTamanhos.LoadFromFile(gspath+'Dados\GradeTamanho.xml');
-        cdsItensTamanhos.Filtered := False;
-        cdsItensTamanhos.Filter := 'IdProduto='+cdsItensVendasTmp.FieldByName('Codigo').AsString;
-        cdsItensTamanhos.Filtered := True;
+         pnlProduto.Caption             := cdsItensVendasTmp.FieldByName('Codigo').AsString+' - '+cdsItensVendasTmp.FieldByName('Descricao').AsString;
+         dtmVendas.srcTamanhos.Dataset  := gConexao.BuscarDadosSQL('select * from ItensGrade where GradeId='+cdsItensVendasTmp.FieldByName('GradeID').AsString,nil);
       end;
-      cmdNomeTamanho.SetFocus;
+      if PagVendas.ActivePageIndex=0 then
+         cdsItensTamanhos.SaveToFile(gspath+'Dados\GradeTamanho.xml', dfXML)
+      else
+      begin
+         if FileExists(gspath+'Dados\GradeTamanho.xml') then
+         begin
+           cdsItensTamanhos.LoadFromFile(gspath+'Dados\GradeTamanho.xml');
+           cdsItensTamanhos.Filtered := False;
+           cdsItensTamanhos.Filter := 'IdProduto='+cdsItensVendasTmp.FieldByName('Codigo').AsString;
+           cdsItensTamanhos.Filtered := True;
+         end;
+         cmdNomeTamanho.SetFocus;
+      end;
+      AtualizaValores;
    end;
-   AtualizaValores;
 end;
 procedure TfrmVendas.AtualizaValores;
 Begin
@@ -2256,9 +2279,11 @@ begin
 
   frxVendaPersonalizada03.Variables['CNPJEmpresa']            := QuotedStr( FormatarCNPJ_CPF( cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
   frxVendaPersonalizada03.Variables['cnpjCliente']            := QuotedStr(edtCnpjCpf.Text);
-  frxVendaPersonalizada03.Variables['TotalLocacao']   := QuotedStr( edtTotalLiquido.Text );
+  frxVendaPersonalizada03.Variables['TotalLocacao']           := QuotedStr( edtTotalLiquido.Text );
   frxVendaPersonalizada03.Variables['NumeroVenda']            := QuotedStr( NumeroVenda );
-  frxVendaPersonalizada03.Variables['FormaPagamento'] := QuotedStr( cmbNome_formaPagamento.text );
+  frxVendaPersonalizada03.Variables['FormaPagamento']         := QuotedStr( cmbNome_formaPagamento.text );
+  frxVendaPersonalizada03.Variables['Observacao']             := QuotedStr( MemoObs.Text );
+  frxVendaPersonalizada03.Variables['Vendedor']               := QuotedStr( cmbNome_Funcionario.Text );
 
   frxVendaPersonalizada03.ShowReport(true);
   cdsEmpresa.Close;

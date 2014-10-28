@@ -77,8 +77,8 @@ begin
 
    qryRelatorio.close;
    qryRelatorio.SQL.Text :='select ent.SeqEntrada, Ent.Cod_Fornecedor, Forne.Descricao, '+
-                           '       Ent.Data_entrada, Ent.Operador,Ent.Vlr_Total, Itens.*, '+
-                           '       Prod.Descricao '+
+                           '       Ent.Data_entrada, Ent.Operador,Ent.Vlr_Total as Total, Itens.*, '+
+                           '       Prod.Descricao as NomeProduto '+
                            'From T_entradas Ent '+
                            '     Left Join T_fornecedores Forne On '+
                            '          Forne.Codigo=Ent.Cod_Fornecedor '+
@@ -127,7 +127,7 @@ begin
       End;
       if cmbTipoRelatorio.ItemIndex = 0 then
       Begin
-         impmatricial.Imp(pvilinha,001,IncZero(cdsrelatorio.FieldByName('Cod_Produto').AsString,5)+' '+cdsrelatorio.FieldByName('Descricao').AsString );
+         impmatricial.Imp(pvilinha,001,IncZero(cdsrelatorio.FieldByName('Cod_Produto').AsString,5)+' '+cdsrelatorio.FieldByName('NomeProduto').AsString );
          impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Entrada').asfloat),[]);
          impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',cdsrelatorio.fieldByname('Pco_Entrada').asfloat),[]);
          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);

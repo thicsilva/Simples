@@ -370,9 +370,7 @@ begin
 end;
 
 procedure TfrmRecebimentoRomaneio.btnNaoRecebidoClick(Sender: TObject);
-var lsDias : String;
-    liDias : Integer;
-    DaoVenda : TDaoVenda;
+var DaoVenda : TDaoVenda;
     I: Integer;
 begin
    DaoVenda := TDaoVenda.Create(gConexao);

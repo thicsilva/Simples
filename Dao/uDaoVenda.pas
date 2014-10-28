@@ -146,6 +146,8 @@ begin
    cdsVenda.FieldByname('NumeroSerie').AsString         := Venda.Serie;
    cdsVenda.FieldByname('Descricao').AsString           := Venda.DescricaoProduto;
    cdsVenda.FieldByname('Defeito').AsString             := Venda.Defeito;
+   cdsVenda.FieldByname('SeqOs').AsInteger              := Venda.OSID;
+
    cdsVenda.Post;
    Try
       cdsVenda.ApplyUpdates(-1);

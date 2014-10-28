@@ -2,7 +2,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
   Left = 0
   Top = 0
   Caption = 'Cadastro Simplificado de Clientes'
-  ClientHeight = 186
+  ClientHeight = 189
   ClientWidth = 664
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,6 +12,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object bsSkinCoolBar3: TbsSkinCoolBar
@@ -273,7 +274,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       SkinDataName = 'stdlabel'
       Caption = 'Nome do Cliente'
     end
-    object bsSkinStdLabel25: TbsSkinStdLabel
+    object lblPlaca: TbsSkinStdLabel
       Left = 6
       Top = 65
       Width = 27
@@ -289,8 +290,9 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'stdlabel'
       Caption = 'Placa'
+      Visible = False
     end
-    object bsSkinStdLabel26: TbsSkinStdLabel
+    object lblDescricaoVeiculo: TbsSkinStdLabel
       Left = 106
       Top = 65
       Width = 101
@@ -306,6 +308,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       SkinData = frmPrincipal.SkinEntradaDados
       SkinDataName = 'stdlabel'
       Caption = 'Descricao de Veiculo'
+      Visible = False
     end
     object edtNome_Cliente: TbsSkinEdit
       Left = 6
@@ -467,6 +470,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       MaxLength = 10
       ParentFont = False
       TabOrder = 3
+      Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -500,6 +504,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       MaxLength = 50
       ParentFont = False
       TabOrder = 5
+      Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -511,9 +516,10 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 167
+    Top = 170
     Width = 664
     Height = 19
     Panels = <>
+    ExplicitTop = 126
   end
 end

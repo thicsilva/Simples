@@ -100,7 +100,7 @@ type
     dxBarLargeButton9: TdxBarLargeButton;
     dxBarButton2: TdxBarButton;
     dxBarButton5: TdxBarButton;
-    actconsServicos: TAction;
+    actConsultaServico: TAction;
     dxBarLargeButton10: TdxBarLargeButton;
     Imagebutoes: TcxImageList;
     dxBarButton6: TdxBarButton;
@@ -156,7 +156,6 @@ type
     dxBarLargeButton6: TdxBarLargeButton;
     MenuPrincipalTab3: TdxRibbonTab;
     dxBarGroup1: TdxBarGroup;
-    TabServicos: TdxBar;
     RibonFiscal: TdxBar;
     MenuManegerBar1: TdxBar;
     dxBarLargeButton12: TdxBarLargeButton;
@@ -169,7 +168,6 @@ type
     actControleRepasse: TAction;
     dxBarButton17: TdxBarButton;
     actSelRelDevolucoes: TAction;
-    RibonAtendimentoCliente: TdxRibbonTab;
     actAbreOs: TAction;
     MenuManegerBar7: TdxBar;
     dxBarLargeButton15: TdxBarLargeButton;
@@ -230,7 +228,6 @@ type
     dxBarLargeButton22: TdxBarLargeButton;
     actVendaloja: TAction;
     actServicoAline: TAction;
-    dxBarSubItem1: TdxBarSubItem;
     dxBarButton29: TdxBarButton;
     dxBarButton30: TdxBarButton;
     acrRecebimentoRomaneio: TAction;
@@ -250,7 +247,6 @@ type
     ImagemLogoSistema: TbsSkinLinkImage;
     SkinGrids: TbsSkinData;
     skinStorage3: TbsCompressedStoredSkin;
-    cxBarEditItem1: TcxBarEditItem;
     dxBarButton33: TdxBarButton;
     actSkinGrid: TAction;
     actSkinDados: TAction;
@@ -263,7 +259,6 @@ type
     dxBarLargeButton26: TdxBarLargeButton;
     dxBarButton36: TdxBarButton;
     TabEntradas: TdxBar;
-    dxBarButton37: TdxBarButton;
     dxBarLargeButton27: TdxBarLargeButton;
     actCadGrade: TAction;
     btnGradeProduto: TdxBarButton;
@@ -272,6 +267,16 @@ type
     TabRelatorioLocacao: TdxBar;
     ActAberturaOs: TAction;
     dxBarButton39: TdxBarButton;
+    dxBarButton37: TdxBarButton;
+    Action3: TAction;
+    MenuManegerBar3: TdxBar;
+    dxBarButton40: TdxBarButton;
+    dxBarLargeButton28: TdxBarLargeButton;
+    dxBarLargeButton29: TdxBarLargeButton;
+    dxBarButton41: TdxBarButton;
+    actServico01: TAction;
+    dxBarLargeButton30: TdxBarLargeButton;
+    dxBarButton42: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -289,7 +294,7 @@ type
     procedure actCtasReceberExecute(Sender: TObject);
     procedure actServicosExecute(Sender: TObject);
     procedure ActConsultaVendaExecute(Sender: TObject);
-    procedure actconsServicosExecute(Sender: TObject);
+    procedure actConsultaServicoExecute(Sender: TObject);
     procedure actCaixaDespesasExecute(Sender: TObject);
     procedure actCadGruposExecute(Sender: TObject);
     procedure actFiscalReducaoZExecute(Sender: TObject);
@@ -342,6 +347,8 @@ type
     procedure actCadGradeExecute(Sender: TObject);
     procedure actRelLocacoesExecute(Sender: TObject);
     procedure ActAberturaOsExecute(Sender: TObject);
+    procedure Action3Execute(Sender: TObject);
+    procedure actServico01Execute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -576,15 +583,18 @@ procedure TfrmPrincipal.AtualizarPainelAReceber;
 var uDaoContaReceber : TDaoContaReceber;
     Total : Real;
 begin
-   uDaoContaReceber := TDaoContaReceber.Create(gConexao);
-   Total := uDaoContaReceber.TotalEmAberto(RetornarDataSistema);
-   pnlContasReceber.Visible := False;
-   if total>0 then
+   if HeDistribuidora then
    begin
-      pnlContasReceber.Visible := True;
-      pnlContasReceber.Caption := '  Total a Receber..: '+FormatFloat(',0.00',Total);
+      uDaoContaReceber := TDaoContaReceber.Create(gConexao);
+      Total := uDaoContaReceber.TotalEmAberto(RetornarDataSistema);
+      pnlContasReceber.Visible := False;
+      if total>0 then
+      begin
+         pnlContasReceber.Visible := True;
+         pnlContasReceber.Caption := '  Total a Receber..: '+FormatFloat(',0.00',Total);
+      end;
+      FreeAndNil(uDaoContaReceber);
    end;
-   FreeAndNil(uDaoContaReceber);
 end;
 
 
@@ -592,15 +602,18 @@ procedure TfrmPrincipal.AtualizarPainelAPagar;
 var uDaoContaApagar : TDaoContaAPagar;
     Total : Real;
 begin
-   uDaoContaApagar := TDaoContaAPagar.Create(gConexao);
-   Total := uDaoContaApagar.TotalEmAberto(RetornarDataSistema);
-   pnlContasApagar.Visible := False;
-   if total>0 then
+   if HeDistribuidora then
    begin
-      pnlContasApagar.Visible := True;
-      pnlContasApagar.Caption := '  Total a Pagar....: '+FormatFloat(',0.00',Total);
+      uDaoContaApagar := TDaoContaAPagar.Create(gConexao);
+      Total := uDaoContaApagar.TotalEmAberto(RetornarDataSistema);
+      pnlContasApagar.Visible := False;
+      if total>0 then
+      begin
+         pnlContasApagar.Visible := True;
+         pnlContasApagar.Caption := '  Total a Pagar....: '+FormatFloat(',0.00',Total);
+      end;
+      FreeAndNil(uDaoContaApagar);
    end;
-   FreeAndNil(uDaoContaApagar);
 end;
 
 procedure TfrmPrincipal.CarregarEmpresa;
@@ -623,26 +636,19 @@ end;
 procedure TfrmPrincipal.ConfiguraAmbiente;
 begin
    MenuPrincipal.ActiveTab := dxRibCadastro;
-   RibonAtendimentoCliente.Visible := false;
+   //RibonAtendimentoCliente.Visible := false;
 
-   RibonFiscal.Visible        := False;
-   tabLocacao.Visible         := False;
-   tabControleEntrega.Visible := False;
-   TabVendasProdutos.Visible  := True;
+   RibonFiscal.Visible         := False;
+   tabLocacao.Visible          := False;
+   tabControleEntrega.Visible  := False;
    actAtendimento.Visible      := False;
    ImagemFundoPet.visible      := False;
+   TabVendasProdutos.Visible   := True;
 
-   If (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='1')  or (gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='2')  Then
-   Begin
-      actServicos.Visible      := True;
-      actconsServicos.Visible  := True;
-      RibonAtendimentoCliente.Visible := False;
-   End;
    if HeServicos then
    begin
-      TabServicos.Visible             := True;
+      //TabServicos.Visible             := True;
       TabVendasProdutos.Visible       := True;
-      RibonAtendimentoCliente.Visible := False;
    end;
    if PetShop then
    begin
@@ -652,7 +658,7 @@ begin
    if HeLocacao then
    begin
       TabVendasProdutos.Visible := False;
-      TabServicos.Visible := False;
+      //TabServicos.Visible := False;
       TabLocacao.Visible := true;
    end;
 end;
@@ -866,7 +872,7 @@ begin
    frmmovcaixa.showmodal;
 end;
 
-procedure TfrmPrincipal.actconsServicosExecute(Sender: TObject);
+procedure TfrmPrincipal.actConsultaServicoExecute(Sender: TObject);
 begin
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
@@ -1263,6 +1269,18 @@ begin
    End;
 End;
 
+procedure TfrmPrincipal.Action3Execute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   frmConsVendas := TfrmConsVendas.Create(Nil);
+   frmconsvendas.tag := 3;
+   frmConsVendas.showmodal;
+end;
+
 procedure TfrmPrincipal.actLocacaoExecute(Sender: TObject);
 begin
    frmLocacao := tfrmLocacao.create(self);
@@ -1340,6 +1358,18 @@ begin
    End;
    frmSelRelDevolucoes := TfrmSelRelDevolucoes.create(Self);
    frmSelRelDevolucoes.Showmodal;
+end;
+
+procedure TfrmPrincipal.actServico01Execute(Sender: TObject);
+begin
+   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   Begin
+      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+   FrmVendas := TfrmVendas.create(Self);
+   frmvendas.Tag := 3; // venda de serviços
+   frmVendas.Showmodal;
 end;
 
 procedure TfrmPrincipal.actServicoAlineExecute(Sender: TObject);

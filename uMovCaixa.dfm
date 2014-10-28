@@ -2,7 +2,7 @@ object frmMovCaixa: TfrmMovCaixa
   Left = 0
   Top = 0
   BorderIcons = []
-  Caption = 'Gaga'
+  Caption = 'Manuten'#231#227'o de Lan'#231'amentos do Caixa'
   ClientHeight = 399
   ClientWidth = 800
   Color = clBtnFace
@@ -524,7 +524,7 @@ object frmMovCaixa: TfrmMovCaixa
     Top = 44
     Width = 800
     Height = 355
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText

@@ -146,7 +146,7 @@ begin
         lsCampo      := 'Vendedor'
       End;
       1 : GstituloRel  :=' Relatorio de vendas por vendedor sintetico ';
-      2 : GstituloRel  :=' Relatorio de produtos por vendedor ';
+      2,10 : GstituloRel  :=' Relatorio de produtos por vendedor ';
       3 :
       Begin
          GstituloRel  :=' Relatorio de vendas por supervisor analitico ';
@@ -320,9 +320,8 @@ begin
          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrvlr_Total),[]);
          pviLinha:=Pvilinha+2;
       End;
-      2,5,8 :
+      2,5,8,10 :
       Begin
-
          lrVlr_Vendedor  := 0;
          lrQtde_Vendedor := 0;
          lrVlr_Total     := 0;
@@ -358,10 +357,17 @@ begin
             End;
             impmatricial.Imp(pvilinha,001, Copy( ( IncZero(cdsrelatorio.FieldByName('Cod_Produto').AsString,5)+' '+cdsrelatorio.FieldByName('Produto').AsString ),1,35));
             impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsrelatorio.fieldByname('Qtde_Venda').asfloat),[]);
-            impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsrelatorio.fieldByname('Perc_Comis').asfloat),[]);
-            impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+            if cmbTipoResultado.ItemIndex = 10 Then
+               impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',(cdsrelatorio.fieldByname('Vlr_Total').asfloat / cdsrelatorio.fieldByname('Qtde_Venda').asfloat)),[])
+             else
+               impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',cdsrelatorio.fieldByname('Perc_Comis').asfloat),[]);
             if cmbTipoResultado.ItemIndex = 8 Then
+            begin
+               impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
                impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_TotalComis').asfloat),[]);
+            end
+            else
+              impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
 
             lrVlr_Vendedor  := lrVlr_Vendedor + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
             lrQtde_Vendedor := lrQtde_Vendedor + cdsrelatorio.fieldByname('Qtde_Venda').asfloat;
@@ -379,18 +385,26 @@ begin
          pviLinha:=Pvilinha+1;
          impmatricial.Imp(pvilinha,001,'Total do '+lsCampo);
          impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrQtde_Vendedor),[]);
-         impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',lrVlr_Vendedor),[]);
          if cmbTipoResultado.ItemIndex = 8 Then
+         begin
+            impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',lrVlr_Vendedor),[]);
             impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',vlr_ComissaoVendedor),[]);
+         end
+         else
+            impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Vendedor),[]);
          pviLinha:=Pvilinha+2;
 
          impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
          pviLinha:=Pvilinha+1;
          impmatricial.Imp(pvilinha,001,'Total Geral ');
          impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrQtde_Total),[]);
-         impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',lrvlr_Total),[]);
          if cmbTipoResultado.ItemIndex = 8 Then
+         begin
+            impmatricial.ImpD(pvilinha,070,FormatFloat(',0.00',lrvlr_Total),[]);
             impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',vlr_Comissao),[]);
+         end
+         else
+            impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrvlr_Total),[]);
 
          pviLinha:=Pvilinha+2;
       End;
@@ -420,12 +434,13 @@ begin
    GridProdutos.Visible   := False;
    GridClientes.Visible   := False;
    GridSupervisor.Visible := False;
+
    lsWhere := RetornarCriticaVenda;
    lsSelect := RetornarVinculoDaVenda;
 
    Case cmbTipoResultado.ItemIndex Of
      0,1,4,6,7,9 : GridClientes.Visible := True;
-     2,8         : GridProdutos.Visible := True;
+     2,8,10      : GridProdutos.Visible := True;
      3           : GridSupervisor.Visible := True;
      5           : GridProdutos.Visible := True;
    End;
@@ -436,6 +451,10 @@ begin
                      ' (Ven.Vlr_total-Ven.Vlr_Desconto) as Vlr_Total ';
      1   : lsCampos := ' Ven.Cod_Funcionario, Fun.Descricao as Vendedor, Sum(Ven.Vlr_total-Vlr_Desconto) as Vlr_Total ';
      2,8 : lsCampos := '  Fun.Descricao as Vendedor, Itens.Perc_Comis, ';
+     10  :
+     begin
+         lsCampos := '  Itens.FuncionarioId, Fun.Descricao as Vendedor, Itens.Perc_Comis, ';
+     end;
      3   :
      Begin
          lsJoin   := ' Left join T_funcionarios Sup on '+
@@ -532,9 +551,45 @@ begin
             qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' And ( Ven.Cod_Funcionario>=:parCod_FuncionarioIni and Ven.Cod_Funcionario<=:parCod_FuncionarioFim)';
 
          Case cmbTipoResultado.ItemIndex Of
-            2,8 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + 'Group by Ven.Cod_Funcionario,fun.Descricao,Itens.Perc_Comis,Itens.Cod_Produto,Prod.Descricao';
-            5   : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + 'Group by Fun.Cod_Supervisor, Sup.Descricao, Itens.Cod_Produto,Prod.Descricao ';
+            2,8    : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + 'Group by Ven.Cod_Funcionario,fun.Descricao,Itens.Perc_Comis,Itens.Cod_Produto,Prod.Descricao';
+            5      : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + 'Group by Fun.Cod_Supervisor, Sup.Descricao, Itens.Cod_Produto,Prod.Descricao ';
          End;
+
+         qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' Order by 1,2 ';
+         if cmbCod_VendedorIni.KeyValue <> null then
+         Begin
+            qryRelatorio.ParamByName('parCod_FuncionarioIni').AsInteger := StrToInt( cmbCod_VendedorIni.Text );
+            qryRelatorio.ParamByName('parCod_FuncionarioFim').AsInteger := StrToInt( cmbCod_VendedorFim.Text );
+         End;
+         qryRelatorio.ParamByName('parData_VendaIni').AsSQLTimeStamp      := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
+         qryRelatorio.ParamByName('parData_VendaFim').AsSQLTimeStamp      := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
+         qryRelatorio.ParamByName('parStatus').AsString                   := '5';
+      End;
+      10 :
+      Begin
+         qryRelatorio.Close;
+         qryRelatorio.SQL.Text := 'Select  '+ lsCampos + ' ' +
+                                  '        Itens.Cod_Produto, '+
+                                  '        Prod.Descricao as Produto, '+
+                                  '        Sum(Itens.Qtde_Venda) as Qtde_Venda, '+
+                                  '        avg(Itens.Pco_Venda-itens.Vlr_Desconto) as Pco_Medio, '+
+                                  '        Sum(itens.Vlr_Total) as Vlr_Total, '+
+                                  '        Sum( Round( (itens.Vlr_Total * Itens.Perc_Comis)/100,2) ) as Vlr_TotalComis, '+
+                                  '        Max(Prod.Perc_Comissao) as Perc_Comissao '+
+                                  'From T_Itensvendas Itens '+
+                                  '     Left Join T_Produtos Prod on '+
+                                  '          Prod.Codigo=Itens.Cod_Produto '+
+                                  '     Left Join T_Vendas Ven on '+
+                                  '          Ven.seqvenda=Itens.Seqvenda '+
+                                  '     Left Join T_Funcionarios Fun on '+
+                                  '          Fun.Codigo=Itens.FuncionarioId '+ lsJoin +' '+lsSelect+' '+
+                                  'WHERE '+lswhere+' ( Ven.Data_Mov>=:parData_VendaIni And '+
+                                  '        Ven.Data_Mov<=:parData_VendaFim  ) and '+
+                                  '        Ven.Status<>:parStatus and Itens.FuncionarioId<>0';
+         if cmbCod_VendedorIni.KeyValue <> null then
+            qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' And ( Ven.Cod_Funcionario>=:parCod_FuncionarioIni and Ven.Cod_Funcionario<=:parCod_FuncionarioFim)';
+
+           qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + 'Group by Itens.FuncionarioID,fun.Descricao,Itens.Perc_Comis,Itens.Cod_Produto,Prod.Descricao';
 
          qryRelatorio.SQL.Text := qryRelatorio.SQL.Text + ' Order by 1,2 ';
          if cmbCod_VendedorIni.KeyValue <> null then
@@ -632,6 +687,7 @@ begin
       0 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                        Nº Venda Controle     Data      Total ');
       1 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                                        Total ');
       2 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                    Qtde. Pco.Medio Vlr.Total ');
+      3,10 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                          Qtde.  Pco.Medio         Vlr.Total ');
       8 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                        Qtde.      % Comis Vlr.Total Comissao');
       9 : TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                        Nº Venda              Data      Total ');
    end;

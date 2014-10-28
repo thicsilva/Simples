@@ -32,6 +32,7 @@ object frmselrelEntradas: TfrmselrelEntradas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -50,6 +51,7 @@ object frmselrelEntradas: TfrmselrelEntradas
     Spacing = 2
     Caption = 'Selecione o intervalo de Datas'
     Align = alClient
+    UseSkinSize = True
     object lblTurma: TbsSkinStdLabel
       Left = 127
       Top = 38
@@ -86,8 +88,8 @@ object frmselrelEntradas: TfrmselrelEntradas
       Left = 157
       Top = 33
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -124,6 +126,7 @@ object frmselrelEntradas: TfrmselrelEntradas
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -135,8 +138,8 @@ object frmselrelEntradas: TfrmselrelEntradas
       Left = 22
       Top = 33
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -173,6 +176,7 @@ object frmselrelEntradas: TfrmselrelEntradas
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -450,6 +454,7 @@ object frmselrelEntradas: TfrmselrelEntradas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -553,8 +558,7 @@ object frmselrelEntradas: TfrmselrelEntradas
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnimprimirClick
-        ExplicitTop = 8
-        ExplicitHeight = 40
+        ExplicitLeft = -31
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 70
@@ -565,9 +569,7 @@ object frmselrelEntradas: TfrmselrelEntradas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitLeft = 64
-        ExplicitTop = -5
-        ExplicitHeight = 40
+        ExplicitLeft = 0
       end
     end
   end
@@ -667,6 +669,8 @@ object frmselrelEntradas: TfrmselrelEntradas
     Top = 20
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -684,6 +688,8 @@ object frmselrelEntradas: TfrmselrelEntradas
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

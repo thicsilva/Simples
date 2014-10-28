@@ -461,7 +461,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         'Cliente Sintetico'
         'Clientes Analitico'
         'Produtos por Vendedor Comi'#231#245'es'
-        'Vendedor e Atividade')
+        'Vendedor e Atividade'
+        'Produtividade')
       ItemIndex = -1
       DropDownCount = 8
       HorizontalExtent = False
@@ -758,6 +759,8 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       DefaultItemHeight = 20
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'tab'
+      ExplicitLeft = -1
+      ExplicitTop = 6
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Escolha o Filtro'
         object bsSkinStdLabel1: TbsSkinStdLabel

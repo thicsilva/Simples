@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 787
     Height = 460
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -281,7 +281,6 @@ object frmCadProdutos: TfrmCadProdutos
           object Column_Nome_TipoProduto: TcxGridDBColumn
             Caption = 'Tipo Cadastro'
             DataBinding.FieldName = 'Nome_TipoProduto'
-            Visible = False
             Width = 95
           end
           object GridProdutosCodigo: TcxGridDBColumn
@@ -6842,14 +6841,6 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 240
   end
   object OpenFigura: TOpenPictureDialog
-    Filter = 
-      'All (*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;*.em' +
-      'f;*.wmf)|*.tif;*.gif;*.bmp;*.png;*.gif;*.jpg;*.jpeg;*.bmp;*.ico;' +
-      '*.emf;*.wmf|All graphics (*.tif;*.gif;*.bmp)|*.tif;*.gif;*.bmp|P' +
-      'NG graphics from DevExpress (*.png)|*.png|GIF Image (*.gif)|*.gi' +
-      'f|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*.jpeg)|*.jpeg|' +
-      'Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|Enhanced Metafiles (*.' +
-      'emf)|*.emf|Metafiles (*.wmf)|*.wmf'
     Left = 428
     Top = 305
   end
