@@ -2,7 +2,7 @@ object frmSelFuncionario: TfrmSelFuncionario
   Left = 0
   Top = 0
   BorderIcons = []
-  Caption = 'Selecione o Mecanio'
+  Caption = 'Selecione o Funcionario'
   ClientHeight = 166
   ClientWidth = 359
   Color = clBtnFace
@@ -18,7 +18,7 @@ object frmSelFuncionario: TfrmSelFuncionario
   object Label1: TLabel
     Left = 22
     Top = 72
-    Width = 159
+    Width = 160
     Height = 18
     Caption = 'Selecione o Mecanico'
     Font.Charset = DEFAULT_CHARSET
@@ -45,8 +45,6 @@ object frmSelFuncionario: TfrmSelFuncionario
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitLeft = -36
-    ExplicitWidth = 483
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -96,7 +94,7 @@ object frmSelFuncionario: TfrmSelFuncionario
       object btnFechar: TbsSkinSpeedButton
         Left = 249
         Top = 0
-        Width = 80
+        Width = 70
         Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -129,9 +127,11 @@ object frmSelFuncionario: TfrmSelFuncionario
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
+        ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 329
+        Left = 319
         Top = 0
         Width = 1
         Height = 49
@@ -151,6 +151,7 @@ object frmSelFuncionario: TfrmSelFuncionario
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end
@@ -160,15 +161,12 @@ object frmSelFuncionario: TfrmSelFuncionario
     Width = 359
     Height = 19
     Panels = <>
-    ExplicitLeft = 232
-    ExplicitTop = 144
-    ExplicitWidth = 0
   end
   object cmbNome_Funcionario: TbsSkinDBLookupComboBox
     Left = 22
     Top = 96
     Width = 299
-    Height = 29
+    Height = 20
     HintImageIndex = 0
     TabOrder = 2
     SkinData = frmPrincipal.SkinEntradaDados

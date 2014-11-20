@@ -29,6 +29,8 @@ type TDaoVenda = class
      procedure CancelarRomaneio(RomaneiId : Integer);
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
+     procedure AtualizarTotal(VendaId : Integer; Total : Real);
+
      procedure Incluir( Venda : TVenda );
 end;
 
@@ -43,6 +45,15 @@ begin
    FqryModific.SQL.Text :='Update T_vendas set RomaneioId=:parRomaneioID where SeqVenda=:parSeqvenda';
    FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
    FqryModific.ParamByName('parRomaneioID').AsInteger := RomaneiId;
+   FqryModific.ExecSql;
+end;
+
+procedure TDaoVenda.AtualizarTotal(VendaId: Integer; Total: Real);
+begin
+   FqryModific.Close;
+   FqryModific.SQL.Text :='Update T_vendas set vlr_total=:parVlr_Total where Seqvenda=:parSeqVenda';
+   FqryModific.ParamByName('parVlr_Total').AsFloat := Total;
+   FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
    FqryModific.ExecSql;
 end;
 
@@ -121,7 +132,7 @@ begin
    cdsVenda.FieldByname('Cod_Funcionario').Asinteger    := Venda.Funcionario.IdFuncionario;
    cdsVenda.FieldByname('Cod_FormaPagamento').Asinteger := Venda.FormaPagamento.Id;
    cdsVenda.FieldByName('Nome_Cliente').asString        := Venda.Cliente.Descricao;
-   cdsVenda.FieldByname('Vlr_Total').AsFloat            := 0;
+   cdsVenda.FieldByname('Vlr_Total').AsFloat            := Venda.Valor_Total;
    cdsVenda.FieldByname('CustoTotal').AsFloat           := 0;
    cdsVenda.FieldByname('LucroBruto').AsFloat           := 0;
    cdsVenda.FieldByname('Vlr_Desconto').AsFloat         := 0;
@@ -133,16 +144,15 @@ begin
    cdsVenda.FieldByName('Data_Cad').asDateTime          := now;
    cdsVenda.FieldByname('Vlr_DescProd').AsFloat         := 0;
    cdsVenda.FieldByname('Controle').AsString            := Venda.Controle;
-   cdsVenda.FieldByname('Tipo_Venda').AsString          := 'P';
    cdsVenda.FieldByname('SeqOs').AsInteger              := 0;
    cdsVenda.FieldByname('Etiqueta').AsInteger           := 1;
-   cdsVenda.FieldByName('Cod_TipoVenda').AsInteger      := Venda.TipoVenda;
+   cdsVenda.FieldByName('Cod_TipoVenda').AsInteger      := Venda.Cod_TipoVenda;
    cdsVenda.FieldByname('Tipo_Venda').AsString          := 'S';
    cdsVenda.FieldByname('Status').AsString              := '1';
    cdsVenda.FieldByname('PagouSinal').AsBoolean         := False;
    cdsVenda.FieldByName('Cod_caixa').asInteger          := 1;
    cdsVenda.FieldByname('AnimalID').AsInteger           := 0;
-   cdsVenda.FieldByname('Tipo_Venda').AsString          := 'S';
+   cdsVenda.FieldByname('Tipo_Venda').AsString          := venda.TipoVenda;
    cdsVenda.FieldByname('NumeroSerie').AsString         := Venda.Serie;
    cdsVenda.FieldByname('Descricao').AsString           := Venda.DescricaoProduto;
    cdsVenda.FieldByname('Defeito').AsString             := Venda.Defeito;

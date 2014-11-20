@@ -47,6 +47,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -195,6 +196,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -241,8 +243,8 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
       Left = 221
       Top = 22
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -280,6 +282,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -291,8 +294,8 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
       Left = 94
       Top = 22
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -330,6 +333,7 @@ object frmRelAnaliseFinanceira: TfrmRelAnaliseFinanceira
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1

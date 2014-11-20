@@ -483,16 +483,16 @@ begin
    lidias    := 0;
 
    Try
+      QryCtasPagar.Close;
+      QryCtasPagar.SQL.Text := 'Select * from T_CtasPagar where 1=2 ';
+
+      cdsCtasPagar.Close;
+      cdsCtasPagar.ProviderName := dspCtasPagar.name;
+      cdsCtasPagar.Open;
+
       For licont := 1 to StrToInt(edtParcelas.Text) Do
       Begin
          lidias := liDias + StrToInt(edtdias.Text);
-
-         QryCtasPagar.Close;
-         QryCtasPagar.SQL.Text := 'Select * from T_CtasPagar where 1=2 ';
-
-         cdsCtasPagar.Close;
-         cdsCtasPagar.ProviderName := dspCtasPagar.name;
-         cdsCtasPagar.Open;
 
          cdsCtasPagar.Append;
          cdsCtasPagar.FieldByName('Data_Cad').AsDateTime := Now;
@@ -524,13 +524,10 @@ begin
          Begin
            lsDias:='28';
          end;
-
-      End;
-      If StrToInt(edtParcelas.Text)>0 Then
-      Begin
          cdsCtasPagar.Post;
+     End;
+      If StrToInt(edtParcelas.Text)>0 Then
          cdsCtasPagar.ApplyUpdates(-1);
-      End;
    Except
 //      frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
    End;

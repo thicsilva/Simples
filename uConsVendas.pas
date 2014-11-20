@@ -294,7 +294,7 @@ var liSeqvenda : Integer;
 begin
    if ( cdsVendas.FieldByName('Status').AsString <> '1') And ( cdsVendas.FieldByName('Status').AsString <> '2') Then
    Begin
-      CaixaMensagem( 'Pedido ja finalizado', ctAviso, [ cbOk ], 0 );
+      CaixaMensagem( 'O.S ja finalizada', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
 
@@ -519,6 +519,12 @@ end;
 procedure TfrmConsVendas.edtmanutencaoClick(Sender: TObject);
 var liseqvenda : Integer;
 begin
+   if ( cdsVendas.FieldByName('Status').AsString <> '1') And ( cdsVendas.FieldByName('Status').AsString <> '2') Then
+   Begin
+      CaixaMensagem( 'O.S ja finalizada', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    FrmVendas     := TfrmVendas.create(Self);
    frmvendas.Tag := 7; // venda de serviços
    FrmVendas.btnincluirClick(FrmVendas.btnincluir);

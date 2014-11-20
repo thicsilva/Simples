@@ -1609,7 +1609,8 @@ begin
 
    {$REGION 'Impressao do comprovante de Venda'}
    IF ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteVenda','0',gsOperador )) and
-       (frmVendas.Tag=VENDAS_NORMAIS) Or (frmVendas.Tag=VENDAS_EXTERNAS) ) Or
+       (frmVendas.Tag=VENDAS_NORMAIS) Or (frmVendas.Tag=VENDAS_EXTERNAS) ) or
+       ( RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' ))) and ( frmvendas.Tag <> 7 ) ) or
       ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteServico','0',gsOperador )) and
        (frmVendas.Tag=SERVICOS) )  Then
    Begin
@@ -2045,7 +2046,10 @@ begin
       if trim(cdsCadClientes.FieldByName('Endereco').asString)=EmptyStr then
       begin
          CaixaMensagem( 'O cliente Esta com o endereço desatualizado ', ctAviso, [ cbOk ], 0 );
-         edtcod_Cliente.SetFocus;
+         try
+            edtcod_Cliente.SetFocus;
+         except
+         end;
       end;
 
       edtCod_Cliente.text  :=  cmbCod_Cliente.Text;
@@ -2074,8 +2078,11 @@ begin
       Begin
           edtNome_Cliente.Enabled := True;
           If frmVendas.tag <> 4 then
+          Try
              edtnome_cliente.SetFocus;
-      End;
+         Except
+         End;
+     End;
       if cdsCadClientes.FieldByName('Status').AsString = '1' then
       Begin
          CaixaMensagem( 'Este Cliente esta em Cobrança ', ctAviso, [ cbOk ], 0 );

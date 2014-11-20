@@ -697,8 +697,14 @@ begin
          edtVlr_Desconto.SetFocus;
          Abort;
       End;
-      edtTotalReceber.text   := FormatFloat('0.00',strTofloat(edtTotalTitulo.Text)-( StrTofloat(edtVlr_Desconto.text) + StrTofloat(edtVlr_Recebido.Text ) ) );
+      edtTotalReceber.text := FormatFloat('0.00',strTofloat(edtTotalTitulo.Text)-( StrTofloat(edtVlr_Desconto.text) + StrTofloat(edtVlr_Recebido.Text ) ) );
    End;
+
+   try
+
+   except
+     edtcod_Pagamento.SetFocus;
+   end;
 end;
 
 procedure TfrmBaixaNormal.btnAdicionarClick(Sender: TObject);

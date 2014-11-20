@@ -84,7 +84,6 @@ type
     dxBarManager1Bar2: TdxBar;
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarLargeButton8: TdxBarLargeButton;
-    actServicos: TAction;
     GridTableViewStyleSheetWindowsStandard: TcxGridTableViewStyleSheet;
     cxStyle15: TcxStyle;
     cxStyle16: TcxStyle;
@@ -227,9 +226,7 @@ type
     actRomaneioEntrega: TAction;
     dxBarLargeButton22: TdxBarLargeButton;
     actVendaloja: TAction;
-    actServicoAline: TAction;
     dxBarButton29: TdxBarButton;
-    dxBarButton30: TdxBarButton;
     acrRecebimentoRomaneio: TAction;
     dxBarLargeButton23: TdxBarLargeButton;
     actCadEmpresa: TAction;
@@ -238,12 +235,10 @@ type
     MarcarEventocomRealizado1: TMenuItem;
     actTabeladePreco: TAction;
     dxBarButton31: TdxBarButton;
-    dxBarButton32: TdxBarButton;
     actServicoLauro: TAction;
     pnlContasReceber: TPanel;
     pnlContasApagar: TPanel;
     dxBarLargeButton25: TdxBarLargeButton;
-    actAtendimento: TAction;
     ImagemLogoSistema: TbsSkinLinkImage;
     SkinGrids: TbsSkinData;
     skinStorage3: TbsCompressedStoredSkin;
@@ -265,7 +260,6 @@ type
     actRelLocacoes: TAction;
     dxBarButton38: TdxBarButton;
     TabRelatorioLocacao: TdxBar;
-    ActAberturaOs: TAction;
     dxBarButton39: TdxBarButton;
     dxBarButton37: TdxBarButton;
     Action3: TAction;
@@ -277,6 +271,8 @@ type
     actServico01: TAction;
     dxBarLargeButton30: TdxBarLargeButton;
     dxBarButton42: TdxBarButton;
+    actDelivery: TAction;
+    dxBarLargeButton31: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -349,6 +345,7 @@ type
     procedure ActAberturaOsExecute(Sender: TObject);
     procedure Action3Execute(Sender: TObject);
     procedure actServico01Execute(Sender: TObject);
+    procedure actDeliveryExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -408,7 +405,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
-  uLocacao, uConsLocacao, uCadGrade, uAberturaOS;
+  uLocacao, uConsLocacao, uCadGrade, uAberturaOS, uDeliveryGas;
 
 {$R *.dfm}
 
@@ -641,7 +638,7 @@ begin
    RibonFiscal.Visible         := False;
    tabLocacao.Visible          := False;
    tabControleEntrega.Visible  := False;
-   actAtendimento.Visible      := False;
+   //actAtendimento.Visible      := False;
    ImagemFundoPet.visible      := False;
    TabVendasProdutos.Visible   := True;
 
@@ -652,7 +649,7 @@ begin
    end;
    if PetShop then
    begin
-      actAtendimento.Visible      := True;
+      //actAtendimento.Visible      := True;
       ImagemFundoPet.visible      := True;
    end;
    if HeLocacao then
@@ -678,6 +675,7 @@ begin
   if Uppercase(gParametros.Ler('', '[CADASTRO]', 'Data_Automatica', 'SIM')) = 'SIM' then
     gsData_Mov := StrToDate(FormatDatetime('dd/mm/yyyy', now));
    StatusBar.Panels[0].Text := 'Data do Movimento .: '+FormatDatetime('dd/mm/yyyy',gsData_Mov);
+   
 end;
 
 procedure TfrmPrincipal.DefinirVariaveisDeAmbiente;
@@ -1167,6 +1165,13 @@ begin
    frmselRelCurvaAbcProdutos.showModal;
 end;
 
+procedure TfrmPrincipal.actDeliveryExecute(Sender: TObject);
+begin
+   frmDeliveryGas := TFrmDeliveryGas.Create(Self);
+   frmDeliveryGas.WindowState := wsMaximized;
+   frmDeliveryGas.ShowModal;
+end;
+
 procedure TfrmPrincipal.actEntradasExecute(Sender: TObject);
 begin
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -1271,11 +1276,11 @@ End;
 
 procedure TfrmPrincipal.Action3Execute(Sender: TObject);
 begin
-   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+{   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
-   End;
+   End; }
    frmConsVendas := TfrmConsVendas.Create(Nil);
    frmconsvendas.tag := 3;
    frmConsVendas.showmodal;

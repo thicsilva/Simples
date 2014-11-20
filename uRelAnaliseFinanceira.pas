@@ -111,7 +111,7 @@ begin
 
 
    qryRelatorio.Close;
-   qryRelatorio.SQL.text:='select  Sum(Itens.Qtde_Venda*Prod.Pco_Custo) as CustoTotal '+
+   qryRelatorio.SQL.text:='select  Sum(Itens.CustoTotal) as CustoTotal '+
                           'from  T_vendas Ven '+
                           '      left join T_itensVendas Itens on itens.SeqVenda=Ven.Seqvenda '+
                           '      left join T_Produtos Prod on Prod.Codigo=itens.Cod_Produto '+lsSelect+' '+

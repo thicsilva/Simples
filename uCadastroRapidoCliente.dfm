@@ -2,7 +2,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
   Left = 0
   Top = 0
   Caption = 'Cadastro Simplificado de Clientes'
-  ClientHeight = 189
+  ClientHeight = 288
   ClientWidth = 664
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -113,6 +113,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
         Align = alLeft
         Spacing = 1
         Layout = blGlyphTop
+        OnClick = BtnCancelaClick
         ExplicitLeft = -15
         ExplicitTop = 12
       end
@@ -198,7 +199,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
     Width = 664
     Height = 116
     HintImageIndex = 0
-    TabOrder = 1
+    TabOrder = 2
     SkinDataName = 'expanel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -342,6 +343,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
+      OnExit = edtNome_ClienteExit
     end
     object edtTelefone: TbsSkinEdit
       Left = 437
@@ -375,6 +377,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
+      OnExit = edtTelefoneExit
     end
     object edtCnpjCpf: TbsSkinEdit
       Left = 326
@@ -415,7 +418,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       Width = 110
       Height = 25
       HintImageIndex = 0
-      TabOrder = 4
+      TabOrder = 5
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'button'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -440,7 +443,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       CanFocused = True
       Down = False
       GroupIndex = 0
-      Caption = ' &Novo Cliente'
+      Caption = '&Adicionar'
       NumGlyphs = 1
       Spacing = 1
       OnClick = btnNovoClienteClick
@@ -503,7 +506,7 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
       Font.Style = []
       MaxLength = 50
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -516,10 +519,245 @@ object frmCadastroClienteSimplificado: TfrmCadastroClienteSimplificado
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 170
+    Top = 269
     Width = 664
     Height = 19
     Panels = <>
-    ExplicitTop = 126
+  end
+  object bsSkinExPanel2: TbsSkinExPanel
+    Left = 0
+    Top = 169
+    Width = 664
+    Height = 100
+    HintImageIndex = 0
+    TabOrder = 1
+    SkinDataName = 'expanel'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = 13
+    DefaultFont.Name = 'Tahoma'
+    DefaultFont.Style = []
+    DefaultWidth = 0
+    DefaultHeight = 0
+    UseSkinFont = True
+    UseSkinSize = True
+    CaptionImageIndex = -1
+    NumGlyphs = 1
+    Spacing = 2
+    RealWidth = 0
+    RealHeight = 0
+    ShowRollButton = True
+    ShowCloseButton = True
+    DefaultCaptionHeight = 21
+    RollState = False
+    RollKind = rkRollVertical
+    Moveable = False
+    Sizeable = False
+    Align = alClient
+    Caption = 'Dados Do Endereco'
+    object bsSkinStdLabel3: TbsSkinStdLabel
+      Left = 31
+      Top = 28
+      Width = 59
+      Height = 16
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -13
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'stdlabel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Caption = 'Endere'#231'o'
+      ParentFont = False
+    end
+    object bsSkinStdLabel2: TbsSkinStdLabel
+      Left = 443
+      Top = 30
+      Width = 36
+      Height = 16
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -13
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'stdlabel'
+      Caption = 'Bairro'
+    end
+    object lblPontoReferencia: TbsSkinStdLabel
+      Left = 2
+      Top = 57
+      Width = 89
+      Height = 16
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -13
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'stdlabel'
+      Caption = 'Pto Referencia'
+    end
+    object bsSkinStdLabel6: TbsSkinStdLabel
+      Left = 453
+      Top = 57
+      Width = 25
+      Height = 16
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -13
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'stdlabel'
+      Caption = 'Cep'
+    end
+    object edtEndereco: TbsSkinEdit
+      Left = 100
+      Top = 29
+      Width = 337
+      Height = 20
+      DefaultColor = clWindow
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+    end
+    object edtBairro: TbsSkinEdit
+      Left = 486
+      Top = 29
+      Width = 164
+      Height = 20
+      DefaultColor = clWindow
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+    end
+    object edtCep: TbsSkinEdit
+      Left = 486
+      Top = 55
+      Width = 66
+      Height = 20
+      DefaultColor = clWindow
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      MaxLength = 9
+      ParentFont = False
+      TabOrder = 3
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+    end
+    object edtPto_Referencia: TbsSkinEdit
+      Left = 100
+      Top = 55
+      Width = 337
+      Height = 20
+      DefaultColor = clWindow
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      UseSkinFont = True
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinEntradaDados
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      MaxLength = 50
+      ParentFont = False
+      TabOrder = 2
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+    end
   end
 end

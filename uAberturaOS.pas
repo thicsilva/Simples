@@ -99,7 +99,6 @@ begin
   AtualizarComboCliente;
   edtNome_Cliente.SetFocus;
   FreeAndNil(frmCadastroClienteSimplificado);
-
 end;
 
 procedure TfrmAberturaOs.btnokClick(Sender: TObject);
@@ -137,6 +136,7 @@ begin
       Venda.DescricaoProduto := edtDescricaoProduto.text;
       Venda.Serie := edtSerie.text;
       Venda.Defeito := MemoDefeito.Text;
+      Venda.TipoVenda := 'S';
       venda.Status := '1';
       Venda.Data_Venda := gsData_Mov;
       Venda.DataMovimento := gsData_Mov;

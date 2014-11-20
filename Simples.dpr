@@ -129,7 +129,7 @@ uses
   uClassContaReceber in 'Modelos\uClassContaReceber.pas',
   uClassRota in 'Modelos\uClassRota.pas',
   uDaoContaAPagar in 'Dao\uDaoContaAPagar.pas',
-  uDelivery in 'uDelivery.pas' {frmDelivery},
+  uDeliveryGas in 'uDeliveryGas.pas' {frmDeliveryGas},
   uFuncoes in '..\Compartilhados\uFuncoes.pas',
   uMapa in 'uMapa.pas' {frmMapa},
   uSelHora in 'uSelHora.pas' {frmSelHora},
@@ -151,7 +151,9 @@ uses
   uDaoProduto in 'Dao\uDaoProduto.pas',
   uCadastroRapidoCliente in 'uCadastroRapidoCliente.pas' {frmCadastroClienteSimplificado},
   uselFuncionario in 'uselFuncionario.pas' {frmSelFuncionario},
-  uDtmComprovanteVenda in 'Data Module\uDtmComprovanteVenda.pas' {DtmComprovante: TDataModule};
+  uDtmComprovanteVenda in 'Data Module\uDtmComprovanteVenda.pas' {DtmComprovante: TDataModule},
+  uClassProduto in 'Modelos\uClassProduto.pas',
+  uSelFormaPagamento in '..\Compartilhados\uSelFormaPagamento.pas' {frmselFormaPagamento};
 
 {$R *.res}
 
@@ -164,6 +166,7 @@ begin
   Application.CreateForm(TfrmCadastroClienteSimplificado, frmCadastroClienteSimplificado);
   Application.CreateForm(TfrmSelFuncionario, frmSelFuncionario);
   Application.CreateForm(TDtmComprovante, DtmComprovante);
+  Application.CreateForm(TfrmselFormaPagamento, frmselFormaPagamento);
   Frmlogin.ShowModal;
   Application.Run;
 end.

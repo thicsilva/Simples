@@ -2086,7 +2086,7 @@ object frmEntradas: TfrmEntradas
             Control = bsSkinToolBar2
             ImageIndex = -1
             MinHeight = 40
-            Width = 699
+            Width = 697
           end>
         SkinDataName = 'controlbar'
         SkinData = frmPrincipal.SkinPrincipal

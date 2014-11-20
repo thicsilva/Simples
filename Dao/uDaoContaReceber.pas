@@ -119,7 +119,7 @@ function TDaoContaReceber.TotalEmAberto(Data: TDateTime): Real;
 var lcdsDados : TClientDataSet;
 begin
    lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where '+
-                                        'Tipo_baixa='+QuotedSTR('AB')+' and data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data)),Nil);
+                                        ' data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data)),Nil);
    Result    := lcdsDados.FieldByName('Total').AsFloat;
 end;
 

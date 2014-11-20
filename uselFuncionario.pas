@@ -8,7 +8,7 @@ uses
   BusinessSkinForm;
 
 type
-  TfrmSelFuncionario = class(TForm)
+    TfrmSelFuncionario = class(TForm)
     bsSkinCoolBar2: TbsSkinCoolBar;
     bsSkinToolBar2: TbsSkinToolBar;
     btnFechar: TbsSkinSpeedButton;
@@ -36,12 +36,12 @@ uses uFuncoes,uprincipal;
 
 procedure TfrmSelFuncionario.btnFecharClick(Sender: TObject);
 begin
-  if cmbNome_Funcionario.KeyValue = null then
-  begin
-     CaixaMensagem( 'Selecione o Mecânico para continua ', ctAviso, [ cbOk ], 0 );
-     Exit
-  end;
-  close;
+   if cmbNome_Funcionario.KeyValue = null then
+   begin
+      CaixaMensagem( 'Selecione o Mecânico para continua ', ctAviso, [ cbOk ], 0 );
+      Exit
+   end;
+   close;
 end;
 
 end.

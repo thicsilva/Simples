@@ -23,7 +23,7 @@ type TVenda = class
     FEntregue: Boolean;
     FVencimentos: TStringList;
     FControle: String;
-    FTipoVenda: Integer;
+    FTipoVenda: String;
     FEmpresaId: Integer;
     FDescricaoProduto: String;
     FSerie: String;
@@ -32,6 +32,7 @@ type TVenda = class
     FDataMovimento: TDateTime;
     FStatus: String;
     FOSID: Integer;
+    FCod_TipoVenda: Integer;
     procedure SetEmpresa(const Value: TEmpresa);
     procedure SetFuncionario(const Value: TFuncionario);
     procedure SetFormaPagamento(const Value: TFormaPagamento);
@@ -53,7 +54,7 @@ type TVenda = class
     procedure SetVencimentos(const Value: TStringList);
     function RetornarPosicaoCentral(liTamanhoString,TamanhoLinha : Integer) : integer;
     procedure SetControle(const Value: String);
-    procedure SetTipoVenda(const Value: Integer);
+    procedure SetTipoVenda(const Value: String);
     procedure SetDataMovimento(const Value: TDateTime);
     procedure SetDefeito(const Value: String);
     procedure SetDescricaoProduto(const Value: String);
@@ -62,6 +63,7 @@ type TVenda = class
     procedure SetSerie(const Value: String);
     procedure SetStatus(const Value: String);
     procedure SetOSID(const Value: Integer);
+    procedure SetCod_TipoVenda(const Value: Integer);
 
   public
      Constructor Create(Conexao : TConexao);
@@ -81,7 +83,7 @@ type TVenda = class
      property FormaPagamento : TFormaPagamento read FFormaPagamento write SetFormaPagamento;
      property Cliente : TCliente read FCliente write SetCliente;
      property Vencimentos : TStringList read FVencimentos write SetVencimentos;
-     property TipoVenda : Integer read FTipoVenda write SetTipoVenda;
+     property TipoVenda : String read FTipoVenda write SetTipoVenda;
      property Controle : String read FControle write SetControle;
      property Operador : String read FOperador write SetOperador;
      property DataMovimento : TDateTime read FDataMovimento write SetDataMovimento;
@@ -91,6 +93,7 @@ type TVenda = class
      property Defeito : String read FDefeito write SetDefeito;
      property Status : String read FStatus write SetStatus;
      property OSID : Integer read FOSID write SetOSID;
+     property Cod_TipoVenda : Integer read FCod_TipoVenda write SetCod_TipoVenda;
 end;
 
 implementation
@@ -707,6 +710,11 @@ begin
   FCliente := Value;
 end;
 
+procedure TVenda.SetCod_TipoVenda(const Value: Integer);
+begin
+  FCod_TipoVenda := Value;
+end;
+
 procedure TVenda.SetControle(const Value: String);
 begin
   FControle := Value;
@@ -792,7 +800,7 @@ begin
   FStatus := Value;
 end;
 
-procedure TVenda.SetTipoVenda(const Value: Integer);
+procedure TVenda.SetTipoVenda(const Value: string);
 begin
   FTipoVenda := Value;
 end;

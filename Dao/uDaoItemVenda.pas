@@ -13,6 +13,7 @@ type TDaoItemVenda = class
   public
     Constructor Create(Conexao : TConexao);
     procedure Inserir(ItensVendas : TClientDataSet; ItemVenda : TItemVenda);
+    procedure InserirItem( ItemVenda : TItemVenda);
     function Buscar(SeqVenda : Integer) : TClientDataSet;
     procedure MarcarComoRecebido(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime; Dias : Integer );
     property Connection : TSqlConnection read FConnection write SetConnection;
@@ -40,6 +41,7 @@ constructor TDaoItemVenda.Create(Conexao: TConexao);
 begin
   Fconexao := Conexao;
   FQueryModific := TSqlQuery.Create(Nil);
+  FQueryModific.SQLConnection := Fconexao.Conection;
 end;
 
 procedure TDaoItemVenda.Inserir(ItensVendas: TClientDataSet; ItemVenda : TItemVenda);
@@ -97,10 +99,52 @@ begin
       FQueryModific.ParamByName('parTipoCobranca').asString   := ItensVendas.FieldByName('TipoCalculo').AsString;
       FQueryModific.ParamByName('parFuncionarioId').asString  := ItensVendas.FieldByName('FuncionarioId').AsString;
       FQueryModific.ParamByName('parDataPrevisaoEntrega').AsSQLTimeStamp := DatetimeToSqltimeStamp(ItensVendas.FieldByName('Previsao_Entrega').AsDateTime);
-
       FQueryModific.ExecSql;
       ItensVendas.next;
    End;
+end;
+
+procedure TDaoItemVenda.InserirItem(ItemVenda: TItemVenda);
+var loDaoSaldo : TDaoSaldo;
+    loSaldo    : TSaldo;
+begin
+
+   FQueryModific.Sql.Text := 'Insert into T_ItensVendas '+
+                             '( Cod_Produto,Qtde_Venda,Pco_Venda, '+
+                             '  vlr_Total,Operador,Data_Cad,Data_Mov,'+
+                             '  Cod_emp,SeqVenda, SetorId,'+
+                             '  Pco_Tabela,TipoCobranca,FuncionarioId ) Values '+
+                             '( :parCod_Produto,:parQtde_Venda,:parPco_Venda, '+
+                             ' :parvlr_Total,:parOperador,:parData_Cad,:parData_Mov,'+
+                             ' :parCod_emp,:parSeqVenda, :parSetorId, '+
+                             ' :parPco_Tabela,:parTipoCobranca, :parFuncionarioId )';
+  FQueryModific.Prepared := True;
+
+  {FQueryModific.ParamByName('parvlr_Desconto').asFloat    := ItensVendas.FieldByName('vlr_Desconto').asFloat;
+  FQueryModific.ParamByName('parComplemento').asString    := ItensVendas.FieldByName('Complemento').asString;
+  FQueryModific.ParamByName('parPerc_Comis').asFloat      := ItensVendas.FieldByName('Perc_Comis').asFloat;
+  FQueryModific.ParamByName('parPesoLiquido').asFloat     := ItensVendas.FieldByName('PesoLiquido').AsFloat;
+  FQueryModific.ParamByName('parPesoBruto').asFloat       := ItensVendas.FieldByName('PesoBruto').AsFloat;
+  FQueryModific.ParamByName('parMargemSecundaria').asFloat:= ItensVendas.FieldByName('MargemSecundaria').AsFloat;
+  FQueryModific.ParamByName('parPrecoCusto').asFloat      := ItensVendas.FieldByName('PrecoCusto').AsFloat;
+  FQueryModific.ParamByName('parLucroBruto').asFloat      := ItensVendas.FieldByName('LucroBruto').AsFloat;
+  FQueryModific.ParamByName('parDataPrevisaoEntrega').AsSQLTimeStamp := DatetimeToSqltimeStamp(ItensVendas.FieldByName('Previsao_Entrega').AsDateTime);}
+
+  FQueryModific.ParamByName('parSeqVenda').asInteger      := ItemVenda.VendaID;
+  FQueryModific.ParamByName('parCod_Produto').asInteger   := ItemVenda.ProdutoId;
+  FQueryModific.ParamByName('parQtde_Venda').asFloat      := ItemVenda.Qunatidade;
+  FQueryModific.ParamByName('parPco_Venda').asFloat       := ItemVenda.PrecoVenda;
+  FQueryModific.ParamByName('parvlr_Total').asFloat       := ItemVenda.Total;
+  FQueryModific.ParamByName('parOperador').asString       := ItemVenda.Operador;
+  FQueryModific.ParamByName('parData_Cad').AsSQLTimeStamp := DatetimeToSqltimeStamp(Now);
+  FQueryModific.ParamByName('parData_Mov').AsSQLTimeStamp := DatetimeToSqltimeStamp(Now);
+  FQueryModific.ParamByName('parCod_emp').asInteger       := ItemVenda.CodigoEmpresa;
+  FQueryModific.ParamByName('parSeqVenda').asInteger      := ItemVenda.VendaID;
+  FQueryModific.ParamByName('parSetorId').asInteger       := ItemVenda.SetorId;
+  FQueryModific.ParamByName('parPco_Tabela').asFloat      := ItemVenda.PrecoVenda;
+  FQueryModific.ParamByName('parTipoCobranca').asInteger  := ItemVenda.TipoCalculo;
+  FQueryModific.ParamByName('parFuncionarioId').asInteger := ItemVenda.FuncionarioId;
+  FQueryModific.ExecSql;
 end;
 
 procedure TDaoItemVenda.MarcarComoRecebido(ProdutoId, VendaID: Integer; DataDevolucao : TDateTime; Dias : Integer);

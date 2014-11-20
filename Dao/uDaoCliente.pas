@@ -19,6 +19,8 @@ type TDaoCliente = class
      procedure Incluir(Cliente : TCliente);
      function SaldoDevedor(ClienteId: Integer; Data : TDateTime) : real;
      Function BuscarTodos : TClientDataSet;
+     function BuscarTelefone(prsTelefone : String) : String;
+     function BuscarNome(prsNome : String) : String;
 end;
 
 implementation
@@ -67,6 +69,16 @@ begin
   End;
 end;
 
+function TDaoCliente.BuscarNome(prsNome: String): String;
+begin
+   Result := Fconexao.BuscarDadosSQL('Select Descricao, Telefone from T_Clientes where Descricao='+QuotedStr(prsNome)+' order by Descricao ',Nil).FieldByName('Telefone').AsString;
+end;
+
+function TDaoCliente.BuscarTelefone(prsTelefone: String): String;
+begin
+   Result := Fconexao.BuscarDadosSQL('Select Descricao, Telefone from T_Clientes where Telefone='+QuotedStr(prsTelefone)+' order by Descricao ',Nil).FieldByName('Descricao').AsString;
+end;
+
 function TDaoCliente.BuscarTodos: TClientDataSet;
 begin
    Result := Fconexao.BuscarDadosSQL('Select * from T_Clientes where ativo='+QuotedStr('S')+' order by Descricao ',Nil);
@@ -93,9 +105,12 @@ begin
    FQryModific.Close;
    FQryModific.SQLConnection := Fconexao.Conection;
    FQryModific.SQL.Text := 'insert into T_clientes ( Codigo, Descricao,Telefone,CNPJCPF,Placa, DescricaoVeiculo,Ativo,'+
-                           '                         Cod_Atividade,Cod_Rota,Cod_Funcionario,Limite_Credito,Qtde_PedAberto, Status ) Values '+
+                           '                         Cod_Atividade,Cod_Rota,Cod_Funcionario,Limite_Credito,Qtde_PedAberto, Status, '+
+                           '                         Endereco, Bairro, Cep, Pto_referencia ) Values '+
                            '                       ( :parCodigo, :parDescricao,:parTelefone,:parCNPJCPF,:parPlaca, :parDescricaoVeiculo,:parAtivo, '+
-                           '                         :parCod_Atividade, :parCod_Rota, :parCod_Funcionario, :parLimite_Credito, :parQtde_PedAberto, :parStatus ) ';
+                           '                         :parCod_Atividade, :parCod_Rota, :parCod_Funcionario, :parLimite_Credito, :parQtde_PedAberto, :parStatus, '+
+                           '                         :parEndereco, :parBairro, :parCep, :parPto_referencia  ) ';
+
    FQryModific.ParamByName('parCodigo').AsString     := Sequencia('Codigo',False,'T_Clientes',fConexao.Conection,'',False,5);
    FQryModific.ParamByName('parDescricao').AsString  := Cliente.Descricao;
    FQryModific.ParamByName('parTelefone').AsString   := Cliente.Telefones;
@@ -109,6 +124,11 @@ begin
    FQryModific.ParamByName('parPlaca').AsString            := Cliente.Placa;
    FQryModific.ParamByName('parStatus').AsInteger          := 0;
    FQryModific.ParamByName('parDescricaoVeiculo').AsString := Cliente.DescricaoVeiculo;
+   FQryModific.ParamByName('parEndereco').AsString         := Cliente.Endereco.logradouro;
+   FQryModific.ParamByName('parCep').AsString              := Cliente.Endereco.cep;
+   FQryModific.ParamByName('parBairro').AsString           := Cliente.Endereco.bairro;
+   FQryModific.ParamByName('parPto_Referencia').AsString   := Cliente.Endereco.PontoReferencia;
+
    FQryModific.ExecSQL;
 end;
 

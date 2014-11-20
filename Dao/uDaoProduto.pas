@@ -2,7 +2,8 @@ unit uDaoProduto;
 
 interface
 
-uses uClassConexao, SqlExpr,Classes,DBClient,SysUtils;
+uses uClassConexao, SqlExpr,Classes,DBClient,SysUtils,uClassProduto;
+
 
 type TDaoProduto = class
    private
@@ -12,9 +13,11 @@ type TDaoProduto = class
      Constructor Create(Conexao : TConexao);
      function RetornarCodigoProduto( CodigoBarra: String ) : String;
      function BuscaCodigoProCodigoProprio( CodigoProprio : String ) : String;
+     function Buscar(ProdutoId : Integer) : TProduto;
 end;
 
 implementation
+
 
 { TDaoProduto }
 
@@ -31,6 +34,23 @@ begin
       Result := lcdsDados.FieldByName('Codigo').AsString;
    FreeAndNil(lstParametros);
    FreeAndnil(lcdsDados);
+end;
+
+function TDaoProduto.Buscar(ProdutoId: Integer): TProduto;
+var lstParametros : TStringList;
+    lcdsDados : TClientDataSet;
+    produto : TProduto;
+begin
+   lstParametros := TStringList.Create;
+   lstParametros.Add(IntToStr(ProdutoId));
+   lcdsDados := Fconexao.BuscarDadosSQL('select Descricao, Codigo, Pco_Venda from T_Produtos where Codigo=:Codigo',lstParametros);
+   produto := TProduto.Create;
+   produto.ProdutoId   := lcdsDados.FieldByName('Codigo').AsInteger;
+   produto.PrecoTabela := lcdsDados.FieldByName('Pco_Venda').AsFloat;
+   produto.Descricao   := lcdsDados.FieldByName('Descricao').AsString;
+   FreeAndNil(lstParametros);
+   FreeAndNil(lcdsDados);
+   Result := produto;
 end;
 
 constructor TDaoProduto.Create(Conexao: TConexao);

@@ -55,6 +55,9 @@
       <Form>FormBase</Form>
     </DCCReference>
     <DCCReference Include="..\Compartilhados\uFuncoes.pas" />
+    <DCCReference Include="..\Compartilhados\uSelFormaPagamento.pas">
+      <Form>frmselFormaPagamento</Form>
+    </DCCReference>
     <DCCReference Include="..\compartilhados\uTipos.pas" />
     <DCCReference Include="Controller\uControllerRomaneio.pas" />
     <DCCReference Include="Dao\Dao.pas" />
@@ -117,6 +120,7 @@
     <DCCReference Include="Modelos\uClassItemGrade.pas" />
     <DCCReference Include="Modelos\uClassItemVenda.pas" />
     <DCCReference Include="Modelos\uClassLancamento.pas" />
+    <DCCReference Include="Modelos\uClassProduto.pas" />
     <DCCReference Include="Modelos\uClassRomaneio.pas" />
     <DCCReference Include="Modelos\uClassRota.pas" />
     <DCCReference Include="Modelos\uClassSaldo.pas" />
@@ -211,8 +215,8 @@
     <DCCReference Include="uCtasReceber.pas">
       <Form>frmCtasReceber</Form>
     </DCCReference>
-    <DCCReference Include="uDelivery.pas">
-      <Form>frmDelivery</Form>
+    <DCCReference Include="uDeliveryGas.pas">
+      <Form>frmDeliveryGas</Form>
     </DCCReference>
     <DCCReference Include="uDescontoVenda.pas">
       <Form>FrmDescontoVenda</Form>
