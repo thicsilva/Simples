@@ -3,7 +3,7 @@ object frmSelDatas: TfrmSelDatas
   Top = 0
   Caption = 'Selecione o Intervalo de Datas'
   ClientHeight = 105
-  ClientWidth = 483
+  ClientWidth = 491
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmSelDatas: TfrmSelDatas
   object PanelConsulta: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 483
+    Width = 491
     Height = 56
     HintImageIndex = 0
     TabOrder = 0
@@ -32,6 +32,7 @@ object frmSelDatas: TfrmSelDatas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -50,12 +51,13 @@ object frmSelDatas: TfrmSelDatas
     Spacing = 2
     Caption = 'PanelConsulta'
     Align = alTop
+    ExplicitWidth = 483
     object dtpData_Ini: TbsSkinDateEdit
-      Left = 19
-      Top = 21
-      Width = 137
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Left = 20
+      Top = 22
+      Width = 122
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -93,6 +95,7 @@ object frmSelDatas: TfrmSelDatas
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -102,9 +105,9 @@ object frmSelDatas: TfrmSelDatas
       OnChange = dtpData_IniChange
     end
     object cmbTipoResumoVenda: TbsSkinComboBox
-      Left = 311
-      Top = 21
-      Width = 142
+      Left = 295
+      Top = 22
+      Width = 177
       Height = 20
       HintImageIndex = 0
       TabOrder = 1
@@ -142,7 +145,6 @@ object frmSelDatas: TfrmSelDatas
       HideSelection = True
       AutoComplete = True
       ImageIndex = 0
-      Enabled = False
       CharCase = ecNormal
       DefaultColor = clWindow
       Text = 'Venda Detalhada'
@@ -161,8 +163,8 @@ object frmSelDatas: TfrmSelDatas
       Style = bscbFixedStyle
     end
     object cmbturno: TbsSkinComboBox
-      Left = 162
-      Top = 21
+      Left = 148
+      Top = 22
       Width = 142
       Height = 20
       HintImageIndex = 0
@@ -218,11 +220,64 @@ object frmSelDatas: TfrmSelDatas
       Sorted = False
       Style = bscbFixedStyle
     end
+    object dtpData_Fim: TbsSkinDateEdit
+      Left = 148
+      Top = 22
+      Width = 122
+      Height = 20
+      EditMask = '!99/99/9999;1; '
+      Text = '  /  /    '
+      AlphaBlend = False
+      AlphaBlendAnimation = False
+      AlphaBlendValue = 0
+      UseSkinFont = True
+      TodayDefault = False
+      CalendarWidth = 200
+      CalendarHeight = 150
+      CalendarFont.Charset = DEFAULT_CHARSET
+      CalendarFont.Color = clWindowText
+      CalendarFont.Height = 14
+      CalendarFont.Name = 'Arial'
+      CalendarFont.Style = []
+      CalendarBoldDays = False
+      CalendarUseSkinFont = True
+      CalendarSkinDataName = 'panel'
+      FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = True
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'buttonedit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      TabOrder = 3
+      Visible = False
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnChange = dtpData_IniChange
+    end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 483
+    Width = 491
     Height = 53
     AutoSize = True
     Bands = <
@@ -230,16 +285,17 @@ object frmSelDatas: TfrmSelDatas
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 479
+        Width = 487
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
+    ExplicitWidth = 483
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 470
+      Width = 478
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -253,6 +309,7 @@ object frmSelDatas: TfrmSelDatas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -282,7 +339,7 @@ object frmSelDatas: TfrmSelDatas
       Flat = False
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 370
+        Left = 402
         Top = 0
         Width = 70
         Height = 49
@@ -361,7 +418,7 @@ object frmSelDatas: TfrmSelDatas
         ExplicitTop = 12
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 369
+        Left = 401
         Top = 0
         Width = 1
         Height = 49
@@ -375,13 +432,12 @@ object frmSelDatas: TfrmSelDatas
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
         Top = 0
-        Width = 299
+        Width = 331
         Height = 49
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -1
       end
     end
   end

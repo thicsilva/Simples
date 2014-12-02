@@ -54,6 +54,8 @@ type
     cdsCadCaixas: TClientDataSet;
     sdtsPesquisa: TSimpleDataSet;
     srcPesquisa: TDataSource;
+    bsSkinStdLabel2: TbsSkinStdLabel;
+    edtDataMovCaixa: TbsSkinDateEdit;
     procedure btnincluirClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -93,6 +95,7 @@ begin
    edtDescricao.Text          := sdtsPesquisa.FieldByName('Descricao').AsString;
 
    EdtData_cad.text := FormatDateTime('dd/mm/yyyy',sdtsPesquisa.FieldByName('Data_Cad').AsDateTime);
+   edtDataMovCaixa.text := FormatDateTime('dd/mm/yyyy',sdtsPesquisa.FieldByName('DataMovimento').AsDateTime);
 
    BtnIncluir.Enabled :=False;
    BtnAlterar.Enabled :=False;
@@ -187,6 +190,7 @@ begin
    End;
    cdsCadCaixas.FieldByName('Descricao').AsString     := edtDescricao.Text;
    cdsCadCaixas.FieldByName('Operador').AsString      := GsOperador;
+   cdsCadCaixas.FieldByName('DataMovimento').AsDateTime := Strtodate(edtDataMovCaixa.Text);
    cdsCadCaixas.FieldByName('Cod_Emp').AsString       := gsCod_Emp;
 
    cdsCadCaixas.Post;

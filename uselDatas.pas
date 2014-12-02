@@ -19,6 +19,7 @@ type
     bsSkinBevel2: TbsSkinBevel;
     cmbTipoResumoVenda: TbsSkinComboBox;
     cmbturno: TbsSkinComboBox;
+    dtpData_Fim: TbsSkinDateEdit;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnincluirClick(Sender: TObject);
@@ -54,25 +55,26 @@ procedure TfrmSelDatas.CarregarDoTurno;
 var DaoCaixaMovimento : TDaoCaixaMovimento;
     Dados : TclientDataSet;
 begin
-   DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
-   Dados := DaoCaixaMovimento.RetornarTurnosFechados(dtpData_Ini.Date, idCaixa);
-   cmbturno.Items.Clear;
-   //cmbturno.Items.Add('Caixa Aberto');
-   while not Dados.Eof do
+   if not HeDistribuidora then
    begin
-     if Dados.FieldByName('Turno').AsInteger<>0 then
-        cmbturno.Items.Add('Turno '+Dados.FieldByName('Turno').AsString);
-     Dados.Next;
+      DaoCaixaMovimento := TDaoCaixaMovimento.Create(gConexao);
+      Dados := DaoCaixaMovimento.RetornarTurnosFechados(dtpData_Ini.Date, idCaixa);
+      cmbturno.Items.Clear;
+      //cmbturno.Items.Add('Caixa Aberto');
+      while not Dados.Eof do
+      begin
+        if Dados.FieldByName('Turno').AsInteger<>0 then
+           cmbturno.Items.Add('Turno '+Dados.FieldByName('Turno').AsString);
+        Dados.Next;
+      end;
+      try
+      cmbturno.ItemIndex := 0;
+      except
+      end;
+      btnincluir.Enabled := False;
+      if cmbturno.Items.Count>0 then
+         btnincluir.Enabled := True;
    end;
-   try
-   cmbturno.ItemIndex := 0;
-   except
-   end;
-   btnincluir.Enabled := False;
-   if cmbturno.Items.Count>0 then
-      btnincluir.Enabled := True;
-
-   
 end;
 
 procedure TfrmSelDatas.dtpData_IniChange(Sender: TObject);

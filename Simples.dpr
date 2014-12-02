@@ -153,7 +153,8 @@ uses
   uselFuncionario in 'uselFuncionario.pas' {frmSelFuncionario},
   uDtmComprovanteVenda in 'Data Module\uDtmComprovanteVenda.pas' {DtmComprovante: TDataModule},
   uClassProduto in 'Modelos\uClassProduto.pas',
-  uSelFormaPagamento in '..\Compartilhados\uSelFormaPagamento.pas' {frmselFormaPagamento};
+  uSelFormaPagamento in '..\Compartilhados\uSelFormaPagamento.pas' {frmselFormaPagamento},
+  uSelProduto in 'uSelProduto.pas' {frmSelProduto};
 
 {$R *.res}
 
@@ -167,6 +168,7 @@ begin
   Application.CreateForm(TfrmSelFuncionario, frmSelFuncionario);
   Application.CreateForm(TDtmComprovante, DtmComprovante);
   Application.CreateForm(TfrmselFormaPagamento, frmselFormaPagamento);
+  Application.CreateForm(TfrmSelProduto, frmSelProduto);
   Frmlogin.ShowModal;
   Application.Run;
 end.

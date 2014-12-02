@@ -20,7 +20,7 @@ uses
   cxGridDBTableView, cxGrid, FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore,
   cxGridCustomPopupMenu, cxGridPopupMenu,uformBase, dxSkinsCore, cxLookAndFeels,
   cxLookAndFeelPainters, dxSkinsDefaultPainters, dxSkinscxPCPainter, frxClass,
-  frxDBSet;
+  frxDBSet, cxGridExportLink;
 
 type
   TfrmCtasReceber = class(TFormBase)
@@ -99,8 +99,7 @@ type
     Columm_Nome_Rota: TcxGridDBColumn;
     CxPropriedades: TcxPropertiesStore;
     cxGridPopupMenu1: TcxGridPopupMenu;
-    ExportarExcelCondensado1: TMenuItem;
-    ExportarExcelExpandido1: TMenuItem;
+    Gri: TMenuItem;
     Column_Nome_Status: TcxGridDBColumn;
     MenuGrid: TbsSkinPopupMenu;
     Marcarcomoentregue1: TMenuItem;
@@ -142,6 +141,11 @@ type
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
     DuplicataMercantil1: TMenuItem;
+    ProrrogarvencimntoNDias1: TMenuItem;
+    cxGrid1Level2: TcxGridLevel;
+    TabTipoPagamento: TcxGridDBTableView;
+    cdsTipoPagamento: TClientDataSet;
+    srcTipoPagamento: TDataSource;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -171,7 +175,6 @@ type
     procedure RecebimentosporLote1Click(Sender: TObject);
     procedure edtCod_FuncionarioExit(Sender: TObject);
     procedure cmbNome_FuncionarioChange(Sender: TObject);
-    procedure PanelSelecaoClick(Sender: TObject);
     procedure cmbLoteChange(Sender: TObject);
     procedure GridCtasReceberCellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
@@ -181,6 +184,8 @@ type
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo;
       var ADone: Boolean);
     procedure DuplicataMercantil1Click(Sender: TObject);
+    procedure GriClick(Sender: TObject);
+    procedure ProrrogarvencimntoNDias1Click(Sender: TObject);
 
   private
    pvQualBotao : String;
@@ -199,7 +204,7 @@ implementation
 
 uses uPrincipal,ufuncoes, uBaixaTipo_01_Brinde, uBaixaNormal,
   uselRelContasReceber, DaoSupervisor,DaoRemessa,
-  uAlteraVencimento_TipoPagamento, uDtmCadastro;
+  uAlteraVencimento_TipoPagamento, uDtmCadastro, uDaoContaReceber;
 
 procedure TfrmCtasReceber.LimpaCampos();
 Begin
@@ -260,10 +265,22 @@ begin
    cmbLote.ItemIndex := (cmbLote.Items.Count-1);
 end;
 
-procedure TfrmCtasReceber.PanelSelecaoClick(Sender: TObject);
+procedure TfrmCtasReceber.ProrrogarvencimntoNDias1Click(Sender: TObject);
+var daoContaReceber : TDaoContaReceber;
+    lsDias : string;
 begin
-  inherited;
+   if not inputQuery('Numero de Dias','Numero de Dias',lsDias) Then
+     Exit;
 
+   daoContaReceber := TDaoContaReceber.Create(gConexao);
+   cdsPesquisa.first;
+   while not cdsPesquisa.Eof do
+   begin
+      daoContaReceber.AtualizarVencimento( cdsPesquisa.FieldByName('Data_Vencimento').AsDateTime+StrTointDef(lsDias,0),
+                                           cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString,
+                                           cdsPesquisa.FieldByName('Sequencia').AsInteger);
+      cdsPesquisa.Next;                                     
+   end;
 end;
 
 {$R *.dfm}
@@ -744,6 +761,8 @@ begin
    lsWhere := '(Rec.Data_Vencimento>=:parDataIni and Rec.Data_Vencimento<=:parDataFim ) And ';
    if cmbTipoData.ItemIndex = 1 then
       lsWhere := '(Rec.Data_Emissao>=:parDataIni and Rec.Data_Emissao<=:parDataFim ) And ';
+   if cmbTipoData.ItemIndex = 2 then
+      lsWhere := '(Rec.Data_Pagamento>=:parDataIni and Rec.Data_Pagamento<=:parDataFim ) And ';
 
 
    qryPesquisa.Close;
@@ -789,6 +808,8 @@ begin
    end;
 
 
+
+
 end;
 
 procedure TfrmCtasReceber.EdtPesquisaKeyDown(Sender: TObject; var Key: Word;
@@ -803,6 +824,11 @@ begin
    if key=#13 then
       btnSelecionarclick(btnSelecionar);
 
+end;
+
+procedure TfrmCtasReceber.GriClick(Sender: TObject);
+begin
+  ExportGridToExcel(gspath + 'Excel\Relatorio_' + formatDatetime('mmss', now), cxGrid1);
 end;
 
 procedure TfrmCtasReceber.qryCtasPagarAfterOpen(DataSet: TDataSet);

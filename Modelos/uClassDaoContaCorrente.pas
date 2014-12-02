@@ -2,13 +2,17 @@ unit uClassDaoContaCorrente;
 
 interface
 
-uses cl_tConexao,uClassContacorrente, SqlExpr, DBXCommon,uPrincipal, SysUtils, 
-  Forms, SqlTimSt;
+uses uClassConexao, uClassContacorrente, SqlExpr, DBXCommon,uPrincipal, SysUtils, 
+  Forms, SqlTimSt, DBClient;
 
-Type TDaoContaCorrente = Class(TConexao)
-   public
+Type TDaoContaCorrente = Class
+   private
+     FConexao : TConexao;
+     FQryModific : TSqlQuery;
+  public
       Function Atualizar ( prDadosContaCorrente : TContaCorrente ) : Boolean ;
-      Constructor Create;
+      function Saldo(clienteId : Integer ) : Real ;
+      Constructor Create( conexao : TConexao);
 End;
 
 implementation
@@ -30,7 +34,7 @@ begin
    End;
     }
    lQrySalvaDados                := TSqlQuery.Create(Application);
-   lQrySalvaDados.SQLConnection  := Conection;
+   lQrySalvaDados.SQLConnection  := Fconexao.Conection;
    lQrySalvaDados.SQL.Text      := 'Insert Into T_ContaCorrente '+
                                    '       ( Historico,Cod_Emp,Data_Cad,Data_Mov,Operador,Valor,D_C,Cod_Cliente,Documento ) values  '+
                                    '       ( :parHistorico,:parCod_Emp,:parData_Cad,:parData_Mov,:parOperador,'+
@@ -53,8 +57,30 @@ end;
 
 constructor TDaoContaCorrente.Create;
 begin
-   inherited create;
+  Fconexao := conexao;
+  FQryModific := TSqlQuery.Create(nil);
+  FQryModific.SQLConnection := Fconexao.Conection;
+end;
 
+function TDaoContaCorrente.Saldo(clienteId: Integer): Real;
+var ldSaldo : Double;
+    qryvariavel : TSqlQuery;
+    lcdsDados   : TClientDataSet;
+begin
+   lcdsDados := Fconexao.BuscarDadosSQL('Select D_C, Sum(Valor) as Total from T_Contacorrente where Cod_Cliente='+QuotedStr(IntToStr(clienteId))+'  '+
+                                         'group by D_C',Nil);
+   ldSaldo := 0;
+   while not lcdsDados.Eof do
+   Begin
+      if lcdsDados.FieldByname('D_C').AsString = 'C' then
+         ldSaldo := ldSaldo + lcdsDados.FieldByname('Total').AsFloat;
+      if lcdsDados.FieldByname('D_C').AsString = 'D' then
+         ldSaldo := ldSaldo - lcdsDados.FieldByname('Total').AsFloat;
+      lcdsDados.Next;
+   End;
+   if ldSaldo>0 then
+      ldSaldo := 0;
+   Result := ldSaldo*(-1);
 end;
 
 end.

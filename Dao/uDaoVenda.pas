@@ -98,6 +98,7 @@ begin
     venda.Peso_Total     := self.PesoTotal( DadosVendas.FieldByName('SeqVenda').AsInteger);
     venda.Entregue       := DadosVendas.FieldByName('Entregue').AsBoolean;
     Venda.Vencimentos    := self.RetornarVencimentos(Venda.VendaID);
+    Venda.Status         := DadosVendas.FieldByName('Status').AsString;
     Result := Venda;
 end;
 

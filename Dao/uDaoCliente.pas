@@ -134,7 +134,7 @@ end;
 
 function TDaoCliente.SaldoDevedor(ClienteId: Integer; Data : TDateTime): real;
 var lstParametros : TStringList;
-   lcdsDados : TClientDataSet;
+    lcdsDados : TClientDataSet;
 begin
    lstParametros := TStringList.Create;
    lstParametros.Add(IntToStr(ClienteId));

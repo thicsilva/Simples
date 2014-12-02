@@ -73,7 +73,7 @@ object frmMovCaixa: TfrmMovCaixa
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 787
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -554,13 +554,18 @@ object frmMovCaixa: TfrmMovCaixa
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GridMovCaixa: TcxGrid
         Left = 0
         Top = 49
         Width = 798
-        Height = 285
+        Height = 284
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 285
         object GrdDespesas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GrdDespesasCustomDrawCell
@@ -1068,9 +1073,27 @@ object frmMovCaixa: TfrmMovCaixa
           TabOrder = 4
         end
       end
+      object pnlDataovimento: TPanel
+        Left = 520
+        Top = 54
+        Width = 275
+        Height = 28
+        Caption = 'pnlDataovimento'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -16
+        Font.Name = 'Arial Narrow'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+      end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manutencao'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 160
         Top = 47
@@ -1599,13 +1622,13 @@ object frmMovCaixa: TfrmMovCaixa
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 586
-    Top = 120
+    Left = 74
+    Top = 184
   end
   object dspPesquisa: TDataSetProvider
     DataSet = qryPesquisa
-    Left = 586
-    Top = 148
+    Left = 74
+    Top = 212
   end
   object cdsPesquisa: TClientDataSet
     Aggregates = <>
@@ -1613,63 +1636,63 @@ object frmMovCaixa: TfrmMovCaixa
     ProviderName = 'dspPesquisa'
     BeforeOpen = cdsPesquisaBeforeOpen
     OnCalcFields = cdsPesquisaCalcFields
-    Left = 587
-    Top = 176
+    Left = 75
+    Top = 240
   end
   object srcPesquisa: TDataSource
     DataSet = cdsPesquisa
-    Left = 587
-    Top = 204
+    Left = 75
+    Top = 268
   end
   object qryMovCaixa: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 614
-    Top = 120
+    Left = 102
+    Top = 184
   end
   object dspMovCaixa: TDataSetProvider
     DataSet = qryMovCaixa
-    Left = 614
-    Top = 148
+    Left = 102
+    Top = 212
   end
   object cdsMovCaixa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMovCaixa'
     BeforeOpen = cdsPesquisaBeforeOpen
-    Left = 615
-    Top = 176
+    Left = 103
+    Top = 240
   end
   object srcMovCaixa: TDataSource
     DataSet = cdsMovCaixa
-    Left = 615
-    Top = 204
+    Left = 103
+    Top = 268
   end
   object srcCadOperacoes: TDataSource
     DataSet = cdsCadOperacoes
-    Left = 643
-    Top = 204
+    Left = 131
+    Top = 268
   end
   object cdsCadOperacoes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
     BeforeOpen = cdsPesquisaBeforeOpen
-    Left = 643
-    Top = 176
+    Left = 131
+    Top = 240
   end
   object qryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 559
-    Top = 120
+    Left = 47
+    Top = 184
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 560
-    Top = 148
+    Left = 48
+    Top = 212
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -1770,50 +1793,50 @@ object frmMovCaixa: TfrmMovCaixa
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 671
-    Top = 176
+    Left = 159
+    Top = 240
   end
   object cdsCadFormasPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 699
-    Top = 176
+    Left = 187
+    Top = 240
   end
   object srcCadFormasPagamento: TDataSource
     DataSet = cdsCadFormasPagamento
-    Left = 699
-    Top = 204
+    Left = 187
+    Top = 268
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 531
-    Top = 120
+    Left = 19
+    Top = 184
   end
   object cdsCadClientes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 728
-    Top = 176
+    Left = 216
+    Top = 240
   end
   object srcCadClientes: TDataSource
     DataSet = cdsCadClientes
-    Left = 728
-    Top = 204
+    Left = 216
+    Top = 268
   end
   object srcCaixa: TDataSource
     DataSet = cdsCaixas
-    Left = 756
-    Top = 204
+    Left = 244
+    Top = 268
   end
   object cdsCaixas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 756
-    Top = 176
+    Left = 244
+    Top = 240
   end
 end

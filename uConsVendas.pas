@@ -566,7 +566,7 @@ begin
    end
    else
       frmVendas.Showmodal;
-   btnSelecionarClick(btnSelecionar);   
+   btnSelecionarClick(btnSelecionar);
 end;
 
 procedure TfrmConsVendas.cdsItensVendasAfterOpen(DataSet: TDataSet);
@@ -795,7 +795,7 @@ end;
 procedure TfrmConsVendas.FormShow(Sender: TObject);
 begin
  inherited;
-
+   cmbPeriodo.ItemIndex := 2;
    cmbPeriodoChange(cmbPeriodo);
 
    btnEmproducao.Visible  := True;
@@ -803,6 +803,7 @@ begin
    cmbTipoFiltro.Enabled  := True;
    cmbStatus.Enabled      := True;
    btnEntregaVenda.Visible := False;
+
    If gsParametros.ReadString('ACESSODADOS','TipoSistema','0') ='0' Then
    Begin
       btnCupomFiscal.Visible := False;
@@ -811,7 +812,6 @@ begin
       btnEntregaVenda.Visible := True;
       separador.Width        := separador.Width+( btnEntregue.Width * 4 );
    End;
-
 
    frmConsVendas.Caption  := 'Consulta e manutenção de Vendas  ';
    pnlmensagem.Caption    := 'Consulta de vendas ';
@@ -862,6 +862,13 @@ begin
       colum_Defeito.Visible := True;
       colum_Vlr_Desconto.Visible := False;
    End;
+   if HeDistribuidora then
+   begin
+      LucroBrutoReal.Visible := True;
+      LucroBruto.Visible := True;
+   end;
+
+
 
 end;
 
@@ -1023,7 +1030,7 @@ begin
       while not CdsVerifica.Eof do
       Begin
          DadosContaCorrente := TContaCorrente.Create;
-         GravaContaCorrente := TDaoContaCorrente.Create;
+         GravaContaCorrente := TDaoContaCorrente.Create(gConexao);
          DadosContaCorrente.D_C         := 'C';
          DadosContaCorrente.Valor       := CdsVerifica.FieldByname('Valor').AsFloat;
          DadosContaCorrente.Cod_Cliente :=  CdsVerifica.FieldByname('Cod_cliente').AsInteger;

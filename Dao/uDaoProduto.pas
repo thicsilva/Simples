@@ -13,6 +13,7 @@ type TDaoProduto = class
      Constructor Create(Conexao : TConexao);
      function RetornarCodigoProduto( CodigoBarra: String ) : String;
      function BuscaCodigoProCodigoProprio( CodigoProprio : String ) : String;
+     function BuscarTodos : TClientDataSet;
      function Buscar(ProdutoId : Integer) : TProduto;
 end;
 
@@ -51,6 +52,11 @@ begin
    FreeAndNil(lstParametros);
    FreeAndNil(lcdsDados);
    Result := produto;
+end;
+
+function TDaoProduto.BuscarTodos: TClientDataSet;
+begin
+   Result := FConexao.BuscarDadosSQL('Select Codigo,Descricao from T_Produtos order by Descricao', Nil);
 end;
 
 constructor TDaoProduto.Create(Conexao: TConexao);

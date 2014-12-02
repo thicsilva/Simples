@@ -34,6 +34,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -52,6 +53,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     Spacing = 2
     Caption = 'Informe a quantidade devolvida dos produtos'
     Align = alClient
+    UseSkinSize = True
     object dbgConsulta: TbsSkinDBGrid
       Left = 1
       Top = 23
@@ -71,6 +73,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
+      ColSizingwithLine = False
       DrawGraphicFields = False
       UseColumnsFont = False
       DefaultRowHeight = 20
@@ -146,6 +149,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -215,6 +219,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -235,7 +240,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       Left = 130
       Top = 0
       Width = 130
-      Height = 23
+      Height = 25
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -259,6 +264,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       Enabled = False
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -302,6 +308,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -629,6 +636,8 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     Top = 240
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -646,6 +655,8 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False

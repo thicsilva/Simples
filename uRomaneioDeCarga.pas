@@ -199,6 +199,13 @@ begin
          Exit;
       end;
 
+      if (Venda.Status='C') OR (Venda.Status='5') then
+      begin
+         CaixaMensagem( 'A Venda foi Cancelada ', ctAviso, [ cbOk ], 0 );
+         MudarFoco;
+         Exit;
+      end;
+
 
       cdsVendasRomaneio.Append;
       cdsVendasRomaneio.FieldByName('NumeroVenda').AsInteger :=  Venda.VendaID;

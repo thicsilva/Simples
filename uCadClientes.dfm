@@ -2739,7 +2739,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 594
-        Top = 3
+        Top = 4
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -3092,7 +3092,7 @@ object frmCadClientes: TfrmCadClientes
         Align = alTop
         object AtualizaRec: TbsSkinSpeedButton
           Left = 503
-          Top = 7
+          Top = 10
           Width = 151
           Height = 24
           HintImageIndex = 0
@@ -3492,7 +3492,7 @@ object frmCadClientes: TfrmCadClientes
           end
           object Colum_Data: TcxGridDBColumn
             Caption = 'Data'
-            DataBinding.FieldName = 'Data_Lancamento'
+            DataBinding.FieldName = 'Data_Mov'
             Width = 80
           end
           object Colum_Historico: TcxGridDBColumn
@@ -3511,6 +3511,7 @@ object frmCadClientes: TfrmCadClientes
           end
           object Column_Saldo: TcxGridDBColumn
             DataBinding.FieldName = 'Vlr_Saldo'
+            Visible = False
             Width = 70
           end
         end

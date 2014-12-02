@@ -38,7 +38,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 793
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -577,7 +577,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 793
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0

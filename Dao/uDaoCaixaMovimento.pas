@@ -14,6 +14,7 @@ Type TDaoCaixaMovimento = Class
     function RetornarTurnosFechados(ptDataAtual: TdateTime; IdCaixa : integer) : TClientDataSet;
     function TemCaixaAberto(ptDataAtual: TdateTime) : Boolean;
     function RetornarCaixaDoLancamento(SeqVenda : Integer) : integer;
+    function RetornarDataMovimento(CaixaId : String) : TDateTime;
     procedure Lancar(lacamento : TLancamento);
 end;
 
@@ -38,7 +39,7 @@ begin
    FQueryModific.ParamByName('parCod_Caixa').AsInteger            := lacamento.Cod_Caixa;
    FQueryModific.ParamByName('parValor').asFloat                  := lacamento.Valor;
    FQueryModific.ParamByName('parHistorico').asString             := lacamento.Historico;
-   FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToSqlTimeStamp(lacamento.Data_Lancamento);
+   FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp :=  DateTimeToSqlTimeStamp(RetornarDataMovimento(IntToStr(lacamento.Cod_Caixa)));
    FQueryModific.ParamByName('parD_C').AsString                   := lacamento.D_C;
    FQueryModific.ParamByName('parSeqVenda').asInteger             := lacamento.SeqVenda;
    FQueryModific.ParamByName('parCod_tipoDespesa').AsString       := lacamento.Cod_tipoDespesa;
@@ -60,6 +61,18 @@ begin
    Finally
      FreeAndNil(parametros);
      FreeAndNil(Dados);
+   End;
+end;
+
+function TDaoCaixaMovimento.RetornarDataMovimento(CaixaId: String): TDateTime;
+var Parametros : TStringList;
+begin
+   parametros := TStringList.Create;
+   Try
+     Parametros.Add(CaixaId);
+     Result := FConexao.BuscarDadosSQL('select coalesce(max(Turno),0) as Turno from Caixas where Cod_Caixa=:parCod_Caixa',Parametros ).FieldByName('DataMovimento').AsDateTime;
+   Finally
+     FreeAndNil(parametros);
    End;
 end;
 

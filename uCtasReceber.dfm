@@ -232,8 +232,20 @@ object frmCtasReceber: TfrmCtasReceber
             Width = 150
           end
         end
+        object TabTipoPagamento: TcxGridDBTableView
+          Navigator.Buttons.CustomButtons = <>
+          DataController.DataSource = srcTipoPagamento
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsView.GroupByBox = False
+          OptionsView.Header = False
+        end
         object cxGrid1Level1: TcxGridLevel
           GridView = GridCtasReceber
+          object cxGrid1Level2: TcxGridLevel
+            GridView = TabTipoPagamento
+          end
         end
       end
       object PanelSelecao: TbsSkinPanel
@@ -272,7 +284,6 @@ object frmCtasReceber: TfrmCtasReceber
         Spacing = 2
         Caption = 'PanelSelecao'
         Align = alTop
-        OnClick = PanelSelecaoClick
         object lblTurma: TbsSkinStdLabel
           Left = 220
           Top = 43
@@ -793,11 +804,12 @@ object frmCtasReceber: TfrmCtasReceber
           ImageIndex = -1
           CharCase = ecNormal
           DefaultColor = clWindow
-          Text = 'Data de Emiss'#227'o'
+          Text = 'Data do Vencimento'
           Items.Strings = (
             'Data do Vencimento'
-            'Data de Emiss'#227'o')
-          ItemIndex = 1
+            'Data de Emiss'#227'o'
+            'Data de Pagamento')
+          ItemIndex = 0
           DropDownCount = 8
           HorizontalExtent = False
           Font.Charset = DEFAULT_CHARSET
@@ -2173,13 +2185,10 @@ object frmCtasReceber: TfrmCtasReceber
     object N1: TMenuItem
       Caption = '-'
     end
-    object ExportarExcelExpandido1: TMenuItem
-      Caption = 'Exportar Excel Expandido'
+    object Gri: TMenuItem
+      Caption = 'Exportar Excel '
       Visible = False
-    end
-    object ExportarExcelCondensado1: TMenuItem
-      Caption = 'Exportar Excel Condensado'
-      Visible = False
+      OnClick = GriClick
     end
     object DuplicataMercantil1: TMenuItem
       Caption = 'Duplicata Mercantil'
@@ -3171,6 +3180,10 @@ object frmCtasReceber: TfrmCtasReceber
       Caption = 'Alterar Vencimento e Tipo de Pagamento'
       OnClick = alterarVencimentoeTipodePagamento1Click
     end
+    object ProrrogarvencimntoNDias1: TMenuItem
+      Caption = 'Prorrogar vencimnto N Dias'
+      OnClick = ProrrogarvencimntoNDias1Click
+    end
   end
   object bsSkinPopupMenu1: TbsSkinPopupMenu
     Left = 196
@@ -3835,8 +3848,8 @@ object frmCtasReceber: TfrmCtasReceber
       'EnderecoObra=EnderecoObra')
     DataSet = cdsCadClientes
     BCDToCurrency = False
-    Left = 390
-    Top = 313
+    Left = 389
+    Top = 312
   end
   object frxDbEmpresa: TfrxDBDataset
     UserName = 'dbSetEmpresa'
@@ -3879,5 +3892,17 @@ object frmCtasReceber: TfrmCtasReceber
     BCDToCurrency = False
     Left = 418
     Top = 312
+  end
+  object cdsTipoPagamento: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 277
+    Top = 339
+  end
+  object srcTipoPagamento: TDataSource
+    DataSet = cdsTipoPagamento
+    Left = 277
+    Top = 311
   end
 end

@@ -1479,7 +1479,7 @@ begin
             2 :
             Begin
                DadosContaCorrente := TContaCorrente.Create;
-               GravaContaCorrente := TDaoContaCorrente.Create;
+               GravaContaCorrente := TDaoContaCorrente.Create(gConexao);
                DadosContaCorrente.D_C         := 'D';
                DadosContaCorrente.Valor       := (StrTOFloat(edtTotalLiquido.Text)-ldPrePagamento);
                DadosContaCorrente.Cod_Cliente := StrToInt(cmbCod_Cliente.KeyValue);

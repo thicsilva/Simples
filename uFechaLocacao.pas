@@ -366,7 +366,7 @@ begin
           2 :
           Begin
              DadosContaCorrente := TContaCorrente.Create;
-             GravaContaCorrente := TDaoContaCorrente.Create;
+             GravaContaCorrente := TDaoContaCorrente.Create(gConexao);
              DadosContaCorrente.D_C         := 'D';
              DadosContaCorrente.Valor       := lrTotalPagamento;
              DadosContaCorrente.Cod_Cliente := StrToInt(edtCodCliente.Text);

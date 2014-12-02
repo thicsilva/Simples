@@ -1099,11 +1099,12 @@ object frmParametros: TfrmParametros
           ButtonDefaultFont.Style = []
           Items.Strings = (
             'Distribui'#231#227'o de Revenda'
-            'Comercio e Servi'#231'o'
+            'Servi'#231'o Fotografico'
             'Pet Shop'
             'Loca'#231#227'o'
             'Assistencia Tecnica'
-            'Servi'#231'os Automotivos')
+            'Servi'#231'os Automotivos'
+            'Venda Porta a Porta')
         end
       end
     end
@@ -2148,7 +2149,7 @@ object frmParametros: TfrmParametros
       Caption = 'Vendas'
       object Label6: TLabel
         Left = 12
-        Top = 113
+        Top = 153
         Width = 178
         Height = 14
         Caption = 'Numero de casas decimais da venda'
@@ -2215,7 +2216,7 @@ object frmParametros: TfrmParametros
       end
       object edtDecimais: TbsSkinSpinEdit
         Left = 196
-        Top = 107
+        Top = 147
         Width = 54
         Height = 20
         HintImageIndex = 0
@@ -2296,6 +2297,36 @@ object frmParametros: TfrmParametros
         Checked = False
         GroupIndex = 0
         Caption = 'Trabalha com Controle de comi'#231#227'o por servi'#231'o'
+      end
+      object chkVendaDiretoCaixa: TbsSkinCheckRadioBox
+        Left = 12
+        Top = 86
+        Width = 255
+        Height = 25
+        HintImageIndex = 0
+        TabOrder = 5
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'checkbox'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        WordWrap = False
+        AllowGrayed = False
+        State = cbUnchecked
+        ImageIndex = 0
+        Flat = True
+        UseSkinFontColor = True
+        TabStop = True
+        CanFocused = True
+        Radio = False
+        Checked = False
+        GroupIndex = 0
+        Caption = 'N'#227'o permite venda direto Caixa'
       end
     end
   end

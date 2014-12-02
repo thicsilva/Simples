@@ -38,7 +38,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 664
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -429,7 +429,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 9
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -638,58 +638,6 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageHotIndex = -1
       RightImageDownIndex = -1
     end
-    object edtData_Pagamento: TbsSkinDateEdit
-      Left = 117
-      Top = 88
-      Width = 100
-      Height = 20
-      EditMask = '!99/99/9999;1; '
-      Text = '  /  /    '
-      AlphaBlend = False
-      AlphaBlendAnimation = False
-      AlphaBlendValue = 0
-      UseSkinFont = True
-      TodayDefault = False
-      CalendarWidth = 200
-      CalendarHeight = 150
-      CalendarFont.Charset = DEFAULT_CHARSET
-      CalendarFont.Color = clWindowText
-      CalendarFont.Height = 14
-      CalendarFont.Name = 'Arial'
-      CalendarFont.Style = []
-      CalendarBoldDays = False
-      CalendarUseSkinFont = True
-      CalendarSkinDataName = 'panel'
-      FirstDayOfWeek = Sun
-      WeekNumbers = False
-      ShowToday = False
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clBlack
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      ButtonMode = True
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'buttonedit'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      MaxLength = 10
-      ParentFont = False
-      TabOrder = 6
-      ButtonImageIndex = -1
-      LeftImageIndex = -1
-      LeftImageHotIndex = -1
-      LeftImageDownIndex = -1
-      RightImageIndex = -1
-      RightImageHotIndex = -1
-      RightImageDownIndex = -1
-      OnChange = edtData_PagamentoChange
-    end
     object Cod_Cliente: TbsSkinEdit
       Left = 137
       Top = 55
@@ -714,7 +662,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -748,7 +696,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 7
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -782,7 +730,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 8
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -819,7 +767,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 10
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -835,7 +783,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Width = 36
       Height = 20
       HintImageIndex = 0
-      TabOrder = 12
+      TabOrder = 11
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -911,7 +859,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 12
       Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -923,7 +871,44 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
     object edtMulta: TbsSkinNumericEdit
       Left = 259
-      Top = 88
+      Top = 85
+      Width = 61
+      Height = 20
+      Text = '0,00'
+      Increment = 1.000000000000000000
+      SupportUpDownKeys = False
+      Alignment = taRightJustify
+      UseSkinFont = True
+      ValueType = vtFloat
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = False
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'edit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 13
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+      OnExit = edtVlr_DescontoExit
+    end
+    object edtJuros: TbsSkinNumericEdit
+      Left = 373
+      Top = 85
       Width = 61
       Height = 20
       Text = '0,00'
@@ -949,43 +934,6 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Style = []
       ParentFont = False
       TabOrder = 14
-      ButtonImageIndex = -1
-      LeftImageIndex = -1
-      LeftImageHotIndex = -1
-      LeftImageDownIndex = -1
-      RightImageIndex = -1
-      RightImageHotIndex = -1
-      RightImageDownIndex = -1
-      OnExit = edtVlr_DescontoExit
-    end
-    object edtJuros: TbsSkinNumericEdit
-      Left = 373
-      Top = 88
-      Width = 61
-      Height = 20
-      Text = '0,00'
-      Increment = 1.000000000000000000
-      SupportUpDownKeys = False
-      Alignment = taRightJustify
-      UseSkinFont = True
-      ValueType = vtFloat
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clBlack
-      DefaultFont.Height = 14
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
-      DefaultWidth = 0
-      DefaultHeight = 0
-      ButtonMode = False
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'edit'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = 14
-      Font.Name = 'Arial'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 15
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -1023,6 +971,57 @@ object frmBaixaNormal: TfrmBaixaNormal
       Font.Name = 'Arial'
       Font.Style = []
       ParentFont = False
+      TabOrder = 15
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
+    end
+    object edtData_Pagamento: TbsSkinDateEdit
+      Left = 111
+      Top = 85
+      Width = 89
+      Height = 20
+      EditMask = '!99/99/9999;1; '
+      Text = '  /  /    '
+      AlphaBlend = False
+      AlphaBlendAnimation = False
+      AlphaBlendValue = 0
+      UseSkinFont = True
+      TodayDefault = False
+      CalendarWidth = 200
+      CalendarHeight = 150
+      CalendarFont.Charset = DEFAULT_CHARSET
+      CalendarFont.Color = clWindowText
+      CalendarFont.Height = 14
+      CalendarFont.Name = 'Arial'
+      CalendarFont.Style = []
+      CalendarBoldDays = False
+      CalendarUseSkinFont = True
+      CalendarSkinDataName = 'panel'
+      FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clBlack
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      ButtonMode = True
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'buttonedit'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
       TabOrder = 16
       ButtonImageIndex = -1
       LeftImageIndex = -1
@@ -1031,6 +1030,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageIndex = -1
       RightImageHotIndex = -1
       RightImageDownIndex = -1
+      OnChange = edtData_PagamentoChange
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox
@@ -1089,7 +1089,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       object bsSkinToolBar2: TbsSkinToolBar
         Left = 9
         Top = 0
-        Width = 662
+        Width = 70
         Height = 40
         HintImageIndex = 0
         TabOrder = 0
@@ -1452,7 +1452,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Left = 490
         Top = 5
         Width = 87
-        Height = 22
+        Height = 19
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = clInfoBk

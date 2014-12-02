@@ -79,9 +79,9 @@ object frmCadCaixas: TfrmCadCaixas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 489
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -115,6 +115,7 @@ object frmCadCaixas: TfrmCadCaixas
         OnClick = btnFecharClick
         ExplicitLeft = 543
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -356,7 +357,7 @@ object frmCadCaixas: TfrmCadCaixas
     Top = 53
     Width = 635
     Height = 247
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -385,12 +386,10 @@ object frmCadCaixas: TfrmCadCaixas
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitLeft = 104
+    ExplicitTop = 69
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -588,10 +587,9 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 0
         Top = 33
         Width = 633
-        Height = 192
+        Height = 190
         Align = alClient
         TabOrder = 1
-        ExplicitHeight = 190
         object GridConsulta: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -646,10 +644,6 @@ object frmCadCaixas: TfrmCadCaixas
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 108
         Top = 80
@@ -700,6 +694,23 @@ object frmCadCaixas: TfrmCadCaixas
         SkinData = frmPrincipal.SkinEntradaDados
         SkinDataName = 'stdlabel'
         Caption = 'Data Cadastro'
+      end
+      object bsSkinStdLabel2: TbsSkinStdLabel
+        Left = 48
+        Top = 130
+        Width = 93
+        Height = 13
+        EllipsType = bsetNone
+        UseSkinFont = True
+        UseSkinColor = True
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = -11
+        DefaultFont.Name = 'MS Sans Serif'
+        DefaultFont.Style = []
+        SkinData = frmPrincipal.SkinEntradaDados
+        SkinDataName = 'stdlabel'
+        Caption = 'Data do Movimento'
       end
       object edtDescricao: TbsSkinEdit
         Left = 149
@@ -800,6 +811,56 @@ object frmCadCaixas: TfrmCadCaixas
         RightImageHotIndex = -1
         RightImageDownIndex = -1
       end
+      object edtDataMovCaixa: TbsSkinDateEdit
+        Left = 149
+        Top = 127
+        Width = 121
+        Height = 19
+        EditMask = '!99/99/9999;1; '
+        Text = '  /  /    '
+        AlphaBlend = False
+        AlphaBlendAnimation = False
+        AlphaBlendValue = 0
+        UseSkinFont = True
+        TodayDefault = False
+        CalendarWidth = 200
+        CalendarHeight = 150
+        CalendarFont.Charset = DEFAULT_CHARSET
+        CalendarFont.Color = clWindowText
+        CalendarFont.Height = 13
+        CalendarFont.Name = 'Tahoma'
+        CalendarFont.Style = []
+        CalendarBoldDays = False
+        CalendarUseSkinFont = True
+        CalendarSkinDataName = 'panel'
+        FirstDayOfWeek = Sun
+        WeekNumbers = False
+        ShowToday = False
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clBlack
+        DefaultFont.Height = 13
+        DefaultFont.Name = 'Tahoma'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        ButtonMode = True
+        SkinDataName = 'buttonedit'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = 13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        MaxLength = 10
+        ParentFont = False
+        TabOrder = 3
+        ButtonImageIndex = -1
+        LeftImageIndex = -1
+        LeftImageHotIndex = -1
+        LeftImageDownIndex = -1
+        RightImageIndex = -1
+        RightImageHotIndex = -1
+        RightImageDownIndex = -1
+      end
     end
   end
   object qryCadCaixas: TSQLQuery
@@ -808,25 +869,25 @@ object frmCadCaixas: TfrmCadCaixas
     SQL.Strings = (
       'Select * from T_Atividades where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 216
-    Top = 166
+    Left = 296
+    Top = 206
   end
   object dspCadCaixas: TDataSetProvider
     DataSet = qryCadCaixas
-    Left = 216
-    Top = 139
+    Left = 326
+    Top = 205
   end
   object srcCadCaixas: TDataSource
     DataSet = cdsCadCaixas
-    Left = 216
-    Top = 223
+    Left = 296
+    Top = 263
   end
   object cdsCadCaixas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadAtividades'
-    Left = 216
-    Top = 194
+    Left = 296
+    Top = 234
   end
   object sdtsPesquisa: TSimpleDataSet
     Aggregates = <>
@@ -834,12 +895,12 @@ object frmCadCaixas: TfrmCadCaixas
     DataSet.MaxBlobSize = -1
     DataSet.Params = <>
     Params = <>
-    Left = 188
-    Top = 223
+    Left = 268
+    Top = 263
   end
   object srcPesquisa: TDataSource
     DataSet = sdtsPesquisa
-    Left = 188
-    Top = 195
+    Left = 268
+    Top = 235
   end
 end

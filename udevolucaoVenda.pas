@@ -101,6 +101,8 @@ Var  trdNrTransacao : TTransactionDesc;
      vlr_anterior   : Double;
      vlr_Atual      : Double;
      lsitensDevolvidos : String;
+     lrVlr_custo : Double;
+     lrVlr_Total : Double;
      loDaoRomaneio : TDaoRomaneio;
      loDaoContaAReceber : TDaoContareceber;
      VendaId : Integer;
@@ -110,6 +112,8 @@ begin
    lrvlr_TotalItem   := 0 ;
    lrVlr_Devolvido   := 0 ;
    lrVlr_Desconto    := 0 ;
+   lrVlr_custo       := 0 ;
+   lrVlr_Total       := 0 ;
 
    cdsTmpItensDevolucoes.First;
    while not cdsTmpItensDevolucoes.Eof do
@@ -138,9 +142,10 @@ begin
       cdsTmpItensDevolucoes.First;
       while not cdsTmpItensDevolucoes.Eof do
       Begin
+         lrVlr_custo := lrVlr_custo + ( cdsTmpItensDevolucoes.FieldByName('Pco_Custo').Asfloat * ( cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').AsInteger - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger));
+         lrVlr_Total := lrVlr_Total + ( cdsTmpItensDevolucoes.FieldByName('Pco_Venda').Asfloat * ( cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').AsInteger - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger));
          if cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger > 0 then
          Begin
-
              lrVlr_Devolvido := lrVlr_Devolvido + (cdsTmpItensDevolucoes.FieldByName('Pco_Venda').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
              lrVlr_Desconto  := lrVlr_Desconto +  (cdsTmpItensDevolucoes.FieldByName('Vlr_Desconto').asFloat * cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger) ;
              lrvlr_TotalItem := ( ( cdsTmpItensDevolucoes.FieldByName('Qtde_Vendida').asFloat - cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asInteger ) *
@@ -262,10 +267,10 @@ begin
                    frmPrincipal.dbxPrincipal.Rollback( trdNrTransacao );
                    Exit;
                 End;
-
              End;
           End;
           lsitensDevolvidos := lsitensDevolvidos + 'Codigo.:'+IncZero(cdsTmpItensDevolucoes.FieldByName('Codigo').asString,5)+' Qtde.: '+cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').asString+' ';
+
           cdsTmpItensDevolucoes.Next;
        End;
 
@@ -277,11 +282,15 @@ begin
              qrymodific.Close;
              qrymodific.Params.Clear;
              qrymodific.SQL.Text :='Update T_vendas set Vlr_total    = ( vlr_total    - :parvlr_total ), '+
-                                   '                    Vlr_Desconto = ( Vlr_Desconto - :parVlr_Desconto ) '+
+                                   '                    Vlr_Desconto = ( Vlr_Desconto - :parVlr_Desconto ), '+
+                                   '                    LucroBruto =:parLucroBruto, '+
+                                   '                    CustoTotal =:parCustoTotal '+
                                    'Where SeqVenda=:parSeqvenda  ';
              qrymodific.ParamByName('ParSeqVenda').AsInteger          := piSeqVenda;
              qrymodific.ParamByName('ParVlr_Total').AsFloat           := lrVlr_Devolvido;
              qrymodific.ParamByName('ParVlr_Desconto').AsFloat        := lrVlr_Desconto;
+             qrymodific.ParamByName('parLucroBruto').AsFloat          := ((lrVlr_Total-lrVlr_custo)/lrVlr_Total)*100;
+             qrymodific.ParamByName('parCustoTotal').AsFloat          := lrVlr_custo;
              qrymodific.ExecSQL;
 
           End;
@@ -410,7 +419,7 @@ begin
       cdsTmpItensDevolucoes.FieldByName('Pco_Venda').Asfloat        := (cdsitensvendas.FieldByName('Pco_Venda').Asfloat-cdsitensvendas.FieldByName('Vlr_Desconto').Asfloat);
       cdsTmpItensDevolucoes.FieldByName('Pco_Venda_Atual').Asfloat  := cdsitensvendas.FieldByName('Venda_Atual').Asfloat;
       cdsTmpItensDevolucoes.FieldByName('Qtde_Devolvida').AsInteger := 0;
-      cdsTmpItensDevolucoes.FieldByName('Pco_Custo').Asfloat        := cdsitensvendas.FieldByName('Pco_Compra').Asfloat;
+      cdsTmpItensDevolucoes.FieldByName('Pco_Custo').Asfloat        := cdsitensvendas.FieldByName('PrecoCusto').Asfloat;
       cdsTmpItensDevolucoes.FieldByName('Vlr_Desconto').Asfloat     := cdsitensvendas.FieldByName('Vlr_Desconto').Asfloat;
       cdsTmpItensDevolucoes.post;
       cdsItensvendas.Next;

@@ -1514,7 +1514,7 @@ begin
 
       qryvariavel.Close;
       qryvariavel.SQL.Text := 'Select  Prod.Descricao, Itens.* from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
-                              'where Ven.Cod_Cliente=:parCod_Cliente and itens.SeqVenda=Ven.SeqVenda and Prod.Codigo=Itens.Cod_Produto ';
+                              'where Ven.Cod_Cliente=:parCod_Cliente and itens.SeqVenda=Ven.SeqVenda and Prod.Codigo=Itens.Cod_Produto Order by Ven.seqvenda ';
       qryvariavel.ParamByName('parCod_Cliente').AsInteger   := cdspesquisa.FieldByName('Codigo').asInteger;
 
       cdsItensVendas.Close;
@@ -2004,19 +2004,22 @@ begin
      acanvas.Font.color := clGreen
   Else if aviewinfo.GridRecord.Values[colum_status.Index]='Cancelado'  Then
      acanvas.Font.color := clBlue;
-  IF aviewinfo.GridRecord.Values[colum_status.Index]='Vencido' Then
-  begin
-     IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>60 Then
-     Begin
-        acanvas.Brush.color := clRed;
-        acanvas.Font.color  := clblack;
-     End
-     Else IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>30 Then
-     Begin
-        acanvas.Brush.color := clYellow;
-        acanvas.Font.color  := clblack;
-     End;
-  end;
+  if HeProtaPorta then
+  Begin
+    IF aviewinfo.GridRecord.Values[colum_status.Index]='Vencido' Then
+    begin
+       IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>60 Then
+       Begin
+          acanvas.Brush.color := clRed;
+          acanvas.Font.color  := clblack;
+       End
+       Else IF aviewinfo.GridRecord.Values[Columm_Dias.Index]>30 Then
+       Begin
+          acanvas.Brush.color := clYellow;
+          acanvas.Font.color  := clblack;
+       End;
+    end;
+  End;
 
 end;
 

@@ -83,6 +83,8 @@ type
     bsSkinButton6: TbsSkinButton;
     btnVenda06: TbsSkinButton;
     bsSkinButton3: TbsSkinButton;
+    lblDevedor: TLabel;
+    btnVendaproduto: TbsSkinButton;
     procedure edtNomeChange(Sender: TObject);
     procedure cdsClientesAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -106,6 +108,7 @@ type
     procedure bsSkinButton6Click(Sender: TObject);
     procedure btnVenda06Click(Sender: TObject);
     procedure bsSkinButton3Click(Sender: TObject);
+    procedure btnVendaprodutoClick(Sender: TObject);
   private
     VendaId : Integer;
     FormaPagamento : String;
@@ -127,26 +130,27 @@ uses
   uDaoFuncionario, uClassVenda, uDaoFormaPagamento, uDaoItemVenda,
   uClassItemVenda, uDaoProduto, uClassProduto, uCadastroRapidoCliente,
   uSelFormaPagamento, uclassContaCorrente, uClassDaoContaCorrente,
-  uselFuncionario;
+  uselFuncionario, uSelProduto;
 
 {$R *.dfm}
 
 procedure TfrmDeliveryGas.dbgConsultaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TbsColumn;
-  State: TGridDrawState);
-  var Hora01,Hora02 : String;
+  const Rect: TRect; DataCol: Integer; Column: TbsColumn;  State: TGridDrawState);
 begin
 
    if gdSelected in State then
       exit;
 
-
-   if cdsLista.FieldByName('Entregador').AsString<>EmptyStr then
+  if cdsLista.FieldByName('Entregador').AsString<>EmptyStr then
    Begin
       dbgConsulta.Canvas.font.Color    := clBlack;
       dbgConsulta.Canvas.Brush.Color   := $0080FFFF;
    End;
-
+   if cdsLista.FieldByName('Hora').AsString='2' then
+   begin
+      dbgConsulta.Canvas.font.Color    := clBlack;
+      dbgConsulta.Canvas.Brush.Color   := clred;
+   end;
    if  cdslista.FieldByName('Status').AsString='S' then
    begin
       dbgConsulta.Canvas.font.Color    := clBlack;
@@ -249,6 +253,25 @@ begin
    IncluirVenda(1,2,1,1);
 end;
 
+procedure TfrmDeliveryGas.btnVendaprodutoClick(Sender: TObject);
+var ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer;
+begin
+   ProdutoId02   := 0;
+   Quantidade02  := 0;
+   frmSelProduto := TfrmSelProduto.Create(Self);
+   frmSelProduto.ShowModal;
+   if frmSelProduto.Tag=0 then
+      exit;
+   ProdutoId01   :=  frmSelProduto.cmbProdutoUm.KeyValue;
+   Quantidade01  :=  frmSelProduto.qtdeProdutoUm.Value;
+   if frmSelProduto.qtdeProdutoDois.Value>0 then
+   begin
+      ProdutoId02   := frmSelProduto.cmbProdutoDois.KeyValue;
+      Quantidade02  := frmSelProduto.qtdeProdutoDois.Value;
+   end;
+   IncluirVenda(ProdutoId01,ProdutoId02,Quantidade01,Quantidade02);
+end;
+
 procedure TfrmDeliveryGas.IncluirVenda(ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer; ValorUnitario : real = 0  );
 var DaoVenda           : TDaoVenda;
     DaoCliente         : TDaoCliente;
@@ -264,11 +287,14 @@ var DaoVenda           : TDaoVenda;
     GravaContaCorrente : TDaoContaCorrente;
     TotalVenda : Real;
     lsDescreicaoProduto : String;
+    lrTipoLancamento : Integer;
 begin
    frmselFormaPagamento := TfrmselFormaPagamento.Create(Self);
    frmselFormaPagamento.ShowModal;
    FormaPagamentoID := frmselFormaPagamento.cmbNome_formaPagamento.KeyValue;
-
+   lrTipoLancamento := frmselFormaPagamento.pTipoLancamento;
+   FreeAndnil(frmselFormaPagamento);
+   
    DaoCliente        := TDaoCliente.Create(gConexao);
    DaoFuncionario    := TDaofuncionario.Create(gConexao);
    DaoformaPagamento := TDaoFormaPagamento.Create(gConexao);
@@ -297,7 +323,7 @@ begin
 
    itemVenda               := TItemVenda.Create;
    ItemVenda.ProdutoId     := Produto.ProdutoId;
-   ItemVenda.Qunatidade    := Quantidade02;
+   ItemVenda.Qunatidade    := Quantidade01;
    ItemVenda.PrecoVenda    := Produto.PrecoTabela;
    ItemVenda.Total         := (Produto.PrecoTabela*Quantidade01);
    ItemVenda.Operador      := gsOperador;
@@ -335,7 +361,7 @@ begin
    Total := TotalVenda;
    DaoVenda.AtualizarTotal(VendaId,TotalVenda);
 
-   Case 0 Of
+   Case lrTipoLancamento Of
       0 : // Lancamento no caixa
       Begin
          qryModific.Close;
@@ -357,11 +383,11 @@ begin
       2 :
       Begin
          DadosContaCorrente := TContaCorrente.Create;
-         GravaContaCorrente := TDaoContaCorrente.Create;
+         GravaContaCorrente := TDaoContaCorrente.Create(gConexao);
          DadosContaCorrente.D_C         := 'D';
          DadosContaCorrente.Valor       := TotalVenda;
          DadosContaCorrente.Cod_Cliente := Venda.Cliente.Id;
-         DadosContaCorrente.Historico   := 'Debito referente a Venda nº '+IntToStr(Venda.VendaID);
+         DadosContaCorrente.Historico   := lsDescreicaoProduto+' Venda nº '+IntToStr(Venda.VendaID);
          DadosContaCorrente.Documento   := Venda.VendaID;
          IF  not GravaContaCorrente.Atualizar(DadosContaCorrente) Then
          Begin
@@ -379,6 +405,7 @@ begin
    cdsLista.FieldByName('FormaPagamento').AsString := FormaPagamento;
    cdsLista.FieldByName('Total').AsFloat :=  Total;
    cdsLista.FieldByName('NomeProduto').AsString := lsDescreicaoProduto;
+   cdsLista.FieldByName('Hora').AsString := IntToStr(lrTipoLancamento);
    cdsLista.Post;
 
    FreeAndNil(DaoCliente);
@@ -393,6 +420,8 @@ procedure TfrmDeliveryGas.cdsClientesAfterScroll(DataSet: TDataSet);
 var DaoCliente : TDaoCliente;
     Cliente : TCliente;
     DaoClienteAnimal : TDaoClienteAnimal;
+    ContaCorrente : TDaoContaCorrente;
+    saldo : Real;
 begin
    DaoCliente := TDaoCliente.Create(gConexao);
    Cliente := DaoCliente.Buscar(cdsClientes.FieldByName('Codigo').AsInteger);
@@ -400,6 +429,11 @@ begin
    edtBairro.Text := Cliente.Endereco.bairro;
    edtCidade.text := Cliente.Endereco.cidade;
    edtPto_Referencia.Text := Cliente.Endereco.PontoReferencia;
+   ContaCorrente := TDaoContaCorrente.Create(gConexao);
+   Saldo := ContaCorrente.Saldo(cdsClientes.FieldByName('Codigo').AsInteger);
+   lblDevedor.Caption:='';
+   if Saldo>0 then
+      lblDevedor.Caption:='Cliente Com Saldo Devedor '+formatFloat('0.00', Saldo );
 
    DaoClienteAnimal   := TDaoClienteAnimal.create(gConexao);
    srcAnimais.DataSet := DaoClienteAnimal.BucarAnimalCliente(Cliente.Id);
@@ -436,6 +470,7 @@ procedure TfrmDeliveryGas.FormShow(Sender: TObject);
 begin
    if FileExists(gspath+'config\listapendente.xml') then
       cdsLista.LoadFromFile(gspath+'config\listapendente.xml');
+   lblDevedor.Caption:='';
    edtData.date := Now;
 end;
 

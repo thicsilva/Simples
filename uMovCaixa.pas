@@ -96,6 +96,7 @@ type
     cmbNome_Caixa: TbsSkinDBLookupComboBox;
     GrdDespesasColumn1: TcxGridDBColumn;
     chkMostraCaixaFechado: TCheckBox;
+    pnlDataovimento: TPanel;
     procedure AtualizaRecClick(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
     procedure cdsPesquisaBeforeOpen(DataSet: TDataSet);
@@ -281,25 +282,39 @@ begin
          qryModific.ParamByName( 'parTurno' ).AsInteger                := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
          qryModific.ExecSQL;
 
-         if ((DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)) = strToint(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ))) and
-            (not DaoCaixaMovimento.TemCaixaAberto(gsData_mov) ) then
+         if HeDistribuidora then
          begin
             qryModific.Close;
-            qryModific.SQL.Text := 'UPDATE T_Sequencias SET Sequencia=:parSequencia, '+
-                                   'Data_Atu=:parData_Atu, Cod_emp=:parCod_emp where Tipo_sequencia=:parTipo_sequencia And Cod_Emp=:parCod_Emp ';
-            qryModific.ParamByName( 'parData_Atu' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',now));
-            qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
-            gsData_mov := gsData_mov+1;
-            if FormatDateTime('DDD',gsData_Mov)='dom' then
-            begin
-               qryModific.ParamByName( 'parSequencia' ).AsString      := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
-               gsData_mov := gsData_mov+1;
-            end;
-            qryModific.ParamByName( 'parCod_Emp' ).AsString           := gsCod_Emp;
-            qryModific.ParamByName( 'parTipo_Sequencia' ).AsString    := 'Data_Mov';
-            frmPrincipal.StatusBar.Panels[0].Text := 'Data do Movimento .: '+qryModific.ParamByName( 'parSequencia' ).AsString;
+            qryModific.SQL.Text := 'UPDATE Caixas SET DataMovimento=:parDataMovimento where Codigo=:parCodigo ';
+            qryModific.ParamByName( 'parDataMovimento' ).AsSQLTimeStamp := DateTimeToSQLTimeStamp(cdsCaixas.fieldByname('DataMovimento').AsDateTime+1);
+            qryModific.ParamByName( 'parCodigo' ).AsString              := '001';
             qryModific.ExecSQL;
-          end;
+            dtpData_Ini.Date := cdsCaixas.fieldByname('DataMovimento').AsDateTime+1;
+            dtpData_Fim.date := cdsCaixas.fieldByname('DataMovimento').AsDateTime+1;
+            pnlDataovimento.Caption := 'Data do Movimento '+FormatDateTime('dd/mm/yyyy', cdsCaixas.fieldByname('DataMovimento').AsDateTime+1);
+         end
+         else
+         begin
+            if ((DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)) = strToint(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ))) and
+               (not DaoCaixaMovimento.TemCaixaAberto(gsData_mov) ) then
+            begin
+               qryModific.Close;
+               qryModific.SQL.Text := 'UPDATE T_Sequencias SET Sequencia=:parSequencia, '+
+                                      'Data_Atu=:parData_Atu, Cod_emp=:parCod_emp where Tipo_sequencia=:parTipo_sequencia And Cod_Emp=:parCod_Emp ';
+               qryModific.ParamByName( 'parData_Atu' ).AsSQLTimeStamp := StrToSqlTimeStamp(FormatDateTime('dd/mm/yyyy hh:mm:ss',now));
+               qryModific.ParamByName( 'parSequencia' ).AsString         := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
+               gsData_mov := gsData_mov+1;
+               if FormatDateTime('DDD',gsData_Mov)='dom' then
+               begin
+                  qryModific.ParamByName( 'parSequencia' ).AsString      := FormatDateTime('dd/mm/yyyy',gsData_Mov+1);
+                  gsData_mov := gsData_mov+1;
+               end;
+               qryModific.ParamByName( 'parCod_Emp' ).AsString           := gsCod_Emp;
+               qryModific.ParamByName( 'parTipo_Sequencia' ).AsString    := 'Data_Mov';
+               frmPrincipal.StatusBar.Panels[0].Text := 'Data do Movimento .: '+qryModific.ParamByName( 'parSequencia' ).AsString;
+               qryModific.ExecSQL;
+            end;
+         end;
       end;
    end;
 end;
@@ -738,6 +753,8 @@ begin
 
    if Turno = 0  then
       lsFiltro := 'And Turno Is Null'
+   else  if Turno = -1 then
+      lsFiltro := ''
    else
       lsFiltro := 'And Turno=:parturno';
 
@@ -1178,16 +1195,29 @@ begin
       frmSelDatas := TFrmSelDatas.Create(Self);
       frmSelDatas.dtpData_Ini.date := dtpData_Ini.Date;
       frmSelDatas.idCaixa := cmbCaixa.KeyValue;
+
+      if HeDistribuidora then
+      begin
+         frmSelDatas.dtpData_Fim.Visible := True;
+         frmSelDatas.btnincluir.Visible := True;
+         frmSelDatas.dtpData_Fim.date := dtpData_Fim.Date;
+         frmSelDatas.cmbturno.Visible := False;
+      end;
       frmSelDatas.ShowModal;
 
       if frmSelDatas.Tag = 1 then
       begin
          dataInicial := frmSelDatas.dtpData_Ini.Date;
          dataFinal   := frmSelDatas.dtpData_Ini.Date;
-         Turno       := frmSelDatas.cmbturno.ItemIndex+1;
          NomeTurno   := frmSelDatas.cmbturno.Text;
          Tipo        := 2;
          Turno       := 1;
+         if HeDistribuidora then
+         begin
+            dataFinal := frmSelDatas.dtpData_Fim.Date;
+            frmSelDatas.dtpData_Fim.Visible := True;
+            Turno     := -1;
+         end;
       end
       else
         exit;
@@ -1212,10 +1242,11 @@ begin
    sdtsTempPagInformado.Connection := frmprincipal.dbxPrincipal;
    sdtsTempPagInformado.dataSet.CommandText := 'Select Pag.*, forma.Descricao from t_PagamentosInformados Pag '+
                                                'left join t_formaspagamento forma on forma.Codigo=pag.Cod_formapagamento '+
-                                               'where data_mov=:parData_Mov and Cod_Caixa=:parCod_Caixa and Turno=:parTurno ' ;
+                                               'where data_mov=:parData_Mov and Cod_Caixa=:parCod_Caixa '+lsFiltro ;
    sdtsTempPagInformado.dataSet.ParamByName('parData_Mov').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(gsData_Mov));
    sdtsTempPagInformado.dataSet.ParamByName('parCod_Caixa').AsInteger     := cmbCaixa.KeyValue;
-   sdtsTempPagInformado.dataSet.ParamByName('parTurno').AsInteger         := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
+   if Turno > 0 then
+      sdtsTempPagInformado.dataSet.ParamByName('parTurno').AsInteger         := (DaoCaixaMovimento.RetornarUltimoTurno(gsData_mov,cmbCaixa.KeyValue)+1);
    sdtsTempPagInformado.open;
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
@@ -1888,7 +1919,7 @@ begin
    if cdsCadFormasPagamento.FieldByName('TipoLancamento').Asinteger=2 then
    Begin
       DadosContaCorrente := TContaCorrente.Create;
-      GravaContaCorrente := TDaoContaCorrente.Create;
+      GravaContaCorrente := TDaoContaCorrente.Create(gconexao);
       DadosContaCorrente.D_C         := 'C';
       if cmbD_C.ItemIndex = 1 then
          DadosContaCorrente.D_C         := 'D';
@@ -1976,7 +2007,7 @@ begin
                                         'Order by Descricao ';
       qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
       qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 1; // 1 Debito 2 Credito
-      cmbNome_formaPagamento.Enabled := false;
+      //cmbNome_formaPagamento.Enabled := false;
       cmbNome_formaPagamento.KeyValue := '001';
     End
     Else
@@ -1989,7 +2020,7 @@ begin
                                         'Order by Descricao ';
       qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 2; // 1 Debito 2 Credito
       cmbNome_formaPagamento.KeyValue := '001';
-      cmbNome_formaPagamento.Enabled := false;
+      //cmbNome_formaPagamento.Enabled := false;
     End;
 
     cdsCadOperacoes.Close;
@@ -2103,11 +2134,25 @@ begin
    cdsCaixas.Close;
    cdsCaixas.ProviderName := dspVariavel.Name;
    cdsCaixas.Open;
+   if cdscaixas.IsEmpty then
+   Begin
+      CaixaMensagem( 'Não Existe Caixa cadastrado, cadastre um Caixa para continuar', ctAviso, [ cbOk ], 0 );
+      Exit;
+   End;
+
    try
       cmbCaixa.KeyValue := 1;
    except
-   end;
 
+   end;
+   pnlDataovimento.Visible := False;
+   if HeDistribuidora then
+   begin
+      pnlDataovimento.Visible := true;
+      dtpData_Ini.Date := cdsCaixas.fieldByname('DataMovimento').AsDateTime;
+      dtpData_Fim.date := cdsCaixas.fieldByname('DataMovimento').AsDateTime;
+      pnlDataovimento.Caption := 'Data do Movimento '+cdsCaixas.fieldByname('DataMovimento').AsString;
+   end;
    PagCadastro.ActivePageIndex := 0;
 end;
 

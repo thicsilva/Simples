@@ -330,6 +330,9 @@
     <DCCReference Include="uSelMotivoStatus.pas">
       <Form>frmMotivoStatus</Form>
     </DCCReference>
+    <DCCReference Include="uSelProduto.pas">
+      <Form>frmSelProduto</Form>
+    </DCCReference>
     <DCCReference Include="uselrelClientes.pas">
       <Form>frmSelRelClientes</Form>
     </DCCReference>

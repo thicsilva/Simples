@@ -109,6 +109,7 @@ type
     chkTrabalhaComVeiculo: TbsSkinCheckRadioBox;
     chkEstiloPDV: TbsSkinCheckRadioBox;
     chkControleComissaoServico: TbsSkinCheckRadioBox;
+    chkVendaDiretoCaixa: TbsSkinCheckRadioBox;
     procedure btnFecharClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -300,8 +301,7 @@ begin
    gParametros.Gravar( '', '[VENDA]', 'CasasDecimais',edtDecimais.Value,GsOperador);
    gParametros.Gravar( '', '[VENDA]', 'EstiloPDV',RetornaSimouNao(chkEstiloPDV.Checked),gsOperador );
    gParametros.Gravar( '', '[VENDA]', 'ControleComissaoServico',RetornaSimouNao(chkControleComissaoServico.Checked),gsOperador );
-
-
+   gParametros.Gravar( '', '[VENDA]', 'VendaDiretoCaixa',RetornaSimouNao(chkVendaDiretoCaixa.Checked),gsOperador );
 end;
 
 procedure TfrmParametros.RecuperarParametrosAdiministrativos;
@@ -323,6 +323,7 @@ begin
    chkEstiloPDV.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'EstiloPDV', 'NAO' )));
    edtDecimais.Value := gParametros.Ler( '', '[VENDA]', 'CasasDecimais', '2' );
    chkControleComissaoServico.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'ControleComissaoServico', 'NAO' )));
+   chkVendaDiretoCaixa.Checked  := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[VENDA]', 'VendaDiretoCaixa', 'NAO' )));
 end;
 
 procedure TfrmParametros.RecuperarParametrosContasAReceber;

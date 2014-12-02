@@ -263,7 +263,7 @@ type
     dxBarButton39: TdxBarButton;
     dxBarButton37: TdxBarButton;
     Action3: TAction;
-    MenuManegerBar3: TdxBar;
+    MenuServicos: TdxBar;
     dxBarButton40: TdxBarButton;
     dxBarLargeButton28: TdxBarLargeButton;
     dxBarLargeButton29: TdxBarLargeButton;
@@ -272,7 +272,7 @@ type
     dxBarLargeButton30: TdxBarLargeButton;
     dxBarButton42: TdxBarButton;
     actDelivery: TAction;
-    dxBarLargeButton31: TdxBarLargeButton;
+    btnRepasse: TdxBarLargeButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -638,10 +638,9 @@ begin
    RibonFiscal.Visible         := False;
    tabLocacao.Visible          := False;
    tabControleEntrega.Visible  := False;
-   //actAtendimento.Visible      := False;
+   //actAtendimento.Visible    := False;
    ImagemFundoPet.visible      := False;
    TabVendasProdutos.Visible   := True;
-
    if HeServicos then
    begin
       //TabServicos.Visible             := True;
@@ -658,6 +657,11 @@ begin
       //TabServicos.Visible := False;
       TabLocacao.Visible := true;
    end;
+   if HeDistribuidora then
+   Begin
+      MenuServicos.Visible := False;
+      tabControleEntrega.Visible  := True;
+   End;
 end;
 
 procedure TfrmPrincipal.DefinirDataSistema;

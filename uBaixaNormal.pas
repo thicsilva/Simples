@@ -37,7 +37,6 @@ type
     qryModific: TSQLQuery;
     edtNrVenda: TbsSkinEdit;
     bsSkinStdLabel3: TbsSkinStdLabel;
-    edtData_Pagamento: TbsSkinDateEdit;
     srcPagamento: TDataSource;
     cdsPagamento: TClientDataSet;
     dspPagamento: TDataSetProvider;
@@ -120,6 +119,7 @@ type
     edtJuros: TbsSkinNumericEdit;
     edtValorOriginal: TbsSkinNumericEdit;
     bsSkinStdLabel10: TbsSkinStdLabel;
+    edtData_Pagamento: TbsSkinDateEdit;
     procedure FormShow(Sender: TObject);
     procedure btnReceberClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -189,8 +189,8 @@ begin
    panelRecebimento.Visible   := False;
    panelRecebimento.RollState := False;
 
-   edtcod_Pagamento.SetFocus;
    edtData_Pagamento.Date := gsData_Mov;
+   edtData_Pagamento.SetFocus;
 
    AtualizarJuros;
 
@@ -355,7 +355,7 @@ begin
                2 :  // Lancamento no conta corrente
                Begin
                   DadosContaCorrente := TContaCorrente.Create;
-                  GravaContaCorrente := TDaoContaCorrente.Create;
+                  GravaContaCorrente := TDaoContaCorrente.Create(gConexao);
                   DadosContaCorrente.D_C         := 'D';
                   DadosContaCorrente.Valor       := cdsTempPagamentos.FieldByName('Valor').AsFloat;
                   DadosContaCorrente.Cod_Cliente := strToInt(Cod_Cliente.Text);
@@ -668,6 +668,7 @@ begin
       edtMulta.Text := FormatFloat('0.00', 0);
       edtJuros.Text := FormatFloat('0.00', 0);
    End;
+   edtTotalReceber.text := FormatFloat('0.00',StrtoFloat(edtTotalReceber.text)-StrTofloat(edtVlr_Recebido.Text));
 end;
 
 procedure TfrmBaixaNormal.edtPco_VendaExit(Sender: TObject);

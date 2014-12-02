@@ -168,12 +168,6 @@ object frmConsVendas: TfrmConsVendas
           Visible = False
           Width = 110
         end
-        object LucroBruto: TcxGridDBColumn
-          Caption = 'Lucro Bruto %'
-          DataBinding.FieldName = 'LucroBruto'
-          Visible = False
-          Width = 85
-        end
         object Colum_Data_Venda: TcxGridDBColumn
           Caption = 'Data'
           DataBinding.FieldName = 'Data_Venda'
@@ -187,6 +181,12 @@ object frmConsVendas: TfrmConsVendas
         object LucroBrutoReal: TcxGridDBColumn
           Caption = 'Lucro Bruto $'
           DataBinding.FieldName = 'LucroBrutoReais'
+          Visible = False
+          Width = 85
+        end
+        object LucroBruto: TcxGridDBColumn
+          Caption = 'Lucro Bruto %'
+          DataBinding.FieldName = 'LucroBruto'
           Visible = False
           Width = 85
         end
@@ -989,9 +989,9 @@ object frmConsVendas: TfrmConsVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 903
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1025,7 +1025,6 @@ object frmConsVendas: TfrmConsVendas
         OnClick = btnFecharClick
         ExplicitLeft = 753
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object separador: TbsSkinBevel
         Left = 100

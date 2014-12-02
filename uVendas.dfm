@@ -1167,7 +1167,7 @@ object frmVendas: TfrmVendas
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 809
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -2093,9 +2093,9 @@ object frmVendas: TfrmVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 716
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -2129,7 +2129,6 @@ object frmVendas: TfrmVendas
         OnClick = btnFecharClick
         ExplicitLeft = 677
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnincluir: TbsSkinSpeedButton
         Left = 0
@@ -2374,6 +2373,10 @@ object frmVendas: TfrmVendas
     OnChange = PagVendasChange
     object TabSheet1: TTabSheet
       Caption = 'Vendas'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgConsulta: TbsSkinDBGrid
         Left = 0
         Top = 0
@@ -2423,6 +2426,7 @@ object frmVendas: TfrmVendas
         Height = 212
         HintImageIndex = 0
         TabOrder = 1
+        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'vscrollbar'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -2442,7 +2446,7 @@ object frmVendas: TfrmVendas
         PageSize = 1
         Min = 1
         Max = 0
-        Position = 1
+        Position = 0
         SmallChange = 63
         LargeChange = 63
       end
@@ -2463,7 +2467,7 @@ object frmVendas: TfrmVendas
         DefaultWidth = 0
         DefaultHeight = 19
         UseSkinFont = True
-        Both = True
+        Both = False
         BothMarkerWidth = 19
         BothSkinDataName = 'bothhscrollbar'
         CanFocused = False
@@ -2480,6 +2484,10 @@ object frmVendas: TfrmVendas
     object TabGrade: TTabSheet
       Caption = 'Adicionar Grade'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object gridTamanho: TbsSkinDBGrid
         Left = 233
         Top = 23
@@ -2940,6 +2948,10 @@ object frmVendas: TfrmVendas
     object TabSheet3: TTabSheet
       Caption = 'Observa'#231#227'o'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MemoObs: TMemo
         Left = 0
         Top = 0

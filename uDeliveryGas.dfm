@@ -853,6 +853,19 @@ object frmDeliveryGas: TfrmDeliveryGas
       DesignSize = (
         776
         312)
+      object lblDevedor: TLabel
+        Left = 12
+        Top = 112
+        Width = 30
+        Height = 19
+        Caption = 'xxx'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object bsSkinPanel4: TbsSkinPanel
         Left = 3
         Top = 24
@@ -1097,7 +1110,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'button'
         DefaultFont.Charset = DEFAULT_CHARSET
-        DefaultFont.Color = clWindowText
+        DefaultFont.Color = clBlack
         DefaultFont.Height = 14
         DefaultFont.Name = 'Arial'
         DefaultFont.Style = []
@@ -1160,9 +1173,9 @@ object frmDeliveryGas: TfrmDeliveryGas
       end
       object bsSkinExPanel4: TbsSkinExPanel
         Left = 1
-        Top = 184
+        Top = 168
         Width = 774
-        Height = 127
+        Height = 143
         HintImageIndex = 0
         TabOrder = 2
         SkinData = frmPrincipal.SkinEntradaDados
@@ -1192,10 +1205,10 @@ object frmDeliveryGas: TfrmDeliveryGas
         Caption = 'Venda Rapida de Produtos'
         DesignSize = (
           774
-          127)
+          143)
         object btnVenda01: TbsSkinButton
           Left = 18
-          Top = 32
+          Top = 38
           Width = 163
           Height = 41
           HintImageIndex = 0
@@ -1267,11 +1280,11 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object bsSkinButton4: TbsSkinButton
           Left = 187
-          Top = 32
+          Top = 38
           Width = 163
           Height = 41
           HintImageIndex = 0
-          Anchors = [akTop]
+          Anchors = []
           TabOrder = 1
           SkinData = frmPrincipal.SkinPrincipal
           SkinDataName = 'button'
@@ -1339,7 +1352,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object bsSkinButton5: TbsSkinButton
           Left = 356
-          Top = 32
+          Top = 38
           Width = 163
           Height = 41
           HintImageIndex = 0
@@ -1411,7 +1424,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object btnVenda04: TbsSkinButton
           Left = 18
-          Top = 79
+          Top = 92
           Width = 163
           Height = 41
           HintImageIndex = 0
@@ -1483,7 +1496,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object bsSkinButton6: TbsSkinButton
           Left = 187
-          Top = 79
+          Top = 92
           Width = 163
           Height = 41
           HintImageIndex = 0
@@ -1555,7 +1568,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object btnVenda06: TbsSkinButton
           Left = 356
-          Top = 79
+          Top = 92
           Width = 163
           Height = 41
           HintImageIndex = 0
@@ -1625,6 +1638,78 @@ object frmDeliveryGas: TfrmDeliveryGas
           Spacing = 1
           OnClick = btnVenda06Click
         end
+      end
+      object btnVendaproduto: TbsSkinButton
+        Left = 3
+        Top = 134
+        Width = 441
+        Height = 28
+        HintImageIndex = 0
+        Anchors = []
+        TabOrder = 3
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'button'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = -16
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = [fsBold]
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = False
+        Transparent = False
+        CheckedMode = False
+        ImageList = frmPrincipal.cxLargeImages
+        ImageIndex = -1
+        AlwaysShowLayeredFrame = False
+        UseSkinSize = False
+        UseSkinFontColor = False
+        RepeatMode = False
+        RepeatInterval = 100
+        AllowAllUp = False
+        TabStop = True
+        CanFocused = True
+        Down = False
+        GroupIndex = 0
+        Caption = 'Venda de Produto'
+        Glyph.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000FF00FF00D409
+          D634A823BF73791DC08E8428C68B8E33CA8B973DCE8B9F45D08BA146D08B993F
+          CE8B9036CB8B872CC78B7B1FC28DA527C079D20DD43AFF00FF00FF00FF009F33
+          E47E4A67E5ED2567ECFF327CF5FF4396FDFF4EA4FCFF58ABFBFF5BAFFCFF50A6
+          FCFF3C93FBFF3581F7FF276BEEFF486EE7F29D3CE886FF00FF00FF00FF00C01A
+          F5485144E6C42264E8FF276CE9FF1855D8FF1149D3FF1A58DDFF236DEBFF5FA2
+          F5FF81B1F2FF2A70EAFF2366EAFF434CE6D4B120F35AFF00FF00FF00FF00EC0A
+          FB188B35EC8B2060E5FF2658D5FF3D66D7FF5A81E1FF719AEBFF79A9F5FFACD0
+          FEFFF6FEFFFF7CB4F1FF195AE4FF7938EA9BE10DFA23FF00FF00FF00FF00FF00
+          FF00C225F4523670E4FF567CDEFF94AFEAFF7398E6FF719BEBFF7DABF5FFC3DD
+          FDFFFCFCFFFFADD6FCFF1657E2FFA823F064FC01FF03FF00FF00FF00FF00FF00
+          FF00E80DFA1F3972E3FF608BE4FF567DDDFF1547D3FF1653DFFF2C77EFFFAAD1
+          FDFFEDFAFFFF94BBF8FF1F5BE0FFDB10F82BFF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF004C64E2E72B61DCFF2757D4FF2A59D7FF3E74E5FF5A95F3FFC6E0
+          FDFFCDF0FFFF357BEAFF2D53DDF2F803FE08FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00CD1BF541BA25F2597985E4EB87A7E9FF88ADEEFFA3C5F8FFEAF3
+          FEFFD5DFFFF4B427F35EC317F245FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00A95DEC9F678DE3FF4B7EE6FF7EAEF5FFEBF5
+          FFFFD197FFB2FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00C913F23E2355D7FF0F4FDEFF63A0F4FFDFF2
+          FEFFD639FF51FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FE00FF016570E2E55C8CE9FFA6C9F8FFDDDF
+          FFF1F908FF0BFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00B25BEF9596B8F1FFD0E2FBFFDF97
+          FEABFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00D619F6385E91EAFFC0DAFAFFEB3F
+          FE4CFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005A71E9E1BFCDFBF1FD05
+          FF06FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00AE5CF394D894FCABFF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00EC25FC33EE34FD3FFF00
+          FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+        NumGlyphs = 1
+        Spacing = 1
+        OnClick = btnVendaprodutoClick
       end
     end
     object bsSkinPanel3: TbsSkinPanel
@@ -1944,8 +2029,8 @@ object frmDeliveryGas: TfrmDeliveryGas
     end
   end
   object srcAnimais: TDataSource
-    Left = 368
-    Top = 320
+    Left = 272
+    Top = 128
   end
   object qryModific: TSQLQuery
     MaxBlobSize = -1
