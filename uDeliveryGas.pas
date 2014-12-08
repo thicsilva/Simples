@@ -114,7 +114,7 @@ type
     FormaPagamento : String;
     Total : Real;
     Produtos : String;
-    procedure IncluirVenda(ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer; ValorUnitario : real = 0  );
+    procedure IncluirVenda(ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer; ValorUnitario : real = 0;cdsProdutos: TclientDataSet = nil  );
     { Private declarations }
   public
     { Public declarations }
@@ -254,25 +254,17 @@ begin
 end;
 
 procedure TfrmDeliveryGas.btnVendaprodutoClick(Sender: TObject);
-var ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer;
+var Produtos : TClientdataset;
 begin
-   ProdutoId02   := 0;
-   Quantidade02  := 0;
    frmSelProduto := TfrmSelProduto.Create(Self);
    frmSelProduto.ShowModal;
    if frmSelProduto.Tag=0 then
       exit;
-   ProdutoId01   :=  frmSelProduto.cmbProdutoUm.KeyValue;
-   Quantidade01  :=  frmSelProduto.qtdeProdutoUm.Value;
-   if frmSelProduto.qtdeProdutoDois.Value>0 then
-   begin
-      ProdutoId02   := frmSelProduto.cmbProdutoDois.KeyValue;
-      Quantidade02  := frmSelProduto.qtdeProdutoDois.Value;
-   end;
-   IncluirVenda(ProdutoId01,ProdutoId02,Quantidade01,Quantidade02);
+   Produtos := frmSelProduto.cdsVendaProduto;
+   IncluirVenda(0,0,0,0,0,Produtos);
 end;
 
-procedure TfrmDeliveryGas.IncluirVenda(ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer; ValorUnitario : real = 0  );
+procedure TfrmDeliveryGas.IncluirVenda(ProdutoId01, ProdutoId02, Quantidade01, Quantidade02 : Integer; ValorUnitario : real = 0;cdsProdutos: TclientDataSet = nil  );
 var DaoVenda           : TDaoVenda;
     DaoCliente         : TDaoCliente;
     DaoFuncionario     : TDaofuncionario;
@@ -294,7 +286,7 @@ begin
    FormaPagamentoID := frmselFormaPagamento.cmbNome_formaPagamento.KeyValue;
    lrTipoLancamento := frmselFormaPagamento.pTipoLancamento;
    FreeAndnil(frmselFormaPagamento);
-   
+
    DaoCliente        := TDaoCliente.Create(gConexao);
    DaoFuncionario    := TDaofuncionario.Create(gConexao);
    DaoformaPagamento := TDaoFormaPagamento.Create(gConexao);
@@ -322,20 +314,23 @@ begin
    DaoVenda.Incluir(Venda);
 
    itemVenda               := TItemVenda.Create;
-   ItemVenda.ProdutoId     := Produto.ProdutoId;
-   ItemVenda.Qunatidade    := Quantidade01;
-   ItemVenda.PrecoVenda    := Produto.PrecoTabela;
-   ItemVenda.Total         := (Produto.PrecoTabela*Quantidade01);
-   ItemVenda.Operador      := gsOperador;
-   ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
-   ItemVenda.VendaID       := Venda.VendaID;
-   ItemVenda.SetorId       := 1;
-   ItemVenda.PrecoVenda    := Produto.PrecoTabela;
-   ItemVenda.TipoCalculo   := 1;
-   ItemVenda.FuncionarioId := 1;
-   DaoItenVenda.InserirItem(ItemVenda);
-   TotalVenda := TotalVenda + (Produto.PrecoTabela*Quantidade01);
-   lsDescreicaoProduto := lsDescreicaoProduto + produto.Descricao;
+   if ProdutoId01<>0 then
+   begin
+      ItemVenda.ProdutoId     := Produto.ProdutoId;
+      ItemVenda.Qunatidade    := Quantidade01;
+      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+      ItemVenda.Total         := (Produto.PrecoTabela*Quantidade01);
+      ItemVenda.Operador      := gsOperador;
+      ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
+      ItemVenda.VendaID       := Venda.VendaID;
+      ItemVenda.SetorId       := 1;
+      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+      ItemVenda.TipoCalculo   := 1;
+      ItemVenda.FuncionarioId := 1;
+      DaoItenVenda.InserirItem(ItemVenda);
+      TotalVenda := TotalVenda + (Produto.PrecoTabela*Quantidade01);
+      lsDescreicaoProduto := lsDescreicaoProduto + produto.Descricao;
+   end;
 
    if ProdutoId02<>0 then
    begin
@@ -354,6 +349,27 @@ begin
       DaoItenVenda.InserirItem(ItemVenda);
       TotalVenda := TotalVenda +(Produto.PrecoTabela*Quantidade02);
       lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
+   end;
+   cdsProdutos.first;
+
+   while not cdsProdutos.Eof do
+   begin
+      produto := DaoProduto.Buscar(cdsProdutos.FieldByName('Codigo').AsInteger);
+      ItemVenda.ProdutoId     := Produto.ProdutoId;
+      ItemVenda.Qunatidade    := cdsProdutos.FieldByName('Quantidade').AsInteger;
+      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+      ItemVenda.Total         := (Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
+      ItemVenda.Operador      := gsOperador;
+      ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
+      ItemVenda.VendaID       := Venda.VendaID;
+      ItemVenda.SetorId       := 1;
+      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+      ItemVenda.TipoCalculo   := 1;
+      ItemVenda.FuncionarioId := 1;
+      DaoItenVenda.InserirItem(ItemVenda);
+      TotalVenda := TotalVenda +(Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
+      lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
+      cdsProdutos.Next;
    end;
 
    VendaId := Venda.VendaID;

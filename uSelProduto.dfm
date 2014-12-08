@@ -2,8 +2,8 @@ object frmSelProduto: TfrmSelProduto
   Left = 0
   Top = 0
   Caption = 'Selecione o Produto'
-  ClientHeight = 166
-  ClientWidth = 377
+  ClientHeight = 291
+  ClientWidth = 575
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frmSelProduto: TfrmSelProduto
   object bsSkinCoolBar1: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 377
+    Width = 575
     Height = 44
     AutoSize = True
     Bands = <
@@ -26,16 +26,16 @@ object frmSelProduto: TfrmSelProduto
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 373
+        Width = 571
       end>
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 364
+    ExplicitWidth = 501
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 364
+      Width = 562
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -146,8 +146,8 @@ object frmSelProduto: TfrmSelProduto
   object bsSkinPanel2: TbsSkinPanel
     Left = 0
     Top = 44
-    Width = 377
-    Height = 122
+    Width = 575
+    Height = 61
     HintImageIndex = 0
     TabOrder = 1
     SkinDataName = 'panel'
@@ -177,14 +177,12 @@ object frmSelProduto: TfrmSelProduto
     NumGlyphs = 1
     Spacing = 2
     Caption = 'bsSkinPanel2'
-    Align = alBottom
-    ExplicitLeft = 1
-    ExplicitTop = 77
-    ExplicitWidth = 362
+    Align = alTop
+    ExplicitWidth = 501
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 3
       Top = 3
-      Width = 78
+      Width = 50
       Height = 18
       EllipsType = bsetNone
       UseSkinFont = False
@@ -200,29 +198,7 @@ object frmSelProduto: TfrmSelProduto
       Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
-      Caption = 'Produto Um'
-      ParentFont = False
-    end
-    object bsSkinStdLabel2: TbsSkinStdLabel
-      Left = 3
-      Top = 59
-      Width = 82
-      Height = 18
-      EllipsType = bsetNone
-      UseSkinFont = False
-      UseSkinColor = False
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = -11
-      DefaultFont.Name = 'MS Sans Serif'
-      DefaultFont.Style = []
-      SkinDataName = 'stdlabel'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clNavy
-      Font.Height = -15
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      Caption = 'Produto Dois'
+      Caption = 'Produto'
       ParentFont = False
     end
     object cmbProdutoUm: TbsSkinDBLookupComboBox
@@ -250,31 +226,6 @@ object frmSelProduto: TfrmSelProduto
       ListField = 'Descricao;Codigo'
       ListSource = srcProdutos
     end
-    object cmbProdutoDois: TbsSkinDBLookupComboBox
-      Left = 3
-      Top = 83
-      Width = 299
-      Height = 20
-      HintImageIndex = 0
-      TabOrder = 1
-      SkinData = frmPrincipal.SkinPrincipal
-      SkinDataName = 'combobox'
-      DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = -19
-      DefaultFont.Name = 'Arial'
-      DefaultFont.Style = [fsBold]
-      DefaultWidth = 0
-      DefaultHeight = 20
-      UseSkinFont = False
-      DefaultColor = clWindow
-      ListBoxDefaultItemHeight = 20
-      ListBoxUseSkinFont = True
-      ListBoxUseSkinItemHeight = True
-      KeyField = 'codigo'
-      ListField = 'Descricao;Codigo'
-      ListSource = srcProdutos
-    end
     object qtdeProdutoUm: TSpinEdit
       Left = 308
       Top = 26
@@ -282,22 +233,150 @@ object frmSelProduto: TfrmSelProduto
       Height = 22
       MaxValue = 0
       MinValue = 0
-      TabOrder = 2
+      TabOrder = 1
       Value = 1
     end
-    object qtdeProdutoDois: TSpinEdit
-      Left = 308
-      Top = 81
-      Width = 45
-      Height = 22
-      MaxValue = 0
-      MinValue = 0
+    object btnAdicionar: TbsSkinButton
+      Left = 357
+      Top = 23
+      Width = 100
+      Height = 25
+      HintImageIndex = 0
+      TabOrder = 2
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.Imagebutoes
+      ImageIndex = 10
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      Caption = '    &Adicionar'
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnAdicionarClick
+    end
+    object btnRemover: TbsSkinButton
+      Left = 461
+      Top = 23
+      Width = 100
+      Height = 25
+      HintImageIndex = 0
       TabOrder = 3
-      Value = 0
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.Imagebutoes
+      ImageIndex = 9
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      Caption = '    &Remover'
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnRemoverClick
     end
   end
+  object bsSkinDBGrid1: TbsSkinDBGrid
+    Left = 0
+    Top = 105
+    Width = 575
+    Height = 186
+    HintImageIndex = 0
+    TabOrder = 2
+    SkinDataName = 'grid'
+    Transparent = False
+    WallpaperStretch = False
+    UseSkinFont = True
+    UseSkinCellHeight = True
+    GridLineColor = clWindowText
+    DefaultCellHeight = 20
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBtnText
+    Font.Height = -16
+    Font.Name = 'Arial Narrow'
+    Font.Style = [fsBold]
+    ColSizingwithLine = False
+    DrawGraphicFields = False
+    UseColumnsFont = False
+    MouseWheelSupport = False
+    SaveMultiSelection = False
+    PickListBoxSkinDataName = 'listbox'
+    PickListBoxCaptionMode = False
+    Align = alClient
+    DataSource = srcVendaProduto
+    ParentFont = False
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clBtnText
+    TitleFont.Height = 14
+    TitleFont.Name = 'Arial'
+    TitleFont.Style = []
+  end
   object srcProdutos: TDataSource
-    Left = 72
-    Top = 56
+    Left = 168
+    Top = 8
+  end
+  object srcVendaProduto: TDataSource
+    DataSet = cdsVendaProduto
+    Left = 248
+    Top = 171
+  end
+  object cdsVendaProduto: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 248
+    Top = 144
+    Data = {
+      670000009619E0BD010000001800000003000000000003000000670006436F64
+      69676F0100490000000100055749445448020002000A000A4465736372696361
+      6F2001004900000001000557494454480200020032000A5175616E7469646164
+      6504000100000000000000}
+    object cdsVendaProdutoCodigo: TStringField
+      DisplayWidth = 14
+      FieldName = 'Codigo'
+      Size = 10
+    end
+    object cdsVendaProdutoDescricao: TStringField
+      DisplayWidth = 41
+      FieldName = 'Descricao '
+      Size = 50
+    end
+    object cdsVendaProdutoQuantidade: TIntegerField
+      DisplayWidth = 11
+      FieldName = 'Quantidade'
+    end
   end
 end

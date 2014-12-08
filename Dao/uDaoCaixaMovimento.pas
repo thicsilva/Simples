@@ -39,7 +39,7 @@ begin
    FQueryModific.ParamByName('parCod_Caixa').AsInteger            := lacamento.Cod_Caixa;
    FQueryModific.ParamByName('parValor').asFloat                  := lacamento.Valor;
    FQueryModific.ParamByName('parHistorico').asString             := lacamento.Historico;
-   FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp :=  DateTimeToSqlTimeStamp(RetornarDataMovimento(IntToStr(lacamento.Cod_Caixa)));
+   FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToSQLTimeStamp( lacamento.Data_Lancamento );
    FQueryModific.ParamByName('parD_C').AsString                   := lacamento.D_C;
    FQueryModific.ParamByName('parSeqVenda').asInteger             := lacamento.SeqVenda;
    FQueryModific.ParamByName('parCod_tipoDespesa').AsString       := lacamento.Cod_tipoDespesa;

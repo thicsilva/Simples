@@ -113,7 +113,9 @@ begin
    qryRelatorio.Close;
    qryRelatorio.SQL.text:='select  Sum(Ven.CustoTotal) as CustoTotal '+
                           'from  T_vendas Ven '+
-                          'Where '+lsWhere+' Ven.Data_Venda>=:parData_Ini and Ven.Data_Venda<=:parData_Fim and Ven.Status<>:parStatus and Ven.Status<>:parStatus2 ';
+                          '     left join T_formasPagamento Forma on Forma.codigo=Ven.Cod_FormaPagamento '+
+                          'Where '+lsWhere+' Ven.Data_Venda>=:parData_Ini and Ven.Data_Venda<=:parData_Fim and'+
+                          ' Ven.Status<>:parStatus and Ven.Status<>:parStatus2 ';
    qryRelatorio.ParamByName('parData_Ini').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Ini);
    qryRelatorio.ParamByName('parData_Fim').AsSqlTimeStamp := DatetimeToSqlTimeStamp(ldData_Fim);
    qryRelatorio.ParamByName('parStatus').AsString         := 'C';

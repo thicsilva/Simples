@@ -136,6 +136,7 @@ type
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
     procedure edtData_PagamentoChange(Sender: TObject);
+    procedure edtData_PagamentoExit(Sender: TObject);
   private
     procedure AtualizarJuros;
     { Private declarations }
@@ -648,6 +649,12 @@ begin
 end;
 
 procedure TfrmBaixaNormal.edtData_PagamentoChange(Sender: TObject);
+begin
+  //if Length(edtData_Pagamento.text)=10 then
+  //   AtualizarJuros;
+end;
+
+procedure TfrmBaixaNormal.edtData_PagamentoExit(Sender: TObject);
 begin
   AtualizarJuros;
 end;

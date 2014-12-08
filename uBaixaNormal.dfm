@@ -38,7 +38,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 664
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1031,6 +1031,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       RightImageHotIndex = -1
       RightImageDownIndex = -1
       OnChange = edtData_PagamentoChange
+      OnExit = edtData_PagamentoExit
     end
   end
   object bsSkinGroupBox2: TbsSkinGroupBox
@@ -1089,7 +1090,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       object bsSkinToolBar2: TbsSkinToolBar
         Left = 9
         Top = 0
-        Width = 70
+        Width = 662
         Height = 40
         HintImageIndex = 0
         TabOrder = 0
@@ -1452,7 +1453,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Left = 490
         Top = 5
         Width = 87
-        Height = 19
+        Height = 22
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = clInfoBk

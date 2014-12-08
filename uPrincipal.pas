@@ -273,6 +273,8 @@ type
     dxBarButton42: TdxBarButton;
     actDelivery: TAction;
     btnRepasse: TdxBarLargeButton;
+    actRelContaCorrente: TAction;
+    dxBarButton30: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -346,6 +348,7 @@ type
     procedure Action3Execute(Sender: TObject);
     procedure actServico01Execute(Sender: TObject);
     procedure actDeliveryExecute(Sender: TObject);
+    procedure actRelContaCorrenteExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -405,7 +408,8 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uselrelCurvaAbcClientes, uRemessaParaVenda, uCadCaixas, uCadSetores, uLogin,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
-  uLocacao, uConsLocacao, uCadGrade, uAberturaOS, uDeliveryGas;
+  uLocacao, uConsLocacao, uCadGrade, uAberturaOS, uDeliveryGas, uDtmRelatorios,
+  uClassDaoContaCorrente, uDaoCliente, uClassCliente;
 
 {$R *.dfm}
 
@@ -958,6 +962,56 @@ begin
    frmControleRepasse := TfrmControleRepasse.create(Self);
    frmControleRepasse.Tag := 1;
    frmControleRepasse.showmodal;
+end;
+
+procedure TfrmPrincipal.actRelContaCorrenteExecute(Sender: TObject);
+var cdsDados : TclientDataSet;
+    ContaCorrente : TDaoContaCorrente;
+    DaoCliente : TDaoCliente;
+    Cliente : TCliente;
+    Saldo : Real;
+    lrTotal : Real;
+begin
+   dtmRelatorios := TdtmRelatorios.Create(Self);
+   cdsDados  := gConexao.BuscarDadosSQL('Select Cod_Cliente from T_ContaCorrente group by Cod_Cliente', nil);
+   ContaCorrente := TDaoContaCorrente.Create(gConexao);
+   DaoCliente := TDaoCliente.Create(gConexao);
+
+   GstituloRel  := 'Relatorio de saldo de conta corrente ';
+   dtmRelatorios.ImpMatricial.PortaComunicacao          := 'LPT1';
+   dtmRelatorios.ImpMatricial.OpcoesPreview.Preview     := true;
+   dtmRelatorios.ImpMatricial.TamanhoQteLinhas          := 66;
+   dtmRelatorios.ImpMatricial.TamanhoQteColunas         := 80;
+   dtmRelatorios.ImpMatricial.FonteTamanhoPadrao        := s17cpp;
+   dtmRelatorios.ImpMatricial.UsaGerenciadorImpr        := True;
+   dtmRelatorios.ImpMatricial.Abrir;
+   ConfiguraRel( Name, True, dtmRelatorios.ImpMatricial, 1 );
+   pviLinha := 07;
+   TRdPrint( Sender ).imp(pviLinha,001,'Codigo Descricao                                                  Total');
+   pviLinha:=pviLinha+1;
+   TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
+   pviLinha:=pviLinha+1;
+   lrTotal := 0;
+   while not cdsDados.eof do
+   begin
+      Saldo         := ContaCorrente.Saldo(cdsDados.FieldByName('Cod_Cliente').AsInteger);
+      if Saldo>0 then
+      begin
+        Cliente     := DaoCliente.Buscar(cdsDados.FieldByName('Cod_Cliente').AsInteger);
+        dtmRelatorios.impmatricial.Imp(pvilinha,001,Cliente.Descricao+' Fone.:'+Cliente.Telefones);
+        pviLinha:=Pvilinha+1;
+        dtmRelatorios.impmatricial.Imp(pvilinha,001,'Endereço ('+cliente.Endereco.logradouro+' - '+cliente.Endereco.bairro+')' );
+        dtmRelatorios.impmatricial.Impd(pvilinha,80,FormatFloat('0.00', Saldo ),[]);
+        pviLinha:=Pvilinha+1;
+        lrTotal := lrTotal + Saldo;
+      end;
+      cdsDados.Next;
+   end;
+   TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
+   pviLinha:=Pvilinha+1;
+   dtmRelatorios.impmatricial.Imp(pvilinha,001,'Total.');
+   dtmRelatorios.impmatricial.Impd(pvilinha,80,FormatFloat('0.00', lrTotal ),[]);
+   dtmRelatorios.ImpMatricial.Fechar;
 end;
 
 procedure TfrmPrincipal.actRelLocacoesExecute(Sender: TObject);

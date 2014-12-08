@@ -154,7 +154,8 @@ uses
   uDtmComprovanteVenda in 'Data Module\uDtmComprovanteVenda.pas' {DtmComprovante: TDataModule},
   uClassProduto in 'Modelos\uClassProduto.pas',
   uSelFormaPagamento in '..\Compartilhados\uSelFormaPagamento.pas' {frmselFormaPagamento},
-  uSelProduto in 'uSelProduto.pas' {frmSelProduto};
+  uSelProduto in 'uSelProduto.pas' {frmSelProduto},
+  uDtmRelatorios in 'Data Module\uDtmRelatorios.pas' {dtmRelatorios: TDataModule};
 
 {$R *.res}
 
@@ -169,6 +170,7 @@ begin
   Application.CreateForm(TDtmComprovante, DtmComprovante);
   Application.CreateForm(TfrmselFormaPagamento, frmselFormaPagamento);
   Application.CreateForm(TfrmSelProduto, frmSelProduto);
+  Application.CreateForm(TdtmRelatorios, dtmRelatorios);
   Frmlogin.ShowModal;
   Application.Run;
 end.
