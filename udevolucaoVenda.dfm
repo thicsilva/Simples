@@ -109,7 +109,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         end
         item
           Expanded = False
-          FieldName = 'Qtde_Vendida'
+          FieldName = 'qtde_Vendida'
           ReadOnly = True
           Visible = True
         end
@@ -121,7 +121,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         end
         item
           Expanded = False
-          FieldName = 'Qtde_devolvida'
+          FieldName = 'qtde_Devolvida'
           Width = 124
           Visible = True
         end
@@ -444,16 +444,8 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         Size = 50
       end
       item
-        Name = 'Qtde_Vendida'
-        DataType = ftInteger
-      end
-      item
         Name = 'Pco_Venda'
         DataType = ftFloat
-      end
-      item
-        Name = 'Qtde_devolvida'
-        DataType = ftInteger
       end
       item
         Name = 'vlr_Desconto'
@@ -464,7 +456,15 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         DataType = ftFloat
       end
       item
+        Name = 'qtde_Vendida'
+        DataType = ftFloat
+      end
+      item
         Name = 'pco_Venda_Atual'
+        DataType = ftFloat
+      end
+      item
+        Name = 'qtde_Devolvida'
         DataType = ftFloat
       end
       item
@@ -480,11 +480,11 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     Data = {
       D20000009619E0BD010000001800000009000000000003000000D20006436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
-      4454480200020032000C517464655F56656E6469646104000100000000000950
-      636F5F56656E646108000400000000000E517464655F6465766F6C7669646104
-      000100000000000C766C725F446573636F6E746F08000400000000000950636F
-      5F437573746F08000400000000000F70636F5F56656E64615F417475616C0800
-      04000000000005746F74616C08000400000000000000}
+      4454480200020032000950636F5F56656E646108000400000000000C766C725F
+      446573636F6E746F08000400000000000950636F5F437573746F080004000000
+      00000F70636F5F56656E64615F417475616C080004000000000005746F74616C
+      08000400000000000E717464655F4465766F6C7669646108000400000000000C
+      717464655F56656E6469646108000400000000000000}
     object cdsTmpItensDevolucoesCodigo: TIntegerField
       DisplayWidth = 9
       FieldName = 'Codigo'
@@ -494,20 +494,9 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       FieldName = 'Descricao'
       Size = 50
     end
-    object cdsTmpItensDevolucoesQtde_Vendida: TIntegerField
-      DisplayLabel = 'Qtde. Venda'
-      DisplayWidth = 15
-      FieldName = 'Qtde_Vendida'
-    end
-    object cdsTmpItensDevolucoesPco_Venda: TFloatField
-      DisplayLabel = 'Pco. Venda'
-      DisplayWidth = 12
-      FieldName = 'Pco_Venda'
-    end
-    object cdsTmpItensDevolucoesQtde_devolvida: TIntegerField
-      DisplayLabel = 'Qtde. Devolvida'
-      DisplayWidth = 15
-      FieldName = 'Qtde_devolvida'
+    object cdsTmpItensDevolucoesqtde_Vendida: TFloatField
+      DisplayLabel = 'Qtde. Vendida'
+      FieldName = 'qtde_Vendida'
     end
     object cdsTmpItensDevolucoesPerc_Desc: TFloatField
       FieldName = 'Vlr_Desconto'
@@ -517,14 +506,23 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       FieldName = 'pco_Custo'
       DisplayFormat = '0.00'
     end
-    object cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField
-      FieldName = 'Pco_Venda_Atual'
-    end
     object cdsTmpItensDevolucoesTotal: TFloatField
       FieldKind = fkCalculated
       FieldName = 'Total'
       DisplayFormat = '0.00'
       Calculated = True
+    end
+    object cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField
+      FieldName = 'Pco_Venda_Atual'
+    end
+    object cdsTmpItensDevolucoesPco_Venda: TFloatField
+      DisplayLabel = 'Pco. Venda'
+      DisplayWidth = 12
+      FieldName = 'Pco_Venda'
+    end
+    object cdsTmpItensDevolucoesqtde_Devolvida: TFloatField
+      DisplayLabel = 'Qtde. Devolvida'
+      FieldName = 'qtde_Devolvida'
     end
   end
   object srcTmpItensDevolucoes: TDataSource

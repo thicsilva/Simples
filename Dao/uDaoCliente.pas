@@ -20,7 +20,7 @@ type TDaoCliente = class
      function SaldoDevedor(ClienteId: Integer; Data : TDateTime) : real;
      Function BuscarTodos : TClientDataSet;
      function BuscarTelefone(prsTelefone : String) : String;
-     function BuscarNome(prsNome : String) : String;
+     function BuscarNome(prsNome : String) : TClientDataSet;
 end;
 
 implementation
@@ -69,9 +69,9 @@ begin
   End;
 end;
 
-function TDaoCliente.BuscarNome(prsNome: String): String;
+function TDaoCliente.BuscarNome(prsNome: String): TClientDataSet;
 begin
-   Result := Fconexao.BuscarDadosSQL('Select Descricao, Telefone from T_Clientes where Descricao='+QuotedStr(prsNome)+' order by Descricao ',Nil).FieldByName('Telefone').AsString;
+   Result := Fconexao.BuscarDadosSQL('Select Codigo, Endereco+'+QuotedStr(' - ')+'+Telefone as Descricao, Telefone from T_Clientes where Descricao='+QuotedStr(prsNome)+' order by Descricao ',Nil);
 end;
 
 function TDaoCliente.BuscarTelefone(prsTelefone: String): String;

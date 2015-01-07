@@ -235,11 +235,17 @@ object frmCtasReceber: TfrmCtasReceber
         object TabTipoPagamento: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcTipoPagamento
+          DataController.DetailKeyFieldNames = 'Sequencia'
+          DataController.KeyFieldNames = 'Sequencia'
+          DataController.MasterKeyFieldNames = 'Sequencia'
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <>
           DataController.Summary.SummaryGroups = <>
           OptionsView.GroupByBox = False
           OptionsView.Header = False
+          object TabTipoPagamentoColumn1: TcxGridDBColumn
+            DataBinding.FieldName = 'Descricao'
+          end
         end
         object cxGrid1Level1: TcxGridLevel
           GridView = GridCtasReceber
@@ -2327,7 +2333,7 @@ object frmCtasReceber: TfrmCtasReceber
     SQL.Strings = (
       'Select * from T_Ctasreceber where 1=2')
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 541
+    Left = 567
     Top = 167
   end
   object cdsPesquisa: TClientDataSet
@@ -2343,7 +2349,7 @@ object frmCtasReceber: TfrmCtasReceber
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 569
+    Left = 537
     Top = 168
   end
   object CxPropriedades: TcxPropertiesStore
@@ -3896,7 +3902,7 @@ object frmCtasReceber: TfrmCtasReceber
   object cdsTipoPagamento: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'dspVariavel'
+    ProviderName = 'dsppagto'
     Left = 277
     Top = 339
   end
@@ -3904,5 +3910,17 @@ object frmCtasReceber: TfrmCtasReceber
     DataSet = cdsTipoPagamento
     Left = 277
     Top = 311
+  end
+  object qryPagto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 253
+    Top = 312
+  end
+  object dsppagto: TDataSetProvider
+    DataSet = qryPagto
+    Left = 251
+    Top = 340
   end
 end

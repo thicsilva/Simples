@@ -78,6 +78,7 @@ type TDaoEstrutura = class
     procedure Adicionar_FuncionarioId_na_Tabela_ItenVendas;
     procedure Adicionar_Obs_na_Tabela_Vendas;
     procedure Adicionar_DataMovimento_na_Tabela_Caixa;
+    procedure CriarTabela_ProdutosPagamentos;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -833,7 +834,7 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
-
+  CriarTabela_ProdutosPagamentos;
   Adicionar_DataMovimento_na_Tabela_Caixa;
   Adicionar_Obs_na_Tabela_Vendas;
   Adicionar_FuncionarioId_na_Tabela_ItenVendas;
@@ -988,6 +989,25 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.CriarTabela_ProdutosPagamentos;
+begin
+   if not ExisteTabela( 'ProdutosPagamentos', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'Create Table ProdutosPagamentos ( ID int Identity(1,1), '+
+                              'Preco Float, '+
+                              'Data_Cadastro Datetime,'+
+                              'Data_movimento DateTime,'+
+                              'Data_Atualizacao DateTime, '+
+                              'Operador Varchar(50),'+
+                              'PagamentoId int,'+
+                              'ProdutoId int,'+
+                              'Cod_Emp int )';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 procedure TDaoEstrutura.CriarTabela_Empresa;
 begin

@@ -117,7 +117,7 @@ begin
   FParametros.clear;
   FParametros.add(IntToStr(RomaneioId));
   //FParametros.add('5');
-  Result := FConexao.BuscarDadosSQL('Select ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Ven.CustoTotal, Pag.Descricao as Pagamento, '+
+  Result := FConexao.BuscarDadosSQL('Select Ven.AnimalId, Ven.SeqVenda,cli.codigo, Cli.Descricao, Ven.Vlr_total, Ven.CustoTotal, Pag.Descricao as Pagamento, '+
                                     '       Ven.Entregue, Ven.Prorrogado, Ven.ServicoPago, Ven.PagouSinal, Ven.Cod_formaPagamento, Ven.Status '+
                                     'from t_vendas ven '+
                                     '      inner join T_clientes cli on Cli.Codigo=Ven.Cod_Cliente '+

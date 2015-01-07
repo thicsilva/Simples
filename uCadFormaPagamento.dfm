@@ -3,8 +3,8 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
   Top = 242
   BorderIcons = []
   Caption = 'Cadastro e manuten'#231#227'o de Formas De Pagamento'
-  ClientHeight = 294
-  ClientWidth = 594
+  ClientHeight = 417
+  ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,9 +19,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
   object pagCadastro: TbsSkinPageControl
     Left = 0
     Top = 53
-    Width = 594
-    Height = 241
-    ActivePage = bsSkinTabSheet2
+    Width = 624
+    Height = 364
+    ActivePage = tabMensagem
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -31,6 +31,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     ParentFont = False
     Style = tsButtons
     TabOrder = 0
+    OnChange = pagCadastroChange
     MouseWheelSupport = False
     TabExtededDraw = False
     ButtonTabSkinDataName = 'resizetoolbutton'
@@ -50,12 +51,16 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
+    ExplicitWidth = 622
+    ExplicitHeight = 271
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitWidth = 620
+      ExplicitHeight = 247
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
-        Width = 592
+        Width = 622
         Height = 33
         HintImageIndex = 0
         TabOrder = 0
@@ -88,6 +93,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
+        ExplicitWidth = 620
         object btntudo: TSpeedButton
           Left = 495
           Top = 6
@@ -256,10 +262,12 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       object cxGrid1: TcxGrid
         Left = 0
         Top = 33
-        Width = 592
-        Height = 184
+        Width = 622
+        Height = 307
         Align = alClient
         TabOrder = 1
+        ExplicitWidth = 620
+        ExplicitHeight = 214
         object GridFormaPagamento: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -314,6 +322,8 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitWidth = 620
+      ExplicitHeight = 247
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 13
         Top = 12
@@ -771,20 +781,319 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object tabMensagem: TbsSkinTabSheet
       Caption = 'Mensagem Complementar'
+      ExplicitWidth = 620
+      ExplicitHeight = 247
       object MemoMensagem: TMemo
         Left = 0
         Top = 0
-        Width = 592
-        Height = 217
+        Width = 622
+        Height = 340
         Align = alClient
         TabOrder = 0
+        ExplicitWidth = 620
+        ExplicitHeight = 247
+      end
+    end
+    object tabprodutos: TbsSkinTabSheet
+      Caption = 'Preco Especial do Produto'
+      ExplicitWidth = 620
+      ExplicitHeight = 247
+      object bsSkinPanel2: TbsSkinPanel
+        Left = 0
+        Top = 27
+        Width = 622
+        Height = 49
+        HintImageIndex = 0
+        TabOrder = 0
+        SkinDataName = 'panel'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 0
+        DefaultHeight = 0
+        UseSkinFont = True
+        EmptyDrawing = False
+        RibbonStyle = False
+        ImagePosition = bsipDefault
+        TransparentMode = False
+        CaptionImageIndex = -1
+        RealHeight = -1
+        AutoEnabledControls = True
+        CheckedMode = False
+        Checked = False
+        DefaultAlignment = taLeftJustify
+        DefaultCaptionHeight = 22
+        BorderStyle = bvFrame
+        CaptionMode = False
+        RollUpMode = False
+        RollUpState = False
+        NumGlyphs = 1
+        Spacing = 2
+        Caption = 'bsSkinPanel2'
+        Align = alTop
+        ExplicitWidth = 620
+        object Label1: TLabel
+          Left = 6
+          Top = 3
+          Width = 85
+          Height = 14
+          Caption = 'Informe o Produto'
+        end
+        object Label2: TLabel
+          Left = 319
+          Top = 3
+          Width = 68
+          Height = 14
+          Caption = 'Pre'#231'o Produto'
+        end
+        object cmbNome_Produto: TbsSkinDBLookupComboBox
+          Left = 76
+          Top = 20
+          Width = 240
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 1
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'Descricao;Codigo'
+          ListSource = srcCadProdutos
+        end
+        object edtCod_Produto: TbsSkinEdit
+          Left = 6
+          Top = 20
+          Width = 64
+          Height = 20
+          DefaultColor = clWindow
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          UseSkinFont = True
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          ButtonImageIndex = -1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+          OnExit = edtCod_ProdutoExit
+        end
+        object btnRemoverDesconto: TbsSkinButton
+          Left = 469
+          Top = 6
+          Width = 72
+          Height = 37
+          HintImageIndex = 0
+          TabOrder = 3
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          Transparent = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 9
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '&Remover'
+          NumGlyphs = 1
+          Spacing = 1
+          Layout = blGlyphTop
+        end
+        object btnAdicionaDesconto: TbsSkinButton
+          Left = 393
+          Top = 6
+          Width = 72
+          Height = 37
+          HintImageIndex = 0
+          TabOrder = 2
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          Transparent = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 10
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          Caption = '&Adicionar'
+          NumGlyphs = 1
+          Spacing = 1
+          Layout = blGlyphTop
+        end
+        object edtPerc_Desconto: TbsSkinNumericEdit
+          Left = 322
+          Top = 20
+          Width = 65
+          Height = 20
+          Text = '0,00'
+          Increment = 1.000000000000000000
+          SupportUpDownKeys = False
+          Alignment = taRightJustify
+          UseSkinFont = True
+          ValueType = vtFloat
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clBlack
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          ButtonMode = False
+          SkinDataName = 'edit'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = 14
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          ButtonImageIndex = -1
+          LeftImageIndex = -1
+          LeftImageHotIndex = -1
+          LeftImageDownIndex = -1
+          RightImageIndex = -1
+          RightImageHotIndex = -1
+          RightImageDownIndex = -1
+        end
+      end
+      object StatusBar1: TStatusBar
+        Left = 0
+        Top = 321
+        Width = 622
+        Height = 19
+        Panels = <>
+        ExplicitTop = 228
+        ExplicitWidth = 620
+      end
+      object bsSkinDBGrid1: TbsSkinDBGrid
+        Left = 0
+        Top = 76
+        Width = 622
+        Height = 245
+        HintImageIndex = 0
+        TabOrder = 2
+        SkinDataName = 'grid'
+        Transparent = False
+        WallpaperStretch = False
+        UseSkinFont = True
+        UseSkinCellHeight = True
+        GridLineColor = clBtnFace
+        DefaultCellHeight = 20
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBtnText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ColSizingwithLine = False
+        DrawGraphicFields = False
+        UseColumnsFont = False
+        DefaultRowHeight = 22
+        MouseWheelSupport = False
+        SaveMultiSelection = False
+        PickListBoxSkinDataName = 'listbox'
+        PickListBoxCaptionMode = False
+        Align = alClient
+        ParentFont = False
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clBtnText
+        TitleFont.Height = 14
+        TitleFont.Name = 'Arial'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Codigo'
+            Width = 50
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Descricao'
+            Width = 370
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Preco'
+            Visible = True
+          end>
+      end
+      object pnlPagamentos: TPanel
+        Left = 0
+        Top = 0
+        Width = 622
+        Height = 27
+        Align = alTop
+        Caption = 'pnlPagamentos'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+        ExplicitWidth = 620
       end
     end
   end
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 594
+    Width = 624
     Height = 53
     AutoSize = True
     Bands = <
@@ -792,16 +1101,17 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 590
+        Width = 620
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
+    ExplicitWidth = 622
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 581
+      Width = 611
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -1163,5 +1473,55 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     DataSet = sdtsPesquisa
     Left = 508
     Top = 179
+  end
+  object qryProdutosPagamentos: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'Select * from T_Atividades where 1=2')
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 576
+    Top = 123
+  end
+  object dspProdutosPagamentos: TDataSetProvider
+    DataSet = qryProdutosPagamentos
+    Left = 576
+    Top = 151
+  end
+  object srcProdutosPagamentos: TDataSource
+    DataSet = cdsProdutosPagamentos
+    Left = 576
+    Top = 179
+  end
+  object cdsProdutosPagamentos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProdutosPagamentos'
+    Left = 576
+    Top = 207
+  end
+  object srcCadProdutos: TDataSource
+    DataSet = cdsCadProdutos
+    Left = 430
+    Top = 239
+  end
+  object cdsCadProdutos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCadProdutos'
+    Left = 430
+    Top = 211
+  end
+  object qryvariavel: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 396
+    Top = 211
+  end
+  object dspVariavel: TDataSetProvider
+    DataSet = qryvariavel
+    Left = 397
+    Top = 239
   end
 end

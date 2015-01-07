@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, bsSkinCtrls, StdCtrls, Mask, bsSkinBoxCtrls, ExtCtrls,
-  ToolWin, ImgList, bsPngImageList;
+  ToolWin, ImgList, bsPngImageList,DbClient;
 
 type
   TfrmCadastroClienteSimplificado = class(TForm)
@@ -45,10 +45,12 @@ type
     procedure BtnCancelaClick(Sender: TObject);
     procedure edtNome_ClienteExit(Sender: TObject);
   private
+    procedure MostrarDados(Dados: TClientDataSet);
     { Private declarations }
   public
     { Public declarations }
     ClienteId : String;
+    pTelefone : String;
   end;
 
 var
@@ -56,7 +58,7 @@ var
 
 implementation
 
-uses uClassCliente, uDaoCliente,uPrincipal,uFuncoes;
+uses uClassCliente, uDaoCliente,uPrincipal,uFuncoes, uMostrarDados;
 
 {$R *.dfm}
 
@@ -112,18 +114,38 @@ end;
 procedure TfrmCadastroClienteSimplificado.edtNome_ClienteExit(Sender: TObject);
 var Daocliente : TDaoCliente;
     lsTelefone : String;
+    Dados : TClientDataSet;
 begin
    Daocliente := TDaoCliente.Create(gConexao);
    try
-      lsTelefone := DaoCliente.BuscarNome(edtNome_Cliente.Text);
-      if trim(lsTelefone)<> EmptyStr then
+      Dados := TClientDataSet.Create(Self);
+      Dados.Data := DaoCliente.BuscarNome(edtNome_Cliente.Text).Data;
+      if Dados.RecordCount>0 then
       begin
-         CaixaMensagem( 'Cliente ja Cadastrado Telefone ('+lsTelefone+')', ctInforma, [ cbOK ], 0 );
-         exit;
+          if Dados.RecordCount=1 then
+            CaixaMensagem( 'Cliente ja Cadastrado Telefone ('+Dados.FieldByName('Descricao').AsString+')', ctInforma, [ cbOK ], 0 )
+          else
+            MostrarDados(Dados);
       end;
    finally
       FreeAndNil(Daocliente);
    end;
+end;
+
+procedure TfrmCadastroClienteSimplificado.MostrarDados(Dados : TClientDataSet);
+begin
+   try
+     frmMostrarDados := TfrmMostrarDados.Create(Self);
+     frmMostrarDados.cdsDados.Data := Dados.Data;
+     frmMostrarDados.ShowModal;
+     if frmMostrarDados.tag=1 then
+     begin
+        edtTelefone.Text := frmMostrarDados.PTelefone;
+        Close;
+     end;
+  finally
+     FreeAndNil(frmMostrarDados);
+  end;
 end;
 
 procedure TfrmCadastroClienteSimplificado.edtTelefoneExit(Sender: TObject);

@@ -155,7 +155,8 @@ uses
   uClassProduto in 'Modelos\uClassProduto.pas',
   uSelFormaPagamento in '..\Compartilhados\uSelFormaPagamento.pas' {frmselFormaPagamento},
   uSelProduto in 'uSelProduto.pas' {frmSelProduto},
-  uDtmRelatorios in 'Data Module\uDtmRelatorios.pas' {dtmRelatorios: TDataModule};
+  uDtmRelatorios in 'Data Module\uDtmRelatorios.pas' {dtmRelatorios: TDataModule},
+  uMostrarDados in 'uMostrarDados.pas' {frmMostrarDados};
 
 {$R *.res}
 
@@ -171,6 +172,7 @@ begin
   Application.CreateForm(TfrmselFormaPagamento, frmselFormaPagamento);
   Application.CreateForm(TfrmSelProduto, frmSelProduto);
   Application.CreateForm(TdtmRelatorios, dtmRelatorios);
+  Application.CreateForm(TfrmMostrarDados, frmMostrarDados);
   Frmlogin.ShowModal;
   Application.Run;
 end.

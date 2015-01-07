@@ -146,6 +146,9 @@ type
     TabTipoPagamento: TcxGridDBTableView;
     cdsTipoPagamento: TClientDataSet;
     srcTipoPagamento: TDataSource;
+    qryPagto: TSQLQuery;
+    dsppagto: TDataSetProvider;
+    TabTipoPagamentoColumn1: TcxGridDBColumn;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure BtnCancelaClick(Sender: TObject);
@@ -802,6 +805,18 @@ begin
    cdsPesquisa.Close;
    cdsPesquisa.ProviderName := dspPesquisa.Name;
    cdsPesquisa.Open;
+
+   qryPagto.Close;
+   qryPagto.SQL.Text:= 'select rec.Sequencia,pag.Descricao '+
+                       'from T_ctasreceber rec '+
+                       'left join T_movcaixa cx on cx.Seqvenda=rec.Seqvenda '+
+                       'left join T_FormasPagamento pag on pag.Codigo=cx.cod_FormaPagamento order by 1' ;
+
+   cdsTipoPagamento.Close;
+   cdsTipoPagamento.Open;
+
+
+
    try
      EdtPesquisa.SetFocus;
    except

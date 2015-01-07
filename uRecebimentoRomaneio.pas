@@ -38,6 +38,7 @@ type
     TmpDadosStatus: TStringField;
     TmpDadosFormaPagemento: TStringField;
     TmpDadosCod_FormaPagamento: TStringField;
+    TmpDadosPagamentoCaixa: TStringField;
     procedure btnCarregarClick(Sender: TObject);
     procedure btnGerarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -49,8 +50,8 @@ type
   private
     function EstaPendente(LinhaId: integer): Boolean;
     function FoiProrrogado(LinhaId: Integer): Boolean;
-    procedure BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String);
-    procedure EfetuarLancamentoNoCaixa(prValorBaixa: Real; priNumeroVenda: String);
+    procedure BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String; FormaPagamento : Integer );
+    procedure EfetuarLancamentoNoCaixa(prValorBaixa: Real; priNumeroVenda: String; FormaPagemento : Integer);
     procedure BaixarTitulo(prValorBaixa: Real; priNumeroVenda: String);
     function FoiRecebido(LinhaId: Integer): Boolean;
     function NaoFoiRecebido(LinhaId: Integer): Boolean;
@@ -66,7 +67,8 @@ var
 
 implementation
 
-uses uDaoRomaneio,uPrincipal, uDaoVenda, uFuncoes,uClassLancamento, uDaoCaixaMovimento ;
+uses uDaoRomaneio,uPrincipal, uDaoVenda, uFuncoes,uClassLancamento, uDaoCaixaMovimento ,
+  uSelFormaPagamento;
 
 {$R *.dfm}
 
@@ -95,9 +97,9 @@ begin
    end;
 end;
 
-procedure TfrmRecebimentoRomaneio.BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String);
+procedure TfrmRecebimentoRomaneio.BaixaTitulosAVista(prValorBaixa: Real; priNumeroVenda: String; FormaPagamento : Integer );
 begin
-   EfetuarLancamentoNoCaixa(prValorBaixa,priNumeroVenda);
+   EfetuarLancamentoNoCaixa(prValorBaixa,priNumeroVenda,FormaPagamento);
    BaixarTitulo(prValorBaixa,priNumeroVenda);
 end;
 
@@ -110,7 +112,7 @@ begin
 end;
 
 
-procedure TfrmRecebimentoRomaneio.EfetuarLancamentoNoCaixa( prValorBaixa : real; priNumeroVenda : String );
+procedure TfrmRecebimentoRomaneio.EfetuarLancamentoNoCaixa(prValorBaixa: Real; priNumeroVenda: String; FormaPagemento : Integer);
 var loLancamento  : TLancamento;
     loDaoMovCaixa : TDaoCaixaMovimento;
 begin
@@ -119,13 +121,13 @@ begin
 
    lolancamento.Cod_Caixa          := 1;
    lolancamento.Valor              := prValorBaixa;
-   lolancamento.Historico          := 'Recebimento de Venda nº(Romaneio) '+priNumeroVenda;
+   lolancamento.Historico          := 'Recebimento (Romaneio) '+priNumeroVenda;
    lolancamento.Data_Lancamento    := now;
    lolancamento.D_C                := 'C';
    lolancamento.SeqVenda           := StrToint(priNumeroVenda);
    lolancamento.Cod_tipoDespesa    := '0101';
    lolancamento.Sequencia          := Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8);
-   lolancamento.Cod_FormaPagamento := 1; // tem que ser dinheiro
+   lolancamento.Cod_FormaPagamento := FormaPagemento;
    lolancamento.Operador           := gsOperador;
    loDaoMovCaixa.Lancar(lolancamento);
 end;
@@ -136,7 +138,7 @@ var I : Integer;
     DaoVenda : TDaoVenda;
 begin
    DaoRomaneio := TDaoRomaneio.Create(gConexao);
-   DaoVenda := TDaoVenda.Create(gConexao);
+   DaoVenda    := TDaoVenda.Create(gConexao);
    try
      for I := 0 to ListVendas.Items.Count - 1 do
      begin
@@ -152,7 +154,7 @@ begin
         if FoiProrrogado(I) then
            DaoVenda.TirarVendaRomaneio( StrToInt(ListVendas.Items[I].Caption))
         else if FoiRecebido(I) then
-           BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption)
+           BaixaTitulosAVista(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption, StrToint(ListVendas.Items[I].SubItems[6]) )
         else if NaoFoiRecebido(I) then
            MudarVencimentoTitulos(StrToFloat(ListVendas.Items[I].SubItems[3]), ListVendas.Items[I].Caption,ListVendas.Items[I].SubItems[5]);
 
@@ -197,7 +199,7 @@ begin
       lsStatus :=  DaoRomaneio.BuscarPorId(StrToint(edtRomaneioid.text)).FieldByName('Status').AsString;
       if lsStatus='F' then
       begin
-         CaixaMensagem( 'Romaneio ja Fechado', ctAviso, [ cbOk ], 0 );
+         CaixaMensagem( 'Romaneio já Fechado', ctAviso, [ cbOk ], 0 );
          exit;
       end;
       if lsStatus='C' then
@@ -237,6 +239,7 @@ begin
       else
         llstTemp.SubItems.Add('Pendente');
       llstTemp.SubItems.Add(Dados.FieldByName('Cod_formaPagamento').AsString);
+      llstTemp.SubItems.Add(Dados.FieldByName('AnimalId').AsString);
       Dados.Next;
    end;
    OrganizaListView;
@@ -257,6 +260,7 @@ begin
      TmpDados.FieldByname('Valor').AsFloat := StrTofloat(ListVendas.Items[I].SubItems[3]);
      TmpDados.FieldByname('Status').AsString := ListVendas.Items[I].SubItems[4];
      TmpDados.FieldByname('Cod_FormaPagamento').AsString := ListVendas.Items[I].SubItems[5];
+     TmpDados.FieldByname('PagamentoCaixa').AsString := ListVendas.Items[I].SubItems[6];
      TmpDados.Post;
   end;
   ListVendas.Items.Clear;
@@ -271,6 +275,7 @@ begin
      llstTemp.SubItems.Add(FormatFloat('0.00', TmpDados.FieldByName('Valor').AsFloat));
      llstTemp.SubItems.Add(TmpDados.FieldByName('Status').AsString);
      llstTemp.SubItems.Add(TmpDados.FieldByName('Cod_formaPagamento').AsString);
+     llstTemp.SubItems.Add(TmpDados.FieldByname('PagamentoCaixa').AsString);
      TmpDados.Next;
   end;
 end;
@@ -347,8 +352,13 @@ var lsDias : String;
     liDias : Integer;
     DaoVenda : TDaoVenda;
     I: Integer;
+    tipoPagamento : Integer;
 begin
    DaoVenda := TDaoVenda.Create(gConexao);
+   frmselFormaPagamento           := TfrmselFormaPagamento.Create(Self);
+   frmselFormaPagamento.SoAvista  := True;
+   frmselFormaPagamento.ShowModal;
+   tipoPagamento                  := frmselFormaPagamento.cmbNome_formaPagamento.KeyValue;
    for I := 0 to ListVendas.Items.Count - 1 do
    begin
       if ListVendas.Items[I].Checked then
@@ -357,7 +367,8 @@ begin
          begin
             DaoVenda.MarcarComoServicoPago(StrToint(ListVendas.Items[I].Caption));
             DaoVenda.MarcarComoEntregue(StrToint(ListVendas.Items[I].Caption));
-         end
+            DaoVenda.AtualizarAnimal(StrToint(ListVendas.Items[I].Caption),tipoPagamento);
+         end                         
          else
          begin
            CaixaMensagem( 'A Venda não esta pendentea ', ctAviso, [ cbOk ], 0 );

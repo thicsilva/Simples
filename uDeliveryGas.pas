@@ -349,27 +349,29 @@ begin
       DaoItenVenda.InserirItem(ItemVenda);
       TotalVenda := TotalVenda +(Produto.PrecoTabela*Quantidade02);
       lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
-   end;
-   cdsProdutos.first;
-
-   while not cdsProdutos.Eof do
+   end;                                                                       
+   if Assigned(cdsProdutos) then
    begin
-      produto := DaoProduto.Buscar(cdsProdutos.FieldByName('Codigo').AsInteger);
-      ItemVenda.ProdutoId     := Produto.ProdutoId;
-      ItemVenda.Qunatidade    := cdsProdutos.FieldByName('Quantidade').AsInteger;
-      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
-      ItemVenda.Total         := (Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
-      ItemVenda.Operador      := gsOperador;
-      ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
-      ItemVenda.VendaID       := Venda.VendaID;
-      ItemVenda.SetorId       := 1;
-      ItemVenda.PrecoVenda    := Produto.PrecoTabela;
-      ItemVenda.TipoCalculo   := 1;
-      ItemVenda.FuncionarioId := 1;
-      DaoItenVenda.InserirItem(ItemVenda);
-      TotalVenda := TotalVenda +(Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
-      lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
-      cdsProdutos.Next;
+      cdsProdutos.first;
+      while not cdsProdutos.Eof do
+      begin
+         produto := DaoProduto.Buscar(cdsProdutos.FieldByName('Codigo').AsInteger);
+         ItemVenda.ProdutoId     := Produto.ProdutoId;
+         ItemVenda.Qunatidade    := cdsProdutos.FieldByName('Quantidade').AsInteger;
+         ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+         ItemVenda.Total         := (Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
+         ItemVenda.Operador      := gsOperador;
+         ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
+         ItemVenda.VendaID       := Venda.VendaID;
+         ItemVenda.SetorId       := 1;
+         ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+         ItemVenda.TipoCalculo   := 1;
+         ItemVenda.FuncionarioId := 1;
+         DaoItenVenda.InserirItem(ItemVenda);
+         TotalVenda := TotalVenda +(Produto.PrecoTabela*cdsProdutos.FieldByName('Quantidade').AsInteger);
+         lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
+         cdsProdutos.Next;
+      end;
    end;
 
    VendaId := Venda.VendaID;

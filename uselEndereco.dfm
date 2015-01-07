@@ -121,6 +121,7 @@ object frmselEndereco: TfrmselEndereco
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'bevel'
       DividerMode = True
+      ExplicitTop = -1
     end
   end
   object edtEnderecoObra: TbsSkinEdit

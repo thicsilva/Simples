@@ -989,9 +989,9 @@ object frmConsVendas: TfrmConsVendas
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 903
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1025,6 +1025,7 @@ object frmConsVendas: TfrmConsVendas
         OnClick = btnFecharClick
         ExplicitLeft = 753
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object separador: TbsSkinBevel
         Left = 100

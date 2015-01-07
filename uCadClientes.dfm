@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 835
     Height = 525
-    ActivePage = tab_Historico
+    ActivePage = Tab_ProdutosDescontos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -2739,7 +2739,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 594
-        Top = 4
+        Top = 0
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -4930,8 +4930,7 @@ object frmCadClientes: TfrmCadClientes
         UseImagesMenuCaption = False
         SkinPopupMenu = bsSkinPopupMenu1
         TrackButtonMode = False
-        ExplicitLeft = 231
-        ExplicitTop = 12
+        ExplicitLeft = 346
       end
       object btnFechar: TbsSkinSpeedButton
         Left = 729

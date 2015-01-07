@@ -30,6 +30,7 @@ type TDaoVenda = class
      procedure TirarVendaRomaneio(VendaId : Integer);
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
      procedure AtualizarTotal(VendaId : Integer; Total : Real);
+     procedure AtualizarAnimal(VendaId : Integer; AnimalId : Integer);
 
      procedure Incluir( Venda : TVenda );
 end;
@@ -38,6 +39,15 @@ end;
 implementation
 
 { TDaoVenda }
+
+procedure TDaoVenda.AtualizarAnimal(VendaId, AnimalId: Integer);
+begin
+   FqryModific.Close;
+   FqryModific.SQL.Text :='Update T_vendas set AnimalId=:parAnimalId where Seqvenda=:parSeqVenda';
+   FqryModific.ParamByName('parAnimalId').AsFloat := AnimalId;
+   FqryModific.ParamByName('parSeqVenda').AsInteger := VendaId;
+   FqryModific.ExecSql;
+end;
 
 procedure TDaoVenda.AtualizarRomaneio(RomaneiId, VendaId: Integer);
 begin

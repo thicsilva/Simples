@@ -73,7 +73,7 @@ object frmMovCaixa: TfrmMovCaixa
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 787
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -463,7 +463,7 @@ object frmMovCaixa: TfrmMovCaixa
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnImprimirClick
-        ExplicitLeft = 390
+        ExplicitLeft = 378
         ExplicitTop = 8
       end
       object bsSkinBevel4: TbsSkinBevel
@@ -554,18 +554,13 @@ object frmMovCaixa: TfrmMovCaixa
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GridMovCaixa: TcxGrid
         Left = 0
         Top = 49
         Width = 798
-        Height = 284
+        Height = 285
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 285
         object GrdDespesas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GrdDespesasCustomDrawCell
@@ -681,7 +676,7 @@ object frmMovCaixa: TfrmMovCaixa
         Align = alTop
         object AtualizaRec: TbsSkinSpeedButton
           Left = 642
-          Top = 23
+          Top = 18
           Width = 137
           Height = 24
           HintImageIndex = 0
@@ -783,7 +778,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object lblTurma: TbsSkinStdLabel
           Left = 123
-          Top = 29
+          Top = 24
           Width = 19
           Height = 13
           EllipsType = bsetNone
@@ -800,7 +795,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object dtpData_Fim: TbsSkinDateEdit
           Left = 151
-          Top = 26
+          Top = 21
           Width = 89
           Height = 20
           EditMask = '!99/99/9999;1; '
@@ -851,7 +846,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object dtpData_Ini: TbsSkinDateEdit
           Left = 24
-          Top = 26
+          Top = 21
           Width = 89
           Height = 20
           EditMask = '!99/99/9999;1; '
@@ -902,7 +897,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object cmbPeriodo: TbsSkinComboBox
           Left = 246
-          Top = 26
+          Top = 21
           Width = 180
           Height = 20
           HintImageIndex = 0
@@ -1040,7 +1035,7 @@ object frmMovCaixa: TfrmMovCaixa
         end
         object cmbCaixa: TbsSkinDBLookupComboBox
           Left = 434
-          Top = 26
+          Top = 21
           Width = 190
           Height = 20
           HintImageIndex = 0
@@ -1074,8 +1069,8 @@ object frmMovCaixa: TfrmMovCaixa
         end
       end
       object pnlDataovimento: TPanel
-        Left = 520
-        Top = 54
+        Left = 519
+        Top = 53
         Width = 275
         Height = 28
         Caption = 'pnlDataovimento'
@@ -1090,10 +1085,6 @@ object frmMovCaixa: TfrmMovCaixa
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Manutencao'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 160
         Top = 47
@@ -1786,8 +1777,8 @@ object frmMovCaixa: TfrmMovCaixa
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 400
-    Top = 112
+    Left = 288
+    Top = 240
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>

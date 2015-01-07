@@ -263,8 +263,18 @@ begin
                               'Prod.Pco_Custo, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
                               'where Prod.Codigo=Itens.Cod_Produto  ';
+   If cmbPeriodo.ItemIndex<>0 Then
+      qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' AND ( Itens.Data_Cad>=:parData_PagamentoIni And Itens.Data_Cad<=:parData_PagamentoFim ) ';
 
    qryItensVendas.SQL.Text := qryItensVendas.SQL.Text + ' And Itens.Seqvenda=Ven.SeqVenda Order by Ven.seqvenda ';
+
+   If cmbPeriodo.ItemIndex<>0 Then
+   Begin
+     qryItensVendas.ParamByName('parData_PagamentoIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
+     qryItensVendas.ParamByName('parData_PagamentoFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
+   End;
+
+
    cdsItensVendas.close;
    cdsItensVendas.ProviderName := dspItensVendas.name;
    cdsItensVendas.open;

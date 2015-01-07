@@ -3,7 +3,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
   Top = 0
   Caption = 'Recebimento e presta'#231#227'o de contas do romaneio.'
   ClientHeight = 397
-  ClientWidth = 831
+  ClientWidth = 959
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
   object bsSkinCoolBar3: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 831
+    Width = 959
     Height = 53
     AutoSize = True
     Bands = <
@@ -24,16 +24,17 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Control = bsSkinToolBar3
         ImageIndex = -1
         MinHeight = 49
-        Width = 827
+        Width = 955
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
+    ExplicitWidth = 831
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 818
+      Width = 946
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -78,9 +79,9 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 711
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -114,6 +115,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         OnClick = btnFecharClick
         ExplicitLeft = 764
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 97
@@ -210,6 +212,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
+        Enabled = False
         OnClick = btnProrrogarVencimentoClick
         ExplicitLeft = 129
         ExplicitTop = 12
@@ -381,7 +384,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
   object bsSkinPanel1: TbsSkinPanel
     Left = 0
     Top = 86
-    Width = 831
+    Width = 959
     Height = 311
     HintImageIndex = 0
     TabOrder = 1
@@ -413,10 +416,11 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alClient
+    ExplicitWidth = 831
     object ListVendas: TbsSkinListView
       Left = 1
       Top = 1
-      Width = 829
+      Width = 957
       Height = 309
       DrawSkin = False
       DrawSkinLines = False
@@ -460,6 +464,10 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         end
         item
           Caption = 'tipopagamento'
+          Width = 100
+        end
+        item
+          Caption = 'PagamentoCaixa'
           Width = 0
         end>
       Font.Charset = DEFAULT_CHARSET
@@ -473,12 +481,14 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       TabOrder = 0
       ViewStyle = vsReport
       HeaderSkinDataName = 'resizetoolbutton'
+      ExplicitLeft = 3
+      ExplicitTop = -1
     end
   end
   object bsSkinPanel3: TbsSkinPanel
     Left = 0
     Top = 53
-    Width = 831
+    Width = 959
     Height = 33
     HintImageIndex = 0
     TabOrder = 2
@@ -510,6 +520,7 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel2'
     Align = alTop
+    ExplicitWidth = 831
     object bsSkinLabel1: TbsSkinLabel
       Left = 9
       Top = 7
@@ -681,6 +692,11 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         Name = 'Cod_FormaPagamento'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'PagamentoCaixa'
+        DataType = ftString
+        Size = 5
       end>
     IndexDefs = <
       item
@@ -695,13 +711,15 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Left = 432
     Top = 144
     Data = {
-      C60000009619E0BD010000001800000007000000000003000000C6000556656E
+      FF0000009619E0BD010000001800000008000000000003000000FF000556656E
       6461040001000000000006436F6469676F040001000000000007436C69656E74
       6501004900000001000557494454480200020064000E466F726D61506167656D
       656E746F01004900000001000557494454480200020032000556616C6F720800
       040000000000065374617475730100490000000100055749445448020002001E
       0012436F645F466F726D61506167616D656E746F010049000000010005574944
-      54480200020014000000}
+      54480200020014000E506167616D656E746F4361697861010049000000010005
+      574944544802000200050001000D44454641554C545F4F524445520200820000
+      000000}
     object TmpDadosVenda: TIntegerField
       FieldName = 'Venda'
     end
@@ -725,6 +743,10 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     end
     object TmpDadosCod_FormaPagamento: TStringField
       FieldName = 'Cod_FormaPagamento'
+    end
+    object TmpDadosPagamentoCaixa: TStringField
+      FieldName = 'PagamentoCaixa'
+      Size = 5
     end
   end
 end

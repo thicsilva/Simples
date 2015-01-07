@@ -17,7 +17,7 @@ uses
   Buttons, ComCtrls, bsSkinTabs, ExtCtrls, ToolWin, BusinessSkinForm,
   FMTBcd, SqlExpr, Provider, DBClient, SimpleDS,uFormBase, dxSkinsCore,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, bsSkinGrids, bsDBGrids, bsdbctrls;
 
 type
   TfrmCadFormaPagamento = class(TFormBase)
@@ -72,6 +72,26 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
+    tabprodutos: TbsSkinTabSheet;
+    bsSkinPanel2: TbsSkinPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    cmbNome_Produto: TbsSkinDBLookupComboBox;
+    edtCod_Produto: TbsSkinEdit;
+    btnRemoverDesconto: TbsSkinButton;
+    btnAdicionaDesconto: TbsSkinButton;
+    edtPerc_Desconto: TbsSkinNumericEdit;
+    StatusBar1: TStatusBar;
+    bsSkinDBGrid1: TbsSkinDBGrid;
+    qryProdutosPagamentos: TSQLQuery;
+    dspProdutosPagamentos: TDataSetProvider;
+    srcProdutosPagamentos: TDataSource;
+    cdsProdutosPagamentos: TClientDataSet;
+    pnlPagamentos: TPanel;
+    srcCadProdutos: TDataSource;
+    cdsCadProdutos: TClientDataSet;
+    qryvariavel: TSQLQuery;
+    dspVariavel: TDataSetProvider;
     procedure btnincluirClick(Sender: TObject);
     procedure LimpaCampos();
     procedure btnokClick(Sender: TObject);
@@ -83,6 +103,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnexcluirClick(Sender: TObject);
     procedure chkImprimeMensagemClick(Sender: TObject);
+    procedure pagCadastroChange(Sender: TObject);
+    procedure edtCod_ProdutoExit(Sender: TObject);
   private
      pvQualBotao : String;
     { Private declarations }
@@ -103,6 +125,30 @@ procedure TfrmCadFormaPagamento.LimpaCampos();
 Begin
    EdtDescricao.Text := '';
 End;
+procedure TfrmCadFormaPagamento.pagCadastroChange(Sender: TObject);
+begin
+
+   IF sdtsPesquisa.IsEmpty Then
+   Begin
+      CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+
+   if pagCadastro.ActivePageIndex = 3 then
+   begin
+      pnlPagamentos.Caption := sdtsPesquisa.FieldByName('Descricao').AsString;
+      qryProdutosPagamentos.Close;
+      qryProdutosPagamentos.SQL.Text := 'Select Prod.Codigo, Prod.Descricao, pag.Preco '+
+                                             ' from ProdutosPagamentos pag '+
+                                             '         left join T_Produtos prod on Prod.Codigo=Pag.ProdutoId '+
+                                             'where PagamentoId=:parPagamentoId ';
+      qryProdutosPagamentos.ParamByName('parPagamentoID').AsInteger := sdtsPesquisa.FieldByName('Codigo').AsInteger;
+      cdsProdutosPagamentos.Close;
+      cdsProdutosPagamentos.Open;
+   end;
+
+end;
+
 procedure TfrmCadFormaPagamento.btnincluirClick(Sender: TObject);
 begin
    pvQualBotao := 'INCLUIR';
@@ -293,9 +339,33 @@ begin
      End;
    end;
 end;
+procedure TfrmCadFormaPagamento.edtCod_ProdutoExit(Sender: TObject);
+begin
+   if Trim(edtCod_produto.text) <> '' Then
+   Begin
+      cmbNome_Produto.KeyValue :=  edtCod_Produto.Text;
+      if trim(cmbNome_Produto.text) = '' Then
+      Begin
+         CaixaMensagem( 'Produto não encontrado ', ctAviso, [ cbOk ], 0 );
+         edtCod_Produto.Setfocus;
+      End;
+   End;
+end;
+
 procedure TfrmCadFormaPagamento.FormShow(Sender: TObject);
 begin
    pagCadastro.ActivePageIndex := 0;
+
+   qryvariavel.Close;
+   qryvariavel.Params.clear;
+   qryvariavel.SQL.Text := 'Select * from T_Produtos where ( Tipo_Produto=:parTipo_Produto  or Tipo_Produto=:parTipo_Produto2 ) ';
+   qryvariavel.ParamByName('parTipo_Produto').AsInteger   := 0; // 1 <materia prima
+   qryvariavel.ParamByName('parTipo_Produto2').AsInteger  := 1; // 1 <materia prima
+
+   cdsCadProdutos.close;
+   cdsCadProdutos.ProviderName := dspvariavel.Name;
+   cdsCadProdutos.Open;
+
 end;
 
 end.

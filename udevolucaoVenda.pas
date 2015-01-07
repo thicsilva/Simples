@@ -15,9 +15,7 @@ type
     srcTmpItensDevolucoes: TDataSource;
     cdsTmpItensDevolucoesCodigo: TIntegerField;
     cdsTmpItensDevolucoesDescricao: TStringField;
-    cdsTmpItensDevolucoesQtde_Vendida: TIntegerField;
     cdsTmpItensDevolucoesPco_Venda: TFloatField;
-    cdsTmpItensDevolucoesQtde_devolvida: TIntegerField;
     dspVariavel: TDataSetProvider;
     qryVariavel: TSQLQuery;
     cdsItensvendas: TClientDataSet;
@@ -46,6 +44,8 @@ type
     bsSkinBevel2: TbsSkinBevel;
     btnFechar: TbsSkinSpeedButton;
     SkinForm: TbsBusinessSkinForm;
+    cdsTmpItensDevolucoesqtde_Devolvida: TFloatField;
+    cdsTmpItensDevolucoesqtde_Vendida: TFloatField;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnokClick(Sender: TObject);
