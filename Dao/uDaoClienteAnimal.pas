@@ -28,7 +28,6 @@ begin
 end;
 
 function TDaoClienteAnimal.BuscarTodos: TClientDataSet;
-Var Parametros : TStringList;
 begin
    Result:= FConexao.BuscarDadosSQL('Select * from ClienteAnimais order by nomeanimal',Nil);
 end;

@@ -96,7 +96,6 @@ var lsNome_Rota     : String;
     lsPercentual    : String;
     lsWhere         : String;
     lsGroupBy       : String;
-    lsCampo         : String;
     lsSelect        : String;
     lsNome_Vendedor : String;
     lsCod_Vendedor  : String;

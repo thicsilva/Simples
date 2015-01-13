@@ -21,7 +21,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     Top = 53
     Width = 624
     Height = 364
-    ActivePage = tabMensagem
+    ActivePage = tabprodutos
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -51,12 +51,8 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitWidth = 622
-    ExplicitHeight = 271
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitWidth = 620
-      ExplicitHeight = 247
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -93,7 +89,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Spacing = 2
         Caption = 'bsSkinPanel1'
         Align = alTop
-        ExplicitWidth = 620
         object btntudo: TSpeedButton
           Left = 495
           Top = 6
@@ -266,8 +261,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Height = 307
         Align = alClient
         TabOrder = 1
-        ExplicitWidth = 620
-        ExplicitHeight = 214
         object GridFormaPagamento: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -322,8 +315,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
-      ExplicitWidth = 620
-      ExplicitHeight = 247
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 13
         Top = 12
@@ -781,8 +772,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object tabMensagem: TbsSkinTabSheet
       Caption = 'Mensagem Complementar'
-      ExplicitWidth = 620
-      ExplicitHeight = 247
       object MemoMensagem: TMemo
         Left = 0
         Top = 0
@@ -790,14 +779,10 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Height = 340
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 620
-        ExplicitHeight = 247
       end
     end
     object tabprodutos: TbsSkinTabSheet
       Caption = 'Preco Especial do Produto'
-      ExplicitWidth = 620
-      ExplicitHeight = 247
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 27
@@ -833,7 +818,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Spacing = 2
         Caption = 'bsSkinPanel2'
         Align = alTop
-        ExplicitWidth = 620
         object Label1: TLabel
           Left = 6
           Top = 3
@@ -871,6 +855,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           KeyField = 'codigo'
           ListField = 'Descricao;Codigo'
           ListSource = srcCadProdutos
+          OnChange = cmbNome_ProdutoChange
         end
         object edtCod_Produto: TbsSkinEdit
           Left = 6
@@ -1016,8 +1001,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Width = 622
         Height = 19
         Panels = <>
-        ExplicitTop = 228
-        ExplicitWidth = 620
       end
       object bsSkinDBGrid1: TbsSkinDBGrid
         Left = 0
@@ -1086,7 +1069,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Font.Style = []
         ParentFont = False
         TabOrder = 3
-        ExplicitWidth = 620
       end
     end
   end
@@ -1107,7 +1089,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitWidth = 622
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0

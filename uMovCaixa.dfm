@@ -1066,6 +1066,7 @@ object frmMovCaixa: TfrmMovCaixa
           Height = 17
           Caption = 'Visualizar Caixa Fechado'
           TabOrder = 4
+          Visible = False
         end
       end
       object pnlDataovimento: TPanel

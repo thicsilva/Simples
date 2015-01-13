@@ -51,7 +51,6 @@ object frmSelDatas: TfrmSelDatas
     Spacing = 2
     Caption = 'PanelConsulta'
     Align = alTop
-    ExplicitWidth = 483
     object dtpData_Ini: TbsSkinDateEdit
       Left = 20
       Top = 22
@@ -291,7 +290,6 @@ object frmSelDatas: TfrmSelDatas
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitWidth = 483
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -438,6 +436,7 @@ object frmSelDatas: TfrmSelDatas
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitTop = -1
       end
     end
   end

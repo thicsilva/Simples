@@ -248,6 +248,7 @@ object frmSelRelClientes: TfrmSelRelClientes
         Layout = blGlyphTop
         OnClick = btnokClick
         ExplicitLeft = -6
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 70

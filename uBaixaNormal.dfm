@@ -325,7 +325,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     end
     object bsSkinStdLabel3: TbsSkinStdLabel
       Left = 10
-      Top = 92
+      Top = 91
       Width = 95
       Height = 13
       EllipsType = bsetNone

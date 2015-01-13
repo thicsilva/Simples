@@ -105,6 +105,7 @@ type
     procedure chkImprimeMensagemClick(Sender: TObject);
     procedure pagCadastroChange(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
+    procedure cmbNome_ProdutoChange(Sender: TObject);
   private
      pvQualBotao : String;
     { Private declarations }
@@ -325,6 +326,14 @@ begin
    End
    Else
       Tabmensagem.TabVisible  := False;
+end;
+
+procedure TfrmCadFormaPagamento.cmbNome_ProdutoChange(Sender: TObject);
+begin
+  inherited;
+  if cmbNome_Produto.KeyValue <> null Then
+     edtcod_Produto.Text := inczero(cmbNome_Produto.KeyValue,5);
+
 end;
 
 procedure TfrmCadFormaPagamento.cmbTipoPagamentoChange(Sender: TObject);

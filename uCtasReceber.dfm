@@ -246,6 +246,9 @@ object frmCtasReceber: TfrmCtasReceber
           object TabTipoPagamentoColumn1: TcxGridDBColumn
             DataBinding.FieldName = 'Descricao'
           end
+          object TabTipoPagamentoColumn2: TcxGridDBColumn
+            DataBinding.FieldName = 'Valor'
+          end
         end
         object cxGrid1Level1: TcxGridLevel
           GridView = GridCtasReceber

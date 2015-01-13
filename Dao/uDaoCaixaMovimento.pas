@@ -30,18 +30,26 @@ begin
 end;
 
 procedure TDaoCaixaMovimento.Lancar(lacamento: TLancamento);
+var lsCampo, lsParametro : String;
 begin
+   if lacamento.SeqVenda>0 then
+   begin
+       lsCampo     :=',SeqVenda';
+       lsParametro :=',:parSeqVenda';
+   end;
+
    FQueryModific.Close;
-   FQueryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,SeqVenda,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento ) Values '+
+   FQueryModific.SQL.Text := 'Insert into T_movCaixa ( Operador, Cod_Caixa, Valor,Historico,Data_Lancamento,D_C,Cod_tipoDespesa,Sequencia,Cod_FormaPagamento'+lsCampo+' ) Values '+
                           '                       ( :parOperador,:parCod_Caixa, :parValor,:parHistorico,:parData_Lancamento,'+
-                          '                         :parD_C,:parSeqVenda,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento ) ';
+                          '                         :parD_C,:parCod_tipoDespesa,:parSeqeuencia,:parCod_FormaPagamento'+lsParametro+' ) ';
 
    FQueryModific.ParamByName('parCod_Caixa').AsInteger            := lacamento.Cod_Caixa;
    FQueryModific.ParamByName('parValor').asFloat                  := lacamento.Valor;
    FQueryModific.ParamByName('parHistorico').asString             := lacamento.Historico;
    FQueryModific.ParamByName('parData_Lancamento').AsSqlTimeStamp := DateTimeToSQLTimeStamp( lacamento.Data_Lancamento );
    FQueryModific.ParamByName('parD_C').AsString                   := lacamento.D_C;
-   FQueryModific.ParamByName('parSeqVenda').asInteger             := lacamento.SeqVenda;
+   if lacamento.SeqVenda>0 then
+      FQueryModific.ParamByName('parSeqVenda').asInteger             := lacamento.SeqVenda;
    FQueryModific.ParamByName('parCod_tipoDespesa').AsString       := lacamento.Cod_tipoDespesa;
    FQueryModific.ParamByName('parSeqeuencia').AsString            := lacamento.Sequencia;
    FQueryModific.ParamByName('parCod_FormaPagamento').AsInteger   := lacamento.Cod_FormaPagamento;

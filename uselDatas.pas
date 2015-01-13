@@ -84,7 +84,8 @@ end;
 
 procedure TfrmSelDatas.FormShow(Sender: TObject);
 begin
-  dtpData_Ini.Date := gsData_Mov;
+  if not HeDistribuidora then
+     dtpData_Ini.Date := gsData_Mov;
   CarregarDoTurno;
 end;
 

@@ -580,15 +580,11 @@ object frmDeliveryGas: TfrmDeliveryGas
       SkinDataName = 'tab'
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Servi'#231'os Pendentes'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgConsulta: TbsSkinDBGrid
           Left = 0
           Top = 0
           Width = 637
-          Height = 288
+          Height = 289
           HintImageIndex = 0
           TabOrder = 0
           SkinData = frmPrincipal.SkinPrincipal
@@ -619,7 +615,7 @@ object frmDeliveryGas: TfrmDeliveryGas
         end
         object bsSkinExPanel5: TbsSkinExPanel
           Left = 0
-          Top = 288
+          Top = 289
           Width = 637
           Height = 130
           HintImageIndex = 0
@@ -648,7 +644,6 @@ object frmDeliveryGas: TfrmDeliveryGas
           Sizeable = False
           Align = alBottom
           Caption = 'bsSkinExPanel5'
-          ExplicitTop = 289
           object Label2: TLabel
             Left = 12
             Top = 112

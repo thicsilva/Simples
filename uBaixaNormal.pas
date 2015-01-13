@@ -191,7 +191,7 @@ begin
    panelRecebimento.RollState := False;
 
    edtData_Pagamento.Date := gsData_Mov;
-   edtData_Pagamento.SetFocus;
+   edtcod_Pagamento.SetFocus;
 
    AtualizarJuros;
 
@@ -291,7 +291,8 @@ begin
 
                      loDaoMovCaixa := TDaoCaixamovimento.Create(gConexao);
                      try
-                        if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) then
+                        if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) and
+                          (strTointDef(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador), 0 )>1)  then
                         begin
                            CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
                            exit;
