@@ -15,6 +15,7 @@ type TDaoProduto = class
      function BuscaCodigoProCodigoProprio( CodigoProprio : String ) : String;
      function BuscarTodos : TClientDataSet;
      function Buscar(ProdutoId : Integer) : TProduto;
+     function PrecoDiferente(ProdutoId,PagamentoId : Integer) : Real;
 end;
 
 implementation
@@ -64,6 +65,13 @@ begin
   Fconexao := conexao;
   FQryModific := TSqlQuery.Create(nil);
   FQryModific.SQLConnection := Fconexao.Conection;
+end;
+
+function TDaoProduto.PrecoDiferente(ProdutoId, PagamentoId: Integer): Real;
+begin
+   Result := FConexao.BuscarDadosSQL('select pag.preco from ProdutosPagamentos pag '+
+                                     ' left join T_Produtos prod on prod.Codigo=pag.ProdutoId '+
+                                     ' where PagamentoId='+IntTOStr(PagamentoId)+' and ProdutoId='+IntTOStr(ProdutoId),Nil).fieldByName('Preco').AsFloat;
 end;
 
 function TDaoProduto.RetornarCodigoProduto( CodigoBarra : String ) : String;

@@ -456,11 +456,11 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         DataType = ftFloat
       end
       item
-        Name = 'qtde_Vendida'
+        Name = 'pco_Venda_Atual'
         DataType = ftFloat
       end
       item
-        Name = 'pco_Venda_Atual'
+        Name = 'total'
         DataType = ftFloat
       end
       item
@@ -468,7 +468,7 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
         DataType = ftFloat
       end
       item
-        Name = 'total'
+        Name = 'qtde_Vendida'
         DataType = ftFloat
       end>
     IndexDefs = <>
@@ -494,9 +494,18 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
       FieldName = 'Descricao'
       Size = 50
     end
+    object cdsTmpItensDevolucoesPco_Venda: TFloatField
+      DisplayLabel = 'Pco. Venda'
+      DisplayWidth = 12
+      FieldName = 'Pco_Venda'
+    end
     object cdsTmpItensDevolucoesqtde_Vendida: TFloatField
       DisplayLabel = 'Qtde. Vendida'
       FieldName = 'qtde_Vendida'
+    end
+    object cdsTmpItensDevolucoesqtde_Devolvida: TFloatField
+      DisplayLabel = 'Qtde. Devolvida'
+      FieldName = 'qtde_Devolvida'
     end
     object cdsTmpItensDevolucoesPerc_Desc: TFloatField
       FieldName = 'Vlr_Desconto'
@@ -514,15 +523,6 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     end
     object cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField
       FieldName = 'Pco_Venda_Atual'
-    end
-    object cdsTmpItensDevolucoesPco_Venda: TFloatField
-      DisplayLabel = 'Pco. Venda'
-      DisplayWidth = 12
-      FieldName = 'Pco_Venda'
-    end
-    object cdsTmpItensDevolucoesqtde_Devolvida: TFloatField
-      DisplayLabel = 'Qtde. Devolvida'
-      FieldName = 'qtde_Devolvida'
     end
   end
   object srcTmpItensDevolucoes: TDataSource
@@ -691,5 +691,11 @@ object frmDevolucaoVenda: TfrmDevolucaoVenda
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
     Left = 148
     Top = 152
+  end
+  object cdsRomaneio: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 528
+    Top = 256
   end
 end

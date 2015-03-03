@@ -2,7 +2,7 @@ unit uDaoCaixaMovimento;
 
 interface
 
-uses uClassConexao,classes,SysUtils,DbClient,uClassLancamento, SqlExpr,SqlTimst;
+uses uClassConexao,classes,SysUtils,DbClient,uClassLancamento,uFuncoes, SqlExpr,SqlTimst;
 
 Type TDaoCaixaMovimento = Class
   private
@@ -15,6 +15,7 @@ Type TDaoCaixaMovimento = Class
     function TemCaixaAberto(ptDataAtual: TdateTime) : Boolean;
     function RetornarCaixaDoLancamento(SeqVenda : Integer) : integer;
     function RetornarDataMovimento(CaixaId : String) : TDateTime;
+    function SaldoPeriodo(DataInicical, DataFinal: TDateTime; TipoPagamento : Integer): Real;
     procedure Lancar(lacamento : TLancamento);
 end;
 
@@ -112,6 +113,36 @@ begin
      FreeAndNil(Dados);
    End;
 end;
+
+function TDaoCaixaMovimento.SaldoPeriodo(DataInicical, DataFinal: TDateTime; TipoPagamento : Integer): Real;
+var Parametros : TStringList;
+    locdsDados   : TClientDataSet;
+    Creditos: real;
+    Debitos: Real;
+    Saldo : Real;
+begin
+   Parametros := TStringList.Create;
+   Creditos := 0;
+   Debitos := 0;
+   locdsDados := TClientDataSet.Create(nil);
+   locdsDados.Data := FConexao.BuscarDadosSQL('Select D_C, Sum(Valor) as Valor from T_MovCaixa '+
+                                       'where Data_Lancamento>='+QuotedStr(FormatDateTime('dd/mm/yyyy',DataInicical)+' 00:00:00')+' and '+
+                                       '      Data_Lancamento<='+QuotedStr(FormatDateTime('dd/mm/yyyy',DataFinal)+' 23:59:00')+' '+
+                                       '      and  Estornado<>'+QuotedStr('S')  +' and '+
+                                       '      Cod_FormaPagamento='+IntToStr(TipoPagamento)+' '+
+                                       'group by D_C Order by D_C ',Nil).Data;
+  while not locdsDados.Eof do
+  begin
+     if locdsDados.FieldByName('D_C').AsString='C' then
+        Creditos := Creditos + locdsDados.fieldByname('Valor').asfloat
+     else
+        Debitos := Debitos + locdsDados.fieldByname('Valor').asfloat;
+      locdsDados.Next;
+  end;
+  Saldo := Creditos - Debitos;
+  Result := Saldo;
+end;
+
 
 function TDaoCaixaMovimento.TemCaixaAberto(ptDataAtual: TdateTime): Boolean;
 var Parametros : TStringList;

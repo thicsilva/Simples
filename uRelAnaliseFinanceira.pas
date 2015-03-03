@@ -146,7 +146,7 @@ begin
    qryRelatorio.SQL.text:= 'Select mov.Cod_TipoDespesa,max(Ope.Descricao) As Descricao, Sum(mov.Valor) As Total, ope.Tipo_Conta '+
                                            'From T_movCaixa mov '+
                                            '     Left Join T_operacoes Ope on Ope.Codigo=Mov.cod_tipodespesa '+
-                                           'Where D_C='+QuotedStr('D')+' and mov.estornado<>'+QuotedStr('S')+' and '+
+                                           'Where D_C='+QuotedStr('D')+' and mov.estornado<>'+QuotedStr('S')+' and Ope.Codigo<0400 and '+
                                            '      Data_Lancamento>=:parData_Ini and Data_Lancamento<=:parData_Fim '+
                                            'Group by mov.Cod_TipoDespesa, ope.Tipo_Conta '+
                                            'Order by Ope.Tipo_Conta,1';

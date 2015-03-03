@@ -187,15 +187,16 @@ begin
    cdsPesquisa.ProviderName := dspPesquisa.Name;
    cdsPesquisa.Open;
 
+   edtData_Pagamento.Date := gsData_Mov;
+
    panelRecebimento.Visible   := False;
    panelRecebimento.RollState := False;
-
-   edtData_Pagamento.Date := gsData_Mov;
-   edtcod_Pagamento.SetFocus;
 
    AtualizarJuros;
 
    cdsTempPagamentos.EmptyDataSet;
+
+   edtData_Pagamento.SetFocus;
 
 end;
 
@@ -218,7 +219,7 @@ begin
    panelRecebimento.Visible    := False;
    panelRecebimento.RollState  := False;
    btnReceber.Enabled          := True;
-   edtcod_Pagamento.SetFocus;
+   edtData_Pagamento.SetFocus;
 end;
 
 procedure TfrmBaixaNormal.btnReceberClick(Sender: TObject);
@@ -291,11 +292,14 @@ begin
 
                      loDaoMovCaixa := TDaoCaixamovimento.Create(gConexao);
                      try
-                        if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) and
-                          (strTointDef(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador), 0 )>1)  then
+                        if not HeDistribuidora then
                         begin
-                           CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
-                           exit;
+                           if loDaoMovCaixa.RetornarUltimoTurno(gsData_Mov,cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger ) = gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador ) and
+                             (strTointDef(gParametros.Ler( '', '[CONTASRECEBER]', 'NumeroDeTurnos', '0' ,gsOperador), 0 )>1)  then
+                           begin
+                              CaixaMensagem( 'O numero maximo de turnos para este caixa foi atingido ', ctAviso, [ cbOk ], 0 );
+                              exit;
+                           end;
                         end;
                         lolancamento := TLancamento.Create;
                         lolancamento.Cod_Caixa          := cdsTempPagamentos.FieldByName('Cod_Caixa').AsInteger;
@@ -677,6 +681,10 @@ begin
       edtJuros.Text := FormatFloat('0.00', 0);
    End;
    edtTotalReceber.text := FormatFloat('0.00',StrtoFloat(edtTotalReceber.text)-StrTofloat(edtVlr_Recebido.Text));
+   try
+      edtcod_Pagamento.SetFocus;
+   except
+   end;
 end;
 
 procedure TfrmBaixaNormal.edtPco_VendaExit(Sender: TObject);

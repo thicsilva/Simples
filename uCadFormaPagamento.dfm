@@ -53,6 +53,10 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     SkinDataName = 'tab'
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel1: TbsSkinPanel
         Left = 0
         Top = 0
@@ -258,9 +262,10 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         Left = 0
         Top = 33
         Width = 622
-        Height = 307
+        Height = 309
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 307
         object GridFormaPagamento: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -315,6 +320,10 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object bsSkinTabSheet2: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinGroupBox1: TbsSkinGroupBox
         Left = 13
         Top = 12
@@ -923,6 +932,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           NumGlyphs = 1
           Spacing = 1
           Layout = blGlyphTop
+          OnClick = btnRemoverDescontoClick
         end
         object btnAdicionaDesconto: TbsSkinButton
           Left = 393
@@ -958,6 +968,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           NumGlyphs = 1
           Spacing = 1
           Layout = blGlyphTop
+          OnClick = btnAdicionaDescontoClick
         end
         object edtPerc_Desconto: TbsSkinNumericEdit
           Left = 322
@@ -1030,6 +1041,7 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         PickListBoxSkinDataName = 'listbox'
         PickListBoxCaptionMode = False
         Align = alClient
+        DataSource = srcProdutosPagamentos
         ParentFont = False
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clBtnText
@@ -1470,7 +1482,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     Top = 151
   end
   object srcProdutosPagamentos: TDataSource
-    DataSet = cdsProdutosPagamentos
     Left = 576
     Top = 179
   end

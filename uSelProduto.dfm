@@ -31,7 +31,6 @@ object frmSelProduto: TfrmSelProduto
     SkinDataName = 'controlbar'
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 501
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -178,7 +177,6 @@ object frmSelProduto: TfrmSelProduto
     Spacing = 2
     Caption = 'bsSkinPanel2'
     Align = alTop
-    ExplicitWidth = 501
     object bsSkinStdLabel1: TbsSkinStdLabel
       Left = 3
       Top = 3

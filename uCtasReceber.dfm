@@ -832,7 +832,7 @@ object frmCtasReceber: TfrmCtasReceber
       end
       object pnlLoteRecebimento: TbsSkinExPanel
         Left = 0
-        Top = 55
+        Top = 0
         Width = 735
         Height = 49
         HintImageIndex = 0
@@ -972,7 +972,7 @@ object frmCtasReceber: TfrmCtasReceber
       end
       object pnlRecebimentoPorLote: TbsSkinExPanel
         Left = 0
-        Top = 0
+        Top = 49
         Width = 735
         Height = 55
         HintImageIndex = 0
@@ -1157,6 +1157,10 @@ object frmCtasReceber: TfrmCtasReceber
     end
     object tabCadastro: TbsSkinTabSheet
       Caption = 'Cadastro'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinStdLabel1: TbsSkinStdLabel
         Left = 172
         Top = 131

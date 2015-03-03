@@ -15,7 +15,7 @@ type TDaoContaReceber = class
     procedure AtualizarVencimento(prNovoVencimento : TDateTime; prsFormaPagamento : String; ContasAReceberId : Integer; SeqvendaId : Integer = 0  );
     procedure BaixarTitulo(proContaAreceber : TContaReceber);
     procedure AtualizarValorDosTitulos(VendaId : Integer; ValorDiminuir : Real);
-    Function TotalEmAberto(Data : TDateTime) : Real;
+    Function TotalEmAberto(Data: TDateTime; ClienteID : Integer = 0): Real;
     Function BuscarVendaID(VendaId : Integer) : TClientDataSet;
     function NovaSequenciaTitulo(SeqVendaID : Integer) : Integer;
 
@@ -35,7 +35,9 @@ begin
    Parametros := TStringList.Create;
    Parametros.Add(IntToStr(VendaId));
    Dados := Fconexao.BuscarDadosSQL('Select vlr_areceber,Sequencia from T_ctasreceber where seqvenda=:parSeqVenda', Parametros );
-   lrvlrDiminuir := Arredondar((ValorDiminuir/Dados.RecordCount),2);
+   lrvlrDiminuir := 0;
+   if Dados.RecordCount>0 then
+      lrvlrDiminuir := Arredondar((ValorDiminuir/Dados.RecordCount),2);
    lrAjuste      := ValorDiminuir - (lrvlrDiminuir*Dados.RecordCount);
    while not Dados.eof do
    begin
@@ -115,11 +117,14 @@ begin
                                        IntTostr(SeqVendaID),Nil).FieldByname('Total').AsInteger+1
 end;
 
-function TDaoContaReceber.TotalEmAberto(Data: TDateTime): Real;
+function TDaoContaReceber.TotalEmAberto(Data: TDateTime; ClienteID : Integer = 0) : Real;
 var lcdsDados : TClientDataSet;
+    lswhere : String;
 begin
-   lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where '+'status='+QuotedSTR('0')+
-                                        ' and data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data)),Nil);
+   lsWhere := ' and data_vencimento<'+QuotedSTR(FormatDateTime('DD/MM/yyyy',Data));
+   if ClienteID<>0 then
+      lsWhere := 'and Cod_Cliente='+intTostr(ClienteID);
+   lcdsDados := Fconexao.BuscarDadosSQL('select Sum(vlr_areceber) as Total from T_ctasreceber where '+'status='+QuotedSTR('0')+' '+lswhere, Nil );
    Result    := lcdsDados.FieldByName('Total').AsFloat;
 end;
 

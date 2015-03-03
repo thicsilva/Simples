@@ -7,7 +7,7 @@ uses
   Dialogs, bsSkinCtrls, bsSkinGrids, bsDBGrids, StdCtrls, Mask, bsSkinBoxCtrls,
   DB, uPrincipal, DBClient, uClassCliente,uFormBase, Menus,StrUtils, DBCtrls,
   ComCtrls, bsSkinTabs, uDaoClienteAnimal, OleCtrls, SHDocVw, FMTBcd, SqlExpr, 
-  SqlTimSt;
+  SqlTimSt, Provider;
 
 
 type
@@ -85,6 +85,10 @@ type
     bsSkinButton3: TbsSkinButton;
     lblDevedor: TLabel;
     btnVendaproduto: TbsSkinButton;
+    srcPagamento: TDataSource;
+    qryPagamento: TSQLQuery;
+    dspPagamento: TDataSetProvider;
+    cdsPagamento: TClientDataSet;
     procedure edtNomeChange(Sender: TObject);
     procedure cdsClientesAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -130,7 +134,7 @@ uses
   uDaoFuncionario, uClassVenda, uDaoFormaPagamento, uDaoItemVenda,
   uClassItemVenda, uDaoProduto, uClassProduto, uCadastroRapidoCliente,
   uSelFormaPagamento, uclassContaCorrente, uClassDaoContaCorrente,
-  uselFuncionario, uSelProduto;
+  uselFuncionario, uSelProduto, uDaoContaReceber;
 
 {$R *.dfm}
 
@@ -280,6 +284,7 @@ var DaoVenda           : TDaoVenda;
     TotalVenda : Real;
     lsDescreicaoProduto : String;
     lrTipoLancamento : Integer;
+    lrNovoPreco : real;
 begin
    frmselFormaPagamento := TfrmselFormaPagamento.Create(Self);
    frmselFormaPagamento.ShowModal;
@@ -306,8 +311,8 @@ begin
    Venda.FormaPagamento := DaoformaPagamento.Buscar(FormaPagamentoID);
    Venda.Funcionario := DaoFuncionario.Buscar(1);
    venda.Status := '1';
-   Venda.Data_Venda := gsData_Mov;
-   Venda.DataMovimento := gsData_Mov;
+   Venda.Data_Venda := soData(now);
+   Venda.DataMovimento := soData(now);
    Venda.TipoVenda := 'P';
    venda.OSID := StrToInt(Sequencia('Seqos',True,'T_Sequencias',FrmPrincipal.dbxPrincipal,'',False,8));
    Venda.Valor_Total := TotalVenda;
@@ -316,6 +321,9 @@ begin
    itemVenda               := TItemVenda.Create;
    if ProdutoId01<>0 then
    begin
+      lrNovoPreco := DaoProduto.PrecoDiferente(Produto.ProdutoId,FormaPagamentoId);
+      if lrNovoPreco>0 then
+         Produto.PrecoTabela  := lrNovoPreco;
       ItemVenda.ProdutoId     := Produto.ProdutoId;
       ItemVenda.Qunatidade    := Quantidade01;
       ItemVenda.PrecoVenda    := Produto.PrecoTabela;
@@ -334,7 +342,11 @@ begin
 
    if ProdutoId02<>0 then
    begin
+
       produto := DaoProduto.Buscar(ProdutoId02);
+      lrNovoPreco := DaoProduto.PrecoDiferente(Produto.ProdutoId,FormaPagamentoId);
+      if lrNovoPreco>0 then
+         Produto.PrecoTabela  := lrNovoPreco;
       ItemVenda.ProdutoId     := Produto.ProdutoId;
       ItemVenda.Qunatidade    := Quantidade02;
       ItemVenda.PrecoVenda    := Produto.PrecoTabela;
@@ -349,13 +361,16 @@ begin
       DaoItenVenda.InserirItem(ItemVenda);
       TotalVenda := TotalVenda +(Produto.PrecoTabela*Quantidade02);
       lsDescreicaoProduto := lsDescreicaoProduto+', '+ produto.Descricao;
-   end;                                                                       
+   end;
    if Assigned(cdsProdutos) then
    begin
       cdsProdutos.first;
       while not cdsProdutos.Eof do
       begin
          produto := DaoProduto.Buscar(cdsProdutos.FieldByName('Codigo').AsInteger);
+         lrNovoPreco := DaoProduto.PrecoDiferente(Produto.ProdutoId,FormaPagamentoId);
+         if lrNovoPreco>0 then
+            Produto.PrecoTabela  := lrNovoPreco;
          ItemVenda.ProdutoId     := Produto.ProdutoId;
          ItemVenda.Qunatidade    := cdsProdutos.FieldByName('Quantidade').AsInteger;
          ItemVenda.PrecoVenda    := Produto.PrecoTabela;
@@ -364,7 +379,7 @@ begin
          ItemVenda.CodigoEmpresa := gempresa.IdEmpresa;
          ItemVenda.VendaID       := Venda.VendaID;
          ItemVenda.SetorId       := 1;
-         ItemVenda.PrecoVenda    := Produto.PrecoTabela;
+         ItemVenda.PrecoVenda    := lrNovoPreco;
          ItemVenda.TipoCalculo   := 1;
          ItemVenda.FuncionarioId := 1;
          DaoItenVenda.InserirItem(ItemVenda);
@@ -380,6 +395,37 @@ begin
    DaoVenda.AtualizarTotal(VendaId,TotalVenda);
 
    Case lrTipoLancamento Of
+      1 :
+      begin
+         QryPagamento.Close;
+         qryPagamento.Sql.Text := 'Select * from T_Ctasreceber Where 1=2 ';
+
+         cdsPagamento.Close;
+         cdsPagamento.ProviderName := dspPagamento.name;
+         cdsPagamento.Open;
+
+         cdsPagamento.Append;
+         cdsPagamento.FieldByName('Sequencia').AsInteger          := StrToInt(Sequencia('Sequencia',False,'T_CtasReceber',FrmPrincipal.dbxPrincipal,'',False,8));
+         cdsPagamento.FieldByName('Vlr_Areceber').AsFloat         := TotalVenda;
+         cdsPagamento.FieldByName('Vlr_Original').AsFloat         := TotalVenda;
+         cdsPagamento.FieldByName('Vlr_Recebido').AsFloat         :=  0;
+         cdsPagamento.FieldByName('Data_Vencimento').AsDateTime   := SoData(now+10);
+         cdsPagamento.FieldByName('Data_cad').AsDateTime          := (now);
+         cdsPagamento.FieldByName('Data_Emissao').AsDateTime      := Sodata(now);
+         cdsPagamento.FieldByName('Historico').AsString           := 'Titulo Referente a venda '+IntToStr(Venda.VendaID);
+         cdsPagamento.FieldByName('Cod_Cliente').AsInteger        := Venda.Cliente.Id;
+         cdsPagamento.FieldByName('Cod_FormaPagamento').AsInteger := FormaPagamentoId;
+         cdsPagamento.FieldByName('SeqVenda').AsInteger           := Venda.VendaID;
+         cdsPagamento.FieldByname('Cod_Emp').AsString             := gsCod_emp;
+         cdsPagamento.FieldByname('Operador').AsString            := gsOperador;
+         cdsPagamento.FieldByname('Documento').AsString           := inczero(intToStr(Venda.VendaID),8)+incZero(intToStr(1),3);
+         cdsPagamento.FieldByName('Status').AsInteger             := 0;
+         cdsPagamento.FieldByname('Repasse').AsString             := 'N';
+         cdsPagamento.FieldByname('Tipo_Baixa').AsString          := 'AB';
+         cdsPagamento.FieldByname('Cod_Caixa').AsInteger          := gParametros.Ler( '', '[GERAL]', 'CaixaBalcao', '0001' );
+         cdsPagamento.Post;
+         cdsPagamento.ApplyUpdates(-1);
+      end;
       0 : // Lancamento no caixa
       Begin
          qryModific.Close;
@@ -438,7 +484,8 @@ procedure TfrmDeliveryGas.cdsClientesAfterScroll(DataSet: TDataSet);
 var DaoCliente : TDaoCliente;
     Cliente : TCliente;
     DaoClienteAnimal : TDaoClienteAnimal;
-    ContaCorrente : TDaoContaCorrente;
+    ContaCorrente : TDaoContaReceber;
+
     saldo : Real;
 begin
    DaoCliente := TDaoCliente.Create(gConexao);
@@ -447,8 +494,8 @@ begin
    edtBairro.Text := Cliente.Endereco.bairro;
    edtCidade.text := Cliente.Endereco.cidade;
    edtPto_Referencia.Text := Cliente.Endereco.PontoReferencia;
-   ContaCorrente := TDaoContaCorrente.Create(gConexao);
-   Saldo := ContaCorrente.Saldo(cdsClientes.FieldByName('Codigo').AsInteger);
+   ContaCorrente := TDaoContaReceber.Create(gConexao);
+   Saldo := ContaCorrente.TotalEmAberto(now,cdsClientes.FieldByName('Codigo').AsInteger);
    lblDevedor.Caption:='';
    if Saldo>0 then
       lblDevedor.Caption:='Cliente Com Saldo Devedor '+formatFloat('0.00', Saldo );

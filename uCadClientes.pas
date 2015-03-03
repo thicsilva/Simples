@@ -1199,8 +1199,6 @@ var lrDias : real;
 begin
    cdsCtasReceber.FieldByName('Nome_Status').AsString := 'A pagar';
 
-   if (cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime < gsData_Mov)  then
-      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Vencido';
 
    If cdsCtasReceber.FieldByName('Status').AsString = '1' Then
       cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Pago'
@@ -1211,6 +1209,8 @@ begin
       (cdsCtasReceber.FieldByName('Status').AsString = '0')  Then
       cdsCtasReceber.FieldByName('Nome_Status').AsString := 'A Vencer';
 
+   if (cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime < gsData_Mov)  then
+      cdsCtasReceber.FieldByName('Nome_Status').AsString := 'Vencido';
 
       if cdsCtasReceber.FieldByName('Data_Pagamento').IsNull then
         lrDias := gsData_Mov - cdsCtasReceber.FieldByName('Data_Vencimento').AsDatetime

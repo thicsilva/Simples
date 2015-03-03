@@ -953,7 +953,8 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
-   If  StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
+
+   If StrToint(gParametros.Ler( '', '[CONTASRECEBER]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
    Begin
       frmbaixaBrinde := TfrmbaixaBrinde.Create(Self);
       frmbaixaBrinde.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;
@@ -975,9 +976,9 @@ begin
       Else
          frmbaixaBrinde.pbNovoRepasse        := True;
       frmbaixaBrinde.edtCod_FormaPagamento.Text := cdsPesquisa.FieldByName('Cod_FormaPagamento').AsString;
-      frmbaixaBrinde.Showmodal
+      frmbaixaBrinde.Showmodal ;
    End
-   Else if StrToint(gParametros.Ler( '', '[CADASTRO]', 'TipoBaixa', '0' ,gsOperador )) = 0 Then
+   Else if StrToint(gParametros.Ler( '', '[CONTASRECEBER]', 'TipoBaixa', '0' ,gsOperador )) = 0 Then
    Begin
       frmBaixaNormal := TfrmBaixaNormal.Create(Self);
       frmBaixaNormal.edtDocumento.Text    := cdsPesquisa.FieldByName('Documento').AsString;
@@ -997,6 +998,7 @@ begin
          frmBaixaNormal.pbeServico := True;
       frmBaixaNormal.Showmodal
    End;
+                       
    btnSelecionarClick(btnSelecionar);
 end;
 

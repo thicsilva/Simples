@@ -2039,4 +2039,28 @@ object frmDeliveryGas: TfrmDeliveryGas
     Left = 522
     Top = 216
   end
+  object srcPagamento: TDataSource
+    DataSet = cdsPagamento
+    Left = 467
+    Top = 202
+  end
+  object qryPagamento: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = frmPrincipal.dbxPrincipal
+    Left = 467
+    Top = 120
+  end
+  object dspPagamento: TDataSetProvider
+    DataSet = qryPagamento
+    Left = 467
+    Top = 148
+  end
+  object cdsPagamento: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPagamento'
+    Left = 467
+    Top = 174
+  end
 end

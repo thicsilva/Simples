@@ -34,12 +34,9 @@ implementation
 { TDaoRomaneio }
 
 procedure TDaoRomaneio.AtualizarTotalDoRomaneio(RomaneioId: integer);
-var Parametros : TStringList;
-    lrTotal : Real;
+var lrTotal : Real;
 begin
-   Parametros := TStringList.Create;
-   Parametros.Add(IntTostr(RomaneioId));
-   lrTotal := FConexao.BuscarDadosSQL('select sum(vlr_Total) as Total from T_vendas where romaneioId=:parRomaneioId',Parametros).FieldByname('Total').AsFloat;
+   lrTotal := FConexao.BuscarDadosSQL('select sum(vlr_Total) as Total from T_vendas where romaneioId='+IntTostr(RomaneioId),Nil).FieldByname('Total').AsFloat;
    FqryModific.Close;
    FqryModific.Sql.Text := 'Update Romaneios set Total=:parTotal where id=:parId';
    FqryModific.ParamByName('parId').AsInteger    := RomaneioId;

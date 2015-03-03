@@ -11,10 +11,12 @@ uses
   bsSkinTabs, ExtCtrls, ToolWin, FMTBcd, SqlExpr, BusinessSkinForm, DBClient,
   Provider, RDprint, SimpleDS, cxContainer, cxCheckBox, cxDBEdit,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, Grids, DBGrids;
 
 const FECHAMENTO = 0;
       RELATORIO = 1;
+const ENTRADA = 1; SAIDA = 0; TRANSFERENCIA = 2;
+
 type
   TfrmMovCaixa = class(TFormBase)
     bsSkinCoolBar1: TbsSkinCoolBar;
@@ -72,9 +74,9 @@ type
     bsSkinExPanel1: TbsSkinExPanel;
     bsSkinStdLabel6: TbsSkinStdLabel;
     bsSkinStdLabel8: TbsSkinStdLabel;
-    bsSkinStdLabel9: TbsSkinStdLabel;
+    lbltipo: TbsSkinStdLabel;
     bsSkinStdLabel11: TbsSkinStdLabel;
-    bsSkinStdLabel13: TbsSkinStdLabel;
+    lbldespesa: TbsSkinStdLabel;
     edtDataMov: TbsSkinDateEdit;
     cmbD_C: TbsSkinComboBox;
     EdtValor: TbsSkinEdit;
@@ -97,6 +99,12 @@ type
     GrdDespesasColumn1: TcxGridDBColumn;
     chkMostraCaixaFechado: TCheckBox;
     pnlDataovimento: TPanel;
+    cdsResumo: TClientDataSet;
+    cdsResumoCodigo: TIntegerField;
+    cdsResumodescricao: TStringField;
+    cdsResumoTipo: TStringField;
+    cdsResumoTotal: TFloatField;
+    DataSource1: TDataSource;
     procedure AtualizaRecClick(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
     procedure cdsPesquisaBeforeOpen(DataSet: TDataSet);
@@ -134,6 +142,7 @@ type
     procedure RelatorioDeCaixaModelo05(prTipo: Integer);
     procedure CabecalhoEntradas;
     procedure CabecalhoSaidas;
+    procedure AdicionarTotal(Codigo : integer; total : Real; Tipo : String; Descricao : string ) ;
     { Private declarations }
   public
      pvsQualBotao : String;
@@ -162,11 +171,15 @@ end;
 
 procedure TfrmMovCaixa.AtualizaRecClick(Sender: TObject);
 var lsWhere : String;
+  DaoMovCaixa : TDaoCaixaMovimento;
+  lrSaldo : Real;
 begin
+     DaoMovCaixa := TDaoCaixaMovimento.Create(gConexao);
+     lrSaldo := DaoMovCaixa.SaldoPeriodo(StrTodate('30/12/2014'),StrTodate('17/01/2015'),1);
 
    lswhere := '';
-   if (not chkMostraCaixaFechado.Checked) and chkMostraCaixaFechado.Visible then
-      lsWhere :=' and Turno is null ';
+   //if (not chkMostraCaixaFechado.Checked) and chkMostraCaixaFechado.Visible then
+   //   lsWhere :=' and Turno is null ';
 
   if RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'NaoMostrarExtorno', 'NAO' ))) then
      lsWhere := lsWhere + ' and Estornado<>'+QuotedStr('S');
@@ -1522,6 +1535,15 @@ begin
    ImpMatricial.TamanhoQteLinhas := pviLinha;
    ImpMatricial.fechar
 end;
+procedure TfrmMovCaixa.AdicionarTotal(Codigo : integer; total : Real; Tipo : String; Descricao : string ) ;
+begin
+   cdsResumo.Append;
+   cdsResumo.FieldByName('Codigo').AsInteger := Codigo;
+   cdsResumo.FieldByName('Total').AsFloat    := Total;
+   cdsResumo.FieldByName('Tipo').AsString    := Tipo;
+   cdsResumo.FieldByName('Descricao').AsString := Descricao;
+   cdsResumo.Post;
+end;
 
 procedure TfrmMovCaixa.RelatorioDeCaixaModelo05(prTipo: Integer);
 var lrTotal_Venda    : Real;
@@ -1552,8 +1574,12 @@ var lrTotal_Venda    : Real;
     DaoCaixaMovimento : TDaoCaixaMovimento;
     lrTotalDinheiro : Real;
     lsPagId : String;
-
+    DaoMovCaixa : TDaoCaixaMovimento;
+    lrsaldo: Real;
+    liCodigo: Integer;
 begin
+
+   cdsResumo.EmptyDataSet;
 
    gsTituloRel := 'Movimento dia '+FormatDateTime('dd/mm/yyyy', dtpData_Fim.Date);
 
@@ -1573,8 +1599,8 @@ begin
       frmSelDatas.dtpData_Ini.date := dtpData_Ini.Date;
       frmSelDatas.idCaixa := cmbCaixa.KeyValue;
 
-      if HeDistribuidora then
-      begin
+      //if HeDistribuidora then
+      //begin
          frmSelDatas.dtpData_Fim.Visible := True;
          frmSelDatas.btnincluir.Visible := True;
          frmSelDatas.dtpData_Fim.date := dtpData_Fim.Date;
@@ -1584,7 +1610,7 @@ begin
          frmSelDatas.cmbTipoResumoVenda.Items.Add('Relatorio de Caixa');
          frmSelDatas.cmbTipoResumoVenda.ImageIndex := 0;
          frmSelDatas.cmbTipoResumoVenda.Enabled := False;
-      end;
+      //end;
       frmSelDatas.ShowModal;
 
       if frmSelDatas.Tag <> 1 then
@@ -1618,7 +1644,7 @@ begin
 
    ImpMatricial.PortaComunicacao          := 'LPT1';
    ImpMatricial.OpcoesPreview.Preview     := true;
-   ImpMatricial.TamanhoQteColunas         := 40;
+   ImpMatricial.TamanhoQteColunas         := 50;
    ImpMatricial.TamanhoQteLinhas          := 66;
    ImpMatricial.FonteTamanhoPadrao        := s10cpp;
    ImpMatricial.UsaGerenciadorImpr        := True;
@@ -1638,39 +1664,39 @@ begin
    begin
       impmatricial.Imp(pvilinha,001,'Vendas Efetuadas ');
       pvilinha := pviLinha + 1;
-      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
       pviLinha:=Pvilinha+1;
       ImpMatricial.imp(pvilinha,001,'Codigo Descricao Grupo ');
       pviLinha:=Pvilinha+1;
       ImpMatricial.impd(pvilinha,040,'Quant. Vlr.Medio Total',[]);
       pviLinha:=Pvilinha+1;
-      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
       pviLinha:=Pvilinha+1;
       lrTotalDinheiro := 0;
       while not cdsrelatorio.Eof do
       Begin
          impmatricial.Imp(pvilinha,001,Copy(cdsrelatorio.FieldByName('Codigo').AsString+' '+cdsrelatorio.FieldByName('Descricao').AsString,1,18) );
-         impmatricial.ImpD(pvilinha,021,FormatFloat(',0',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
+         impmatricial.ImpD(pvilinha,025,FormatFloat(',0',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
          impmatricial.ImpD(pvilinha,028,FormatFloat(',0.00',cdsrelatorio.fieldByname('Pco_UnitMedio').asfloat),[]);
-         impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
          lrTotal_Venda   := lrTotal_Venda+cdsrelatorio.fieldByname('Vlr_Total').asfloat;
          cdsrelatorio.Next;
          pvilinha := pviLinha + 1;
       End;
-      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
       pviLinha:=Pvilinha+1;
       ImpMatricial.imp(pvilinha,001,'Total...');
-      impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrTotal_Venda),[]);
+      impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrTotal_Venda),[]);
       pviLinha:=Pvilinha+1;
       if StrtointDef(lsPagId,1 )<>1then
       begin
          ImpMatricial.imp(pvilinha,001,'Valor Informado');
-         impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat),[]);
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat),[]);
          pviLinha:=Pvilinha+1;
-         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
          pviLinha:=Pvilinha+1;
          ImpMatricial.imp(pvilinha,001,'Diferença');
-         impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00', sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat - (lrTotal_Venda)  ),[]);
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00', sdtsTempPagInformado.FieldByName('vlr_Informado').Asfloat - (lrTotal_Venda)  ),[]);
          pviLinha:=Pvilinha+1;
       end;
       pviLinha:=Pvilinha+2;
@@ -1679,7 +1705,6 @@ begin
 
 
    {$REGION 'Resumo das entradas'}
-
 
    qryVariavel.close;
    qryVariavel.Params.Clear;
@@ -1707,76 +1732,77 @@ begin
       CabecalhoEntradas;
       lrVlr_Entrada := 0;
       lrTotal:=0;
-      lsNomePagamento := cdsrelatorio.FieldByName('Descricao').AsString;
       while not cdsrelatorio.Eof do
       Begin
          if liCod_TipoPagamento <> cdsrelatorio.FieldByName('Codigo').AsInteger then
          begin
             if lrTotal>0 then
             begin
-               ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+               ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
                pvilinha := pviLinha + 1;
                impmatricial.Imp(pvilinha,001,'Total ');
-               impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00', lrTotal ),[]);
+               impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00', lrTotal ),[]);
                pvilinha := pviLinha + 1;
+               AdicionarTotal(liCod_TipoPagamento,lrtotal,'E',lsNomePagamento);
             end;
-            ImpMatricial.imp(pvilinha,001,( IntToStr(liCod_TipoPagamento) +' - '+ lsNomePagamento) );
-            pviLinha:=Pvilinha+1;
-            ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
             liCod_TipoPagamento := cdsrelatorio.FieldByName('Codigo').AsInteger;
             lsNomePagamento     := cdsrelatorio.FieldByName('Descricao').AsString;
+            ImpMatricial.imp(pvilinha,001,( IncZero(IntToStr(liCod_TipoPagamento),3) +' - '+ lsNomePagamento) );
+            pviLinha:=Pvilinha+1;
+            ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
             lrTotal := 0;
             pviLinha:=Pvilinha+1;
          end;
          impmatricial.Imp(pvilinha,001, cdsrelatorio.fieldByname('Historico').asString );
-         impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsrelatorio.fieldByname('Valor').asfloat),[]);
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsrelatorio.fieldByname('Valor').asfloat),[]);
          lrVlr_Entrada := lrVlr_Entrada + cdsrelatorio.fieldByname('Valor').asfloat;
          lrTotal := lrtotal + cdsrelatorio.fieldByname('Valor').asfloat;
          pviLinha:=Pvilinha+1;
-         if pvilinha>64 then
+
+         if pvilinha>60 then
          begin
             impmatricial.Novapagina;
-            pvilinha := 1;
             CabecalhoEntradas;
          end;
          cdsrelatorio.Next;
       End;
+
       if lrTotal>0 then
       begin
-         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
          pvilinha := pviLinha + 1;
          impmatricial.Imp(pvilinha,001,'Total ');
-         impmatricial.ImpD(pvilinha,039,FormatFloat(',0.00', lrTotal ),[]);
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00', lrTotal ),[]);
          pvilinha := pviLinha + 2;
+         AdicionarTotal(liCod_TipoPagamento,lrtotal,'E',lsNomePagamento);
       end;
 
-      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
       pviLinha:=Pvilinha+1;
       ImpMatricial.imp(pvilinha,001,'Total Das Entradas...');
-      impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrVlr_Entrada),[]);
+      impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrVlr_Entrada),[]);
       pviLinha:=Pvilinha+2;
    End;
    {$ENDREGION}
 
-
    {$REGION 'Resumo das Saidas'}
-
    qryVariavel.close;
    qryVariavel.Params.Clear;
-   qryVariavel.Sql.Text := 'Select Historico, Valor '+
+   qryVariavel.Sql.Text := 'Select ope.Descricao as Operacao, Historico, Valor, Pag.Descricao,Pag.Codigo '+
                            'From t_movcaixa Mov '+
+                           'Left Join T_FormasPagamento pag on pag.Codigo=mov.Cod_FormaPagamento '+
+                           'Left join T_Operacoes ope on ope.codigo=mov.Cod_TipoDespesa '+
                            'Where data_Lancamento>=:parDataIni and '+
                            '      data_Lancamento<=:parDataFim and '+
                            '      mov.Cod_Caixa=:parCod_Caixa and '+
-                           '      Estornado<>:parEstornado and D_C=:parD_C '+lsFiltro+' ';
+                           '      Estornado<>:parEstornado and D_C=:parD_C '+
+                           ' Order by Cod_FormaPagamento ';
 
    qryVariavel.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
    qryVariavel.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
    qryVariavel.Parambyname('parCod_Caixa').AsInteger    := cmbCaixa.KeyValue;
    qryVariavel.Parambyname('parEstornado').AsString     := 'S';
    qryVariavel.Parambyname('parD_C').AsString           := 'D';
-   if Turno>0 then
-      qryVariavel.Parambyname('parturno').AsInteger     := Turno;
 
    cdsRelatorio.close;
    cdsRelatorio.ProviderName := dspVariavel.name;
@@ -1785,77 +1811,147 @@ begin
    if not cdsRelatorio.IsEmpty then
    begin
       CabecalhoSaidas;
-      lrTotal_Saidas := 0;
+      lrVlr_Entrada := 0;
+      lrTotal:=0;
       while not cdsrelatorio.Eof do
       Begin
-         impmatricial.Imp(pvilinha,001, cdsrelatorio.fieldByname('Historico').asString );
-         impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',cdsrelatorio.fieldByname('Valor').asfloat),[]);
-         lrTotal_Saidas := lrTotal_Saidas + cdsrelatorio.fieldByname('Valor').asfloat;
-         cdsrelatorio.Next;
-         if pvilinha>64 then
+         if liCod_TipoPagamento <> cdsrelatorio.FieldByName('Codigo').AsInteger then
+         begin
+            if lrTotal>0 then
+            begin
+               ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+               pvilinha := pviLinha + 1;
+               impmatricial.Imp(pvilinha,001,'Total ');
+               impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00', lrTotal ),[]);
+               pvilinha := pviLinha + 1;
+               AdicionarTotal(liCod_TipoPagamento,lrtotal,'S',lsNomePagamento);
+            end;
+            liCod_TipoPagamento := cdsrelatorio.FieldByName('Codigo').AsInteger;
+            lsNomePagamento     := cdsrelatorio.FieldByName('Descricao').AsString;
+            ImpMatricial.imp(pvilinha,001,( IncZero(IntToStr(liCod_TipoPagamento),3) +' - '+ lsNomePagamento) );
+            pviLinha:=Pvilinha+1;
+            ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+            lrTotal := 0;
+            pviLinha:=Pvilinha+1;
+         end;
+         impmatricial.Imp(pvilinha,001, copy(cdsrelatorio.fieldByname('Historico').asString+'('+cdsrelatorio.fieldByname('Operacao').asString+')',1,40) );
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsrelatorio.fieldByname('Valor').asfloat),[]);
+         lrVlr_Saida := lrVlr_Saida + cdsrelatorio.fieldByname('Valor').asfloat;
+         lrTotal := lrtotal + cdsrelatorio.fieldByname('Valor').asfloat;
+         pviLinha:=Pvilinha+1;
+
+         if pvilinha>60 then
          begin
             impmatricial.Novapagina;
-            pvilinha := 1;
             CabecalhoSaidas;
          end;
-
-         pvilinha := pviLinha + 1;
+         cdsrelatorio.Next;
       End;
-      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+
+      if lrTotal>0 then
+      begin
+         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+         pvilinha := pviLinha + 1;
+         impmatricial.Imp(pvilinha,001,'Total ');
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00', lrTotal ),[]);
+         pvilinha := pviLinha + 2;
+         AdicionarTotal(liCod_TipoPagamento,lrtotal,'S',lsNomePagamento);
+      end;
+
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
       pviLinha:=Pvilinha+1;
       ImpMatricial.imp(pvilinha,001,'Total Das Saidas...');
-      impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrTotal_Saidas),[]);
+      impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrVlr_Saida),[]);
       pviLinha:=Pvilinha+2;
    End;
+
+
    {$ENDREGION}
 
-   sdtsTempPagInformado.Locate('Cod_formapagamento','001',[]);
+   DaoMovCaixa := TDaoCaixaMovimento.Create(gConexao);
+   if pvilinha>50 then
+      impmatricial.Novapagina;
 
-
-   impmatricial.Imp(pvilinha,001,'Resumo Do Caixa (Dinheiro) ' );
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
    pvilinha := pviLinha + 1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pvilinha,001,'Total das Entradas');
-   impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrVlr_Entrada),[]);
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pvilinha,001,'Total das Saidas');
-   impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrTotal_Saidas),[]);
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pvilinha,001,'Saldo do Caixa');
-   impmatricial.ImpD(pvilinha,040,FormatFloat(',0.00',lrVlr_Entrada-lrTotal_Saidas),[]);
-   pviLinha:=Pvilinha+1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
-   pviLinha:=Pvilinha+1;
-   pviLinha:=Pvilinha+3;
-   ImpMatricial.imp (pvilinha,001,'.');
-   ImpMatricial.TamanhoQteLinhas := pviLinha;
+   impmatricial.Imp(pvilinha,001,'     Resumo Geral    ' );
+   pvilinha := pviLinha + 1;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+   pvilinha := pviLinha + 2;
+   cdsResumo.First;
+   lrSaldo := 99999999;
+   while not cdsResumo.eof do
+   begin
+      if ( liCodigo <> cdsResumo.FieldByname('Codigo').AsInteger ) then
+      begin
+         if lrSaldo<>99999999 then
+         begin
+            ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+            pvilinha := pviLinha + 1;
+            impmatricial.Imp(pvilinha,001,'Saldo Final..: ' );
+            impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrSaldo),[]);
+            pvilinha := pviLinha + 2;
+         end;
+         if pvilinha>50 then
+            impmatricial.Novapagina;
+
+         lrSaldo := DaoMovCaixa.SaldoPeriodo(StrTodate('29/12/2014'),(dataInicial-1),cdsResumo.FieldByname('Codigo').AsInteger);
+         ImpMatricial.imp(pvilinha,001,cdsResumo.FieldByname('Descricao').AsString);
+         pvilinha := pviLinha + 1;
+         impmatricial.Imp(pvilinha,001,'Saldo Anterior..: ' );
+         impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrSaldo),[]);
+         pvilinha := pviLinha + 1;
+         ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+         pvilinha := pviLinha + 1;
+         liCodigo := cdsResumo.FieldByname('Codigo').AsInteger;
+      end;
+      if pvilinha>50 then
+         impmatricial.Novapagina;
+
+      if cdsResumo.FieldByname('Tipo').AsString='E' then
+      begin
+         lrSaldo := lrSaldo + cdsResumo.FieldByname('Total').AsFloat;
+         impmatricial.Imp(pvilinha,001,' Total das Entradas ' );
+      end;
+      if cdsResumo.FieldByname('Tipo').AsString='S' then
+      begin
+         lrSaldo := lrSaldo - cdsResumo.FieldByname('Total').AsFloat;
+         impmatricial.Imp(pvilinha,001,' Total das Saidas ' );
+      end;
+      impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',cdsResumo.FieldByname('Total').AsFloat),[]);
+      pvilinha := pviLinha + 1;
+      cdsResumo.Next;
+   end;
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
+   pvilinha := pviLinha + 1;
+   impmatricial.Imp(pvilinha,001,'Saldo Final..: ' );
+   impmatricial.ImpD(pvilinha,050,FormatFloat(',0.00',lrSaldo),[]);
+   pvilinha := pviLinha + 2;
+
    ImpMatricial.fechar
 end;
 
 procedure TfrmMovCaixa.CabecalhoEntradas;
 begin
-  impmatricial.Imp(pvilinha, 1, 'Resumo das Entradas ');
+  impmatricial.Imp(pvilinha, 1, 'Resumo Das Entradas ');
   pvilinha := pviLinha + 1;
-  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 40, 0));
+  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 50, 0));
   pviLinha := Pvilinha + 1;
-  ImpMatricial.imp(pvilinha, 1, ' Historico                        Valor');
+  ImpMatricial.imp(pvilinha, 1, ' Historico                                  Valor');
   pviLinha := Pvilinha + 1;
-  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 40, 0));
+  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 50, 0));
   pviLinha := Pvilinha + 1;
 end;
 
 procedure TfrmMovCaixa.CabecalhoSaidas;
 begin
-  impmatricial.Imp(pvilinha, 1, 'Resumo das Despesas/Saidas ');
+  impmatricial.Imp(pvilinha, 1, 'Resumo Das Saidas ');
   pvilinha := pviLinha + 1;
-  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 40, 0));
+  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 50, 0));
   pviLinha := Pvilinha + 1;
-  ImpMatricial.imp(pvilinha, 1, ' Historico                        Valor');
+  ImpMatricial.imp(pvilinha, 1, ' Historico                                  Valor');
   pviLinha := Pvilinha + 1;
-  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 40, 0));
+  ImpMatricial.imp(pviLinha, 1, incdigito('-', '-', 50, 0));
   pviLinha := Pvilinha + 1;
 end;
 
@@ -2225,10 +2321,10 @@ end;
 
 procedure TfrmMovCaixa.btnImprimirClick(Sender: TObject);
 begin
-  if HeDistribuidora then
+  //if HeDistribuidora then
      RelatorioDeCaixaModelo05(Relatorio)
-  else
-     RelatorioDeCaixaModelo04(Relatorio);
+ // else
+  //   RelatorioDeCaixaModelo04(Relatorio);
 end;
 
 procedure TfrmMovCaixa.btnincluirClick(Sender: TObject);
@@ -2258,24 +2354,40 @@ var DadosContaCorrente : TContaCorrente;
     lacamento         : TLancamento;
     DaoCaixaMovimento : TdaoCaixaMovimento;
 begin
-
    lacamento := TLancamento.Create;
    DaoCaixaMovimento := TdaoCaixaMovimento.Create(gConexao);
-
    lacamento.Cod_Caixa    := cmbCod_Caixa.KeyValue;
    lacamento.Valor        := strToFloat(EdtValor.Text);
    lacamento.Historico    := edthistorico.text;
    lacamento.Data_Lancamento := edtdatamov.Date;
-   lacamento.D_C          := 'C';
-   if cmbD_C.ItemIndex = 1 then
+   lacamento.D_C             := 'C';
+   if ( cmbD_C.ItemIndex = 1 ) OR ( cmbD_C.ItemIndex = TRANSFERENCIA ) then
       lacamento.D_C       := 'D';
    lacamento.SeqVenda              := 0;
-   lacamento.Cod_tipoDespesa       := cmbCod_TipoDespesa.Text;
    lacamento.Sequencia             := Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8);
    lacamento.Cod_FormaPagamento    := cmbNome_formaPagamento.KeyValue;
    lacamento.Operador              := gsOperador;
+   lacamento.Cod_tipoDespesa       := cmbCod_TipoDespesa.keyvalue;
+   if cmbD_C.ItemIndex = TRANSFERENCIA then
+   begin
+      lacamento.Historico         := '( Transferencia Debito )'+edthistorico.text;
+      lacamento.Cod_tipoDespesa   := '9999';
+   end;
    DaoCaixaMovimento.Lancar(lacamento);
-
+   if cmbD_C.ItemIndex = TRANSFERENCIA then
+   begin
+      lacamento.Cod_Caixa             := cmbCod_Caixa.KeyValue;
+      lacamento.Valor                 := strToFloat(EdtValor.Text);
+      lacamento.Historico             := '( Transferencia Credito )'+edthistorico.text;
+      lacamento.Data_Lancamento       := edtdatamov.Date;
+      lacamento.D_C                   := 'C';
+      lacamento.SeqVenda              := 0;
+      lacamento.Cod_tipoDespesa       := '9999';
+      lacamento.Sequencia             := Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8);
+      lacamento.Cod_FormaPagamento    := cmbNome_TipoDespesa.KeyValue;
+      lacamento.Operador              := gsOperador;
+      DaoCaixaMovimento.Lancar(lacamento);
+   end;
    if cdsCadFormasPagamento.FieldByName('TipoLancamento').Asinteger=2 then
    Begin
       DadosContaCorrente := TContaCorrente.Create;
@@ -2358,30 +2470,41 @@ end;
 
 procedure TfrmMovCaixa.cmbD_CChange(Sender: TObject);
 begin
-   If cmbD_C.ItemIndex <> 0 Then
+   If cmbD_C.ItemIndex = ENTRADA Then
    Begin
       qryVariavel.Close;
       qryVariavel.Params.clear;
       qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
-                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 ) '+
+                                     '( Tipo_Conta=:parTipo_Conta Or Tipo_Conta=:parTipo_Conta1 and Codigo<>'+QuotedStr('9999')+'  ) '+
                                         'Order by Descricao ';
       qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 0; // 1 Debito 2 Credito
       qryVariavel.ParamByName('parTipo_Conta1').AsInteger := 1; // 1 Debito 2 Credito
-      //cmbNome_formaPagamento.Enabled := false;
       cmbNome_formaPagamento.KeyValue := '001';
-    End
-    Else
+      cmbNome_TipoDespesa.ListSource := srcCadOperacoes;
+      cmbCod_TipoDespesa.ListSource  := srcCadOperacoes;
+    End;
+
+    If cmbD_C.ItemIndex = SAIDA Then
     Begin
-      // receitas
       qryVariavel.Close;
       qryVariavel.Params.clear;
       qryVariavel.SQL.Text := 'Select * from T_Operacoes where '+
-                                     '( Tipo_Conta=:parTipo_Conta  ) '+
+                                     '( Tipo_Conta=:parTipo_Conta and Codigo<>'+QuotedStr('9999')+'  ) '+
                                         'Order by Descricao ';
       qryVariavel.ParamByName('parTipo_Conta').AsInteger  := 2; // 1 Debito 2 Credito
       cmbNome_formaPagamento.KeyValue := '001';
-      //cmbNome_formaPagamento.Enabled := false;
+      cmbNome_TipoDespesa.ListSource := srcCadOperacoes;
+      cmbCod_TipoDespesa.ListSource  := srcCadOperacoes;
     End;
+
+    If cmbD_C.ItemIndex = TRANSFERENCIA Then
+    begin
+       lbltipo.Caption := 'Pagamento Origem';
+       lbldespesa.Caption := 'Pagamento Destino';
+       cmbNome_TipoDespesa.ListSource := cmbNome_formaPagamento.ListSource;
+       cmbCod_TipoDespesa.ListSource  := cmbNome_formaPagamento.ListSource
+    end;
+
 
     cdsCadOperacoes.Close;
     cdsCadOperacoes.ProviderName := dspVariavel.name;
@@ -2532,11 +2655,11 @@ procedure TfrmMovCaixa.impMatricialNewPage(Sender: TObject; Pagina: Integer);
 begin
    //ConfiguraRel( Name, True, TRdPrint( Sender ), 1 );
    pviLinha := 01;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
    pvilinha := pviLinha + 1;
    impmatricial.Imp(pvilinha,001,cmbCaixa.Text+' - Dia '+dtpData_Ini.Text);
    pvilinha := pviLinha + 1;
-   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',40,0));
+   ImpMatricial.imp(pviLinha,001,incdigito( '-','-',50,0));
    pvilinha := pviLinha + 1;
 end;
 

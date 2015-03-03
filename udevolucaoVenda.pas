@@ -46,6 +46,7 @@ type
     SkinForm: TbsBusinessSkinForm;
     cdsTmpItensDevolucoesqtde_Devolvida: TFloatField;
     cdsTmpItensDevolucoesqtde_Vendida: TFloatField;
+    cdsRomaneio: TClientDataSet;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnokClick(Sender: TObject);
@@ -347,21 +348,29 @@ begin
    End;
    {$ENDREGION}
 
+   frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
+   frmDevolucaoVenda.tag := 1;
+
    if frmDevolucaoVenda.Tag=2 then
    Begin
       frmBaixaBrinde.cdsTmpItensDevolucoes.EmptyDataSet;
       frmBaixaBrinde.cdsTmpItensDevolucoes.Data := cdsTmpItensDevolucoes.Data;
-   End;
-   frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
-   frmDevolucaoVenda.tag := 1;
+   End
+   Else
+   begin
+      loDaoContaAReceber := TDaoContareceber.Create(gConexao);
+      loDaoContaAReceber.AtualizarValorDosTitulos(VendaID,StrTofloat(edtVlr_Recebido.Text));
+      FreeAndnil(loDaoContaAReceber);
 
-   loDaoContaAReceber := TDaoContareceber.Create(gConexao);
-   loDaoContaAReceber.AtualizarValorDosTitulos(VendaID,StrTofloat(edtVlr_Recebido.Text));
-   FreeAndnil(loDaoContaAReceber);
+      loDaoRomaneio := TdaoRomaneio.Create(gConexao);
+      loDaoRomaneio.AtualizarTotalDoRomaneio(piRomaneioId);
+      FreeAndNil(loDaoRomaneio);
+   end;
 
-   loDaoRomaneio := TdaoRomaneio.Create(gConexao);
-   loDaoRomaneio.AtualizarTotalDoRomaneio(piRomaneioId);
-   FreeAndNil(loDaoRomaneio);
+
+
+
+
    close;
 End;
 

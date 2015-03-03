@@ -275,6 +275,9 @@ type
     btnRepasse: TdxBarLargeButton;
     actRelContaCorrente: TAction;
     dxBarButton30: TdxBarButton;
+    dxBarButton32: TdxBarButton;
+    actSimplesRemessa: TAction;
+    dxBarButton43: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -349,6 +352,7 @@ type
     procedure actServico01Execute(Sender: TObject);
     procedure actDeliveryExecute(Sender: TObject);
     procedure actRelContaCorrenteExecute(Sender: TObject);
+    procedure actSimplesRemessaExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -1458,6 +1462,12 @@ begin
    FrmVendas := TfrmVendas.create(Self);
    frmvendas.Tag := 3; // venda de serviços
    frmVendas.Showmodal;
+end;
+
+procedure TfrmPrincipal.actSimplesRemessaExecute(Sender: TObject);
+begin
+   frmRemessaParaVenda := TfrmRemessaParaVenda.Create(Self);
+   frmRemessaParaVenda.showmodal
 end;
 
 end.

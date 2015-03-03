@@ -38,7 +38,7 @@ object frmBaixaNormal: TfrmBaixaNormal
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 664
+      Width = 70
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1090,7 +1090,7 @@ object frmBaixaNormal: TfrmBaixaNormal
       object bsSkinToolBar2: TbsSkinToolBar
         Left = 9
         Top = 0
-        Width = 662
+        Width = 70
         Height = 40
         HintImageIndex = 0
         TabOrder = 0
@@ -1453,7 +1453,7 @@ object frmBaixaNormal: TfrmBaixaNormal
         Left = 490
         Top = 5
         Width = 87
-        Height = 22
+        Height = 19
         BevelInner = bvNone
         BevelOuter = bvNone
         Color = clInfoBk

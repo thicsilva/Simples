@@ -59,9 +59,7 @@ type
     cdsTmpItensDevolucoes: TClientDataSet;
     cdsTmpItensDevolucoesCodigo: TIntegerField;
     cdsTmpItensDevolucoesDescricao: TStringField;
-    cdsTmpItensDevolucoesQtde_Vendida: TIntegerField;
     cdsTmpItensDevolucoesPco_Venda: TFloatField;
-    cdsTmpItensDevolucoesQtde_devolvida: TIntegerField;
     cdsTmpItensDevolucoesPerc_Desc: TFloatField;
     cdsTmpItensDevolucoespco_Custo: TFloatField;
     cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField;
@@ -82,6 +80,8 @@ type
     dspSaldos: TDataSetProvider;
     qrySaldos: TSQLQuery;
     edtSupervisor: TbsSkinEdit;
+    cdsTmpItensDevolucoesQtde_Vendida: TFloatField;
+    cdsTmpItensDevolucoesQtde_devolvida: TFloatField;
     procedure FormShow(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -160,7 +160,7 @@ begin
      bsSkinToolBar2.SetFocus
    except
    end;
-   
+
    if CaixaMensagem( 'Deseja Efetuar o pagamento do titulo '+edtDocumento.text, ctConfirma, [ cbSimNao ], 0 )  Then
    Begin
 

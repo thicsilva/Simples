@@ -524,7 +524,7 @@ object frmMovCaixa: TfrmMovCaixa
     Top = 44
     Width = 800
     Height = 355
-    ActivePage = bsSkinTabSheet1
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1065,6 +1065,8 @@ object frmMovCaixa: TfrmMovCaixa
           Width = 233
           Height = 17
           Caption = 'Visualizar Caixa Fechado'
+          Checked = True
+          State = cbChecked
           TabOrder = 4
           Visible = False
         end
@@ -1151,7 +1153,7 @@ object frmMovCaixa: TfrmMovCaixa
           SkinDataName = 'stdlabel'
           Caption = 'Data de Lan'#231'amento'
         end
-        object bsSkinStdLabel9: TbsSkinStdLabel
+        object lbltipo: TbsSkinStdLabel
           Left = 28
           Top = 70
           Width = 83
@@ -1185,7 +1187,7 @@ object frmMovCaixa: TfrmMovCaixa
           SkinDataName = 'stdlabel'
           Caption = 'Historico'
         end
-        object bsSkinStdLabel13: TbsSkinStdLabel
+        object lbldespesa: TbsSkinStdLabel
           Left = 25
           Top = 95
           Width = 86
@@ -1333,7 +1335,8 @@ object frmMovCaixa: TfrmMovCaixa
           Text = 'Saida'
           Items.Strings = (
             'Entrada'
-            'Saida')
+            'Saida'
+            'Transferencia')
           ItemIndex = 1
           DropDownCount = 8
           HorizontalExtent = False
@@ -1386,7 +1389,7 @@ object frmMovCaixa: TfrmMovCaixa
         object Edthistorico: TbsSkinEdit
           Left = 122
           Top = 139
-          Width = 301
+          Width = 305
           Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1418,7 +1421,7 @@ object frmMovCaixa: TfrmMovCaixa
           RightImageDownIndex = -1
         end
         object cmbNome_TipoDespesa: TbsSkinDBLookupComboBox
-          Left = 208
+          Left = 212
           Top = 88
           Width = 215
           Height = 20
@@ -1467,6 +1470,7 @@ object frmMovCaixa: TfrmMovCaixa
           KeyField = 'codigo'
           ListField = 'codigo;descricao'
           ListSource = srcCadOperacoes
+          NullValueKey = 16450
           OnChange = cmbCod_TipoDespesaChange
         end
         object cmbNome_formaPagamento: TbsSkinDBLookupComboBox
@@ -1582,7 +1586,7 @@ object frmMovCaixa: TfrmMovCaixa
           OnChange = cmbCod_CaixaChange
         end
         object cmbNome_Caixa: TbsSkinDBLookupComboBox
-          Left = 208
+          Left = 212
           Top = 113
           Width = 215
           Height = 20
@@ -1778,8 +1782,8 @@ object frmMovCaixa: TfrmMovCaixa
     FonteEstiloPadrao = []
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
-    Left = 288
-    Top = 240
+    Left = 656
+    Top = 184
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
@@ -1830,5 +1834,68 @@ object frmMovCaixa: TfrmMovCaixa
     ProviderName = 'dspVariavel'
     Left = 244
     Top = 240
+  end
+  object cdsResumo: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Codigo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'descricao'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'Tipo'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'Total'
+        DataType = ftFloat
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end
+      item
+        Name = 'cdsResumoIndex3'
+        Fields = 'codigo'
+      end>
+    IndexFieldNames = 'codigo'
+    Params = <>
+    StoreDefs = True
+    Left = 624
+    Top = 152
+    Data = {
+      6E0000009619E0BD0100000018000000040000000000030000006E0006436F64
+      69676F04000100000000000964657363726963616F0100490000000100055749
+      445448020002003200045469706F010049000000010005574944544802000200
+      020005546F74616C08000400000000000000}
+    object cdsResumoCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object cdsResumodescricao: TStringField
+      FieldName = 'descricao'
+      Size = 50
+    end
+    object cdsResumoTipo: TStringField
+      FieldName = 'Tipo'
+      Size = 2
+    end
+    object cdsResumoTotal: TFloatField
+      FieldName = 'Total'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = cdsResumo
+    Left = 680
+    Top = 152
   end
 end

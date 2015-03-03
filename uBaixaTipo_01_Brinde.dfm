@@ -36,6 +36,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -54,6 +55,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     Spacing = 2
     Caption = 'Informa'#231#245'es do Titulo'
     Align = alTop
+    UseSkinSize = True
     object bsSkinStdLabel2: TbsSkinStdLabel
       Left = 27
       Top = 63
@@ -183,7 +185,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 64
       Top = 58
       Width = 289
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -204,6 +206,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -215,7 +218,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 455
       Top = 58
       Width = 105
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -236,6 +239,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -247,7 +251,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 65
       Top = 34
       Width = 89
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -268,6 +272,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -313,7 +318,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 240
       Top = 31
       Width = 73
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -334,6 +339,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Font.Style = []
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -345,7 +351,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 384
       Top = 82
       Width = 43
-      Height = 18
+      Height = 20
       Text = 'Venda'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -367,6 +373,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 5
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -378,8 +385,8 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 106
       Top = 88
       Width = 100
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -417,6 +424,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       MaxLength = 10
       ParentFont = False
       TabOrder = 6
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -428,7 +436,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 422
       Top = 82
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'cliente'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -450,6 +458,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 7
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -461,7 +470,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 459
       Top = 82
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'pagamento'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -483,6 +492,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 8
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -494,7 +504,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 479
       Top = 86
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'emissao'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -516,6 +526,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 9
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -527,7 +538,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 520
       Top = 86
       Width = 40
-      Height = 18
+      Height = 20
       Text = 'emissao'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -549,6 +560,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 10
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -585,7 +597,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 392
       Top = 90
       Width = 43
-      Height = 18
+      Height = 20
       Text = 'Supervisor'
       DefaultColor = clInactiveBorder
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -607,6 +619,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 12
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -632,6 +645,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -650,6 +664,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     Spacing = 2
     Caption = 'Valores para recebimento'
     Align = alClient
+    UseSkinSize = True
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 32
       Top = 28
@@ -984,8 +999,8 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       Left = 468
       Top = 114
       Width = 101
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 22
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -1024,6 +1039,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       ParentFont = False
       TabOrder = 7
       Visible = False
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1115,6 +1131,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -1170,6 +1187,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1395,6 +1413,8 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     end
   end
   object SkinForm: TbsBusinessSkinForm
+    ShowMDIScrollBars = True
+    WindowState = wsNormal
     QuickButtons = <>
     QuickButtonsShowHint = False
     QuickButtonsShowDivider = True
@@ -1412,6 +1432,8 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     LogoBitMapTransparent = False
     AlwaysMinimizeToTray = False
     UseSkinFontInMenu = True
+    UseSkinFontInCaption = True
+    UseSkinSizeInMenu = True
     ShowIcon = False
     MaximizeOnFullScreen = False
     AlphaBlend = False
@@ -1491,7 +1513,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 285
+    Left = 277
     Top = 162
   end
   object dspVariavel: TDataSetProvider
@@ -1514,7 +1536,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       end
       item
         Name = 'Qtde_Vendida'
-        DataType = ftInteger
+        DataType = ftFloat
       end
       item
         Name = 'Pco_Venda'
@@ -1522,7 +1544,7 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       end
       item
         Name = 'Qtde_devolvida'
-        DataType = ftInteger
+        DataType = ftFloat
       end
       item
         Name = 'vlr_Desconto'
@@ -1548,9 +1570,9 @@ object frmBaixaBrinde: TfrmBaixaBrinde
     Data = {
       D20000009619E0BD010000001800000009000000000003000000D20006436F64
       69676F04000100000000000944657363726963616F0100490000000100055749
-      4454480200020032000C517464655F56656E6469646104000100000000000950
-      636F5F56656E646108000400000000000E517464655F6465766F6C7669646104
-      000100000000000C766C725F446573636F6E746F08000400000000000950636F
+      4454480200020032000C517464655F56656E6469646108000400000000000950
+      636F5F56656E646108000400000000000E517464655F6465766F6C7669646108
+      000400000000000C766C725F446573636F6E746F08000400000000000950636F
       5F437573746F08000400000000000F70636F5F56656E64615F417475616C0800
       04000000000005746F74616C08000400000000000000}
     object cdsTmpItensDevolucoesCodigo: TIntegerField
@@ -1562,20 +1584,10 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FieldName = 'Descricao'
       Size = 50
     end
-    object cdsTmpItensDevolucoesQtde_Vendida: TIntegerField
-      DisplayLabel = 'Qtde. Venda'
-      DisplayWidth = 15
-      FieldName = 'Qtde_Vendida'
-    end
     object cdsTmpItensDevolucoesPco_Venda: TFloatField
       DisplayLabel = 'Pco. Venda'
       DisplayWidth = 12
       FieldName = 'Pco_Venda'
-    end
-    object cdsTmpItensDevolucoesQtde_devolvida: TIntegerField
-      DisplayLabel = 'Qtde. Devolvida'
-      DisplayWidth = 15
-      FieldName = 'Qtde_devolvida'
     end
     object cdsTmpItensDevolucoesPerc_Desc: TFloatField
       FieldName = 'Vlr_Desconto'
@@ -1585,14 +1597,20 @@ object frmBaixaBrinde: TfrmBaixaBrinde
       FieldName = 'pco_Custo'
       DisplayFormat = '0.00'
     end
-    object cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField
-      FieldName = 'Pco_Venda_Atual'
-    end
     object cdsTmpItensDevolucoesTotal: TFloatField
       FieldKind = fkCalculated
       FieldName = 'Total'
       DisplayFormat = '0.00'
       Calculated = True
+    end
+    object cdsTmpItensDevolucoesPco_Venda_Atual: TFloatField
+      FieldName = 'Pco_Venda_Atual'
+    end
+    object cdsTmpItensDevolucoesQtde_Vendida: TFloatField
+      FieldName = 'Qtde_Vendida'
+    end
+    object cdsTmpItensDevolucoesQtde_devolvida: TFloatField
+      FieldName = 'Qtde_devolvida'
     end
   end
   object dspItensDevolucoes: TDataSetProvider

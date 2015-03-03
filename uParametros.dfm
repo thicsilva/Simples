@@ -58,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = bsSkinTabSheet2
+    ActivePage = tabContasAReceber
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1246,7 +1246,7 @@ object frmParametros: TfrmParametros
         Items.Strings = (
           'Baixa Normal'
           'Baixa com Contrle de Brinde')
-        ItemIndex = 0
+        ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False
         Font.Charset = DEFAULT_CHARSET

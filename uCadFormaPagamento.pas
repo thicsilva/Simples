@@ -10,7 +10,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,sqlTimSt,
   cxDataStorage, cxEdit, DB, cxDBData, bsSkinCtrls, StdCtrls, cxGridLevel,
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, Mask, bsSkinBoxCtrls,
@@ -106,8 +106,11 @@ type
     procedure pagCadastroChange(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
     procedure cmbNome_ProdutoChange(Sender: TObject);
+    procedure btnAdicionaDescontoClick(Sender: TObject);
+    procedure btnRemoverDescontoClick(Sender: TObject);
   private
      pvQualBotao : String;
+    procedure AtualizaProdutosPagamentos(PagamentoId: Integer);
     { Private declarations }
   public
     { Public declarations }
@@ -137,15 +140,17 @@ begin
 
    if pagCadastro.ActivePageIndex = 3 then
    begin
+      AtualizaProdutosPagamentos(sdtsPesquisa.FieldByName('Codigo').AsInteger);
+
       pnlPagamentos.Caption := sdtsPesquisa.FieldByName('Descricao').AsString;
-      qryProdutosPagamentos.Close;
+    { qryProdutosPagamentos.Close;
       qryProdutosPagamentos.SQL.Text := 'Select Prod.Codigo, Prod.Descricao, pag.Preco '+
                                              ' from ProdutosPagamentos pag '+
                                              '         left join T_Produtos prod on Prod.Codigo=Pag.ProdutoId '+
                                              'where PagamentoId=:parPagamentoId ';
       qryProdutosPagamentos.ParamByName('parPagamentoID').AsInteger := sdtsPesquisa.FieldByName('Codigo').AsInteger;
       cdsProdutosPagamentos.Close;
-      cdsProdutosPagamentos.Open;
+      cdsProdutosPagamentos.Open;   }
    end;
 
 end;
@@ -195,7 +200,7 @@ begin
    Begin
       cdsCadFormasPagamento.Append;
       cdsCadFormasPagamento.FieldByName('Codigo').Asinteger        := StrtoInt(edtCodigo.Text);
-      cdsCadFormasPagamento.FieldByName('Data_Cad').AsDateTime := Now;
+      cdsCadFormasPagamento.FieldByName('Data_Cad').AsDateTime     := Now;
    End;
    cdsCadFormasPagamento.FieldByName('Descricao').AsString        := edtDescricao.Text;
    cdsCadFormasPagamento.FieldByName('Operador').AsString         := GsOperador;
@@ -229,6 +234,14 @@ begin
 
 end;
 
+procedure TfrmCadFormaPagamento.btnRemoverDescontoClick(Sender: TObject);
+begin
+   gConexao.Conection.Execute('Delete from ProdutosPagamentos where '+
+                              ' Produtoid='+srcProdutosPagamentos.DataSet.FieldByName('Codigo').AsString+' and '+
+                              ' PagamentoID='+sdtsPesquisa.FieldByName('Codigo').AsString,Nil);
+   AtualizaProdutosPagamentos(sdtsPesquisa.FieldByName('Codigo').AsInteger);
+end;
+
 procedure TfrmCadFormaPagamento.BtnCancelaClick(Sender: TObject);
 begin
 
@@ -257,6 +270,29 @@ begin
    sdtsPesquisa.DataSet.ParamByName('parDescricao').AsString := lsCoringa+EdtPesquisa.Text+'%';
    sdtsPesquisa.Open;
 end;
+
+procedure TfrmCadFormaPagamento.btnAdicionaDescontoClick(Sender: TObject);
+begin
+  qryProdutosPagamentos.SQL.Text :=' insert into ProdutosPagamentos ( Preco,ProdutoId,PagamentoId,Operador,Data_Cadastro,Data_movimento) values '+
+                                   ' ( :parPreco,:parProdutoId,:parPagamentoId,:parOperador,:parData_Cadastro,:parData_movimento)';
+  qryProdutosPagamentos.ParamByName('parPreco').AsFloat := Strtofloat(edtPerc_Desconto.text);
+  qryProdutosPagamentos.ParamByName('parProdutoId').AsInteger :=strToInt(edtCod_Produto.Text) ;
+  qryProdutosPagamentos.ParamByName('parPagamentoId').AsInteger := sdtsPesquisa.FieldByName('Codigo').AsInteger ;
+  qryProdutosPagamentos.ParamByName('parOperador').AsString :=gsOperador ;
+  qryProdutosPagamentos.ParamByName('parData_Cadastro').AsSQLTimeStamp := DateTimeToSqlTimeStamp( now );
+  qryProdutosPagamentos.ParamByName('parData_movimento').AsSQLTimeStamp := DateTimeToSqlTimeStamp( now );
+  qryProdutosPagamentos.Execsql;
+
+  AtualizaProdutosPagamentos(sdtsPesquisa.FieldByName('Codigo').AsInteger);
+end;
+
+procedure TfrmCadFormaPagamento.AtualizaProdutosPagamentos(PagamentoId : Integer);
+begin
+    srcProdutosPagamentos.DataSet := gConexao.BuscarDadosSQL('select prod.Codigo, Prod.descricao, pag.preco from ProdutosPagamentos pag '+
+                                                             ' left join T_Produtos prod on prod.Codigo=pag.ProdutoId  where PagamentoId='+IntTOStr(PagamentoId),Nil);
+
+end;
+
 
 procedure TfrmCadFormaPagamento.btnalterarClick(Sender: TObject);
 begin
