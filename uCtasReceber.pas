@@ -208,7 +208,8 @@ implementation
 
 uses uPrincipal,ufuncoes, uBaixaTipo_01_Brinde, uBaixaNormal,
   uselRelContasReceber, DaoSupervisor,DaoRemessa,
-  uAlteraVencimento_TipoPagamento, uDtmCadastro, uDaoContaReceber;
+  uAlteraVencimento_TipoPagamento, uDtmCadastro, uDaoContaReceber, uDaoVenda,
+  uDaoRomaneio;
 
 procedure TfrmCtasReceber.LimpaCampos();
 Begin
@@ -926,12 +927,17 @@ End;
 procedure TfrmCtasReceber.btnexcluirClick(Sender: TObject);
 var vlrJuros : Real;
     vlrMulta : Real;
+    DaoVenda : TDaoVenda;
+    DaoRomaneio : TDaoRomaneio;
+  lsRomaneioID: string;
 begin
+
    if not gsPerfilacesso.VerificaAcesso('Financeiro','Contas a Receber','Efetuar Baixa',gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
    End;
+
 
    IF Uppercase( gParametros.Ler( '', '[CADASTRO]', 'TrabalhaComRemessa', 'NAO' )) = 'SIM' Then
    begin
@@ -953,6 +959,15 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
+   DaoVenda := TDaoVenda.Create(gConexao);
+   DaoRomaneio := TDaoRomaneio.Create(gConexao);
+
+   lsRomaneioId := DaoVenda.RetornarRomaneio(cdsPesquisa.FieldByName('Seqvenda').AsInteger);
+   if not DaoRomaneio.RomaneioEstaFechado(StrToint(lsRomaneioId))then
+   begin
+      if not CaixaMensagem('Este pagamento pertence a um romaneio, Deseja Continuar?', ctConfirma, [ cbSimNao ], 0 )  Then
+        Exit;
+   end;
 
    If StrToint(gParametros.Ler( '', '[CONTASRECEBER]', 'TipoBaixa', '0' ,gsOperador )) = 1 Then
    Begin

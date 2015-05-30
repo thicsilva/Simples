@@ -208,7 +208,6 @@ type
     cdsClienteQtde_PedAberto: TIntegerField;
     cdsClienterazao_Social: TStringField;
     cdsClientePto_Referencia: TStringField;
-    cdsClienteFax: TStringField;
     cdsClienteResponsavel: TStringField;
     cdsClienteCod_Funcionario: TIntegerField;
     cdsClientecontrato: TIntegerField;

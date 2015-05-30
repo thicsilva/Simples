@@ -49,6 +49,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -347,6 +348,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         Spacing = 1
         OnClick = btndicionarClick
         ExplicitLeft = 222
+        ExplicitTop = 12
       end
     end
   end
@@ -366,6 +368,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -399,6 +402,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         VScrollBar = bsSkinScrollBar3
         GridLineColor = clWindowText
         DefaultCellHeight = 20
+        ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
         DefaultRowHeight = 18
@@ -472,6 +476,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -502,6 +507,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           VScrollBar = bsSkinScrollBar2
           GridLineColor = clWindowText
           DefaultCellHeight = 20
+          ColSizingwithLine = False
           DrawGraphicFields = False
           UseColumnsFont = False
           DefaultRowHeight = 18
@@ -586,9 +592,6 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           Position = 0
           SmallChange = 1
           LargeChange = 1
-          ExplicitLeft = 569
-          ExplicitTop = 103
-          ExplicitHeight = 200
         end
       end
       object bsSkinPanel1: TbsSkinPanel
@@ -607,6 +610,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -698,6 +702,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -747,9 +752,6 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         Position = 0
         SmallChange = 1
         LargeChange = 1
-        ExplicitLeft = 569
-        ExplicitTop = 103
-        ExplicitHeight = 200
       end
     end
     object tabNovaRemessa: TbsSkinTabSheet
@@ -770,6 +772,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -830,7 +833,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           Left = 82
           Top = 32
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -851,6 +854,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           Font.Style = []
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -876,6 +880,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = True
+          EmptyDrawing = False
           RibbonStyle = False
           ImagePosition = bsipDefault
           TransparentMode = False
@@ -949,7 +954,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             Left = 54
             Top = 10
             Width = 65
-            Height = 18
+            Height = 20
             DefaultColor = clWindow
             DefaultFont.Charset = DEFAULT_CHARSET
             DefaultFont.Color = clBlack
@@ -969,6 +974,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             Font.Style = []
             ParentFont = False
             TabOrder = 0
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -1007,7 +1013,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             Left = 501
             Top = 11
             Width = 42
-            Height = 18
+            Height = 20
             Text = '0'
             DefaultColor = clWindow
             DefaultFont.Charset = DEFAULT_CHARSET
@@ -1029,6 +1035,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             Font.Style = []
             ParentFont = False
             TabOrder = 2
+            ButtonImageIndex = -1
             LeftImageIndex = -1
             LeftImageHotIndex = -1
             LeftImageDownIndex = -1
@@ -1052,6 +1059,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = False
+            Transparent = False
             CheckedMode = False
             ImageList = frmPrincipal.Imagebutoes
             ImageIndex = 10
@@ -1086,6 +1094,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
             DefaultWidth = 0
             DefaultHeight = 0
             UseSkinFont = False
+            Transparent = False
             CheckedMode = False
             ImageList = frmPrincipal.Imagebutoes
             ImageIndex = 9
@@ -1121,6 +1130,7 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         VScrollBar = bsSkinScrollBar1
         GridLineColor = clWindowText
         DefaultCellHeight = 20
+        ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
         DefaultRowHeight = 18
@@ -1162,7 +1172,6 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         Height = 236
         HintImageIndex = 0
         TabOrder = 2
-        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'vscrollbar'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -1179,15 +1188,12 @@ object frmRemessaParaVenda: TfrmRemessaParaVenda
         CanFocused = False
         Align = alRight
         Kind = sbVertical
-        PageSize = 0
-        Min = 0
-        Max = 100
-        Position = 0
+        PageSize = 1
+        Min = 1
+        Max = 0
+        Position = 1
         SmallChange = 1
         LargeChange = 1
-        ExplicitLeft = 569
-        ExplicitTop = 103
-        ExplicitHeight = 200
       end
     end
   end

@@ -17,6 +17,7 @@ type TDaoItemVenda = class
     function Buscar(SeqVenda : Integer) : TClientDataSet;
     procedure MarcarComoRecebido(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime; Dias : Integer );
     property Connection : TSqlConnection read FConnection write SetConnection;
+    procedure AtualizarData(ProdutoId,VendaID : Integer; DataDevolucao : TDateTime; Dias : Integer );
 end;
 
 implementation
@@ -24,6 +25,12 @@ implementation
 uses uDaoSaldo, uClassSaldo;
 
 { TDaoItemVenda }
+
+procedure TDaoItemVenda.AtualizarData(ProdutoId, VendaID: Integer;
+  DataDevolucao: TDateTime; Dias: Integer);
+begin
+   fConexao.Conection.ExecuteDirect('update T_ItensVendas set Dias=0, Data_Mov='+ QuotedStr(FormatDateTime('dd/mm/yyyy', DataDevolucao ))+' where Cod_Produto='+IntTostr(ProdutoId)+' and SeqVenda='+IntTostr(VendaId));
+end;
 
 function TDaoItemVenda.Buscar(SeqVenda: Integer): TClientDataSet;
 var Parametros : TStringList;

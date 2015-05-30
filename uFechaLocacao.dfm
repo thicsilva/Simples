@@ -38,7 +38,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinToolBar1: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 793
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -83,7 +83,7 @@ object frmFechaLocacao: TfrmFechaLocacao
       Flat = True
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
-        Left = 716
+        Left = 703
         Top = 0
         Width = 70
         Height = 40
@@ -119,11 +119,10 @@ object frmFechaLocacao: TfrmFechaLocacao
         Spacing = 2
         Layout = blGlyphTop
         OnClick = btnFecharClick
-        ExplicitLeft = 405
-        ExplicitTop = 8
+        ExplicitLeft = 732
       end
       object bsSkinBevel1: TbsSkinBevel
-        Left = 70
+        Left = 140
         Top = 0
         Width = 15
         Height = 40
@@ -131,6 +130,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
+        ExplicitLeft = 70
         ExplicitTop = -5
       end
       object btnok: TbsSkinSpeedButton
@@ -173,15 +173,54 @@ object frmFechaLocacao: TfrmFechaLocacao
         ExplicitTop = 8
       end
       object bsSkinBevel2: TbsSkinBevel
-        Left = 85
+        Left = 155
         Top = 0
-        Width = 631
+        Width = 548
         Height = 40
         Align = alLeft
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bevel'
         DividerMode = True
-        ExplicitTop = -5
+        ExplicitLeft = 85
+      end
+      object btnFaturamento: TbsSkinSpeedButton
+        Left = 70
+        Top = 0
+        Width = 70
+        Height = 40
+        HintImageIndex = 0
+        Visible = False
+        SkinData = frmPrincipal.SkinPrincipal
+        SkinDataName = 'bigtoolbutton'
+        DefaultFont.Charset = DEFAULT_CHARSET
+        DefaultFont.Color = clWindowText
+        DefaultFont.Height = 14
+        DefaultFont.Name = 'Arial'
+        DefaultFont.Style = []
+        DefaultWidth = 70
+        DefaultHeight = 40
+        UseSkinFont = True
+        CheckedMode = False
+        UseSkinSize = True
+        UseSkinFontColor = True
+        WidthWithCaption = 0
+        WidthWithoutCaption = 0
+        ImageIndex = 10
+        RepeatMode = False
+        RepeatInterval = 100
+        Transparent = True
+        Flat = True
+        AllowAllUp = False
+        Down = False
+        GroupIndex = 0
+        Caption = '&Faturamento'
+        ShowCaption = True
+        NumGlyphs = 1
+        Align = alLeft
+        Spacing = 2
+        Layout = blGlyphTop
+        OnClick = btnFaturamentoClick
+        ExplicitLeft = 64
       end
     end
   end
@@ -577,7 +616,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 70
+      Width = 793
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
@@ -1177,7 +1216,7 @@ object frmFechaLocacao: TfrmFechaLocacao
     RightImageDownIndex = -1
   end
   object edtData_Venda: TbsSkinEdit
-    Left = 113
+    Left = 335
     Top = 8
     Width = 66
     Height = 25

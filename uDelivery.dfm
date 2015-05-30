@@ -2,7 +2,7 @@ object frmDelivery: TfrmDelivery
   Left = 0
   Top = 0
   Caption = 'Atendimento Expresso'
-  ClientHeight = 429
+  ClientHeight = 484
   ClientWidth = 1241
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -34,6 +34,7 @@ object frmDelivery: TfrmDelivery
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    UseSkinSize = True
     CaptionImageIndex = -1
     NumGlyphs = 1
     Spacing = 2
@@ -48,23 +49,26 @@ object frmDelivery: TfrmDelivery
     Sizeable = False
     Align = alTop
     Caption = 'Dados do Cliente'
+    ExplicitLeft = -1
+    ExplicitTop = -4
     object bsSkinLabel1: TbsSkinLabel
-      Left = 16
-      Top = 32
-      Width = 41
+      Left = 4
+      Top = 31
+      Width = 112
       Height = 21
       HintImageIndex = 0
       TabOrder = 0
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'label'
       DefaultFont.Charset = DEFAULT_CHARSET
-      DefaultFont.Color = clWindowText
-      DefaultFont.Height = 14
+      DefaultFont.Color = clBlue
+      DefaultFont.Height = -15
       DefaultFont.Name = 'Arial'
-      DefaultFont.Style = []
+      DefaultFont.Style = [fsBold]
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -75,14 +79,15 @@ object frmDelivery: TfrmDelivery
       UseSkinSize = True
       UseSkinFontColor = True
       BorderStyle = bvFrame
-      Caption = 'Nome'
+      Alignment = taCenter
+      Caption = 'Nome/telefone'
       AutoSize = False
     end
     object edtNome: TbsSkinEdit
-      Left = 64
-      Top = 32
-      Width = 515
-      Height = 18
+      Left = 120
+      Top = 31
+      Width = 314
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -102,6 +107,7 @@ object frmDelivery: TfrmDelivery
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -111,7 +117,7 @@ object frmDelivery: TfrmDelivery
       OnChange = edtNomeChange
     end
     object btnAdicionar: TbsSkinButton
-      Left = 751
+      Left = 606
       Top = 29
       Width = 84
       Height = 25
@@ -127,6 +133,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 10
@@ -146,7 +153,7 @@ object frmDelivery: TfrmDelivery
       OnClick = btnAdicionarClick
     end
     object btnRemoverDesconto: TbsSkinButton
-      Left = 834
+      Left = 690
       Top = 29
       Width = 84
       Height = 25
@@ -162,6 +169,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 9
@@ -181,11 +189,11 @@ object frmDelivery: TfrmDelivery
       OnClick = btnRemoverDescontoClick
     end
     object edtData: TbsSkinDateEdit
-      Left = 585
-      Top = 32
+      Left = 434
+      Top = 31
       Width = 98
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -222,6 +230,7 @@ object frmDelivery: TfrmDelivery
       MaxLength = 10
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -230,7 +239,7 @@ object frmDelivery: TfrmDelivery
       RightImageDownIndex = -1
     end
     object btnClientes: TbsSkinButton
-      Left = 917
+      Left = 920
       Top = 29
       Width = 84
       Height = 25
@@ -246,6 +255,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 14
@@ -264,10 +274,10 @@ object frmDelivery: TfrmDelivery
       Spacing = 1
       OnClick = btnClientesClick
     end
-    object bsSkinButton1: TbsSkinButton
-      Left = 1014
-      Top = 25
-      Width = 107
+    object btnServicos: TbsSkinButton
+      Left = 1112
+      Top = 24
+      Width = 61
       Height = 35
       HintImageIndex = 0
       TabOrder = 6
@@ -281,6 +291,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.ImageMenu32x32
       ImageIndex = 13
@@ -292,7 +303,6 @@ object frmDelivery: TfrmDelivery
       AllowAllUp = False
       TabStop = True
       CanFocused = True
-      Action = frmPrincipal.actServicos
       Down = False
       GroupIndex = 0
       Glyph.Data = {
@@ -332,12 +342,12 @@ object frmDelivery: TfrmDelivery
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       NumGlyphs = 1
       Spacing = 1
-      OnClick = bsSkinButton1Click
+      OnClick = btnServicosClick
     end
     object bsSkinButton2: TbsSkinButton
-      Left = 1123
-      Top = 25
-      Width = 107
+      Left = 1172
+      Top = 24
+      Width = 61
       Height = 35
       HintImageIndex = 0
       TabOrder = 7
@@ -351,6 +361,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.ImageMenu32x32
       ImageIndex = 12
@@ -362,7 +373,6 @@ object frmDelivery: TfrmDelivery
       AllowAllUp = False
       TabStop = True
       CanFocused = True
-      Action = frmPrincipal.actconsServicos
       Down = False
       GroupIndex = 0
       Glyph.Data = {
@@ -404,10 +414,10 @@ object frmDelivery: TfrmDelivery
       Spacing = 1
     end
     object edtHora: TbsSkinTimeEdit
-      Left = 687
-      Top = 31
+      Left = 534
+      Top = 30
       Width = 56
-      Height = 20
+      Height = 22
       EditMask = '!90:00:00;1; '
       Text = '00:00:00'
       DefaultColor = clWindow
@@ -429,6 +439,7 @@ object frmDelivery: TfrmDelivery
       MaxLength = 8
       ParentFont = False
       TabOrder = 8
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -439,12 +450,118 @@ object frmDelivery: TfrmDelivery
       BorderStyle = bsNone
       ShowUpDown = False
     end
+    object btnNovoCliente: TbsSkinButton
+      Left = 817
+      Top = 29
+      Width = 104
+      Height = 25
+      HintImageIndex = 0
+      TabOrder = 9
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.Imagebutoes
+      ImageIndex = 10
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      Caption = ' &Novo Cliente'
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnNovoClienteClick
+    end
+    object btnImprimir: TbsSkinButton
+      Left = 1056
+      Top = 24
+      Width = 61
+      Height = 35
+      HintImageIndex = 0
+      TabOrder = 10
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.Imagebutoes
+      ImageIndex = 6
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = False
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00D409
+        D634A823BF73791DC08E8428C68B8E33CA8B973DCE8B9F45D08BA146D08B993F
+        CE8B9036CB8B872CC78B7B1FC28DA527C079D20DD43AFF00FF00FF00FF009F33
+        E47E4A67E5ED2567ECFF327CF5FF4396FDFF4EA4FCFF58ABFBFF5BAFFCFF50A6
+        FCFF3C93FBFF3581F7FF276BEEFF486EE7F29D3CE886FF00FF00FF00FF00C01A
+        F5485144E6C42264E8FF276CE9FF1855D8FF1149D3FF1A58DDFF236DEBFF5FA2
+        F5FF81B1F2FF2A70EAFF2366EAFF434CE6D4B120F35AFF00FF00FF00FF00EC0A
+        FB188B35EC8B2060E5FF2658D5FF3D66D7FF5A81E1FF719AEBFF79A9F5FFACD0
+        FEFFF6FEFFFF7CB4F1FF195AE4FF7938EA9BE10DFA23FF00FF00FF00FF00FF00
+        FF00C225F4523670E4FF567CDEFF94AFEAFF7398E6FF719BEBFF7DABF5FFC3DD
+        FDFFFCFCFFFFADD6FCFF1657E2FFA823F064FC01FF03FF00FF00FF00FF00FF00
+        FF00E80DFA1F3972E3FF608BE4FF567DDDFF1547D3FF1653DFFF2C77EFFFAAD1
+        FDFFEDFAFFFF94BBF8FF1F5BE0FFDB10F82BFF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF004C64E2E72B61DCFF2757D4FF2A59D7FF3E74E5FF5A95F3FFC6E0
+        FDFFCDF0FFFF357BEAFF2D53DDF2F803FE08FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00CD1BF541BA25F2597985E4EB87A7E9FF88ADEEFFA3C5F8FFEAF3
+        FEFFD5DFFFF4B427F35EC317F245FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00A95DEC9F678DE3FF4B7EE6FF7EAEF5FFEBF5
+        FFFFD197FFB2FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00C913F23E2355D7FF0F4FDEFF63A0F4FFDFF2
+        FEFFD639FF51FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FE00FF016570E2E55C8CE9FFA6C9F8FFDDDF
+        FFF1F908FF0BFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00B25BEF9596B8F1FFD0E2FBFFDF97
+        FEABFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00D619F6385E91EAFFC0DAFAFFEB3F
+        FE4CFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF005A71E9E1BFCDFBF1FD05
+        FF06FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00AE5CF394D894FCABFF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00EC25FC33EE34FD3FFF00
+        FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnImprimirClick
+    end
   end
   object bsSkinPanel1: TbsSkinPanel
-    Left = 600
+    Left = 538
     Top = 65
-    Width = 641
-    Height = 364
+    Width = 703
+    Height = 419
     HintImageIndex = 0
     TabOrder = 1
     SkinDataName = 'panel'
@@ -456,6 +573,7 @@ object frmDelivery: TfrmDelivery
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -477,8 +595,8 @@ object frmDelivery: TfrmDelivery
     object bsSkinPageControl1: TbsSkinPageControl
       Left = 1
       Top = 1
-      Width = 639
-      Height = 362
+      Width = 701
+      Height = 417
       ActivePage = bsSkinTabSheet1
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
@@ -490,6 +608,7 @@ object frmDelivery: TfrmDelivery
       TabOrder = 0
       MouseWheelSupport = False
       TabExtededDraw = False
+      ButtonTabSkinDataName = 'resizetoolbutton'
       TabsOffset = 0
       TabSpacing = 1
       TextInHorizontal = False
@@ -510,8 +629,8 @@ object frmDelivery: TfrmDelivery
         object dbgConsulta: TbsSkinDBGrid
           Left = 0
           Top = 0
-          Width = 637
-          Height = 341
+          Width = 699
+          Height = 372
           HintImageIndex = 0
           TabOrder = 0
           SkinData = frmPrincipal.SkinPrincipal
@@ -522,6 +641,7 @@ object frmDelivery: TfrmDelivery
           UseSkinCellHeight = True
           GridLineColor = clWindowText
           DefaultCellHeight = 20
+          ColSizingwithLine = False
           DrawGraphicFields = False
           UseColumnsFont = False
           DefaultRowHeight = 18
@@ -531,6 +651,7 @@ object frmDelivery: TfrmDelivery
           PickListBoxCaptionMode = False
           Align = alClient
           DataSource = srcLista
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = PopupMenu1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clBtnText
@@ -539,14 +660,30 @@ object frmDelivery: TfrmDelivery
           TitleFont.Style = []
           OnDrawColumnCell = dbgConsultaDrawColumnCell
         end
+        object pnlObs: TPanel
+          Left = 0
+          Top = 372
+          Width = 699
+          Height = 24
+          Align = alBottom
+          Color = clAppWorkSpace
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentBackground = False
+          ParentFont = False
+          TabOrder = 1
+        end
       end
     end
   end
   object bsSkinPanel2: TbsSkinPanel
     Left = 0
     Top = 65
-    Width = 600
-    Height = 364
+    Width = 538
+    Height = 419
     HintImageIndex = 0
     TabOrder = 2
     SkinDataName = 'panel'
@@ -558,6 +695,7 @@ object frmDelivery: TfrmDelivery
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -579,9 +717,9 @@ object frmDelivery: TfrmDelivery
     object bsSkinExPanel2: TbsSkinExPanel
       AlignWithMargins = True
       Left = 4
-      Top = 120
-      Width = 592
-      Height = 240
+      Top = 136
+      Width = 530
+      Height = 279
       HintImageIndex = 0
       TabOrder = 0
       SkinData = frmPrincipal.SkinPrincipal
@@ -594,6 +732,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      UseSkinSize = True
       CaptionImageIndex = -1
       NumGlyphs = 1
       Spacing = 2
@@ -609,12 +748,12 @@ object frmDelivery: TfrmDelivery
       Align = alBottom
       Caption = 'Enderteco do Cliente'
       DesignSize = (
-        592
-        240)
+        530
+        279)
       object bsSkinExPanel3: TbsSkinExPanel
         Left = 1
-        Top = 112
-        Width = 590
+        Top = 151
+        Width = 528
         Height = 127
         HintImageIndex = 0
         TabOrder = 0
@@ -627,6 +766,7 @@ object frmDelivery: TfrmDelivery
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        UseSkinSize = True
         CaptionImageIndex = -1
         NumGlyphs = 1
         Spacing = 2
@@ -645,7 +785,7 @@ object frmDelivery: TfrmDelivery
         object bsSkinDBGrid3: TbsSkinDBGrid
           Left = 1
           Top = 21
-          Width = 588
+          Width = 526
           Height = 105
           HintImageIndex = 0
           TabOrder = 0
@@ -658,6 +798,7 @@ object frmDelivery: TfrmDelivery
           VScrollBar = bsSkinScrollBar1
           GridLineColor = clWindowText
           DefaultCellHeight = 20
+          ColSizingwithLine = False
           DrawGraphicFields = False
           UseColumnsFont = False
           DefaultRowHeight = 17
@@ -675,9 +816,9 @@ object frmDelivery: TfrmDelivery
         end
       end
       object bsSkinPanel4: TbsSkinPanel
-        Left = 3
+        Left = 9
         Top = 24
-        Width = 441
+        Width = 510
         Height = 82
         HintImageIndex = 0
         TabOrder = 1
@@ -691,6 +832,7 @@ object frmDelivery: TfrmDelivery
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -779,15 +921,15 @@ object frmDelivery: TfrmDelivery
         object edtEndereco: TbsSkinEdit
           Left = 85
           Top = 3
-          Width = 337
-          Height = 18
+          Width = 412
+          Height = 24
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
+          DefaultFont.Height = -15
           DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
+          DefaultFont.Style = [fsBold]
+          UseSkinFont = False
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
@@ -795,11 +937,12 @@ object frmDelivery: TfrmDelivery
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = 14
+          Font.Height = -15
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -811,14 +954,14 @@ object frmDelivery: TfrmDelivery
           Left = 85
           Top = 29
           Width = 137
-          Height = 18
+          Height = 24
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
+          DefaultFont.Height = -15
           DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
+          DefaultFont.Style = [fsBold]
+          UseSkinFont = False
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
@@ -826,11 +969,12 @@ object frmDelivery: TfrmDelivery
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = 14
+          Font.Height = -15
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -840,16 +984,16 @@ object frmDelivery: TfrmDelivery
         end
         object edtCidade: TbsSkinEdit
           Left = 284
-          Top = 27
-          Width = 137
-          Height = 18
+          Top = 28
+          Width = 213
+          Height = 24
           DefaultColor = clCream
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
+          DefaultFont.Height = -15
           DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
+          DefaultFont.Style = [fsBold]
+          UseSkinFont = False
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
@@ -857,11 +1001,12 @@ object frmDelivery: TfrmDelivery
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = 14
+          Font.Height = -15
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -872,15 +1017,15 @@ object frmDelivery: TfrmDelivery
         object edtPto_Referencia: TbsSkinEdit
           Left = 86
           Top = 54
-          Width = 337
-          Height = 18
+          Width = 411
+          Height = 24
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
-          DefaultFont.Height = 14
+          DefaultFont.Height = -15
           DefaultFont.Name = 'Arial'
-          DefaultFont.Style = []
-          UseSkinFont = True
+          DefaultFont.Style = [fsBold]
+          UseSkinFont = False
           DefaultWidth = 0
           DefaultHeight = 0
           ButtonMode = False
@@ -888,12 +1033,13 @@ object frmDelivery: TfrmDelivery
           SkinDataName = 'edit'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = 14
+          Font.Height = -15
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           MaxLength = 50
           ParentFont = False
           TabOrder = 3
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -903,10 +1049,10 @@ object frmDelivery: TfrmDelivery
         end
       end
       object btnMostrarMapa: TbsSkinButton
-        Left = 450
-        Top = 24
-        Width = 139
-        Height = 82
+        Left = 9
+        Top = 112
+        Width = 510
+        Height = 33
         HintImageIndex = 0
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 2
@@ -920,6 +1066,7 @@ object frmDelivery: TfrmDelivery
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = False
+        Transparent = False
         CheckedMode = False
         ImageList = frmPrincipal.cxLargeImages
         ImageIndex = 19
@@ -977,8 +1124,8 @@ object frmDelivery: TfrmDelivery
     object bsSkinPanel3: TbsSkinPanel
       Left = 1
       Top = 1
-      Width = 598
-      Height = 116
+      Width = 536
+      Height = 132
       HintImageIndex = 0
       TabOrder = 1
       SkinDataName = 'panel'
@@ -990,6 +1137,7 @@ object frmDelivery: TfrmDelivery
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1018,8 +1166,8 @@ object frmDelivery: TfrmDelivery
       object bsSkinDBGrid1: TbsSkinDBGrid
         Left = 1
         Top = 1
-        Width = 577
-        Height = 114
+        Width = 515
+        Height = 130
         HintImageIndex = 0
         TabOrder = 0
         SkinData = frmPrincipal.SkinPrincipal
@@ -1031,6 +1179,7 @@ object frmDelivery: TfrmDelivery
         VScrollBar = bsSkinScrollBar1
         GridLineColor = clWindowText
         DefaultCellHeight = 20
+        ColSizingwithLine = False
         DrawGraphicFields = False
         UseColumnsFont = False
         DefaultRowHeight = 17
@@ -1073,10 +1222,10 @@ object frmDelivery: TfrmDelivery
           end>
       end
       object bsSkinScrollBar1: TbsSkinScrollBar
-        Left = 578
+        Left = 516
         Top = 1
         Width = 19
-        Height = 114
+        Height = 130
         HintImageIndex = 0
         TabOrder = 1
         Visible = False
@@ -1161,21 +1310,28 @@ object frmDelivery: TfrmDelivery
         Name = 'Lancado'
         DataType = ftString
         Size = 2
+      end
+      item
+        Name = 'Obs'
+        DataType = ftString
+        Size = 300
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
+    AfterScroll = cdslistaAfterScroll
     Left = 692
     Top = 165
     Data = {
-      F10000009619E0BD010000001800000009000000000003000000F10002496404
+      090100009619E0BD01000000180000000A000000000003000000090102496404
       00010000000000044E6F6D650100490000000100055749445448020002006400
       0444617461080008000000000004486F72610100490000000100055749445448
       0200020014000653746174757301004900000001000557494454480200020001
       000B486F72614368656761646101004900000001000557494454480200020005
       000E507265766973616F43686567646101004900000001000557494454480200
       020005000A436F64436C69656E74650400010000000000074C616E6361646F01
-      004900000001000557494454480200020002000000}
+      00490000000100055749445448020002000200034F6273020049000000010005
+      5749445448020002002C010000}
     object cdslistaLancado: TStringField
       DisplayLabel = 'L'
       DisplayWidth = 2
@@ -1183,11 +1339,11 @@ object frmDelivery: TfrmDelivery
       Size = 2
     end
     object cdslistaId: TIntegerField
-      DisplayWidth = 5
+      DisplayWidth = 2
       FieldName = 'Id'
     end
     object cdslistaNome: TStringField
-      DisplayWidth = 46
+      DisplayWidth = 49
       FieldName = 'Nome'
       Size = 100
     end
@@ -1198,19 +1354,19 @@ object frmDelivery: TfrmDelivery
     end
     object cdslistaHoraChegada: TStringField
       DisplayLabel = 'Hora Chegada'
-      DisplayWidth = 15
+      DisplayWidth = 17
       FieldName = 'HoraChegada'
       Size = 5
     end
     object cdslistaPrevisaoChegda: TStringField
       DisplayLabel = 'Previsao Chegda'
-      DisplayWidth = 18
+      DisplayWidth = 17
       FieldName = 'PrevisaoChegda'
       Size = 5
     end
     object cdslistaHora: TStringField
       DisplayLabel = 'Previs'#227'o Entrega'
-      DisplayWidth = 18
+      DisplayWidth = 17
       FieldName = 'Hora'
     end
     object cdslistaStatus: TStringField
@@ -1221,6 +1377,11 @@ object frmDelivery: TfrmDelivery
     object cdslistaCodCliente: TIntegerField
       FieldName = 'CodCliente'
       Visible = False
+    end
+    object cdslistaObs: TStringField
+      DisplayWidth = 360
+      FieldName = 'Obs'
+      Size = 300
     end
   end
   object srcLista: TDataSource
@@ -1251,5 +1412,99 @@ object frmDelivery: TfrmDelivery
   object srcAnimais: TDataSource
     Left = 296
     Top = 336
+  end
+  object ImpMatricial: TRDprint
+    ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
+    ImpressoraPersonalizada.AvancaOitavos = '27 48'
+    ImpressoraPersonalizada.AvancaSextos = '27 50'
+    ImpressoraPersonalizada.SaltoPagina = '12'
+    ImpressoraPersonalizada.TamanhoPagina = '27 67 66'
+    ImpressoraPersonalizada.Negrito = '27 69'
+    ImpressoraPersonalizada.Italico = '27 52'
+    ImpressoraPersonalizada.Sublinhado = '27 45 49'
+    ImpressoraPersonalizada.Expandido = '27 14'
+    ImpressoraPersonalizada.Normal10 = '18 27 80'
+    ImpressoraPersonalizada.Comprimir12 = '18 27 77'
+    ImpressoraPersonalizada.Comprimir17 = '27 80 27 15'
+    ImpressoraPersonalizada.Comprimir20 = '27 77 27 15'
+    ImpressoraPersonalizada.Reset = '27 80 18 20 27 53 27 70 27 45 48'
+    ImpressoraPersonalizada.Inicializar = '27 64'
+    OpcoesPreview.PaginaZebrada = False
+    OpcoesPreview.Remalina = False
+    OpcoesPreview.CaptionPreview = 'Rdprint Preview'
+    OpcoesPreview.PreviewZoom = 100
+    OpcoesPreview.CorPapelPreview = clWhite
+    OpcoesPreview.CorLetraPreview = clBlack
+    OpcoesPreview.Preview = False
+    OpcoesPreview.BotaoSetup = Ativo
+    OpcoesPreview.BotaoImprimir = Ativo
+    OpcoesPreview.BotaoGravar = Ativo
+    OpcoesPreview.BotaoLer = Ativo
+    OpcoesPreview.BotaoProcurar = Ativo
+    Margens.Left = 10
+    Margens.Right = 10
+    Margens.Top = 10
+    Margens.Bottom = 10
+    Autor = Deltress
+    RegistroUsuario.NomeRegistro = 'TEC-SOFT INFORMATICA LTDA'
+    RegistroUsuario.SerieProduto = 'SITE-0306/00320'
+    RegistroUsuario.AutorizacaoKey = 'EOSP-0695-PUAG-8415-LXYS'
+    About = 'RDprint 4.0c - Registrado'
+    Acentuacao = Transliterate
+    CaptionSetup = 'Rdprint Setup'
+    TitulodoRelatorio = 'Gerado por RDprint'
+    UsaGerenciadorImpr = True
+    CorForm = clBtnFace
+    CorFonte = clBlack
+    Impressora = Epson
+    Mapeamento.Strings = (
+      '//--- Grafico Compativel com Windows/USB ---//'
+      '//'
+      'GRAFICO=GRAFICO'
+      'HP=GRAFICO'
+      'DESKJET=GRAFICO'
+      'LASERJET=GRAFICO'
+      'INKJET=GRAFICO'
+      'STYLUS=GRAFICO'
+      'EPL=GRAFICO'
+      'USB=GRAFICO'
+      '//'
+      '//--- Linha Epson Matricial 9 e 24 agulhas ---//'
+      '//'
+      'EPSON=EPSON'
+      'GENERICO=EPSON'
+      'LX-300=EPSON'
+      'LX-810=EPSON'
+      'FX-2170=EPSON'
+      'FX-1170=EPSON'
+      'LQ-1170=EPSON'
+      'LQ-2170=EPSON'
+      'OKIDATA=EPSON'
+      '//'
+      '//--- Rima e Emilia ---//'
+      '//'
+      'RIMA=RIMA'
+      'EMILIA=RIMA'
+      '//'
+      '//--- Linha HP/Xerox padr'#227'o PCL ---//'
+      '//'
+      'PCL=HP'
+      '//'
+      '//--- Impressoras 40 Colunas ---//'
+      '//'
+      'DARUMA=BOBINA'
+      'SIGTRON=BOBINA'
+      'SWEDA=BOBINA'
+      'BEMATECH=BOBINA')
+    MostrarProgresso = True
+    TamanhoQteLinhas = 66
+    TamanhoQteColunas = 80
+    TamanhoQteLPP = Seis
+    NumerodeCopias = 1
+    FonteTamanhoPadrao = S10cpp
+    FonteEstiloPadrao = []
+    Orientacao = poPortrait
+    Left = 368
+    Top = 96
   end
 end

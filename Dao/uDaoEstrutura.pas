@@ -79,6 +79,9 @@ type TDaoEstrutura = class
     procedure Adicionar_Obs_na_Tabela_Vendas;
     procedure Adicionar_DataMovimento_na_Tabela_Caixa;
     procedure CriarTabela_ProdutosPagamentos;
+    procedure Adicionar_ImprimeRelatorio_na_Tabela_FormasPagamento;
+    procedure Adicionar_Banco_na_Tabela_ContasReceber;
+    procedure Adicionar_NCheque_na_Tabela_ContasReceber;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -148,6 +151,40 @@ begin
       FQryAjustes.ExecSQL;
    end;
 end;
+
+procedure TDaoEstrutura.Adicionar_Banco_na_Tabela_ContasReceber;
+begin
+   if not ExisteCampo( 'T_CtasReceber', 'Banco', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD Banco Varchar(20)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD Agencia Varchar(20)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD Nconta Varchar(20)';
+      FQryAjustes.ExecSQL;
+
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD Emitente Varchar(200)';
+      FQryAjustes.ExecSQL;
+
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_NCheque_na_Tabela_ContasReceber;
+begin
+   if not ExisteCampo( 'T_CtasReceber', 'NCheque', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_CtasReceber ADD NCheque varchar(20)';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 procedure TDaoEstrutura.Adicionar_PesoLiquido_na_Tabela_ItensVendas;
 begin
@@ -221,6 +258,16 @@ begin
       FQryAjustes.SQL.Text := 'Update T_Produtos Set Ativo=1';
       FQryAjustes.ExecSQL;
 
+   end;
+end;
+
+procedure TDaoEstrutura.Adicionar_ImprimeRelatorio_na_Tabela_FormasPagamento;
+begin
+   if not ExisteCampo( 'T_FormasPagamento', 'ImprimeRelatorio', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'ALTER TABLE T_FormasPagamento ADD ImprimeRelatorio bit';
+      FQryAjustes.ExecSQL;
    end;
 end;
 
@@ -834,6 +881,9 @@ end;
 
 procedure TDaoEstrutura.ExecultarCorrecoes;
 begin
+  Adicionar_NCheque_na_Tabela_ContasReceber;
+  Adicionar_Banco_na_Tabela_ContasReceber;
+  Adicionar_ImprimeRelatorio_na_Tabela_FormasPagamento;
   CriarTabela_ProdutosPagamentos;
   Adicionar_DataMovimento_na_Tabela_Caixa;
   Adicionar_Obs_na_Tabela_Vendas;

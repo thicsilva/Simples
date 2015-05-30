@@ -777,10 +777,44 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
           GroupIndex = 0
           Caption = 'N'#227'o soma nas vendas'
         end
+        object chkRelatorioCheque: TbsSkinCheckRadioBox
+          Left = 313
+          Top = 146
+          Width = 200
+          Height = 22
+          HintImageIndex = 0
+          TabOrder = 8
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'checkbox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = True
+          WordWrap = False
+          AllowGrayed = False
+          State = cbUnchecked
+          ImageIndex = 0
+          Flat = True
+          UseSkinFontColor = True
+          TabStop = True
+          CanFocused = True
+          Radio = False
+          Checked = False
+          GroupIndex = 0
+          Caption = 'Adiciona no Relatorio de Cheque'
+        end
       end
     end
     object tabMensagem: TbsSkinTabSheet
       Caption = 'Mensagem Complementar'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MemoMensagem: TMemo
         Left = 0
         Top = 0
@@ -792,6 +826,10 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
     end
     object tabprodutos: TbsSkinTabSheet
       Caption = 'Preco Especial do Produto'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bsSkinPanel2: TbsSkinPanel
         Left = 0
         Top = 27
@@ -1008,16 +1046,17 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       end
       object StatusBar1: TStatusBar
         Left = 0
-        Top = 321
+        Top = 323
         Width = 622
         Height = 19
         Panels = <>
+        ExplicitTop = 321
       end
       object bsSkinDBGrid1: TbsSkinDBGrid
         Left = 0
         Top = 76
         Width = 622
-        Height = 245
+        Height = 247
         HintImageIndex = 0
         TabOrder = 2
         SkinDataName = 'grid'
@@ -1149,9 +1188,9 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 488
-        Top = 0
+        Top = 4
         Width = 70
-        Height = 49
+        Height = 40
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -1185,7 +1224,6 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
         OnClick = btnFecharClick
         ExplicitLeft = 518
         ExplicitTop = 12
-        ExplicitHeight = 40
       end
       object btnexcluir: TbsSkinSpeedButton
         Left = 140
@@ -1494,26 +1532,26 @@ object frmCadFormaPagamento: TfrmCadFormaPagamento
   end
   object srcCadProdutos: TDataSource
     DataSet = cdsCadProdutos
-    Left = 430
+    Left = 526
     Top = 239
   end
   object cdsCadProdutos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCadProdutos'
-    Left = 430
-    Top = 211
+    Left = 558
+    Top = 275
   end
   object qryvariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 396
-    Top = 211
+    Left = 516
+    Top = 275
   end
   object dspVariavel: TDataSetProvider
     DataSet = qryvariavel
-    Left = 397
-    Top = 239
+    Left = 429
+    Top = 335
   end
 end

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, bsSkinCtrls, bsSkinGrids, bsDBGrids, StdCtrls, Mask, bsSkinBoxCtrls,
   DB, uPrincipal, DBClient, uClassCliente,uFormBase, Menus,StrUtils, DBCtrls,
-  ComCtrls, bsSkinTabs, uDaoClienteAnimal, OleCtrls, SHDocVw;
+  ComCtrls, bsSkinTabs, uDaoClienteAnimal, OleCtrls, SHDocVw, ExtCtrls, RDprint;
 
 
 type
@@ -38,7 +38,7 @@ type
     MarcarComonoEntregue1: TMenuItem;
     cdslistaStatus: TStringField;
     btnClientes: TbsSkinButton;
-    bsSkinButton1: TbsSkinButton;
+    btnServicos: TbsSkinButton;
     Label1: TLabel;
     cdslistaHoraChegada: TStringField;
     cdslistaPrevisaoChegda: TStringField;
@@ -62,22 +62,30 @@ type
     PrevisodeChegada1: TMenuItem;
     edtHora: TbsSkinTimeEdit;
     cdslistaLancado: TStringField;
+    btnNovoCliente: TbsSkinButton;
+    pnlObs: TPanel;
+    cdslistaObs: TStringField;
+    ImpMatricial: TRDprint;
+    btnImprimir: TbsSkinButton;
     procedure edtNomeChange(Sender: TObject);
     procedure cdsClientesAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverDescontoClick(Sender: TObject);
-    procedure dbgConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TbsColumn; State: TGridDrawState);
+    procedure dbgConsultaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TbsColumn; State: TGridDrawState);
     procedure MarcarcomoEntregue1Click(Sender: TObject);
     procedure MarcarComonoEntregue1Click(Sender: TObject);
     procedure btnClientesClick(Sender: TObject);
-    procedure bsSkinButton1Click(Sender: TObject);
+    procedure btnServicosClick(Sender: TObject);
     procedure HoradeChegada1Click(Sender: TObject);
     procedure btnMostrarMapaClick(Sender: TObject);
     procedure PrevisodeChegada1Click(Sender: TObject);
+    procedure btnNovoClienteClick(Sender: TObject);
+    procedure cdslistaAfterScroll(DataSet: TDataSet);
+    procedure btnImprimirClick(Sender: TObject);
   private
+     function RetornarPosicaoCentral(liTamanhoString,  TamanhoLinha: Integer): integer;
     { Private declarations }
   public
     { Public declarations }
@@ -89,7 +97,8 @@ var
 implementation
 
 uses
-  uDaoCliente,ufuncoes, uCadClientes, uVendas, uMapa, uSelHora;
+  uDaoCliente,ufuncoes, uCadClientes, uVendas, uMapa, uSelHora,
+  uCadastroRapidoCliente;
 
 {$R *.dfm}
 
@@ -128,7 +137,7 @@ begin
    dbgConsulta.DefaultDrawColumnCell( Rect, DataCol, Column, State );
 end;
 
-procedure TfrmDelivery.bsSkinButton1Click(Sender: TObject);
+procedure TfrmDelivery.btnServicosClick(Sender: TObject);
 begin
    FrmVendas := TfrmVendas.create(Self);
    frmvendas.Tag := 3; // venda de serviços
@@ -154,18 +163,32 @@ begin
    FrmMapa.showmodal;
 end;
 
+procedure TfrmDelivery.btnNovoClienteClick(Sender: TObject);
+begin
+  frmCadastroClienteSimplificado := TfrmCadastroClienteSimplificado.Create(Self);
+  frmCadastroClienteSimplificado.showModal;
+  edtNome.SetFocus;
+  edtNome.Text := frmCadastroClienteSimplificado.edtTelefone.Text;
+  FreeAndNil(frmCadastroClienteSimplificado);
+end;
+
 procedure TfrmDelivery.btnAdicionarClick(Sender: TObject);
+var lsObs : String;
 begin
   if Trim(edtHora.Text)='' then
   begin
      CaixaMensagem( 'Informe a hora prevista para entrega ', ctAviso, [ cbOk ], 0 );
      Exit;
   end;
+ if not inputQuery('Informe a OBS...','Informe a OBS...',lsObs) Then
+         Exit;
   cdsLista.Append;
   cdsLista.FieldByName('Id').AsInteger := cdsClientes.FieldByName('Codigo').AsInteger;
   cdsLista.FieldByName('Nome').AsString := cdsClientes.FieldByName('Descricao').AsString;
   cdsLista.FieldByName('Data').AsDatetime :=  edtData.date;
   cdsLista.FieldByName('Hora').AsString := edtHora.Text;
+  cdsLista.FieldByName('obs').AsString  := lsObs;
+  pnlObs.Caption := lsObs;
   cdsLista.Post;
 end;
 
@@ -175,6 +198,61 @@ begin
    frmCadClientes.Tag := 5;
    frmCadClientes.showmodal;
 end;
+
+procedure TfrmDelivery.btnImprimirClick(Sender: TObject);
+var  lDaoCliente : TDaoCliente;
+     Cliente : Tcliente;
+     FLinha : Integer;
+begin
+   ImpMatricial := TrdPrint.Create(Nil);
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   impMatricial.OpcoesPreview.PreviewZoom := 100;
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 33;
+   ImpMatricial.TamanhoQteColunas         := 80;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   impmatricial.Impressora                := Grafico;
+   impMatricial.UsaGerenciadorImpr        := True;
+   impMatricial.Abrir;
+
+   lDaoCliente := TDaoCliente.Create(gConexao);
+   cliente := lDaoCliente.Buscar(cdslista.FieldByName('id').AsInteger);
+
+   FLinha := 01;
+   impMatricial.Imp(FLinha,001,IncDigito( '_','_',80,0));
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha,RetornarPosicaoCentral(Length(Trim(gEmpresa.Nome_Fantasia)),ImpMatricial.TamanhoQteColunas ), Trim(gEmpresa.Nome_Fantasia), [] );
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha, RetornarPosicaoCentral(Length(Trim(gEmpresa.Endereco.logradouro)+', '+Trim(gempresa.Endereco.numero)+' Bairro.: '+Trim(gEmpresa.Endereco.bairro)+' '+
+                                                            Trim(gEmpresa.Endereco.cidade)+'-'+gEmpresa.Endereco.uf),ImpMatricial.TamanhoQteColunas ),
+                                  gEmpresa.Endereco.logradouro+', '+gEmpresa.Endereco.numero+' Bairro.: '+gEmpresa.Endereco.bairro+' '+
+                                  gEmpresa.Endereco.cidade+'-'+gEmpresa.Endereco.uf, [] );
+   FLinha := FLinha + 1;
+   impMatricial.ImpC(FLinha, RetornarPosicaoCentral(Length(Trim(gEmpresa.Telefones)),ImpMatricial.TamanhoQteColunas ),'Telefones '+gEmpresa.Telefones, [] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
+   FLinha := FLinha + 1;
+   impMatricial.Imp (FLinha,001,'Emissao...: '+formatdateTime('dd/mm/YYYY',now));
+   FLinha := FLinha + 1;
+   impMatricial.ImpF(FLinha,001,'Cliente...: '+Copy(IntToStr(Cliente.Id)+'-'+Cliente.Descricao,1,80 ),[negrito] );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Endereco..: '+Cliente.Endereco.logradouro+', '+Cliente.Endereco.numero);
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Bairro.: '+Cliente.Endereco.bairro+' '+Cliente.Endereco.cidade+'-'+Cliente.Endereco.uf );
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'Pto.Refere: '+Cliente.Endereco.PontoReferencia+' Telefone.:'+cliente.Telefones);
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,'OBS...: '+cdsLista.FieldByName('OBS').AsString);
+   FLinha := FLinha + 1;
+   impMatricial.Imp(FLinha,001,IncDigito( '-','-',80,0));
+   ImpMatricial.Fechar;
+end;
+function TfrmDelivery.RetornarPosicaoCentral(liTamanhoString,  TamanhoLinha: Integer): integer;
+begin
+   Result := StrToint(formatFloat('0',( (TamanhoLinha/2) - (liTamanhoString/8))));
+end;
+
 
 procedure TfrmDelivery.btnRemoverDescontoClick(Sender: TObject);
 begin
@@ -200,13 +278,20 @@ begin
    FreeAndNil(Cliente);
 end;
 
+procedure TfrmDelivery.cdslistaAfterScroll(DataSet: TDataSet);
+begin
+   pnlObs.Caption := cdsLista.fieldByname('obs').AsString;
+end;
+
 procedure TfrmDelivery.edtNomeChange(Sender: TObject);
 var parametros : TStringList;
 begin
-   parametros := TStringList.Create;
+parametros := TStringList.Create;
    parametros.Add('%'+edtNome.Text+'%');
-   cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Descricao Like :parNome_fantasia',parametros ).Data;
-end;
+   if length(edtNome.Text) > 8 then
+      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Descricao Like :parNome_fantasia',parametros ).Data
+   else
+      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Telefone Like :parNome_fantasia',parametros ).Data;end;
 
 procedure TfrmDelivery.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin

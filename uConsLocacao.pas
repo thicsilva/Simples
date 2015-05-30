@@ -253,7 +253,6 @@ var liSeqvenda : Integer;
     lilinha : Integer;
     liDias : Integer;
 begin
-
    if ( cdsVendas.FieldByName('Status').AsString <> '1') and ( cdsVendas.FieldByName('Status').AsString <> '4') Then
    Begin
       CaixaMensagem( 'Locação já finalizada ou cancelada', ctAviso, [ cbOk ], 0 );
@@ -303,7 +302,6 @@ begin
    End;
    frmFechaLocacao.Showmodal;
    btnSelecionarClick(btnSelecionar);
-
 end;
 
 procedure TfrmConsLocacao.btnImpComprovanteClick(Sender: TObject);

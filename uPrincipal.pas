@@ -278,6 +278,8 @@ type
     dxBarButton32: TdxBarButton;
     actSimplesRemessa: TAction;
     dxBarButton43: TdxBarButton;
+    actControleCheque: TAction;
+    dxBarButton44: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -353,6 +355,7 @@ type
     procedure actDeliveryExecute(Sender: TObject);
     procedure actRelContaCorrenteExecute(Sender: TObject);
     procedure actSimplesRemessaExecute(Sender: TObject);
+    procedure actControleChequeExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -413,7 +416,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
   uLocacao, uConsLocacao, uCadGrade, uAberturaOS, uDeliveryGas, uDtmRelatorios,
-  uClassDaoContaCorrente, uDaoCliente, uClassCliente;
+  uClassDaoContaCorrente, uDaoCliente, uClassCliente, uRelCheques;
 
 {$R *.dfm}
 
@@ -1171,6 +1174,12 @@ begin
 
 end;
 
+procedure TfrmPrincipal.actControleChequeExecute(Sender: TObject);
+begin
+   frmcontroleCheques := TfrmcontroleCheques.create(Self);
+   frmcontroleCheques.showmodal;
+end;
+
 procedure TfrmPrincipal.actControleRepasseExecute(Sender: TObject);
 begin
    if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
@@ -1229,9 +1238,9 @@ end;
 
 procedure TfrmPrincipal.actDeliveryExecute(Sender: TObject);
 begin
-   frmDeliveryGas := TFrmDeliveryGas.Create(Self);
-   frmDeliveryGas.WindowState := wsMaximized;
-   frmDeliveryGas.ShowModal;
+   frmDelivery := TFrmDelivery.Create(Self);
+   frmDelivery.WindowState := wsMaximized;
+   frmDelivery.ShowModal;
 end;
 
 procedure TfrmPrincipal.actEntradasExecute(Sender: TObject);

@@ -371,7 +371,7 @@ begin
          end                         
          else
          begin
-           CaixaMensagem( 'A Venda não esta pendentea ', ctAviso, [ cbOk ], 0 );
+           CaixaMensagem( 'A Venda não esta pendente ', ctAviso, [ cbOk ], 0 );
            exit;
          end;
       end;

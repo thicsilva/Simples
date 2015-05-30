@@ -124,6 +124,7 @@ type
     cdsEmpresaLocal: TStringField;
     dspEmpresa: TDataSetProvider;
     qryEmpresa: TSQLQuery;
+    btnFaturamento: TbsSkinSpeedButton;
     procedure edtcod_PagamentoExit(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnRemoverClick(Sender: TObject);
@@ -138,6 +139,7 @@ type
     procedure cdsItensVendasTmpBeforeOpen(DataSet: TDataSet);
     procedure edtDataDevolucaoChange(Sender: TObject);
     procedure bsSkinDBGrid1DblClick(Sender: TObject);
+    procedure btnFaturamentoClick(Sender: TObject);
   private
     procedure AtualizarGrid;
     procedure AtualizaSaldoDevedor;
@@ -149,6 +151,7 @@ type
     pnomeCliente : string;
     pcnpj : string;
     pCodigoCliEnte : String;
+    pFaturamento : Boolean;
     { Public declarations }
   end;
 
@@ -200,6 +203,12 @@ begin
      cmbNome_formaPagamento.SetFocus;
    except
    end;
+end;
+
+procedure TfrmFechaLocacao.btnFaturamentoClick(Sender: TObject);
+begin
+   pFaturamento := True;
+   btnokClick(btnok);
 end;
 
 procedure TfrmFechaLocacao.btnFecharClick(Sender: TObject);
@@ -399,10 +408,19 @@ begin
     begin
        if cdsItensVendasTmp.FieldByName('Marcado').AsString='X' then
        begin
-          loDaoItemVenda.MarcarComoRecebido(cdsItensVendasTmp.FieldByName('Codigo').AsInteger,StrToInt(edtNumeroVenda.Text), edtDataDevolucao.Date,
-                                            cdsItensVendasTmp.FieldByName('Dias').AsInteger );
-          DevolverItem(StrToInt(edtNumeroVenda.Text), cdsItensVendasTmp);
-          QtdeItensDevolvidos := QtdeItensDevolvidos + 1;
+          if pFaturamento then
+          begin
+             loDaoItemVenda.AtualizarData(cdsItensVendasTmp.FieldByName('Codigo').AsInteger,StrToInt(edtNumeroVenda.Text), edtDataDevolucao.Date,
+                                               cdsItensVendasTmp.FieldByName('Dias').AsInteger );
+             QtdeItensDevolvidos := 0;
+          end
+          else
+          begin
+             loDaoItemVenda.MarcarComoRecebido(cdsItensVendasTmp.FieldByName('Codigo').AsInteger,StrToInt(edtNumeroVenda.Text), edtDataDevolucao.Date,
+                                               cdsItensVendasTmp.FieldByName('Dias').AsInteger );
+             DevolverItem(StrToInt(edtNumeroVenda.Text), cdsItensVendasTmp);
+             QtdeItensDevolvidos := QtdeItensDevolvidos + 1;
+          end;
        end;
        cdsItensVendasTmp.next;
     end;
@@ -607,6 +625,7 @@ end;
 
 procedure TfrmFechaLocacao.FormShow(Sender: TObject);
 begin
+   pFaturamento := False;
    cdsTempPagamentos.EmptyDataSet;
    qryVariavel.Close;
    qryVariavel.Params.Clear;

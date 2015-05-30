@@ -2220,17 +2220,6 @@ object frmConsVendas: TfrmConsVendas
       OnClick = MenuItem1Click
     end
   end
-  object ACBrNFe1: TACBrNFe
-    Configuracoes.Geral.PathSalvar = 'E:\Program Files (x86)\CodeGear\RAD Studio\5.0\bin\'
-    Configuracoes.Geral.ExibirErroSchema = True
-    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
-    Configuracoes.WebServices.UF = 'SP'
-    Configuracoes.WebServices.AguardarConsultaRet = 0
-    Configuracoes.WebServices.IntervaloTentativas = 0
-    Configuracoes.WebServices.AjustaAguardaConsultaRet = False
-    Left = 952
-    Top = 196
-  end
   object frxDbItens: TfrxDBDataset
     UserName = 'dbSetItens'
     CloseDataSource = False

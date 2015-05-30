@@ -14,6 +14,7 @@ type TDaoRomaneio = Class
     procedure SetDataSistema(const Value: TDatetime);
    public
      constructor Create(Conexao : TConexao);
+
      function Incluir(Romaneio : TRomaneio) : Integer;
      function BuscarTodos : TClientDataSet;
      function BuscarPorId(RomaneioId : Integer) : TClientDataSet;
@@ -22,9 +23,12 @@ type TDaoRomaneio = Class
      function RetornarPedidosNaoEntregues : TClientDataSet;
      function PendenciasDoRomaneio(RomaneioId: integer): TClientDataSet;
      function RetornarNomeMotorista (RomaneioId : integer) : String;
+     function RomaneioEstaFechado(RomaneioId : integer) : Boolean;
+
      procedure FecharRomaneio(RomaneioId : integer);
      procedure Cancelar(RomaneioId : integer);
      procedure AtualizarTotalDoRomaneio(RomaneioId : integer);
+
      property DataSistema : TDatetime read FDataSistema write SetDataSistema;
 End;
 
@@ -177,6 +181,27 @@ begin
                                      '     left Join T_Grupos Gru on Gru.codigo=Prod.Cod_Grupo '+
                                      'where romaneioID=:parRomaneioId and ( Itens.status<>:parStatus or Itens.Status is Null ) '+
                                      'group by Cod_Produto,Cod_Grupo order by 2,3',FParametros);
+end;
+
+function TDaoRomaneio.RomaneioEstaFechado(RomaneioId: integer): Boolean;
+var lsStatus : String;
+    Dados : TclientDataSet;
+begin
+   FParametros.clear;
+   FParametros.add(IntToStr(RomaneioId));
+
+   Dados:= fConexao.BuscarDadosSQL('Select Roma.Status from Romaneios Roma '+
+                                     'where ID=:parRomaneioId',FParametros);
+   Result := False;
+   if Dados.IsEmpty then
+      Result := True
+   else
+   begin
+      if Dados.FieldByName('Status').AsString='C' then
+         Result := True;
+      if Dados.FieldByName('Status').AsString='F' then
+         Result := True;
+   end;
 end;
 
 procedure TDaoRomaneio.SetDataSistema(const Value: TDatetime);

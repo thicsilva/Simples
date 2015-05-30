@@ -28,9 +28,9 @@ uses
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase,
-  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,pcnConversao,
+  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, ACBrNFe, frxClass, frxDBSet;
+  dxSkinscxPCPainter, frxClass, frxDBSet;
 
 type
   TfrmConsVendas = class(TFormBase)
@@ -133,7 +133,6 @@ type
     btnEntregaVenda: TbsSkinSpeedButton;
     MenuDeControle: TcxGridPopupMenu;
     btnCupomFiscal: TbsSkinSpeedButton;
-    ACBrNFe1: TACBrNFe;
     frxDbItens: TfrxDBDataset;
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
@@ -402,7 +401,7 @@ var
     DaoVenda: TDaoVenda;
     DaoItemVenda : TDaoItemVenda;
 begin
-   if ( cdsVendas.FieldByName('Status').AsString <> '1') And ( cdsVendas.FieldByName('Status').AsString <> '2') Then
+   if ( cdsVendas.FieldByName('Status').AsString <> '1')  Then
    Begin
      if (HeAssistencia) and (frmConsVendas.Tag=3) then
      begin
@@ -1276,7 +1275,7 @@ procedure TfrmConsVendas.bsSkinSpeedButton1Click(Sender: TObject);
 var vAux, vNumLote : String;
     lstLog : TStringList;
 begin
-
+{
    //btnTudoClick(btnTudo);
    //cdsOrdemServico.locate('SeqOs',liSeqOs,[]);
 
@@ -1318,7 +1317,7 @@ begin
  ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].xMotivo }
 
  // ACBrNFe1.NotasFiscais.Clear;
-
+               
 end;
 
 procedure TfrmConsVendas.btnCupomFiscalClick(Sender: TObject);
@@ -1549,7 +1548,7 @@ begin
 
  {$REGION 'Cabecalho da Nota'}
 
-   with ACBrNFe1.NotasFiscais.Add.NFe do
+{   with ACBrNFe1.NotasFiscais.Add.NFe do
    begin
      Ide.cNF       := StrToInt(NumNFe); //Caso não seja preenchido será gerado um número aleatório pelo componente
      Ide.natOp     := 'VENDA PRODUCAO DO ESTAB.';
@@ -1599,7 +1598,7 @@ begin
       end;
 }
 
-      Emit.CNPJCPF           := gEmpresa.CNPJ;
+ {     Emit.CNPJCPF           := gEmpresa.CNPJ;
       Emit.IE                := gEmpresa.InscricaoEstadual;
       Emit.xNome             := gEmpresa.Razao_social;
       Emit.xFant             := gEmpresa.Nome_Fantasia;
@@ -1636,7 +1635,7 @@ begin
       Avulsa.dPag    := now;             }
 
 
-      cdsCliente := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil);
+  {    cdsCliente := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil);
 
       Dest.CNPJCPF           := cdsCliente.FieldByName('cnpjcpf').AsString;
       Dest.IE                := cdsCliente.FieldByName('IscricaoEstadual').AsString;
@@ -1676,7 +1675,7 @@ begin
       Entrega.UF      := '';}
 
 //Adicionando Produtos
-      with Det.Add do
+   {   with Det.Add do
        begin
          Prod.nItem    := 1; // Número sequencial, para cada item deve ser incrementado
          Prod.cProd    := '123456';
@@ -1790,7 +1789,7 @@ begin
             ICMSCons.UFcons        := '' ;
           end;}
 
-          with Imposto do
+    {      with Imposto do
           begin
             // lei da transparencia nos impostos
             vTotTrib := 0;
@@ -1826,7 +1825,7 @@ begin
                vUnid  := 0;
                pIPI   := 5;
                vIPI   := 5;
-             end;         
+             end;
 
             with II do
              begin
@@ -1887,7 +1886,7 @@ begin
                cListServ := 1402; // Preencha este campo usando a tabela disponível
                                // em http://www.planalto.gov.br/Ccivil_03/LEIS/LCP/Lcp116.htm
              end;}
-          end;
+     {     end;
        end;
 
 //Adicionando Serviços
@@ -1987,7 +1986,7 @@ begin
          RNTC  := '';
        end;}
 
-      with Transp.Vol.Add do
+      {with Transp.Vol.Add do
        begin
          qVol  := 1;
          esp   := 'Especie';
@@ -2041,13 +2040,13 @@ begin
          indProc := ipSEFAZ;
        end;                 }
 
-      exporta.UFembarq   := '';;
+     { exporta.UFembarq   := '';;
       exporta.xLocEmbarq := '';
 
       compra.xNEmp := '';
       compra.xPed  := '';
       compra.xCont := '';
-   end;
+   end;}
 end;
 
 

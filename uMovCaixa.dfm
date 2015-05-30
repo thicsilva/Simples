@@ -524,7 +524,7 @@ object frmMovCaixa: TfrmMovCaixa
     Top = 44
     Width = 800
     Height = 355
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -561,6 +561,8 @@ object frmMovCaixa: TfrmMovCaixa
         Height = 285
         Align = alClient
         TabOrder = 0
+        ExplicitLeft = 24
+        ExplicitTop = 26
         object GrdDespesas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GrdDespesasCustomDrawCell
@@ -594,6 +596,11 @@ object frmMovCaixa: TfrmMovCaixa
           Styles.Group = frmPrincipal.cxStyle5
           Styles.GroupByBox = frmPrincipal.cxStyle4
           Styles.StyleSheet = frmPrincipal.GridTableViewStyleSheetDevExpress
+          object GrdDespesasColumn2: TcxGridDBColumn
+            Caption = 'Tipo Despesa'
+            DataBinding.FieldName = 'NomeDespesa'
+            Width = 161
+          end
           object colum_NomeD_C: TcxGridDBColumn
             Caption = 'Tipo Lan.'
             DataBinding.FieldName = 'NomeD_C'

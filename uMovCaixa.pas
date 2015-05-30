@@ -105,6 +105,7 @@ type
     cdsResumoTipo: TStringField;
     cdsResumoTotal: TFloatField;
     DataSource1: TDataSource;
+    GrdDespesasColumn2: TcxGridDBColumn;
     procedure AtualizaRecClick(Sender: TObject);
     procedure cmbPeriodoChange(Sender: TObject);
     procedure cdsPesquisaBeforeOpen(DataSet: TDataSet);
@@ -186,10 +187,11 @@ begin
 
    qryPesquisa.Close;
    qryPesquisa.Params.Clear;
-   qryPesquisa.Sql.Text:= 'Select Desp.Sequencia,Desp.Data_Lancamento,Desp.Cod_TipoDespesa,Desp.SeqVenda,desp.Estornado, '+
+   qryPesquisa.Sql.Text:= 'Select Ope.Descricao As NomeDespesa, Desp.Sequencia, Desp.Data_Lancamento, Desp.Cod_TipoDespesa, Desp.SeqVenda, Desp.Estornado, '+
                           'Desp.D_C, Desp.Valor, Desp.Historico,Pag.Descricao,desp.Cod_FormaPagamento,Ven.Nome_Cliente '+
                           'From t_movcaixa Desp '+
                           '     inner join t_FormasPagamento pag on Pag.Codigo = Desp.Cod_FormaPagamento '+
+                          '     left join T_Operacoes Ope on Ope.codigo = Desp.Cod_TipoDespesa '+
                           '     left Join T_vendas Ven on Ven.Seqvenda=Desp.Seqvenda '+
                           'Where Desp.Data_lancamento>=:parData_ini and Desp.Data_lancamento<=:parData_Fim  and  '+
                           'desp.Cod_Caixa=:parCod_Caixa '+lsWhere;

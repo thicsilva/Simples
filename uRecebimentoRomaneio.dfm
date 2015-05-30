@@ -30,7 +30,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 831
     object bsSkinToolBar3: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -212,7 +211,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
         NumGlyphs = 1
         Align = alLeft
         Spacing = 1
-        Enabled = False
         OnClick = btnProrrogarVencimentoClick
         ExplicitLeft = 129
         ExplicitTop = 12
@@ -416,7 +414,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel1'
     Align = alClient
-    ExplicitWidth = 831
     object ListVendas: TbsSkinListView
       Left = 1
       Top = 1
@@ -481,8 +478,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
       TabOrder = 0
       ViewStyle = vsReport
       HeaderSkinDataName = 'resizetoolbutton'
-      ExplicitLeft = 3
-      ExplicitTop = -1
     end
   end
   object bsSkinPanel3: TbsSkinPanel
@@ -520,7 +515,6 @@ object frmRecebimentoRomaneio: TfrmRecebimentoRomaneio
     Spacing = 2
     Caption = 'bsSkinPanel2'
     Align = alTop
-    ExplicitWidth = 831
     object bsSkinLabel1: TbsSkinLabel
       Left = 9
       Top = 7

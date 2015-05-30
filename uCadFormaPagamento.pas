@@ -92,6 +92,7 @@ type
     cdsCadProdutos: TClientDataSet;
     qryvariavel: TSQLQuery;
     dspVariavel: TDataSetProvider;
+    chkRelatorioCheque: TbsSkinCheckRadioBox;
     procedure btnincluirClick(Sender: TObject);
     procedure LimpaCampos();
     procedure btnokClick(Sender: TObject);
@@ -202,15 +203,17 @@ begin
       cdsCadFormasPagamento.FieldByName('Codigo').Asinteger        := StrtoInt(edtCodigo.Text);
       cdsCadFormasPagamento.FieldByName('Data_Cad').AsDateTime     := Now;
    End;
-   cdsCadFormasPagamento.FieldByName('Descricao').AsString        := edtDescricao.Text;
-   cdsCadFormasPagamento.FieldByName('Operador').AsString         := GsOperador;
-   cdsCadFormasPagamento.FieldByName('TipoPagamento').AsString    := IntToStr(cmbTipoPagamento.ItemIndex);
-   cdsCadFormasPagamento.FieldByName('TipoLancamento').AsString   := IntToStr(cmbTipoLancamento.ItemIndex);
-   cdsCadFormasPagamento.FieldByName('ImprimeMensagem').AsBoolean := chkImprimeMensagem.Checked;
-   cdsCadFormasPagamento.FieldByName('Prazo').AsString            := edtPrazo.Text;
-   cdsCadFormasPagamento.FieldByName('Cod_Emp').AsString          := gsCod_Emp;
-   cdsCadFormasPagamento.FieldByName('SomaVenda').AsBoolean       := chkSomaVendas.Checked;
-
+   cdsCadFormasPagamento.FieldByName('Descricao').AsString         := edtDescricao.Text;
+   cdsCadFormasPagamento.FieldByName('Operador').AsString          := GsOperador;
+   cdsCadFormasPagamento.FieldByName('TipoPagamento').AsString     := IntToStr(cmbTipoPagamento.ItemIndex);
+   cdsCadFormasPagamento.FieldByName('TipoLancamento').AsString    := IntToStr(cmbTipoLancamento.ItemIndex);
+   cdsCadFormasPagamento.FieldByName('ImprimeMensagem').AsBoolean  := chkImprimeMensagem.Checked;
+   cdsCadFormasPagamento.FieldByName('Prazo').AsString             := edtPrazo.Text;
+   cdsCadFormasPagamento.FieldByName('Cod_Emp').AsString           := gsCod_Emp;
+   cdsCadFormasPagamento.FieldByName('SomaVenda').AsString        := '0';
+   if chkSomaVendas.Checked then
+      cdsCadFormasPagamento.FieldByName('SomaVenda').AsString     := '1';
+   cdsCadFormasPagamento.FieldByName('ImprimeRelatorio').AsBoolean := chkRelatorioCheque.Checked;
    cdsCadFormasPagamento.Post;
 
    If cdsCadFormasPagamento.ChangeCount > 0  Then // se houve mudancas

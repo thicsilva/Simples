@@ -19,6 +19,7 @@ type TDaoVenda = class
      function Buscar(VendaId : Integer) : TVenda;
      function PesoTotal(IDVenda : Integer) : Real;
      function RetornarVencimentos(VendaId : Integer) : TStringList;
+     function RetornarRomaneio(VendaId: Integer): String;
 
      procedure MarcarComoEntregue(IDVenda : Integer);
      Procedure MarcarComoPagouSinal(IDVenda : Integer);
@@ -31,6 +32,7 @@ type TDaoVenda = class
      procedure ProrrogarVencimento(VendaId : Integer; Dias : Integer);
      procedure AtualizarTotal(VendaId : Integer; Total : Real);
      procedure AtualizarAnimal(VendaId : Integer; AnimalId : Integer);
+
 
      procedure Incluir( Venda : TVenda );
 end;
@@ -118,6 +120,13 @@ begin
   FqryModific  := TSqlQuery.Create(Application);
   FqryModific.SQLConnection := FConexao.Conection;
   FParametros := TStringList.Create;
+end;
+
+function TDaoVenda.RetornarRomaneio(VendaId: Integer): String;
+var dados : TclientDataSet;
+begin
+   Dados := FConexao.BuscarDadosSQL('select RomaneioId from T_vendas where Seqvenda='+intTostr(VendaId),nil);
+   Result := dados.FieldByName('RomaneioId').AsString;
 end;
 
 procedure TDaoVenda.Incluir( Venda : TVenda );
