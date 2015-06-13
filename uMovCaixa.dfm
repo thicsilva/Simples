@@ -463,7 +463,7 @@ object frmMovCaixa: TfrmMovCaixa
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnImprimirClick
-        ExplicitLeft = 378
+        ExplicitLeft = 390
         ExplicitTop = 8
       end
       object bsSkinBevel4: TbsSkinBevel
@@ -561,8 +561,6 @@ object frmMovCaixa: TfrmMovCaixa
         Height = 285
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 24
-        ExplicitTop = 26
         object GrdDespesas: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           OnCustomDrawCell = GrdDespesasCustomDrawCell
@@ -682,9 +680,9 @@ object frmMovCaixa: TfrmMovCaixa
         Caption = 'PanelConsulta'
         Align = alTop
         object AtualizaRec: TbsSkinSpeedButton
-          Left = 642
+          Left = 630
           Top = 18
-          Width = 137
+          Width = 107
           Height = 24
           HintImageIndex = 0
           SkinData = frmPrincipal.SkinPrincipal
@@ -1076,6 +1074,41 @@ object frmMovCaixa: TfrmMovCaixa
           State = cbChecked
           TabOrder = 4
           Visible = False
+        end
+        object btnImprimirSaldos: TbsSkinButton
+          Left = 743
+          Top = 18
+          Width = 52
+          Height = 25
+          HintImageIndex = 0
+          TabOrder = 5
+          SkinData = frmPrincipal.SkinPrincipal
+          SkinDataName = 'button'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 0
+          UseSkinFont = False
+          Transparent = False
+          CheckedMode = False
+          ImageList = frmPrincipal.Imagebutoes
+          ImageIndex = 6
+          AlwaysShowLayeredFrame = False
+          UseSkinSize = False
+          UseSkinFontColor = True
+          RepeatMode = False
+          RepeatInterval = 100
+          AllowAllUp = False
+          TabStop = True
+          CanFocused = True
+          Down = False
+          GroupIndex = 0
+          NumGlyphs = 1
+          Spacing = 1
+          OnClick = btnImprimirSaldosClick
         end
       end
       object pnlDataovimento: TPanel

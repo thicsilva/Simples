@@ -120,6 +120,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         Layout = blGlyphTop
         OnClick = btnFecharClick
         ExplicitLeft = 732
+        ExplicitTop = 8
       end
       object bsSkinBevel1: TbsSkinBevel
         Left = 140
@@ -182,6 +183,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitLeft = 85
+        ExplicitTop = -5
       end
       object btnFaturamento: TbsSkinSpeedButton
         Left = 70
@@ -189,7 +191,6 @@ object frmFechaLocacao: TfrmFechaLocacao
         Width = 70
         Height = 40
         HintImageIndex = 0
-        Visible = False
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
@@ -221,6 +222,7 @@ object frmFechaLocacao: TfrmFechaLocacao
         Layout = blGlyphTop
         OnClick = btnFaturamentoClick
         ExplicitLeft = 64
+        ExplicitTop = 8
       end
     end
   end

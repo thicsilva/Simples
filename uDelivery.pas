@@ -67,6 +67,9 @@ type
     cdslistaObs: TStringField;
     ImpMatricial: TRDprint;
     btnImprimir: TbsSkinButton;
+    Saiuparaentrega1: TMenuItem;
+    bsSkinButton3: TbsSkinButton;
+    ServioFinalizado1: TMenuItem;
     procedure edtNomeChange(Sender: TObject);
     procedure cdsClientesAfterScroll(DataSet: TDataSet);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -84,6 +87,9 @@ type
     procedure btnNovoClienteClick(Sender: TObject);
     procedure cdslistaAfterScroll(DataSet: TDataSet);
     procedure btnImprimirClick(Sender: TObject);
+    procedure Saiuparaentrega1Click(Sender: TObject);
+    procedure bsSkinButton3Click(Sender: TObject);
+    procedure ServioFinalizado1Click(Sender: TObject);
   private
      function RetornarPosicaoCentral(liTamanhoString,  TamanhoLinha: Integer): integer;
     { Private declarations }
@@ -119,20 +125,34 @@ begin
      Hora02 := replaceStr( FormatDatetime('HH:MM',now),':','');
    end;
 
-   if  StrToint(Hora01) <= Strtoint(Hora02) then
+   if  cdslista.FieldByName('Status').AsString='E' then
+   begin
+      dbgConsulta.Canvas.font.Color    := clBlack;
+      dbgConsulta.Canvas.Brush.Color   := $0014ECF8;
+   end;
+
+   if  cdslista.FieldByName('Status').AsString='F' then
+   begin
+      dbgConsulta.Canvas.font.Color    := clBlack;
+      dbgConsulta.Canvas.Brush.Color   := $00FFFF80;
+   end;
+
+   if  (StrToint(Hora01) <= Strtoint(Hora02)) and (StrToint(Hora01)>0) then
    Begin
-      dbgConsulta.Canvas.font.Color    := clRed;
-      //dbgConsulta.Canvas.Brush.Color   := $00B7F98A;
+      dbgConsulta.Canvas.font.Color    := clBlack;
+      dbgConsulta.Canvas.Brush.Color   := clRed;
    End
-   else if  StrToint(Hora01)<= Strtoint(Hora02)+30 then
-      dbgConsulta.Canvas.font.Color    := $000080FF;
+   else if  (StrToint(Hora01)+30>= Strtoint(Hora02))  and (StrToint(Hora01)>0) then
+   begin
+      dbgConsulta.Canvas.font.Color    := clBlack;
+      dbgConsulta.Canvas.Brush.Color    := $000080FF;
+   end;
 
    if  cdslista.FieldByName('Status').AsString='S' then
    begin
       dbgConsulta.Canvas.font.Color    := clBlack;
       dbgConsulta.Canvas.Brush.Color   := $00B7F98A;
    end;
-
 
    dbgConsulta.DefaultDrawColumnCell( Rect, DataCol, Column, State );
 end;
@@ -170,6 +190,12 @@ begin
   edtNome.SetFocus;
   edtNome.Text := frmCadastroClienteSimplificado.edtTelefone.Text;
   FreeAndNil(frmCadastroClienteSimplificado);
+end;
+
+procedure TfrmDelivery.bsSkinButton3Click(Sender: TObject);
+begin
+  if CaixaMensagem( 'Deseja ZERAR a lista de entregas', ctConfirma, [ cbSimNao ], 0 )  Then
+     cdsLista.EmptyDataSet;
 end;
 
 procedure TfrmDelivery.btnAdicionarClick(Sender: TObject);
@@ -254,6 +280,20 @@ begin
 end;
 
 
+procedure TfrmDelivery.Saiuparaentrega1Click(Sender: TObject);
+begin
+   cdsLista.Edit;
+   cdsLista.FieldByname('Status').AsString := 'E';
+   cdsLista.Post;
+end;
+
+procedure TfrmDelivery.ServioFinalizado1Click(Sender: TObject);
+begin
+   cdsLista.Edit;
+   cdsLista.FieldByname('Status').AsString := 'F';
+   cdsLista.Post;
+end;
+
 procedure TfrmDelivery.btnRemoverDescontoClick(Sender: TObject);
 begin
   cdsLista.Delete;
@@ -288,10 +328,11 @@ var parametros : TStringList;
 begin
 parametros := TStringList.Create;
    parametros.Add('%'+edtNome.Text+'%');
-   if length(edtNome.Text) > 8 then
-      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Descricao Like :parNome_fantasia',parametros ).Data
+   if TemSoNumero(edtNome.Text) then
+      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Telefone Like :parNome_fantasia',parametros ).Data
    else
-      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Telefone Like :parNome_fantasia',parametros ).Data;end;
+      cdsClientes.Data := gConexao.BuscarDadosSQL('Select * from T_Clientes where Descricao Like :parNome_fantasia',parametros ).Data;
+end;
 
 procedure TfrmDelivery.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin

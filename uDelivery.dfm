@@ -49,8 +49,6 @@ object frmDelivery: TfrmDelivery
     Sizeable = False
     Align = alTop
     Caption = 'Dados do Cliente'
-    ExplicitLeft = -1
-    ExplicitTop = -4
     object bsSkinLabel1: TbsSkinLabel
       Left = 4
       Top = 31
@@ -239,8 +237,8 @@ object frmDelivery: TfrmDelivery
       RightImageDownIndex = -1
     end
     object btnClientes: TbsSkinButton
-      Left = 920
-      Top = 29
+      Left = 966
+      Top = 24
       Width = 84
       Height = 25
       HintImageIndex = 0
@@ -451,8 +449,8 @@ object frmDelivery: TfrmDelivery
       ShowUpDown = False
     end
     object btnNovoCliente: TbsSkinButton
-      Left = 817
-      Top = 29
+      Left = 863
+      Top = 24
       Width = 104
       Height = 25
       HintImageIndex = 0
@@ -556,6 +554,42 @@ object frmDelivery: TfrmDelivery
       Spacing = 1
       OnClick = btnImprimirClick
     end
+    object bsSkinButton3: TbsSkinButton
+      Left = 777
+      Top = 26
+      Width = 84
+      Height = 33
+      HintImageIndex = 0
+      TabOrder = 11
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.Imagebutoes
+      ImageIndex = 4
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = False
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      Caption = ' Remover Todos'
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = bsSkinButton3Click
+    end
   end
   object bsSkinPanel1: TbsSkinPanel
     Left = 538
@@ -626,6 +660,10 @@ object frmDelivery: TfrmDelivery
       SkinDataName = 'tab'
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Servi'#231'os Pendentes'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgConsulta: TbsSkinDBGrid
           Left = 0
           Top = 0
@@ -650,6 +688,7 @@ object frmDelivery: TfrmDelivery
           PickListBoxSkinDataName = 'listbox'
           PickListBoxCaptionMode = False
           Align = alClient
+          Color = clWhite
           DataSource = srcLista
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = PopupMenu1
@@ -1320,8 +1359,8 @@ object frmDelivery: TfrmDelivery
     Params = <>
     StoreDefs = True
     AfterScroll = cdslistaAfterScroll
-    Left = 692
-    Top = 165
+    Left = 660
+    Top = 138
     Data = {
       090100009619E0BD01000000180000000A000000000003000000090102496404
       00010000000000044E6F6D650100490000000100055749445448020002006400
@@ -1400,6 +1439,10 @@ object frmDelivery: TfrmDelivery
       Caption = 'Marcar Como n'#227'o Entregue'
       OnClick = MarcarComonoEntregue1Click
     end
+    object Saiuparaentrega1: TMenuItem
+      Caption = 'Saiu para entrega'
+      OnClick = Saiuparaentrega1Click
+    end
     object PrevisodeChegada1: TMenuItem
       Caption = 'Previs'#227'o de Chegada'
       OnClick = PrevisodeChegada1Click
@@ -1407,6 +1450,10 @@ object frmDelivery: TfrmDelivery
     object HoradeChegada1: TMenuItem
       Caption = 'Hora de Chegada'
       OnClick = HoradeChegada1Click
+    end
+    object ServioFinalizado1: TMenuItem
+      Caption = 'Servi'#231'o Finalizado'
+      OnClick = ServioFinalizado1Click
     end
   end
   object srcAnimais: TDataSource
