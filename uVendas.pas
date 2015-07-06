@@ -1627,9 +1627,11 @@ begin
          lovenda.Funcionario := Daofuncionario.Buscar(cdsVenda.FieldByName('Cod_Funcionario').AsInteger);
          lovenda.Empresa := gEmpresa;
          loVenda.VendaID := 1;
-         loVenda.Imprimir(cdsVenda,cdsItensVendasTMP,
-                          gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
-                          StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora', '0')));
+         loVenda.Imprimir(cdsVenda,
+                          cdsItensVendasTMP,
+                          gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),
+                          0,
+                          StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora','0')));
          FreeAndNil(DaoVenda);
          FreeAndNil(lovenda);
       end;
