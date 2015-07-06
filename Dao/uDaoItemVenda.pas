@@ -104,6 +104,8 @@ begin
       FQueryModific.ParamByName('parLucroBruto').asFloat      := ItensVendas.FieldByName('LucroBruto').AsFloat;
       FQueryModific.ParamByName('parPco_Tabela').asFloat      := ItensVendas.FieldByName('Pco_Tabela').AsFloat;
       FQueryModific.ParamByName('parTipoCobranca').asString   := ItensVendas.FieldByName('TipoCalculo').AsString;
+      FQueryModific.ParamByName('parFuncionarioId').asString  := '00';
+      if ItensVendas.FindField('FuncionarioId')<> Nil then
       FQueryModific.ParamByName('parFuncionarioId').asString  := ItensVendas.FieldByName('FuncionarioId').AsString;
       FQueryModific.ParamByName('parDataPrevisaoEntrega').AsSQLTimeStamp := DatetimeToSqltimeStamp(ItensVendas.FieldByName('Previsao_Entrega').AsDateTime);
       FQueryModific.ExecSql;

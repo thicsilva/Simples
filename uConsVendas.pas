@@ -401,8 +401,8 @@ var
     DaoVenda: TDaoVenda;
     DaoItemVenda : TDaoItemVenda;
 begin
-   if ( cdsVendas.FieldByName('Status').AsString <> '1')  Then
-   Begin
+     {//if ( cdsVendas.FieldByName('Status').AsString <> '1')  Then
+     //Begin}
      if (HeAssistencia) and (frmConsVendas.Tag=3) then
      begin
         DtmComprovante := TDtmComprovante.create(Nil);
@@ -451,19 +451,22 @@ begin
        loVenda.VendaID := cdsVendas.FieldByName('SeqVenda').Asinteger;
        lovenda.Empresa := gEmpresa;
        DaoItemVenda    := TDaoItemVenda.Create(gConexao);
-       loVenda.Imprimir(cdsVendas,DaoItemVenda.Buscar(loVenda.VendaID),
-                        gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),0,
-                        StrToint(gParametros.ler( '', '[IMPRESSAO]', 'TipoImpressora','0',gsOperador)));
+       loVenda.Imprimir(cdsVendas,
+                        DaoItemVenda.Buscar(loVenda.VendaID),
+                        gsParametros.ReadString('IMPRESSAO','CaminhoImpressao','LPT1'),
+                        0,
+                        StrToint(gsParametros.ReadString('IMPRESSAO', 'TipoImpressora','0')
+                        ));
        FreeAndNil(DaoVenda);
        FreeAndNil(lovenda);
        FreeAndNil(DaoItemVenda);
      end;
-   End
-   else
+   //End;
+  { else
    begin
       CaixaMensagem( 'Ordem de serviço não finalizada', ctAviso, [ cbOk ], 0 );
       Exit;
-   end;
+   end;}
 end;
 procedure TfrmConsVendas.PrepararGarantia;
 Begin

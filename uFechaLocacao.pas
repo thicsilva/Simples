@@ -507,9 +507,9 @@ begin
       cdsItensVendasTmp.first;
       while not cdsItensVendasTmp.Eof do
       begin
-        if cdsItensVendasTmp.fieldByname('Marcado').AsString='X' then
+        if cdsItensVendasTmp.fieldByname('Marcado').AsString='X' then                 
         Begin
-          lsProdutos := lsProdutos+lsVirgula+cdsItensVendasTmp.fieldByname('Descricao').AsString;
+          lsProdutos := lsProdutos+lsVirgula+cdsItensVendasTmp.fieldByname('Quantidade').AsString+' - '+cdsItensVendasTmp.fieldByname('Descricao').AsString;
           lsVirgula := ',';
         End;
         cdsItensVendasTmp.Next;

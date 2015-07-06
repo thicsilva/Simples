@@ -410,6 +410,7 @@ object frmDelivery: TfrmDelivery
         FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
       NumGlyphs = 1
       Spacing = 1
+      OnClick = bsSkinButton2Click
     end
     object edtHora: TbsSkinTimeEdit
       Left = 534
@@ -660,10 +661,6 @@ object frmDelivery: TfrmDelivery
       SkinDataName = 'tab'
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Servi'#231'os Pendentes'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgConsulta: TbsSkinDBGrid
           Left = 0
           Top = 0

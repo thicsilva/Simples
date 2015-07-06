@@ -2325,10 +2325,10 @@ end;
 
 procedure TfrmMovCaixa.btnImprimirClick(Sender: TObject);
 begin
-  //if HeDistribuidora then
+  if HeDistribuidora then
      RelatorioDeCaixaModelo05(Relatorio)
- // else
-  //   RelatorioDeCaixaModelo04(Relatorio);
+  else
+     RelatorioDeCaixaModelo04(Relatorio);
 end;
 
 procedure TfrmMovCaixa.btnImprimirSaldosClick(Sender: TObject);
@@ -2470,7 +2470,7 @@ begin
       DadosContaCorrente.Valor       := strToFloat(EdtValor.Text);
       DadosContaCorrente.Cod_Cliente := StrtoInt(edtcod_Cliente.Text);
       DadosContaCorrente.Historico   := edthistorico.text;
-      DadosContaCorrente.Documento   := cdsMovCaixa.FieldByName('Sequencia').asInteger;
+      DadosContaCorrente.Documento   := StrtoInt(Sequencia('Sequencia',False,'T_MovCaixa',FrmPrincipal.dbxPrincipal,'',False,8));
       IF  not GravaContaCorrente.Atualizar(DadosContaCorrente) Then
       Begin
          CaixaMensagem( 'Não foi possivel lancar no conta corrente', ctAviso, [ cbOk ], 0 );

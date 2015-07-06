@@ -90,6 +90,7 @@ type
     procedure Saiuparaentrega1Click(Sender: TObject);
     procedure bsSkinButton3Click(Sender: TObject);
     procedure ServioFinalizado1Click(Sender: TObject);
+    procedure bsSkinButton2Click(Sender: TObject);
   private
      function RetornarPosicaoCentral(liTamanhoString,  TamanhoLinha: Integer): integer;
     { Private declarations }
@@ -104,7 +105,7 @@ implementation
 
 uses
   uDaoCliente,ufuncoes, uCadClientes, uVendas, uMapa, uSelHora,
-  uCadastroRapidoCliente;
+  uCadastroRapidoCliente, uConsVendas;
 
 {$R *.dfm}
 
@@ -190,6 +191,13 @@ begin
   edtNome.SetFocus;
   edtNome.Text := frmCadastroClienteSimplificado.edtTelefone.Text;
   FreeAndNil(frmCadastroClienteSimplificado);
+end;
+
+procedure TfrmDelivery.bsSkinButton2Click(Sender: TObject);
+begin
+   frmConsVendas := TfrmConsVendas.Create(Nil);
+   frmconsvendas.tag := 3;
+   frmConsVendas.showmodal;
 end;
 
 procedure TfrmDelivery.bsSkinButton3Click(Sender: TObject);
