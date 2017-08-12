@@ -22,7 +22,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Align = alClient
     TabOrder = 0
     object GridAtividades: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcTmpItensEtiquetas
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -82,6 +82,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    UseSkinSize = True
     CaptionImageIndex = -1
     NumGlyphs = 1
     Spacing = 2
@@ -151,7 +152,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Left = 8
       Top = 37
       Width = 65
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -171,6 +172,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -209,7 +211,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Left = 327
       Top = 37
       Width = 66
-      Height = 18
+      Height = 20
       Text = '0'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -231,6 +233,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -255,6 +258,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 10
@@ -290,6 +294,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 9
@@ -324,6 +329,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     UseSkinCellHeight = True
     GridLineColor = clWindowText
     DefaultCellHeight = 20
+    ColSizingwithLine = False
     DrawGraphicFields = False
     UseColumnsFont = False
     DefaultRowHeight = 17
@@ -383,6 +389,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -422,7 +429,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Left = 134
       Top = 10
       Width = 276
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -442,6 +449,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -515,7 +523,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Left = 255
     Top = 333
     Width = 66
-    Height = 18
+    Height = 20
     Text = '0,00'
     DefaultColor = clWindow
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -538,6 +546,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     ParentFont = False
     TabOrder = 4
     Visible = False
+    ButtonImageIndex = -1
     LeftImageIndex = -1
     LeftImageHotIndex = -1
     LeftImageDownIndex = -1
@@ -549,7 +558,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     Left = 255
     Top = 309
     Width = 66
-    Height = 18
+    Height = 20
     Text = '0'
     DefaultColor = clWindow
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -572,6 +581,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
     ParentFont = False
     TabOrder = 5
     Visible = False
+    ButtonImageIndex = -1
     LeftImageIndex = -1
     LeftImageHotIndex = -1
     LeftImageDownIndex = -1
@@ -613,6 +623,7 @@ object frmSelRelEtiquetas: TfrmSelRelEtiquetas
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False

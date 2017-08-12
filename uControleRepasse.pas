@@ -25,8 +25,6 @@ type
     dspRelatorio: TDataSetProvider;
     cdsRelatorio: TClientDataSet;
     srcRelatorio: TDataSource;
-    ClientDataSet1: TClientDataSet;
-    DataSource1: TDataSource;
     cdsRepasse: TClientDataSet;
     srcRepasse: TDataSource;
     cdsRepasseRota: TStringField;
@@ -73,6 +71,14 @@ type
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
     BtnFechamento: TbsSkinSpeedButton;
+    cmbTipoResutado: TComboBox;
+    cdsRecebidos: TClientDataSet;
+    srcRecebidos: TDataSource;
+    cdsAuxiliar: TClientDataSet;
+    srcAuxiliar: TDataSource;
+    srcDevolucoes: TDataSource;
+    cdsDevolucoes: TClientDataSet;
+    btnLimpa: TbsSkinButton;
     procedure btnPesquisarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -80,21 +86,47 @@ type
     procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure cmbPeriodoChange(Sender: TObject);
     procedure BtnFechamentoClick(Sender: TObject);
+    procedure btnLimpaClick(Sender: TObject);
   private
-     pviLinha : Integer;   
+     pviLinha : Integer;
+    procedure CarregarTotais;
+    procedure CarregarTotaisPorCidade(Cidade: string);
+    procedure CarregarGrid();
+    procedure CarregarGridCidades;
+    procedure AtulizarGrid;
+
     { Private declarations }
   public
+    function RetornaSelect( tipo : Integer ) : string;
     { Public declarations }
   end;
 
 var
   frmControleRepasse: TfrmControleRepasse;
-
+  CONST VENDEDOR = 1;
+  CONST CIDADE = 2;
 implementation
 
 uses uprincipal,ufuncoes, ufechames, uselrelRepasse;
 
 {$R *.dfm}
+
+procedure TfrmControleRepasse.AtulizarGrid;
+begin
+     cdsRepasse.First;
+     while not cdsRepasse.Eof do
+     begin
+        cdsRepasse.Edit;
+        cdsRepasse.FieldByName('Perc001').AsFloat :=  ((cdsRepasse.FieldByName('vlr_recebido').AsFloat/cdsRepasse.FieldByName('vlr_Repasse').AsFloat)*100);
+        cdsRepasse.FieldByName('Perc002').AsFloat :=  ((cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat/cdsRepasse.FieldByName('vlr_Repasse').AsFloat)*100);
+        cdsRepasse.FieldByName('Perc003').AsFloat :=  ((cdsRepasse.FieldByName('Vlr_Perdido').AsFloat/cdsRepasse.FieldByName('vlr_Repasse').AsFloat)*100);
+        cdsRepasse.FieldByName('Perc004').AsFloat :=  ((cdsRepasse.FieldByName('Vlr_Comissao').AsFloat/cdsRepasse.FieldByName('vlr_Repasse').AsFloat)*100);
+        cdsRepasse.FieldByName('Perc005').AsFloat :=  ((cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat/cdsRepasse.FieldByName('vlr_Repasse').AsFloat)*100);
+        cdsRepasse.post;
+        cdsRepasse.next;
+
+     end;
+end;
 
 procedure TfrmControleRepasse.BtnFechamentoClick(Sender: TObject);
 begin
@@ -117,264 +149,267 @@ begin
    frmselrelRepasse := TfrmselrelRepasse.create(Self);
    frmselrelRepasse.Tag := frmcontroleRepasse.Tag;
    frmselrelRepasse.ShowModal;
-  {
-   qryRelatorio.Close;
-   qryRelatorio.Params.Clear;
-   qryRelatorio.SQL.Text := 'SELECT Rota.Descricao as Nome_Rota,Ven.Controle,Cli.descricao,Rec.Vlr_Areceber '+
-                            'FROM T_Ctasreceber Rec '+
-                            '     LEFT JOIN T_CLientes Cli ON '+
-                            '          Cli.Codigo=Rec.Cod_Cliente '+
-                            '     LEFT JOIN T_Rotas Rota ON '+
-                            '          Rota.Codigo=Cli.Cod_Rota '+
-                            '     LEFT JOIN T_Vendas Ven ON '+
-                            '          Ven.Seqvenda=Rec.SeqVenda '+
-                            'WHERE Rec.Repasse=:parRepasse and '+
-                            '(Data_Repasse>=:parData_RepasseIni and Data_Repasse<=:parData_RepasseFim ) '+
-                            'Order by 1,2 ';
-   qryRelatorio.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
-   qryRelatorio.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-   qryRelatorio.ParamByName('parRepasse').AsString := 'S';
-   qryRelatorio.Open;
-
-   ImpMatricial.PortaComunicacao          := 'LPT1';
-   ImpMatricial.OpcoesPreview.Preview     := true;
-   ImpMatricial.TamanhoQteLinhas          := 66;
-   ImpMatricial.TamanhoQteColunas         := 80;
-   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
-   ImpMatricial.UsaGerenciadorImpr        := True;
-   ImpMatricial.Abrir;
-
-   lrVlr_Rota  := 0;
-   lrVlr_Total := 0;
-   liQtde_Rota := 0;
-   lsNome_Rota := 'FORCA QUEBRA';
-
-   cdsRelatorio.First;
-
-   while not qryRelatorio.Eof do
-   Begin
-      if lsNome_Rota<>qryRelatorio.FieldByname('Nome_Rota').AsString then
-      Begin
-         IF lsNome_Rota<>'FORCA QUEBRA' Then
-         Begin
-            impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-            pviLinha:=Pvilinha+1;
-            impmatricial.Imp(pvilinha,001,'Quantidade Total da Rota..: '+intToStr(liQtde_Rota));
-            impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Rota),[]);
-            pviLinha:=Pvilinha+2;
-            lrVlr_Rota   := 0;
-            liQtde_Rota  := 0;
-         End;
-         impmatricial.Imp(pvilinha,001,qryRelatorio.FieldByName('Nome_Rota').AsString );
-         pviLinha:=Pvilinha+1;
-         impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-         pviLinha:=Pvilinha+1;
-         lsNome_Rota:=qryRelatorio.FieldByname('Nome_Rota').AsString;
-      End;
-      impmatricial.Imp (pvilinha,001,qryRelatorio.FieldByName('Nome_Rota').AsString+' '+qryRelatorio.FieldByName('Controle').AsString);
-      impmatricial.Imp (pvilinha,025,Copy(qryRelatorio.FieldByName('Descricao').AsString,1,30));
-      impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',qryRelatorio.fieldByname('Vlr_Areceber').asfloat),[]);
-      pvilinha := pvilinha + 1 ;
-
-      lrVlr_Rota   := lrVlr_Rota  + qryRelatorio.fieldByname('Vlr_Areceber').asfloat;
-      lrVlr_Total  := lrVlr_Total + qryRelatorio.fieldByname('Vlr_Areceber').asfloat;
-      liQtde_Rota  := liQtde_Rota + 1;
-      
-      if pvilinha>60 then
-         impmatricial.Novapagina;
-
-      qryRelatorio.Next;
-   End;
-   impmatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
-   pviLinha:=Pvilinha+1;
-   impmatricial.Imp(pvilinha,001,'Quantidade Total da Rota..: '+intToStr(liQtde_Rota));
-   impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Rota),[]);
-   pviLinha:=Pvilinha+1;
-  // impmatricial.Imp(pvilinha,001,'Total da Rota..: '+intToStr(liQtde_Rota));
-   //impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrVlr_Total),[]);
-   pviLinha:=Pvilinha+2;
-   lrVlr_Rota   := 0;
-   liQtde_Rota  := 0;
-
-   impmatricial.Fechar;
-   }
 End;
+
+procedure TfrmControleRepasse.btnLimpaClick(Sender: TObject);
+begin
+   cmbNome_TipoVenda.KeyValue := null;
+end;
 
 procedure TfrmControleRepasse.btnPesquisarClick(Sender: TObject);
 var
-  lsFrom : String;
-  lsWhere : String;
+  lsWhere        : String;
+  lrTotal        : Real;
+  lrtotalFicha   : real;
+  vlrRepase      : real;
+  vlrRecebido    : real;
+  vlrDevolucao   : real;
+  TotalDevolvido : real;
+  TotalPerdido   : Real;
+  TotalComissao  : real;
+  Saldorepasse   : Real;
+ begin
+   lrtotalFicha := 0;
+   lrTotal      := 0;
+
+   qryRelatorio.Close;
+   qryRelatorio.Params.Clear;
+   if cmbTipoResutado.ItemIndex=1 then
+      qryRelatorio.SQL.Text := RetornaSelect(VENDEDOR)
+   else
+      qryRelatorio.SQL.Text := RetornaSelect(CIDADE);
+
+
+   qryRelatorio.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text);
+   qryRelatorio.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text);
+   qryRelatorio.ParamByName('parStatus').AsString                := '5';
+   qryRelatorio.ParamByName('parStatus_Cancelada').AsString      := 'C';
+
+   cdsRelatorio.Close;
+   cdsRelatorio.ProviderName := dspRelatorio.Name;
+   cdsRelatorio.Open;
+
+
+   if cmbNome_TipoVenda.KeyValue = null then
+      CarregarTotais
+   else
+      CarregarTotaisPorCidade(cmbNome_TipoVenda.Text);
+
+   QryVariavel.Close;
+   QryVariavel.Params.Clear;
+   QryVariavel.SQL.Text := 'SELECT Cli.Cidade, '+
+                           '     SUM(COALESCE(QTDE_DEVOLVIDA*PCO_VENDA,0)) as Devolucao '+
+                           'FROM T_Vendas Ven '+
+                           ' LEFT JOIN T_CLientes Cli ON  Cli.Codigo=Ven.Cod_Cliente '+
+                           ' LEFT JOIN T_itensDevolucoes dev on dev.SeqVenda=ven.seqvenda '+
+                           'WHERE ( Ven.Data_Venda>=:parData_RepasseIni and Ven.Data_Venda<=:parData_RepasseFim ) and '+
+                            '        Ven.Status<>:parStatus and Ven.Status<>:parStatus_Cancelada GROUP BY Cli.Cidade';
+   QryVariavel.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
+   QryVariavel.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
+   QryVariavel.ParamByName('parStatus').AsString                := '5';
+   QryVariavel.ParamByName('parStatus_Cancelada').AsString      := 'C';
+
+
+   cdsDevolucoes.Close;
+   cdsDevolucoes.ProviderName := dspVariavel.Name;
+   cdsDevolucoes.Open;
+   if cmbNome_TipoVenda.KeyValue = null then
+      CarregarGrid
+   else
+     CarregarGridCidades;
+
+     AtulizarGrid ;
+End;
+
+
+
+function TfrmControleRepasse.RetornaSelect(tipo : integer ) : string;
+var select : string;
+    lsfrom : string;
+    lsWhere : String;
+    lsjoins : string;
+    lsSelect : String;
+    lsGroup : string;
 begin
-
-   if frmControleRepasse.Tag = 1 Then
-   Begin
-      if cmbNome_TipoVenda.KeyValue = null then
-      Begin
-         CaixaMensagem( 'Informe o tipo de venda !!!', ctInforma, [ cbOk ], 0 );
-         Exit;
-      End;
-      lsFrom  := 'LEFT JOIN T_Vendas Ven on Ven.SeqVenda=Rec.Seqvenda';
-      lsWhere := 'Ven.Cod_TipoVenda=:parCod_tipoVenda and (tipo_baixa<>:parTipo_Baixa or Tipo_baixa is null) and Fechado is Null';
-   End
-   Else
-      lsWhere := '(Data_Repasse>=:parData_RepasseIni and Data_Repasse<=:parData_RepasseFim ) And Rec.Repasse=:parRepasse ';
-
-
-   qryRelatorio.Close;
-   qryRelatorio.Params.Clear;
-   qryRelatorio.SQL.Text := 'SELECT Rota.Descricao, '+
-                            '       Sum(Rec.Vlr_Original)  As Tot_Repasse, '+
-                            '       Sum(Rec.Vlr_Recebido)  As Tot_Recebido, '+
-                            '       Sum(Rec.Vlr_Devolvido) As Tot_Devolvido, '+
-                            '       Sum(Rec.Vlr_Comissao)  As Tot_Comissao, '+
-                            '       Sum(Rec.Vlr_Perdido)   As Tot_Perdido, '+
-                            '       Count(Distinct(Rec.SeqVenda)) As Qtde_Repasse '+
-                            'FROM T_Ctasreceber Rec '+
-                            '       LEFT JOIN T_CLientes Cli ON '+
-                            '            Cli.Codigo=Rec.Cod_Cliente '+
-                            '       LEFT JOIN T_Rotas Rota ON '+
-                            '            Rota.Codigo=Cli.Cod_Rota '+
-                                     lsFrom + ' '+
-                            'WHERE '+lsWhere+' '+
-                            'GROUP BY Rota.Descricao ' ;
-  IF frmControleRepasse.Tag = 1 Then
-  Begin
-     qryRelatorio.ParamByName('parCod_TipoVenda').AsString      := cmbNome_TipoVenda.KeyValue;
-     qryRelatorio.ParamByName('parTipo_baixa').AsString         :='PP';
-  End
-  Else
-  Begin
-     qryRelatorio.ParamByName('parRepasse').AsString               := 'S';
-     qryRelatorio.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
-     qryRelatorio.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-  End;
-
-  cdsRelatorio.Close;
-  cdsRelatorio.ProviderName := dspRelatorio.Name;
-  cdsRelatorio.Open;
+      if tipo = CIDADE  then
+      begin
+         lsSelect  :=  'cli.cidade as Descricao,';
+         lsjoins  :=  '       LEFT JOIN T_CLientes Cli ON '+
+                      '            Cli.Codigo=Ven.Cod_Cliente ';
+         lsWhere := '(Ven.Data_Venda>=:parData_RepasseIni and Ven.Data_Venda<=:parData_RepasseFim ) ';
+         lsfrom  := '';
+         lsGroup := 'cli.Cidade';
+      end
+      else  if tipo = VENDEDOR  then
+      begin
+         lsSelect  := 'rep.Descricao,';
+         lsjoins  :=  '       LEFT JOIN T_funcionarios rep ON '+
+                      '            rep.Codigo=Ven.Cod_Funcionario ';
+         lsWhere := '(Ven.Data_Venda>=:parData_RepasseIni and Ven.Data_Venda<=:parData_RepasseFim ) ';
+         lsfrom  := '';
+         lsGroup := 'rep.Descricao';
+      end;
 
 
+
+     select :=  'SELECT '+lsSelect+' '+
+	              '     Sum(vlr_Total) as total, '+
+                '     Count(distinct(Ven.SeqVenda)) As Qtde_Repasse '+
+                'FROM T_Vendas Ven '+ lsjoins +' '+
+                'WHERE ( Ven.Data_Venda>=:parData_RepasseIni and Ven.Data_Venda<=:parData_RepasseFim ) and '+
+                '        Ven.Status<>:parStatus and Ven.Status<>:parStatus_Cancelada GROUP BY '+lsGroup;
+      Result := select;
+end;
+procedure TfrmControleRepasse.CarregarGridCidades();
+var
+  vlrDevolucao: Real;
+  vlrRepase: Real;
+  vlrRecebido: Real;
+  TotalPerdido : Real ;
+  TotalComissao : Real ;
+  Saldorepasse :Real;
+  TotalDevolvido : Real;
+  lrTotal : Real;
+  lrtotalFicha : Real;
+begin
   cdsRepasse.EmptyDataSet;
+  vlrRecebido := 0;
+  TotalPerdido := 0;
+  TotalComissao := 0;
+  Saldorepasse := 0;
+  while not cdsAuxiliar.Eof do
+  begin
+    cdsRepasse.Append;
+    vlrDevolucao := 0;
+
+      vlrRepase :=  cdsAuxiliar.FieldByName('Tot_Repasse').AsFloat;
+      cdsRepasse.FieldByName('Rota').AsString := cdsAuxiliar.FieldByName('Descricao').AsString;
+      cdsRepasse.FieldByName('Vlr_Repasse').AsFloat := cdsAuxiliar.FieldByName('Tot_Repasse').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Recebido').AsFloat := cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat := cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Perdido').AsFloat := cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Comissao').AsFloat := cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat;
+
+      vlrRecebido := vlrRecebido + cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat;
+      TotalDevolvido := TotalDevolvido + cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat;
+      TotalPerdido := TotalPerdido + cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat;
+      TotalComissao := TotalComissao + cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat;
+      cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := vlrRepase - (cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat + cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat + cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat + cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat);
+      Saldorepasse := Saldorepasse + cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat;
+
+
+    //cdsRepasse.FieldByName('Qtde_Fichas').AsInteger := cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
+    lrTotal := lrTotal + vlrRepase;
+    lrtotalFicha := lrtotalFicha + cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
+    cdsRepasse.Post;
+    cdsAuxiliar.Next;
+  end;
+   cdsRepasse.Append;
+   cdsRepasse.FieldByName('Rota').AsString            := 'Total Geral';
+   //cdsRepasse.FieldByName('Qtde_Fichas').AsFloat      := lrtotalFicha;
+   cdsRepasse.FieldByName('Vlr_Repasse').AsFloat      := lrTotal;
+   cdsRepasse.FieldByName('Vlr_Recebido').AsFloat     := vlrRecebido;
+   cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat    := TotalDevolvido;
+   cdsRepasse.FieldByName('Vlr_Perdido').AsFloat      := TotalPerdido;
+   cdsRepasse.FieldByName('Vlr_Comissao').AsFloat     := TotalComissao;
+   cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := Saldorepasse;
+   cdsRepasse.Post;
+end;
+
+
+
+procedure TfrmControleRepasse.CarregarGrid();
+var
+  vlrDevolucao: Real;
+  vlrRepase: Real;
+  vlrRecebido: Real;
+  TotalPerdido : Real ;
+  TotalComissao : Real ;
+  Saldorepasse :Real;
+  TotalDevolvido : Real;
+  lrTotal : Real;
+  lrtotalFicha : Real;
+begin
+  cdsRepasse.EmptyDataSet;
+  vlrRecebido := 0;
+  TotalPerdido := 0;
+  TotalComissao := 0;
+  Saldorepasse := 0;
   while not cdsRelatorio.Eof do
-  Begin
-     cdsRepasse.Append;
-     cdsRepasse.FieldByName('Rota').AsString            := cdsRelatorio.FieldByName('Descricao').AsString;
-     cdsRepasse.FieldByName('Vlr_Repasse').AsFloat      := cdsRelatorio.FieldByName('Tot_Repasse').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Recebido').AsFloat     := cdsRelatorio.FieldByName('Tot_Recebido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat    := cdsRelatorio.FieldByName('Tot_Devolvido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Perdido').AsFloat      := cdsRelatorio.FieldByName('Tot_Perdido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Comissao').AsFloat     := cdsRelatorio.FieldByName('Tot_Comissao').AsFloat;
-     if cdsRelatorio.FieldByName('Tot_Repasse').AsFloat <> 0 then
-     Begin
-        cdsRepasse.FieldByName('Perc001').AsFloat       := (cdsRelatorio.FieldByName('Tot_Recebido').AsFloat/cdsRelatorio.FieldByName('Tot_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc002').AsFloat       := (cdsRelatorio.FieldByName('Tot_Devolvido').AsFloat/cdsRelatorio.FieldByName('Tot_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc003').AsFloat       := (cdsRelatorio.FieldByName('Tot_Perdido').AsFloat/cdsRelatorio.FieldByName('Tot_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc004').AsFloat       := (cdsRelatorio.FieldByName('Tot_Comissao').AsFloat/cdsRelatorio.FieldByName('Tot_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc005').AsFloat       := (cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat/cdsRelatorio.FieldByName('Tot_Repasse').AsFloat)*100;
-     End
-     Else
-     Begin
-        cdsRepasse.FieldByName('Perc001').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc002').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc003').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc004').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc005').AsFloat       := 0;
-     End;
-     cdsRepasse.FieldByName('Qtde_Fichas').AsInteger    := cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
-     cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := cdsRelatorio.FieldByName('Tot_Repasse').AsFloat -
-                                                           ( cdsRelatorio.FieldByName('Tot_Recebido').AsFloat+
-                                                             cdsRelatorio.FieldByName('Tot_Devolvido').AsFloat+
-                                                             cdsRelatorio.FieldByName('Tot_Perdido').AsFloat+
-                                                             cdsRelatorio.FieldByName('Tot_Comissao').AsFloat );
-     cdsRepasse.Post;
-     cdsRelatorio.Next;
-  End;
+  begin
+    cdsRepasse.Append;
+    vlrDevolucao := 0;
+    if cdsDevolucoes.locate('Cidade', cdsRelatorio.FieldByName('Descricao').AsString, []) then
+       vlrDevolucao := cdsDevolucoes.FieldByName('Devolucao').AsFloat;
+    vlrRepase := cdsRelatorio.FieldByName('Total').AsFloat + vlrDevolucao;
+    cdsRepasse.FieldByName('Rota').AsString := cdsRelatorio.FieldByName('Descricao').AsString;
+    cdsRepasse.FieldByName('Vlr_Repasse').AsFloat := vlrRepase;
+    if cdsAuxiliar.locate('Descricao', cdsRelatorio.FieldByName('Descricao').AsString, []) then
+    begin
+      cdsRepasse.FieldByName('Vlr_Recebido').AsFloat := cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat := cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Perdido').AsFloat := cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat;
+      cdsRepasse.FieldByName('Vlr_Comissao').AsFloat := cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat;
 
-   if frmControleRepasse.Tag = 1 Then
-   Begin
-      if cmbNome_TipoVenda.KeyValue = null then
-      Begin
-         CaixaMensagem( 'Informe o tipo de venda !!!', ctInforma, [ cbOk ], 0 );
-         Exit;
-      End;
-      lsFrom  := 'LEFT JOIN T_Vendas Ven on Ven.SeqVenda=Rec.Seqvenda';
-      lsWhere := 'Ven.Cod_TipoVenda=:parCod_tipoVenda and (tipo_baixa=:parTipo_Baixa) and Fechado is Null';
-   End
-   Else
-      lsWhere := '(Data_Repasse>=:parData_RepasseIni and Data_Repasse<=:parData_RepasseFim ) And Rec.Repasse=:parRepasse ';
+      vlrRecebido := vlrRecebido + cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat;
+      TotalDevolvido := TotalDevolvido + cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat;
+      TotalPerdido := TotalPerdido + cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat;
+      TotalComissao := TotalComissao + cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat;
+      cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := vlrRepase - (cdsAuxiliar.FieldByName('Tot_Recebido').AsFloat + cdsAuxiliar.FieldByName('Tot_Comissao').AsFloat + cdsAuxiliar.FieldByName('Tot_Devolvido').AsFloat + cdsAuxiliar.FieldByName('Tot_Perdido').AsFloat);
+      Saldorepasse := Saldorepasse + cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat;
+    end;
+
+    cdsRepasse.FieldByName('Qtde_Fichas').AsInteger := cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
+    lrTotal := lrTotal + vlrRepase;
+    lrtotalFicha := lrtotalFicha + cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
+    cdsRepasse.Post;
+    cdsRelatorio.Next;
+  end;
+   cdsRepasse.Append;
+   cdsRepasse.FieldByName('Rota').AsString            := 'Total Geral';
+   cdsRepasse.FieldByName('Qtde_Fichas').AsFloat      := lrtotalFicha;
+   cdsRepasse.FieldByName('Vlr_Repasse').AsFloat      := lrTotal;
+   cdsRepasse.FieldByName('Vlr_Recebido').AsFloat     := vlrRecebido;
+   cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat    := TotalDevolvido;
+   cdsRepasse.FieldByName('Vlr_Perdido').AsFloat      := TotalPerdido;
+   cdsRepasse.FieldByName('Vlr_Comissao').AsFloat     := TotalComissao;
+   cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := Saldorepasse;
+   cdsRepasse.Post;
+end;
 
 
-   qryRelatorio.Close;
-   qryRelatorio.Params.Clear;
-   qryRelatorio.SQL.Text := 'SELECT Rota.Descricao, '+
-                            '       Sum(Rec.Vlr_Original)  As Tot_Repasse, '+
-                            '       Sum(Rec.Vlr_Recebido)  As Tot_Recebido, '+
-                            '       Sum(Rec.Vlr_Devolvido) As Tot_Devolvido, '+
-                            '       Sum(Rec.Vlr_Comissao)  As Tot_Comissao, '+
-                            '       Sum(Rec.Vlr_Perdido)   As Tot_Perdido, '+
-                            '       Count(Distinct(Rec.SeqVenda)) As Qtde_Repasse '+
-                            'FROM T_Ctasreceber Rec '+
-                            '       LEFT JOIN T_CLientes Cli ON '+
-                            '            Cli.Codigo=Rec.Cod_Cliente '+
-                            '       LEFT JOIN T_Rotas Rota ON '+
-                            '            Rota.Codigo=Cli.Cod_Rota '+
-                                     lsFrom + ' '+
-                            'WHERE '+lsWhere+' '+
-                            'GROUP BY Rota.Descricao ' ;
-  IF frmControleRepasse.Tag = 1 Then
-  Begin
-     qryRelatorio.ParamByName('parCod_TipoVenda').AsString      := cmbNome_TipoVenda.KeyValue;
-     qryRelatorio.ParamByName('parTipo_baixa').AsString         :='PP';
 
-     cdsRelatorio.Next;
-  End
-  Else
-  Begin
-     qryRelatorio.ParamByName('parRepasse').AsString               := 'S';
-     qryRelatorio.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');
-     qryRelatorio.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text+' 23:59:00');
-  End;
+procedure TfrmControleRepasse.CarregarTotais;
+begin
+  QryVariavel.Close;
+  QryVariavel.Params.Clear;
+  QryVariavel.SQL.Text := 'SELECT cli.cidade as Descricao, ' + '       Sum(Rec.Vlr_Original)  As Tot_Repasse, ' + '       Sum(Rec.Vlr_Recebido)  As Tot_Recebido, ' + '       Sum(Rec.Vlr_Devolvido) As Tot_Devolvido, ' + '       Sum(Rec.Vlr_Comissao)  As Tot_Comissao, ' + '       Sum(Rec.Vlr_Perdido)   As Tot_Perdido ' + 'FROM T_Ctasreceber Rec ' + '       LEFT JOIN T_CLientes Cli ON Cli.Codigo=Rec.Cod_Cliente ' + 'WHERE (Rec.Data_emissao>=:parData_RepasseIni and rec.Data_emissao<=:parData_RepasseFim) ' + 'GROUP BY cli.Cidade ';
+  QryVariavel.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text + ' 00:00:00');
+  QryVariavel.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text + ' 23:59:00');
+  cdsAuxiliar.Close;
+  cdsAuxiliar.ProviderName := dspVariavel.Name;
+  cdsAuxiliar.Open;
+end;
 
-  cdsRelatorio.Close;
-  cdsRelatorio.ProviderName := dspRelatorio.Name;
-  cdsRelatorio.Open;
-
-  while not cdsRelatorio.Eof do
-  Begin
-     cdsRepasse.Locate('rota', cdsRelatorio.FieldByName('Descricao').AsString,[]);
-     cdsRepasse.Edit;
-     cdsRepasse.FieldByName('Vlr_Recebido').AsFloat     := cdsRelatorio.FieldByName('Tot_Recebido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat    := cdsRelatorio.FieldByName('Tot_Devolvido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Perdido').AsFloat      := cdsRelatorio.FieldByName('Tot_Perdido').AsFloat;
-     cdsRepasse.FieldByName('Vlr_Comissao').AsFloat     := cdsRelatorio.FieldByName('Tot_Comissao').AsFloat;
-     cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat := cdsRepasse.FieldByName('Vlr_Repasse').AsFloat -
-                                                           ( cdsRepasse.FieldByName('Vlr_Recebido').AsFloat+
-                                                             cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat+
-                                                             cdsRepasse.FieldByName('Vlr_Perdido').AsFloat+
-                                                             cdsRepasse.FieldByName('Vlr_Comissao').AsFloat );
-
-     if cdsRepasse.FieldByName('Vlr_Repasse').AsFloat <> 0 then
-     Begin
-        cdsRepasse.FieldByName('Perc001').AsFloat       := (cdsRepasse.FieldByName('vlr_Recebido').AsFloat/cdsRepasse.FieldByName('Vlr_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc002').AsFloat       := (cdsRepasse.FieldByName('Vlr_Devolvido').AsFloat/cdsRepasse.FieldByName('Vlr_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc003').AsFloat       := (cdsRepasse.FieldByName('Vlr_Perdido').AsFloat/cdsRepasse.FieldByName('Vlr_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc004').AsFloat       := (cdsRepasse.FieldByName('Vlr_Comissao').AsFloat/cdsRepasse.FieldByName('Vlr_Repasse').AsFloat)*100;
-        cdsRepasse.FieldByName('Perc005').AsFloat       := (cdsRepasse.FieldByName('vlr_SaldoRepasse').AsFloat/cdsRepasse.FieldByName('Vlr_Repasse').AsFloat)*100;
-     End
-     Else
-     Begin
-        cdsRepasse.FieldByName('Perc001').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc002').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc003').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc004').AsFloat       := 0;
-        cdsRepasse.FieldByName('Perc005').AsFloat       := 0;
-     End;
-     cdsRepasse.FieldByName('Qtde_Fichas').AsInteger    := cdsRelatorio.FieldByName('Qtde_Repasse').AsInteger;
-     cdsRepasse.Post;
-     cdsRelatorio.Next;
-  End;
-
-
+procedure TfrmControleRepasse.CarregarTotaisPorCidade(Cidade : string);
+begin
+  QryVariavel.Close;
+  QryVariavel.Params.Clear;
+  QryVariavel.SQL.Text := 'SELECT cli.Descricao, ' +
+                          '       max(Rec.Vlr_Original)  As Tot_Repasse, ' +
+                          '       Sum(Rec.Vlr_Recebido)  As Tot_Recebido, ' +
+                          '       Sum(Rec.Vlr_Devolvido) As Tot_Devolvido, ' +
+                          '       Sum(Rec.Vlr_Comissao)  As Tot_Comissao, ' +
+                          '       Sum(Rec.Vlr_Perdido)   As Tot_Perdido ' +
+                          'FROM T_Ctasreceber Rec ' +
+                          '       LEFT JOIN T_CLientes Cli ON Cli.Codigo=Rec.Cod_Cliente  ' +
+                          'WHERE (Rec.Data_emissao>=:parData_RepasseIni and rec.Data_emissao<=:parData_RepasseFim and cli.Cidade=:ParCidade) ' + 'GROUP BY cli.Descricao ';
+  QryVariavel.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text + ' 00:00:00');
+  QryVariavel.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text + ' 23:59:00');
+  QryVariavel.ParamByName('ParCidade').AsString                := Cidade;
+  cdsAuxiliar.Close;
+  cdsAuxiliar.ProviderName := dspVariavel.Name;
+  cdsAuxiliar.Open;
 end;
 
 procedure TfrmControleRepasse.cmbPeriodoChange(Sender: TObject);
@@ -384,6 +419,7 @@ end;
 
 procedure TfrmControleRepasse.FormShow(Sender: TObject);
 begin
+
 
    qryVariavel.Close;
    qryVariavel.Params.Clear;

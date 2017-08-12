@@ -472,6 +472,7 @@ begin
       loItementrada.DataEntrada  := edtDataEntrada.Date;
       loItementrada.CompraId  := liSeqEntrada;
       loDaoItemEntrada.incluir(cdsItensEntradasTmp,loItemEntrada);
+
    except on E: Exception do
        CaixaMensagem('Não foi possivel efetuar a entrada ('+E.Message+')', ctConfirma, [ cbSimNao ], 0 )
    End;

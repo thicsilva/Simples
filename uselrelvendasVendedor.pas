@@ -79,6 +79,10 @@ type
     bsSkinBevel1: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
     bsSkinSpeedButton1: TbsSkinSpeedButton;
+    ClientDataSet1: TClientDataSet;
+    ClientDataSet1Cidade: TStringField;
+    ClientDataSet1Quantidade: TIntegerField;
+    ClientDataSet1Total: TFloatField;
     procedure btnPesquisarClick(Sender: TObject);
     procedure impMatricialNewPage(Sender: TObject; Pagina: Integer);
     procedure FormShow(Sender: TObject);
@@ -170,6 +174,19 @@ begin
          lsCampo      := 'Vendedor';
          lsQuebra     := 'Atividade';
       end;
+      11 :
+      begin
+         GstituloRel  :=' Relatorio de Vendas por vendedor e Cidade';
+         lsCampo      := 'Vendedor';
+         lsQuebra     := 'Cidade';
+      end;
+      12 :
+      begin
+         GstituloRel  :=' Relatorio de Vendas por vendedor e Cidade';
+         lsCampo      := 'Cidade';
+         lsQuebra     := 'Vendedor';
+      end;
+
    end;
 
 
@@ -182,7 +199,7 @@ begin
    ImpMatricial.Abrir;
 
    case cmbTipoResultado.ItemIndex of
-      0,1,3,4,6,7,9:
+      0,1,3,4,6,7,9,11,12:
       Begin
 
          lrVlr_Vendedor  := 0;
@@ -195,7 +212,7 @@ begin
          While not cdsRelatorio.Eof Do
          begin
            case cmbTipoResultado.ItemIndex Of
-              0,3,6,7,9 :
+              0,3,6,7,9,11,12 :
               Begin
                  if Trim(lsCampo)<>'' then
                  begin
@@ -248,7 +265,7 @@ begin
                     End;
                  end;
                  case cmbTipoResultado.ItemIndex Of
-                    0,6,7,9:
+                    0,6,7,9,11,12:
                     Begin
                        impmatricial.Imp(pvilinha,001,Copy((IncZero(cdsrelatorio.FieldByName('Cod_Cliente').AsString,5)+' '+cdsrelatorio.FieldByName('Descricao').AsString),1,40));
                        impmatricial.Imp(pvilinha,044,IncZero(cdsrelatorio.FieldByName('SeqVenda').AsString,8)+' '+
@@ -439,18 +456,21 @@ begin
    lsSelect := RetornarVinculoDaVenda;
 
    Case cmbTipoResultado.ItemIndex Of
-     0,1,4,6,7,9 : GridClientes.Visible := True;
-     2,8,10      : GridProdutos.Visible := True;
-     3           : GridSupervisor.Visible := True;
-     5           : GridProdutos.Visible := True;
+     0,1,4,6,7,9,11,12 : GridClientes.Visible := True;
+     2,8,10            : GridProdutos.Visible := True;
+     3                 : GridSupervisor.Visible := True;
+     5                 : GridProdutos.Visible := True;
    End;
 
    case cmbTipoResultado.ItemIndex of
      0   : lsCampos := ' Ven.Cod_Funcionario, Ven.Cod_Cliente, Fun.Descricao as Vendedor, '+
-                     ' Cli.Descricao, Ven.Seqvenda,Ven.Controle,Ven.Data_Mov, '+
-                     ' (Ven.Vlr_total-Ven.Vlr_Desconto) as Vlr_Total ';
+                       ' Cli.Descricao, Ven.Seqvenda,Ven.Controle,Ven.Data_Mov, '+
+                       ' (Ven.Vlr_total-Ven.Vlr_Desconto) as Vlr_Total ';
+     11,12 : lsCampos := ' Cli.Cidade,Ven.Cod_Funcionario, Ven.Cod_Cliente, Fun.Descricao as Vendedor, '+
+                       ' Cli.Descricao, Ven.Seqvenda,Ven.Controle,Ven.Data_Mov, '+
+                       ' (Ven.Vlr_total-Ven.Vlr_Desconto) as Vlr_Total ';
      1   : lsCampos := ' Ven.Cod_Funcionario, Fun.Descricao as Vendedor, Sum(Ven.Vlr_total-Vlr_Desconto) as Vlr_Total ';
-     2,8 : lsCampos := '  Fun.Descricao as Vendedor, Itens.Perc_Comis, ';
+     2,8 : lsCampos := ' Fun.Descricao as Vendedor, Itens.Perc_Comis, ';
      10  :
      begin
          lsCampos := '  Itens.FuncionarioId, Fun.Descricao as Vendedor, Itens.Perc_Comis, ';
@@ -488,7 +508,7 @@ begin
    end;
 
    Case cmbTipoResultado.ItemIndex Of
-      0,1,3,4,6,7,9 :
+      0,1,3,4,6,7,9,11,12 :
       Begin
          qryRelatorio.Close;
          qryRelatorio.SQL.Text := 'SELECT  '+lsCampos+' '+
@@ -510,9 +530,10 @@ begin
          Case cmbTipoResultado.ItemIndex Of
             9 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1,3,2 ';
             6 : qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 3 ';
+            11: qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 2,1 ';
+            12: qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1,2 ';
             else
                qryRelatorio.SQL.Text := qryRelatorio.SQL.Text +' Order by 1 ';
-
          End;
 
          qryRelatorio.ParamByName('parData_VendaIni').AsSQLTimeStamp      := StrToSqlTimeStamp(dtpData_Ini.Text+' 00:00:00');

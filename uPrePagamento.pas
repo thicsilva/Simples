@@ -310,7 +310,7 @@ begin
       TotalPago := TotalPago + cdsTempPagamentos.FieldByName('Valor').AsFloat;
       cdsTempPagamentos.Next;
    End;
-   if TotalPago>0 then
+   if (TotalPago>0) and ( RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimeComprovanteBaixa','0',gsOperador ) ) ) then 
    Begin
 
       Parametros := TStringList.Create;

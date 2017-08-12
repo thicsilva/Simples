@@ -8,7 +8,9 @@ uses
   ToolWin, ComCtrls, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, DB, cxDBData, FMTBcd, DBClient, Provider, SqlExpr,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxControls, cxGridCustomView, cxGrid,uFormBase, bsSkinTabs;
+  cxClasses, cxControls, cxGridCustomView, cxGrid,uFormBase, bsSkinTabs,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmTransferenciaDeSetores = class(TFormBase)

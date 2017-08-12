@@ -8,7 +8,8 @@ uses
   cxEdit, DB, cxDBData, FMTBcd, DBClient, Provider, SqlExpr, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,uFormBase,
   cxControls, cxGridCustomView, cxGrid, ExtCtrls, bsSkinCtrls, ToolWin, ComCtrls,
-  dxSkinsCore;
+  dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmConsItensDevolvidos = class(TFormBase)

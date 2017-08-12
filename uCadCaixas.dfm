@@ -357,7 +357,7 @@ object frmCadCaixas: TfrmCadCaixas
     Top = 53
     Width = 635
     Height = 247
-    ActivePage = bsSkinTabSheet2
+    ActivePage = bsSkinTabSheet1
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -386,8 +386,6 @@ object frmCadCaixas: TfrmCadCaixas
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitLeft = 104
-    ExplicitTop = 69
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
       object bsSkinPanel1: TbsSkinPanel
@@ -587,9 +585,10 @@ object frmCadCaixas: TfrmCadCaixas
         Left = 0
         Top = 33
         Width = 633
-        Height = 190
+        Height = 171
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 190
         object GridConsulta: TcxGridDBTableView
           Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcPesquisa
@@ -640,6 +639,16 @@ object frmCadCaixas: TfrmCadCaixas
         object cxGrid1Level1: TcxGridLevel
           GridView = GridConsulta
         end
+      end
+      object StatusBar1: TStatusBar
+        Left = 0
+        Top = 204
+        Width = 633
+        Height = 19
+        Panels = <>
+        ExplicitLeft = 184
+        ExplicitTop = 160
+        ExplicitWidth = 0
       end
     end
     object bsSkinTabSheet2: TbsSkinTabSheet

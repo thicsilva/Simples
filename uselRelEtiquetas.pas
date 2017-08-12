@@ -9,7 +9,8 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, bsdbctrls, StdCtrls, Mask,
   bsSkinBoxCtrls, bsSkinGrids, bsDBGrids, FMTBcd, Provider, SqlExpr, DBClient,
-  dxSkinsCore;
+  dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmSelRelEtiquetas = class(TFormBase)

@@ -1635,6 +1635,7 @@ object frmVendas: TfrmVendas
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'stdlabel'
       Caption = 'Desconto'
+      Visible = False
     end
     object edtCod_Produto: TbsSkinEdit
       Left = 10
@@ -1828,6 +1829,7 @@ object frmVendas: TfrmVendas
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      Visible = False
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -1844,6 +1846,7 @@ object frmVendas: TfrmVendas
       Height = 20
       HintImageIndex = 0
       TabOrder = 6
+      Visible = False
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -8884,6 +8887,10 @@ object frmVendas: TfrmVendas
     object NovoClienen1: TMenuItem
       Caption = 'Novo Cliente'
       OnClick = NovoClienen1Click
+    end
+    object AlteraoCliente1: TMenuItem
+      Caption = 'Altera'#231#227'o Cliente'
+      OnClick = AlteraoCliente1Click
     end
   end
 end

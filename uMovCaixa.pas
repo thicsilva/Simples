@@ -840,9 +840,6 @@ begin
                'Group by Prod.Codigo,Itens.Pco_Venda,prod.Descricao';
 
    End;
-
-
-
 end;
 
 Procedure TfrmMovCaixa.RelatorioDeCaixaModelo03;
@@ -2335,13 +2332,14 @@ procedure TfrmMovCaixa.btnImprimirSaldosClick(Sender: TObject);
 var DadosRelatorio : TclientDataSet;
     lsCodigo : String;
     Total : Real;
+    TotalGeral : Real;
 begin
 
    DadosRelatorio := TclientDataSet.Create(Self);
    DadosRelatorio.data := gconexao.BuscarDadosSQL('Select cod_TipoDespesa as Codigo, ope.Descricao, Historico, Valor '+
                                              ' from T_MovCaixa mov '+
 	                                           ' left join T_Operacoes Ope on ope.codigo=mov.Cod_TipoDespesa '+
-                                             ' where D_C='+QuotedStr('D')+' and '+
+                                             ' where D_C='+QuotedStr('D')+' and Estornado<>'+QuotedStr('S')+ ' and '+
                                              ' Mov.Data_lancamento>='+QuotedStr( DateToStr(dtpData_Ini.Date)+' 00:00:00')+' and Mov.Data_lancamento<='+QuotedStr(DateToStr(dtpData_Fim.Date) +' 00:00:00')+
                                              ' Order By Mov.Cod_tipoDespesa ',Nil).data;
 
@@ -2367,20 +2365,25 @@ begin
       ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
       pviLinha:=Pvilinha+1;
       Total := 0;
+      TotalGeral := 0;
       while not DadosRelatorio.Eof do
       Begin
          if lscodigo<>DadosRelatorio.FieldByName('Codigo').AsString then
          begin
             if Total<>0 then
             begin
+              ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+              pviLinha:=Pvilinha+1;
               impmatricial.Imp(pvilinha,05,'Total da Despesa');
               impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',Total),[]);
               pviLinha:=Pvilinha+1;
               ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
               pviLinha:=Pvilinha+1;
+              Total := 0;
             end;
             impmatricial.Imp(pvilinha,001,Copy(DadosRelatorio.FieldByName('Codigo').AsString+' '+DadosRelatorio.FieldByName('Descricao').AsString,1,18) );
             lscodigo := DadosRelatorio.FieldByName('Codigo').AsString;
+            pviLinha:=Pvilinha+1;
          end;
          if DadosRelatorio.FieldByName('Historico').AsString=EmptyStr then
             impmatricial.Imp(pvilinha,05,'Sem Historico')
@@ -2388,12 +2391,18 @@ begin
             impmatricial.Imp(pvilinha,05,DadosRelatorio.FieldByName('Historico').AsString);
          impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',DadosRelatorio.fieldByname('Valor').asfloat),[]);
          pvilinha := pviLinha + 1;
+         if pvilinha>=55 then
+            impmatricial.Novapagina;
+
          total := total + DadosRelatorio.fieldByname('Valor').asfloat;
+         totalGeral := totalGeral + DadosRelatorio.fieldByname('Valor').asfloat;
+
          DadosRelatorio.Next;
       End;
       ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
       pviLinha:=Pvilinha+1;
-      ImpMatricial.imp(pvilinha,001,'Total...');
+      ImpMatricial.imp(pvilinha,001,'Total Geral...');
+      impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',totalGeral),[]);
       pviLinha:=Pvilinha+1;
    end;
    ImpMatricial.Fechar;

@@ -21,7 +21,7 @@ object frmCadClientes: TfrmCadClientes
     Top = 76
     Width = 835
     Height = 525
-    ActivePage = tab_Historico
+    ActivePage = Tab_Consulta
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -926,7 +926,7 @@ object frmCadClientes: TfrmCadClientes
       object bsSkinExPanel1: TbsSkinExPanel
         Left = 136
         Top = 3
-        Width = 524
+        Width = 578
         Height = 302
         HintImageIndex = 0
         TabOrder = 1
@@ -1744,6 +1744,31 @@ object frmCadClientes: TfrmCadClientes
           RightImageIndex = -1
           RightImageHotIndex = -1
           RightImageDownIndex = -1
+        end
+        object cmbCidade: TbsSkinDBLookupComboBox
+          Left = 460
+          Top = 146
+          Width = 115
+          Height = 20
+          HintImageIndex = 0
+          TabOrder = 16
+          SkinData = frmPrincipal.SkinEntradaDados
+          SkinDataName = 'combobox'
+          DefaultFont.Charset = DEFAULT_CHARSET
+          DefaultFont.Color = clWindowText
+          DefaultFont.Height = 14
+          DefaultFont.Name = 'Arial'
+          DefaultFont.Style = []
+          DefaultWidth = 0
+          DefaultHeight = 20
+          UseSkinFont = True
+          DefaultColor = clWindow
+          ListBoxDefaultItemHeight = 20
+          ListBoxUseSkinFont = True
+          ListBoxUseSkinItemHeight = True
+          KeyField = 'codigo'
+          ListField = 'descricao;codigo'
+          ListSource = srcCidades
         end
       end
       object panelVeiculo: TbsSkinExPanel
@@ -2739,7 +2764,7 @@ object frmCadClientes: TfrmCadClientes
       end
       object pnlBloqueado: TPanel
         Left = 594
-        Top = -2
+        Top = -10
         Width = 236
         Height = 30
         Anchors = [akRight, akBottom]
@@ -5564,8 +5589,8 @@ object frmCadClientes: TfrmCadClientes
     Top = 424
   end
   object PopupMenu1: TPopupMenu
-    Left = 664
-    Top = 240
+    Left = 672
+    Top = 112
     object Configurar1: TMenuItem
       Caption = 'Configurar'
       OnClick = Configurar1Click
@@ -5605,5 +5630,17 @@ object frmCadClientes: TfrmCadClientes
       Caption = 'Realizar Evento'
       OnClick = MenuItem1Click
     end
+  end
+  object cdsCidades: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCadAtividades'
+    Left = 32
+    Top = 170
+  end
+  object srcCidades: TDataSource
+    DataSet = cdsCidades
+    Left = 31
+    Top = 200
   end
 end

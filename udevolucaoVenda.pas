@@ -349,7 +349,6 @@ begin
    {$ENDREGION}
 
    frmPrincipal.dbxPrincipal.Commit( trdNrTransacao );
-   frmDevolucaoVenda.tag := 1;
 
    if frmDevolucaoVenda.Tag=2 then
    Begin
@@ -366,11 +365,7 @@ begin
       loDaoRomaneio.AtualizarTotalDoRomaneio(piRomaneioId);
       FreeAndNil(loDaoRomaneio);
    end;
-
-
-
-
-
+   frmDevolucaoVenda.tag := 1;
    close;
 End;
 

@@ -22,7 +22,7 @@ object frmCadProdutos: TfrmCadProdutos
     Top = 53
     Width = 787
     Height = 460
-    ActivePage = pagFichaTecnica
+    ActivePage = bsSkinTabSheet2
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText

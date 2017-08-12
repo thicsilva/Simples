@@ -49,6 +49,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -248,6 +249,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -266,6 +268,7 @@ object frmPrePagamento: TfrmPrePagamento
     Spacing = 2
     Caption = 'Informa'#231#245'es do Pre-Pagamento'
     Align = alTop
+    UseSkinSize = True
     object bsSkinStdLabel6: TbsSkinStdLabel
       Left = 299
       Top = 53
@@ -310,7 +313,7 @@ object frmPrePagamento: TfrmPrePagamento
       Left = 136
       Top = 51
       Width = 89
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -330,6 +333,7 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -389,6 +393,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -444,11 +449,11 @@ object frmPrePagamento: TfrmPrePagamento
       ImageIndex = -1
       CharCase = ecNormal
       DefaultColor = clWindow
-      Text = 'Controle'
+      Text = 'Ordem de Servi'#231'o'
       Items.Strings = (
         'Controle'
         'Ordem de Servi'#231'o')
-      ItemIndex = 0
+      ItemIndex = 1
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -494,6 +499,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -632,6 +638,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -687,7 +694,7 @@ object frmPrePagamento: TfrmPrePagamento
       Left = 100
       Top = 4
       Width = 61
-      Height = 18
+      Height = 20
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
@@ -708,6 +715,7 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -798,6 +806,7 @@ object frmPrePagamento: TfrmPrePagamento
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = False
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -834,6 +843,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -854,7 +864,7 @@ object frmPrePagamento: TfrmPrePagamento
       Left = 351
       Top = 0
       Width = 73
-      Height = 23
+      Height = 25
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -878,6 +888,7 @@ object frmPrePagamento: TfrmPrePagamento
       ParentBiDiMode = False
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -890,7 +901,7 @@ object frmPrePagamento: TfrmPrePagamento
       Left = 144
       Top = 0
       Width = 87
-      Height = 23
+      Height = 25
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -912,6 +923,7 @@ object frmPrePagamento: TfrmPrePagamento
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -938,6 +950,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -958,7 +971,7 @@ object frmPrePagamento: TfrmPrePagamento
       Left = 478
       Top = 0
       Width = 66
-      Height = 23
+      Height = 25
       Text = '0,00'
       DefaultColor = clWindow
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -982,6 +995,7 @@ object frmPrePagamento: TfrmPrePagamento
       ParentBiDiMode = False
       ParentFont = False
       TabOrder = 4
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -1007,6 +1021,7 @@ object frmPrePagamento: TfrmPrePagamento
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       ShadowEffect = False
       ShadowColor = clBlack
       ShadowOffset = 0
@@ -1044,6 +1059,7 @@ object frmPrePagamento: TfrmPrePagamento
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
+    ColSizingwithLine = False
     DrawGraphicFields = False
     UseColumnsFont = False
     MouseWheelSupport = False

@@ -280,6 +280,8 @@ type
     dxBarButton43: TdxBarButton;
     actControleCheque: TAction;
     dxBarButton44: TdxBarButton;
+    ActCidade: TAction;
+    dxBarButton45: TdxBarButton;
     procedure actSkinsExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
     procedure actCadClientesExecute(Sender: TObject);
@@ -356,6 +358,7 @@ type
     procedure actRelContaCorrenteExecute(Sender: TObject);
     procedure actSimplesRemessaExecute(Sender: TObject);
     procedure actControleChequeExecute(Sender: TObject);
+    procedure ActCidadeExecute(Sender: TObject);
   private
     pviLinha : integer;
     procedure ConfiguraAmbiente;
@@ -416,7 +419,7 @@ uses uCadClientes, uCadAtividades, uCadFuncionarios, uCadOperacoes,
   uRelAnaliseFinanceira, uDaoEventoAnimal, uRelEstoque, uRomaneioDeCarga,
   uRecebimentoRomaneio, uCadEmpresa, uDaoEmpresa, uRelTabelaPreco, uDelivery,
   uLocacao, uConsLocacao, uCadGrade, uAberturaOS, uDeliveryGas, uDtmRelatorios,
-  uClassDaoContaCorrente, uDaoCliente, uClassCliente, uRelCheques;
+  uClassDaoContaCorrente, uDaoCliente, uClassCliente, uRelCheques, uCadCidade;
 
 {$R *.dfm}
 
@@ -629,6 +632,12 @@ var DaoEmpresa : TDaoEmpresa;
 begin
   DaoEmpresa := TDaoEmpresa.Create(gConexao);
   gEmpresa := Daoempresa.carregar;
+end;
+
+procedure TfrmPrincipal.ActCidadeExecute(Sender: TObject);
+begin
+   frmCadCidade := TfrmCadCidade.create(Self);
+   frmCadCidade.showModal;
 end;
 
 procedure TfrmPrincipal.VerificarAgendaAnimal;
@@ -1182,11 +1191,11 @@ end;
 
 procedure TfrmPrincipal.actControleRepasseExecute(Sender: TObject);
 begin
-   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+{   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
    Begin
       CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
       Exit;
-   End;
+   End;}
    frmControleRepasse := TfrmControleRepasse.create(Self);
    frmControleRepasse.Tag := 0;
    frmControleRepasse.showmodal;
@@ -1438,11 +1447,11 @@ end;
 
 procedure TfrmPrincipal.actServico01Execute(Sender: TObject);
 begin
-   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
-   Begin
-      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
-      Exit;
-   End;
+   //if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   //Begin
+   //   CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+   //   Exit;
+   //End;
    FrmVendas := TfrmVendas.create(Self);
    frmvendas.Tag := 3; // venda de serviços
    frmVendas.Showmodal;
@@ -1463,11 +1472,11 @@ end;
 
 procedure TfrmPrincipal.actServicosExecute(Sender: TObject);
 begin
-   if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
-   Begin
-      CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
-      Exit;
-   End;
+   //if not gsPerfilacesso.AcessoForm(TAction(Sender).Category,TAction(Sender).Caption,gbMaster) Then
+   //Begin
+   //   CaixaMensagem( 'Acesso restrito a senha ', ctAviso, [ cbOk ], 0 );
+   //   Exit;
+   //End;
    FrmVendas := TfrmVendas.create(Self);
    frmvendas.Tag := 3; // venda de serviços
    frmVendas.Showmodal;

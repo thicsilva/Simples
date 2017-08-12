@@ -82,6 +82,7 @@ type TDaoEstrutura = class
     procedure Adicionar_ImprimeRelatorio_na_Tabela_FormasPagamento;
     procedure Adicionar_Banco_na_Tabela_ContasReceber;
     procedure Adicionar_NCheque_na_Tabela_ContasReceber;
+    procedure CriarTabela_Cidade;
 
   public
     Constructor Create(Conexao : TConexao);
@@ -787,6 +788,21 @@ begin
    end;
 end;
 
+procedure TDaoEstrutura.CriarTabela_Cidade;
+begin
+   if not ExisteTabela( 'Cidade', FConexao.Conection ) then
+   begin
+      FQryAjustes.Close;
+      FQryAjustes.SQL.Text := 'CREATE TABLE Cidade ([Codigo] [INT] , '+
+	                           '                    [Descricao] [varchar](50), '+
+                              '                    [Data_Cad] [datetime] NULL,'+
+                              '                    [Data_Atu] [datetime] NULL,'+
+    	                        '                    [Cod_Emp] [char](3), '+
+                              '                    [Operador] [varchar](30))';
+      FQryAjustes.ExecSQL;
+   end;
+end;
+
 
 procedure TDaoEstrutura.CriarTabela_Correcoes;
 begin
@@ -944,6 +960,7 @@ begin
   CriarTabela_CustosProduto;
   Adicionar_Email_na_Tabela_Clientes;
   Adicionar_BloqueioEstoque_na_Tabela_Produtos;
+  CriarTabela_Cidade;
 end;
 
 

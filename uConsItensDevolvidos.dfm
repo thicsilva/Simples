@@ -21,10 +21,8 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
     Height = 307
     Align = alClient
     TabOrder = 0
-    ExplicitTop = 44
-    ExplicitHeight = 316
     object gridMovimento: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcItensDevolucoes
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -98,19 +96,16 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 772
+        Width = 774
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 1
-    ExplicitLeft = 8
-    ExplicitTop = 8
-    ExplicitWidth = 472
     object bsSkinToolBar2: TbsSkinToolBar
-      Left = 11
+      Left = 9
       Top = 0
-      Width = 763
+      Width = 765
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -124,6 +119,7 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -154,9 +150,9 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 665
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -190,6 +186,7 @@ object frmConsItensDevolvidos: TfrmConsItensDevolvidos
         OnClick = btnFecharClick
         ExplicitLeft = 704
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object bsSkinBevel3: TbsSkinBevel
         Left = 0

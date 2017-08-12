@@ -44,6 +44,7 @@ type TVenda = class
     procedure ImprimirBematec(DadosVendas, DadosItensVendas: TClientDataSet; CaminhoImpressora: String; prTotalPago : Real);
     procedure ImprimirGrafico80Colunas(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet;   CaminhoImpressora : String );
     procedure ImprimirGrafico80ColunasM2(DadosVendas : TClientDataSet; DadosItensVendas : TClientDataSet;   CaminhoImpressora : String );
+    procedure ImprimirBematec03(DadosVendas, DadosItensVendas: TClientDataSet; CaminhoImpressora: String; prTotalPago: Real);
     procedure SetVendaID(const Value: Integer);
     procedure SetValorPendendente(const Value: Real);
     procedure SetData_Venda(const Value: TDateTime);
@@ -347,11 +348,9 @@ Begin
       impMatricial.Imp ( FLinha, 008,'|'+DadosItensVendas.FieldByName( 'Descricao' ).AsString );
       impMatricial.ImpD( FLinha, 058,FormatFloat( '#,##0.00', DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat)+'|', [ ] );
       impMatricial.ImpD( FLinha, 067,FormatFloat( '#,##0.00', Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) )+'|', [ ] );
-      impMatricial.ImpD( FLinha, 080,FormatFloat( '#,##0.00', Arredondar ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat *
-                                                                          ( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat -
-                                                                            DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat ), 2 ) )+'|' , [ ] );
-      lrTot_Produtos := lrTot_Produtos + ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
-      lrTot_Desconto := lrTot_Desconto + ( DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat * DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat );
+      impMatricial.ImpD( FLinha, 080,FormatFloat( '#,##0.00', DadosItensVendas.FieldByName( 'vlr_total' ).AsFloat)+'|' , [ ] );
+      lrTot_Produtos := lrTot_Produtos +  DadosItensVendas.FieldByName( 'vlr_total' ).AsFloat;
+      lrTot_Desconto := lrTot_Desconto +  DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat;
 
       liCont := liCont + 1;
       FLinha := FLinha + 1;
@@ -359,11 +358,14 @@ Begin
    end;
    impMatricial.Imp ( FLinha, 001, IncDigito( '-', '-', 80, 0 ) );
    FLinha := FLinha + 1;
-   impMatricial.Imp ( FLinha, 001, 'Total de Produtos Listado.: ' );
+   impMatricial.Imp ( FLinha, 001, 'Numero de itens Listado...: ' );
    impMatricial.ImpD( FLinha, 039, IntToStr( liCont ), [ ] );
    FLinha := FLinha + 1;
+   impMatricial.Imp ( FLinha, 001, 'Desconto Total............:');
+   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Desconto ) ), [ ] );
+    FLinha := FLinha + 1;
    impMatricial.Imp ( FLinha, 001, 'Valor a Pagar.............:');
-   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ), [ ] );
+   impMatricial.ImpD( FLinha, 039, FormatFloat( '#,##0.00', ( lrTot_Produtos ) ), [ ] );
    FLinha := FLinha + 1;
    impMatricial.Imp ( FLinha, 001, IncDigito( '=', '=', 80, 0 ) );
    FLinha := FLinha + 2;
@@ -616,6 +618,7 @@ begin
      2: ImprimirBematec(DadosVendas,DadosItensVendas,CaminhoImpressora,prTotalPago);
      3: ImprimirGrafico80Colunas(DadosVendas,DadosItensVendas,CaminhoImpressora);
      4: ImprimirGrafico80ColunasM2(DadosVendas,DadosItensVendas,CaminhoImpressora);
+     8: ImprimirBematec03(DadosVendas,DadosItensVendas,CaminhoImpressora,prTotalPago);
   end;
 end;
 
@@ -703,6 +706,92 @@ begin
      CloseFile(F);
   end;
 end;
+
+procedure TVenda.ImprimirBematec03(DadosVendas,DadosItensVendas: TClientDataSet; CaminhoImpressora : String; prTotalPago : Real);
+const
+    sComando = #27 + #109;
+  var F: TextFile;
+     lrTot_Produtos : Real;
+     lrTot_Desconto : Real;
+     liCont         : Integer;
+     I: Integer;
+     DaoCaixa : TDaoCaixa;
+begin
+  DaoCaixa := TDaoCaixa.Create(FConexao);
+
+  for I := 0 to Self.Numerovias-1 do
+  begin
+     AssignFile(F, CaminhoImpressora  );
+     Rewrite(F);
+     WriteLn(F, '',IncDigito( '_','_',52,0));
+     WriteLn(F, '','Emitido em :' + FormatDatetime( 'dd/mm/yyyy hh:mm:ss', Now ) );
+     WriteLn(F, '',IncDigito( '-','-',52,0));
+     WriteLn(F, '',Copy(Empresa.Nome_Fantasia,1,39));
+     WriteLn(F, '',IncDigito( '-','-',52,0));
+     WriteLn(F, '',Copy('Nota de Pagamento',1,39));
+     WriteLn(F, '',IncDigito( '-','-',52,0));
+     WriteLn(F, '',Copy(inczero(DadosVendas.FieldByName( 'Cod_Cliente' ).AsString,5)+' - '+ DadosVendas.FieldByName( 'Nome_Cliente' ).AsString ,1, 39 ) );
+     WriteLn(F, '','Emissao...: '+formatdateTime('dd/mm/YYYY',DadosVendas.FieldByName( 'Data_Venda' ).AsDateTime)+' Orc.: '+incZero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,8) );
+     WriteLn(F, '','Forma Pag.: '+Copy(inczero(IntToStr(Self.FormaPagamento.Id),3)+'-'+FormaPagamento.Descricao,1,25));
+     WriteLn(F, '','Vendedor..: '+Copy(inczero(DadosVendas.FieldByName( 'Cod_Funcionario' ).AsString,3)+'-'+Self.Funcionario.Descricao,1,25));
+     WriteLn(F, '','NºControle: '+inczero(DadosVendas.FieldByName( 'SeqVenda' ).AsString,6) );
+     WriteLn(F, '','Caixa.....: '+DaoCaixa.RetornarNomeCaixa( DadosVendas.FieldByName( 'Cod_Caixa' ).AsInteger) );
+     WriteLn(F, '',IncDigito( '=','=',52,0));
+     WriteLn(F, '','Cod  |P R O D U T O S      |Und|Qtd| Valor |Total |' );
+     //             12345678901234567890123456789012345678901234567890
+     //                      1         2         3         4         5
+     WriteLn(F, '',IncDigito( '=', '=', 52, 0 ) );
+
+     lrTot_Produtos := 0;
+     lrTot_Desconto := 0;
+     liCont         := 0;
+
+     DadosItensVendas.First;
+     while  Not DadosItensVendas.Eof  do
+     Begin
+
+        WriteLn(F, '', 001, inczero(Copy(DadosItensVendas.FieldByName('Codigo' ).AsString,1,4),4) + '|' +
+                            IncDigito( Copy( DadosItensVendas.FieldByName( 'Descricao' ).AsString, 1, 21 ),' ',21,1)+'|'+
+                            IncDigito( DadosItensVendas.FieldByName('Unidade').asString,'',3,0) +'|'+
+                            IncDigito( FormatFloat( '#,##0',DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat),' ',3,0) +'|'+
+                            IncDigito( FormatFloat( '##0.00', Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) ),' ',7,0)+'|'+
+                            IncDigito( FormatFloat( '##0.00', ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat *
+                                                                Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat -
+                                                                DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat , 2 ) ) ),' ',7,0)+'|' );
+
+        lrTot_Produtos := lrTot_Produtos + ( DadosItensVendas.FieldByName( 'Qtde_Venda' ).AsFloat * Arredondar( DadosItensVendas.FieldByName( 'Pco_Venda' ).AsFloat, 2 ) );
+        lrTot_Desconto := lrTot_Desconto + ( DadosItensVendas.FieldByName( 'Vlr_Desconto' ).AsFloat * DadosItensVendas.FieldByName( 'Qtde_venda').AsFloat ) ;
+
+        liCont := liCont + 1;
+        DadosItensVendas.Next;
+     end;
+     WriteLn(F, '', IncDigito( '-', '-', 52, 0 ) );
+     WriteLn(F, '', 'Total de Produtos Listado.:'+IncDigito(  IntToStr( liCont ),' ',10,0) );
+     WriteLn(F, '', 'Total dos Produtos........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Produtos ) ,' ',10,0) ) ;
+     WriteLn(F, '', 'Desconto Total ...........:'+IncDigito(  FormatFloat( '#,##0.00', lrTot_Desconto ) ,' ',10,0) );
+     WriteLn(F, '', 'Valor Total...............:'+IncDigito( FormatFloat( '#,##0.00', ( lrTot_Produtos - lrTot_Desconto ) ) ,' ',10,0) );
+     WriteLn(F, '',IncDigito( '=', '=', 52, 0 ) );
+     if prTotalPago>0 then
+     begin
+        if self.ValorPendendente=0 then
+           self.ValorPendendente := lrTot_Produtos;
+        WriteLn(F, '',  'Valor Pago......:'+IncDigito(  FormatFloat( '#,##0.00', prTotalPago ) ,' ',13,0) );
+        if (( Self.ValorPendendente  - lrTot_Desconto ) - prTotalPago) > 0 then
+        begin
+           WriteLn(F, '',  'A Pagar na Entrega: '+IncDigito( FormatFloat( '#,##0.00', ( ( Self.ValorPendendente - lrTot_Desconto ) - prTotalPago)),' ',10,0 ) );
+        end;
+        WriteLn(F, '',IncDigito( '=', '=', 52, 0 ) );
+     end;
+     WriteLn(F, '', '    DOCUMENTO SEM VALOR FISCAL        ' );
+     WriteLn(F, '', ' ' );
+     WriteLn(F, '', ' ' );
+     WriteLn(F, '', ' ' );
+     WriteLn(F, '', ' ' );
+     WriteLn(F, '',sComando);
+     CloseFile(F);
+  end;
+end;
+
 
 
 procedure TVenda.SetCliente(const Value: TCliente);

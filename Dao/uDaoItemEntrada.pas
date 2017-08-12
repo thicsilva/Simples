@@ -14,7 +14,7 @@ type TDaoItemEntrada = class
 end;
 implementation
 
-uses uClassSaldo, uDaoSaldo;
+uses uClassSaldo, uDaoSaldo,uDaoProduto;
 
 { TDaoItemEntrada }
 
@@ -28,7 +28,7 @@ end;
 procedure TDaoItemEntrada.incluir(ItensCompras : TClientDataSet ;ItemEntrada : TItemEntrada );
 var loDaoSaldo : TDaoSaldo;
     loSaldo  : TSaldo;
-
+    loProduto : TDaoProduto;
 begin
   FQueryModific.Close;
   FQueryModific.SQLConnection := FConexao.Conection;
@@ -41,6 +41,8 @@ begin
 
   FQueryModific.Prepared := True;
   ItensCompras.first;
+  loProduto := TDaoProduto.Create(FConexao);
+
   while not ItensCompras.Eof do
   Begin
      if ItensCompras.FieldByName('SetorId').asInteger>1 then
@@ -54,6 +56,9 @@ begin
         FreeAndNil(loDaoSaldo);
         FreeAndNil(loSaldo);
      end;
+
+     loProduto.AtualizaCusto(ItensCompras.FieldByName('Pco_Venda').asFloat, ItensCompras.FieldByName('Codigo').asString );
+
      FQueryModific.ParamByName('parCod_Produto').asInteger    := ItensCompras.FieldByName('Codigo').asInteger;
      FQueryModific.ParamByName('parSetorId').asInteger        := ItensCompras.FieldByName('SetorId').asInteger;
      FQueryModific.ParamByName('parSeqEntrada').asInteger     := ItemEntrada.CompraID;
@@ -67,6 +72,7 @@ begin
      FQueryModific.ParamByName('parData_Mov').AsSQLTimeStamp      := DateTimeToSqlTimeStamp(ItemEntrada.DataMovimento);
      FQueryModific.ExecSql;
      ItensCompras.next;
+     
   End;
 end;
 
