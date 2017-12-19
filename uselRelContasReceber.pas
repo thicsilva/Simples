@@ -16,7 +16,8 @@ uses
   cxGridTableView, cxGridDBTableView, cxGrid, bsSkinBoxCtrls, StdCtrls, Mask,
   FMTBcd, BusinessSkinForm, RDprint, DBClient, Provider, SqlExpr, SqlTimSt,
   Menus, bsSkinMenus, dxBar, cxGridCustomPopupMenu, cxGridPopupMenu,UformBase,
-  dxSkinsCore, bsdbctrls;
+  dxSkinsCore, bsdbctrls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   TfrmSelRelContasReceber = class(TFormBase)

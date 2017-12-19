@@ -349,6 +349,9 @@ type
     bsSkinStdLabel26: TbsSkinStdLabel;
     EdtPlacaVeiculo: TbsSkinEdit;
     edtDescricaoVeiculo: TbsSkinEdit;
+    cmbCidade: TbsSkinDBLookupComboBox;
+    cdsCidades: TClientDataSet;
+    srcCidades: TDataSource;
     procedure btnincluirClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
@@ -700,6 +703,12 @@ begin
       CaixaMensagem( 'A Rota não pode ser vazio ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
+    if Trim(cmbCidade.text)='' then
+   begin
+      CaixaMensagem( 'A Cidade não pode ser vazia ', ctAviso, [ cbOk ], 0 );
+      Exit
+   End;
+
 
    qryCadClientes.Close;
    If pvQualBotao = 'ALTERAR' then
@@ -730,7 +739,7 @@ begin
    cdsCadClientes.FieldByName('Descricao').AsString        := edtNome_Fantasia.Text;
    cdsCadClientes.FieldByName('Razao_Social').AsString     := edtRazao_Social.Text;
    cdsCadClientes.FieldByName('Endereco').AsString         := edtendereco.Text;
-   cdsCadClientes.FieldByName('Cidade').AsString           := edtCidade.Text;
+   cdsCadClientes.FieldByName('Cidade').AsString           := cmbCidade.Text;
    cdsCadClientes.FieldByName('Responsavel').AsString      := edtResponsavel.Text;
    cdsCadClientes.FieldByName('Bairro').AsString           := edtBairro.Text;
    cdsCadClientes.FieldByName('Uf').AsString               := edtUf.Text;
@@ -782,7 +791,7 @@ begin
       btnPesquisarClick(btnPesquisar);
       PagCadastro.ActivePageIndex:=9;
    end;
-
+   piCod_Produto := cdspesquisa.FieldByName('Codigo').AsInteger;
    LimpaCampos();
 
 end;
@@ -911,11 +920,14 @@ begin
       CaixaMensagem( 'Não existe registro selecionado ', ctAviso, [ cbOk ], 0 );
       Exit
    End;
+   cmbCidade.KeyValue := null;
    PagCadastro.ActivePageIndex:=1;
    edtcodigo.Text             := incZero( IntToStr(cdspesquisa.FieldByName('Codigo').AsInteger),5);
    edtNome_Fantasia.Text      := cdspesquisa.FieldByName('Descricao').AsString;
    edtRazao_Social.Text       := cdspesquisa.FieldByName('Razao_social').AsString;
    edtendereco.Text           := cdspesquisa.FieldByName('Endereco').AsString;
+   if cdsCidades.Locate('Descricao',cdspesquisa.FieldByName('Cidade').AsString,[]) then
+      cmbCidade.KeyValue      := cdsCidades.FieldByName('Codigo').AsString;
    edtCidade.Text             := cdspesquisa.FieldByName('Cidade').AsString;
    edtBairro.Text             := cdspesquisa.FieldByName('Bairro').AsString;
    edtUf.Text                 := cdspesquisa.FieldByName('Uf').AsString;
@@ -1038,6 +1050,7 @@ end;
 procedure TfrmCadClientes.btnFecharClick(Sender: TObject);
 begin
     Close;
+     piCod_Produto := cdspesquisa.FieldByName('Codigo').AsInteger;
 end;
 
 procedure TfrmCadClientes.btnImprimirAnimaisClick(Sender: TObject);
@@ -1112,6 +1125,14 @@ begin
    cdsCadFuncionarios.ProviderName := dspVariavel.Name;
    cdsCadFuncionarios.Open;
 
+   qryVariavel.Close;
+   qryVariavel.Params.Clear;
+   qryVariavel.SQL.text :='Select Codigo,Descricao from cidade order by Descricao ';
+
+   cdsCidades.Close;
+   cdsCidades.ProviderName := dspVariavel.Name;
+   cdsCidades.Open;
+
    PagCadastro.ActivePageIndex:=0;
    piCod_Produto  := 0;
 
@@ -1123,7 +1144,11 @@ begin
        FCustomDrawingStyle[i, j] := cdsGradient;
 
   panelVeiculo.Visible := RetornarVerdadeirOuFalso( Uppercase( gParametros.Ler( '', '[ADMINISTRATIVO]', 'TrabalhaComVeiculo', 'NAO' )));
-
+  if tag=6 then
+  begin
+    btnPesquisarClick(Sender);
+    btnalterarClick(Sender);
+  end;
   InitFonts();
 
   DesabilitarTabSheets(self);
@@ -1986,9 +2011,9 @@ end;
 
 procedure TfrmCadClientes.GridClintesDblClick(Sender: TObject);
 begin
-   if frmcadclientes.Tag=5 Then
+   if (frmcadclientes.Tag = 5) or ( frmcadclientes.Tag = 6) Then
    Begin
-      piCod_Produto := cdspesquisa.FieldByName('Codigo').AsInteger;
+       piCod_Produto := cdspesquisa.FieldByName('Codigo').AsInteger;
       Close;
    End;
 end;

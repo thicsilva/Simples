@@ -10,7 +10,7 @@ uses
   cxClasses, cxControls, cxGridCustomView, cxGrid, ExtCtrls, ToolWin, ComCtrls,
   FMTBcd, DBClient, Provider, SqlExpr,SqlTimSt, RDprint, BusinessSkinForm,
   dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, uDaoCaixaMovimento, SimpleDS;
 
 type
   TfrmSelRelVendas = class(TForm)
@@ -48,6 +48,8 @@ type
     btnok: TbsSkinSpeedButton;
     bsSkinBevel2: TbsSkinBevel;
     bsSkinBevel3: TbsSkinBevel;
+    bsSkinStdLabel4: TbsSkinStdLabel;
+    cmbTipoResultado: TbsSkinComboBox;
     procedure edtData_IniExit(Sender: TObject);
     procedure edtData_fimExit(Sender: TObject);
     procedure cmbVenctoChange(Sender: TObject);
@@ -61,11 +63,14 @@ type
     procedure cdsRelatorioCalcFields(DataSet: TDataSet);
   private
     pviLinha : Integer;
+    procedure RelatorioDeVendas;
+    function RetornaSelectDasVendas: String; 
     { Private declarations }
   public
     { Public declarations }
   end;
   const RELATORIO_DE_LOCACAO = 2;
+        RELATORIO_DE_LUCRATIVIDADE = 3;
 
 var
   frmSelRelVendas: TfrmSelRelVendas;
@@ -165,9 +170,8 @@ begin
    impmatricial.ImpD(pvilinha,060,FormatFloat(',0.00',lrQtde_Total),[]);
    impmatricial.ImpD(pvilinha,080,FormatFloat(',0.00',lrvlr_Total),[]);
    pviLinha:=Pvilinha+2;
-
-
    impmatricial.Fechar;
+   
 end;
 
 procedure TfrmSelRelVendas.btnPesquisarClick(Sender: TObject);
@@ -175,6 +179,11 @@ var lsWhere : String;
     lsSelect : String;
     lsValorTotal : String;
 begin
+   if cmbTipoResultado.ItemIndex=1 then
+   begin
+      RelatorioDeVendas;
+      exit;
+   end;
 
    lsValorTotal := ' Sum(Itens.vlr_Total) as vlr_Total ';
    if Tag = RELATORIO_DE_LOCACAO then
@@ -235,13 +244,13 @@ end;
 
 procedure TfrmSelRelVendas.cdsRelatorioBeforeOpen(DataSet: TDataSet);
 begin
-   CriarCalculado (DataSet,'pco_Medio',ftFloat,0);
+  // CriarCalculado (DataSet,'pco_Medio',ftFloat,0);
 end;
 
 procedure TfrmSelRelVendas.cdsRelatorioCalcFields(DataSet: TDataSet);
 var Dias : Real;
 begin
-   Dias := 0;
+   Dias := 1;
    if Tag = RELATORIO_DE_LOCACAO then
       Dias := cdsRelatorio.FieldByName('Dias').Asfloat;
    cdsRelatorio.FieldByName('Pco_Medio').AsFloat  := 0;
@@ -309,11 +318,140 @@ begin
    if Tag = RELATORIO_DE_LOCACAO then
       TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                           Dias    Qtde  Vlr.Medio    Total ')
    else
+   if Tag = RELATORIO_DE_LUCRATIVIDADE then
+      TRdPrint( Sender ).imp(pvilinha,001,'Codigo Descricao Produto                     Quant. Vlr.Unit Custo Total Lucro')
+   else
       TRdPrint( Sender ).imp(pvilinha,001,'Codigo   Descricao                                    Qtde  Vlr.Medio    Total ');
 
    pviLinha:=Pvilinha+1;
    TRdPrint( Sender ).imp(pviLinha,001,incdigito( '-','-',80,0));
    pviLinha:=Pvilinha+1;
 end;
+
+procedure TfrmSelRelVendas.RelatorioDeVendas;
+var lrTotal_Venda    : real;
+    lrTotal_recebido : real;
+    lrTotal_Extras   : real;
+    lrTotal_Saidas   : real;
+    lrDiferenca      : real;
+    lrTotal_Baixa    : real;
+    lrVlr_Saida      : real;
+    lrVlr_Entrada    : real;
+    dataInicial, dataFinal : tDateTime;
+    DaoCaixaMovimento : TDaoCaixaMovimento;
+    sdtsTempPagInformado : TsimpleDataSet;
+    lsNomePagamento : string;
+  vlrLucro: Real;
+begin
+   gsTituloRel := 'Movimento dia '+FormatDateTime('dd/mm/yyyy', dtpData_Fim.Date);
+
+   lrTotal_Venda    := 0;
+   lrTotal_recebido := 0;
+   lrTotal_Extras   := 0;
+   lrTotal_Saidas   := 0;
+   lrDiferenca      := 0;
+   lrTotal_Baixa    := 0;
+   lrVlr_Saida      := 0;
+   lrVlr_Entrada    := 0;
+
+   dataInicial := dtpData_Ini.Date;
+   dataFinal   := dtpData_Fim.Date;
+
+   DaoCaixaMovimento    := TDaoCaixaMovimento.Create(gConexao);
+
+   ImpMatricial.PortaComunicacao          := 'LPT1';
+   ImpMatricial.OpcoesPreview.Preview     := true;
+   ImpMatricial.TamanhoQteLinhas          := 66;
+   ImpMatricial.TamanhoQteColunas         := 80;
+   ImpMatricial.FonteTamanhoPadrao        := s10cpp;
+   ImpMatricial.UsaGerenciadorImpr        := True;
+   ImpMatricial.Abrir;
+
+   qryRelatorio.Close;
+   qryRelatorio.Sql.Text := RetornaSelectDasVendas;
+   qryRelatorio.ParamByName('parDataIni').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataInicial)+'00:00:00');
+   qryRelatorio.ParamByName('parDataFim').AsSqlTimeStamp := StrToSQLTimeStamp(DateToStr(dataFinal)+'23:59:59');
+
+   cdsRelatorio.close;
+   cdsRelatorio.ProviderName := dspRelatorio.name;
+   cdsRelatorio.Open;
+
+   pvilinha := pviLinha + 1;
+   if not cdsRelatorio.IsEmpty then
+   begin
+
+      ImpMatricial.imp(pvilinha,001,'Codigo Descricao Produto             Quant. Vlr.Unit Custo Total Lucro');
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+      pviLinha:=Pvilinha+1;
+
+      while not cdsrelatorio.Eof do
+      Begin
+         if lsNomePagamento <> cdsrelatorio.FieldByName('FormaPagamento').AsString then
+         begin
+            if lrTotal_Venda<>0 then
+            begin
+               ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+               pviLinha:=Pvilinha+1;
+               ImpMatricial.imp(pvilinha,001,'Total...');
+               impmatricial.ImpD(pvilinha,072,FormatFloat(',0.00',lrTotal_Venda),[]);
+               pviLinha:=Pvilinha+2;
+               lrTotal_Venda:=0;
+            end;
+            impmatricial.Imp(pvilinha,001,Copy(cdsrelatorio.FieldByName('FormaPagamento').AsString,1,20) );
+            pviLinha:=Pvilinha+1;
+            ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+            pviLinha:=Pvilinha+1;
+            lsNomePagamento := cdsrelatorio.FieldByName('FormaPagamento').AsString;
+         end;
+
+         impmatricial.Imp (pvilinha,001,Copy(cdsrelatorio.FieldByName('Codigo').AsString+' '+cdsrelatorio.FieldByName('Descricao').AsString,1,40) );
+         impmatricial.ImpD(pvilinha,046,FormatFloat(',0',cdsrelatorio.fieldByname('Qtde_Total').asfloat),[]);
+         impmatricial.ImpD(pvilinha,054,FormatFloat('0.00',cdsrelatorio.fieldByname('Pco_UnitMedio').asfloat),[]);
+         impmatricial.ImpD(pvilinha,062,FormatFloat('0.00',cdsrelatorio.fieldByname('TotalCusto').asfloat),[]);
+         impmatricial.ImpD(pvilinha,072,FormatFloat('0.00',cdsrelatorio.fieldByname('Vlr_Total').asfloat),[]);
+         vlrLucro := ( cdsrelatorio.fieldByname('Vlr_Total').asfloat - cdsrelatorio.fieldByname('TotalCusto').asfloat);
+         if vlrLucro<>0 then
+            vlrlucro := Arredondar( (vlrlucro/cdsrelatorio.fieldByname('Vlr_Total').asfloat)*100,2);
+
+         impmatricial.ImpD(pvilinha,080,FormatFloat('0.00',vlrLucro )+'%',[]);
+         lrTotal_Venda   := lrTotal_Venda + cdsrelatorio.fieldByname('Vlr_Total').asfloat;
+         cdsrelatorio.Next;
+         if pvilinha>55 then
+            impmatricial.Novapagina;
+
+         pvilinha := pviLinha + 1;
+      End;
+      ImpMatricial.imp(pviLinha,001,incdigito( '-','-',80,0));
+      pviLinha:=Pvilinha+1;
+      ImpMatricial.imp(pvilinha,001,'Total...');
+      impmatricial.ImpD(pvilinha,072,FormatFloat(',0.00',lrTotal_Venda),[]);
+      pviLinha:=Pvilinha+1;
+      pviLinha:=Pvilinha+2;
+   end;
+   ImpMatricial.Fechar;
+end;
+
+function TfrmSelRelVendas.RetornaSelectDasVendas : String;
+var lsFiltro : String;
+begin
+
+   Result := 'Select pag.Codigo as PagId, '+
+             '       Pag.Descricao as FormaPagamento, '+
+             '       Prod.Codigo,Prod.Descricao, '+
+             '       Itens.pco_Venda as Pco_UnitMedio, '+
+             '       Itens.Vlr_total as Vlr_Total, '+
+             '       Itens.Qtde_Venda as Qtde_Total, '+
+             '       ( Itens.PrecoCusto*Itens.Qtde_Venda ) as TotalCusto, '+
+             '       Itens.Vlr_total - ( Itens.PrecoCusto*Itens.Qtde_Venda ) as totalLucro '+
+             'from  T_itensvendas itens '+
+             '       left join T_Vendas Ven on Ven.SeqVenda = itens.SeqVenda '+
+             '       left Join T_Produtos Prod on Prod.codigo=Itens.Cod_Produto '+
+             '       Left join T_Grupos grupo on Grupo.Codigo=Prod.Cod_Grupo '+
+             '       left join T_FormasPagamento Pag on Pag.Codigo = Ven.Cod_FormaPagamento '+
+             'where ( Itens.data_mov>=:parDataIni and Itens.data_mov<=:parDataFim ) and Ven.Status<>'+QuotedSTR('5')+
+             'Order by 1,8 desc ';
+end;
+
 
 end.

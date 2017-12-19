@@ -228,7 +228,7 @@ begin
          cdsPagamento.ApplyUpdates(-1);
       End;
 
-    {$REGION 'Devolução dos Itens '}
+     {$REGION 'Devolução dos Itens '}
 
      if not frmPrincipal.dbxPrincipal.InTransaction then
         trdNrTransacao := frmPrincipal.dbxPrincipal.BeginTransaction;

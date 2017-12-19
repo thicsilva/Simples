@@ -50,6 +50,8 @@ object frmfechames: Tfrmfechames
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -94,6 +96,7 @@ object frmfechames: Tfrmfechames
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -132,6 +135,7 @@ object frmfechames: Tfrmfechames
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -185,6 +189,8 @@ object frmfechames: Tfrmfechames
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -202,6 +208,7 @@ object frmfechames: Tfrmfechames
     Spacing = 2
     Caption = 'Encerramenti do Periodo'
     Align = alClient
+    UseSkinSize = True
     object lblTurma: TbsSkinStdLabel
       Left = 23
       Top = 46
@@ -223,8 +230,8 @@ object frmfechames: Tfrmfechames
       Left = 158
       Top = 46
       Width = 89
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -242,6 +249,8 @@ object frmfechames: Tfrmfechames
       CalendarUseSkinFont = True
       CalendarSkinDataName = 'panel'
       FirstDayOfWeek = Sun
+      WeekNumbers = False
+      ShowToday = False
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clBlack
       DefaultFont.Height = 14
@@ -260,6 +269,13 @@ object frmfechames: Tfrmfechames
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
+      LeftImageIndex = -1
+      LeftImageHotIndex = -1
+      LeftImageDownIndex = -1
+      RightImageIndex = -1
+      RightImageHotIndex = -1
+      RightImageDownIndex = -1
     end
   end
   object qryModific: TSQLQuery

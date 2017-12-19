@@ -4,7 +4,7 @@ object frmControleRepasse: TfrmControleRepasse
   BorderIcons = []
   Caption = 'Controle de Repasse por rota'
   ClientHeight = 481
-  ClientWidth = 972
+  ClientWidth = 1111
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frmControleRepasse: TfrmControleRepasse
   object bsSkinPaintPanel1: TbsSkinPaintPanel
     Left = 0
     Top = 53
-    Width = 972
+    Width = 1111
     Height = 43
     HintImageIndex = 0
     TabOrder = 0
@@ -53,8 +53,8 @@ object frmControleRepasse: TfrmControleRepasse
     Caption = 'bsSkinPaintPanel1'
     Align = alTop
     object lblTurma: TbsSkinStdLabel
-      Left = 123
-      Top = 18
+      Left = 110
+      Top = 16
       Width = 19
       Height = 13
       EllipsType = bsetNone
@@ -69,8 +69,8 @@ object frmControleRepasse: TfrmControleRepasse
       Caption = 'Ate.'
     end
     object btnPesquisar: TbsSkinButton
-      Left = 767
-      Top = 7
+      Left = 831
+      Top = 6
       Width = 125
       Height = 30
       HintImageIndex = 0
@@ -146,7 +146,7 @@ object frmControleRepasse: TfrmControleRepasse
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 5
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -161,7 +161,7 @@ object frmControleRepasse: TfrmControleRepasse
       Width = 180
       Height = 20
       HintImageIndex = 0
-      TabOrder = 2
+      TabOrder = 1
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -294,12 +294,12 @@ object frmControleRepasse: TfrmControleRepasse
       OnChange = cmbPeriodoChange
     end
     object cmbNome_TipoVenda: TbsSkinDBLookupComboBox
-      Left = 476
+      Left = 452
       Top = 11
-      Width = 234
+      Width = 149
       Height = 20
       HintImageIndex = 0
-      TabOrder = 3
+      TabOrder = 2
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'combobox'
       DefaultFont.Charset = DEFAULT_CHARSET
@@ -314,9 +314,10 @@ object frmControleRepasse: TfrmControleRepasse
       ListBoxDefaultItemHeight = 20
       ListBoxUseSkinFont = True
       ListBoxUseSkinItemHeight = True
-      KeyField = 'codigo'
-      ListField = 'Descricao;Codigo'
-      ListSource = srcTipoVenda
+      ImeMode = imHanguel
+      KeyField = 'descricao'
+      ListField = 'Descricao'
+      ListSource = srcAuxiliar
     end
     object dtpData_Ini: TbsSkinDateEdit
       Left = 9
@@ -360,7 +361,7 @@ object frmControleRepasse: TfrmControleRepasse
       Font.Style = []
       MaxLength = 10
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
       ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
@@ -369,11 +370,58 @@ object frmControleRepasse: TfrmControleRepasse
       RightImageHotIndex = -1
       RightImageDownIndex = -1
     end
+    object cmbTipoResutado: TComboBox
+      Left = 630
+      Top = 11
+      Width = 185
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 4
+      Text = 'Venda Por Cidade'
+      Items.Strings = (
+        'Venda Por Cidade'
+        'Venda por Vendedor')
+    end
+    object btnLimpa: TbsSkinButton
+      Left = 603
+      Top = 11
+      Width = 24
+      Height = 20
+      Hint = 'Limpar Sele'#231#227'o'
+      HintImageIndex = 0
+      TabOrder = 6
+      SkinDataName = 'button'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = False
+      Transparent = False
+      CheckedMode = False
+      ImageList = frmPrincipal.cxSmallImages
+      ImageIndex = 10
+      AlwaysShowLayeredFrame = False
+      UseSkinSize = False
+      UseSkinFontColor = True
+      RepeatMode = False
+      RepeatInterval = 100
+      AllowAllUp = False
+      TabStop = True
+      CanFocused = True
+      Down = False
+      GroupIndex = 0
+      NumGlyphs = 1
+      Spacing = 1
+      OnClick = btnLimpaClick
+    end
   end
   object cxGrid1: TcxGrid
     Left = 0
     Top = 96
-    Width = 972
+    Width = 1111
     Height = 385
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -411,7 +459,7 @@ object frmControleRepasse: TfrmControleRepasse
         Width = 100
       end
       object GridRelatoriovlr_Repasse: TcxGridDBColumn
-        Caption = 'vlr. Repasse'
+        Caption = 'vlr. Total'
         DataBinding.FieldName = 'vlr_Repasse'
         Width = 100
       end
@@ -441,6 +489,16 @@ object frmControleRepasse: TfrmControleRepasse
         DataBinding.FieldName = 'perc002'
         Width = 50
       end
+      object GridRelatoriovlr_SaldoRepasse: TcxGridDBColumn
+        Caption = 'Saldo Repasse'
+        DataBinding.FieldName = 'vlr_SaldoRepasse'
+        Width = 100
+      end
+      object GridRelatorioColumn1: TcxGridDBColumn
+        Caption = '%'
+        DataBinding.FieldName = 'perc005'
+        Width = 50
+      end
       object GridRelatoriovlr_Perdido: TcxGridDBColumn
         Caption = 'Vlr Perdido'
         DataBinding.FieldName = 'vlr_Perdido'
@@ -461,16 +519,6 @@ object frmControleRepasse: TfrmControleRepasse
         DataBinding.FieldName = 'perc004'
         Width = 50
       end
-      object GridRelatoriovlr_SaldoRepasse: TcxGridDBColumn
-        Caption = 'Saldo Repasse'
-        DataBinding.FieldName = 'vlr_SaldoRepasse'
-        Width = 100
-      end
-      object GridRelatorioColumn1: TcxGridDBColumn
-        Caption = '%'
-        DataBinding.FieldName = 'perc005'
-        Width = 50
-      end
     end
     object cxGrid1Level1: TcxGridLevel
       GridView = GridRelatorio
@@ -479,7 +527,7 @@ object frmControleRepasse: TfrmControleRepasse
   object bsSkinCoolBar2: TbsSkinCoolBar
     Left = 0
     Top = 0
-    Width = 972
+    Width = 1111
     Height = 53
     AutoSize = True
     Bands = <
@@ -487,7 +535,7 @@ object frmControleRepasse: TfrmControleRepasse
         Control = bsSkinToolBar2
         ImageIndex = -1
         MinHeight = 49
-        Width = 968
+        Width = 1107
       end>
     SkinDataName = 'controlbar'
     SkinData = frmPrincipal.SkinPrincipal
@@ -496,7 +544,7 @@ object frmControleRepasse: TfrmControleRepasse
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
-      Width = 959
+      Width = 1098
       Height = 49
       HintImageIndex = 0
       TabOrder = 0
@@ -541,9 +589,9 @@ object frmControleRepasse: TfrmControleRepasse
       Images = frmPrincipal.Imagebutoes
       object btnFechar: TbsSkinSpeedButton
         Left = 847
-        Top = 4
+        Top = 0
         Width = 70
-        Height = 40
+        Height = 49
         HintImageIndex = 0
         SkinData = frmPrincipal.SkinPrincipal
         SkinDataName = 'bigtoolbutton'
@@ -577,6 +625,7 @@ object frmControleRepasse: TfrmControleRepasse
         OnClick = btnFecharClick
         ExplicitLeft = 811
         ExplicitTop = 12
+        ExplicitHeight = 40
       end
       object btnImprimir: TbsSkinSpeedButton
         Left = 0
@@ -614,9 +663,8 @@ object frmControleRepasse: TfrmControleRepasse
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnImprimirClick
-        ExplicitLeft = 12
-        ExplicitTop = 8
-        ExplicitHeight = 40
+        ExplicitLeft = -6
+        ExplicitTop = 12
       end
       object bsSkinBevel2: TbsSkinBevel
         Left = 70
@@ -691,36 +739,24 @@ object frmControleRepasse: TfrmControleRepasse
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 314
-    Top = 131
+    Top = 187
   end
   object dspRelatorio: TDataSetProvider
     DataSet = qryRelatorio
     Left = 314
-    Top = 159
+    Top = 215
   end
   object cdsRelatorio: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItensVendas'
     Left = 314
-    Top = 215
+    Top = 271
   end
   object srcRelatorio: TDataSource
     DataSet = cdsRelatorio
     Left = 314
-    Top = 187
-  end
-  object ClientDataSet1: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspItensVendas'
-    Left = 314
-    Top = 215
-  end
-  object DataSource1: TDataSource
-    DataSet = ClientDataSet1
-    Left = 314
-    Top = 187
+    Top = 243
   end
   object cdsRepasse: TClientDataSet
     Active = True
@@ -787,7 +823,7 @@ object frmControleRepasse: TfrmControleRepasse
     Params = <>
     StoreDefs = True
     Left = 354
-    Top = 215
+    Top = 271
     Data = {
       2A0100009619E0BD01000000180000000E0000000000030000002A0104526F74
       610100490000000100055749445448020002001E000B766C725F526570617373
@@ -858,7 +894,7 @@ object frmControleRepasse: TfrmControleRepasse
   object srcRepasse: TDataSource
     DataSet = cdsRepasse
     Left = 354
-    Top = 187
+    Top = 243
   end
   object impMatricial: TRDprint
     ImpressoraPersonalizada.NomeImpressora = 'Modelo Personalizado - (Epson)'
@@ -953,31 +989,31 @@ object frmControleRepasse: TfrmControleRepasse
     Orientacao = poPortrait
     OnNewPage = impMatricialNewPage
     Left = 279
-    Top = 131
+    Top = 187
   end
   object srcTipoVenda: TDataSource
     DataSet = cdsTipoVenda
-    Left = 385
-    Top = 215
+    Left = 383
+    Top = 243
   end
   object cdsTipoVenda: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVariavel'
-    Left = 385
-    Top = 187
+    Left = 382
+    Top = 271
   end
   object QryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
     Left = 381
-    Top = 122
+    Top = 178
   end
   object dspVariavel: TDataSetProvider
     DataSet = QryVariavel
     Left = 381
-    Top = 149
+    Top = 205
   end
   object bsBusinessSkinForm1: TbsBusinessSkinForm
     ShowMDIScrollBars = True
@@ -1035,7 +1071,43 @@ object frmControleRepasse: TfrmControleRepasse
     Magnetic = False
     MagneticSize = 5
     BorderIcons = [biSystemMenu, biMinimize, biMaximize, biRollUp]
-    Left = 360
-    Top = 64
+    Left = 160
+    Top = 224
+  end
+  object cdsRecebidos: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVariavel'
+    Left = 406
+    Top = 271
+  end
+  object srcRecebidos: TDataSource
+    DataSet = cdsRecebidos
+    Left = 407
+    Top = 243
+  end
+  object cdsAuxiliar: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspItensVendas'
+    Left = 442
+    Top = 271
+  end
+  object srcAuxiliar: TDataSource
+    DataSet = cdsAuxiliar
+    Left = 442
+    Top = 243
+  end
+  object srcDevolucoes: TDataSource
+    DataSet = cdsDevolucoes
+    Left = 474
+    Top = 243
+  end
+  object cdsDevolucoes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspItensVendas'
+    Left = 474
+    Top = 271
   end
 end

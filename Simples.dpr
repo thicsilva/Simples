@@ -158,7 +158,8 @@ uses
   uDtmRelatorios in 'Data Module\uDtmRelatorios.pas' {dtmRelatorios: TDataModule},
   uMostrarDados in 'uMostrarDados.pas' {frmMostrarDados},
   uRelCheques in 'uRelCheques.pas' {frmcontroleCheques},
-  uDelivery in 'uDelivery.pas' {frmDelivery};
+  uDelivery in 'uDelivery.pas' {frmDelivery},
+  uCadCidade in 'uCadCidade.pas' {frmCadCidade};
 
 {$R *.res}
 
@@ -167,16 +168,6 @@ begin
   Application.Title := 'Simples - Sistema Simples de Administração';
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmLogin, frmLogin);
-  Application.CreateForm(TfrmAberturaOs, frmAberturaOs);
-  Application.CreateForm(TfrmCadastroClienteSimplificado, frmCadastroClienteSimplificado);
-  Application.CreateForm(TfrmSelFuncionario, frmSelFuncionario);
-  Application.CreateForm(TDtmComprovante, DtmComprovante);
-  Application.CreateForm(TfrmselFormaPagamento, frmselFormaPagamento);
-  Application.CreateForm(TfrmSelProduto, frmSelProduto);
-  Application.CreateForm(TdtmRelatorios, dtmRelatorios);
-  Application.CreateForm(TfrmMostrarDados, frmMostrarDados);
-  Application.CreateForm(TfrmcontroleCheques, frmcontroleCheques);
-  Application.CreateForm(TfrmDelivery, frmDelivery);
   Frmlogin.ShowModal;
   Application.Run;
 end.

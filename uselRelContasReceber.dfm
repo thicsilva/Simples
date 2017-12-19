@@ -33,6 +33,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -140,8 +141,8 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Left = 6
       Top = 11
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -179,6 +180,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       MaxLength = 10
       ParentFont = False
       TabOrder = 0
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -190,8 +192,8 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       Left = 138
       Top = 11
       Width = 95
-      Height = 18
-      EditMask = '!99/99/0000;1; '
+      Height = 20
+      EditMask = '!99/99/9999;1; '
       Text = '  /  /    '
       AlphaBlend = False
       AlphaBlendAnimation = False
@@ -229,6 +231,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       MaxLength = 10
       ParentFont = False
       TabOrder = 1
+      ButtonImageIndex = -1
       LeftImageIndex = -1
       LeftImageHotIndex = -1
       LeftImageDownIndex = -1
@@ -253,6 +256,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 8
@@ -789,6 +793,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.cxSmallImages
       ImageIndex = 10
@@ -883,6 +888,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.cxSmallImages
       ImageIndex = 10
@@ -909,7 +915,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
     Align = alClient
     TabOrder = 1
     object GridRelatorio: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = srcRelatorio
       DataController.Summary.DefaultGroupSummaryItems = <
         item
@@ -1051,6 +1057,7 @@ object frmSelRelContasReceber: TfrmSelRelContasReceber
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False

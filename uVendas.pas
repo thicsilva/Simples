@@ -265,6 +265,7 @@ type
     cdsItensVendasTMPFuncionarioId: TIntegerField;
     TabSheet3: TTabSheet;
     MemoObs: TMemo;
+    AlteraoCliente1: TMenuItem;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -309,6 +310,7 @@ type
     procedure CadastrodeCliente1Click(Sender: TObject);
     procedure btnCadAlunosClick(Sender: TObject);
     procedure NovoClienen1Click(Sender: TObject);
+    procedure AlteraoCliente1Click(Sender: TObject);
 
   private
      pvQualBotao      : String;
@@ -363,7 +365,7 @@ begin
       lrVlr_desconto := ( ( cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat ) * lrPercDesconto )/100;
 
       cdsItensVendasTmp.Edit;
-      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat := Arredondar(( ( cdsItensVendasTmp.FieldByName('Pco_Venda').asFloat ) * lrPercDesconto )/100 ,2);
+      cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat := Arredondar( lrVlr_desconto,2);
       cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat    := ( ( cdsItensVendasTmp.FieldByname('Pco_Venda').AsFloat * cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat) - lrVlr_desconto );
       cdsItensVendasTmp.Post;
       cdsItensVendasTmp.Next;
@@ -741,7 +743,7 @@ begin
    cdsItensVendasTmp.First;
    while not cdsItensVendasTmp.Eof do
    begin
-      TotalDesconto := TotalDesconto + (cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat *  cdsItensVendasTmp.FieldByname('Qtde_Venda').AsFloat );
+      TotalDesconto := TotalDesconto + cdsItensVendasTmp.FieldByname('Vlr_desconto').AsFloat;
       Total := Total + (cdsItensVendasTmp.FieldByname('Vlr_total').AsFloat);
       cdsItensVendasTmp.Next;
    end;
@@ -754,8 +756,8 @@ begin
       cdsItensVendasTmp.Post;
    end;
    
-   edtTotDesconto.Text  := FormatFloat('0.00', TotalDesconto );
-   edtTotalVenda.Text   := FormatFloat('0.00', TotalDesconto+Total);
+   edtTotDesconto.Text  := FormatFloat('0.00', lrTotalDesconto );
+   edtTotalVenda.Text   := FormatFloat('0.00', lrTotalDesconto+Total);
    edtTotalLiquido.Text := FormatFloat('0.00', Total );
 end;
 
@@ -935,6 +937,7 @@ begin
       Exit;
    end;
    frmCadClientes := TfrmCadClientes.Create(Nil);
+   frmCadClientes.EdtPesquisa.text := edtCod_Cliente.text;
    frmCadClientes.Tag := 5;
    frmCadClientes.showmodal;
 
@@ -950,6 +953,27 @@ begin
    End;
    edtcod_Cliente.SetFocus;
 
+end;
+
+procedure TfrmVendas.AlteraoCliente1Click(Sender: TObject);
+begin
+  inherited;
+   frmCadClientes := TfrmCadClientes.Create(Nil);
+   frmCadClientes.EdtPesquisa.text := edtnome_Cliente.text;
+   frmCadClientes.Tag := 6;
+   frmCadClientes.showmodal;
+
+   edtcod_Cliente.Text := '';
+   edtcod_ClienteExit(edtcod_Cliente);
+
+    AtualizarDadosClientes;
+
+   if frmCadClientes.piCod_Produto<> 0 Then
+   begin
+      edtCod_Cliente.Text := intToStr(frmCadClientes.piCod_Produto);
+      edtCod_ClienteExit(edtCod_Produto);
+   End;
+   edtcod_Cliente.SetFocus;
 end;
 
 procedure  TfrmVendas.AtaulizaLucroBruto;

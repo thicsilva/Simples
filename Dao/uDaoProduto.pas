@@ -16,12 +16,21 @@ type TDaoProduto = class
      function BuscarTodos : TClientDataSet;
      function Buscar(ProdutoId : Integer) : TProduto;
      function PrecoDiferente(ProdutoId,PagamentoId : Integer) : Real;
+     procedure AtualizaCusto( custo : Real; CodigoProduto : String );
 end;
 
 implementation
 
 
 { TDaoProduto }
+
+procedure TDaoProduto.AtualizaCusto(custo: Real; CodigoProduto: String);
+begin
+   FQryModific.SQL.Text :='Update T_produtos set pco_compra=:parpreco, Pco_custo=:parPreco where Codigo=:ParCodigo';
+   FQryModific.ParamByName('ParCodigo').AsString := CodigoProduto;
+   FQryModific.ParamByName('parPreco').AsFloat := custo;
+   FQryModific.ExecSQL;
+end;
 
 function TDaoProduto.BuscaCodigoProCodigoProprio(CodigoProprio: String): String;
 var lstParametros : TStringList;

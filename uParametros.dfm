@@ -58,7 +58,7 @@ object frmParametros: TfrmParametros
     Top = 53
     Width = 635
     Height = 347
-    ActivePage = tabContasAReceber
+    ActivePage = bsSkinTabSheet3
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBtnText
@@ -1663,7 +1663,8 @@ object frmParametros: TfrmParametros
           '80 Colunas Modelo 01'
           'Personalizado(Natal Linhas)'
           'Personalizado(Eti Marcas)'
-          'Personalizado(Casa Do Radiado)')
+          'Personalizado(Casa Do Radiado)'
+          'Bematech - Termica MOD-02')
         ItemIndex = -1
         DropDownCount = 8
         HorizontalExtent = False

@@ -68,9 +68,9 @@ object frmSelRelVendas: TfrmSelRelVendas
       Caption = 'Ate.'
     end
     object bsSkinStdLabel1: TbsSkinStdLabel
-      Left = 15
-      Top = 44
-      Width = 66
+      Left = 276
+      Top = 50
+      Width = 46
       Height = 13
       EllipsType = bsetNone
       UseSkinFont = True
@@ -81,11 +81,11 @@ object frmSelRelVendas: TfrmSelRelVendas
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
       SkinDataName = 'stdlabel'
-      Caption = 'Tipo Relatorio'
+      Caption = 'Tipo Filtro'
     end
     object lblsituacao: TbsSkinStdLabel
-      Left = 229
-      Top = 45
+      Left = 461
+      Top = 50
       Width = 42
       Height = 13
       EllipsType = bsetNone
@@ -99,6 +99,23 @@ object frmSelRelVendas: TfrmSelRelVendas
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'stdlabel'
       Caption = 'Situa'#231#227'o'
+    end
+    object bsSkinStdLabel4: TbsSkinStdLabel
+      Left = 16
+      Top = 50
+      Width = 87
+      Height = 13
+      EllipsType = bsetNone
+      UseSkinFont = True
+      UseSkinColor = True
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = -11
+      DefaultFont.Name = 'MS Sans Serif'
+      DefaultFont.Style = []
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'stdlabel'
+      Caption = 'Tipo de Resultado'
     end
     object edtData_Ini: TEditN
       Left = 10
@@ -159,8 +176,8 @@ object frmSelRelVendas: TfrmSelRelVendas
       TextHint = True
     end
     object btnPesquisar: TbsSkinButton
-      Left = 443
-      Top = 6
+      Left = 494
+      Top = 3
       Width = 125
       Height = 30
       HintImageIndex = 0
@@ -349,8 +366,8 @@ object frmSelRelVendas: TfrmSelRelVendas
         'Pr'#243'ximo Ano')
     end
     object cmbTipoRel: TbsSkinComboBox
-      Left = 92
-      Top = 38
+      Left = 328
+      Top = 43
       Width = 120
       Height = 20
       HintImageIndex = 0
@@ -406,8 +423,8 @@ object frmSelRelVendas: TfrmSelRelVendas
       Style = bscbFixedStyle
     end
     object cmbStatus: TbsSkinComboBox
-      Left = 280
-      Top = 38
+      Left = 514
+      Top = 43
       Width = 105
       Height = 20
       HintImageIndex = 0
@@ -456,6 +473,105 @@ object frmSelRelVendas: TfrmSelRelVendas
         'Finalizado'
         'Entregue'
         'Cancelada')
+      ItemIndex = 0
+      DropDownCount = 8
+      HorizontalExtent = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 14
+      Font.Name = 'Arial'
+      Font.Style = []
+      Sorted = False
+      Style = bscbFixedStyle
+    end
+    object cmbTipoResultado: TbsSkinComboBox
+      Left = 114
+      Top = 43
+      Width = 157
+      Height = 20
+      HintImageIndex = 0
+      TabOrder = 8
+      SkinData = frmPrincipal.SkinPrincipal
+      SkinDataName = 'combobox'
+      DefaultFont.Charset = DEFAULT_CHARSET
+      DefaultFont.Color = clWindowText
+      DefaultFont.Height = 14
+      DefaultFont.Name = 'Arial'
+      DefaultFont.Style = []
+      DefaultWidth = 0
+      DefaultHeight = 0
+      UseSkinFont = True
+      UseSkinSize = True
+      ToolButtonStyle = False
+      AlphaBlend = False
+      AlphaBlendValue = 0
+      AlphaBlendAnimation = False
+      ListBoxCaptionMode = False
+      ListBoxDefaultFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultFont.Color = clWindowText
+      ListBoxDefaultFont.Height = 14
+      ListBoxDefaultFont.Name = 'Arial'
+      ListBoxDefaultFont.Style = []
+      ListBoxDefaultCaptionFont.Charset = DEFAULT_CHARSET
+      ListBoxDefaultCaptionFont.Color = clWindowText
+      ListBoxDefaultCaptionFont.Height = 14
+      ListBoxDefaultCaptionFont.Name = 'Arial'
+      ListBoxDefaultCaptionFont.Style = []
+      ListBoxDefaultItemHeight = 20
+      ListBoxCaptionAlignment = taLeftJustify
+      ListBoxUseSkinFont = True
+      ListBoxUseSkinItemHeight = True
+      ListBoxWidth = 0
+      HideSelection = True
+      AutoComplete = True
+      ImageIndex = 0
+      TabWidths.Strings = (
+        'Nenhum'
+        'Ontem'
+        'Hoje'
+        'Amanh'#227
+        'Semana Anterior'
+        'Esta Semana'
+        'Pr'#243'xima Semana'
+        'Quinzena Anterior'
+        'Esta Quinzena'
+        'Pr'#243'xima Quinzena '
+        'Nos '#218'ltimos 15 dias'
+        'Nos Pr'#243'ximos 15 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 15 dias'
+        'M'#234's Anterior'
+        'Este M'#234's'
+        'Pr'#243'ximo M'#234's'
+        'Nos '#218'ltimos 30 dias'
+        'Nos Pr'#243'ximos 30 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 30 dias'
+        'Nos '#218'ltimos 45 dias'
+        'Nos Pr'#243'ximos 45 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 45 dias'
+        'Nos '#218'ltimos 60 dias'
+        'Nos Pr'#243'ximos 60 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 60 dias'
+        'Trimestre Anterior'
+        'Neste Trimestre'
+        'Pr'#243'ximo Trimestre'
+        'Nos '#218'ltimos 90 dias'
+        'Nos Pr'#243'ximos 90 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 90 dias'
+        'Semestre Passado'
+        'Neste Semestre'
+        'Pr'#243'ximo Semestre'
+        'Nos '#218'ltimos 120 dias'
+        'Nos Pr'#243'ximos 120 dias'
+        'Nos '#218'ltimos e Pr'#243'ximos 120 dias'
+        'Ano Passado'
+        'Neste Ano'
+        'Pr'#243'ximo Ano')
+      CharCase = ecNormal
+      DefaultColor = clWindow
+      Text = 'Vendas Por Grupo'
+      Items.Strings = (
+        'Vendas Por Grupo'
+        'Vendas Por Pagamento')
       ItemIndex = 0
       DropDownCount = 8
       HorizontalExtent = False

@@ -30,6 +30,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     TabOrder = 0
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -47,15 +48,20 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     SkinDataName = 'tab'
     object TabLancamento: TbsSkinTabSheet
       Caption = 'Lancamento de Avarias'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 182
         Width = 665
-        Height = 194
+        Height = 193
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 194
         object GridAvarias: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = SrcProdutosAvarias
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -129,6 +135,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -185,7 +192,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 44
           Top = 13
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -205,6 +212,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -243,7 +251,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 356
           Top = 13
           Width = 57
-          Height = 18
+          Height = 20
           Text = '0'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -265,6 +273,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -289,6 +298,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -324,6 +334,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -360,6 +371,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -502,6 +514,8 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           ParentFont = False
           ScrollBars = ssBoth
           TabOrder = 2
+          Transparent = False
+          WallpaperStretch = False
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
           DefaultFont.Height = 14
@@ -578,6 +592,10 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     end
     object tabConsulta: TbsSkinTabSheet
       Caption = 'Consulta de Avarias'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object panelconsulta: TbsSkinPanel
         Left = 0
         Top = 0
@@ -594,6 +612,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -648,8 +667,8 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 63
           Top = 9
           Width = 88
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -686,6 +705,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           MaxLength = 10
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -697,8 +717,8 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 201
           Top = 9
           Width = 89
-          Height = 18
-          EditMask = '!99/99/0000;1; '
+          Height = 20
+          EditMask = '!99/99/9999;1; '
           Text = '  /  /    '
           AlphaBlend = False
           AlphaBlendAnimation = False
@@ -735,6 +755,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           MaxLength = 10
           ParentFont = False
           TabOrder = 1
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -895,6 +916,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 5
@@ -918,11 +940,12 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Left = 0
         Top = 42
         Width = 665
-        Height = 334
+        Height = 333
         Align = alClient
         TabOrder = 1
+        ExplicitHeight = 334
         object GrdAvarias: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcAvarias
           DataController.DetailKeyFieldNames = 'SeqAvaria'
           DataController.KeyFieldNames = 'SeqAvaria'
@@ -997,7 +1020,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           end
         end
         object GrdItensVendas: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcItensAvarias
           DataController.DetailKeyFieldNames = 'SeqAvaria'
           DataController.Filter.Active = True
@@ -1038,7 +1061,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           end
         end
         object grdDevolucoes: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DetailKeyFieldNames = 'seqvenda'
           DataController.KeyFieldNames = 'seqvenda'
           DataController.MasterKeyFieldNames = 'seqvenda'
@@ -1076,6 +1099,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -1158,6 +1182,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -1192,6 +1217,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -1213,7 +1239,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 51
           Top = 7
           Width = 385
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -1233,6 +1259,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           MaxLength = 50
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1301,7 +1328,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Left = 344
           Top = 31
           Width = 92
-          Height = 18
+          Height = 20
           Text = '0,00'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -1322,6 +1349,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
           Font.Style = []
           ParentFont = False
           TabOrder = 4
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -1338,7 +1366,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
         Align = alClient
         TabOrder = 1
         object cxGridAjustaEstoque: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcAjustaEstoque
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -1430,6 +1458,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -1562,7 +1591,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     Left = 336
     Top = 293
     Width = 59
-    Height = 18
+    Height = 20
     Text = '0,00'
     DefaultColor = clScrollBar
     DefaultFont.Charset = DEFAULT_CHARSET
@@ -1584,6 +1613,7 @@ object frmEstoqueManutencao: TfrmEstoqueManutencao
     ParentFont = False
     TabOrder = 2
     Visible = False
+    ButtonImageIndex = -1
     LeftImageIndex = -1
     LeftImageHotIndex = -1
     LeftImageDownIndex = -1

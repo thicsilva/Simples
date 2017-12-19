@@ -137,7 +137,6 @@ type
     cmbTipoData: TbsSkinComboBox;
     alterarVencimentoeTipodePagamento1: TMenuItem;
     Nome_FormaPagamento: TcxGridDBColumn;
-    frxDuplicataMErcantil: TfrxReport;
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
     DuplicataMercantil1: TMenuItem;
@@ -714,10 +713,10 @@ begin
    frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
    dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr('00001'),Nil).Data;
    frxDBCliente.DataSet := dtmCadastro.cdsClientes;
-   frxDuplicataMErcantil.Variables['Valor']       := QuotedStr(FormatFloat('0.00',cdsPesquisa.fieldByName('vlr_Areceber').AsFloat) );
-   frxDuplicataMErcantil.Variables['Documento']   := QuotedStr(cdsPesquisa.fieldByName('Documento').AsString );
-   frxDuplicataMErcantil.Variables['Vencimento']  := QuotedStr( FormatDateTime('dd/mm/yyyy',cdsPesquisa.fieldByName('Data_Vencimento').AsDateTime ));
-   frxDuplicataMErcantil.ShowReport(true);
+   //frxDuplicataMErcantil.Variables['Valor']       := QuotedStr(FormatFloat('0.00',cdsPesquisa.fieldByName('vlr_Areceber').AsFloat) );
+   //frxDuplicataMErcantil.Variables['Documento']   := QuotedStr(cdsPesquisa.fieldByName('Documento').AsString );
+   //frxDuplicataMErcantil.Variables['Vencimento']  := QuotedStr( FormatDateTime('dd/mm/yyyy',cdsPesquisa.fieldByName('Data_Vencimento').AsDateTime ));
+   //frxDuplicataMErcantil.ShowReport(true);
 end;
 
 procedure TfrmCtasReceber.edtCod_FornecedorExit(Sender: TObject);
@@ -963,7 +962,7 @@ begin
    DaoRomaneio := TDaoRomaneio.Create(gConexao);
 
    lsRomaneioId := DaoVenda.RetornarRomaneio(cdsPesquisa.FieldByName('Seqvenda').AsInteger);
-   if not DaoRomaneio.RomaneioEstaFechado(StrToint(lsRomaneioId))then
+   if not DaoRomaneio.RomaneioEstaFechado(StrToIntDef(lsRomaneioId,0))then
    begin
       if not CaixaMensagem('Este pagamento pertence a um romaneio, Deseja Continuar?', ctConfirma, [ cbSimNao ], 0 )  Then
         Exit;

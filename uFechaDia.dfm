@@ -25,20 +25,18 @@ object frmFechaDia: TfrmFechaDia
         Control = bsSkinToolBar1
         ImageIndex = -1
         MinHeight = 40
-        Width = 405
+        Width = 407
       end>
     SkinDataName = 'controlbar'
-    SkinData = frmPrincipal.Skindata
     SkinBevel = True
     TabOrder = 0
     object bsSkinToolBar1: TbsSkinToolBar
-      Left = 12
+      Left = 9
       Top = 0
-      Width = 391
+      Width = 398
       Height = 40
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'bigtoolpanel'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -48,6 +46,8 @@ object frmFechaDia: TfrmFechaDia
       DefaultWidth = 70
       DefaultHeight = 40
       UseSkinFont = True
+      EmptyDrawing = False
+      RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
       CaptionImageIndex = -1
@@ -82,7 +82,6 @@ object frmFechaDia: TfrmFechaDia
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -92,6 +91,7 @@ object frmFechaDia: TfrmFechaDia
         DefaultWidth = 70
         DefaultHeight = 40
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -120,7 +120,6 @@ object frmFechaDia: TfrmFechaDia
         Width = 70
         Height = 40
         HintImageIndex = 0
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bigtoolbutton'
         DefaultFont.Charset = DEFAULT_CHARSET
         DefaultFont.Color = clWindowText
@@ -130,6 +129,7 @@ object frmFechaDia: TfrmFechaDia
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        CheckedMode = False
         UseSkinSize = True
         UseSkinFontColor = True
         WidthWithCaption = 0
@@ -149,6 +149,7 @@ object frmFechaDia: TfrmFechaDia
         Spacing = 1
         Layout = blGlyphTop
         OnClick = btnokClick
+        ExplicitLeft = -6
         ExplicitTop = 8
       end
       object bsSkinBevel2: TbsSkinBevel
@@ -157,7 +158,6 @@ object frmFechaDia: TfrmFechaDia
         Width = 232
         Height = 40
         Align = alLeft
-        SkinData = frmPrincipal.Skindata
         SkinDataName = 'bevel'
         DividerMode = True
         ExplicitTop = -5
@@ -171,7 +171,6 @@ object frmFechaDia: TfrmFechaDia
     Height = 21
     HintImageIndex = 0
     TabOrder = 1
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'statusbar'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -181,6 +180,8 @@ object frmFechaDia: TfrmFechaDia
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -206,7 +207,6 @@ object frmFechaDia: TfrmFechaDia
       Height = 21
       HintImageIndex = 0
       TabOrder = 0
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'statusgauge'
       DefaultFont.Charset = DEFAULT_CHARSET
       DefaultFont.Color = clWindowText
@@ -231,10 +231,9 @@ object frmFechaDia: TfrmFechaDia
     Left = 0
     Top = 70
     Width = 411
-    Height = 156
+    Height = 137
     HintImageIndex = 0
     TabOrder = 2
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'checklistbox'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -244,6 +243,7 @@ object frmFechaDia: TfrmFechaDia
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    ShowCaptionButtons = True
     AllowGrayed = False
     UseSkinItemHeight = True
     Columns = 0
@@ -286,6 +286,7 @@ object frmFechaDia: TfrmFechaDia
     NumGlyphs = 1
     Spacing = 2
     RowCount = 0
+    ExplicitHeight = 156
   end
   object bsSkinPanel1: TbsSkinPanel
     Left = 0
@@ -294,7 +295,6 @@ object frmFechaDia: TfrmFechaDia
     Height = 26
     HintImageIndex = 0
     TabOrder = 3
-    SkinData = frmPrincipal.Skindata
     SkinDataName = 'panel'
     DefaultFont.Charset = DEFAULT_CHARSET
     DefaultFont.Color = clWindowText
@@ -304,6 +304,8 @@ object frmFechaDia: TfrmFechaDia
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
+    RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
     CaptionImageIndex = -1
@@ -334,22 +336,37 @@ object frmFechaDia: TfrmFechaDia
       DefaultFont.Height = -11
       DefaultFont.Name = 'MS Sans Serif'
       DefaultFont.Style = []
-      SkinData = frmPrincipal.Skindata
       SkinDataName = 'stdlabel'
       Caption = 'Execultando os seguintes procedimentos'
     end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 207
+    Width = 411
+    Height = 19
+    Panels = <
+      item
+        Width = 500
+      end
+      item
+        Width = 50
+      end>
+    ExplicitLeft = 1
+    ExplicitTop = 6
+    ExplicitWidth = 409
   end
   object qryVariavel: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 109
-    Top = 97
+    Left = 173
+    Top = 169
   end
   object dspvariavel: TDataSetProvider
     DataSet = qryVariavel
-    Left = 109
-    Top = 126
+    Left = 101
+    Top = 158
   end
   object cdsProcedimento: TClientDataSet
     Aggregates = <>
@@ -371,7 +388,14 @@ object frmFechaDia: TfrmFechaDia
     MaxBlobSize = -1
     Params = <>
     SQLConnection = frmPrincipal.dbxPrincipal
-    Left = 81
-    Top = 97
+    Left = 65
+    Top = 161
+  end
+  object cdsVendas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspvariavel'
+    Left = 279
+    Top = 145
   end
 end

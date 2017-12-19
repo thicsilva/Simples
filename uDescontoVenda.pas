@@ -47,12 +47,12 @@ begin
    Perc_Desconto := (Perc_Desconto/StrToFloat(edtTotalVenda.text))*100;
    pTotalDesconto := StrTofloat(edtTotDesconto.text);
 
-   if ( Perc_Desconto > gsPerfilAcesso.Desc_Maximo ) then
+   {if ( Perc_Desconto > gsPerfilAcesso.Desc_Maximo ) then
    Begin
       CaixaMensagem( 'O valor do desconto ultrapassa sua margem de '+formatFloat('0.00',gsPerfilAcesso.Desc_Maximo), ctAviso, [ cbOk ], 0 );
       edtTotDesconto.SetFocus;
       Exit;
-   End;
+   End;}
    Tag := 1;
    pPercDesconto := Perc_Desconto;
    Close;

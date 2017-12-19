@@ -19,10 +19,10 @@ uses
   cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
-  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase, 
+  FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase,
   uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter;
+  dxSkinscxPCPainter, frxClass, frxDBSet;
 
 type
   TfrmConsLocacao = class(TFormBase)
@@ -118,8 +118,36 @@ type
     bsSkinSpeedButton1: TbsSkinSpeedButton;
     Colum_TipoCobranca: TcxGridDBColumn;
     ColumnDataVencimento: TcxGridDBColumn;
-    bsSkinSpeedButton2: TbsSkinSpeedButton;
+    btnImprimir: TbsSkinSpeedButton;
     cdsItensDev: TClientDataSet;
+    btnSemPrazo: TbsSkinSpeedButton;
+    frxDbItens: TfrxDBDataset;
+    frxDBCliente: TfrxDBDataset;
+    frxDbEmpresa: TfrxDBDataset;
+    frxContrato: TfrxReport;
+    cdsItensLocacaoTMP: TClientDataSet;
+    cdsItensLocacaoTMPTipoCalculo: TStringField;
+    cdsItensLocacaoTMPCodigo: TIntegerField;
+    cdsItensLocacaoTMPDescricao: TStringField;
+    cdsItensLocacaoTMPUnidade: TStringField;
+    cdsItensLocacaoTMPqtde_Venda: TIntegerField;
+    cdsItensLocacaoTMPPco_Venda: TFloatField;
+    cdsItensLocacaoTMPPrevisao_Entrega: TDateTimeField;
+    cdsItensLocacaoTMPDias: TIntegerField;
+    cdsItensLocacaoTMPvlr_Desconto: TFloatField;
+    cdsItensLocacaoTMPvlr_Total: TFloatField;
+    cdsItensLocacaoTMPComplemento: TStringField;
+    cdsItensLocacaoTMPPco_tabela: TFloatField;
+    cdsItensLocacaoTMPperc_Comis: TFloatField;
+    cdsItensLocacaoTMPqtdeEmbalagem: TIntegerField;
+    cdsItensLocacaoTMPseqVenda: TIntegerField;
+    cdsItensLocacaoTMPSetorId: TIntegerField;
+    cdsItensLocacaoTMPPesoBruto: TFloatField;
+    cdsItensLocacaoTMPPesoLiquido: TFloatField;
+    cdsItensLocacaoTMPPrecoCusto: TFloatField;
+    cdsItensLocacaoTMPMargemSecundaria: TFloatField;
+    cdsItensLocacaoTMPLucroBruto: TFloatField;
+    cdsItensLocacaoTMPValor_Pagamento: TFloatField;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -145,11 +173,13 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure cdsItensVendasCalcFields(DataSet: TDataSet);
     procedure bsSkinSpeedButton1Click(Sender: TObject);
-    procedure bsSkinSpeedButton2Click(Sender: TObject);
+    procedure btnSemPrazoClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     pvilinha  : integer;
     procedure CarregaPropriedade;
     function RetornarTotalVenda(var DataDevolucao : TDatetime; lrSeqVenda: String) : Real;
+    function CarregaItensLocacaoTMP : Real;
     { Private declarations }
   public
     { Public declarations }
@@ -162,7 +192,7 @@ implementation
 
 uses Uprincipal,Ufuncoes, uVendas, UnitDeclaracoes, uSelMotivoStatus, uDaoCaixaMovimento,
   udevolucaoVenda, uConsItensDevolvidos, uDaoVenda, uClassVenda, uDaoItemVenda,
-  uclassContaCorrente, uFechaLocacao;
+  uclassContaCorrente, uFechaLocacao, uDtmCadastro;
 
 {$R *.dfm}
 
@@ -220,7 +250,7 @@ begin
 
    qryItensVendas.Close;
    qryItensVendas.SQL.Text := 'Select Prod.Unid as Unidade, Prod.Codigo, Prod.Aliquota_ECF, Prod.Descricao, Prod.Pco_Venda as Pco_Venda_Atual, '+
-                              'Prod.Pco_Custo, coalesce(Itens.Status,0) as Status, Itens.* '+
+                 '             Prod.Pco_Custo, coalesce(Itens.Status,0) as Status, Itens.* '+
                               'from T_itensvendas Itens, T_produtos Prod, T_Vendas Ven '+
                               'where Prod.Codigo=Itens.Cod_Produto  ';
 
@@ -241,6 +271,18 @@ begin
 
 end;
 
+
+procedure TfrmConsLocacao.btnSemPrazoClick(Sender: TObject);
+begin
+   if CaixaMensagem( 'Confirma que esta locação esta sem prazo definido ???', ctConfirma, [ cbSimNao ], 0 )  Then
+   Begin
+      qryModific.SQL.Text := 'Update T_Vendas set Status=:parStatus Where seqvenda=:parSeqvenda ';
+      qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
+      qryModific.ParamByName('parStatus').AsString    := '4';
+      qryModific.ExecSQL;
+   End;
+   btnselecionarclick(btnselecionar);
+end;
 
 procedure TfrmConsLocacao.btnFecharClick(Sender: TObject);
 begin
@@ -321,6 +363,70 @@ begin
    FreeAndNil(DaoVenda);
    FreeAndNil(lovenda);
    FreeAndNil(DaoItemVenda);
+end;
+
+procedure TfrmConsLocacao.btnImprimirClick(Sender: TObject);
+
+begin
+   dtmCadastro    := TdtmCadastro.create(Nil);
+
+   dtmCadastro.cdsEmpresa.Data  := gconexao.BuscarDadosSQL('Select * from Empresa',Nil).Data;
+   dtmCadastro.cdsClientes.Data := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil).Data;
+
+   dtmCadastro.cdsClientes.locate('Codigo', cdsVendas.FieldByname('Cod_Cliente').AsString,[] );
+
+   frxDBCliente.DataSet := dtmCadastro.cdsClientes;
+   frxDbEmpresa.DataSet := dtmCadastro.cdsEmpresa;
+
+
+  frxContrato.Variables['EnderecoObra']  := QuotedStr( dtmCadastro.cdsClientes.FieldByName('EnderecoObra').AsString );
+  frxContrato.Variables['CNPJEmpresa']   := QuotedStr( FormatarCNPJ_CPF( dtmCadastro.cdsEmpresa.fieldByname('cnpjcpf').AsString ) );
+  frxContrato.Variables['cnpjCliente']   := QuotedStr( dtmCadastro.cdsClientes.FieldByName('EnderecoObra').AsString);
+  frxContrato.Variables['TotalLocacao']  := QuotedStr( cdsVendas.FieldByName('TotalLocacao').AsString );
+  frxContrato.Variables['ExtensoValor']  := QuotedStr( valorPorExtenso(StrTofloat('0')));
+  frxContrato.Variables['ExtensoData']   := QuotedStr( 'Ao(s) '+NumeroPorExtenso(StrToint(FormatDateTime('dd',now)))+' dia(s) do mês de '+FormatDateTime('mmm',now)+
+                                                      ' de '+NumeroPorExtenso(StrToFloat(formatDatetime('yyyy',now))));
+  frxContrato.Variables['SeqVenda']      :=  cdsVendas.FieldByName('SeqVenda').AsString;
+  frxContrato.Variables['TotalCaucao']   := QuotedStr( formatFloat('0.00',CarregaItensLocacaoTMP) );
+  frxContrato.ShowReport(true);
+
+end;
+function TfrmConsLocacao.CarregaItensLocacaoTMP : real;
+var liseqvenda : integer;
+    total : real;
+Begin
+   cdsItensLocacaoTMP.EmptyDataSet;
+   liSeqvenda := cdsVendas.fieldbyname('SeqVenda').ASInteger;
+   cdsItensVendas.Locate('seqvenda',liseqvenda,[]);
+   while ( cdsItensVendas.fieldbyname('SeqVenda').AsInteger = liSeqvenda ) and ( Not cdsItensVendas.Eof )  do
+   Begin
+
+     Total := Total + cdsItensVendas.FieldByName('PrecoCusto').AsFloat*cdsItensVendas.FieldByName('Qtde_Venda').AsFloat;
+     cdsItensLocacaoTMP.Append;
+     cdsItensLocacaoTMP.FieldByName('Perc_Comis').asFloat       := 0;
+     cdsItensLocacaoTMP.FieldByName('Codigo').asInteger         := cdsItensVendas.FieldByName('Codigo').AsInteger;
+     cdsItensLocacaoTMP.FieldByName('Qtde_Venda').asFloat       := cdsItensVendas.FieldByName('Qtde_Venda').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('Pco_Venda').asFloat        := cdsItensVendas.FieldByName('pco_venda').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('Pco_Tabela').asFloat       := cdsItensVendas.FieldByName('Pco_Tabela').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('vlr_Total').asFloat        := cdsItensVendas.FieldByName('vlr_Total').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('PrecoCusto').asFloat       := cdsItensVendas.FieldByName('PrecoCusto').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('LucroBruto').asFloat       := 0;
+     cdsItensLocacaoTMP.FieldByName('MargemSecundaria').asFloat := 0;
+     cdsItensLocacaoTMP.FieldByName('vlr_Desconto').asFloat     := 0;
+     cdsItensLocacaoTMP.FieldByName('Descricao').asString       := cdsItensVendas.FieldByName('Descricao').AsString;
+     cdsItensLocacaoTMP.FieldByName('Unidade').asString         := cdsItensVendas.FieldByName('Unidade').AsString;
+     cdsItensLocacaoTMP.FieldByName('QtdeEmbalagem').asString   := '0';
+     cdsItensLocacaoTMP.FieldByName('PesoBruto').asFloat        := 0;
+     cdsItensLocacaoTMP.FieldByName('PesoLiquido').asFloat      := 0;
+     cdsItensLocacaoTMP.FieldByName('SeqVenda').asInteger       := 1;
+     cdsItensLocacaoTMP.FieldByName('SetorId').asInteger        := 1;
+     cdsItensLocacaoTMP.FieldByName('Dias').asInteger           := 0 ;
+     cdsItensLocacaoTMP.FieldByName('Valor_Pagamento').AsFloat  := cdsItensVendas.FieldByName('PrecoCusto').AsFloat*cdsItensVendas.FieldByName('Qtde_Venda').AsFloat;
+     cdsItensLocacaoTMP.FieldByName('TipoCalculo').asString     := '0';
+     cdsItensLocacaoTMP.Post;
+     cdsItensVendas.next;
+   End;
+   Result := total
 end;
 
 procedure TfrmConsLocacao.cdsItensVendasAfterOpen(DataSet: TDataSet);
@@ -575,7 +681,7 @@ begin
       Colum_NomeStatus.Visible := True;
    End;
    //btnImpComprovante.Visible :=  RetornarVerdadeirOuFalso(gParametros.ler( '', '[IMPRESSAO]', 'ImprimiCopiaComprovante','0',gsOperador ));
-   btnSelecionarClick(btnSelecionar);
+   //btnSelecionarClick(btnSelecionar);
    if gbMaster then
       MenuDeControle.UseBuiltInPopupMenus := True;
 end;
@@ -836,18 +942,6 @@ begin
          cdsVendas.Locate('SeqVenda',liSeqVenda, [] );
       End;
    End;
-end;
-
-procedure TfrmConsLocacao.bsSkinSpeedButton2Click(Sender: TObject);
-begin
-   if CaixaMensagem( 'Confirma que esta locação esta sem prazo definido ???', ctConfirma, [ cbSimNao ], 0 )  Then
-   Begin
-      qryModific.SQL.Text := 'Update T_Vendas set Status=:parStatus Where seqvenda=:parSeqvenda ';
-      qryModific.ParamByName('parSeqVenda').AsInteger := StrToInt(cdsVendas.FieldByName('SeqVenda').AsString);
-      qryModific.ParamByName('parStatus').AsString    := '4';
-      qryModific.ExecSQL;
-   End;
-   btnselecionarclick(btnselecionar);
 end;
 
 procedure TfrmConsLocacao.btnEntregueClick(Sender: TObject);

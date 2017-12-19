@@ -9,7 +9,8 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, bsSkinCtrls, bsdbctrls, StdCtrls, Mask, bsSkinBoxCtrls, ExtCtrls,
   ToolWin, ComCtrls, FMTBcd, DBClient, Provider, SqlExpr, bsSkinTabs,SqlTimSt,
-  dxSkinsCore;
+  dxSkinsCore, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter;
 
 type
   TfrmEstoqueManutencao = class(TFormBase)

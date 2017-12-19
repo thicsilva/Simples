@@ -32,7 +32,6 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
     SkinData = frmPrincipal.SkinPrincipal
     SkinBevel = True
     TabOrder = 0
-    ExplicitWidth = 621
     object bsSkinToolBar2: TbsSkinToolBar
       Left = 9
       Top = 0
@@ -50,6 +49,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = True
+      EmptyDrawing = False
       RibbonStyle = False
       ImagePosition = bsipDefault
       TransparentMode = False
@@ -238,6 +238,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
     TabOrder = 1
     MouseWheelSupport = False
     TabExtededDraw = False
+    ButtonTabSkinDataName = 'resizetoolbutton'
     TabsOffset = 0
     TabSpacing = 1
     TextInHorizontal = False
@@ -254,28 +255,17 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
     DefaultItemHeight = 20
     SkinData = frmPrincipal.SkinPrincipal
     SkinDataName = 'tab'
-    ExplicitTop = 134
-    ExplicitWidth = 621
-    ExplicitHeight = 289
     object bsSkinTabSheet1: TbsSkinTabSheet
       Caption = 'Consulta'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object cxGrid1: TcxGrid
         Left = 0
         Top = 0
         Width = 611
-        Height = 327
+        Height = 325
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = -2
-        ExplicitTop = 25
-        ExplicitWidth = 621
-        ExplicitHeight = 242
         object cxGridDBTableView2: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcTransferencia
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <
@@ -356,6 +346,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -412,7 +403,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           Left = 46
           Top = 14
           Width = 65
-          Height = 18
+          Height = 20
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
           DefaultFont.Color = clBlack
@@ -431,6 +422,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -468,7 +460,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           Left = 361
           Top = 14
           Width = 57
-          Height = 18
+          Height = 20
           Text = '0'
           DefaultColor = clWindow
           DefaultFont.Charset = DEFAULT_CHARSET
@@ -489,6 +481,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           Font.Style = []
           ParentFont = False
           TabOrder = 2
+          ButtonImageIndex = -1
           LeftImageIndex = -1
           LeftImageHotIndex = -1
           LeftImageDownIndex = -1
@@ -512,6 +505,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 9
@@ -545,6 +539,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
           DefaultWidth = 0
           DefaultHeight = 0
           UseSkinFont = False
+          Transparent = False
           CheckedMode = False
           ImageList = frmPrincipal.Imagebutoes
           ImageIndex = 10
@@ -580,6 +575,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
         DefaultWidth = 0
         DefaultHeight = 0
         UseSkinFont = True
+        EmptyDrawing = False
         RibbonStyle = False
         ImagePosition = bsipDefault
         TransparentMode = False
@@ -696,7 +692,7 @@ object frmTransferenciaDeSetores: TfrmTransferenciaDeSetores
         ExplicitWidth = 621
         ExplicitHeight = 242
         object cxGridDBTableView1: TcxGridDBTableView
-          NavigatorButtons.ConfirmDelete = False
+          Navigator.Buttons.CustomButtons = <>
           DataController.DataSource = srcTempTransferencia
           DataController.Summary.DefaultGroupSummaryItems = <>
           DataController.Summary.FooterSummaryItems = <

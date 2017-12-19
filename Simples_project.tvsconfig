@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<TgConfig Version="3" SubLevelDisabled="False">
-  <Option Name="namespaceFolder.uCadClientes" Type="System.String" Value="" Category="General" IsBrowsable="False" />
-  <Option Name="namespaceFolder.uclassContaCorrente" Type="System.String" Value="" Category="General" IsBrowsable="False" />
-  <Option Name="namespaceFolder.uClassPerfil" Type="System.String" Value="uClassPerfil" Category="General" IsBrowsable="False" />
-  <Option Name="namespaceFolder.uClassConexao" Type="System.String" Value="uClassConexao" Category="General" IsBrowsable="False" />
-</TgConfig>

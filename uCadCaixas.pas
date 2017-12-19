@@ -56,6 +56,7 @@ type
     srcPesquisa: TDataSource;
     bsSkinStdLabel2: TbsSkinStdLabel;
     edtDataMovCaixa: TbsSkinDateEdit;
+    StatusBar1: TStatusBar;
     procedure btnincluirClick(Sender: TObject);
     procedure btnalterarClick(Sender: TObject);
     procedure btnokClick(Sender: TObject);

@@ -30,6 +30,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
     DefaultWidth = 0
     DefaultHeight = 0
     UseSkinFont = True
+    EmptyDrawing = False
     RibbonStyle = False
     ImagePosition = bsipDefault
     TransparentMode = False
@@ -48,8 +49,6 @@ object FrmDescontoVenda: TFrmDescontoVenda
     Spacing = 2
     Caption = 'bsSkinPanel3'
     Align = alClient
-    ExplicitWidth = 285
-    ExplicitHeight = 201
     object bsSkinStdLabel7: TbsSkinStdLabel
       Left = 46
       Top = 22
@@ -261,6 +260,7 @@ object FrmDescontoVenda: TFrmDescontoVenda
       DefaultWidth = 0
       DefaultHeight = 0
       UseSkinFont = False
+      Transparent = False
       CheckedMode = False
       ImageList = frmPrincipal.Imagebutoes
       ImageIndex = 5

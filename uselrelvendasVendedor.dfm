@@ -368,7 +368,7 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     end
     object cmbTipoResultado: TbsSkinComboBox
       Left = 109
-      Top = 32
+      Top = 30
       Width = 196
       Height = 20
       HintImageIndex = 0
@@ -450,20 +450,22 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
         'Pr'#243'ximo Ano')
       CharCase = ecNormal
       DefaultColor = clWindow
-      Text = 'Vendedor Analitico'
+      Text = '01 - Vendedor Analitico'
       Items.Strings = (
-        'Vendedor Analitico'
-        'Vendedor Sintetico'
-        'Produtos por Vendedor'
-        'Supervisor Analitico'
-        'Supervisor Sintetico'
-        'Produtos por Supervisor'
-        'Cliente Sintetico'
-        'Clientes Analitico'
-        'Produtos por Vendedor Comi'#231#245'es'
-        'Vendedor e Atividade'
-        'Produtividade')
-      ItemIndex = -1
+        '01 - Vendedor Analitico'
+        '02 - Vendedor Sintetico'
+        '03 - Produtos por Vendedor'
+        '04 - Supervisor Analitico'
+        '05 - Supervisor Sintetico'
+        '06 - Produtos por Supervisor'
+        '07 - Cliente Sintetico'
+        '08 - Clientes Analitico'
+        '09 - Produtos por Vendedor Comi'#231#245'es'
+        '10 - Vendedor e Atividade'
+        '11 - Produtividade'
+        '12 - Vededor Analitico Cidade'
+        '13 - Cidade e Vendedor Analitico')
+      ItemIndex = 0
       DropDownCount = 8
       HorizontalExtent = False
       Font.Charset = DEFAULT_CHARSET
@@ -759,8 +761,6 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
       DefaultItemHeight = 20
       SkinData = frmPrincipal.SkinPrincipal
       SkinDataName = 'tab'
-      ExplicitLeft = -1
-      ExplicitTop = 6
       object bsSkinTabSheet1: TbsSkinTabSheet
         Caption = 'Escolha o Filtro'
         object bsSkinStdLabel1: TbsSkinStdLabel
@@ -1411,5 +1411,21 @@ object frmselrelVendasVendedor: TfrmselrelVendasVendedor
     Params = <>
     Left = 328
     Top = 312
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 568
+    Top = 160
+    object ClientDataSet1Cidade: TStringField
+      FieldName = 'Cidade'
+      Size = 50
+    end
+    object ClientDataSet1Quantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object ClientDataSet1Total: TFloatField
+      FieldName = 'Total'
+    end
   end
 end
