@@ -431,7 +431,6 @@ begin
   end;
   QryVariavel.ParamByName('parData_RepasseIni').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Ini.Text + ' 00:00:00');
   QryVariavel.ParamByName('parData_RepasseFim').AsSQLTimeStamp := StrToSqlTimeStamp(dtpData_Fim.Text + ' 23:59:00');
-
   cdsAuxiliar.Close;
   cdsAuxiliar.ProviderName := dspVariavel.Name;
   cdsAuxiliar.Open;
