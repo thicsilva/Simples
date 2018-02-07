@@ -28,9 +28,9 @@ uses
   cxDBData, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxControls, cxGridCustomView, cxGrid,dateUtils,
   FMTBcd, SqlExpr,SqlTimSt, cxPropertiesStore, SimpleDS, dxSkinsCore,uformBase,
-  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,pcnConversao,
+  uClassDaoContaCorrente, cxGridCustomPopupMenu, cxGridPopupMenu,
   cxLookAndFeels, cxLookAndFeelPainters, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, ACBrNFe, frxClass, frxDBSet;
+  dxSkinscxPCPainter, frxClass, frxDBSet;
 
 type
   TfrmConsVendas = class(TFormBase)
@@ -133,7 +133,6 @@ type
     btnEntregaVenda: TbsSkinSpeedButton;
     MenuDeControle: TcxGridPopupMenu;
     btnCupomFiscal: TbsSkinSpeedButton;
-    ACBrNFe1: TACBrNFe;
     frxDbItens: TfrxDBDataset;
     frxDBCliente: TfrxDBDataset;
     frxDbEmpresa: TfrxDBDataset;
@@ -152,6 +151,8 @@ type
     Column_Produto: TcxGridDBColumn;
     Column_Placa: TcxGridDBColumn;
     frxVendaPersonalizada03: TfrxReport;
+    Colum_RomaneioID: TcxGridDBColumn;
+    Colum_Entregue: TcxGridDBColumn;
     procedure btnSelecionarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnFinalizarClick(Sender: TObject);
@@ -889,7 +890,12 @@ begin
   IF aviewinfo.GridRecord.Values[Column_NomeStatus.Index]='Cancelada' Then
      acanvas.Font.color := clred
   else IF aviewinfo.GridRecord.Values[Column_NomeStatus.Index]='Finalizado' Then
-     acanvas.Font.color := clGreen;
+     acanvas.Font.color := clGreen
+  else IF aviewinfo.GridRecord.Values[Colum_Entregue.Index]= True Then
+     acanvas.Font.color := clGreen
+  else IF aviewinfo.GridRecord.Values[Colum_RomaneioID.Index]<>Null Then
+     acanvas.Font.color := clBlue;
+
 end;
 
 procedure TfrmConsVendas.MenuItem1Click(Sender: TObject);
@@ -1279,7 +1285,7 @@ begin
 
    //btnTudoClick(btnTudo);
    //cdsOrdemServico.locate('SeqOs',liSeqOs,[]);
-
+ {
   lstLog := TStringList.Create;
 
   ACBrNFe1.NotasFiscais.Clear;
@@ -1548,7 +1554,7 @@ var cdsCliente : TClientDataSet;
 begin
 
  {$REGION 'Cabecalho da Nota'}
-
+     {
    with ACBrNFe1.NotasFiscais.Add.NFe do
    begin
      Ide.cNF       := StrToInt(NumNFe); //Caso não seja preenchido será gerado um número aleatório pelo componente
@@ -1598,7 +1604,7 @@ begin
         RefECF.nCOO    := '';          // |
       end;
 }
-
+    {
       Emit.CNPJCPF           := gEmpresa.CNPJ;
       Emit.IE                := gEmpresa.InscricaoEstadual;
       Emit.xNome             := gEmpresa.Razao_social;
@@ -1635,7 +1641,7 @@ begin
       Avulsa.repEmi  := '';
       Avulsa.dPag    := now;             }
 
-
+    {
       cdsCliente := gconexao.BuscarDadosSQL('Select * from T_Clientes where Codigo='+QuotedStr(cdsVendas.FieldByName('Cod_Cliente').AsString),Nil);
 
       Dest.CNPJCPF           := cdsCliente.FieldByName('cnpjcpf').AsString;
@@ -1676,7 +1682,7 @@ begin
       Entrega.UF      := '';}
 
 //Adicionando Produtos
-      with Det.Add do
+   {   with Det.Add do
        begin
          Prod.nItem    := 1; // Número sequencial, para cada item deve ser incrementado
          Prod.cProd    := '123456';
@@ -1790,7 +1796,7 @@ begin
             ICMSCons.UFcons        := '' ;
           end;}
 
-          with Imposto do
+   {       with Imposto do
           begin
             // lei da transparencia nos impostos
             vTotTrib := 0;
@@ -1887,8 +1893,8 @@ begin
                cListServ := 1402; // Preencha este campo usando a tabela disponível
                                // em http://www.planalto.gov.br/Ccivil_03/LEIS/LCP/Lcp116.htm
              end;}
-          end;
-       end;
+   //       end;
+      // end;
 
 //Adicionando Serviços
     {  with Det.Add do
@@ -1986,7 +1992,7 @@ begin
          UF    := '';
          RNTC  := '';
        end;}
-
+ {
       with Transp.Vol.Add do
        begin
          qVol  := 1;
@@ -2040,14 +2046,14 @@ begin
          nProc := '';
          indProc := ipSEFAZ;
        end;                 }
-
+ {
       exporta.UFembarq   := '';;
       exporta.xLocEmbarq := '';
 
       compra.xNEmp := '';
       compra.xPed  := '';
       compra.xCont := '';
-   end;
+   end;}
 end;
 
 

@@ -456,7 +456,7 @@ object frmVendas: TfrmVendas
       Align = alRight
       object bsSkinStdLabel7: TbsSkinStdLabel
         Left = 54
-        Top = 12
+        Top = 24
         Width = 83
         Height = 20
         EllipsType = bsetNone
@@ -478,7 +478,7 @@ object frmVendas: TfrmVendas
       end
       object bsSkinStdLabel9: TbsSkinStdLabel
         Left = 59
-        Top = 50
+        Top = 60
         Width = 78
         Height = 20
         EllipsType = bsetNone
@@ -543,7 +543,7 @@ object frmVendas: TfrmVendas
       end
       object edtTotalVenda: TEditN
         Left = 143
-        Top = 8
+        Top = 20
         Width = 69
         Height = 24
         TabStop = False
@@ -578,7 +578,7 @@ object frmVendas: TfrmVendas
       end
       object edtTotDesconto: TEditN
         Left = 143
-        Top = 50
+        Top = 56
         Width = 69
         Height = 24
         TabStop = False
@@ -2952,6 +2952,23 @@ object frmVendas: TfrmVendas
       end
     end
   end
+  object pnlClienteDevedor: TPanel
+    Left = 586
+    Top = 55
+    Width = 230
+    Height = 18
+    Caption = 'Verndedor Com Remessa Aberta'
+    Color = clSkyBlue
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 10
+    Visible = False
+  end
   object dspItensVendas: TDataSetProvider
     DataSet = qryItensVendas
     Left = 465
@@ -3556,7 +3573,7 @@ object frmVendas: TfrmVendas
     Top = 239
   end
   object frxVenda: TfrxReport
-    Version = '4.9.105'
+    Version = '5.1.9'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -3629,6 +3646,7 @@ object frmVendas: TfrmVendas
       BottomMargin = 10.000000000000000000
       Duplex = dmSimplex
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 113.944960000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
@@ -3637,14 +3655,12 @@ object frmVendas: TfrmVendas
           Top = 4.661410000000000000
           Width = 710.551640000000000000
           Height = 105.283550000000000000
-          ShowHint = False
         end
         object dbSetEmpresaNome_Fantasia: TfrxMemoView
           Left = 93.283550000000000000
           Top = 24.897650000000000000
           Width = 502.488560000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Nome_Fantasia'
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
@@ -3663,7 +3679,6 @@ object frmVendas: TfrmVendas
           Top = 72.472480000000000000
           Width = 504.488560000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -3680,7 +3695,6 @@ object frmVendas: TfrmVendas
           Top = 41.574830000000000000
           Width = 502.488560000000000000
           Height = 31.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -3700,7 +3714,6 @@ object frmVendas: TfrmVendas
           Top = 88.370130000000000000
           Width = 504.709030000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -3719,7 +3732,6 @@ object frmVendas: TfrmVendas
           Top = 27.102350000000000000
           Width = 57.000000000000000000
           Height = 76.000000000000000000
-          ShowHint = False
           Picture.Data = {
             0A54504E474F626A65637489504E470D0A1A0A0000000D49484452000000B000
             0000EB0806000000C9FE1C6A000000017352474200AECE1CE90000000467414D
@@ -3933,14 +3945,13 @@ object frmVendas: TfrmVendas
           Top = 4.440940000000000000
           Width = 175.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          Color = clMenuText
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Fill.BackColor = clMenuText
+          Fill.Style = bsClear
           HAlign = haCenter
           Memo.UTF8 = (
             'Pedido')
@@ -3951,7 +3962,6 @@ object frmVendas: TfrmVendas
           Top = 4.102350000000000000
           Width = 197.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -3963,6 +3973,7 @@ object frmVendas: TfrmVendas
         end
       end
       object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
         Height = 105.480210000000000000
         Top = 154.960730000000000000
         Width = 718.110700000000000000
@@ -3971,14 +3982,12 @@ object frmVendas: TfrmVendas
           Top = 5.039270000000000000
           Width = 712.331170000000000000
           Height = 97.504020000000000000
-          ShowHint = False
         end
         object dbSetClienteDescricao: TfrxMemoView
           Left = 5.118120000000000000
           Top = 24.559060000000000000
           Width = 555.433520000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = ANSI_CHARSET
@@ -3995,7 +4004,6 @@ object frmVendas: TfrmVendas
           Top = 42.236240000000000000
           Width = 553.433520000000000000
           Height = 15.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = DEFAULT_CHARSET
@@ -4015,7 +4023,6 @@ object frmVendas: TfrmVendas
           Top = 57.362090000000000000
           Width = 553.385900000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = DEFAULT_CHARSET
@@ -4032,7 +4039,6 @@ object frmVendas: TfrmVendas
           Top = 70.362090000000000000
           Width = 555.110390000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = DEFAULT_CHARSET
@@ -4051,7 +4057,6 @@ object frmVendas: TfrmVendas
           Top = 85.362090000000000000
           Width = 137.063080000000000000
           Height = 13.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -4066,14 +4071,13 @@ object frmVendas: TfrmVendas
           Top = 6.039270000000000000
           Width = 175.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          Color = clMenuText
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Fill.BackColor = clMenuText
+          Fill.Style = bsClear
           HAlign = haCenter
           Memo.UTF8 = (
             'Dados do Cliente')
@@ -4083,7 +4087,7 @@ object frmVendas: TfrmVendas
           Left = 568.000000000000000000
           Top = 4.582560000000000000
           Height = 96.000000000000000000
-          ShowHint = False
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object dbSetClientePto_Referencia: TfrxMemoView
@@ -4091,7 +4095,6 @@ object frmVendas: TfrmVendas
           Top = 82.582560000000000000
           Width = 415.370130000000000000
           Height = 16.897650000000000000
-          ShowHint = False
           DataField = 'Pto_Referencia'
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
@@ -4109,7 +4112,6 @@ object frmVendas: TfrmVendas
           Top = 6.582560000000000000
           Width = 145.488250000000000000
           Height = 26.897650000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -21
@@ -4126,7 +4128,6 @@ object frmVendas: TfrmVendas
           Top = 63.582560000000000000
           Width = 145.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -4142,7 +4143,6 @@ object frmVendas: TfrmVendas
           Top = 32.582560000000000000
           Width = 145.370130000000000000
           Height = 28.897650000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -21
@@ -4159,7 +4159,6 @@ object frmVendas: TfrmVendas
           Top = 80.582560000000000000
           Width = 145.370130000000000000
           Height = 23.897650000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -4171,6 +4170,7 @@ object frmVendas: TfrmVendas
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 23.267470000000000000
         Top = 366.614410000000000000
         Width = 718.110700000000000000
@@ -4182,7 +4182,6 @@ object frmVendas: TfrmVendas
           Top = 1.369820000000000000
           Width = 340.393700790000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           Font.Charset = ANSI_CHARSET
@@ -4199,7 +4198,6 @@ object frmVendas: TfrmVendas
           Top = 0.369820000000000000
           Width = 56.692950000000000000
           Height = 18.897637800000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           DisplayFormat.FormatStr = '%2.2n'
@@ -4219,7 +4217,6 @@ object frmVendas: TfrmVendas
           Top = 0.369820000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           DisplayFormat.FormatStr = '%2.2n'
@@ -4238,7 +4235,7 @@ object frmVendas: TfrmVendas
           Left = 2.000000000000000000
           Top = 21.015460000000000000
           Width = 714.000000000000000000
-          ShowHint = False
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object Memo5: TfrxMemoView
@@ -4246,7 +4243,6 @@ object frmVendas: TfrmVendas
           Top = 1.015460000000000000
           Width = 56.692950000000000000
           Height = 18.897637800000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           Font.Charset = DEFAULT_CHARSET
@@ -4264,7 +4260,6 @@ object frmVendas: TfrmVendas
           Top = 1.015460000000000000
           Width = 58.929190000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'qtde_Venda'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
@@ -4279,7 +4274,6 @@ object frmVendas: TfrmVendas
           Top = 0.385590000000000000
           Width = 38.677180000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Unidade'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
@@ -4288,6 +4282,7 @@ object frmVendas: TfrmVendas
         end
       end
       object ColumnHeader1: TfrxColumnHeader
+        FillType = ftBrush
         Height = 21.062770000000000000
         Top = 283.464750000000000000
         Width = 718.110700000000000000
@@ -4296,14 +4291,13 @@ object frmVendas: TfrmVendas
           Top = 3.165120000000000000
           Width = 714.149660000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = 14211288
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftTop, ftBottom]
+          Fill.BackColor = 14211288
           Memo.UTF8 = (
             
               'Codigo    Descricao                                             ' +
@@ -4314,6 +4308,7 @@ object frmVendas: TfrmVendas
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 121.677180000000000000
         Top = 411.968770000000000000
         Width = 718.110700000000000000
@@ -4321,7 +4316,7 @@ object frmVendas: TfrmVendas
           Left = 1.000000000000000000
           Top = 57.661100000000000000
           Width = 314.000000000000000000
-          ShowHint = False
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object Memo35: TfrxMemoView
@@ -4329,13 +4324,12 @@ object frmVendas: TfrmVendas
           Top = 61.661100000000000000
           Width = 302.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
+          Fill.BackColor = clWhite
           Memo.UTF8 = (
             'Nome.:  [dbSetCliente."Descricao"]')
           ParentFont = False
@@ -4346,14 +4340,13 @@ object frmVendas: TfrmVendas
           Top = 8.661100000000000000
           Width = 575.149660000000000000
           Height = 16.897650000000000000
-          ShowHint = False
-          Color = 14211288
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Fill.BackColor = 14211288
           Memo.UTF8 = (
             'Total do  Orcamento')
           ParentFont = False
@@ -4364,7 +4357,6 @@ object frmVendas: TfrmVendas
           Top = 8.661100000000000000
           Width = 136.370130000000000000
           Height = 16.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -4382,7 +4374,6 @@ object frmVendas: TfrmVendas
           Top = 78.031230000000000000
           Width = 225.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Memo.UTF8 = (
             'Vendedor.: [Vendedor]')
         end
@@ -4709,7 +4700,7 @@ object frmVendas: TfrmVendas
     Top = 400
   end
   object frxVendaPersonalizada03: TfrxReport
-    Version = '4.9.105'
+    Version = '5.1.9'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -4787,6 +4778,7 @@ object frmVendas: TfrmVendas
       Duplex = dmSimplex
       LargeDesignHeight = True
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 113.944960000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
@@ -4795,14 +4787,12 @@ object frmVendas: TfrmVendas
           Top = 4.661410000000000000
           Width = 710.551640000000000000
           Height = 105.283550000000000000
-          ShowHint = False
         end
         object dbSetEmpresaNome_Fantasia: TfrxMemoView
           Left = 200.283550000000000000
           Top = 24.897650000000000000
           Width = 502.488560000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Nome_Fantasia'
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
@@ -4821,7 +4811,6 @@ object frmVendas: TfrmVendas
           Top = 72.472480000000000000
           Width = 504.488560000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -4838,7 +4827,6 @@ object frmVendas: TfrmVendas
           Top = 88.370130000000000000
           Width = 504.709030000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -4857,7 +4845,6 @@ object frmVendas: TfrmVendas
           Top = 13.763760000000000000
           Width = 195.385590000000000000
           Height = 94.228200000000000000
-          ShowHint = False
           Center = True
           Picture.Data = {
             0A54504E474F626A65637489504E470D0A1A0A0000000D494844520000017500
@@ -8285,14 +8272,13 @@ object frmVendas: TfrmVendas
           Top = 4.440940000000000000
           Width = 235.960730000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          Color = clMenuText
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Fill.BackColor = clMenuText
+          Fill.Style = bsClear
           HAlign = haCenter
           Memo.UTF8 = (
             'Certificado de Garantia')
@@ -8303,7 +8289,6 @@ object frmVendas: TfrmVendas
           Top = 4.102350000000000000
           Width = 197.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -12
@@ -8318,7 +8303,6 @@ object frmVendas: TfrmVendas
           Top = 41.574830000000000000
           Width = 502.488560000000000000
           Height = 31.897650000000000000
-          ShowHint = False
           DataSet = frxDbEmpresa
           DataSetName = 'dbSetEmpresa'
           Font.Charset = DEFAULT_CHARSET
@@ -8335,6 +8319,7 @@ object frmVendas: TfrmVendas
         end
       end
       object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
         Height = 129.000000000000000000
         Top = 154.960730000000000000
         Width = 718.110700000000000000
@@ -8343,14 +8328,12 @@ object frmVendas: TfrmVendas
           Top = 5.039270000000000000
           Width = 712.331170000000000000
           Height = 120.181200000000000000
-          ShowHint = False
         end
         object dbSetClienteDescricao: TfrxMemoView
           Left = 5.118120000000000000
           Top = 24.559060000000000000
           Width = 555.433520000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = ANSI_CHARSET
@@ -8367,7 +8350,6 @@ object frmVendas: TfrmVendas
           Top = 42.236240000000000000
           Width = 553.433520000000000000
           Height = 15.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = DEFAULT_CHARSET
@@ -8387,7 +8369,6 @@ object frmVendas: TfrmVendas
           Top = 57.362090000000000000
           Width = 553.385900000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Font.Charset = DEFAULT_CHARSET
@@ -8404,14 +8385,13 @@ object frmVendas: TfrmVendas
           Top = 6.039270000000000000
           Width = 175.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          Color = clMenuText
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Fill.BackColor = clMenuText
+          Fill.Style = bsClear
           HAlign = haCenter
           Memo.UTF8 = (
             'Dados do Cliente')
@@ -8421,7 +8401,7 @@ object frmVendas: TfrmVendas
           Left = 568.000000000000000000
           Top = 4.582560000000000000
           Height = 96.000000000000000000
-          ShowHint = False
+          Color = clBlack
           Frame.Typ = [ftLeft]
         end
         object Memo6: TfrxMemoView
@@ -8429,7 +8409,6 @@ object frmVendas: TfrmVendas
           Top = 6.582560000000000000
           Width = 145.488250000000000000
           Height = 26.897650000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -21
@@ -8446,7 +8425,6 @@ object frmVendas: TfrmVendas
           Top = 67.362090000000000000
           Width = 145.488250000000000000
           Height = 26.456710000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -8462,7 +8440,6 @@ object frmVendas: TfrmVendas
           Top = 32.582560000000000000
           Width = 145.370130000000000000
           Height = 28.897650000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -21
@@ -8479,7 +8456,6 @@ object frmVendas: TfrmVendas
           Top = 91.921150000000000000
           Width = 145.370130000000000000
           Height = 31.456710000000000000
-          ShowHint = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -8495,14 +8471,13 @@ object frmVendas: TfrmVendas
           Top = 75.590600000000000000
           Width = 175.488250000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          BrushStyle = bsClear
-          Color = clMenuText
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Fill.BackColor = clMenuText
+          Fill.Style = bsClear
           HAlign = haCenter
           Memo.UTF8 = (
             'Dados do Veiculo')
@@ -8513,7 +8488,6 @@ object frmVendas: TfrmVendas
           Top = 102.047310000000000000
           Width = 415.748300000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Memo.UTF8 = (
@@ -8524,7 +8498,6 @@ object frmVendas: TfrmVendas
           Top = 102.047310000000000000
           Width = 132.283550000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDBCliente
           DataSetName = 'dbSetCliente'
           Memo.UTF8 = (
@@ -8532,6 +8505,7 @@ object frmVendas: TfrmVendas
         end
       end
       object ColumnHeader1: TfrxColumnHeader
+        FillType = ftBrush
         Height = 21.062770000000000000
         Top = 306.141930000000000000
         Width = 718.110700000000000000
@@ -8539,14 +8513,13 @@ object frmVendas: TfrmVendas
           Left = 3.779530000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftLeft, ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           Memo.UTF8 = (
             '  Tipo')
           ParentFont = False
@@ -8555,14 +8528,13 @@ object frmVendas: TfrmVendas
           Left = 49.133890000000000000
           Width = 313.700990000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           Memo.UTF8 = (
             'Descri'#195#167#195#163'o')
           ParentFont = False
@@ -8571,14 +8543,13 @@ object frmVendas: TfrmVendas
           Left = 461.102660000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           Memo.UTF8 = (
             'Quant.')
           ParentFont = False
@@ -8587,14 +8558,13 @@ object frmVendas: TfrmVendas
           Left = 506.457020000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           HAlign = haRight
           Memo.UTF8 = (
             'Und.')
@@ -8604,14 +8574,13 @@ object frmVendas: TfrmVendas
           Left = 551.811380000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           HAlign = haRight
           Memo.UTF8 = (
             'Valor Unit.')
@@ -8621,14 +8590,13 @@ object frmVendas: TfrmVendas
           Left = 631.181510000000000000
           Width = 83.149660000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           HAlign = haRight
           Memo.UTF8 = (
             'Valor Total.')
@@ -8638,14 +8606,13 @@ object frmVendas: TfrmVendas
           Left = 362.834880000000000000
           Width = 98.267780000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = cl3DLight
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = cl3DLight
           HAlign = haCenter
           Memo.UTF8 = (
             'Garantia')
@@ -8653,6 +8620,7 @@ object frmVendas: TfrmVendas
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 226.771800000000000000
         Top = 434.645950000000000000
         Width = 718.110700000000000000
@@ -8661,14 +8629,13 @@ object frmVendas: TfrmVendas
           Top = 8.661100000000000000
           Width = 575.149660000000000000
           Height = 16.897650000000000000
-          ShowHint = False
-          Color = 14211288
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Fill.BackColor = 14211288
           Memo.UTF8 = (
             'Total de produtos e Servi'#195#167'os')
           ParentFont = False
@@ -8679,7 +8646,6 @@ object frmVendas: TfrmVendas
           Top = 8.661100000000000000
           Width = 136.370130000000000000
           Height = 16.897650000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -8697,7 +8663,6 @@ object frmVendas: TfrmVendas
           Top = 32.676870000000000000
           Width = 225.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           Memo.UTF8 = (
             'Vendedor.: [Vendedor]')
         end
@@ -8705,7 +8670,6 @@ object frmVendas: TfrmVendas
           Top = 56.692950000000000000
           Width = 714.331170000000000000
           Height = 45.354360000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -15
@@ -8720,7 +8684,6 @@ object frmVendas: TfrmVendas
           Top = 105.826840000000000000
           Width = 718.110700000000000000
           Height = 94.488250000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -15
@@ -8741,6 +8704,7 @@ object frmVendas: TfrmVendas
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 23.267470000000000000
         Top = 389.291590000000000000
         Width = 718.110700000000000000
@@ -8752,7 +8716,6 @@ object frmVendas: TfrmVendas
           Top = 1.369820000000000000
           Width = 313.700787400000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           Font.Charset = ANSI_CHARSET
@@ -8769,7 +8732,6 @@ object frmVendas: TfrmVendas
           Top = 0.369820000000000000
           Width = 83.149606300000000000
           Height = 18.897637800000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           DisplayFormat.FormatStr = '%2.2n'
@@ -8789,7 +8751,6 @@ object frmVendas: TfrmVendas
           Top = 0.369820000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
           DisplayFormat.FormatStr = '%2.2n'
@@ -8808,7 +8769,7 @@ object frmVendas: TfrmVendas
           Left = 2.000000000000000000
           Top = 21.015460000000000000
           Width = 714.000000000000000000
-          ShowHint = False
+          Color = clBlack
           Frame.Typ = [ftTop]
         end
         object dbSetItensUnidade: TfrxMemoView
@@ -8816,7 +8777,6 @@ object frmVendas: TfrmVendas
           Top = 0.385590000000000000
           Width = 45.354330710000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Unidade'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
@@ -8828,7 +8788,6 @@ object frmVendas: TfrmVendas
           Left = 3.779530000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'TipoProduto'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
@@ -8845,7 +8804,6 @@ object frmVendas: TfrmVendas
           Left = 362.834880000000000000
           Width = 98.267780000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Complemento'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'
@@ -8862,7 +8820,6 @@ object frmVendas: TfrmVendas
           Left = 461.102660000000000000
           Width = 45.354360000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'qtde_Venda'
           DataSet = frxDbItens
           DataSetName = 'dbSetItens'

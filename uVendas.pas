@@ -265,6 +265,7 @@ type
     cdsItensVendasTMPFuncionarioId: TIntegerField;
     TabSheet3: TTabSheet;
     MemoObs: TMemo;
+    pnlClienteDevedor: TPanel;
     procedure btnFecharClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure edtCod_ProdutoExit(Sender: TObject);
@@ -404,15 +405,15 @@ var DaoCliente : TDaocliente;
     ValorEmAberto : Real;
 begin
    DaoCliente := TDaocliente.Create(gConexao);
-   pnlRemessaAberta.Visible:= False;
+   pnlClienteDevedor.Visible:= False;
    pnlRemessaAberta.Caption := 'Vendedor Com Remessa Aberta';
    pnlRemessaAberta.Color := clSkyBlue;
    ValorEmAberto := DaoCliente.SaldoDevedor(ClienteID, RetornarDataSistema );
    IF ValorEmAberto > 0 Then
    begin
-      pnlRemessaAberta.Visible:= True;
-      pnlRemessaAberta.Caption := 'Valor Em Aberto..: '+Formatfloat(',0.00',ValorEmAberto);
-      pnlRemessaAberta.Color := clRed;
+      pnlClienteDevedor.Visible:= True;
+      pnlClienteDevedor.Caption := 'Valor Em Aberto..: '+Formatfloat(',0.00',ValorEmAberto);
+      pnlClienteDevedor.Color := clRed;
    end
 end;
 
@@ -869,6 +870,9 @@ begin
    cdsItensVendasTmp.FieldByName('GradeID').asInteger        := cdsCadProdutos.fieldbyname('GradeID').AsInteger;
    cdsItensVendasTmp.FieldByName('SetorId').asInteger        := 1;
    cdsItensVendasTmp.FieldByName('FuncionarioId').asInteger  := liFuncionarioId;
+   if liFuncionarioId=0 then
+      cdsItensVendasTmp.FieldByName('FuncionarioId').asInteger  :=StrToInt( edtCod_Funcionario.text);   
+
 
    if cdsCadProdutos.FieldByName('Garantia').AsInteger > 0 then
       cdsItensVendasTmp.FieldByName('Complemento').asString:=' Garantia de '+cdsCadProdutos.fieldbyname('Garantia').AsString+' Dias';
